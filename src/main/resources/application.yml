@@ -48,7 +48,7 @@ spring:
         # 登录密码
         login-password: admin
     username: root
-    password:
+    password: xtyqqw4822022
     url: jdbc:mysql://192.168.124.17/gjj_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
