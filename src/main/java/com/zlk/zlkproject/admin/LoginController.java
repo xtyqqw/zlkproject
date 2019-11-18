@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/loginController")
 public class LoginController {
 
+    @RequestMapping(value = "/toSuccess")
+    public String toLogin(){
+        return "admin/success";
+    }
+
     @RequestMapping(value = "/toMain")
     public String toMain(){
         return "admin/main";

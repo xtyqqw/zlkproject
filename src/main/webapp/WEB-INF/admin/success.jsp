@@ -1,3 +1,4 @@
+<%@ taglib prefix="shrio" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: l
@@ -13,8 +14,13 @@
 <html>
 <head>
     <title>$Title$</title>
-    <link rel="stylesheet" href="../layui/css/layui.css">
-    <script src="../layui/layui.js"></script>
+
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css">
+    <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
+
     <style type="text/css">
         .top {
             width: 100%;
@@ -36,24 +42,6 @@
             font-size: 22px;
         }
 
-        .left {
-            width: 14%;
-        }
-
-        #leftul {
-            width: 100%;
-        }
-
-        .bottom {
-            width: 100%;
-            height: 500px;
-        }
-
-        .bottom div {
-            float: left;
-            height: 505px;
-        }
-
         .main {
             width: 85%;
         }
@@ -66,93 +54,92 @@
         #logout:hover {
             color: white;
         }
+
+        .left {
+            width: 14.9%;
+        }
+
+        #tree {
+            width: 100%;
+            height: auto;
+            padding-left: 40px;
+            padding-top: 35px;
+            font-size: 25px;
+        }
+
+        .bottom {
+            width: 100%;
+            height: 500px;
+        }
+
+        .bottom div {
+            float: left;
+            height: 505px;
+        }
+
+        #maintarget{
+            border-left: black 1px solid;
+        }
     </style>
 </head>
 <body>
 <div class="top">
-    <p>新闻管理平台</p>
-    <span>计算机科学与技术学院</span><br><br>
+    <p>学习管理平台</p>
     <span>尊敬的用户${loginName}您好，欢迎您的登陆</span><br><br>
-    <a href="<%=basePath%>/user/logout" id="logout">退出登录</a>
+    <a href="<%=basePath%>/logout" id="logout">退出登录</a>
 </div>
 <div class="bottom">
     <div class="left">
-        <ul id="leftul" class="layui-nav layui-nav-tree" lay-shrink="all" lay-filter="test">
-            <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-            <li class="layui-nav-item layui-nav-itemed">
-                <a href="javascript:;">新闻管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="<%=request.getContextPath()%>/news/toNews" target="maintarget">查看新闻</a></dd>
-                    <dd><a href="<%=request.getContextPath()%>/news/toNewsManager" target="maintarget">编辑新闻</a>
-                    </dd>
-                    <%--<dd><a href="<%=request.getContextPath()%>/product/toProductManager" target="maintarget">产品管理</a>
-                    </dd>
-                    <dd><a href="">作业管理</a></dd>
-                    <dd><a href="">生产计划管理</a></dd>
-                    <dd><a href="">生成派工管理</a></dd>--%>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">设备管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">设备台账</a></dd>
-                    <dd><a href="">设备种类</a></dd>
-                    <dd><a href="">设备例检</a></dd>
-                    <dd><a href="">设备故障</a></dd>
-                    <dd><a href="">设备维修</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">工艺监控</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">工艺管理</a></dd>
-                    <dd><a href="">工艺要求</a></dd>
-                    <dd><a href="">公益计划</a></dd>
-                    <dd><a href="">工序管理</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">物料监控</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">物料信息</a></dd>
-                    <dd><a href="">物料收入</a></dd>
-                    <dd><a href="">物料消耗</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">质量监控</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">不合格品管理</a></dd>
-                    <dd><a href="">成品计量质检</a></dd>
-                    <dd><a href="">成品计数质检</a></dd>
-                    <dd><a href="">工序计量质检</a></dd>
-                    <dd><a href="">工序计数质检</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">人员监控</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">部门管理</a></dd>
-                    <dd><a href="">员工管理</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">系统管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="<%=request.getContextPath()%>/user/toUserManager" target="maintarget">用户管理</a></dd>
-                    <dd><a href="<%=request.getContextPath()%>/role/toRoleManager" target="maintarget">角色管理</a></dd>
-                </dl>
-            </li>
-        </ul>
+        <ul id="tree" class="ztree"></ul>
     </div>
-    <script>
-        layui.use('element', function () {
-            var element = layui.element;
-        });
-    </script>
     <div class="main">
-        <iframe src="<%=request.getContextPath()%>/loginController/toMain" name="maintarget" frameborder="0"></iframe>
+        <iframe src="<%=request.getContextPath()%>/loginController/toMain" id="maintarget" name="maintarget" frameborder="0"></iframe>
     </div>
 </div>
+
+<script type="text/javascript">
+    var setting = {
+        view: {
+            showIcon: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback:{
+            beforeClick: function(treeId, treeNode) {
+                var zTree = $.fn.zTree.getZTreeObj("tree");
+                if (treeNode.isParent) {
+                    zTree.expandNode(treeNode);
+                    return false;
+                }
+            }
+        }
+    };
+
+    var zNodes =[
+        { id:1, pId:0, name:"前台用户管理"},
+        { id:11, pId:1, name:"前台用户管理", target:"maintarget", url:""},
+        { id:2, pId:0, name:"项目管理"},
+        { id:21, pId:2, name:"课程管理", target:"maintarget", url:""},
+        { id:22, pId:2, name:"视频管理", target:"maintarget", url:""},
+        { id:23, pId:2, name:"问答管理", target:"maintarget", url:""},
+        { id:24, pId:2, name:"笔记管理", target:"maintarget", url:""},
+        { id:3, pId:0, name:"社区管理"},
+        { id:31, pId:3, name:"文章管理", target:"maintarget", url:""},
+        { id:4, pId:0, name:"系统管理"},
+        { id:41, pId:4, name:"类别管理", target:"maintarget", url:""},
+        { id:42, pId:4, name:"部门管理", target:"maintarget", url:""},
+        { id:43, pId:4, name:"用户管理", target:"maintarget", url:""},
+        { id:44, pId:4, name:"角色管理", target:"maintarget", url:""},
+        { id:45, pId:4, name:"日志管理", target:"maintarget", url:""}
+    ];
+
+    $(document).ready(function(){
+        $.fn.zTree.init($("#tree"), setting, zNodes);
+    });
+</script>
+
 </body>
 </html>
