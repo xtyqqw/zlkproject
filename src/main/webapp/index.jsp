@@ -8,9 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>首页跳转测试</title>
 </head>
 <body>
-index
+<script>
+    location.href="<%=request.getContextPath() %>/test/toLogin";
+</script>
+<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
 </body>
 </html>
