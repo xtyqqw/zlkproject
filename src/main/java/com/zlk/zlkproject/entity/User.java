@@ -57,6 +57,7 @@ public class User {
     private Integer userAllTime;
     /**用户每日学习时长*/
     private Integer userDateTime;
+    /***/
 
     public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
         this.userId = userId;

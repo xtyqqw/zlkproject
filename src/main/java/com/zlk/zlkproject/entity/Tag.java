@@ -18,10 +18,13 @@ public class Tag {
     private Integer tagId;
     /**tag名称*/
     private String tagName;
+    /**tag对应方向id*/
+    private Integer tagTypeId;
 
-    public Tag(Integer tagId, String tagName) {
+    public Tag(Integer tagId, String tagName, Integer tagTypeId) {
         this.tagId = tagId;
         this.tagName = tagName;
+        this.tagTypeId = tagTypeId;
     }
 
     public Tag() {
