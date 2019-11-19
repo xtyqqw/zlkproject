@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.admin.mapper.DeptMapper">
+    <resultMap id="deptEntityMap" type="com.zlk.zlkproject.entity.Dept">
+        <id property="deptId" column="dept_id" javaType="java.lang.String"/>
+        <result property="deptName" column="dept_name" javaType="java.lang.String"/>
+        <result property="deptCode" column="dept_code" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findTotalCountByDeptName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
+        select count(*) from depts
+        <if test="condition!='' and condition!=null">
+            where dept_name like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <select id="findDeptByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="deptEntityMap">
+        select * from depts
+        <if test="condition!='' and condition!=null">
+            where dept_name like CONCAT('%',#{condition},'%')
+        </if>
+        order by dept_id limit #{startPage},#{limit}
+    </select>
+    <insert id="addDept" parameterType="com.zlk.zlkproject.entity.Dept">
+        insert into depts
+        <trim prefix="(" suffix=") " suffixOverrides=",">
+            dept_id,dept_name,dept_code,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{deptId},#{deptName},#{deptCode},
+        </trim>
+    </insert>
+    <select id="findDeptByDeptName" parameterType="java.lang.String" resultMap="deptEntityMap">
+        select * from depts where dept_name = #{deptName}
+    </select>
+    <update id="updateDeptByDeptId" parameterType="com.zlk.zlkproject.entity.Dept">
+        update depts
+        <set>
+            <if test="deptName!=null and deptName!='' ">
+                dept_name=#{deptName},
+            </if>
+            <if test="deptCode!=null and deptCode!='' ">
+                dept_code=#{deptCode},
+            </if>
+        </set>
+        where dept_id=#{deptId}
+    </update>
+    <delete id="deleteDeptByDeptId" parameterType="java.lang.String">
+        delete from depts where dept_id=#{deptId}
+    </delete>
+</mapper>

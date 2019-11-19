@@ -86,7 +86,7 @@
 <div class="top">
     <p>学习管理平台</p>
     <span>尊敬的用户${loginName}您好，欢迎您的登陆</span><br><br>
-    <a href="<%=basePath%>/logout" id="logout">退出登录</a>
+    <a href="<%=request.getContextPath()%>/loginController/toLogin" id="logout">退出登录</a>
 </div>
 <div class="bottom">
     <div class="left">
@@ -130,9 +130,9 @@
         { id:31, pId:3, name:"文章管理", target:"maintarget", url:""},
         { id:4, pId:0, name:"系统管理"},
         { id:41, pId:4, name:"类别管理", target:"maintarget", url:""},
-        { id:42, pId:4, name:"部门管理", target:"maintarget", url:""},
-        { id:43, pId:4, name:"用户管理", target:"maintarget", url:""},
-        { id:44, pId:4, name:"角色管理", target:"maintarget", url:""},
+        { id:42, pId:4, name:"部门管理", target:"maintarget", url:"/dept/toDeptManager"},
+        { id:43, pId:4, name:"用户管理", target:"maintarget", url:"/admin/toAdminManager"},
+        { id:44, pId:4, name:"角色管理", target:"maintarget", url:"/role/toRoleManager"},
         { id:45, pId:4, name:"日志管理", target:"maintarget", url:""}
     ];
 

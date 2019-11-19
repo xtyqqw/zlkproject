@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+        <!--shiro依赖-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
         <!--mysql依赖-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
