@@ -48,8 +48,13 @@ spring:
         # 登录密码
         login-password: admin
     username: root
+<<<<<<< HEAD
     password: yzh
     url: jdbc:mysql://localhost:3306/zlkproject?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+=======
+    password: 
+    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+>>>>>>> 9da84b25fba1b9f6da5fcef8c89927b9f36b108d
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
