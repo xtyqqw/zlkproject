@@ -2,11 +2,10 @@ $(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/kechengshipin/selectOne?id=1",
+        url :"/courseHomePage/selectAccountByUnitId?id=1",
         data:"",
         success: function (data) {
             console.log(data.url);
-            console.log(data.yiwanchengkecheng/data.zhongkecheng*100);
             console.log(data);
             $("#kechengshipin").html("<video width='100%' height='100%' controls style='border-radius: 5px;' >"
                 +"<source src="+data.url+" type='video/mp4'>"

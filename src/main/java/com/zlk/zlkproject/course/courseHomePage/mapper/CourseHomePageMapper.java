@@ -9,7 +9,7 @@ import com.zlk.zlkproject.course.entity.Courses;
  * Date 2019/11/19 16:33
  **/
 public interface CourseHomePageMapper {
-    Courses selectPayInByUnitId(Integer coursesId);
+    Courses selectCoursesByCoursesId(Integer coursesId);
 
 }
 

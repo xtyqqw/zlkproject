@@ -1,7 +1,9 @@
 package com.zlk.zlkproject.course.courseHomePage.service.impl;
 
+import com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.course.entity.Courses;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @ClassName CourseHomePageServiceImpl
@@ -10,10 +12,11 @@ import com.zlk.zlkproject.course.entity.Courses;
  * Date 2019/11/19 16:31
  **/
 public class CourseHomePageServiceImpl implements CourseHomePageService {
-
+    @Autowired
+    private CourseHomePageMapper courseHomePageMapper;
 
     @Override
-    public Courses selectPayInByUnitId(Integer coursesId) {
-        return null;
+    public Courses selectCoursesByCoursesId(Integer coursesId) {
+        return courseHomePageMapper.selectCoursesByCoursesId(coursesId);
     }
 }
