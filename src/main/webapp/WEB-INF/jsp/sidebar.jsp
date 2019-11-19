@@ -38,6 +38,9 @@
             width: 70px;
             border-radius: 5px;
             box-shadow: 3px 3px 5px 3px #D4D4D4;
+            position: fixed;
+            right: 20px;
+            top: 200px;
         }
 <<<<<<< HEAD
         .sidebar img{
@@ -121,7 +124,7 @@
         }
 =======
         #sidebar .qrcode1{
-            margin-top: 150px;
+            margin-top: 50px;
         }
         #sidebar .qrcode1 img{
             padding: 10px 15px 0px 15px;
@@ -130,7 +133,7 @@
             padding: 5px 15px;
         }
         #sidebar .qrcode2{
-            margin-top: 220px;
+            margin-top: 130px;
         }
         #sidebar .qrcode2 img{
             padding: 10px 10px 0px 15px;

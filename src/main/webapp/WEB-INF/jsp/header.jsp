@@ -13,7 +13,6 @@
     <style type="text/css">
         body {
             margin: 0;
-            text-align: center;
         }
         .header{
             background-color: #FFFFFF;
