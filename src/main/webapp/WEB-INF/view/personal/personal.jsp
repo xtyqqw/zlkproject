@@ -60,7 +60,7 @@
     <div id="personal-nav">
         <ul>
             <%--学习看板--%>
-            <a href="javascript:;" target="main">
+            <a href="<%=request.getContextPath()%>/personal/learnlook" target="main">
                 <li>
                     <i class="layui-icon layui-icon-chart-screen"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -128,7 +128,8 @@
     <%--侧栏--%>
     <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
     <!-- 主体内容 -->
-    <iframe name="main" style="border: 1px #ffffff;width: 1050px;margin-top: -518px;margin-left: -170px;"></iframe>
+    <iframe name="main" style="border: 1px #ffffff;height: 100%;
+            width: 1050px;margin-top: -518px;margin-left: 10px;"></iframe>
     <%--尾部--%>
     <jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>

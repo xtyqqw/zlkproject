@@ -92,7 +92,7 @@
     <div class="header">
         <!-- logo -->
         <div class="header-logo">
-            <img src="img/logo.png" />
+            <img src="/img/logo.png" />
         </div>
         <!-- 导航 -->
         <div class="header-nav">
