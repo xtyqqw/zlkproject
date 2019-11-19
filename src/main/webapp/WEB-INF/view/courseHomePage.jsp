@@ -9,6 +9,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,91 +32,302 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style>
-     .tabbable{
+     .layui-tab {
          width: 950px;
          height: 600px;
          position: absolute;
-         left: 150px;
-         top: 200px;
+         left: 200px;
+         top: 100px;
+     }
+     .layui-this{
+         width:190px;
+         color:#000000;
+     }
+     .layui-tab-title{
+         color:#000000;
+     }
+     .dt1{
+         border: solid 1px;
+         color: black;
+         width: 213px;
+         height: 100px;
+     }
+     .dl1{
+         position: absolute;
+         top: 90px;
+     }
+     .dl2{
+         position: absolute;
+         left: 240px;
+         top: 90px;
+     }
+     .dl3{
+         position: absolute;
+         left: 468px;
+         top: 90px;
+     }
+     .dl4{
+            position: absolute;
+            left: 698px;
+            top: 90px;
+        }
+     .dl5{
+         position: absolute;
+
+         top: 320px;
+     }
+     .dl6{
+         position: absolute;
+         left: 240px;
+         top: 320px;
+     }
+     .dl7{
+         position: absolute;
+         left: 468px;
+         top: 320px;
+     }
+     .dl8{
+         position: absolute;
+         left: 698px;
+         top: 320px;
+     }
+     .dd1{
+         box-shadow:-2px 0 3px -1px #ebebeb,
+         -2px 0 3px -1px #ebebeb,
+         2px 0 3px -1px  #ebebeb;
+         height: 100px;
+
+     }
+     .h61{
+         position: absolute;
+         left: 10px;
+         top: 103px;
+         color: #1f2022;
+     }
+     .h62{
+         position: absolute;
+         left: 128px;
+         top: 103px;
+         color: #1f2022;
+     }
+     .h63{
+         position: absolute;
+         left: 155px;
+         top: 103px;
+         color: #1f2022;
+     }
+     .h64{
+         position: absolute;
+         left: 10px;
+         top: 123px;
+         color: #ff4413;
+     }
+     .h65{
+         position: absolute;
+         left: 70px;
+         top: 123px;
+         color: #807d7c;
+     }
+     .but1{
+         width: 100px;
+         height: 30px;
+         position: absolute;
+         left: 53px;
+         top: 153px;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 5px;
+     }
+     .conceal{
+         width: 950px;
+         height: 300px;
+         position: absolute;
+         z-index: 1;
+         background-color: #f6f1ff;
+         display: none;
+         top:39px;
+         left: -2px;
+
      }
     </style>
+
+
 </head>
 <body>
 
+<div class="layui-tab layui-tab-brief" >
+    <ul class="layui-tab-title">
+        <li class="layui-this" >全部内容</li>
 
-<div class="tabbable" id="tabs-360466"> <!-- Only required for left/right tabs -->
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#panel-401510" data-toggle="tab" contenteditable="true">全部</a></li>
-        <li class=""><a href="#panel-622356" data-toggle="tab" contenteditable="true">JAVA</a></li>
-        <li class=""><a href="#panel-111111" data-toggle="tab" contenteditable="true">HTML</a></li>
-        <li class=""><a href="#panel-111112" data-toggle="tab" contenteditable="true">CSS</a></li>
-        <li class=""><a href="#panel-111113" data-toggle="tab" contenteditable="true">JS</a></li>
 
     </ul>
-    <div class="tab-content">
-        <div class="tab-pane active" id="panel-401510" contenteditable="true">
-            <p>
-                <a class="btn" href="#" contenteditable="true">JAVA</a>
-                <a class="btn" href="#" contenteditable="true">HTML</a>
-                <a class="btn" href="#" contenteditable="true">CSS</a>
-                <a class="btn" href="#" contenteditable="true">JS</a>
-            </p>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="conceal" >
+                <p>JAVA</p>
+                <p>HTML</p>
+                <p>CSS</p>
+                <p>JS</p>
+            </div>
+            <dl class="dl1">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
 
+                </dd>
+
+            </dl>
+            <dl class="dl2">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl3">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl4">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl5">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl6">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl7">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
+            <dl class="dl8">
+                <dt class="dt1"></dt>
+                <dd class="dd1">
+                    <h6 class="h61">学习人数</h6>
+                    <h6 class="h62">章</h6>
+                    <h6 class="h63">节</h6>
+                    <h6 class="h64">金额</h6>
+                    <h6 class="h65">上次学习时间</h6>
+                    <input class="but1" type="button" value="查看详情">
+
+                </dd>
+
+            </dl>
         </div>
-        <div class="tab-pane" id="panel-622356" contenteditable="true">
-            <p><a>JAVA</a></p>
-        </div>
-        <div class="tab-pane" id="panel-111111" contenteditable="true">
-            <p><a>HTML</a></p>
-        </div>
-        <div class="tab-pane" id="panel-111112" contenteditable="true">
-            <p><a>CSS</a></p>
-        </div>
-        <div class="tab-pane" id="panel-111113" contenteditable="true">
-            <p><a>JS</a></p>
-        </div>
+
     </div>
 </div>
 
-<%--<ul class="thumbnails">
-    <li class="span4">
-        <div class="thumbnail"> <img alt="300x200" src="img/timg.jpg">
-            <div class="caption" contenteditable="true">
-                <h3>冯诺尔曼结构</h3>
-                <p>也称普林斯顿结构，是一种将程序指令存储器和数据存储器合并在一起的存储器结构。程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置。</p>
-                <p><a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a></p>
-            </div>
-        </div>
-    </li>
-    <li class="span4">
-        <div class="thumbnail"> <img alt="300x200" src="img/timg.jpg">
-            <div class="caption" contenteditable="true">
-                <h3>哈佛结构</h3>
-                <p>哈佛结构是一种将程序指令存储和数据存储分开的存储器结构，它的主要特点是将程序和数据存储在不同的存储空间中，进行独立编址。</p>
-                <p><a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a></p>
-            </div>
-        </div>
-    </li>
-    <li class="span4">
-        <div class="thumbnail"> <img alt="300x200" src="img/timg.jpg">
-            <div class="caption" contenteditable="true">
-                <h3>改进型哈佛结构</h3>
-                <p>改进型的哈佛结构具有一条独立的地址总线和一条独立的数据总线，两条总线由程序存储器和数据存储器分时复用，使结构更紧凑。</p>
-                <p><a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a></p>
-            </div>
-        </div>
-    </li>
 
-    <li class="span4">
-        <div class="thumbnail"> <img alt="300x200" src="img/timg.jpg">
-            <div class="caption" contenteditable="true">
-                <h3>改进型哈佛结构</h3>
-                <p>改进型的哈佛结构具有一条独立的地址总线和一条独立的数据总线，两条总线由程序存储器和数据存储器分时复用，使结构更紧凑。</p>
-                <p><a class="btn btn-primary" href="#">浏览</a> <a class="btn" href="#">分享</a></p>
-            </div>
-        </div>
-    </li>
-</ul>--%>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+<script>
+    $(".layui-this").mouseenter(function () {
+        $(this).css("background-color","#6872ff");
+        $(this).css("border-radius","5px");
+        $(this).css("color","#fff");
+        $(".conceal").show();
+        $(this).children().first().css("margin-top","1vw");
+
+    });
+    $(".layui-this").mouseleave(function () {
+        $(this).css("background-color","#fff");
+        $(this).css("height","3vw");
+        $(this).css("border-radius","5px");
+        $(this).css("margin-top","0vw");
+        $(this).css("border","none");
+        $(this).css("color","#4ea9cd");
+        $(".conceal").hide();
+        $(this).children().children().first().css("margin-top","0vw");
+
+    });
+    $(".conceal").mouseenter(function () {
+        $(this).show();
+    });
+
+    $(".conceal").mouseleave(function () {
+        $(this).hide();
+    });
+    $(".layui-this").click( function () {
+        $(this).siblings().css("width","185px");
+        $(this).siblings().css("color","#4ea9cd");
+
+
+
+    });
+    
+</script>
+
+
+
 
 </body>
 </html>

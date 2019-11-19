@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class controller {
     //获取UserMapper 对象 @autowired注解的作用就是自动获取对象
 
-    @RequestMapping(value = "/HomePage")
+        @RequestMapping(value = "/HomePage")
     public String toLogin() throws Exception {//跳转登录页页面的方法
         return "view/courseHomePage";
     }
