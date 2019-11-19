@@ -11,18 +11,7 @@
     <title>侧栏</title>
     <script src="/js/jquery-1.12.4.js"></script>
     <style type="text/css">
-        body{
-            background-color: #FFFFFF;
-            margin: 0;
-        }
-<<<<<<< HEAD
-        .sidebar{
-            margin-top: 200px;
-            position: fixed;
-            right: 20px;
-        }
-        .sidebar .box{
-=======
+        body{margin: 0;}
         #sidebar{
             margin-top: 100px;
             position: absolute;
@@ -30,7 +19,6 @@
             top: 200px;
         }
         #sidebar .box{
->>>>>>> 4591641b43f5460d4383af853409b4275eba776b
             float: left;
             margin-right: 0;
             border: 1px #656565;
@@ -42,25 +30,6 @@
             right: 20px;
             top: 200px;
         }
-<<<<<<< HEAD
-        .sidebar img{
-            width: 38px;
-            height: 38px;
-        }
-        .sidebar ul{
-            padding-left: 19px;
-            padding-right: 15px;
-        }
-        .sidebar ul li{
-            list-style: none;
-            padding: 5px 0px;
-        }
-        .sidebar ul li a{
-            text-decoration: none;
-            color: #656565;
-        }
-        .sidebar hr{
-=======
         #sidebar img{
             width: 38px;
             height: 38px;
@@ -78,16 +47,11 @@
             color: #656565;
         }
         #sidebar hr{
->>>>>>> 4591641b43f5460d4383af853409b4275eba776b
             width: 36px;
             color: #FCFCFE;
         }
         /* 二维码样式 */
-<<<<<<< HEAD
-        .sidebar .qrcode1,.qrcode2{
-=======
         #sidebar .qrcode1,.qrcode2{
->>>>>>> 4591641b43f5460d4383af853409b4275eba776b
             position: fixed;
             right: 98px;
             height: 120px;
@@ -97,32 +61,6 @@
             box-shadow: 3px 3px 5px 3px #D4D4D4;
             display: none;
         }
-<<<<<<< HEAD
-        .sidebar .qrcode1{
-            margin-top: 150px;
-        }
-        .sidebar .qrcode1 img{
-            padding: 10px 15px 0px 15px;
-        }
-        .sidebar .qrcode1 span{
-            padding: 5px 15px;
-        }
-        .sidebar .qrcode2{
-            margin-top: 220px;
-        }
-        .sidebar .qrcode2 img{
-            padding: 10px 10px 0px 15px;
-        }
-        .sidebar .qrcode2 span{
-            padding: 5px 10px;
-        }
-        .sidebar .qrcode1,.qrcode2 span{
-            font-size: 13px;
-        }
-        .sidebar span{
-            padding: 0px;
-        }
-=======
         #sidebar .qrcode1{
             margin-top: 50px;
         }
@@ -150,7 +88,6 @@
         #sidebar .box ul li a img span{
             position: absolute;
         }
->>>>>>> 4591641b43f5460d4383af853409b4275eba776b
     </style>
 </head>
 <body>
@@ -216,12 +153,7 @@
         });
 
     </script>
-
-<<<<<<< HEAD
-    <div class="sidebar">
-=======
     <div id="sidebar">
->>>>>>> 4591641b43f5460d4383af853409b4275eba776b
         <div class="box">
             <ul>
                 <li id="nav1">
