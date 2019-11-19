@@ -26,8 +26,9 @@
 =======
 <%--头部--%>
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
-index
-<%--尾部--%>
+<script>
+    window.location = "<%=request.getContextPath()%>/user/tosignup"
+</script>
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
 >>>>>>> 282096966003bc74ff130381f9240aa50001abd8
 </body>
