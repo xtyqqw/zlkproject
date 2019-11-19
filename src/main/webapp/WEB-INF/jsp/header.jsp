@@ -12,7 +12,6 @@
     <title>头部</title>
     <style type="text/css">
         body {
-            background-color: #F2F2F2;
             margin: 0;
             text-align: center;
         }
@@ -20,6 +19,8 @@
             background-color: #FFFFFF;
             height: 80px;
             width: 100%;
+            border-bottom: 1px #989898;
+            box-shadow: 1px 1px 5px 3px #D4D4D4;
         }
         /* 头部logo样式 */
         .header-logo{

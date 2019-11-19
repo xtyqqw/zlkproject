@@ -15,12 +15,13 @@
             background-color: #FFFFFF;
             margin: 0;
         }
-        .sidebar{
-            margin-top: 200px;
-            position: fixed;
+        #sidebar{
+            margin-top: 100px;
+            position: absolute;
             right: 20px;
+            top: 200px;
         }
-        .sidebar .box{
+        #sidebar .box{
             float: left;
             margin-right: 0;
             border: 1px #656565;
@@ -29,28 +30,28 @@
             border-radius: 5px;
             box-shadow: 3px 3px 5px 3px #D4D4D4;
         }
-        .sidebar img{
+        #sidebar img{
             width: 38px;
             height: 38px;
         }
-        .sidebar ul{
+        #sidebar ul{
             padding-left: 19px;
             padding-right: 15px;
         }
-        .sidebar ul li{
+        #sidebar ul li{
             list-style: none;
             padding: 5px 0px;
         }
-        .sidebar ul li a{
+        #sidebar ul li a{
             text-decoration: none;
             color: #656565;
         }
-        .sidebar hr{
+        #sidebar hr{
             width: 36px;
             color: #FCFCFE;
         }
         /* 二维码样式 */
-        .sidebar .qrcode1,.qrcode2{
+        #sidebar .qrcode1,.qrcode2{
             position: fixed;
             right: 98px;
             height: 120px;
@@ -60,29 +61,32 @@
             box-shadow: 3px 3px 5px 3px #D4D4D4;
             display: none;
         }
-        .sidebar .qrcode1{
+        #sidebar .qrcode1{
             margin-top: 150px;
         }
-        .sidebar .qrcode1 img{
+        #sidebar .qrcode1 img{
             padding: 10px 15px 0px 15px;
         }
-        .sidebar .qrcode1 span{
+        #sidebar .qrcode1 span{
             padding: 5px 15px;
         }
-        .sidebar .qrcode2{
+        #sidebar .qrcode2{
             margin-top: 220px;
         }
-        .sidebar .qrcode2 img{
+        #sidebar .qrcode2 img{
             padding: 10px 10px 0px 15px;
         }
-        .sidebar .qrcode2 span{
+        #sidebar .qrcode2 span{
             padding: 5px 10px;
         }
-        .sidebar .qrcode1,.qrcode2 span{
+        #sidebar .qrcode1,.qrcode2 span{
             font-size: 13px;
         }
-        .sidebar span{
+        #sidebar span{
             padding: 0px;
+        }
+        #sidebar .box ul li a img span{
+            position: absolute;
         }
     </style>
 </head>
@@ -150,7 +154,7 @@
 
     </script>
 
-    <div class="sidebar">
+    <div id="sidebar">
         <div class="box">
             <ul>
                 <li id="nav1">
