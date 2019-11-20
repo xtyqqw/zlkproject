@@ -64,6 +64,17 @@ $(document).ready(function () {
     var res = 0;
     var screenState = false;
 
+    //切换视频方法
+    function switchVideo (src) {
+        document.getElementById("video_src").src = src;
+        video1.load();
+        clearInterval(interval1);
+        btn_play.innerHTML = "&#xe652;";
+        btn.style.left = 0 + 'px';
+        bar.style.width = 0 + 'px';
+        currentTime.innerText = '00:00:00';
+    }
+
     //全屏按钮点击
     document.getElementById("fscreen").onclick = function () {
         screenState = true;
