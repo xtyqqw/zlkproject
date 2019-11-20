@@ -1,9 +1,9 @@
 package com.zlk.zlkproject.course.courseHomePage.service;
 
-import com.zlk.zlkproject.course.entity.Courses;
-import org.springframework.stereotype.Service;
 
-@Service
+import com.zlk.zlkproject.entity.Courses;
+
+
 public interface CourseHomePageService {
     Courses selectCoursesByCoursesId(Integer coursesId);
 }
