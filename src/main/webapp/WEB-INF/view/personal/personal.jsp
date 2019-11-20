@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人中心-对内版</title>
+    <title>个人中心-框架</title>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
@@ -60,7 +60,7 @@
     <div id="personal-nav">
         <ul>
             <%--学习看板--%>
-            <a href="<%=request.getContextPath()%>/personal/learnlook" target="main">
+            <a href="<%=request.getContextPath()%>/personal/learnlook">
                 <li>
                     <i class="layui-icon layui-icon-chart-screen"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -68,7 +68,7 @@
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-form"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -76,7 +76,7 @@
                 </li>
             </a>
             <%--个人笔记--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-edit"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -84,7 +84,7 @@
                 </li>
             </a>
             <%--我的问答--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-survey"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -92,7 +92,7 @@
                 </li>
             </a>
             <%--我的文章--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-list"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -100,7 +100,7 @@
                 </li>
             </a>
             <%--我的关注--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-rate"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -108,7 +108,7 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-dialogue"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -116,7 +116,7 @@
                 </li>
             </a>
             <%--愿望清单--%>
-            <a href="javascript:;" target="main">
+            <a href="javascript:;">
                 <li>
                     <i class="layui-icon layui-icon-release"
                        style="font-size: 25px;color: #FFFFFF;"></i>
@@ -127,9 +127,6 @@
     </div>
     <%--侧栏--%>
     <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
-    <!-- 主体内容 -->
-    <iframe name="main" style="border: 1px #ffffff;height: 100%;
-            width: 1050px;margin-top: -518px;margin-left: 10px;"></iframe>
     <%--尾部--%>
     <jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>

@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.course.courseHomePage.service;
 
-import com.zlk.zlkproject.course.entity.Courses;
 
+import com.zlk.zlkproject.entity.Courses;
 
 
 public interface CourseHomePageService {

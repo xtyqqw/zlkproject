@@ -2,10 +2,10 @@ package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
-import com.zlk.zlkproject.course.entity.Courses;
+
+import com.zlk.zlkproject.entity.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
