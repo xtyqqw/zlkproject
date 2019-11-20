@@ -10,45 +10,45 @@
 <head>
     <title>尾部</title>
     <style type="text/css">
-        body{background-color: #F2F2F2;margin: 0;}
-        .footer{
+        body{margin: 0;}
+        #footer{
             background-color: #333C4D;
             height: 130px;
             width: 100%;
             margin-top: 100px;
         }
-        ul{
+        #footer ul{
             padding-top: 30px;
             width: 800px;
             margin: 0 auto;
         }
-        ul li{
+        #footer ul li{
             float: left;
             list-style: none;
             padding-left: 20px;
         }
-        ul li a{
+        #footer ul li a{
             color: #989898;
             text-decoration: none;
             float: left;
             padding-left: 20px;
         }
-        ul li a:hover{
+        #footer ul li a:hover{
             color: #F2F2F2;
         }
-        hr{
+        #footer hr{
             width: 800px;
-            align-content: center;
+            align-content: center !important;
             color: #989898;
         }
-        p{
+        #footer p{
             color: #989898;
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="footer">
+    <div id="footer">
         <ul>
             <li>
                 <a href="javascript:;">关于我们</a>
