@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community;
+package com.zlk.zlkproject.community.articleAdd;
 
 /**
  * @program: Test

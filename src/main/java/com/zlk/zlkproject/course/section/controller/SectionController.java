@@ -1,0 +1,46 @@
+package com.zlk.zlkproject.course.section.controller;
+
+import com.zlk.zlkproject.course.chapter.service.ChapterService;
+import com.zlk.zlkproject.course.section.service.SectionService;
+import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.entity.Section;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @program: zlkproject
+ * @description: 小节控制类
+ * @author: zyx
+ * @create: 2019-11-19 14:37
+ */
+@Controller
+@RequestMapping(value = "/section")
+public class SectionController {
+    @Autowired
+    private SectionService sectionService;
+    @Autowired
+    private ChapterService chapterService;
+
+    @RequestMapping(value = "/findSections")
+    @ResponseBody
+    private ModelAndView findSections()throws Exception{
+        int coursesId = 1;
+        List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
+        List<Section> sections = new ArrayList<>();
+        for (Chapter chapter : chapters) {
+            sections = sectionService.findSectionByChapterId(chapter.getChapterId());
+        }
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("chapters",chapters);
+        mv.addObject("sections",sections);
+        mv.addObject("name","sss");
+        mv.setViewName("/view/videoPlayer");
+        return mv;
+    }
+}

@@ -2,10 +2,99 @@
     padding: 0;
     margin: 0;
 }
-
 #div_video{
     width: 1000px;
     height: 500px;
     background-color: #009f95;
     margin: 5px auto;
+}
+#l_func{
+    background-color: black;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    float: left;
+}
+.l_func_icon{
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    color: white;
+    text-align: center;
+    margin: 30px auto;
+}
+.iconfont{
+    font-size: 26px !important;
+    /*color: white;*/
+}
+.icon_text{
+    font-size: 18px;
+    /*color: white;*/
+}
+
+#r_video{
+    background-color: white;
+    float: left;
+    width: 89%;
+    height: 100%;
+    margin-left: 1%;
+    position: relative;
+}
+
+.layui-col-md2{
+    background-color: white;
+    height: 100%;
+}
+
+#video_row{
+    height: 400px;
+}
+
+.layui-col-md8{
+    height: 100%;
+}
+
+#video_div{
+    position: absolute;
+    z-index: 1;
+    background-color: red;
+}
+
+#mulu_div{
+    position: absolute;
+    z-index: 2;
+    background-color: gray;
+    width: 50%;
+    height: 100%;
+    opacity: 0.7;
+}
+
+#mulu_div ul{
+    width: 90%;
+    /*background-color: white;*/
+    color: black;
+    font-size: 24px;
+    margin:20px 5%;
+    padding: 0 0;
+    list-style: none;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+#mulu_div ul span{
+    width: 100%;
+    display: inline-block;
+    background-color: white;
+    box-sizing: border-box;/*将框体并排放置,确定盒模型为IE盒模型，width包括边框与内边距*/
+    padding: 0 6px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+#mulu_div ul li{
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    display: none;
+    cursor: pointer;
 }
