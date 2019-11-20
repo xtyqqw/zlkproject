@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.course.courseHomePage.mapper;
 
 import com.zlk.zlkproject.course.entity.Courses;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @ClassName CourseHomePageMapper
@@ -8,6 +9,7 @@ import com.zlk.zlkproject.course.entity.Courses;
  * @Author LuanKe
  * Date 2019/11/19 16:33
  **/
+@Mapper
 public interface CourseHomePageMapper {
     Courses selectCoursesByCoursesId(Integer coursesId);
 
