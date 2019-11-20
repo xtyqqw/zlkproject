@@ -2,3 +2,10 @@
     padding: 0;
     margin: 0;
 }
+
+#div_video{
+    width: 1000px;
+    height: 500px;
+    background-color: #009f95;
+    margin: 5px auto;
+}
