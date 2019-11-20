@@ -10,6 +10,7 @@
 <head>
     <title>侧栏</title>
     <script src="/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{margin: 0;}
         #sidebar{
@@ -24,6 +25,7 @@
             border: 1px #656565;
             background-color: #FFFFFF;
             width: 70px;
+            height: 310px;
             border-radius: 5px;
             box-shadow: 3px 3px 5px 3px #D4D4D4;
             position: fixed;
@@ -33,14 +35,14 @@
         #sidebar img{
             width: 38px;
             height: 38px;
+            margin-left: -5px;
         }
         #sidebar ul{
-            padding-left: 19px;
-            padding-right: 15px;
+            padding: 10px 15px;
         }
         #sidebar ul li{
             list-style: none;
-            padding: 5px 0px;
+            padding: 10px 5px;
         }
         #sidebar ul li a{
             text-decoration: none;
@@ -49,6 +51,8 @@
         #sidebar hr{
             width: 36px;
             color: #FCFCFE;
+            position: fixed;
+            margin: 0;
         }
         /* 二维码样式 */
         #sidebar .qrcode1,.qrcode2{
@@ -60,9 +64,10 @@
             border-radius: 5px;
             box-shadow: 3px 3px 5px 3px #D4D4D4;
             display: none;
+            background-color: #FFFFFF;
         }
         #sidebar .qrcode1{
-            margin-top: 50px;
+            margin-top: 30px;
         }
         #sidebar .qrcode1 img{
             padding: 10px 15px 0px 15px;
@@ -71,7 +76,7 @@
             padding: 5px 15px;
         }
         #sidebar .qrcode2{
-            margin-top: 130px;
+            margin-top: 80px;
         }
         #sidebar .qrcode2 img{
             padding: 10px 10px 0px 15px;
@@ -86,7 +91,7 @@
             padding: 0px;
         }
         #sidebar .box ul li a img span{
-            position: absolute;
+            position: fixed;
         }
     </style>
 </head>

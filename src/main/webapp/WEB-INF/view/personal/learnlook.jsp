@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>学习看板</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{margin: 0;}
         /* 个性签名 */

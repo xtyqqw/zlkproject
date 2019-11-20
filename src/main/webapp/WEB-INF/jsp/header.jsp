@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>头部</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body {
             margin: 0;
