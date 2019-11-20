@@ -3,10 +3,10 @@
     margin: 0;
 }
 #div_video_all{
-    width: 1000px;
+    width: 100%;
     height: 500px;
     background-color: #009f95;
-    margin: 5px auto;
+    margin: auto;
 }
 #l_func{
     background-color: black;
@@ -33,12 +33,11 @@
 }
 
 #r_video{
-    background-color: white;
+    background-color: #2F4056;
     float: left;
     width: 89%;
     height: 100%;
     margin-left: 1%;
-    position: relative;
 }
 
 .layui-col-md2{
@@ -98,12 +97,15 @@
     cursor: pointer;
 }
 
-/*播放器 begin*/
+/*播放器 begin---------------------------------------------------------------------------------------------------------*/
 #div_all{
     width: 100%;
     height: 100%;
     margin: auto;
     overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 #div_video{
     width: 100%;
@@ -157,8 +159,8 @@
     float: left;
     margin: 10px 10px;
 }
-#div_void{
-    width: 48%;
+.float_right{
+    float: right !important;
 }
 #div_time{
     width: 135px;
@@ -261,4 +263,4 @@
     text-align: center;
     padding: 5px 0 0 0;
 }
-/*播放器 end*/
+/*播放器 end-----------------------------------------------------------------------------------------------------------*/
