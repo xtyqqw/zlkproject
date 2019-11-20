@@ -44,9 +44,17 @@
                     <div id="r_video">
                         <div id="video_div">视频播放器</div>
                         <div style="display: none" id="mulu_div">
-                            <c:forEach var="" items="">
+                            <span>${chapters} hhh</span>
+                            <c:forEach items="${chapters}" var="chapter">
+                                <span>${chapter.chapterName}</span>
+                            </c:forEach>
+                            <c:forEach var="chapter" items="${chapters}">
                                 <ul>
-                                    <span>${}</span>
+                                    <span>${chapter.chapterName}</span>
+                                    <span>${name}</span>
+                                    <c:forEach var="section" items="${sections}">
+                                        <li>${section.sectionName}</li>
+                                    </c:forEach>
                                 </ul>
                             </c:forEach>
                             <ul>

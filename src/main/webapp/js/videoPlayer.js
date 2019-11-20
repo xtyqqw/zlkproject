@@ -10,7 +10,24 @@ $(document).ready(function () {
     });
 
     $("#icon-mulu").click(function () {
-        $("#mulu_div").css("display","block");
+        $.ajax({
+            type: "POST",
+            url:"/chapter/findChapters",
+            success:function (data) {
+                $("#mulu_div").css("display","block");
+                var str = "";
+                var chapters = data.chapters;
+                $.each(chapters,function (i,chapter) {
+                    str += "<ul>";
+                    str += "<span>"+chapter.chapterName+"</span>";
+                    // $.each(chapter.sectionList,function (i, section) {
+                    //     str +="<li><a>"+section.sectionName+"</a></li>";
+                    // })
+                });
+                $("#mulu_div").html(str);
+            }
+        })
+
     });
 
     $("ul span").click(function () {
