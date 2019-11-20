@@ -20,17 +20,22 @@ $(document).ready(function () {
                 $.each(chapters,function (i,chapter) {
                     str += "<ul>";
                     str += "<span>"+chapter.chapterName+"</span>";
-                    // $.each(chapter.sectionList,function (i, section) {
-                    //     str +="<li><a>"+section.sectionName+"</a></li>";
-                    // })
+                    $.each(chapter.sectionList,function (i, section) {
+                        var time = section.sectionTime;
+                        // var hours = time.getHours();
+                        console.log(time);
+                        // console.log(hours);
+                        str +="<li>"+section.sectionName+"</li>";
+                    });
+                    str += "</ul>";
                 });
-                $("#mulu_div").html(str);
+                $("#mulu_div").append(str);
             }
         })
 
     });
 
-    $("ul span").click(function () {
+    $(document).on("click","ul span",function(){
         var er = $(this).parent().find("li");
         var yi = $(this).parent().siblings("ul");
         if ($(er).css("display")=="none"){
@@ -40,5 +45,6 @@ $(document).ready(function () {
         }
         $(yi).find("li").slideUp();
     });
+
 });
 

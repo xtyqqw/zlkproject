@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.course.courseHomePage.mapper;
 
-import com.zlk.zlkproject.course.entity.Courses;
+import com.zlk.zlkproject.entity.Courses;
 
 /**
  * @ClassName CourseHomePageMapper

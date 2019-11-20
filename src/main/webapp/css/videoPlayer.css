@@ -88,7 +88,8 @@
 #mulu_div ul li{
     background-color: white;
     color: black;
-    font-size: 14px;
+    font-size: 30px;
     display: none;
     cursor: pointer;
+    border: black 2px solid;
 }

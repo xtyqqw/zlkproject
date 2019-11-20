@@ -28,8 +28,8 @@ public class ChapterController {
 
     @RequestMapping(value = "/findChapters")
     @ResponseBody
-    public Map<String,Object> findChapters()throws Exception{
-        int coursesId = 1;
+    public Map<String,Object> findChapters(Integer coursesId)throws Exception{
+        coursesId = 1;
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         for (Chapter chapter : chapters) {
             System.out.println(chapter.getSectionList());

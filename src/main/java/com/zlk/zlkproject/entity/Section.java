@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,14 +25,14 @@ public class Section {
     /**视频地址 对应字段video_addr*/
     private String videoAddr;
     /**小节视频时长 对应字段section_time*/
-    private Date sectionTime;
+    private Integer sectionTime;
     /**小节序号 对应字段section_num*/
     private Integer sectionNum;
 
     public Section() {
     }
 
-    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr, Date sectionTime, Integer sectionNum) {
+    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr, Integer sectionTime, Integer sectionNum) {
         this.sectionId = sectionId;
         this.chapterId = chapterId;
         this.sectionName = sectionName;
