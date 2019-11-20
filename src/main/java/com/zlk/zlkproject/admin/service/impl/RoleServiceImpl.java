@@ -66,6 +66,18 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 通过角色ID查询角色信息
+     * @Date 9:22 2019/11/20
+     * @Param [roleId]
+     * @return com.zlk.zlkproject.entity.Role
+     **/
+    @Override
+    public Role findRoleByRoleId(String roleId) {
+        return roleMapper.findRoleByRoleId(roleId);
+    }
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 通过角色名查询角色信息
      * @Date 16:24 2019/11/19
      * @Param [roleName]

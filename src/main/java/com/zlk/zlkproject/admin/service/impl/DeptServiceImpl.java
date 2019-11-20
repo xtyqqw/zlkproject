@@ -78,6 +78,18 @@ public class DeptServiceImpl implements DeptService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 通过部门ID查询部门信息
+     * @Date 10:52 2019/11/20
+     * @Param [deptId]
+     * @return com.zlk.zlkproject.entity.Dept
+     **/
+    @Override
+    public Dept findDeptByDeptId(String deptId) {
+        return deptMapper.findDeptByDeptId(deptId);
+    }
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 通过部门ID修改部门信息
      * @Date 15:28 2019/11/19
      * @Param [dept]

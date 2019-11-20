@@ -37,6 +37,11 @@ public class ShrioConfig {
         filterMap.put("/loginController/login","anon");
         //filterMap.put("/loginController/logout","logout");
         filterMap.put("/loginController/*","authc");
+        filterMap.put("/admin/*","authc");
+        filterMap.put("/role/*","authc");
+        filterMap.put("/dept/*","authc");
+        filterMap.put("/log/*","authc");
+        filterMap.put("/function/*","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

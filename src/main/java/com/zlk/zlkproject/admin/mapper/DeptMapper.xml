@@ -34,6 +34,9 @@
     <select id="findDeptByDeptName" parameterType="java.lang.String" resultMap="deptEntityMap">
         select * from depts where dept_name = #{deptName}
     </select>
+    <select id="findDeptByDeptId" parameterType="java.lang.String" resultMap="deptEntityMap">
+        select * from depts where dept_id=#{deptId}
+    </select>
     <update id="updateDeptByDeptId" parameterType="com.zlk.zlkproject.entity.Dept">
         update depts
         <set>

@@ -21,6 +21,12 @@
         </if>
         order by role_id limit #{startPage},#{limit}
     </select>
+    <select id="findRoleByRoleId" parameterType="java.lang.String" resultMap="roleEntityMap">
+        select * from roles where role_id=#{roleId}
+    </select>
+    <select id="findRoleByRoleName" parameterType="java.lang.String" resultMap="roleEntityMap">
+        select * from roles where role_name = #{roleName}
+    </select>
     <insert id="addRole" parameterType="com.zlk.zlkproject.entity.Role">
         insert into roles
         <trim prefix="(" suffix=") " suffixOverrides=",">
@@ -31,9 +37,6 @@
             #{roleId},#{roleName},#{roleCode},
         </trim>
     </insert>
-    <select id="findRoleByRoleName" parameterType="java.lang.String" resultMap="roleEntityMap">
-        select * from roles where role_name = #{roleName}
-    </select>
     <update id="updateRoleByRoleId" parameterType="com.zlk.zlkproject.entity.Role">
         update roles
         <set>

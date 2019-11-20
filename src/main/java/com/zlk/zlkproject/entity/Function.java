@@ -19,7 +19,11 @@ public class Function {
     //导航栏ID
     private Integer functionId;
     //导航栏名称
-    private String functionName;
+    private String name;
     //父导航栏ID
     private Integer parentId;
+    //跳转url
+    private String url;
+    //跳转的iframe
+    private String target="maintarget";
 }

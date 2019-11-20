@@ -25,6 +25,24 @@ public interface AdminMapper {
      * @return java.lang.Integer
      **/
     Integer findTotalCountByAdminName(Pagination pagination);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查找有该角色的用户集合
+     * @Date 19:09 2019/11/19
+     * @Param [roleName]
+     * @return java.util.List<com.zlk.zlkproject.entity.Admin>
+     **/
+    List<Admin> findAdminByRoleName(String roleName);
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过后台用户ID查询用户信息
+     * @Date 9:12 2019/11/20
+     * @Param [adminId]
+     * @return com.zlk.zlkproject.entity.Admin
+     **/
+    Admin findAdminByAdminId(String adminId);
     
     /**
      * @Author lufengxiang
@@ -61,6 +79,15 @@ public interface AdminMapper {
      * @return java.lang.Integer
      **/
     Integer updateAdminAndRoleByAdminId(String adminsId,String rolesId);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 修改角色名称一并修改拥有该角色的用户信息
+     * @Date 9:40 2019/11/20
+     * @Param [roleName1]
+     * @return java.lang.Integer
+     **/
+    Integer updateAdminByRoleName(String roleName1,String roleName2);
     
     /**
      * @Author lufengxiang

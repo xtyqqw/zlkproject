@@ -38,17 +38,17 @@
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/role/insert" class="form">
-        角色名称 <input type="text" required placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input type="text" required placeholder="请输入角色代码" name="roleCode"><br>
+    <form action="<%=request.getContextPath()%>/dept/insert" class="form">
+        部门名称 <input type="text" required placeholder="请输入部门名称" name="deptName"><br>
+        部门代码 <input type="text" required placeholder="请输入部门代码" name="deptCode"><br>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
 </div>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/role/update" class="form">
-        <input type="hidden" name="roleId" id="roleId"><br>
-        角色名称 <input type="text" required id="roleName" placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input type="text" required id="roleCode" placeholder="请输入角色代码" name="roleCode"><br>
+    <form action="<%=request.getContextPath()%>/dept/update" class="form">
+        <input type="hidden" name="deptId" id="deptId"><br>
+        部门名称 <input type="text" required id="deptName" placeholder="请输入部门名称" name="deptName"><br>
+        部门代码 <input type="text" required id="deptCode" placeholder="请输入部门代码" name="deptCode"><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -76,33 +76,38 @@
         //第一个实例
         table.render({
             elem: '#demo'
-            , url: '<%=request.getContextPath()%>/role/roleManager?condition=${condition}' //数据接口
+            , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
             , page: true //开启分页
             , height: 450
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'roleId', title: '角色编号', width: 290, sort: true}
-                , {field: 'roleName', title: '角色名称', width: 130, sort: true}
-                , {field: 'roleCode', title: '角色代码', width: 290}
+                , {field: 'logId', title: '日志编号', width: 120, sort: true}
+                , {field: 'name', title: '操作用户名称', width: 150, sort: true}
+                , {field: 'description', title: '操作描述', width: 510}
                 , {
-                    title: '操作', width: 180, align: 'center', toolbar: '' +
+                    field: 'time',
+                    title: '操作时间',
+                    templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',
+                    width: 180
+                }
+                , {
+                    title: '操作', width: 90, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
-                        '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
                         '</div>'
                 }
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn" lay-event="add">增加</button>' +
+                '<button type="hidden" class="layui-btn" lay-event="add"></button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/role/toRoleManager"> \n' +
+                '               <form type="post" action="/log/toLogManager"> \n' +
                 '                <div class="layui-inline">\n' +
-                '                    <label class="layui-form-label hint">角色名称</label>\n' +
+                '                    <label class="layui-form-label hint">操作者名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的角色名称" autocomplete="off" class="layui-input">\n' +
+                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的操作者名称" autocomplete="off" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-inline">\n' +
@@ -121,15 +126,9 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'add':
-                    layer.open({
-                        title: "添加",
-                        type: 1,
-                        area: ['30%', '70%'],
-                        content: $("#addForm"),
-                        btn: ['提交'],
-                        yes: function (index, layero) {
-                            layero.find("form").find("#insertSubmit").click();
-                        }
+                    $.ajax({
+                        type: "POST",
+                        url:"<%=request.getContextPath()%>/log/logManager"
                     });
                     break;
             }
@@ -139,32 +138,27 @@
         //监听行工具事件
         table.on('tool(test)', function (obj) {
             var data = obj.data;
-            var id = data.roleId;
+            var id = data.logId;
             if (obj.event === 'del') {
                 layer.confirm('是否确认删除', function (index) {
+                    obj.del();
                     $.ajax({
                         type: "POST",
-                        url: "<%=request.getContextPath()%>/role/delete?roleId=" + id,
+                        url: "<%=request.getContextPath()%>/log/delete?logId=" + id,
                         success: function (msg) {
-                            if(msg){
-                                layer.alert("删除成功");
-                                obj.del();
-                            }
-                            if(!msg){
-                                layer.alert("仍有用户属于该角色,无法删除");
-                            }
+                            layer.alert("删除成功");
                         },
                         error: function (msg) {
                             layer.alert("遇到意外错误");
-
                         }
                     });
                     layer.close(index);
                 });
-            } else if (obj.event === 'edit') {
-                $("#roleId").val(data.roleId);
-                $("#roleName").val(data.roleName);
-                $("#roleCode").val(data.roleCode);
+            }
+            /*else if (obj.event === 'edit') {
+                $("#deptId").val(data.deptId);
+                $("#deptName").val(data.deptName);
+                $("#deptCode").val(data.deptCode);
                 layer.open({
                     title: "修改",
                     type: 1,
@@ -175,7 +169,7 @@
                         layero.find("form").find("#updateSubmit").click();
                     }
                 });
-            }
+            }*/
         });
     });
 </script>

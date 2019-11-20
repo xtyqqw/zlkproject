@@ -16,7 +16,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Dept {
+    //部门ID
     private String deptId;
+    //部门名称
     private String deptName;
+    //部门代码
     private String deptCode;
 }

@@ -99,12 +99,20 @@
 
 <script type="text/javascript">
     var setting = {
+        async: {
+            enable: true,
+            url: "/function/findFunction",
+            dataType: JSON
+        },
         view: {
             showIcon: false
         },
         data: {
             simpleData: {
-                enable: true
+                enable: true,
+                idKey: "functionId",
+                pIdKey: "parentId",
+                rootPId: 0
             }
         },
         callback:{
@@ -118,26 +126,8 @@
         }
     };
 
-    var zNodes =[
-        { id:1, pId:0, name:"前台用户管理"},
-        { id:11, pId:1, name:"前台用户管理", target:"maintarget", url:""},
-        { id:2, pId:0, name:"项目管理"},
-        { id:21, pId:2, name:"课程管理", target:"maintarget", url:""},
-        { id:22, pId:2, name:"视频管理", target:"maintarget", url:""},
-        { id:23, pId:2, name:"问答管理", target:"maintarget", url:""},
-        { id:24, pId:2, name:"笔记管理", target:"maintarget", url:""},
-        { id:3, pId:0, name:"社区管理"},
-        { id:31, pId:3, name:"文章管理", target:"maintarget", url:""},
-        { id:4, pId:0, name:"系统管理"},
-        { id:41, pId:4, name:"类别管理", target:"maintarget", url:""},
-        { id:42, pId:4, name:"部门管理", target:"maintarget", url:"/dept/toDeptManager"},
-        { id:43, pId:4, name:"用户管理", target:"maintarget", url:"/admin/toAdminManager"},
-        { id:44, pId:4, name:"角色管理", target:"maintarget", url:"/role/toRoleManager"},
-        { id:45, pId:4, name:"日志管理", target:"maintarget", url:""}
-    ];
-
     $(document).ready(function(){
-        $.fn.zTree.init($("#tree"), setting, zNodes);
+        $.fn.zTree.init($("#tree"), setting);
     });
 </script>
 

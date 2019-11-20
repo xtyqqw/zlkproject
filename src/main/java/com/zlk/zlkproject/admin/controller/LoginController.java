@@ -1,17 +1,22 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.zlk.zlkproject.admin.service.LogService;
+import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.entity.Admin;
+import com.zlk.zlkproject.entity.Log;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * @ClassName LoginController
@@ -22,6 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/loginController")
 public class LoginController {
+
+    @Autowired
+    private LogService logService;
 
     /**
      * @Author lufengxiang
@@ -45,13 +53,23 @@ public class LoginController {
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, Admin admin, String code){
         ModelAndView mv=new ModelAndView();
+        if(admin.getAdminName()==null){
+            mv.setViewName("admin/login");
+            return mv;
+        }
         String checkCode = (String) request.getSession().getAttribute("checkCode");
         if(checkCode.toLowerCase().equals(code.toLowerCase())){
             Subject subject = SecurityUtils.getSubject();
+            admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
             UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());
             try {
                 subject.login(token);
-                mv.addObject("loginName",admin.getAdminName());
+                request.getSession().setAttribute("loginName",admin.getAdminName());
+                Log log=new Log();
+                log.setName((String) request.getSession().getAttribute("loginName"));
+                log.setDescription("登陆了管理系统");
+                log.setTime(new Date());
+                logService.addLog(log);
                 mv.setViewName("admin/success");
                 return mv;
             } catch (UnknownAccountException e) {

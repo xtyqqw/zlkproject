@@ -22,6 +22,12 @@
         </if>
         order by admin_id limit #{startPage},#{limit}
     </select>
+    <select id="findAdminByRoleName" parameterType="java.lang.String" resultMap="adminEntityMap">
+        select * from admins where admin_role=#{roleName}
+    </select>
+    <select id="findAdminByAdminId" parameterType="java.lang.String" resultMap="adminEntityMap">
+        select * from admins where admin_id = #{adminId}
+    </select>
     <insert id="addAdmin" parameterType="com.zlk.zlkproject.entity.Admin">
         insert into admins
         <trim prefix="(" suffix=") " suffixOverrides=",">
@@ -52,6 +58,9 @@
     </update>
     <update id="updateAdminAndRoleByAdminId" parameterType="java.lang.String">
         update admins_roles set roles_id = #{param2} where admins_id=#{param1}
+    </update>
+    <update id="updateAdminByRoleName" parameterType="java.lang.String">
+        update admins set admin_role = #{param1} where admin_role = #{param2}
     </update>
     <delete id="deleteAdminByAdminId" parameterType="java.lang.String">
         delete from admins where admin_id=#{adminId}

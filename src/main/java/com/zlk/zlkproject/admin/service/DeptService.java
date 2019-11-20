@@ -41,6 +41,15 @@ public interface DeptService {
      * @return com.zlk.zlkproject.entity.Dept
      **/
     Dept findDeptByDeptName(String deptName);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过部门ID查询部门信息
+     * @Date 10:51 2019/11/20
+     * @Param [deptId]
+     * @return com.zlk.zlkproject.entity.Dept
+     **/
+    Dept findDeptByDeptId(String deptId);
     
     /**
      * @Author lufengxiang

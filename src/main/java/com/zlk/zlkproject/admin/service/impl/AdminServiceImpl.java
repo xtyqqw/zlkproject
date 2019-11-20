@@ -54,6 +54,30 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 通过用户所属角色查询用户
+     * @Date 9:15 2019/11/20
+     * @Param [roleName]
+     * @return java.util.List<com.zlk.zlkproject.entity.Admin>
+     **/
+    @Override
+    public List<Admin> findAdminByRoleName(String roleName) {
+        return adminMapper.findAdminByRoleName(roleName);
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过后台用户ID查询用户
+     * @Date 9:21 2019/11/20
+     * @Param [adminId]
+     * @return com.zlk.zlkproject.entity.Admin
+     **/
+    @Override
+    public Admin findAdminByAdminId(String adminId) {
+        return adminMapper.findAdminByAdminId(adminId);
+    }
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 新增后台用户
      * @Date 12:56 2019/11/19
      * @Param [admin]
@@ -98,6 +122,18 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Integer updateAdminAndRoleByAdminId(String adminsId,String rolesId) {
         return adminMapper.updateAdminAndRoleByAdminId(adminsId,rolesId);
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 修改角色名称一并修改拥有该角色的用户信息
+     * @Date 10:32 2019/11/20
+     * @Param [roleName1, roleName2]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer updateAdminByRoleName(String roleName1, String roleName2) {
+        return adminMapper.updateAdminByRoleName(roleName1, roleName2);
     }
 
     /**
