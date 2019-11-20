@@ -5,7 +5,6 @@ import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.entity.Admin;
 import com.zlk.zlkproject.entity.Log;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -40,7 +39,7 @@ public class LoginController {
      **/
     @RequestMapping(value = "/toLogin")
     public String toLogin(){
-        return "admin/login";
+        return "admin/testLogin";
     }
 
     /**
@@ -51,14 +50,14 @@ public class LoginController {
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/login")
-    public ModelAndView login(HttpServletRequest request, Admin admin, String code){
+    public ModelAndView login(HttpServletRequest request, Admin admin){
         ModelAndView mv=new ModelAndView();
         if(admin.getAdminName()==null){
             mv.setViewName("admin/login");
             return mv;
         }
-        String checkCode = (String) request.getSession().getAttribute("checkCode");
-        if(checkCode.toLowerCase().equals(code.toLowerCase())){
+        //String checkCode = (String) request.getSession().getAttribute("checkCode");
+        //if(checkCode.toLowerCase().equals(code.toLowerCase())){
             Subject subject = SecurityUtils.getSubject();
             admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
             UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());
@@ -83,11 +82,12 @@ public class LoginController {
                 mv.setViewName("admin/login");
                 return mv;
             }
-        }else {
+        /*}
+        else {
             mv.setViewName("admin/login");
             mv.addObject("error", "验证码错误");
-        }
-        return mv;
+        }*/
+        //return mv;
     }
 
     /**
