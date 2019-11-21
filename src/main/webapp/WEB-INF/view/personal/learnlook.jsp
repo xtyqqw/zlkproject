@@ -98,7 +98,8 @@
             <ul>
                 <li>
                     <span class="font1">学习时长</span><br />
-                    <i>${lists.userDateTime}</i><span style="font-size: 13px;color: #999999;">小时</span>
+                    <i>${lists.userDateTime}</i>
+                    <span style="font-size: 13px;color: #999999;">小时</span>
                     <p>已超过89%的同学</p>
                 </li>
                 <li>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.awt.*;
 import java.util.List;
 
 @Service
@@ -18,6 +19,12 @@ public class DurationServiceImpl implements DurationService {
     @Override
     public User selectDuration(User user){
         return durationMapper.selectDuration(user);
+        /*User user1 = durationMapper.selectDuration(user);
+        Integer userAllTime = user1.getUserAllTime();
+        Integer userDateTime = user1.getUserDateTime();
+        userAllTime+=userDateTime;*/
+
+
     }
 
 }
