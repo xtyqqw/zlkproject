@@ -24,4 +24,9 @@ public class SectionServiceImpl implements SectionService {
     public List<Section> findSectionByChapterId(Integer chapterId) {
         return sectionMapper.findSectionByChapterId(chapterId);
     }
+
+    @Override
+    public String findStateById(Integer sectionId) {
+        return sectionMapper.findStateById(sectionId);
+    }
 }

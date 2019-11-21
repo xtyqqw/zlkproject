@@ -15,4 +15,6 @@ public interface SectionService {
      *@time 2019/11/19  14:34
      */
     List<Section> findSectionByChapterId(Integer chapterId);
+
+    String findStateById(Integer sectionId);
 }

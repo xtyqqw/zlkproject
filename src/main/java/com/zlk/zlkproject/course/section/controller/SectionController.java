@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: zlkproject
@@ -29,7 +31,7 @@ public class SectionController {
 
     @RequestMapping(value = "/findSections")
     @ResponseBody
-    private ModelAndView findSections()throws Exception{
+    public ModelAndView findSections()throws Exception{
         int coursesId = 1;
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         List<Section> sections = new ArrayList<>();
@@ -42,5 +44,17 @@ public class SectionController {
         mv.addObject("name","sss");
         mv.setViewName("/view/videoPlayer");
         return mv;
+    }
+
+    @RequestMapping(value = "/findState")
+    @ResponseBody
+    public Map<String, Object> findState(Integer sectionId) throws Exception{
+        String state = sectionService.findStateById(sectionId);
+        if (state ==null){
+            state = "未开始";
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("state",state);
+        return map;
     }
 }
