@@ -4,6 +4,7 @@ import com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Courses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @ClassName CourseHomePageServiceImpl
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Author LuanKe
  * Date 2019/11/19 16:31
  **/
+@Service
 public class CourseHomePageServiceImpl implements CourseHomePageService {
+
     @Autowired
     private CourseHomePageMapper courseHomePageMapper;
 

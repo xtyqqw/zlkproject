@@ -62,18 +62,11 @@
                                     <div id="mid" class="time">/</div>
                                     <div id="total_time" class="time"></div>
                                 </div>
-                                <div id="div_void" class="div_btn"></div>
-                                <div class="div_btn" style="padding: 2px 0 0 0;">
-                                    <i id="volume" class="iconfont icon-yinzhong enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;margin: 0 0 0 15px"></i>
-                                    <div id="volume_bar">
-                                        <div id="volume_num" style="">50</div>
-                                        <div id="vb_bg">
-                                            <div id="vb_bar"></div>
-                                        </div>
-                                        <div id="vb_btn"></div>
-                                    </div>
+                                <div class="div_btn float_right" style="padding: 2px 0 0 0;">
+                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
+                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
                                 </div>
-                                <div id="div_speed" class="div_btn">
+                                <div id="div_speed" class="div_btn float_right">
                                     <div id="speed_btn" class="enableClk">1.0x</div>
                                     <div id="speed_option_box">
                                         <div class="speed_option enableClk">2.0x</div>
@@ -84,9 +77,15 @@
                                         <div class="speed_option enableClk">0.75x</div>
                                     </div>
                                 </div>
-                                <div class="div_btn" style="padding: 2px 0 0 0;">
-                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
-                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+                                <div class="div_btn float_right" style="padding: 2px 0 0 0;">
+                                    <i id="volume" class="iconfont icon-yinzhong enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;margin: 0 0 0 15px"></i>
+                                    <div id="volume_bar">
+                                        <div id="volume_num" style="">50</div>
+                                        <div id="vb_bg">
+                                            <div id="vb_bar"></div>
+                                        </div>
+                                        <div id="vb_btn"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

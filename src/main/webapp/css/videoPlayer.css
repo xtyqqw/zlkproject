@@ -7,7 +7,7 @@
     width: 100%;
     height: 500px;
     background-color: #009f95;
-    margin: 5px auto;
+    margin: auto;
 }
 
 .layui-col-md2{
@@ -43,12 +43,11 @@
 }
 
 #r_video{
-    background-color: white;
+    background-color: #2F4056;
     float: left;
     width: 89%;
     height: 100%;
     margin-left: 1%;
-    position: relative;
 }
 
 #video_row{
@@ -63,12 +62,13 @@
 /*侧边栏 end*/
 /*目录 begin*/
 #mulu_div{
-    position: absolute;
-    z-index: 2;
+    z-index: 5;
     background-color: gray;
     width: 50%;
     height: 100%;
     opacity: 0.7;
+    position: relative;
+    bottom: 500px;
 }
 
 #mulu_div ul{
@@ -102,7 +102,7 @@
     border: black 2px solid;
 }
 
-.time{
+.sectionTime{
     width: 100px !important;
     height: auto !important;
     float: right !important;
@@ -120,7 +120,6 @@
     height: 100%;
     margin: auto;
     overflow: hidden;
-    position: absolute;
     z-index: 1;
 }
 #div_video{
@@ -175,8 +174,8 @@
     float: left;
     margin: 10px 10px;
 }
-#div_void{
-    width: 48%;
+.float_right{
+    float: right !important;
 }
 #div_time{
     width: 135px;
