@@ -31,11 +31,12 @@
     <style>
      .layui-tab {
          width: 950px;
-         height: 600px;
-         position: absolute;
+         height: 500px;
+         position: relative;
          left: 200px;
-         top: 100px;
+         top: 35px;
      }
+
      .layui-this{
          width:190px;
          color:#000000;
@@ -47,226 +48,270 @@
          border: solid 1px;
          color: black;
          width: 213px;
-         height: 110px;
+         height: 90px;
      }
+
      .dl1{
-         position: absolute;
-         top: 90px;
+         height: 190px;
      }
      .dl2{
-         position: absolute;
-         left: 240px;
-         top: 90px;
+         height: 190px;
      }
      .dl3{
-         position: absolute;
-         left: 468px;
-         top: 90px;
+         height: 190px;
      }
      .dl4{
-            position: absolute;
-            left: 698px;
-            top: 90px;
+         height: 190px;
         }
      .dl5{
-         position: absolute;
-
-         top: 320px;
+         height: 190px;
      }
      .dl6{
-         position: absolute;
-         left: 240px;
-         top: 320px;
+         height: 190px;
      }
      .dl7{
-         position: absolute;
-         left: 468px;
-         top: 320px;
+         height: 190px;
      }
      .dl8{
-         position: absolute;
-         left: 698px;
-         top: 320px;
+         height: 190px;
      }
      .dd1{
          box-shadow:-2px 0 3px -1px #ebebeb,
          -2px 0 3px -1px #ebebeb,
          2px 0 3px -1px  #ebebeb;
-         height: 100px;
-
+         height: 80px;
+         position: relative;
+         top: -95px;
      }
      .h61{
-         position: absolute;
+         position: relative;
          left: 10px;
-         top: 103px;
+         top: 10px;
          color: #1f2022;
          font-weight:bold;
      }
      .h62{
-         position: absolute;
+         position: relative;
          left: 128px;
-         top: 103px;
+         top: -13px;
          color: #1f2022;
          font-weight:bold;
      }
      .h63{
-         position: absolute;
+         position: relative;
          left: 155px;
-         top: 103px;
+         top: -36px;
          color: #1f2022;
          font-weight:bold;
      }
      .h64{
-         position: absolute;
+         position: relative;
          left: 10px;
-         top: 123px;
+         top: -38px;
          color: #ff4413;
 
      }
      .h65{
-         position: absolute;
-         left: 70px;
-         top: 123px;
+         position: relative;
+         left: 60px;
+         top: -62px;
          color: #807d7c;
      }
      .but1{
          width: 100px;
-         height: 30px;
+         height: 25px;
          position: absolute;
          left: 53px;
-         top: 160px;
+         top: 52px;
          background-color: #1E9FFF;
          color: white;
          border-radius: 5px;
          font-weight:bold;
+         border: none;
      }
      .conceal{
          width: 950px;
          height: 300px;
          position: absolute;
          z-index: 1;
-         background-color: #f6f1ff;
+         background-color: #ffffff;
          display: none;
          top:39px;
          left: -2px;
 
      }
-     .h51{
-         position: absolute;
-         top:50px;
-         left: 5px;
-         font-weight:bold;
 
-     }
      .badge{
 
          opacity: 0.1;
      }
-     #badge1{
-         position: absolute;
-         top:80px;
-         left: 5px;
-        }
-     #badge2{
-         position: absolute;
-         top:80px;
-         left: 50px;
-     }
+
      #badge3{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:35px;
          left: 5px;
      }
      #badge4{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge5{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge6{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge7{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge8{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge9{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge10{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge11{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge12{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge13{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge14{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }#badge15{
-          position: absolute;
-          top:80px;
+          position: relative;
+          top:35px;
           left: 5px;
       }
      #badge16{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }
      #badge17{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:35px;
          left: 5px;
      }
      #badge18{
-         position: absolute;
-         top:80px;
+         position: relative;
+         top:5px;
          left: 50px;
      }
 
 
-     .xingxing{
+     .xingxing {
          position: absolute;
-         top:71px;
+         top: 71px;
          left: 110px;
      }
+
+
+     .li1{
+         float: left;
+         height: 190px;
+
+     }
+     .li2{
+         float: left;
+         margin-left: 20px;
+         height: 190px;
+     }
+     .li3{
+         float: left;
+         margin-left: 20px;
+         height: 190px;
+     }
+     .li4{
+         float: left;
+         margin-left: 20px;
+         height: 190px;
+     }
+     .li5{
+         float: left;
+         height: 220px;
+
+     }
+     .li6{
+         float: left;
+         margin-left: 20px;
+         height: 220px;
+     }
+     .li7{
+         float: left;
+         margin-left: 20px;
+         height: 220px;
+     }
+     .li8{
+         float: left;
+         margin-left: 20px;
+         height: 220px;
+     }
+     .h51{
+         position: relative;
+         top:45px;
+         left:5px;
+         font-weight:bold;
+
+     }
+     .h52{
+         position: relative;
+         top:42px;
+         left:1px;
+         font-weight:bold;
+
+     }
+     .dd2{
+         position: relative;
+         top:-100px;
+         left:10px;
+     }
+     .ul2{
+         position: relative;
+     }
+     .layui-this{
+         font-weight:bold;
+     }
+
+
+
+
 
     </style>
 
 
 </head>
 <body>
-
+<jsp:include page="../jsp/header.jsp"></jsp:include>
 <div class="layui-tab layui-tab-brief" >
     <ul class="layui-tab-title">
         <li class="layui-this" >全部内容</li>
 
 
     </ul>
-    <div class="layui-tab-content">
+    <div class="layui-tab-content" >
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
                 <p>JAVA</p>
@@ -275,150 +320,11 @@
                 <p>JS</p>
 
             </div>
-            <dl class="dl1">
-                <dt class="dt1">
-                <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge9">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge10">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61" id="renshu">学习人数</h6>
-                    <h6 class="h62" id="zhang">章</h6>
-                    <h6 class="h63" id="jie">节</h6>
-                    <h6 class="h64" id="jin">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-                </dd>
+            <div style="clear: both"></div>
 
-            </dl>
-            <dl class="dl2">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge17">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge18">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl3">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge3">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge4">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl4">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge5">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge6">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl5">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge7">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge8">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl6">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge11">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge12">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl7">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge13">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge14">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
-            <dl class="dl8">
-                <dt class="dt1">
-                    <h5 class="h51">玩转数据结构，从入门到精通</h5>
-                    <p><span class="badge" contenteditable="true" id="badge15">java</span></p>
-                    <p><span class="badge" contenteditable="true" id="badge16">html</span></p>
-                    <div class="xingxing"></div>
-                </dt>
-                <dd class="dd1">
-                    <h6 class="h61">学习人数</h6>
-                    <h6 class="h62">章</h6>
-                    <h6 class="h63">节</h6>
-                    <h6 class="h64">金额</h6>
-                    <h6 class="h65">上次学习时间</h6>
-                    <input class="but1" type="button" value="查看详情">
-
-                </dd>
-
-            </dl>
         </div>
+
+        <div id="LAY_demo2"></div>
 
     </div>
 </div>
@@ -472,6 +378,7 @@
 
 <script src="/layui/layui.js" charset="utf-8"></script>
 
+<%--图片中的星星--%>
 <script>
     layui.use(['rate'], function(){
         var rate = layui.rate;
@@ -484,6 +391,197 @@
         });
 </script>
 
+ <%--瀑布流--%>
+<script>
+    layui.use('flow', function(){
+        var flow = layui.flow;
+  flow.load({
+elem: '#LAY_demo2' //流加载容器
+,isAuto: false
+,done: function(page, next){ //加载下一页
+//模拟插入
+setTimeout(function(){
+var lis = [];
+for(var i = 0; i < 1; i++){
+lis.push(
+    '<ul>'+
+        '<li class="li1">'+
+    '<dl class="dl1">' +
+    '<dt class="dt1">' +
+    '</dt>' +
+    '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge9">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +
+    '<div class="xingxing"></div>' +
+    '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61" id="renshu">学习人数</h6>' +
+    '<h6 class="h62" id="zhang">章</h6>' +
+    '<h6 class="h63" id="jie">节</h6>' +
+    '<h6 class="h64" id="jin">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" onclick=window.open("https://www.baidu.com") value="查看详情"/>' +
+    '</dd>' +
+    '</dl>' +
+    '</li>'+
+    '<li class="li2">'+
+    '<dl class="dl2">' +
+    '<dt class="dt1">' +
+    '</dt>' +
+    '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge17">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge18">html</span></p>' +
+    '<div class="xingxing"></div>' +
+    '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li>'+
+        '<li class="li3">'+
+    '<dl class="dl3">' +
+    '<dt class="dt1">' +
+    '</dt>' +
+        '<dd class="dd2">'+
+    ' <h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge3">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge4">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li>'+
+        '<li class="li4">'+
+    '<dl class="dl4">' +
+    '<dt class="dt1">' +
 
+    '</dt>' +
+        '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge5">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge6">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li >'+
+        '</ul>'+
+        '<ul class="ul2">'+
+        '<li class="li5">'+
+    '<dl class="dl5">' +
+    '<dt class="dt1">' +
+
+    '</dt>' +
+        '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge7">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge8">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li>'+
+        '<li class="li6">'+
+    '<dl class="dl6">' +
+    '<dt class="dt1">' +
+
+    '</dt>' +
+        '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge11">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge12">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li>'+
+        '<li class="li7">'+
+    '<dl class="dl7">' +
+    '<dt class="dt1">' +
+
+    '</dt>' +
+        '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge13">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge14">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+        '</li>'+
+        '<li class="li8">'+
+    '<dl class="dl8">' +
+    '<dt class="dt1">' +
+
+    '</dt>' +
+        '<dd class="dd2">'+
+    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
+    '<p><span class="badge" contenteditable="true" id="badge15">java</span></p>' +
+    '<p><span class="badge" contenteditable="true" id="badge16">html</span></p>' +
+    '<div class="xingxing"></div>' +
+        '</dd>'+
+    '<dd class="dd1">' +
+    '<h6 class="h61">学习人数</h6>' +
+    '<h6 class="h62">章</h6>' +
+    '<h6 class="h63">节</h6>' +
+    '<h6 class="h64">金额</h6>' +
+    '<h6 class="h65">上次学习时间</h6>' +
+    '<input class="but1" type="button" value="查看详情">' +
+    '</dd>' +
+    '</dl>' +
+    '</li>' +
+    '</li>'
+    )
+}
+next(lis.join(''), page < 6); //假设总页数为 6
+}, 500);
+}
+});
+    });
+</script>
+<div style="clear: both"></div>
+<jsp:include page="../jsp/footer.jsp"></jsp:include>
 </body>
 </html>
