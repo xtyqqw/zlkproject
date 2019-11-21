@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div id="r_video">
-
+                        <%--播放器 begin ------------------------------------------------------------------------------%>
                             <div id="div_all">
                                 <div id="div_video">
                                     <video id="video1" width="100%" height="100%">
@@ -90,6 +90,7 @@
                                     </div>
                                 </div>
                             </div>
+                        <%--播放器 end---------------------------------------------------------------------------------%>
 
                         <div style="display: none" id="mulu_div">
                             <span>${chapters} hhh</span>
