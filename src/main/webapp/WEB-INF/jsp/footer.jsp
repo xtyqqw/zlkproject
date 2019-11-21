@@ -19,6 +19,7 @@
             margin-top: 100px;
             margin-bottom: 0;
             position: absolute;
+
         }
         #footer ul{
             padding-top: 30px;
