@@ -16,6 +16,7 @@
             height: 130px;
             width: 100%;
             margin-top: 100px;
+
         }
         #footer ul{
             padding-top: 30px;
