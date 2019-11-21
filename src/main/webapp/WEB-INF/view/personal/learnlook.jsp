@@ -9,43 +9,16 @@
 <html>
 <head>
     <title>学习看板</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{margin: 0;}
-        /* 个性签名 */
-        .signature{
-            background-color: #FAFAFA;
-            width: 100%;height: 130px;
-            border: 1px #FAFAFA;
-            border-radius: 5px;
-        }
-        /* 头像 */
-        .signature .headimg{
-            width: 80px;height: 80px;
-            border: 1px #FAFAFA;
-            border-radius: 50%;
-            background-color: #713ED7;
-            float: left;
-            margin: 23px 20px 23px 30px;
-        }
-        /* 昵称 */
-        .signature .petname{
-            margin-left: 100px;
-            padding-top: 20px;
-            font-size: 18px;
-            width: 300px;
-        }
-        /* 签名 */
-        .signature .sdf{
-            margin-left: 100px;
-            font-size: 12px;
-            width: 500px;
-        }
         .xuexili{
-            margin-top: 20px;
+            margin-top: 0;
             background-color: #FAFAFA;
-            width: 100%;height: 300px;
+            width: 100%;
+            height: 300px;
             border: 1px #FAFAFA;
-            border-radius: 5px;
+            border-radius: 3px;
         }
         .zi{
             margin: 40px 30px 0px 30px;
@@ -86,7 +59,6 @@
             margin-left: 10px;
             border: 1px #FAFAFA;
             border-radius: 5px;
-
             padding: 20px 30px;
             text-align: center;
         }
@@ -110,21 +82,6 @@
     </style>
 </head>
 <body>
-    <!-- 个性签名 -->
-    <div class="signature">
-        <!-- 头像 -->
-        <div class="headimg">
-
-        </div>
-        <!-- 昵称 -->
-        <div class="petname">
-            <p>我是大牛</p>
-        </div>
-        <!-- 签名 -->
-        <div class="sdf">
-            <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
-        </div>
-    </div>
     <!-- 学习力 -->
     <div class="xuexili">
         <div class="zi">
@@ -141,12 +98,12 @@
             <ul>
                 <li>
                     <span class="font1">学习时长</span><br />
-                    <i>5</i><span style="font-size: 13px;color: #999999;">小时</span>
+                    <i>${lists.userDateTime}</i><span style="font-size: 13px;color: #999999;">小时</span>
                     <p>已超过89%的同学</p>
                 </li>
                 <li>
                     <span class="font1">学习成长量</span><br />
-                    <i>33</i>
+                    <i>${lists.userAllTime}</i>
                     <p>已超过89%的同学</p>
                 </li>
                 <li>

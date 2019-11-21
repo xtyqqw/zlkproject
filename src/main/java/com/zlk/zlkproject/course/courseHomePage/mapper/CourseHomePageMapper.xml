@@ -3,19 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper">
-    <resultMap id="CourseHomePageEntityMap" type="com.zlk.zlkproject.course.entity.Courses">
+    <resultMap id="CourseHomePageEntityMap" type="com.zlk.zlkproject.entity.Courses">
         <id property="coursesId" column="courses_id" javaType="java.lang.Integer"></id>
-        <result property="unitId" column="courses_name" javaType="java.lang.String"></result>
-        <result property="unitRegisterId" column="student_num" javaType="java.lang.String"></result>
-        <result property="payMethod" column="chapter_num" javaType="java.lang.String"></result>
-        <result property="receiptUnitName" column="section_num" javaType="java.lang.String"></result>
-        <result property="receiptUnitAccount" column="price" javaType="java.lang.String"></result>
-        <result property="receiptUnitBank" column="cover_pic" javaType="java.lang.String"></result>
-        <result property="bankExchangeNum" column="introduce_video" javaType="java.lang.String"></result>
-        <result property="paySusNum" column="introduce_text" javaType="java.lang.String"></result>
-        <result property="receiptDate" column="introduce_pic" javaType="java.lang.String"></result>
-        <result property="remitUnitName" column="feature_text" javaType="java.lang.String"></result>
-        <result property="remitBankName" column="feature_pic" javaType="java.lang.String"></result>
+        <result property="coursesName" column="courses_name" javaType="java.lang.String"></result>
+        <result property="studentNum" column="student_num" javaType="java.lang.Integer"></result>
+        <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
+        <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
+        <result property="price" column="price" javaType="java.lang.Double"></result>
+        <result property="coverPic" column="cover_pic" javaType="java.lang.String"></result>
+        <result property="introduceVideo" column="introduce_video" javaType="java.lang.String"></result>
+        <result property="introduceText" column="introduce_text" javaType="java.lang.String"></result>
+        <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
+        <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
+        <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
 
     </resultMap>
+    <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
+		select * from courses where courses_id=#{coursesId}
+	</select>
 </mapper>
