@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>尾部</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{margin: 0;}
         #footer{
@@ -16,17 +17,21 @@
             height: 130px;
             width: 100%;
             margin-top: 100px;
+            margin-bottom: 0;
+            position: absolute;
 
         }
         #footer ul{
             padding-top: 30px;
             width: 800px;
+            height: 30px;
             margin: 0 auto;
+            border-bottom: 1px solid #999999;
         }
         #footer ul li{
             float: left;
             list-style: none;
-            padding-left: 20px;
+            padding-left: 30px;
         }
         #footer ul li a{
             color: #989898;
@@ -39,12 +44,12 @@
         }
         #footer hr{
             width: 800px;
-            align-content: center !important;
             color: #989898;
         }
         #footer p{
             color: #989898;
             text-align: center;
+            padding-top: 10px;
         }
     </style>
 </head>
@@ -73,7 +78,6 @@
                 <a href="javascript:;">合作企业</a>
             </li>
         </ul>
-        <br><hr>
         <p>
             copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
         </p>

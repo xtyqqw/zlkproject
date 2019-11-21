@@ -29,4 +29,13 @@ public class AboutusController {
     public String aboutzlk(){
         return "view/aboutus/aboutzlk";
     }
+
+    /**
+     * 跳转友情链接功能
+     * @return
+     */
+    @RequestMapping("/blogroll")
+    public String blogroll(){
+        return "view/aboutus/blogroll";
+    }
 }

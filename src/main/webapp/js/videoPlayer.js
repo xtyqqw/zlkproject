@@ -64,6 +64,17 @@ $(document).ready(function () {
     var res = 0;
     var screenState = false;
 
+    //切换视频方法
+    function switchVideo (src) {
+        document.getElementById("video_src").src = src;
+        video1.load();
+        clearInterval(interval1);
+        btn_play.innerHTML = "&#xe652;";
+        btn.style.left = 0 + 'px';
+        bar.style.width = 0 + 'px';
+        currentTime.innerText = '00:00:00';
+    }
+
     //全屏按钮点击
     document.getElementById("fscreen").onclick = function () {
         screenState = true;
@@ -79,16 +90,15 @@ $(document).ready(function () {
     //监听全屏改变事件
     window.addEventListener("fullscreenchange",function () {
         if (screenState) {
+            $("#div_all").offset({top:0,left:0});
             all.style.width = window.screen.width + '';
             all.style.height = window.screen.height + '';
             all.style.margin = "auto";
-            all.style.position = "absolute";
-            all.style.top = '0';
-            all.style.left = '0';
             document.getElementById("fscreen").style.display = "none";
             document.getElementById("escreen").style.display = "block";
             screenState = false;
         }else{
+            $("#div_all").offset({top:$("#r_video").offset().top,left:$("#r_video").offset().left});
             all.style.width = "100%";
             all.style.height = "100%";
             all.style.margin = "auto";
