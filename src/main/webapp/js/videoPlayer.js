@@ -21,12 +21,14 @@ $(document).ready(function () {
                     var chapters = data.chapters;
                     $.each(chapters,function (i,chapter) {
                         str += "<ul>";
-                        str += "<span>"+chapter.chapterName+"</span>";
+                        str += "<span class=\"headline\">"+chapter.chapterName+"</span>";
                         $.each(chapter.sectionList,function (i, section) {
                             var time = section.sectionTime;
                             console.log(time);
+                            var time1 = format(time);
                             var sectionId = section.sectionId;
                             str += "<li>";
+                            str += "<input hidden name=\"sectionId\" value=\""+sectionId+"\">";
                             $.ajax({
                                 type:"POST",
                                 url:"/section/findState?sectionId="+sectionId,
@@ -46,7 +48,7 @@ $(document).ready(function () {
                                 str += "<i class=\"iconfont icon-suoding state\"></i>";
                             }
                             str +=section.sectionName;
-                            str +="<span class=\"time\">"+time+"</span>";
+                            str +="<span class=\"duration\">"+time1+"</span>";
                             str +="</li>";
                         });
                         str += "</ul>";
@@ -70,11 +72,17 @@ $(document).ready(function () {
 
     /*小节视频点击更换*/
     $(document).on("click","ul li",function(){
-
-        // $("#video_src").attr("src","/img/claa.mp4");
-        $("#video_src").src="/img/claa.mp4";
-        // video1.load();
-        $("#mulu_div").css("display","none");
+        var sectionId = $(this).find("input").val();
+        console.log(sectionId);
+        $.ajax({
+            type:"POST",
+            url:"/section/findVideoAddr?sectionId="+sectionId,
+            success:function (data) {
+                var src = data.videoAddr;
+                switchVideo(src);
+                $("#mulu_div").css("display","none");
+            }
+        });
     });
 
     /*

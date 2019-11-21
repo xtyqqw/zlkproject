@@ -57,4 +57,13 @@ public class SectionController {
         map.put("state",state);
         return map;
     }
+
+    @RequestMapping(value = "/findVideoAddr")
+    @ResponseBody
+    public Map<String,Object> findVideoAddr(Integer sectionId) throws Exception{
+        String videoAddr = sectionService.findVideoAddrById(sectionId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("videoAddr",videoAddr);
+        return map;
+    }
 }

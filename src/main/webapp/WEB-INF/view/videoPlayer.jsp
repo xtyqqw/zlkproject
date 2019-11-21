@@ -98,17 +98,9 @@
             </div>
             <div class="layui-col-md2"></div>
         </div>
-    </div>
-    <div >
-        <ul>
-            <li>
-                <i class="iconfont icon-bofang state"></i>
-                <i class="iconfont icon-wancheng state"></i>
-                <i class="iconfont icon-suoding state"></i>
-                lsdjls
-            </li>
-        </ul>
-    </div>
+        <div class="layui-row" id="tab_row">
 
+        </div>
+    </div>
 </body>
 </html>

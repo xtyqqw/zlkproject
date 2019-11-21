@@ -17,4 +17,7 @@
     <select id="findStateById" parameterType="java.lang.Integer" resultType="java.lang.String">
         select state from user_section where section_id = #{sectionId}
     </select>
+    <select id="findVideoAddrById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select video_addr from section where section_id = #{sectionId}
+    </select>
 </mapper>
