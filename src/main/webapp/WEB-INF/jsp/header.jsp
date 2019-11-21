@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>头部</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body {
             margin: 0;
-            text-align: center;
         }
         .header{
             background-color: #FFFFFF;
@@ -92,7 +92,7 @@
     <div class="header">
         <!-- logo -->
         <div class="header-logo">
-            <img src="img/logo.png" />
+            <img src="/img/logo.png" />
         </div>
         <!-- 导航 -->
         <div class="header-nav">

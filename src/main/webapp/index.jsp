@@ -8,28 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>首页跳转测试</title>
+    <title>首页</title>
 </head>
 <body>
-<<<<<<< HEAD
-<script>
-    location.href="<%=request.getContextPath() %>/test/toLogin";
-</script>
-<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
-
-    });
-</script>
-=======
-<%--头部--%>
+<%--引入头部--%>
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
+<<<<<<< HEAD
 <script>
     window.location = "<%=request.getContextPath()%>/user/tosignup"
 </script>
+=======
+index
+<%--引入尾部--%>
+>>>>>>> 0650f3eb288b0a8f11e19fe32d7c7cdd02ee175b
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
->>>>>>> 282096966003bc74ff130381f9240aa50001abd8
 </body>
 </html>
