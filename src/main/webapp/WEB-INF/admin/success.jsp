@@ -22,33 +22,43 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
 
     <style type="text/css">
+        .outer{
+            background-image:url(<%=request.getContextPath()%>/img/login_bg.jpg);
+        }
         .top {
             width: 100%;
-            background-color: #2D93CA;
             height: 100px;
+            background-image:url(<%=request.getContextPath()%>/img/admin_logo.png);
+            background-repeat:no-repeat;
+            background-position: 30px center;
         }
 
-        .top span, .top a {
+        .top span {
             position: relative;
-            top: -20px;
+            margin-top: 25px;
             right: 40px;
             float: right;
         }
 
-        .top p {
-            position: relative;
-            top: 35px;
-            text-align: center;
-            font-size: 22px;
-        }
-
         .main {
             width: 85%;
+            margin: 0;
+            padding: 0;
         }
 
         .main iframe {
             height: 100%;
             width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #logout{
+            color: black;
+            position: relative;
+            margin-top: 25px;
+            right: -170px;
+            float: right;
         }
 
         #logout:hover {
@@ -57,6 +67,7 @@
 
         .left {
             width: 14.9%;
+            background-image:url(<%=request.getContextPath()%>/img/dao_hang_lan.jpg);
         }
 
         #tree {
@@ -74,19 +85,16 @@
 
         .bottom div {
             float: left;
-            height: 505px;
-        }
-
-        #maintarget{
-            border-left: black 1px solid;
+            height: 500px;
         }
     </style>
 </head>
 <body>
-<div class="top">
-    <p>学习管理平台</p>
-    <span>尊敬的用户${loginName}您好，欢迎您的登陆</span><br><br>
-    <a href="<%=basePath%>/logout" id="logout">退出登录</a>
+<div class="outer">
+    <div class="top">
+        <span>尊敬的用户${loginName}您好，欢迎您的登陆</span><br><br>
+        <a href="<%=basePath%>/logout" id="logout">退出登录</a>
+    </div>
 </div>
 <div class="bottom">
     <div class="left">

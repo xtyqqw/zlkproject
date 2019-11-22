@@ -78,6 +78,7 @@ public class TypeController {
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Type type){
         ModelAndView mv=new ModelAndView();
+        //判断方向名是否存在
         Type typeByTypeName = typeService.findTypeByTypeName(type.getTypeName());
         if (typeByTypeName!=null){
             mv.addObject("flag","true");

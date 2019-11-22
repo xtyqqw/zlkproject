@@ -13,12 +13,13 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/lecturer")
 public class LecturerController {
+
     @Autowired
     private LecturerService lecturerService;
-    /*@RequestMapping(value = "tolecturer")
+    @RequestMapping(value = "tolecturer")
     public String lec(){
         return "view/aboutus/teamwork";
-    }*/
+    }
     /*查询合作讲师*/
     @RequestMapping(value = "lecturers")
     @ResponseBody

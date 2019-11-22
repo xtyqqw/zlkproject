@@ -70,4 +70,13 @@ public interface RoleMapper {
      * @return java.lang.Integer
      **/
     Integer deleteRoleByRoleId(String roleId);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询全部角色名
+     * @Date 10:21 2019/11/22
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Role>
+     **/
+    List<Role> findRoleName();
 }

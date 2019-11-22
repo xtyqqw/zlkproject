@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
     <script src="../layui/layui.js"></script>
     <style type="text/css">
+        body{
+
+        }
         .list1{
             float: left;
             padding: 20px;
@@ -115,7 +118,6 @@
         <div class="layui-colla-content">
             <c:forEach items="${list}" var="user">
             <div class="list1">
-
                 <h1>资深讲师：${user.lecturerName}</h1>
                 <p>${user.lecturerIntro}</p>
                 <img style="width:200px; height:200px; border-radius:50%; overflow:hidden;" src="${user.lecturerPhotor}">

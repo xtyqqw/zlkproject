@@ -96,7 +96,7 @@
                     <span>合作企业</span>
                 </li>
             </a>
-            <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+            <a href="<%=request.getContextPath()%>/lecturer/lecturers" name="dian" class="nodian" target="aboutus-main">
                 <li>
                     <span>讲师合作</span>
                 </li>
