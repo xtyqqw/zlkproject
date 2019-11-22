@@ -607,17 +607,17 @@
                                 <li>
                                     <h3>学习时长</h3>
                                     <p><span>${user1.userAllTime}</span>小时</p>
-                                    <p>已超过<span>89</span>%的同学</p>
+                                    <p>已超过<span>${rankBai}</span>%的同学</p>
                                 </li>
                                 <li>
                                     <h3>学习成长量</h3>
-                                    <p><span>33</span></p>
-                                    <p>已超过<span>89</span>%的同学</p>
+                                    <p><span>${xueXi}</span></p>
+                                    <p>已超过<span>${rankBai}</span>%的同学</p>
                                 </li>
                                 <li>
                                     <h3>技能水平</h3>
-                                    <p><span>100</span></p>
-                                    <p>已超过<span>89</span>%的同学</p>
+                                    <p><span>${jiNeng}</span></p>
+                                    <p>已超过<span>${rankBai}</span>%的同学</p>
                                 </li>
                             </ul>
                         </div>
