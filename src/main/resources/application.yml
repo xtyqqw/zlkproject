@@ -47,10 +47,10 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-    username:
-    password:
+    username: root
+    password: sdd
 
-    url: jdbc:mysql://localhost:3306/?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/wucan?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
 
 
     driver-class-name: com.mysql.cj.jdbc.Driver
