@@ -20,15 +20,24 @@ public class Arith {
             Integer y = (x * 5)+ 3;
             return y;
         }else {
-            return 0;
+            return null;
         }
     }
     public static Integer acc(Integer c){
         if(c != null){
-            Integer a=(c+1) * 3;
+            Integer a = (c + 1) * 3;
             return a;
         }else {
-            return 0;
+            return null;
+        }
+    }
+    public static Integer abb(Integer b,Integer q){
+        /*除法*/
+        Integer h=b/q;
+        if(q!=0){
+        return h;
+        }else {
+            return null;
         }
     }
 
