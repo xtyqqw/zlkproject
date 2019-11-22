@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.community.articleTag.service.impl;
 
-import com.zlk.zlkproject.community.articleTag.mapper.TagMapper;
-import com.zlk.zlkproject.community.articleTag.service.TagService;
+import com.zlk.zlkproject.community.articleTag.mapper.TagsMapper;
+import com.zlk.zlkproject.community.articleTag.service.TagsService;
 import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ import java.util.List;
  * @date: 2019/11/22 17:06
  */
 @Service
-public class TagServiceImpl implements TagService {
+public class TagsServiceImpl implements TagsService {
 
     @Autowired
-    private TagMapper tagMapper;
+    private TagsMapper tagsMapper;
 
     @Override
-    public List<Tag> getAllTagByTagId(Integer tagId) {
-        return tagMapper.getAllTagByTagId(tagId);
+    public List<Tag> getAllTagByTagId(Tag tag) {
+        return tagsMapper.getAllTagByTagId(tag);
     }
 }

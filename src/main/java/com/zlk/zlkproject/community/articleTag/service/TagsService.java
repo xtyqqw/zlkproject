@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.community.articleTag.service;
 
-import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
  * @author: QianKeQin
  * @date: 2019/11/22 16:45
  */
-public interface TagService {
+public interface TagsService {
 
-    List<Tag> getAllTagByTagId(Integer tagId);
+    List<Tag> getAllTagByTagId(Tag tag);
 }

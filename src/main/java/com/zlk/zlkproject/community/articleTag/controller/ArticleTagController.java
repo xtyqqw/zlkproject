@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.community.articleTag.controller;
 
 import com.zlk.zlkproject.community.articleTag.service.ArticleTagService;
-import com.zlk.zlkproject.community.articleTag.service.TagService;
+import com.zlk.zlkproject.community.articleTag.service.TagsService;
 import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @program: ArticleTagController
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ArticleTagController {
 
     @Autowired
-    private TagService tagService;
+    private TagsService tagsService;
     @Autowired
     private ArticleTagService articleTagService;
 
@@ -31,11 +31,14 @@ public class ArticleTagController {
     }*/
 
     @RequestMapping(value = "/community/tag")
-    public ModelAndView getAllTag(HttpServletRequest request, Integer tagId){
+    public ModelAndView getAllTag(HttpServletRequest request, Tag tag){
         ModelAndView mv=new ModelAndView();
-        Tag tag= (Tag) tagService.getAllTagByTagId(tagId);
-        mv.addObject("tagName",tag.getTagName());
+        List<Tag> tagList=tagsService.getAllTagByTagId(tag);
+        mv.addObject("tagList",tagList);
+        System.out.println("tagList="+tagList);
         mv.setViewName("view/articleTag");
         return mv;
     }
+
+
 }

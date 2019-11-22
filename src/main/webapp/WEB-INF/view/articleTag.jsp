@@ -13,50 +13,47 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css">
     <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
     <style>
-        .main {
-            position: relative;
-            margin: auto;
-        }
-        .all {
-            position: absolute;
-            z-index: 0;
-        }
         .show {
+
+            border: #8D8D8D 2px solid;
             width: 500px;
-            height: 40px;
-            padding: 10px;
-            background-color: #8D8D8D;
+            height: 20px;
+        }
+        .show a{
+            float: left;
+            padding-left: 15px;
+
         }
         .hide {
-            margin-left: 40px;
-            margin-top: 20px;
+            display: none;
+            border: #1E9FFF 2px solid;
+            width: 500px;
+            height: 50px;
         }
-        .show:hover {
-            z-index: 1;
-        }
-        a {
-
+        .hide a{
+            float: left;
+            padding-left: 15px;
         }
     </style>
 </head>
 <body>
     <div class="main">
-        <div class="show all">
-            <a href="<%=request.getContextPath() %>/" type="button" class="layui-btn layui-btn-sm">全部1</a>
-            <c:forEach items="${data}" var="tag" begin="0" end="10">
+        <div class="show">
+            <a href="<%=request.getContextPath() %>/" type="button" class="">全部1</a>
+            <c:forEach items="${tagList}" var="tag" begin="0" end="3">
                 <div>
                     <ul>
-                        <li><c:out value="${tag}"><a href="<%=request.getContextPath() %>/" type="button" class="layui-btn layui-btn-sm"></a></c:out></li>
+                        <li><a href="<%=request.getContextPath() %>/" type="button" class="">${tag.tagName}</a></li>
                     </ul>
                 </div>
             </c:forEach>
         </div>
-        <div class="hide all">
-            <a href="<%=request.getContextPath() %>/" type="button" class="layui-btn layui-btn-sm">全部2</a>
-            <c:forEach items="${data}" var="tag">
+        <div class="hide">
+            <a href="<%=request.getContextPath() %>/" type="button" class="">全部2</a>
+            <c:forEach items="${tagList}" var="tag">
                 <div>
                     <ul>
-                        <li><c:out value="${tag}"><a href="<%=request.getContextPath() %>/" type="button" class="layui-btn layui-btn-sm"></a></c:out></li>
+                        <li><a href="<%=request.getContextPath() %>/" type="button" class="">${tag.tagName}</a></li>
                     </ul>
                 </div>
             </c:forEach>
@@ -64,7 +61,14 @@
     </div>
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script type="text/javascript">
-
+        $(document).on('mouseenter','.show',function () {
+            $('.hide').css('display','block');
+            $(this).css('display','none');
+        });
+        $(document).on('mouseleave','.hide',function () {
+           $('.show').css('display','block');
+           $(this).css('display','none');
+        });
     </script>
 </body>
 </html>
