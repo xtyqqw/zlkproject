@@ -21,6 +21,13 @@ public class LogUtil {
     @Autowired
     private LogService logService;
 
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 新增日志方法
+     * @Date 10:00 2019/11/22
+     * @Param [request请求对象, description操作描述]
+     * @return java.lang.Integer
+     **/
     public Integer setLog(HttpServletRequest request,String description){
         Log log=new Log();
         //获取IP

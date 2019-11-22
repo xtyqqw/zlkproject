@@ -111,4 +111,16 @@ public class RoleServiceImpl implements RoleService {
     public Integer deleteRoleByRoleId(String roleId) {
         return roleMapper.deleteRoleByRoleId(roleId);
     }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询全部角色名
+     * @Date 10:22 2019/11/22
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Role>
+     **/
+    @Override
+    public List<Role> findRoleName() {
+        return roleMapper.findRoleName();
+    }
 }

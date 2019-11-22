@@ -54,6 +54,8 @@ public class AdminController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/adminManager");
+        List<Role> roleNameList = roleService.findRoleName();
+        mv.addObject("roleNameList",roleNameList);
         return mv;
     }
 

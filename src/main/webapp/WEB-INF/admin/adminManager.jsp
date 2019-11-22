@@ -14,6 +14,12 @@
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <style type="text/css">
+        #demo{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
         .search {
             float: right;
             width: 450px;
@@ -43,8 +49,9 @@
         用户密码 <input type="text" required placeholder="请输入密码" name="adminPassword"><br>
         所属角色 <select required name="adminRole">
                     <option value="">请选择</option>
-                    <option value="项目管理员">项目管理员</option>
-                    <option value="超级管理员">超级管理员</option>
+                    <c:forEach var="roleName" items="${roleNameList}">
+                        <option value="${roleName.roleName}">${roleName.roleName}</option>
+                    </c:forEach>
                 </select><br>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
@@ -56,8 +63,9 @@
         用户密码 <input type="text" required id="adminPassword" placeholder="请输入密码" name="adminPassword"><br>
         所属角色 <select required name="adminRole" id="adminRole">
                     <option value="">请选择</option>
-                    <option value="项目管理员">项目管理员</option>
-                    <option value="超级管理员">超级管理员</option>
+                    <c:forEach var="roleName" items="${roleNameList}">
+                        <option value="${roleName.roleName}">${roleName.roleName}</option>
+                    </c:forEach>
                 </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
@@ -88,7 +96,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/admin/adminManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 450
+            , height: 480
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'adminId', title: '用户编号', width: 290, sort: true}
