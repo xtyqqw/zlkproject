@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.admin.mapper.LogMapper">
+    <resultMap id="logEntityMap" type="com.zlk.zlkproject.entity.Log">
+        <id property="logId" column="log_id" javaType="java.lang.Integer"/>
+        <result property="name" column="name" javaType="java.lang.String"/>
+        <result property="description" column="description" javaType="java.lang.String"/>
+        <result property="time" column="time" javaType="java.util.Date"/>
+        <result property="ip" column="ip" javaType="java.lang.String"/>
+        <result property="type" column="type" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findLogByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="logEntityMap">
+        select * from logs
+        <if test="condition!='' and condition!=null">
+            where name like CONCAT('%',#{condition},'%')
+        </if>
+        order by log_id limit #{startPage},#{limit}
+    </select>
+    <select id="findTotalCountByName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
+        select count(*) from logs
+        <if test="condition!='' and condition!=null">
+            where name like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <insert id="addLog" parameterType="com.zlk.zlkproject.entity.Log">
+        insert into logs(name,description,time,ip,type) values (#{name},#{description},#{time},#{ip},#{type})
+    </insert>
+    <delete id="deleteLogByLogId" parameterType="java.lang.String">
+        delete from logs where log_id=#{logId}
+    </delete>
+</mapper>

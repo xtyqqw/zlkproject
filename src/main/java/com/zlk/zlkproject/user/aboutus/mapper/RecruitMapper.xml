@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.RecruitMapper">
+    <resultMap type="com.zlk.zlkproject.user.entity.Recruit" id="recruitMap">
+        <id property="recruitId" column="recruit_id" javaType="java.lang.Integer"/>
+        <result property="recruitName" column="recruit_name" javaType="java.lang.String"/>
+        <result property="recruitBac" column="recruit_bac" javaType="java.lang.String"/>
+        <result property="recruitNumber" column="recruit_number" javaType="java.lang.String"/>
+        <result property="recruitPhone" column="recruit_phone" javaType="java.lang.String"/>
+        <result property="recruitMail" column="recruit_mail" javaType="java.lang.String"/>
+        <result property="recruitSite" column="recruit_site" javaType="java.lang.String"/>
+        <result property="recruitSex" column="recruit_sex" javaType="java.lang.String"/>
+    </resultMap>
+    <!--添加个人招聘信息-->
+    <insert id="addRecruit" parameterType="com.zlk.zlkproject.user.entity.Recruit">
+        insert into recruit (recruit_id,recruit_name,recruit_bac,recruit_number,recruit_phone,recruit_mail,recruit_site,recruit_sex)
+        values (#{recruitId},#{recruitName},#{recruitBac},#{recruitNumber},#{recruitPhone},#{recruitMail},#{recruitSite},#{recruitSex})
+    </insert>
+</mapper>

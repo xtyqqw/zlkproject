@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>首页跳转测试</title>
+    <title>首页</title>
 </head>
 <body>
 <script>
@@ -23,9 +23,12 @@
     });
 </script>
 <%--头部--%>
+
+<%--引入头部--%>
+
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
 index
-<%--尾部--%>
+<%--引入尾部--%>
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

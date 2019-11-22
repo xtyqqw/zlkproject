@@ -47,9 +47,18 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
+<<<<<<< HEAD
     username: root
     password: 123456
     url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+=======
+    username:
+    password:
+
+    url: jdbc:mysql://localhost:3306/?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+
+
+>>>>>>> 66994b29a444e12f3b36941fe68875148fe2d872
     driver-class-name: com.mysql.cj.jdbc.Driver
 #  thymeleaf:
 #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
@@ -75,4 +84,29 @@ spring:
       prefix: /WEB-INF/
       suffix: .jsp
   main:
+<<<<<<< HEAD
     allow-bean-definition-overriding: true
+=======
+    allow-bean-definition-overriding: true
+
+  jmx:
+    enabled: false
+
+#FastDfs的配置
+fdfs:
+  #读取inputsream阻塞时间
+  connect-timeout: 600
+  so-timeout: 1500
+  #tracker地址
+  tracker-list: 47.98.183.4:22122
+  #通过nginx 访问地址
+  resHost: http://47.98.183.4
+  storagePort: 8888/
+  #缩略图配置
+  thumb-image:
+    height: 150
+    width: 150
+  #获取连接池最大数量
+  pool:
+    max-total: 200
+>>>>>>> 66994b29a444e12f3b36941fe68875148fe2d872
