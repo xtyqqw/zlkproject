@@ -118,7 +118,7 @@
         <div class="personal-nav">
             <ul>
                 <%--学习看板--%>
-                <a href="<%=request.getContextPath()%>/personal/learnlook"
+                <a href="<%=request.getContextPath()%>/duration/select"
                    name="dian" class="nodian" target="personal-main">
                     <li>
                         <i class="layui-icon layui-icon-chart-screen"
