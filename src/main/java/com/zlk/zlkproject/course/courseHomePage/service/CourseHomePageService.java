@@ -2,9 +2,14 @@ package com.zlk.zlkproject.course.courseHomePage.service;
 
 
 import com.zlk.zlkproject.entity.Courses;
+<<<<<<< HEAD
 import com.zlk.zlkproject.entity.Pagination;
 
 import java.util.List;
+=======
+import org.springframework.stereotype.Service;
+
+>>>>>>> 35ddf71367b40286d642dc458630a7baebac8939
 
 
 public interface CourseHomePageService {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.LecturerMapper">
+    <resultMap type="com.zlk.zlkproject.user.entity.Lecturer" id="lecturerMap">
+        <id property="lecturerId" column="lecturer_id" javaType="java.lang.Integer"/>
+        <result property="lecturerName" column="lecturer_name" javaType="java.lang.String"/>
+        <result property="lecturerIntro" column="lecturer_intro" javaType="java.lang.String"/>
+        <result property="lecturerPhotoa" column="photoa" javaType="java.lang.String"/>
+        <result property="lecturerPhotor" column="photor" javaType="java.lang.String"/>
+    </resultMap>
+    <!--查询讲师合作-->
+    <select id="selectLecturer" resultMap="lecturerMap" parameterType="com.zlk.zlkproject.user.entity.Lecturer">
+        select * from lecturer
+    </select>
+</mapper>

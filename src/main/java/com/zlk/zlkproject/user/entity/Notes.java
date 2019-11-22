@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.user.entity;
 
 import java.util.Date;
-
+/*个人笔记*/
 public class Notes {
     private Integer snId;
     private Integer sectionId;

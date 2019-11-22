@@ -2,12 +2,22 @@
     padding: 0;
     margin: 0;
 }
+
 #div_video_all{
     width: 100%;
     height: 500px;
     background-color: #009f95;
     margin: auto;
 }
+
+.layui-col-md2{
+    height: 100%;
+}
+
+.layui-col-md8{
+    height: 100%;
+}
+/*侧边栏 begin*/
 #l_func{
     background-color: black;
     width: 10%;
@@ -38,18 +48,11 @@
     width: 89%;
     height: 100%;
     margin-left: 1%;
-}
-
-.layui-col-md2{
-    height: 100%;
+    position: relative;
 }
 
 #video_row{
     height: 400px;
-}
-
-.layui-col-md8{
-    height: 100%;
 }
 
 #video_div{
@@ -57,14 +60,15 @@
     z-index: 1;
     background-color: red;
 }
-
+/*侧边栏 end*/
+/*目录 begin*/
 #mulu_div{
-    position: absolute;
-    z-index: 2;
+    z-index: 5;
     background-color: gray;
     width: 50%;
     height: 100%;
     opacity: 0.7;
+    position: absolute;
 }
 
 #mulu_div ul{
@@ -79,7 +83,7 @@
     border-radius: 2px;
 }
 
-#mulu_div ul span{
+#mulu_div ul .headline{
     width: 100%;
     display: inline-block;
     background-color: white;
@@ -92,20 +96,32 @@
 #mulu_div ul li{
     background-color: white;
     color: black;
-    font-size: 14px;
+    font-size: 20px;
     display: none;
     cursor: pointer;
+    border: black 2px solid;
 }
 
-/*播放器 begin---------------------------------------------------------------------------------------------------------*/
+.duration{
+    width: 100px;
+    height: auto;
+    float: right;
+
+}
+
+.state{
+    color: darkslateblue;
+}
+/*目录 end*/
+
+/*播放器 begin*/
 #div_all{
     width: 100%;
     height: 100%;
     margin: auto;
     overflow: hidden;
-    position: relative;
-    top: 0;
-    left: 0;
+    z-index: 1;
+    position: absolute;
 }
 #div_video{
     width: 100%;
@@ -263,4 +279,4 @@
     text-align: center;
     padding: 5px 0 0 0;
 }
-/*播放器 end-----------------------------------------------------------------------------------------------------------*/
+/*播放器 end*/

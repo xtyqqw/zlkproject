@@ -96,7 +96,7 @@
                     <span>合作企业</span>
                 </li>
             </a>
-            <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+            <a href="<%=request.getContextPath()%>/lecturer/lecturers" name="dian" class="nodian" target="aboutus-main">
                 <li>
                     <span>讲师合作</span>
                 </li>
@@ -125,7 +125,7 @@
         </ul>
     </div>
     <!-- 主体内容 -->
-    <iframe name="aboutus-main" style="border: 1px #FFFFFF;width: 1050px;margin-top: -518px;
+    <iframe name="aboutus-main" style="border: 1px #FFFFFF;width: 1050px;margin-top: -518px;margin-bottom: 50px;
             margin-left: 300px;float: left;height: 100%;"></iframe>
     <%--侧栏--%>
     <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
