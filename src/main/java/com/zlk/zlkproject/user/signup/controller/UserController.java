@@ -115,4 +115,9 @@ public class UserController {
 //        mv.setViewName("/view/signup");
 //        return mv;
     }
+
+    @RequestMapping(value = "/tosignin")
+    public String toSignin(){
+        return "/view/signin";
+    }
 }
