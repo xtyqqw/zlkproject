@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/test")
 public class TestController {
-    @RequestMapping(value = "toLogin")
-    public String toLogin(){
-        return "article";
+    @RequestMapping(value = "/community")
+    public String toTest(){
+        return "hotArticle";
     }
+
 }

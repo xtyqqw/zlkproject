@@ -10,11 +10,13 @@ body{
 .layui-tab .layui-tab-brief{
 
 }
+.layui-body{
+    left: 100px !important;
+}
 .div{
     width: 98%;
     height: 1100px;
     float: left;
-    border: 1px solid #111111;
     margin: 0 auto;
 }
 .div .div1{
@@ -35,19 +37,19 @@ body{
     width: 300px;
     height: 800px;
 }
+
 .demoTable{
-    margin-top:10px;
-    margin-left:850px;
+    margin-top:-44px;
+    margin-left:800px;
     margin-right:-200px;
     position: fixed;
 }
 .layui-header .layui-nav layui-layout-left #div1{
     color: #111111;
 }
-img{
+.toubutupian img{
     width: 100px;
     height: 43px;
-    position:fixed;
     background-position: 50px 10px;
     margin-top:10px;
     margin-left:200px;
@@ -69,4 +71,118 @@ img{
 }
 .ul1 li a:hover{
     background-color: #A500CC;
+}
+
+.wz_rm{
+    background-color: rgba(192,192,192,0.1);
+    width: 20vw;
+    margin-top: 1vw;
+    margin-left: 1vw;
+}
+.wz_remenwenzhang{
+    position: absolute;
+    margin-left: 65vw;
+    margin-top: -1vw;
+}
+.wz_remen{
+    background-color: rgba(192,192,192,0.3);
+    float: left;
+    width: 20vw;
+    font-size: 1.4vw;
+    font-weight:bold;
+    height: 3vw;
+    line-height: 3vw;
+    border-bottom: 0.1vw solid blue;
+    margin-left: 4vw;
+    margin-top: 2vw;
+}
+.wz_remen_wz{
+    margin-left: 1vw;
+    float: left;
+    width: 8vw;
+}
+.anniu{
+    float: left;
+    font-size: 1vw;
+    margin-top: 0.1vw;
+    margin-left: 6vw;
+}
+.yueanniu{
+    border: 1px solid white;
+    line-height: 3vw;
+    text-align: center;
+    height: 3vw;
+    color: white;
+    background-color: blue;
+}
+.zonganniu{
+    border: 1px solid white;
+    line-height: 3vw;
+    text-align: center;
+    height: 3vw;
+    color: black;
+    background-color: white;
+}
+.wz_remen_zt1{
+    background-color: rgba(192,192,192,0.1);
+    width: 20vw;
+    margin-left: 4vw;
+    position: absolute;
+    margin-top: 5vw;
+}
+.wz_remen_zt1 ul li{
+    width: 18vw;
+    height: 5vw;
+    padding:0.5vw 0 0 1vw;
+}
+.wz_remen_zt1 ul li:nth-child(1){
+    margin-top: 0.5vw;
+}
+
+.wz_remen_zt2{
+    display: none;
+    background-color: rgba(192,192,192,0.1);
+    width: 20vw;
+    margin-left: 4vw;
+    position: absolute;
+    margin-top: 5vw;
+}
+.wz_remen_zt2 ul li{
+    width: 18vw;
+    height: 5vw;
+    padding:0.5vw 0 0 1vw;
+}
+.wz_remen_zt2 ul li:nth-child(1){
+    margin-top: 0.5vw;
+}
+
+.wz_remen_img{
+    float: left;
+    width: 3vw;
+    height: 3vw;
+}
+.wz_remen_img img{
+    width: 100%;
+    height: 100%
+}
+.wz_remen_bt{
+    float: left;
+    width: 14vw;
+    height: 4vw;
+    line-height: 3vw;
+    font-size: 1.1vw;
+    margin-left: 1vw;
+    overflow: hidden;
+}
+.bt{
+    float: left;
+    margin-top: 0.2vw;
+}
+.wz_bt_bq{
+    float: right;
+    margin-top: 2vw;
+    font-size: 0.5vw;
+}
+.wz_bt_bq span{
+    margin-right: 1vw;
 }
