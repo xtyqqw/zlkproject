@@ -14,6 +14,12 @@
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <style type="text/css">
+        #demo{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
         .search {
             float: right;
             width: 450px;
@@ -76,7 +82,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/type/typeManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 450
+            , height: 480
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'typeId', title: '类别编号', width: 180, sort: true}

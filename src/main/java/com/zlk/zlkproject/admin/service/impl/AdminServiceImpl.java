@@ -60,8 +60,8 @@ public class AdminServiceImpl implements AdminService {
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     @Override
-    public List<Admin> findAdminByRoleName(String roleName) {
-        return adminMapper.findAdminByRoleName(roleName);
+    public List<Admin> findAdminByRoleId(String roleId) {
+        return adminMapper.findAdminByRoleId(roleId);
     }
 
     /**

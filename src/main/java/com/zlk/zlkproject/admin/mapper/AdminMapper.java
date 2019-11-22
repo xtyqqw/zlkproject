@@ -33,7 +33,7 @@ public interface AdminMapper {
      * @Param [roleName]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
-    List<Admin> findAdminByRoleName(String roleName);
+    List<Admin> findAdminByRoleId(String roleId);
     
     /**
      * @Author lufengxiang

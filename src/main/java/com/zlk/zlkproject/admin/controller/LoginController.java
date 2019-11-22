@@ -57,36 +57,28 @@ public class LoginController {
             mv.setViewName("admin/login");
             return mv;
         }
-        //String checkCode = (String) request.getSession().getAttribute("checkCode");
-        //if(checkCode.toLowerCase().equals(code.toLowerCase())){
-            Subject subject = SecurityUtils.getSubject();
-            admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
-            UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());
-            try {
-                subject.login(token);
-                request.getSession().setAttribute("loginName",admin.getAdminName());
-                logUtil.setLog(request,"登陆了管理系统");
-                mv.setViewName("admin/success");
-                return mv;
-            } catch (UnknownAccountException e) {
-                e.printStackTrace();
-                mv.addObject("flag","true");
-                mv.addObject("error","用户名不存在");
-                mv.setViewName("admin/login");
-                return mv;
-            } catch (IncorrectCredentialsException e){
-                e.printStackTrace();
-                mv.addObject("flag","true");
-                mv.addObject("error","密码错误");
-                mv.setViewName("admin/login");
-                return mv;
-            }
-        /*}
-        else {
+        Subject subject = SecurityUtils.getSubject();
+        admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
+        UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());
+        try {
+            subject.login(token);
+            request.getSession().setAttribute("loginName",admin.getAdminName());
+            logUtil.setLog(request,"登陆了管理系统");
+            mv.setViewName("admin/success");
+            return mv;
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+            mv.addObject("flag","true");
+            mv.addObject("error","用户名不存在");
             mv.setViewName("admin/login");
-            mv.addObject("error", "验证码错误");
-        }*/
-        //return mv;
+            return mv;
+        } catch (IncorrectCredentialsException e){
+            e.printStackTrace();
+            mv.addObject("flag","true");
+            mv.addObject("error","密码错误");
+            mv.setViewName("admin/login");
+            return mv;
+        }
     }
 
     /**

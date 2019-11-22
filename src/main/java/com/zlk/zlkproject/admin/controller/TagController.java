@@ -106,7 +106,7 @@ public class TagController {
      * @Author lufengxiang
      * @Description //TODO 通过类别ID修改类别信息
      * @Date 14:59 2019/11/21
-     * @Param [tag]
+     * @Param [tag,request]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/update")
@@ -142,7 +142,7 @@ public class TagController {
      * @Author lufengxiang
      * @Description //TODO 通过类别ID删除类别
      * @Date 16:44 2019/11/21
-     * @Param [tagId]
+     * @Param [tagId,request]
      * @return java.lang.String
      **/
     @RequestMapping(value = "/delete")

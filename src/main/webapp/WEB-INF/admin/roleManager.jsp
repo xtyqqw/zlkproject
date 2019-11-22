@@ -14,6 +14,12 @@
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <style type="text/css">
+        #demo{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
         .search {
             float: right;
             width: 450px;
@@ -78,7 +84,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/role/roleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 450
+            , height: 480
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'roleId', title: '角色编号', width: 290, sort: true}
