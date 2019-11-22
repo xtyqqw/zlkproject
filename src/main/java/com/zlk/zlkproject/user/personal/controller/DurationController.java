@@ -25,7 +25,7 @@ public class DurationController {
         User lists=durationService.selectDuration(user);
         ModelAndView mv=new ModelAndView();
         Integer ad= Arith.add(lists.getUserDateTime());
-        Integer addd = Arith.add(ad);
+        Integer addd = Arith.acc(lists.getUserDateTime());
         mv.addObject("ad",ad);
         mv.addObject("addd",addd);
         /*添加一个对象*/

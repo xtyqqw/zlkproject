@@ -17,8 +17,16 @@ public class Arith {
 
     public static Integer add(Integer x) {
         if (x!=null) {
-            Integer y = x * 5;
+            Integer y = (x * 5)+ 3;
             return y;
+        }else {
+            return 0;
+        }
+    }
+    public static Integer acc(Integer c){
+        if(c != null){
+            Integer a=(c+1) * 3;
+            return a;
         }else {
             return 0;
         }
