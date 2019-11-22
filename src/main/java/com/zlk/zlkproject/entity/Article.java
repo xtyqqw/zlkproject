@@ -22,10 +22,6 @@ public class Article {
     private String articleId = UUIDUtils.getId();
     /**文章标题*/
     private String title;
-    /**方向种类*/
-    private String typeName;
-    /**标签名称*/
-    private String tagName;
     /**浏览数*/
     private Integer browseCount;
     /**评论数*/
@@ -51,33 +47,7 @@ public class Article {
     /**举报*/
     private String inform;
     /**建立的是文章和用户的多对一关系*/
-    private User user;
-    /**建立的是文章和方向的多对一关系*/
-    private Type type;
+    private String userId;
     /**建立的是文章和标签的多对一关系*/
-    private Tag tag;
-
-    public Article(String articleId, String title, String typeName, String tagName, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, String inform, User user, Type type, Tag tag) {
-        this.articleId = articleId;
-        this.title = title;
-        this.typeName = typeName;
-        this.tagName = tagName;
-        this.browseCount = browseCount;
-        this.commentCount = commentCount;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.figures = figures;
-        this.figuresReal = figuresReal;
-        this.articleDigest = articleDigest;
-        this.articleContent = articleContent;
-        this.zanCount = zanCount;
-        this.caiCount = caiCount;
-        this.inform = inform;
-        this.user = user;
-        this.type = type;
-        this.tag = tag;
-    }
-
-    public Article() {
-    }
+    private Integer tagId;
 }

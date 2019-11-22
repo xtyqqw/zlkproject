@@ -7,14 +7,13 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * @program: ArticleTagMapper
+ * @program: TagMapper
  * @description:
  * @author: QianKeQin
- * @date: 2019/11/22 15:37
+ * @date: 2019/11/22 16:46
  */
-
 @Mapper
-public interface ArticleTagMapper {
+public interface TagMapper {
 
-    List<Article> getArticleByTagId(Integer tagId);
+    List<Tag> getAllTagByTagId(Integer tagId);
 }

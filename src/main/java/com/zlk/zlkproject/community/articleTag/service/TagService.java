@@ -6,12 +6,12 @@ import com.zlk.zlkproject.entity.Tag;
 import java.util.List;
 
 /**
- * @program: ArticleTagService
+ * @program: TagService
  * @description:
  * @author: QianKeQin
- * @date: 2019/11/22 15:32
+ * @date: 2019/11/22 16:45
  */
-public interface ArticleTagService {
+public interface TagService {
 
-    List<Article> getArticleByTagId(Integer tagId);
+    List<Tag> getAllTagByTagId(Integer tagId);
 }
