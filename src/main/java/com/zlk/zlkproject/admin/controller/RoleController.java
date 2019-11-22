@@ -4,6 +4,7 @@ import com.zlk.zlkproject.admin.service.AdminService;
 import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.service.RoleService;
 import com.zlk.zlkproject.admin.util.IDUtil;
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Admin;
 import com.zlk.zlkproject.entity.Log;
@@ -35,7 +36,7 @@ public class RoleController {
     @Autowired
     private AdminService adminService;
     @Autowired
-    private LogService logService;
+    private LogUtil logUtil;
 
     /**
      * @Author lufengxiang
@@ -127,22 +128,14 @@ public class RoleController {
             mv.setViewName("admin/roleManager");
             return mv;
         }
-        //修改角色信息并修改拥有该角色的用户信息
+        //修改角色信息
         Integer flag = roleService.updateRoleByRoleId(role);
-        List<Admin> adminByRoleName = adminService.findAdminByRoleName(roleByRoleId.getRoleName());
-        if(adminByRoleName!=null){
-            Integer flag1 = adminService.updateAdminByRoleName(role.getRoleName(), roleByRoleId.getRoleName());
-        }
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/roleManager");
             //记录角色修改日志
-            Log log=new Log();
-            log.setName((String) request.getSession().getAttribute("loginName"));
-            log.setDescription("将角色名"+roleByRoleId.getRoleName()+"，角色代码。"+roleByRoleId.getRoleCode()+"修改成角色名"+role.getRoleName()+"，角色代码"+role.getRoleCode());
-            log.setTime(new Date());
-            logService.addLog(log);
+            logUtil.setLog(request,"将角色名"+roleByRoleId.getRoleName()+"，角色代码。"+roleByRoleId.getRoleCode()+"修改成角色名"+role.getRoleName()+"，角色代码"+role.getRoleCode());
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -174,11 +167,7 @@ public class RoleController {
         }else {
             roleService.deleteRoleByRoleId(roleId);
             //记录删除角色日志
-            Log log=new Log();
-            log.setName((String) request.getSession().getAttribute("loginName"));
-            log.setDescription("将角色名为"+roleByRoleId.getRoleName()+"的角色删除了");
-            log.setTime(new Date());
-            logService.addLog(log);
+            logUtil.setLog(request,"将角色名为"+roleByRoleId.getRoleName()+"的角色删除了");
             return true;
         }
     }

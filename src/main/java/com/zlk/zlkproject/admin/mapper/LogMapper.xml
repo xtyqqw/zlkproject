@@ -8,6 +8,8 @@
         <result property="name" column="name" javaType="java.lang.String"/>
         <result property="description" column="description" javaType="java.lang.String"/>
         <result property="time" column="time" javaType="java.util.Date"/>
+        <result property="ip" column="ip" javaType="java.lang.String"/>
+        <result property="type" column="type" javaType="java.lang.String"/>
     </resultMap>
     <select id="findLogByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="logEntityMap">
         select * from logs
@@ -23,7 +25,7 @@
         </if>
     </select>
     <insert id="addLog" parameterType="com.zlk.zlkproject.entity.Log">
-        insert into logs(name,description,time) values (#{name},#{description},#{time})
+        insert into logs(name,description,time,ip,type) values (#{name},#{description},#{time},#{ip},#{type})
     </insert>
     <delete id="deleteLogByLogId" parameterType="java.lang.String">
         delete from logs where log_id=#{logId}

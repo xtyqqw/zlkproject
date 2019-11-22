@@ -26,4 +26,8 @@ public class Log {
     private String description;
     //操作时间
     private Date time;
+    //请求用户IP
+    private String ip;
+    //请求用户浏览器类型
+    private String type;
 }

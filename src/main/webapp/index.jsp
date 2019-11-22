@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>首页</title>
 </head>
 <body>
+<%--引入头部--%>
+<jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
 index
+<%--引入尾部--%>
+<jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

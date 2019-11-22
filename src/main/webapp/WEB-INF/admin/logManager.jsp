@@ -79,16 +79,19 @@
             , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
             , page: true //开启分页
             , height: 450
+            , limit: 100
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'logId', title: '日志编号', width: 120, sort: true}
-                , {field: 'name', title: '操作用户名称', width: 150, sort: true}
-                , {field: 'description', title: '操作描述', width: 510}
+                , {field: 'logId', title: '日志编号', width: 110, sort: true}
+                , {field: 'name', title: '操作者名称', width: 120, sort: true}
+                , {field: 'description', title: '操作描述', width: 370}
+                , {field: 'ip', title: 'IP地址', width: 105}
+                , {field: 'type', title: '浏览器类型', width: 105}
                 , {
                     field: 'time',
                     title: '操作时间',
                     templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',
-                    width: 180
+                    width: 170
                 }
                 , {
                     title: '操作', width: 90, align: 'center', toolbar: '' +
@@ -97,7 +100,7 @@
                         '</div>'
                 }
             ]]
-            , limits: [5, 10, 20]
+            , limits: [50, 100, 200]
             , toolbar: '<div class="layui-btn-group">' +
                 '<button type="hidden" class="layui-btn" lay-event="add"></button>' +
                 '<div class="layui-card search">\n' +

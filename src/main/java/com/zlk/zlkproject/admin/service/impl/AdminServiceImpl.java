@@ -126,18 +126,6 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * @Author lufengxiang
-     * @Description //TODO 修改角色名称一并修改拥有该角色的用户信息
-     * @Date 10:32 2019/11/20
-     * @Param [roleName1, roleName2]
-     * @return java.lang.Integer
-     **/
-    @Override
-    public Integer updateAdminByRoleName(String roleName1, String roleName2) {
-        return adminMapper.updateAdminByRoleName(roleName1, roleName2);
-    }
-
-    /**
-     * @Author lufengxiang
      * @Description //TODO 通过用户ID删除用户
      * @Date 13:30 2019/11/19
      * @Param [adminId]

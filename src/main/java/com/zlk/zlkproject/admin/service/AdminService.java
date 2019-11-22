@@ -80,15 +80,6 @@ public interface AdminService {
 
     /**
      * @Author lufengxiang
-     * @Description //TODO 修改角色名称一并修改拥有该角色的用户信息
-     * @Date 9:40 2019/11/20
-     * @Param [roleName1]
-     * @return java.lang.Integer
-     **/
-    Integer updateAdminByRoleName(String roleName1,String roleName2);
-
-    /**
-     * @Author lufengxiang
      * @Description //TODO 通过用户ID删除用户
      * @Date 14:47 2019/11/19
      * @Param [adminId]

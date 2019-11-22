@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.admin.controller;
 
 import com.zlk.zlkproject.admin.service.LogService;
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.entity.Admin;
 import com.zlk.zlkproject.entity.Log;
@@ -28,7 +29,7 @@ import java.util.Date;
 public class LoginController {
 
     @Autowired
-    private LogService logService;
+    private LogUtil logUtil;
 
     /**
      * @Author lufengxiang
@@ -39,7 +40,7 @@ public class LoginController {
      **/
     @RequestMapping(value = "/toLogin")
     public String toLogin(){
-        return "admin/testLogin";
+        return "admin/login";
     }
 
     /**
@@ -64,20 +65,18 @@ public class LoginController {
             try {
                 subject.login(token);
                 request.getSession().setAttribute("loginName",admin.getAdminName());
-                Log log=new Log();
-                log.setName((String) request.getSession().getAttribute("loginName"));
-                log.setDescription("登陆了管理系统");
-                log.setTime(new Date());
-                logService.addLog(log);
+                logUtil.setLog(request,"登陆了管理系统");
                 mv.setViewName("admin/success");
                 return mv;
             } catch (UnknownAccountException e) {
                 e.printStackTrace();
+                mv.addObject("flag","true");
                 mv.addObject("error","用户名不存在");
                 mv.setViewName("admin/login");
                 return mv;
             } catch (IncorrectCredentialsException e){
                 e.printStackTrace();
+                mv.addObject("flag","true");
                 mv.addObject("error","密码错误");
                 mv.setViewName("admin/login");
                 return mv;

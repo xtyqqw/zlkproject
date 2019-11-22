@@ -86,7 +86,7 @@
 <div class="top">
     <p>学习管理平台</p>
     <span>尊敬的用户${loginName}您好，欢迎您的登陆</span><br><br>
-    <a href="<%=request.getContextPath()%>/loginController/toLogin" id="logout">退出登录</a>
+    <a href="<%=basePath%>/logout" id="logout">退出登录</a>
 </div>
 <div class="bottom">
     <div class="left">

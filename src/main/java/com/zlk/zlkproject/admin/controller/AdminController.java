@@ -5,6 +5,7 @@ import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.service.LoginService;
 import com.zlk.zlkproject.admin.service.RoleService;
 import com.zlk.zlkproject.admin.util.IDUtil;
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Admin;
@@ -39,7 +40,7 @@ public class AdminController {
     @Autowired
     private RoleService roleService;
     @Autowired
-    private LogService logService;
+    private LogUtil logUtil;
 
     /**
      * @Author lufengxiang
@@ -148,11 +149,7 @@ public class AdminController {
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/adminManager");
             //记录修改用户日志
-            Log log=new Log();
-            log.setName((String) request.getSession().getAttribute("loginName"));
-            log.setDescription("修改了后台用户"+admin.getAdminName()+"的信息");
-            log.setTime(new Date());
-            logService.addLog(log);
+            logUtil.setLog(request,"修改了后台用户"+adminByAdminId.getAdminName()+"的信息");
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -178,11 +175,7 @@ public class AdminController {
         Integer flag1 = adminService.deleteAdminAndRoleByAdminId(adminId);
         if(flag==1&&flag1==1){
             //记录删除用户日志
-            Log log=new Log();
-            log.setName((String) request.getSession().getAttribute("loginName"));
-            log.setDescription("删除了后台用户"+adminByAdminId.getAdminName()+"的信息");
-            log.setTime(new Date());
-            logService.addLog(log);
+            logUtil.setLog(request,"删除了后台用户"+adminByAdminId.getAdminName()+"的信息");
         }
         return "admin/adminManager";
     }

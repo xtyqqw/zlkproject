@@ -3,6 +3,7 @@ package com.zlk.zlkproject.admin.controller;
 import com.zlk.zlkproject.admin.service.DeptService;
 import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.util.IDUtil;
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Dept;
 import com.zlk.zlkproject.entity.Log;
@@ -31,7 +32,7 @@ public class DeptController {
     @Autowired
     private DeptService deptService;
     @Autowired
-    private LogService logService;
+    private LogUtil logUtil;
 
     /**
      * @Author lufengxiang
@@ -128,11 +129,7 @@ public class DeptController {
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/deptManager");
             //记录修改部门日志
-            Log log=new Log();
-            log.setName((String) request.getSession().getAttribute("loginName"));
-            log.setDescription("修改了部门："+deptByDeptId.getDeptName()+"的信息");
-            log.setTime(new Date());
-            logService.addLog(log);
+            logUtil.setLog(request,"修改了部门："+deptByDeptId.getDeptName()+"的信息");
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -155,11 +152,7 @@ public class DeptController {
         Dept deptByDeptId = deptService.findDeptByDeptId(deptId);
         deptService.deleteDeptByDeptId(deptId);
         //记录删除部门日志
-        Log log=new Log();
-        log.setName((String) request.getSession().getAttribute("loginName"));
-        log.setDescription("删除了部门："+deptByDeptId.getDeptName());
-        log.setTime(new Date());
-        logService.addLog(log);
+        logUtil.setLog(request,"删除了部门:"+deptByDeptId.getDeptName());
         return "admin/deptManager";
     }
 }

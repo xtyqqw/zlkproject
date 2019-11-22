@@ -7,7 +7,7 @@
         <id property="adminId" column="admin_id" javaType="java.lang.String"/>
         <result property="adminName" column="admin_name" javaType="java.lang.String"/>
         <result property="adminPassword" column="admin_password" javaType="java.lang.String"/>
-        <result property="adminRole" column="admin_role" javaType="java.lang.String"/>
+        <result property="adminRole" column="role_name" javaType="java.lang.String"/>
     </resultMap>
     <select id="findTotalCountByAdminName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
         select count(*) from admins
@@ -16,10 +16,13 @@
         </if>
     </select>
     <select id="findAdminByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="adminEntityMap">
-        select * from admins
+        select a.*,r.role_name from admins a,admins_roles ar,roles r
+        <where>
+            a.admin_id=ar.admins_id and r.role_id=ar.roles_id
         <if test="condition!='' and condition!=null">
-            where admin_name like CONCAT('%',#{condition},'%')
+            and admin_name like CONCAT('%',#{condition},'%')
         </if>
+        </where>
         order by admin_id limit #{startPage},#{limit}
     </select>
     <select id="findAdminByRoleName" parameterType="java.lang.String" resultMap="adminEntityMap">
@@ -31,11 +34,11 @@
     <insert id="addAdmin" parameterType="com.zlk.zlkproject.entity.Admin">
         insert into admins
         <trim prefix="(" suffix=") " suffixOverrides=",">
-            admin_id,admin_name,admin_password,admin_role
+            admin_id,admin_name,admin_password,
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            #{adminId},#{adminName},#{adminPassword},#{adminRole},
+            #{adminId},#{adminName},#{adminPassword},
         </trim>
     </insert>
     <insert id="addAdminAndRole" parameterType="java.lang.String">
@@ -50,17 +53,11 @@
             <if test="adminPassword!=null and adminPassword!='' ">
                 admin_password=#{adminPassword},
             </if>
-            <if test="adminRole!=null and adminRole!='' ">
-                admin_role=#{adminRole},
-            </if>
         </set>
         where admin_id=#{adminId}
     </update>
     <update id="updateAdminAndRoleByAdminId" parameterType="java.lang.String">
         update admins_roles set roles_id = #{param2} where admins_id=#{param1}
-    </update>
-    <update id="updateAdminByRoleName" parameterType="java.lang.String">
-        update admins set admin_role = #{param1} where admin_role = #{param2}
     </update>
     <delete id="deleteAdminByAdminId" parameterType="java.lang.String">
         delete from admins where admin_id=#{adminId}
