@@ -4,6 +4,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.signup.service.SignService;
 import com.zlk.zlkproject.user.until.GetCode;
+import com.zlk.zlkproject.user.until.MD5Util;
 import com.zlk.zlkproject.user.until.SmsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -86,6 +87,9 @@ public class UserController {
         String code1 = (String) session.getAttribute("code");
         //通过手机号查找改手机号是否已经注册
         Boolean f1 = signService.findUserByPhonenum(user.getPhonenum());
+        if(code1 == null){
+            code1 = "x";
+        }
         //判断验证码是否输入正确
         if(code1.equals(usercode)){
             if(f1){
@@ -107,7 +111,7 @@ public class UserController {
                 }
             }
         }else {
-            mv.addObject("spanmsg","验证码错误请重新获取");
+            mv.addObject("spanmsg","验证码错误请重新输入");
             mv.setViewName("/view/signup");
             return mv;
         }
@@ -119,5 +123,58 @@ public class UserController {
     @RequestMapping(value = "/tosignin")
     public String toSignin(){
         return "/view/signin";
+    }
+
+    @RequestMapping(value = "/signupbypwd")
+    public ModelAndView signinByPwd(User user,HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        //获取session
+        HttpSession session = request.getSession();
+        String MD5Pwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
+        user.setUserPwd(MD5Pwd);
+        User user1 = signService.findUserByPhonenumAndPwd(user);
+        if(user1!=null){
+            //将验证码放入session
+            session.setAttribute("userId",user1.getUserId());
+            mv.addObject("userId",user1.getUserId());
+            //跳转至首页
+            mv.setViewName("");
+            return mv;
+        }else {
+            mv.setViewName("/view/signin");
+            mv.addObject("spanmsg","用户名或密码错误");
+            return mv;
+        }
+    }
+
+    @RequestMapping(value = "/signupbycode")
+    public ModelAndView signupBycode(User user,HttpServletRequest request,String usercode){
+        ModelAndView mv = new ModelAndView();
+        //获取session
+        HttpSession session = request.getSession();
+        String code1 = (String) session.getAttribute("code");
+        if(code1 == null){
+            code1 = "1l";
+        }
+        User user1 = signService.findUserByUserphonenum(user.getPhonenum());
+        if(user1!=null){
+            if (code1.equals(usercode)){
+                //将验证码放入session
+                session.setAttribute("userId",user1.getUserId());
+                mv.addObject("userId",user1.getUserId());
+                //跳转至首页
+                mv.setViewName("");
+                return mv;
+            }else {
+                mv.setViewName("/view/signin");
+                mv.addObject("spanmsg","验证码错误");
+                return mv;
+            }
+
+        }else {
+            mv.setViewName("/view/signin");
+            mv.addObject("spanmsg","该用户不存在");
+            return mv;
+        }
     }
 }

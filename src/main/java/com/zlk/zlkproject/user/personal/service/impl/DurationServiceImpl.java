@@ -16,7 +16,7 @@ public class DurationServiceImpl implements DurationService {
     private DurationMapper durationMapper;
     /*重写方法*/
     @Override
-    public List<User> selectDuration(User user){
+    public User selectDuration(User user){
         return durationMapper.selectDuration(user);
     }
 

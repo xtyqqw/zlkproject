@@ -20,18 +20,18 @@ public class NotesController {
     private NotesService notesService;
     @RequestMapping(value = "toNotes")
     public String note(){
-        return "sdd/tst";
+        return "view/personal/note";
     }
     /*查询个人笔记方法*/
     @RequestMapping(value = "select")
     @ResponseBody
-    public Map<String,Object> list(Notes notes){
-        List<Notes> lists=notesService.selectNotes(notes);
-        Map<String,Object> map=new HashMap<>();
+    public ModelAndView list(Notes notes){
+        Notes lists=notesService.selectNotes(notes);
+        ModelAndView mv=new ModelAndView();
         /*查询所有信息*/
-        map.put("code",0);
-        map.put("data",lists);
-        return map;
+        mv.addObject("lists",lists);
+        mv.setViewName("view/personal/note");
+        return mv;
     }
     /*修改*/
     @RequestMapping(value = "/update")

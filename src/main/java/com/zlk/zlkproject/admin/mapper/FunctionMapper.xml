@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.admin.mapper.FunctionMapper">
+    <resultMap id="functionEntityMap" type="com.zlk.zlkproject.entity.Function">
+        <id property="functionId" column="function_id" javaType="java.lang.Integer"/>
+        <result property="name" column="function_name" javaType="java.lang.String"/>
+        <result property="parentId" column="parent_id" javaType="java.lang.Integer"/>
+        <result property="url" column="url" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findFunctionByAdminName" parameterType="java.lang.String" resultMap="functionEntityMap">
+        select distinct f.* from roles r,roles_functions rf,functions f
+        where r.role_id = rf.roles_id and f.function_id=rf.functions_id
+        and r.role_id in (select r.role_id from admins a,roles r,admins_roles ar where a.admin_id=ar.admins_id and r.role_id=ar.roles_id and a.admin_name=#{adminName});
+    </select>
+</mapper>

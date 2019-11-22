@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @program: Tag
@@ -13,6 +11,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tag {
     /**tag对应id*/
     private Integer tagId;
@@ -20,13 +20,6 @@ public class Tag {
     private String tagName;
     /**tag对应方向id*/
     private Integer tagTypeId;
-
-    public Tag(Integer tagId, String tagName, Integer tagTypeId) {
-        this.tagId = tagId;
-        this.tagName = tagName;
-        this.tagTypeId = tagTypeId;
-    }
-
-    public Tag() {
-    }
+    /**tag对应方向名*/
+    private String tagTypeName;
 }

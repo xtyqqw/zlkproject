@@ -10,8 +10,11 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/sign.css" type="text/css">
+    <script src="/js/jquery-1.12.4.js"></script>
+    <script src="/layui/layui.js" charset="utf-8"></script>
     <style type="text/css">
-        li{
+        .layui-tab-title li{
             width: 172px;
         }
 
@@ -34,7 +37,7 @@
         }
     </style>
 </head>
-<body style="height: 1000px">
+<body>
 <%--引入头部--%>
 <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
 <center><h3 id="login">用户登录</h3>
@@ -45,14 +48,14 @@
     </ul>
     <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
-            <span>${error}</span>
-            <form action="" method="post">
+            <span style="margin-left: 25px;color: red">${spanmsg}</span>
+            <form action="/user/signupbypwd" method="post">
 <%--                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><br>--%>
 <%--                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <br>--%>
                 <div class="layui-form-item">
                     <label class="layui-form-label">手机号</label>
                     <div class="layui-input-inline">
-                        <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                        <input id="" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -65,20 +68,46 @@
             </form>
         </div>
         <div class="layui-tab-item">
-            <span>${error}</span>
-            <form action="/user/codesignin" method="post">
-                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>
-                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>
+            <span>${spanmsg}</span>
+            <form action="/user/signupbycode" method="post">
+<%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
+<%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号</label>
+                    <div class="layui-input-inline">
+                        <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">验证码</label>
+                    <div class="layui-input-inline">
+                        <input type="tel" name="usercode" lay-verify="required|phone" autocomplete="off" class="layui-input"><button type="button" id="getcod" onclick="openCheck(this);" style="border: none">获取验证码</button>
+                    </div>
+                </div>
+<%--                <div class="layui-form-item">--%>
+<%--                    <label class="layui-form-label">密码</label>--%>
+<%--                    <div class="layui-input-inline">--%>
+<%--                        <input name="code" type="password" value="" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input"><button type="button">获取验证码</button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                <center><button class="login" type="submit">登陆</button><a class="signup" href="<%=request.getContextPath()%>/user/tosignup">注册</a></center>
             </form>
         </div>
     </div>
 </div>
+    <div id="box" onselectstart="return false;" style="visibility: hidden" >
+        <div class="bgColor"></div>
+        <div class="txt" >滑动解锁</div>
+        <!--给i标签添加上相应字体图标的类名即可-->
+        <div class="slider"><i class="iconfont icon-double-right"></i></div>
+    </div>
 </center>
 <%--引入尾部--%>
 <jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>
-<script src="/layui/layui.js" charset="utf-8"></script>
+
+<script src="/js/signup.js"></script>
+
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('element', function(){
@@ -123,4 +152,5 @@
 
     });
 </script>
+
 </html>

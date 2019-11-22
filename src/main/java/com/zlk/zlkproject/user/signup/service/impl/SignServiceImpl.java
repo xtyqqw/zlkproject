@@ -36,4 +36,16 @@ public class SignServiceImpl implements SignService {
         }
 
     }
+
+    @Override
+    public User findUserByUserphonenum(String phonenum) {
+        return signMapper.findUserByPhonenum(phonenum);
+    }
+
+    @Override
+    public User findUserByPhonenumAndPwd(User user) {
+        System.out.println(user.getUserPwd());
+        User user1 = signMapper.findUserByPhonenumAndPwd(user);
+        return user1;
+    }
 }
