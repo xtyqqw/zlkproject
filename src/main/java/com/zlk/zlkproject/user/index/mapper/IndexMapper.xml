@@ -61,8 +61,8 @@
         (SELECT * FROM user ORDER BY user_all_time DESC) AS t
         ) AS b WHERE b.user_id = #{userId};
     </select>
-    <!--根据ID查询学习时长排序后用户的排名-->
-    <select id="findUserRankById" parameterType="com.zlk.zlkproject.entity.User" resultType="java.lang.Integer">
-
+    <!--查询用户总数-->
+    <select id="findUserCount" resultType="java.lang.Integer">
+        select count(*) from user
     </select>
 </mapper>

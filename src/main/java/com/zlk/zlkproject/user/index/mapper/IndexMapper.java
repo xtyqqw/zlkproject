@@ -34,4 +34,9 @@ public interface IndexMapper {
      * @return Integer
      */
     Integer findUserRankById(String userId);
+    /**
+     * 查询用户总数
+     * @return Integer
+     */
+    Integer findUserCount();
 }

@@ -53,4 +53,12 @@ public class IndexServiceImpl implements IndexService {
     public Integer findUserRankById(String userId) {
         return indexMapper.findUserRankById(userId);
     }
+    /**
+     * 查询用户总数
+     * @return Integer
+     */
+    @Override
+    public Integer findUserCount() {
+        return indexMapper.findUserCount();
+    }
 }
