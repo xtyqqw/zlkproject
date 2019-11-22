@@ -13,6 +13,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/lecturer")
 public class LecturerController {
+
     @Autowired
     private LecturerService lecturerService;
     @RequestMapping(value = "tolecturer")

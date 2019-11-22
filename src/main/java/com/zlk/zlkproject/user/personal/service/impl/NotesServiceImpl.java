@@ -11,12 +11,12 @@ import java.util.List;
 @Service
 public class NotesServiceImpl implements NotesService {
     /*加载外部资源*/
-    @Autowired
+    @Autowired(required = false)
     private NotesMapper notesMapper;
     /*重写方法查询*/
     @Override
-    public Notes selectNotes(Notes notes){
-        return notesMapper.selectNotes(notes);
+    public List<Notes> selectNotes(){
+        return notesMapper.selectNotes();
     }
     /*修改*/
     @Override

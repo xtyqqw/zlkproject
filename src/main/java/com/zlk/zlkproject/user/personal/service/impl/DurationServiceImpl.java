@@ -13,17 +13,12 @@ import java.util.List;
 @Service
 public class DurationServiceImpl implements DurationService {
     /*加载外部资源*/
-    @Autowired
+    @Autowired(required = false)
     private DurationMapper durationMapper;
     /*重写方法*/
     @Override
     public User selectDuration(User user){
         return durationMapper.selectDuration(user);
-        /*User user1 = durationMapper.selectDuration(user);
-        Integer userAllTime = user1.getUserAllTime();
-        Integer userDateTime = user1.getUserDateTime();
-        userAllTime+=userDateTime;*/
-
 
     }
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecruitServiceImpl implements RecruitService {
-    @Autowired
+    @Autowired(required = false)
     private RecruitMapper recruitMapper;
     @Override
     public Integer addRecruit(Recruit recruit){
