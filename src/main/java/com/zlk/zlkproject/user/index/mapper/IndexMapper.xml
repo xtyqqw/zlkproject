@@ -41,11 +41,11 @@
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"/>
     </resultMap>
     <!--查询所有课程-->
-    <select id="findCoursesAll" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="coursesMap">
+    <select id="findCoursesAll" resultMap="coursesMap">
        select * from coursesr
     </select>
     <!--按照学习总时长从多到少查询用户-->
-    <select id="findUsersByAllTime" parameterType="com.zlk.zlkproject.entity.User" resultMap="userMap">
+    <select id="findUsersByAllTime" resultMap="userMap">
        select * from user order by user_all_time DESC
     </select>
     <!--根据ID查询用户-->
@@ -60,5 +60,9 @@
         FROM (SELECT @rownum := 0) r,
         (SELECT * FROM user ORDER BY user_all_time DESC) AS t
         ) AS b WHERE b.user_id = #{userId};
+    </select>
+    <!--查询用户总数-->
+    <select id="findUserCount" resultType="java.lang.Integer">
+        select count(*) from user
     </select>
 </mapper>

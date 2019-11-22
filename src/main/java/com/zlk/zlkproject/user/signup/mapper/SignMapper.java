@@ -18,6 +18,7 @@ public interface SignMapper {
      * */
     Integer signup(User user);
     User findUserByPhonenum(String phonenum);
+    User findUserByPhonenumAndPwd(User user);
 
 
 }
