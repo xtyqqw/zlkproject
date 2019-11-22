@@ -1,7 +1,5 @@
 server:
-  port: 8081
-
-
+  port: 8080
 spring:
   messages:
     basename: message/msg
@@ -48,8 +46,8 @@ spring:
         # 登录密码
         login-password: admin
     username: root
-    password: muxi830717
-    url: jdbc:mysql://localhost:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    password:
+    url: jdbc:mysql://localhost:3306/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
 #  thymeleaf:
 #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
