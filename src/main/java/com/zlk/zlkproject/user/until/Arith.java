@@ -33,7 +33,7 @@ public class Arith {
     }
     public static Integer abb(Integer b,Integer q){
         /*除法*/
-        Integer h=b/q;
+        Integer h=(b*100)/q;
         if(q!=0){
         return h;
         }else {
