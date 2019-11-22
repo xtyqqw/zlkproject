@@ -13,33 +13,37 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
-        #personal-nav{
+        #personal{
+            height: 550px;
+        }
+        #personal .personal-nav{
             width: 130px;
             height: 500px;
             background-color: #8C24DD;
             border: 1px #8C24DD;
             border-radius: 5px;
-            margin: 20px 20px 20px 80px;
+            margin: 0 20px 20px 80px;
             align-content: space-around;
             display: flex;
+            float: left;
         }
-        #personal-nav ul{
+        #personal .personal-nav ul{
             margin: 0;
         }
-        #personal-nav ul li{
+        #personal .personal-nav ul li{
             list-style: none;
             display: flex;
             flex-flow: row wrap;
             align-content:space-around;
         }
-        #personal-nav ul a:hover{
+        #personal .personal-nav ul a:hover{
             background-color: #FFFFFF;
             color: #8C24DD;
         }
-        #personal-nav i:hover{
+        #personal .personal-nav i:hover{
             color: #8C24DD;
         }
-        #personal-nav ul a{
+        #personal .personal-nav ul a{
             color: #FFFFFF;
             border: 1px #8C24DD;
             border-radius: 5px;
@@ -50,7 +54,7 @@
             align-content:space-around;
         }
         /* 点击后的样式 */
-        #personal-nav ul .active{
+        #personal .personal-nav ul .active{
             background-color: #FFFFFF;
             color: #8C24DD;
             border: 1px #8C24DD;
@@ -62,8 +66,39 @@
             align-content:space-around;
             text-decoration: none;
         }
-        #personal-nav li span{
+        #personal .personal-nav li span{
             padding: 5px 2px;
+        }
+        /* 个性签名 */
+        #personal .signature{
+            background-color: #FAFAFA;
+            width: 1050px;
+            height: 130px;
+            border: 1px #FAFAFA;
+            border-radius: 3px;
+            margin: 33px 0 0 320px;
+        }
+        /* 头像 */
+        #personal .signature .headimg{
+            float: left;
+            margin: 23px 20px 23px 30px;
+        }
+        #personal .signature .headerimg{
+            width: 80px;height: 80px;
+            border-radius: 50%;
+        }
+        /* 昵称 */
+        #personal .signature .petname{
+            margin-left: 100px;
+            padding-top: 20px;
+            font-size: 18px;
+            width: 300px;
+        }
+        /* 签名 */
+        #personal .signature .sdf{
+            margin-left: 100px;
+            font-size: 12px;
+            width: 500px;
         }
     </style>
 </head>
@@ -78,79 +113,97 @@
     </script>
     <!-- 头部 -->
     <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
-    <!-- 侧边导航 -->
-    <div id="personal-nav">
-        <ul>
-            <%--学习看板--%>
-            <a name="dian" class="nodian" target="personal-main"
-               href="<%=request.getContextPath()%>/personal/learnlook">
-                <li>
-                    <i class="layui-icon layui-icon-chart-screen"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>学习看板</span>
-                </li>
-            </a>
-            <%--学习记录--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-form"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>学习记录</span>
-                </li>
-            </a>
-            <%--个人笔记--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-edit"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>个人笔记</span>
-                </li>
-            </a>
-            <%--我的问答--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-survey"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>我的问答</span>
-                </li>
-            </a>
-            <%--我的文章--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-list"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>我的文章</span>
-                </li>
-            </a>
-            <%--我的关注--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-rate"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>我的关注</span>
-                </li>
-            </a>
-            <%--个人信息--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-dialogue"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>个人信息</span>
-                </li>
-            </a>
-            <%--愿望清单--%>
-            <a name="dian" class="nodian" target="personal-main" href="javascript:;">
-                <li>
-                    <i class="layui-icon layui-icon-release"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
-                    <span>愿望清单</span>
-                </li>
-            </a>
-        </ul>
+    <div id="personal">
+        <!-- 侧边导航 -->
+        <div class="personal-nav">
+            <ul>
+                <%--学习看板--%>
+                <a href="<%=request.getContextPath()%>/personal/learnlook"
+                   name="dian" class="nodian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-chart-screen"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>学习看板</span>
+                    </li>
+                </a>
+                <%--学习记录--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-form"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>学习记录</span>
+                    </li>
+                </a>
+                <%--个人笔记--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-edit"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>个人笔记</span>
+                    </li>
+                </a>
+                <%--我的问答--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-survey"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>我的问答</span>
+                    </li>
+                </a>
+                <%--我的文章--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-list"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>我的文章</span>
+                    </li>
+                </a>
+                <%--我的关注--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-rate"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>我的关注</span>
+                    </li>
+                </a>
+                <%--个人信息--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-dialogue"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>个人信息</span>
+                    </li>
+                </a>
+                <%--愿望清单--%>
+                <a href="javascript:;" name="dian" target="personal-main">
+                    <li>
+                        <i class="layui-icon layui-icon-release"
+                           style="font-size: 25px;color: #D4D4D4;"></i>
+                        <span>愿望清单</span>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <!-- 个性签名 -->
+        <div class="signature">
+            <!-- 头像 -->
+            <div class="headimg">
+                <img src="/img/headimg.jpg" class="headerimg">
+            </div>
+            <!-- 昵称 -->
+            <div class="petname">
+                <p>${lists.phonenum}</p>
+            </div>
+            <!-- 签名 -->
+            <div class="sdf">
+                <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
+            </div>
+        </div>
     </div>
+
     <!-- 主体内容 -->
-    <iframe name="personal-main" style="border: 1px #FFFFFF;width: 1050px;margin-top: -518px;
-            margin-left: 300px;float: left;height: 100%;"></iframe>
+    <iframe name="personal-main" style="border: 1px #fff;width: 1050px;margin-top: -400px;
+            margin-left: 320px;float: left;height: 99%;"></iframe>
     <%--侧栏--%>
     <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
     <%--尾部--%>

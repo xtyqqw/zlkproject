@@ -125,7 +125,7 @@
         </ul>
     </div>
     <!-- 主体内容 -->
-    <iframe name="aboutus-main" style="border: 1px #FFFFFF;width: 1050px;margin-top: -518px;
+    <iframe name="aboutus-main" style="border: 1px #FFFFFF;width: 1050px;margin-top: -518px;margin-bottom: 50px;
             margin-left: 300px;float: left;height: 100%;"></iframe>
     <%--侧栏--%>
     <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>

@@ -15,7 +15,7 @@ public class NotesServiceImpl implements NotesService {
     private NotesMapper notesMapper;
     /*重写方法查询*/
     @Override
-    public List<Notes> selectNotes(Notes notes){
+    public Notes selectNotes(Notes notes){
         return notesMapper.selectNotes(notes);
     }
     /*修改*/

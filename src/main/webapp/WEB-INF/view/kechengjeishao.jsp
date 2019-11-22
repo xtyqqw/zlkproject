@@ -11,6 +11,7 @@
 
 </head>
 <body>
+
 <div id="kechengzhuti">
     <div id="kechengjeishao">
         <input id="kechengId" type="hidden">
@@ -120,5 +121,6 @@
 
 <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
 <script type="text/javascript" src="/js/kechengjeishao.js"  charset="utf-8"></script>
+
 </body>
 </html>
