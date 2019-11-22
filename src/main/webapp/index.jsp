@@ -11,7 +11,6 @@
     <title>首页跳转测试</title>
 </head>
 <body>
-<<<<<<< HEAD
 <script>
     location.href="<%=request.getContextPath() %>/test/toLogin";
 </script>
@@ -23,12 +22,10 @@
 
     });
 </script>
-=======
 <%--头部--%>
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
 index
 <%--尾部--%>
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
->>>>>>> 282096966003bc74ff130381f9240aa50001abd8
 </body>
 </html>
