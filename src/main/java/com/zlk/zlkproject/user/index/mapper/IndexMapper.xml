@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.index.mapper.IndexMapper">
+    <resultMap type="com.zlk.zlkproject.entity.User" id="userMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+    </resultMap>
+    <resultMap type="com.zlk.zlkproject.entity.Courses" id="coursesMap">
+        <id property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
+        <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
+        <result property="studentNum" column="student_num" javaType="java.lang.Integer"/>
+        <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"/>
+        <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
+        <result property="price" column="price" javaType="java.lang.Double"/>
+        <result property="coverPic" column="cover_pic" javaType="java.lang.String"/>
+        <result property="introduceVideo" column="introduce_video" javaType="java.lang.String"/>
+        <result property="introduceText" column="introduce_text" javaType="java.lang.String"/>
+        <result property="introducePic" column="introduce_pic" javaType="java.lang.String"/>
+        <result property="featureText" column="feature_text" javaType="java.lang.String"/>
+        <result property="featurePic" column="feature_pic" javaType="java.lang.String"/>
+    </resultMap>
+    <!--查询所有课程-->
+    <select id="findCoursesAll" resultMap="coursesMap">
+       select * from coursesr
+    </select>
+    <!--按照学习总时长从多到少查询用户-->
+    <select id="findUsersByAllTime" resultMap="userMap">
+       select * from user order by user_all_time DESC
+    </select>
+    <!--根据ID查询用户-->
+    <select id="findUsersById" parameterType="com.zlk.zlkproject.entity.User" resultMap="userMap">
+       select * from user where user_id = #{userId}
+    </select>
+    <!--根据ID查询学习时长排序后用户的排名-->
+    <select id="findUserRankById" parameterType="com.zlk.zlkproject.entity.User" resultType="java.lang.Integer">
+        SELECT b.rownum FROM
+        (
+        SELECT t.*, @rownum := @rownum + 1 AS rownum
+        FROM (SELECT @rownum := 0) r,
+        (SELECT * FROM user ORDER BY user_all_time DESC) AS t
+        ) AS b WHERE b.user_id = #{userId};
+    </select>
+    <!--查询用户总数-->
+    <select id="findUserCount" resultType="java.lang.Integer">
+        select count(*) from user
+    </select>
+</mapper>

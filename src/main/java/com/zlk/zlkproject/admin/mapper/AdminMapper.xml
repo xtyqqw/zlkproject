@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.admin.mapper.AdminMapper">
+    <resultMap id="adminEntityMap" type="com.zlk.zlkproject.entity.Admin">
+        <id property="adminId" column="admin_id" javaType="java.lang.String"/>
+        <result property="adminName" column="admin_name" javaType="java.lang.String"/>
+        <result property="adminPassword" column="admin_password" javaType="java.lang.String"/>
+        <result property="adminRole" column="role_name" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findTotalCountByAdminName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
+        select count(*) from admins
+        <if test="condition!='' and condition!=null">
+            where admin_name like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <select id="findAdminByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="adminEntityMap">
+        select a.*,r.role_name from admins a,admins_roles ar,roles r
+        <where>
+            a.admin_id=ar.admins_id and r.role_id=ar.roles_id
+        <if test="condition!='' and condition!=null">
+            and admin_name like CONCAT('%',#{condition},'%')
+        </if>
+        </where>
+        order by admin_id limit #{startPage},#{limit}
+    </select>
+    <select id="findAdminByRoleId" parameterType="java.lang.String" resultMap="adminEntityMap">
+        select * from admins a,roles r,admins_roles ar where a.admin_id=ar.admins_id and r.role_id=ar.roles_id and r.role_id=#{roleId}
+    </select>
+    <select id="findAdminByAdminId" parameterType="java.lang.String" resultMap="adminEntityMap">
+        select * from admins where admin_id = #{adminId}
+    </select>
+    <insert id="addAdmin" parameterType="com.zlk.zlkproject.entity.Admin">
+        insert into admins
+        <trim prefix="(" suffix=") " suffixOverrides=",">
+            admin_id,admin_name,admin_password,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{adminId},#{adminName},#{adminPassword},
+        </trim>
+    </insert>
+    <insert id="addAdminAndRole" parameterType="java.lang.String">
+        insert into admins_roles(admins_id,roles_id) value(#{param1},#{param2})
+    </insert>
+    <update id="updateAdminByAdminId" parameterType="com.zlk.zlkproject.entity.Admin">
+        update admins
+        <set>
+            <if test="adminName!=null and adminName!='' ">
+                admin_name=#{adminName},
+            </if>
+            <if test="adminPassword!=null and adminPassword!='' ">
+                admin_password=#{adminPassword},
+            </if>
+        </set>
+        where admin_id=#{adminId}
+    </update>
+    <update id="updateAdminAndRoleByAdminId" parameterType="java.lang.String">
+        update admins_roles set roles_id = #{param2} where admins_id=#{param1}
+    </update>
+    <delete id="deleteAdminByAdminId" parameterType="java.lang.String">
+        delete from admins where admin_id=#{adminId}
+    </delete>
+    <delete id="deleteAdminAndRoleByAdminId" parameterType="java.lang.String">
+        delete from admins_roles where admins_id = #{adminsId}
+    </delete>
+</mapper>
