@@ -16,7 +16,6 @@
 </head>
 <style>
     *{margin: 0;padding: 0;font-family: "微软雅黑";}
-    .body{}
     .clear{clear: both;}
     .main{width: 100%;}
     .maininfo{width: 960px;margin: 0 auto;height: 1000px;}
@@ -26,7 +25,7 @@
     .banner_nav ul{padding-top: 35px;padding-left: 0;margin-left: 20px;}
     .banner_nav ul li{list-style: none;width: 130px;height: 35px;background: white;text-align: center;line-height: 35px;cursor: pointer}
     .banner_nav ul li p{width: 110px;height: 35px;border-radius: 5px;}
-    .banner_nav ul li p:hover{background: #914ff1;}
+    .banner_nav ul li p:hover{background: #914ff1;color: white;}
     .banner_nav_li{margin-top: 45px;}
     #banner_img div img{width: 800px;height: 350px;}
     #ul_none{z-index: 10;position: absolute;left: -10px;}
@@ -98,7 +97,7 @@
         });
     });
 </script>
-<body class="body">
+<body>
 <%--引入头部--%>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 <div class="main">
@@ -606,7 +605,7 @@
                             <ul>
                                 <li>
                                     <h3>学习时长</h3>
-                                    <p><span>${user1.userAllTime}</span>小时</p>
+                                    <p><span>${user1.userDateTime}</span>小时</p>
                                     <p>已超过<span>${rankBai}</span>%的同学</p>
                                 </li>
                                 <li>

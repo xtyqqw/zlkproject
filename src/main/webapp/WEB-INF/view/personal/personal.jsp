@@ -99,114 +99,129 @@
             margin-left: 100px;
             font-size: 12px;
             width: 500px;
+            padding-top: 30px;
+        }
+        #personal-iframe{
+            width: 1050px;
+            margin-top: -400px;
+            margin-left: 320px;
+            float: left;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- 侧边导航点击事件 -->
-    <script type="text/javascript">
-        $(function(){
-            $("a[name='dian']").click(function(){
-                $(this).addClass("active").siblings().removeClass("active");
-            });
-        })
-    </script>
-    <!-- 头部 -->
-    <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
-    <div id="personal">
-        <!-- 侧边导航 -->
-        <div class="personal-nav">
-            <ul>
-                <%--学习看板--%>
-                <a href="<%=request.getContextPath()%>/duration/select"
-                   name="dian" class="nodian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-chart-screen"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>学习看板</span>
-                    </li>
-                </a>
-                <%--学习记录--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-form"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>学习记录</span>
-                    </li>
-                </a>
-                <%--个人笔记--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-edit"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>个人笔记</span>
-                    </li>
-                </a>
-                <%--我的问答--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-survey"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>我的问答</span>
-                    </li>
-                </a>
-                <%--我的文章--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-list"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>我的文章</span>
-                    </li>
-                </a>
-                <%--我的关注--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-rate"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>我的关注</span>
-                    </li>
-                </a>
-                <%--个人信息--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-dialogue"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>个人信息</span>
-                    </li>
-                </a>
-                <%--愿望清单--%>
-                <a href="javascript:;" name="dian" target="personal-main">
-                    <li>
-                        <i class="layui-icon layui-icon-release"
-                           style="font-size: 25px;color: #D4D4D4;"></i>
-                        <span>愿望清单</span>
-                    </li>
-                </a>
-            </ul>
+<!-- 侧边导航点击事件 -->
+<script type="text/javascript">
+    $(function(){
+        $("a[name='dian']").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+    })
+</script>
+<!-- 头部 -->
+<jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
+<div id="personal">
+    <!-- 侧边导航 -->
+    <div class="personal-nav">
+        <ul>
+            <%--学习看板--%>
+            <a href="<%=request.getContextPath()%>/duration/select"
+               name="dian" class="nodian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-chart-screen"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>学习看板</span>
+                </li>
+            </a>
+            <%--学习记录--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-form"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>学习记录</span>
+                </li>
+            </a>
+            <%--个人笔记--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-edit"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>个人笔记</span>
+                </li>
+            </a>
+            <%--我的问答--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-survey"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>我的问答</span>
+                </li>
+            </a>
+            <%--我的文章--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-list"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>我的文章</span>
+                </li>
+            </a>
+            <%--我的关注--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-rate"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>我的关注</span>
+                </li>
+            </a>
+            <%--个人信息--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-dialogue"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>个人信息</span>
+                </li>
+            </a>
+            <%--愿望清单--%>
+            <a href="javascript:;" name="dian" target="personal-main">
+                <li>
+                    <i class="layui-icon layui-icon-release"
+                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <span>愿望清单</span>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <!-- 个性签名 -->
+    <div class="signature">
+        <!-- 头像 -->
+        <div class="headimg">
+            <img src="//t.cn/RCzsdCq" class="headerimg">
         </div>
-        <!-- 个性签名 -->
-        <div class="signature">
-            <!-- 头像 -->
-            <div class="headimg">
-                <img src="/img/headimg.jpg" class="headerimg">
-            </div>
-            <!-- 昵称 -->
-            <div class="petname">
-                <p>${lists.phonenum}</p>
-            </div>
-            <!-- 签名 -->
-            <div class="sdf">
-                <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
-            </div>
+        <!-- 昵称 -->
+        <div class="petname">
+            <p>我是大牛</p>
+        </div>
+        <!-- 签名 -->
+        <div class="sdf">
+            <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
         </div>
     </div>
+</div>
 
-    <!-- 主体内容 -->
-    <iframe name="personal-main" style="border: 1px #fff;width: 1050px;margin-top: -400px;
-            margin-left: 320px;float: left;height: 99%;"></iframe>
-    <%--侧栏--%>
-    <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
-    <%--尾部--%>
-    <jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
+<!-- 主体内容 -->
+<iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+<script type="text/javascript">
+    $(window.parent.document).find("#aboutus-iframe").load(function(){
+        var main = $(window.parent.document).find("#aboutus-iframe");
+        var thisheight = $(document).height()+30;
+        main.height(thisheight);
+    });
+</script>
+<%--侧栏--%>
+<jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
+<div style="clear: both"></div>
+<%--尾部--%>
+<jsp:include page="/WEB-INF/jsp/footer.jsp"></jsp:include>
 </body>
 </html>
