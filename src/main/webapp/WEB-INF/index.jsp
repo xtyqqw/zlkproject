@@ -78,7 +78,7 @@
     .state_box p{font-size: 10px;color:gray;line-height: 15px;margin-top: 5px;}
     .state_box p span{font-size: 15px;color: #914ff1;}
     .studing_ul{margin-top: 30px;}
-    .studing_ul li{float: left;}
+    .studing_ul li{float: left;margin:0 20px;}
     .studing_ul .studing_ul_li_none{width: 42px;height: 1px;}
     .studing img{width: 200px;height: 100px;display: block;}
     .studing .studing_ul_f_dd p{color: white;font-size: 12px;position: relative;top: -36px;left: 5px;}
@@ -628,24 +628,39 @@
                 <div class="title title_flow1">
                     <p class="title_p">正在学习</p>
                 </div>
+                <div class="flow_div">
+
+                </div>
             </div>
+            <div class="clear"></div>
             <!--个性推荐模块-->
             <div class="studing">
                 <div class="title title_flow2">
                     <p class="title_p">个性推荐</p>
                 </div>
+                <div class="flow_div2">
+
+                </div>
             </div>
         </c:if>
+        <div class="clear"></div>
         <!--热门推荐模块-->
         <div class="studing">
             <div class="title title_flow3">
                 <p class="title_p">热门推荐</p>
             </div>
+            <div class="flow_div3">
+
+            </div>
         </div>
+        <div class="clear"></div>
         <!--精品推荐模块-->
         <div class="studing">
             <div class="title title_flow4">
                 <p class="title_p">精品推荐</p>
+            </div>
+            <div class="flow_div4">
+
             </div>
         </div>
     </div>
@@ -694,98 +709,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow1' //流加载容器
+            elem: '.flow_div' //流加载容器
             ,isAuto:false
             ,done: function(page, next){ //执行下一页的回调
-                //模拟数据插入
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                    next(lis.join(''), page < 10); //假设总页数为 10
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                            lis.push('<ul class="studing_ul flow-default">'+
+                                '<li>'+
+                                '<dl>'+
+                                '<dt>'+
+                                '<a href="javascript:;">'+
+                                '<img src="'+courses.introducePic+'" />'+
+                                '</a>'+
+                                '</dt>'+
+                                '<dd class="studing_ul_f_dd">'+
+                                '<p>'+courses.introduceText+'</p>'+
+                                '<span>JAVA</span>'+
+                                '<span>SPRING</span>'+
+                                '<span class="stars"></span>'+
+                                '</dd>'+
+                                '<dd class="studing_ul_s_dd">'+
+                                '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                '</dd>'+
+                                '</dl>'+
+                                '</li>'+
+                                '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -793,95 +755,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow2'
+            elem: '.flow_div2' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -889,95 +801,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow3'
+            elem: '.flow_div3' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -985,95 +847,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow4'
+            elem: '.flow_div4' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });

@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.service;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.User;
 
 import java.util.List;
@@ -37,4 +38,10 @@ public interface IndexService {
      * @return Integer
      */
     Integer findUserCount();
+    /**
+     *流加载查询分页课程
+     * @param pagination
+     * @return List<Courses>
+     */
+    List<Courses> findCoursesList(Pagination pagination);
 }
