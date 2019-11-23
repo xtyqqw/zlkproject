@@ -7,14 +7,14 @@
         <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"></id>
         <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
         <result property="chapterName" column="chapter_name" javaType="java.lang.String"></result>
-        <result property="chapterTime" column="chapter_time" javaType="java.util.Date"></result>
+        <result property="chapterTime" column="chapter_time" javaType="java.lang.Integer"></result>
         <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
         <collection property="sectionList" ofType="com.zlk.zlkproject.entity.Section">
             <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
             <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"></result>
             <result property="sectionName" column="section_name" javaType="java.lang.String"></result>
             <result property="videoAddr" column="video_addr" javaType="java.lang.String"></result>
-            <result property="sectionTime" column="section_time" javaType="java.util.Date"></result>
+            <result property="sectionTime" column="section_time" javaType="java.lang.Integer"></result>
             <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
         </collection>
     </resultMap>

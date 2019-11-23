@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.admin.mapper.TypeMapper">
+    <resultMap id="typeEntityMap" type="com.zlk.zlkproject.entity.Type">
+        <id property="typeId" column="type_id" javaType="java.lang.Integer"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findTypeByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="typeEntityMap">
+        select * from type
+        <if test="condition!='' and condition!=null">
+            where type_name like CONCAT('%',#{condition},'%')
+        </if>
+        order by type_id limit #{startPage},#{limit}
+    </select>
+    <select id="findTotalCountByTypeName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
+        select count(*) from type
+        <if test="condition!='' and condition!=null">
+            where type_name like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <select id="findTypeByTypeName" parameterType="java.lang.String" resultMap="typeEntityMap">
+        select * from type where type_name=#{typeName}
+    </select>
+    <select id="findTypeByTypeId" parameterType="java.lang.Integer" resultMap="typeEntityMap">
+        select * from type where type_id=#{typeId}
+    </select>
+    <insert id="addType" parameterType="com.zlk.zlkproject.entity.Type">
+        insert into type values (#{typeId},#{typeName})
+    </insert>
+    <update id="updateType" parameterType="com.zlk.zlkproject.entity.Tag">
+        update type
+        <set>
+            <if test="typeName!=null and typeName!='' ">
+                type_name=#{typeName},
+            </if>
+        </set>
+        where type_id=#{typeId}
+    </update>
+    <delete id="deleteTypeByTypeId" parameterType="java.lang.Integer">
+        delete from type where type_id = #{typeId}
+    </delete>
+</mapper>

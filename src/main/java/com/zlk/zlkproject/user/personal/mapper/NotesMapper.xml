@@ -15,7 +15,7 @@
     </resultMap>
     <!--查询个人笔记-->
     <select id="selectNotes" resultMap="notesMap" parameterType="com.zlk.zlkproject.user.entity.Notes">
-          select * from stu_note order by sn_id desc
+          select * from stu_note order by date desc
     </select>
     <!--修改个人笔记-->
     <update id="updateNotes" parameterType="com.zlk.zlkproject.user.entity.Notes">

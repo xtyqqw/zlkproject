@@ -3,7 +3,6 @@ package com.zlk.zlkproject.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ public class Chapter {
     /**章节名称 对应字段chapter_name*/
     private String chapterName;
     /**章节视频总时间 对应字段chapter_time*/
-    private Date chapterTime;
+    private Integer chapterTime;
     /**章节序号 对应字段chapter_num*/
     private Integer chapterNum;
     /**小节列表*/
@@ -32,7 +31,7 @@ public class Chapter {
     public Chapter() {
     }
 
-    public Chapter(Integer chapterId, Integer coursesId, String chapterName, Date chapterTime, Integer chapterNum, List<Section> sectionList) {
+    public Chapter(Integer chapterId, Integer coursesId, String chapterName, Integer chapterTime, Integer chapterNum, List<Section> sectionList) {
         this.chapterId = chapterId;
         this.coursesId = coursesId;
         this.chapterName = chapterName;
