@@ -63,6 +63,37 @@ $(document).ready(function () {
     var move = 0;
     var res = 0;
     var screenState = false;
+    var interval_cache = null;
+    var timeOut_cache = null;
+    var cache_res = 0;
+    var CTrecord = 0;
+    var isMousemove = false;
+
+    //视频等待事件监听
+    video1.addEventListener("waiting",function () {
+        btn_play.innerHTML = "&#xe652;";
+    });
+
+    //视频播放事件监听
+    video1.addEventListener("playing",function () {
+        btn_play.innerHTML = "&#xe651;";
+    });
+
+    //成功获取资源长度事件监听
+    video1.addEventListener("loadedmetadata",function () {
+        interval_cache = setInterval(function () {
+            console.log('length:'+video1.buffered.length);
+            for (var i=0;i<video1.buffered.length;i++){
+                console.log('start:'+video1.buffered.start(i));
+                console.log('end:'+video1.buffered.end(i));
+            }
+            var res = video1.buffered.end(video1.buffered.length-1)/video1.duration * $("#pg_bg").width();
+            document.getElementById("pg_cache").style.width = res + 'px';
+            if(video1.buffered.end(0) === video1.duration){
+                clearInterval(interval_cache);
+            }
+        },1000);
+    });
 
     //切换视频方法
     function switchVideo (src) {
@@ -73,6 +104,8 @@ $(document).ready(function () {
         btn.style.left = 0 + 'px';
         bar.style.width = 0 + 'px';
         currentTime.innerText = '00:00:00';
+        clearInterval(interval_cache);
+        document.getElementById("pg_cache").style.width = 0 + 'px';
     }
 
     //全屏按钮点击
@@ -90,18 +123,24 @@ $(document).ready(function () {
     //监听全屏改变事件
     window.addEventListener("fullscreenchange",function () {
         if (screenState) {
+            $("#div_video_all").css("overflow","visible");
             $("#div_all").offset({top:0,left:0});
             all.style.width = window.screen.width + '';
             all.style.height = window.screen.height + '';
             all.style.margin = "auto";
+            var res = video1.buffered.end(0)/video1.duration * $("#pg_bg").width();
+            document.getElementById("pg_cache").style.width = res + 'px';
             document.getElementById("fscreen").style.display = "none";
             document.getElementById("escreen").style.display = "block";
             screenState = false;
         }else{
+            $("#div_video_all").css("overflow","hidden");
             $("#div_all").offset({top:$("#r_video").offset().top,left:$("#r_video").offset().left});
             all.style.width = "100%";
             all.style.height = "100%";
             all.style.margin = "auto";
+            var res = video1.buffered.end(0)/video1.duration * $("#pg_bg").width();
+            document.getElementById("pg_cache").style.width = res + 'px';
             document.getElementById("fscreen").style.display = "block";
             document.getElementById("escreen").style.display = "none";
         }
@@ -149,9 +188,40 @@ $(document).ready(function () {
             res = move;
             btn.style.left = res-8 + 'px';
         }
+        cache_res = res;
         bar.style.width = res + 'px';
         currentTime.innerText = format(Math.round(video1.duration * res/$("#pg_bg").width()));
         video1.currentTime = Math.round(video1.duration * res/$("#pg_bg").width());
+
+
+        if (!state) {
+            timeOut_cache = setTimeout(function () {
+                clearTimeout(timeOut_cache);
+                clearInterval(interval_cache);
+                var clickVideoTime = video1.duration * cache_res/$("#pg_bg").width();
+                var length = video1.buffered.length;
+                for(var i=0;i<length;i++){
+                    var min = video1.buffered.start(i);
+                    var max = video1.buffered.end(i);
+                    if(clickVideoTime >= min && clickVideoTime <= max){
+                        interval_cache = setInterval(function () {
+                            console.log('length:'+video1.buffered.length);
+                            for (var l=0;l<video1.buffered.length;l++){
+                                console.log('start:'+video1.buffered.start(l));
+                                console.log('end:'+video1.buffered.end(l));
+                            }
+                            var res = video1.buffered.end(i)/video1.duration * $("#pg_bg").width();
+                            document.getElementById("pg_cache").style.width = res + 'px';
+                            if(video1.buffered.end(0) === video1.duration){
+                                clearInterval(interval_cache);
+                            }
+                        },1000);
+                        break;
+                    }
+                }
+            },1000);
+        }
+
     };
 
     //音量条点击
@@ -181,6 +251,34 @@ $(document).ready(function () {
     document.onmouseup = function () {
         state = false;
         volumeState = false;
+        if (isMousemove){
+            timeOut_cache = setTimeout(function () {
+                clearTimeout(timeOut_cache);
+                clearInterval(interval_cache);
+                var clickVideoTime = video1.duration * cache_res/$("#pg_bg").width();
+                var length = video1.buffered.length;
+                for(var i=0;i<length;i++){
+                    var min = video1.buffered.start(i);
+                    var max = video1.buffered.end(i);
+                    if(clickVideoTime >= min && clickVideoTime <= max){
+                        interval_cache = setInterval(function () {
+                            console.log('length:'+video1.buffered.length);
+                            for (var l=0;l<video1.buffered.length;l++){
+                                console.log('start:'+video1.buffered.start(l));
+                                console.log('end:'+video1.buffered.end(l));
+                            }
+                            var res = video1.buffered.end(i)/video1.duration * $("#pg_bg").width();
+                            document.getElementById("pg_cache").style.width = res + 'px';
+                            if(video1.buffered.end(0) === video1.duration){
+                                clearInterval(interval_cache);
+                            }
+                        },1000);
+                        break;
+                    }
+                }
+            },1000);
+        }
+        isMousemove = false;
     };
 
     //拖动 进度条/音量条
@@ -197,9 +295,11 @@ $(document).ready(function () {
                 res = move;
                 btn.style.left = res-8 + 'px';
             }
+            cache_res = res;
             bar.style.width = res + 'px';
             currentTime.innerText = format(Math.round(video1.duration * res/$("#pg_bg").width()));
             video1.currentTime = Math.round(video1.duration * res/$("#pg_bg").width());
+            isMousemove = true;
         } else if (volumeState) {
             move = 80 - (ev.pageY - $("#vb_bg").offset().top);
             if(move <= 0) {
@@ -229,6 +329,7 @@ $(document).ready(function () {
                 btn.style.left = res + 'px';
                 bar.style.width = res + 'px';
                 currentTime.innerText = format(video1.currentTime);
+                CTrecord = video1.currentTime;
                 if(video1.ended) {
                     btn_play.innerHTML = "&#xe652;";
                     clearInterval(interval1);
@@ -266,14 +367,16 @@ $(document).ready(function () {
     });
 
 
-    //控制栏 显示/隐藏  begin
+    //控制栏 显示/隐藏  begin--------------------------------------------------------------------------------------------
     var timeOut1 = null;
     var timeOut1State = false;
     video.onmousemove = function () {
         controller.style.bottom = "60px";
+        btn.style.display = "block";
         if (!timeOut1State) {
             timeOut1 = setTimeout(function () {
-                controller.style.bottom = "-10px";
+                controller.style.bottom = "6px";
+                btn.style.display = "none";
                 timeOut1State = false;
             }, 2000);
             timeOut1State = true;
@@ -282,7 +385,8 @@ $(document).ready(function () {
     video.onmouseout = function () {
         if (!timeOut1State) {
             timeOut1 = setTimeout(function () {
-                controller.style.bottom = "-10px";
+                controller.style.bottom = "6px";
+                btn.style.display = "none";
                 timeOut1State = false;
             }, 2000);
             timeOut1State = true;
@@ -292,20 +396,22 @@ $(document).ready(function () {
         clearTimeout(timeOut1);
         timeOut1State = false;
         controller.style.bottom = "60px";
+        btn.style.display = "block";
     };
     controller.onmouseout = function () {
         if (!timeOut1State) {
             timeOut1 = setTimeout(function () {
-                controller.style.bottom = "-10px";
+                controller.style.bottom = "6px";
+                btn.style.display = "none";
                 timeOut1State = false;
             }, 2000);
             timeOut1State = true;
         }
     };
-    //控制栏 显示/隐藏 end
+    //控制栏 显示/隐藏 end-----------------------------------------------------------------------------------------------
 
 
-    //音量条 显示/隐藏 begin
+    //音量条 显示/隐藏 begin---------------------------------------------------------------------------------------------
     var timeOut = null;
     document.getElementById("volume").onmouseover = function () {
         document.getElementById("volume_bar").style.display = "block";
@@ -322,7 +428,45 @@ $(document).ready(function () {
     document.getElementById("volume_bar").onmouseout = function () {
         document.getElementById("volume_bar").style.display = "none";
     }
-    //音量条 显示/隐藏 end
+    //音量条 显示/隐藏 end-----------------------------------------------------------------------------------------------
+
+    /*清晰度 begin---------------------------------------------------------------------------------------------*/
+
+    //点击清晰度按钮
+    $("#sharpness_btn").click(function () {
+        $("#sharpness_option_box").css("display","block");
+    });
+
+    //点击清晰度选项
+    $(".sharpness_option").click(function () {
+        var currentTime = video1.currentTime;
+        totalTime.innerText = '--:--:--';
+        clearInterval(interval1);
+        clearTimeout(timeOut_cache);
+        clearInterval(interval_cache);
+        if('超清'===$(this).text()){
+            document.getElementById("video_src").src = "http://47.98.183.4:8888/group1/M00/00/00/rBBUH13Xo7GAK6HTCnvSt70QyI4511.mp4";
+        }else if('普清'===$(this).text()){
+            document.getElementById("video_src").src = "http://47.98.183.4:8888/group1/M00/00/00/rBBUH13XjVyAVYH-AxDnTtIGlSU552.mp4";
+        }
+        video1.load();
+        video1.currentTime = currentTime;
+        btn_play.innerHTML = "&#xe652;";
+
+
+        $("#sharpness_btn").text($(this).text());
+        $("#sharpness_option_box").css("display","none");
+    });
+
+    //鼠标 进入/离开 清晰度选项
+    $(".sharpness_option").hover(function () {
+        $(this).css("background-color","#5FB878");
+    },function () {
+        $(this).css("background-color","#0C0C0C");
+    });
+
+    /*清晰度 end-----------------------------------------------------------------------------------------------*/
+
     /*
     播放器 end----------------------------------------------------------------------------------------------------------
     */
