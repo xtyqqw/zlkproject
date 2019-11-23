@@ -15,7 +15,7 @@ function getcode(e) {
         }else{
             //测试用数据
             // code = 000000;
-            alert(phonenumber.value)
+            // alert(phonenumber.value)
             var userPhonenum = phonenumber.value;
             var jsondata={//前端可以发送数据给后端，json形式
                 userPhonenum:userPhonenum
@@ -211,8 +211,33 @@ function phone() {
         return false;
     }
 }
+//验证验证码
+function checkcode() {
+    var check = false;
+    var reg = /\S/;
+    var code = document.getElementById("code1").value;
+    var bool = reg.test(code);
+    if(bool == true){
+        document.getElementById("phoneError").innerHTML="";
+        check = true
+        return check;
+    } else {
+        document.getElementById("codeError").innerHTML = "请输入验证码";
+        document.getElementById("codeError").style.color = "red";
+        check = false;
+        return check;
+    }
+}
+
+function changera(obj){
+    if(obj.value == 'a'){
+        return true;
+    }else {
+        return false;
+    }
+}
 
 function check(){
-    var check = checkpwd1() && checkpwd2()  && phone();
+    var check = checkpwd1() && checkpwd2()  && phone() && changera() && checkcode();
     return check;
 }

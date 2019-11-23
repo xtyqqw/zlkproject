@@ -14,5 +14,5 @@ import java.util.List;
 @Mapper
 public interface ArticlesMapper {
     /*查询文章方法*/
-    List<Article> selectArticle();
+    List<Article> selectArticles();
 }

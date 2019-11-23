@@ -4,12 +4,13 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,4 +36,17 @@ public class CourseHomePageController {
         map.put("courses",courses);
         return map;
     }
+    @RequestMapping(value = "/findCoursesList")
+    @ResponseBody
+    public Map<String,Object> findCoursesList(Pagination pagination)throws Exception{
+
+        List<Courses> coursesList=courseHomePageService.findCoursesList(pagination);
+        for(Courses courses:coursesList){
+            System.out.println(courses.getCoursesId());
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("coursesList",coursesList);
+        return map;
+    }
+
 }

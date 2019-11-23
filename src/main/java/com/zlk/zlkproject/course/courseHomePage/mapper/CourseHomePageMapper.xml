@@ -21,4 +21,14 @@
     <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
 		select * from courses where courses_id=#{coursesId}
 	</select>
+
+    <select id="findCoursesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="CourseHomePageEntityMap">
+        select * from courses limit #{startPage},#{limit}
+    </select>
+
+    <select id="findCoursesCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
+		select count(1) from courses
+	</select>
+
+
 </mapper>

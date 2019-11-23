@@ -16,10 +16,9 @@
             background-color: #333C4D;
             height: 130px;
             width: 100%;
-            margin-top: 100px;
+            margin-top: 50px;
             margin-bottom: 0;
             position: absolute;
-
         }
         #footer ul{
             padding-top: 30px;
@@ -54,33 +53,33 @@
     </style>
 </head>
 <body>
-    <div id="footer">
-        <ul>
-            <li>
-                <a href="javascript:;">关于我们</a>
-            </li>
-            <li>
-                <a href="javascript:;">加入我们</a>
-            </li>
-            <li>
-                <a href="javascript:;">联系我们</a>
-            </li>
-            <li>
-                <a href="javascript:;">讲师合作</a>
-            </li>
-            <li>
-                <a href="javascript:;">帮助中心</a>
-            </li>
-            <li>
-                <a href="javascript:;">友情链接</a>
-            </li>
-            <li>
-                <a href="javascript:;">合作企业</a>
-            </li>
-        </ul>
-        <p>
-            copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
-        </p>
-    </div>
+<div id="footer">
+    <ul>
+        <li>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutzlk">关于我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">加入我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">联系我们</a>
+        </li>
+        <li>
+            <a href="<%=request.getContextPath()%>/lecturer/lecturers">讲师合作</a>
+        </li>
+        <li>
+            <a href="javascript:;">帮助中心</a>
+        </li>
+        <li>
+            <a href="<%=request.getContextPath()%>/aboutus/blogroll">友情链接</a>
+        </li>
+        <li>
+            <a href="javascript:;">合作企业</a>
+        </li>
+    </ul>
+    <p>
+        copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
+    </p>
+</div>
 </body>
 </html>

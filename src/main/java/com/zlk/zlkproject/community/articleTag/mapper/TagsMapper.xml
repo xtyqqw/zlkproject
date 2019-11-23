@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.articleTag.mapper.TagsMapper">
+    <resultMap id="tagEntityMap" type="com.zlk.zlkproject.entity.Tag">
+        <id column="tag_id" property="tagId"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="tag_type_id" property="tagTypeId"/>
+        <result column="tag_type_name" property="tagTypeName"/>
+    </resultMap>
+
+    <select id="getAllTagByTagId" resultMap="tagEntityMap" parameterType="java.lang.Integer">
+        select T.tag_id,T.tag_name,T.tag_type_id,T.tag_type_name from tag T
+    </select>
+</mapper>

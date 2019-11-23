@@ -82,38 +82,38 @@
     </style>
 </head>
 <body>
-    <!-- 学习力 -->
-    <div class="xuexili">
-        <div class="zi">
-            <span class="zi1">学习力</span>
-            <span class="zi2">今日学习情况</span>
-        </div>
-        <!-- 学习力指针图 -->
-        <div class="pointer">
-            <p>501</p>
-            <img src="/img/poor-good.png">
-        </div>
-        <!-- 今日学习情况 -->
-        <div class="today-learn-case">
-            <ul>
-                <li>
-                    <span class="font1">学习时长</span><br />
-                    <i>${lists.userDateTime}</i>
-                    <span style="font-size: 13px;color: #999999;">小时</span>
-                    <p>已超过89%的同学</p>
-                </li>
-                <li>
-                    <span class="font1">学习成长量</span><br />
-                    <i>${lists.userAllTime}</i>
-                    <p>已超过89%的同学</p>
-                </li>
-                <li>
-                    <span class="font1">技能水平</span><br />
-                    <i>100</i>
-                    <p>已超过89%的同学</p>
-                </li>
-            </ul>
-        </div>
+<!-- 学习力 -->
+<div class="xuexili">
+    <div class="zi">
+        <span class="zi1">学习力</span>
+        <span class="zi2">今日学习情况</span>
     </div>
+    <!-- 学习力指针图 -->
+    <div class="pointer">
+        <p>501</p>
+        <img src="/img/poor-good.png">
+    </div>
+    <!-- 今日学习情况 -->
+    <div class="today-learn-case">
+        <ul>
+            <li>
+                <span class="font1">学习时长</span><br />
+                <i>${lists.userDateTime}</i>
+                <span style="font-size: 13px;color: #999999;">小时</span>
+                <p>已超过89%的同学</p>
+            </li>
+            <li>
+                <span class="font1">学习成长量</span><br />
+                <i>${ad}</i>
+                <p>已超过89%的同学</p>
+            </li>
+            <li>
+                <span class="font1">技能水平</span><br />
+                <i>${addd}</i>
+                <p>已超过89%的同学</p>
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

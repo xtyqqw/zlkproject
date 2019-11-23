@@ -31,8 +31,8 @@ public class IndexController {
         Integer rank = indexService.findUserRankById(userId);
         Integer count = indexService.findUserCount();
         Integer rankBai = Arith.abb(rank,count);
-        Integer jiNeng= Arith.add(rank);
-        Integer xueXi= Arith.acc(rank);
+        Integer jiNeng= Arith.add(user.getUserDateTime());
+        Integer xueXi= Arith.acc(user.getUserDateTime());
         mv.addObject("userList",userList);
         mv.addObject("user1",user);
         mv.addObject("rank",rank);

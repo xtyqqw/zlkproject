@@ -1,5 +1,7 @@
 package com.zlk.zlkproject.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 /*个人笔记*/
 public class Notes {
@@ -10,6 +12,7 @@ public class Notes {
     private Integer up;
     private Integer down;
     private String report;
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     public Notes(Integer snId, Integer sectionId, Integer userId, String content, Integer up, Integer down, String report, Date date) {
