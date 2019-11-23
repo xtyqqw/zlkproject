@@ -3,9 +3,20 @@
     margin: 0;
 }
 
+.layui-container{
+    width: 100% !important;
+    height: 100%;
+    clear: both;
+}
+
+.layui-fluid{
+    width: 100%;
+    height: auto;
+}
+
 #div_video_all{
     width: 100%;
-    height: 500px;
+    height: 100%;
     background-color: #009f95;
     margin: auto;
 }
@@ -52,7 +63,7 @@
 }
 
 #video_row{
-    height: 400px;
+    height: 500px;
 }
 
 #video_div{
@@ -280,3 +291,58 @@
     padding: 5px 0 0 0;
 }
 /*播放器 end*/
+
+/*选项卡内容 begin*/
+.layui-tab{
+    margin: 30px auto !important;
+}
+.layui-tab-title{
+    border-top:solid 5px blue !important;
+
+}
+.layui-tab-title li{
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 0 0 !important;
+    font-size: 16px !important;
+    color: snow !important;
+    letter-spacing: 5px;
+}
+
+.li_show{
+    width: 16%;
+}
+
+.li_hide{
+    width: 12%;
+}
+
+.layui-this{
+    background-color: darkblue !important;
+}
+
+.layui-tab-item{
+    border: 2px #5d6164 solid;
+    border-radius: 1px;
+}
+
+/*讲师笔记bigin*/
+#lay_flow1{
+    border-right: lightgrey 2px solid;
+    border-left: lightgrey 2px solid;
+    border-top: ghostwhite 2px solid;
+}
+.note_div{
+    width: 80%;
+    height: auto;
+    padding: 10px 10%;
+}
+.note_title{
+    width: 100%;
+    margin: 10px auto;
+}
+.note_content_div{
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+}

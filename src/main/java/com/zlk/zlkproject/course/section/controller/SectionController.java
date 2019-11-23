@@ -49,7 +49,8 @@ public class SectionController {
     @RequestMapping(value = "/findState")
     @ResponseBody
     public Map<String, Object> findState(Integer sectionId) throws Exception{
-        String state = sectionService.findStateById(sectionId);
+        Integer userId = 1;
+        String state = sectionService.findStateById(userId,sectionId);
         if (state ==null){
             state = "未开始";
         }

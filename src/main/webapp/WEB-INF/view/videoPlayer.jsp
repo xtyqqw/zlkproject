@@ -100,9 +100,39 @@
             </div>
             <div class="layui-col-md2"></div>
         </div>
-        <div class="layui-row" id="tab_row">
-
+        <div class="layui-row FS_hidden" id="tab_row">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md8 layui-tab">
+                <div class="layui-tab-title">
+                    <li class="layui-this li_show">讲师笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生评论</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生问答</li>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" id="lay_flow1">
+                        <div>
+                            <span></span>
+                            <div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容而</div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容三</div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容四</div>
+                </div>
+            </div>
+            <div class="layui-col-md2"></div>
         </div>
     </div>
+    <div style="clear: both"></div>
+    <jsp:include page="../jsp/footer.jsp"></jsp:include>
 </body>
 </html>
