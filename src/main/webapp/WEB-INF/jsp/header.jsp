@@ -120,7 +120,7 @@
         </div>
 
         <%--未登录显示注册登录--%>
-        <c:if test="">
+        <c:if test="true">
             <!-- 注册登录 -->
             <div class="header-login">
                 <a href="javascript:;">注册</a>
@@ -150,8 +150,7 @@
     <%--鼠标移入移出头像事件--%>
     <script>
         layui.use('element', function(){
-            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
+            var element = layui.element;
             //监听导航点击
             element.on('nav(demo)', function(elem){
                 //console.log(elem)
