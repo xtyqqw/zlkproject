@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: Article
@@ -48,6 +49,6 @@ public class Article {
     private String inform;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
-    /**建立的是文章和标签的多对一关系*/
-    private Integer tagId;
+
+    private List<String> tagName;
 }
