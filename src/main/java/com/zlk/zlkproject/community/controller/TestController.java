@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
     @RequestMapping(value = "/community")
     public String toTest(){
-        return "hotArticle";
+        return "view/community/hotArticle";
     }
 
 }

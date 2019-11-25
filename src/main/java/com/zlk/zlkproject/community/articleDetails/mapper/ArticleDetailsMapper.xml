@@ -27,12 +27,12 @@
 
     <!--根据创建时间降序查询最新文章标题-->
     <select id="selectTitleByArticle" resultType="com.zlk.zlkproject.entity.Article" resultMap="articleEntityMap">
-        select title,browse_count,comment_count,user_img from article order by create_time desc LIMIT 0,6
+        select title,browse_count,comment_count from article order by create_time desc LIMIT 0,6
     </select>
 
     <!--根据浏览量降序查询文章标题-->
     <select id="findTitleByBrowseCount" resultType="com.zlk.zlkproject.entity.Article" resultMap="articleEntityMap">
-        select title,browse_count,comment_count,user_img from article order by browse_count desc LIMIT 0,6
+        select title,browse_count,comment_count from article order by browse_count desc LIMIT 0,6
     </select>
 
     <!--查询所有文章-->
