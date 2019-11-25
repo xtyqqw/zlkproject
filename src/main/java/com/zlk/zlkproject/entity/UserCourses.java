@@ -2,6 +2,8 @@ package com.zlk.zlkproject.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -11,51 +13,24 @@ import java.util.Date;
  * @Author LuanKe
  * Date 2019/11/22 18:06
  **/
-
+@Setter
+@Getter
+@ToString
 public class UserCourses {
-    private int userID;
+    /**用户ID*/
+    private int userId;
+    /**课程ID*/
     private int coursesId;
+    /**上次学习时间*/
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastStudyTime;
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public int getCoursesId() {
-        return coursesId;
-    }
-
-    public void setCoursesId(int coursesId) {
-        this.coursesId = coursesId;
-    }
-
-    public Date getLastStudyTime() {
-        return lastStudyTime;
-    }
-
-    public void setLastStudyTime(Date lastStudyTime) {
-        this.lastStudyTime = lastStudyTime;
-    }
-
-    public UserCourses(int userID, int coursesId, Date lastStudyTime) {
-        this.userID = userID;
+    public UserCourses(int userId, int coursesId, Date lastStudyTime) {
+        this.userId = userId;
         this.coursesId = coursesId;
         this.lastStudyTime = lastStudyTime;
     }
 
     public UserCourses() {
-    }
-
-    @Override
-    public String toString() {
-        return "UserCourses{" +
-                "userID=" + userID +
-                ", coursesId=" + coursesId +
-                ", lastStudyTime=" + lastStudyTime +
-                '}';
     }
 }
