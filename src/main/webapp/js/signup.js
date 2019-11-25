@@ -9,9 +9,11 @@ function getcode(e) {
     phonenumber = document.getElementById("userPhonenum");
     if(phonenumber.value.length == 0){
         alert("请输入手机号码");
+        location.reload();
     }else{
         if(!(/^1[34578]\d{9}$/.test(phonenumber.value))){
-            alert("手机号码有误，请重填")
+            alert("手机号码有误，请重新输入");
+            location.reload();
         }else{
             //测试用数据
             // code = 000000;

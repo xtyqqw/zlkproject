@@ -43,15 +43,16 @@
                         </div>
                     </div>
                     <div id="r_video">
-                        <%--播放器 begin---------------------------------------------------------------------------------%>
+<%--------------------------播放器 begin ------------------------------------------------------------------------------%>
                         <div id="div_all">
                             <div id="div_video">
                                 <video id="video1" width="100%" height="100%">
-                                    <source id="video_src" src="/img/ckin.mp4" type="video/mp4" />
+                                    <source id="video_src" src="http://47.98.183.4:8888/group1/M00/00/00/rBBUH13XjVyAVYH-AxDnTtIGlSU552.mp4" type="video/mp4" />
                                 </video>
                             </div>
                             <div id="div_controller">
                                 <div id="pg_bg">
+                                    <div id="pg_cache"></div>
                                     <div id="pg_bar"></div>
                                     <div id="pg_btn"></div>
                                 </div>
@@ -61,11 +62,18 @@
                                 <div id="div_time" class="div_btn">
                                     <div id="current_time" class="time">00:00:00</div>
                                     <div id="mid" class="time">/</div>
-                                    <div id="total_time" class="time"></div>
+                                    <div id="total_time" class="time">--:--:--</div>
                                 </div>
                                 <div class="div_btn float_right" style="padding: 2px 0 0 0;">
                                     <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
                                     <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+                                </div>
+                                <div id="div_sharpness" class="div_btn float_right">
+                                    <div id="sharpness_btn" class="enableClk">普清</div>
+                                    <div id="sharpness_option_box">
+                                        <div class="sharpness_option enableClk">超清</div>
+                                        <div class="sharpness_option enableClk">普清</div>
+                                    </div>
                                 </div>
                                 <div id="div_speed" class="div_btn float_right">
                                     <div id="speed_btn" class="enableClk">1.0x</div>
@@ -90,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <%--播放器 end---------------------------------------------------------------------------------%>
+<%--------------------------播放器 end---------------------------------------------------------------------------------%>
 
                         <div style="display: none" id="mulu_div">
 

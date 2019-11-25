@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.mapper;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -39,4 +40,10 @@ public interface IndexMapper {
      * @return Integer
      */
     Integer findUserCount();
+    /**
+     *流加载查询分页课程
+     * @param pagination
+     * @return List<Courses>
+     */
+    List<Courses> findCoursesList(Pagination pagination);
 }

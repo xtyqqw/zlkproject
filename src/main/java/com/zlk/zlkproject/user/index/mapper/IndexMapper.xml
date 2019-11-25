@@ -44,6 +44,10 @@
     <select id="findCoursesAll" resultMap="coursesMap">
        select * from coursesr
     </select>
+    <!--课程分页查询-->
+    <select id="findCoursesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="coursesMap">
+        select * from courses limit #{startPage},#{limit}
+    </select>
     <!--按照学习总时长从多到少查询用户-->
     <select id="findUsersByAllTime" resultMap="userMap">
        select * from user order by user_all_time DESC
