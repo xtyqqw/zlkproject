@@ -17,6 +17,8 @@
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
+    <%--引入wangEditor富文本编辑器--%>
+    <script type="text/javascript" src="/js/wangEditor.js"></script>
 </head>
 <body>
     <div class="layui-container">
@@ -91,9 +93,19 @@
                             </div>
                         </div>
                         <%--播放器 end---------------------------------------------------------------------------------%>
-
+                        <%--功能栏目录--%>
                         <div style="display: none" id="mulu_div">
 
+                        </div>
+                        <%--功能栏问答--%>
+                        <div style="display: none" id="wenda_div">
+                            <div class="editor_title"><span>提问题</span></div>
+                            <div id="editor">
+                                <div id="div1" class="toolbar"></div>
+                                <div id="div2" class="text" style="min-height: 100%">
+                                    <p><span class="badge" contenteditable="true">1</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +144,8 @@
             <div class="layui-col-md2"></div>
         </div>
     </div>
-    <div style="clear: both"></div>
-    <jsp:include page="../jsp/footer.jsp"></jsp:include>
+<%--    <div style="clear: both">--%>
+<%--        <jsp:include page="../jsp/footer.jsp"></jsp:include>--%>
+<%--    </div>--%>
 </body>
 </html>

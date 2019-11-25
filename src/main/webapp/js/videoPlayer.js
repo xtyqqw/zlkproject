@@ -103,6 +103,13 @@ $(document).ready(function () {
             note_flow(sectionId);
         });
 
+        /*功能栏问答点击*/
+        $("#icon-wenda").click(function () {
+            $("#mulu_div").css("display","none");
+            $("#wenda_div").css("display","block");
+
+        });
+
         /*
         播放器 begin--------------------------------------------------------------------------------------------------------
         */
@@ -423,7 +430,14 @@ $(document).ready(function () {
             })
         }
 
+        var E = window.wangEditor
+        var editor = new E('#div1','#div2')
+        // 或者 var editor = new E( document.getElementById('editor') )
+        editor.create()
+
     });
+
+
 
 });
 

@@ -125,6 +125,41 @@
 }
 /*目录 end*/
 
+/*功能栏问答 begin*/
+#wenda_div{
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    padding: 0 5%;
+}
+.w-e-text{
+    overflow-y: auto !important;
+}
+.editor_title{
+    height: 10%;
+    font-size: 30px;
+    font-family: cursive;
+    letter-spacing: 6px;
+}
+#editor{
+    height: 90%;
+}
+
+.toolbar{
+    height: 8%;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+    align-items: center;
+}
+
+.text{
+    height: 70%;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+}
+
 /*播放器 begin*/
 #div_all{
     width: 100%;
