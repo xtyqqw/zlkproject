@@ -85,7 +85,7 @@ fdfs:
   #tracker地址
   tracker-list: 47.98.183.4:22122
   #通过nginx 访问地址
-  resHost: http://47.98.183.4
+  resHost: 
   storagePort: 8888/
   #缩略图配置
   thumb-image:

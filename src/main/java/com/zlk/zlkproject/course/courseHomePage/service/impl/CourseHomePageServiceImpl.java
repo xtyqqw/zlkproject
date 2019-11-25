@@ -36,6 +36,15 @@ public class CourseHomePageServiceImpl implements CourseHomePageService {
     }
 
     @Override
+    public List<Courses> findUserCoursesList(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return courseHomePageMapper.findUserCoursesList(pagination);
+    }
+
+    @Override
     public Integer findCoursesCount(Pagination pagination) {
         return courseHomePageMapper.findCoursesCount(pagination);
     }

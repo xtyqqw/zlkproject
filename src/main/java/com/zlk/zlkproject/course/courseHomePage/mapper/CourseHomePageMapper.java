@@ -32,6 +32,15 @@ public interface CourseHomePageMapper {
     **/
     List<Courses> findCoursesList(Pagination pagination);
 
+    /**
+     *@Author luanke
+     *@Description //多表查询所有内容和时间
+     *@Date 11:01 2019/11/23
+     *@Param [pagination]
+     *@return java.util.List<com.zlk.zlkproject.entity.Courses>
+    **/
+    List<Courses> findUserCoursesList(Pagination pagination);
+
     Integer findCoursesCount(Pagination pagination);
 
 }
