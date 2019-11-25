@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.personal.mapper;
 
+
 import com.zlk.zlkproject.entity.Article;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +14,10 @@ import java.util.List;
  */
 @Mapper
 public interface ArticlesMapper {
-    /*查询文章方法*/
-    List<Article> selectArticles();
+    /**
+     * 根据userId查询user文章的集合
+     * @param userId
+     * @return
+     */
+    List<Article> selectArticles(String userId);
 }

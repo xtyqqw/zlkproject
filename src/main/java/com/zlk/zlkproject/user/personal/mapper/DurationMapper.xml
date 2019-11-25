@@ -26,7 +26,7 @@
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
         <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
     </resultMap>
-    <!--根据降序查询最新一条数据-->
+    <!--根据id查询学习表-->
     <select id="selectDuration" resultMap="durstionMap" parameterType="java.lang.String">
         select * from user where user_id=#{userId}
     </select>

@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface NotesMapper {
     /*查询个人笔记*/
-    List<Notes> selectNotes();
+    List<Notes> selectNotes(String userId);
     /*修改笔记*/
     Integer updateNotes(Notes notes);
     /*删除笔记*/
