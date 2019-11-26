@@ -11,6 +11,10 @@ import java.util.List;
  * @Date： 2019/11/23 10:02
  */
 public interface ArticlesService {
-    /*查询文章*/
-    List<Article> selectArticles();
+    /**
+     * 根据userid查询user文章的集合
+     * @param userId
+     * @return
+     */
+    List<Article> selectArticles(String userId);
 }

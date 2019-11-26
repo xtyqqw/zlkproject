@@ -52,7 +52,7 @@
     .li_none_box_class{margin-top:20px;}
     .li_none_box_class li{width: 41%;height: 58px;float: left;padding: 10px;}
     .li_none_box_class li:hover{box-shadow: 0 0 5px;}
-    .li_none_box_class dl{float: right;display: inline-block;}
+    .li_none_box_class dl{float: left;display: inline-block;margin-left: 10px}
     .li_none_box_class dl dt{font-size: 13px;color: grey;margin:13px 0 0 0;}
     .li_none_box_class dl dd{font-size: 12px;color: darkgrey;}
     .rank{height: 60px;width: 900px;padding: 30px 10px 0 10px;}
@@ -78,7 +78,7 @@
     .state_box p{font-size: 10px;color:gray;line-height: 15px;margin-top: 5px;}
     .state_box p span{font-size: 15px;color: #914ff1;}
     .studing_ul{margin-top: 30px;}
-    .studing_ul li{float: left;}
+    .studing_ul li{float: left;margin:0 20px;}
     .studing_ul .studing_ul_li_none{width: 42px;height: 1px;}
     .studing img{width: 200px;height: 100px;display: block;}
     .studing .studing_ul_f_dd p{color: white;font-size: 12px;position: relative;top: -36px;left: 5px;}
@@ -105,18 +105,26 @@
         <div class="banner">
             <div class="banner_nav">
                 <ul>
+                    <c:forEach items="${typeList}" var="type" begin="0" end="0">
                     <li class="nav_li_none">
-                        <p>JAVA</p>
+                        <p>${type.typeName}</p>
                     </li>
-                    <li class="banner_nav_li">
-                        <p>大数据</p>
-                    </li>
-                    <li class="banner_nav_li">
-                        <p>HTML,CSS</p>
-                    </li>
-                    <li class="banner_nav_li">
-                        <p>JAVASCRIPT</p>
-                    </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="1" end="1">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="2" end="2">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="3" end="3">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="banner_img layui-carousel" id="banner_img">
@@ -125,78 +133,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>JAVA</h2>
+                                <c:forEach items="${typeList}" var="type" begin="0" end="0">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
+                                    <c:forEach items="${tags}" var="tag">
                                     <li>
-                                        <a href="javascript:;">JAVA基础</a>
+                                        <a href="javascript:;">${tag.tagName}</a>
                                     </li>
-                                    <li>
-                                        <a href="javascript:;">JAVA框架</a>
-                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
+                                    <c:forEach items="${courses}" var="courses">
                                     <li>
                                         <div>
                                             <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
+                                                <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
                                             </a>
                                         </div>
                                         <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
+                                            <dt>${courses.introduceText}</dt>
                                             <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
+                                                <span>学习人数：${courses.studentNum}人</span>
+                                                <span>${courses.chapterNum}节</span>
+                                                <span>￥${courses.price}</span>
                                             </dd>
                                         </dl>
                                     </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -204,78 +170,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>大数据</h2>
+                                <c:forEach items="${typeList}" var="type" begin="1" end="1">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">大数据</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">hadoop</a>
-                                    </li>
+                                    <c:forEach items="${tags2}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses2}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -283,78 +207,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>HTML,CSS</h2>
+                                <c:forEach items="${typeList}" var="type" begin="2" end="2">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">CSS</a>
-                                    </li>
+                                    <c:forEach items="${tags3}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses3}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -362,78 +244,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>JAVASCRIPT</h2>
+                                <c:forEach items="${typeList}" var="type" begin="3" end="3">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">JAVASCRIPT</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">JQUERY</a>
-                                    </li>
+                                    <c:forEach items="${tags4}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses4}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -628,24 +468,39 @@
                 <div class="title title_flow1">
                     <p class="title_p">正在学习</p>
                 </div>
+                <div class="flow_div">
+
+                </div>
             </div>
+            <div class="clear"></div>
             <!--个性推荐模块-->
             <div class="studing">
                 <div class="title title_flow2">
                     <p class="title_p">个性推荐</p>
                 </div>
+                <div class="flow_div2">
+
+                </div>
             </div>
         </c:if>
+        <div class="clear"></div>
         <!--热门推荐模块-->
         <div class="studing">
             <div class="title title_flow3">
                 <p class="title_p">热门推荐</p>
             </div>
+            <div class="flow_div3">
+
+            </div>
         </div>
+        <div class="clear"></div>
         <!--精品推荐模块-->
         <div class="studing">
             <div class="title title_flow4">
                 <p class="title_p">精品推荐</p>
+            </div>
+            <div class="flow_div4">
+
             </div>
         </div>
     </div>
@@ -694,98 +549,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow1' //流加载容器
+            elem: '.flow_div' //流加载容器
             ,isAuto:false
             ,done: function(page, next){ //执行下一页的回调
-                //模拟数据插入
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
-                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
-                    next(lis.join(''), page < 10); //假设总页数为 10
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                            lis.push('<ul class="studing_ul flow-default">'+
+                                '<li>'+
+                                '<dl>'+
+                                '<dt>'+
+                                '<a href="javascript:;">'+
+                                '<img src="'+courses.introducePic+'" />'+
+                                '</a>'+
+                                '</dt>'+
+                                '<dd class="studing_ul_f_dd">'+
+                                '<p>'+courses.introduceText+'</p>'+
+                                '<span>JAVA</span>'+
+                                '<span>SPRING</span>'+
+                                '<span class="stars"></span>'+
+                                '</dd>'+
+                                '<dd class="studing_ul_s_dd">'+
+                                '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                '</dd>'+
+                                '</dl>'+
+                                '</li>'+
+                                '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -793,95 +595,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow2'
+            elem: '.flow_div2' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -889,95 +641,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow3'
+            elem: '.flow_div3' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
@@ -985,95 +687,45 @@
     layui.use('flow', function(){
         var flow = layui.flow;
         flow.load({
-            elem: '.title_flow4'
+            elem: '.flow_div4' //流加载容器
             ,isAuto:false
-            ,done: function(page, next){
+            ,done: function(page, next){ //执行下一页的回调
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0;i<2;i++){
-                        lis.push('<ul class="studing_ul flow-default">'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '<li class="studing_ul_li_none"></li>'+
-                            '<li>'+
-                            '<dl>'+
-                            '<dt>'+
-                            '<a href="javascript:;">'+
-                            '<img src="../img/1.jpg" />'+
-                            '</a>'+
-                            '</dt>'+
-                            '<dd class="studing_ul_f_dd">'+
-                            '<p>玩转JAVA，从入门到精通</p>'+
-                            '<span>JAVA</span>'+
-                            '<span>SPRING</span>'+
-                            '<span class="stars"></span>'+
-                            '</dd>'+
-                            '<dd class="studing_ul_s_dd">'+
-                            '<p>学习人数：<span>2345</span>人</p><br/>'+
-                            '<p>￥<span>2300.00</span>上次学习时间：<span>2018-10-12</span></p>'+
-                            '</dd>'+
-                            '</dl>'+
-                            '</li>'+
-                            '</ul>')
-                    }
-                    next(lis.join(''), page < 10);
+                    var limit =8;
+                    var data={"page":page,"limit":limit};
+                    $.ajax({
+                        type :"POST",
+                        url:"/index/toFlow",
+                        dataType:"json",
+                        data:data,
+                        success:function(result) {
+                            layui.each(result.coursesList, function (i, courses) {
+                                lis.push('<ul class="studing_ul flow-default">'+
+                                    '<li>'+
+                                    '<dl>'+
+                                    '<dt>'+
+                                    '<a href="javascript:;">'+
+                                    '<img src="'+courses.introducePic+'" />'+
+                                    '</a>'+
+                                    '</dt>'+
+                                    '<dd class="studing_ul_f_dd">'+
+                                    '<p>'+courses.introduceText+'</p>'+
+                                    '<span>JAVA</span>'+
+                                    '<span>SPRING</span>'+
+                                    '<span class="stars"></span>'+
+                                    '</dd>'+
+                                    '<dd class="studing_ul_s_dd">'+
+                                    '<p>学习人数：<span>'+courses.studentNum+'</span>人</p><br/>'+
+                                    '<p>￥<span>'+courses.price+'</span>上次学习时间：<span>2018-10-12</span></p>'+
+                                    '</dd>'+
+                                    '</dl>'+
+                                    '</li>'+
+                                    '</ul>')
+                            })
+                            next(lis.join(''), page < 3);
+                        }
+                    });
                 }, 500);
             }
         });
