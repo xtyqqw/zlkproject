@@ -120,7 +120,7 @@
         </div>
 
         <%--未登录显示注册登录--%>
-        <c:if test="true">
+        <c:if test="">
             <!-- 注册登录 -->
             <div class="header-login">
                 <a href="javascript:;">注册</a>
@@ -129,7 +129,7 @@
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
-        <c:if test="">
+        <c:if test="true">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
                     <li class="layui-nav-item" lay-unselect="">
