@@ -3,24 +3,77 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.user.personal.mapper.ArticlesMapper">
-    <resultMap type="com.zlk.zlkproject.entity.Article" id="articleMap">
-        <id property="articleId" column="article_id" javaType="java.lang.String"/>
-        <result property="title" column="title" javaType="java.lang.String"/>
-        <result property="browseCount" column="browse_count" javaType="java.lang.Integer"/>
-        <result property="commentCount" column="comment_count" javaType="java.lang.Integer"/>
-        <result property="createTime" column="create_time" javaType="java.util.Date"/>
-        <result property="updateTime" column="update_time" javaType="java.util.Date"/>
-        <result property="figures" column="figures" javaType="java.lang.String"/>
-        <result property="figuresReal" column="figures_real" javaType="java.lang.String"/>
-        <result property="articleDigest" column="article_digest" javaType="java.lang.String"/>
-        <result property="articleContent" column="article_content" javaType="java.lang.String"/>
-        <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
-        <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
-        <result property="inform" column="inform" javaType="java.lang.String"/>
-        <result property="userId" column="user_id" javaType="java.lang.String"/>
-        <result property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+    <resultMap type="com.zlk.zlkproject.user.entity.Users" id="userMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+        <collection property="articleList" ofType="com.zlk.zlkproject.user.entity.Articles">
+            <id property="articleId" column="article_id" javaType="java.lang.String"/>
+            <result property="title" column="title" javaType="java.lang.String"/>
+            <result property="browseCount" column="browse_count" javaType="java.lang.Integer"/>
+            <result property="commentCount" column="comment_count" javaType="java.lang.Integer"/>
+            <result property="createTime" column="create_time" javaType="java.util.Date"/>
+            <result property="updateTime" column="update_time" javaType="java.util.Date"/>
+            <result property="figures" column="figures" javaType="java.lang.String"/>
+            <result property="figuresReal" column="figures_real" javaType="java.lang.String"/>
+            <result property="articleDigest" column="article_digest" javaType="java.lang.String"/>
+            <result property="articleContent" column="article_content" javaType="java.lang.String"/>
+            <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
+            <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
+            <result property="inform" column="inform" javaType="java.lang.String"/>
+            <result property="userId" column="article_user_id" javaType="java.lang.String"/>
+            <result property="tagId" column="article_tag_id" javaType="java.lang.Integer"/>
+            <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
+                <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+                <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+                <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+                <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+            </collection>
+        </collection>
     </resultMap>
-    <select id="selectArticles" resultMap="articleMap">
-        select * from article order by update_time desc
+    <select id="selectArticles" resultMap="userMap" parameterType="java.lang.String">
+        select
+        user_id,
+        article_id,
+        title,
+        browse_count,
+        comment_count,
+        create_time,
+        update_time,
+        figures,
+        figures_real,
+        article_digest,
+        article_content,
+        zan_count,
+        cai_count,
+        inform,
+        article_user_id,
+        article_tag_id,
+        tag_id,
+        tag_name,
+        tag_type_id,
+        tag_type_name
+        from user
+        JOIN article on user.user_id=article.article_user_id
+        JOIN tag on article.article_tag_id=tag.tag_id
+        where user_id = #{userId}
     </select>
 </mapper>

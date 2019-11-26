@@ -31,4 +31,40 @@ public class FunctionServiceImpl implements FunctionService {
     public List<Function> findFunctionByAdminName(String adminName) {
         return functionMapper.findFunctionByAdminName(adminName);
     }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 菜单管理数据接口
+     * @Date 10:06 2019/11/25
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Function>
+     **/
+    @Override
+    public List<Function> functionManager() {
+        return functionMapper.functionManager();
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 新增菜单
+     * @Date 17:31 2019/11/25
+     * @Param [function]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer addFunction(Function function) {
+        return functionMapper.addFunction(function);
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过菜单编号删除菜单
+     * @Date 18:19 2019/11/25
+     * @Param [functionId]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer deleteFunction(String functionId) {
+        return functionMapper.deleteFunction(functionId);
+    }
 }

@@ -111,4 +111,16 @@ public class TypeServiceImpl implements TypeService {
     public Integer deleteTypeByTypeId(Integer typeId) {
         return typeMapper.deleteTypeByTypeId(typeId);
     }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询全部方向名称
+     * @Date 11:06 2019/11/23
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Type>
+     **/
+    @Override
+    public List<Type> findAllTypeName() {
+        return typeMapper.findAllTypeName();
+    }
 }

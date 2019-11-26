@@ -52,7 +52,7 @@
     .li_none_box_class{margin-top:20px;}
     .li_none_box_class li{width: 41%;height: 58px;float: left;padding: 10px;}
     .li_none_box_class li:hover{box-shadow: 0 0 5px;}
-    .li_none_box_class dl{float: right;display: inline-block;}
+    .li_none_box_class dl{float: left;display: inline-block;margin-left: 10px}
     .li_none_box_class dl dt{font-size: 13px;color: grey;margin:13px 0 0 0;}
     .li_none_box_class dl dd{font-size: 12px;color: darkgrey;}
     .rank{height: 60px;width: 900px;padding: 30px 10px 0 10px;}
@@ -105,18 +105,26 @@
         <div class="banner">
             <div class="banner_nav">
                 <ul>
+                    <c:forEach items="${typeList}" var="type" begin="0" end="0">
                     <li class="nav_li_none">
-                        <p>JAVA</p>
+                        <p>${type.typeName}</p>
                     </li>
-                    <li class="banner_nav_li">
-                        <p>大数据</p>
-                    </li>
-                    <li class="banner_nav_li">
-                        <p>HTML,CSS</p>
-                    </li>
-                    <li class="banner_nav_li">
-                        <p>JAVASCRIPT</p>
-                    </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="1" end="1">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="2" end="2">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
+                    <c:forEach items="${typeList}" var="type" begin="3" end="3">
+                        <li class="banner_nav_li">
+                            <p>${type.typeName}</p>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="banner_img layui-carousel" id="banner_img">
@@ -125,78 +133,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>JAVA</h2>
+                                <c:forEach items="${typeList}" var="type" begin="0" end="0">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
+                                    <c:forEach items="${tags}" var="tag">
                                     <li>
-                                        <a href="javascript:;">JAVA基础</a>
+                                        <a href="javascript:;">${tag.tagName}</a>
                                     </li>
-                                    <li>
-                                        <a href="javascript:;">JAVA框架</a>
-                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
+                                    <c:forEach items="${courses}" var="courses">
                                     <li>
                                         <div>
                                             <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
+                                                <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
                                             </a>
                                         </div>
                                         <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
+                                            <dt>${courses.introduceText}</dt>
                                             <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
+                                                <span>学习人数：${courses.studentNum}人</span>
+                                                <span>${courses.chapterNum}节</span>
+                                                <span>￥${courses.price}</span>
                                             </dd>
                                         </dl>
                                     </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVA，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -204,78 +170,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>大数据</h2>
+                                <c:forEach items="${typeList}" var="type" begin="1" end="1">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">大数据</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">hadoop</a>
-                                    </li>
+                                    <c:forEach items="${tags2}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转大数据，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses2}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -283,78 +207,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>HTML,CSS</h2>
+                                <c:forEach items="${typeList}" var="type" begin="2" end="2">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">CSS</a>
-                                    </li>
+                                    <c:forEach items="${tags3}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转HTML,CSS，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses3}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
@@ -362,78 +244,36 @@
                     <li class="li_none box">
                         <div class="li_none_box">
                             <div class="li_none_box_nav">
-                                <h2>JAVASCRIPT</h2>
+                                <c:forEach items="${typeList}" var="type" begin="3" end="3">
+                                    <h2>${type.typeName}</h2>
+                                </c:forEach>
                                 <ul>
-                                    <li>
-                                        <a href="javascript:;">JAVASCRIPT</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">JQUERY</a>
-                                    </li>
+                                    <c:forEach items="${tags4}" var="tag">
+                                        <li>
+                                            <a href="javascript:;">${tag.tagName}</a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <a href="javascript:;">
-                                                <img style="width: 80px;height: 60px;float: left;" src="../img/1.jpg"/>
-                                            </a>
-                                        </div>
-                                        <dl>
-                                            <dt>玩转JAVASCRIPT，从入门到精通</dt>
-                                            <dd>
-                                                <span>学习人数：2345人</span>
-                                                <span>230节</span>
-                                                <span>￥2300.00</span>
-                                            </dd>
-                                        </dl>
-                                    </li>
+                                    <c:forEach items="${courses4}" var="courses">
+                                        <li>
+                                            <div>
+                                                <a href="javascript:;">
+                                                    <img style="width: 80px;height: 60px;float: left;" src="${courses.introducePic}"/>
+                                                </a>
+                                            </div>
+                                            <dl>
+                                                <dt>${courses.introduceText}</dt>
+                                                <dd>
+                                                    <span>学习人数：${courses.studentNum}人</span>
+                                                    <span>${courses.chapterNum}节</span>
+                                                    <span>￥${courses.price}</span>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>

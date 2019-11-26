@@ -16,7 +16,11 @@
         <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
-
+        <!--<collection property="UserCoursesList" ofType="com.zlk.zlkproject.entity.UserCourses">
+        <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
+        <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
+        <result property="lastStudyTime" column="last_study_time" javaType="java.util.Date"></result>
+        </collection>-->
     </resultMap>
     <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
 		select * from courses where courses_id=#{coursesId}
@@ -24,6 +28,10 @@
 
     <select id="findCoursesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="CourseHomePageEntityMap">
         select * from courses limit #{startPage},#{limit}
+    </select>
+
+    <select id="findUserCoursesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="CourseHomePageEntityMap">
+        select * from courses , user_courses #{startPage},#{limit}
     </select>
 
     <select id="findCoursesCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
