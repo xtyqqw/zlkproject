@@ -139,18 +139,6 @@ $(document).ready(function () {
             }
         };
 
-        // //切换视频函数
-        // function switchVideo (src) {
-        //     document.getElementById("video_src").src = src;
-        //     elem_video1.load();
-        //     clearInterval(interval1);
-        //     elem_btnPlay.innerHTML = "&#xe652;";
-        //     elem_pgBtn.style.left = 0 + 'px';
-        //     elem_pgBar.style.width = 0 + 'px';
-        //     elem_currentTime.innerText = '00:00:00';
-        //     clearInterval(interval_cache);
-        //     document.getElementById("pg_cache").style.width = 0 + 'px';
-        // }
 
         //视频时长格式转换函数  hh:mm:ss
         function format(num) {
@@ -208,9 +196,10 @@ $(document).ready(function () {
             })
         }
 
-    })
+    });
 
 });
+
 
 
 
