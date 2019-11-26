@@ -50,6 +50,12 @@
         <id property="typeId" column="type_id" javaType="java.lang.Integer"/>
         <result property="typeName" column="type_name" javaType="java.lang.String"/>
     </resultMap>
+    <resultMap type="com.zlk.zlkproject.user.entity.Signin" id="signinMap">
+        <id property="signinId" column="signin_id" javaType="java.lang.Integer"/>
+        <result property="signinUserId" column="signin_user_id" javaType="java.lang.String"/>
+        <result property="signinLastTime" column="signin_last_time" javaType="java.util.Date"/>
+        <result property="signinNum" column="signin_num" javaType="java.lang.Integer"/>
+    </resultMap>
     <!--查询所有课程-->
     <select id="findCoursesAll" resultMap="coursesMap">
        select * from coursesr
@@ -93,4 +99,26 @@
        where ty.type_id = ta.tag_type_id and ta.tag_id = tc.tag_id
        and tc.courses_id = c.courses_id and ty.type_id = #{typeId}
     </select>
+    <!--根据今天时间返回日期day-->
+    <select id="findDayByDate" parameterType="java.util.Date" resultType="java.lang.String">
+        SELECT DATE_FORMAT(#{today},'%d')
+    </select>
+    <!--根据用户ID查询上次签到日期-->
+    <select id="findDayByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT DATE_FORMAT((select signin_last_time from signin where signin_user_id = #{userId}),'%d')
+    </select>
+    <!--根据用户ID查询连续签到次数-->
+    <select id="findSigninByUserId" parameterType="java.lang.String" resultMap="signinMap">
+        select * from signin where signin_user_id = #{userId}
+    </select>
+    <!--签到-->
+    <update id="signByUserId" parameterType="com.zlk.zlkproject.user.entity.Signin">
+        update signin set signin_last_time = #{signinLastTime},signin_num = #{signinNum}
+        where signin_user_id = #{signinUserId}
+    </update>
+    <!--首次签到-->
+    <insert id="signFirst" parameterType="com.zlk.zlkproject.user.entity.Signin">
+        insert into signin(signin_user_id,signin_last_time,signin_num)
+        values(#{signinUserId},#{signinLastTime},#{signinNum})
+    </insert>
 </mapper>
