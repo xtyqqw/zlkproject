@@ -176,11 +176,13 @@ function checkpwd1() {
     var check = false;
     //获取密码输入框输入的值
     var password = document.getElementById("pwd1").value;
-    if (password.length == 6) {
+    var regpass = /^[a-zA-Z]{1}(?![a-zA-Z]+$)([a-zA-Z0-9]|[._]){5,17}$/;
+    var bool = regpass.test(password);
+    if (bool == true) {
         document.getElementById("checktext2").innerHTML = "";
         check = true;
     } else {
-        document.getElementById("checktext2").innerHTML = "密码必须是六位";
+        document.getElementById("checktext2").innerHTML = "密码必须以字母开头包含6-18数字字母和._符号";
         check = false;
     }
     return check;

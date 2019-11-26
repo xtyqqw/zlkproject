@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.CooperativedMapper">
+    <resultMap type="com.zlk.zlkproject.user.entity.Lecturer" id="lecturerMap">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result property="name" column="name" javaType="java.lang.String"/>
+        <result property="msg" column="msg" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap type="com.zlk.zlkproject.user.entity.Help" id="helpMap">
+        <id property="id" column="id" javaType="java.lang.Integer"/>
+        <result property="zlkMsg" column="zlk_msg" javaType="java.lang.String"/>
+        <result property="zlkPurpose" column="zlk_purpose" javaType="java.lang.String"/>
+        <result property="zlkDo" column="zlk_do" javaType="java.lang.String"/>
+        <result property="zlkSeek" column="zlk_seek" javaType="java.lang.String"/>
+        <result property="zlkIswho" column="zlk_iswho" javaType="java.lang.String"/>
+    </resultMap>
+    <!--查询合作企业-->
+    <select id="findAll" resultMap="lecturerMap">
+        select * from cooperative
+    </select>
+
+    <!--查询帮助中心信息-->
+    <select id="findHelp" resultMap="helpMap">
+        select * from help limit 0,1
+    </select>
+</mapper>
