@@ -134,9 +134,7 @@
     background-color: white;
     padding: 0 5%;
 }
-.w-e-text{
-    overflow-y: auto !important;
-}
+
 .editor_title{
     height: 10%;
     font-size: 30px;
@@ -155,11 +153,46 @@
 }
 
 .text{
-    height: 70%;
+    height: 76%;
     border: solid 1px lightgrey;
     border-radius: 3px;
 }
 
+.w-e-text:empty::before{
+    content: attr(placeholder);
+    color: darkgrey;
+}
+
+/*[contenteditable]:focus:before{*/
+/*    content: none;*/
+/*}*/
+.w-e-text{
+    overflow-y: auto !important;
+    padding: 0 !important;
+}
+
+#btn_div{
+    width: 100%;
+    height: 16%;
+    float: right;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+button{
+    width: 15%;
+    height: 50%;
+    margin: 0 10px !important;
+    background-color: grey;
+    color: white;
+    letter-spacing: 2px;
+}
+
+#btn_submit_wenda{
+    background-color: blue;
+}
+/*功能栏问答end*/
 /*播放器 begin*/
 #div_all{
     width: 100%;

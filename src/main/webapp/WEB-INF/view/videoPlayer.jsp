@@ -101,9 +101,11 @@
                         <div style="display: none" id="wenda_div">
                             <div class="editor_title"><span>提问题</span></div>
                             <div id="editor">
-                                <div id="div1" class="toolbar"></div>
-                                <div id="div2" class="text" style="min-height: 100%">
-                                    <p><span class="badge" contenteditable="true">1</span></p>
+                                <div id="toolbar_div" class="toolbar"></div>
+                                <div id="text_div" class="text"></div>
+                                <div id="btn_div">
+                                    <button type="button" id="btn_submit_wenda">提交</button>
+                                    <button type="reset" id="btn_reset_wenda">取消</button>
                                 </div>
                             </div>
                         </div>
@@ -112,6 +114,7 @@
             </div>
             <div class="layui-col-md2"></div>
         </div>
+
         <div class="layui-row FS_hidden" id="tab_row">
             <div class="layui-col-md2"></div>
             <div class="layui-col-md8 layui-tab">
