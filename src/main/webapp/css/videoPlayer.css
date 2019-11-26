@@ -123,6 +123,32 @@
 }
 /*目录 end*/
 
+/*-----stuNote begin-----*/
+#div_stuNote{
+    width: 50%;
+    height: 100%;
+    background-color: #009f95;
+    border-radius: 5px;
+    z-index: 10;
+    position: relative;
+    left: 0;
+    top: 0;
+    display: none;
+}
+#stuNote_title{
+    width: 60px;
+    height: 26px;
+    background-color: #eb7350;
+    font-size: 20px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+#stuNote_closeBtn{
+
+}
+/*-----stuNote end-----*/
+
 /*播放器 begin*/
 #div_all{
     width: 100%;
