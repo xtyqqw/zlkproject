@@ -12,13 +12,14 @@
     <title>VideoPlayer</title>
     <link rel="stylesheet" href="/css/videoPlayer.css" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/js/videoPlayer.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
+    <script type="text/javascript" src="/js/player.js"></script>
+    <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
     <div class="layui-container">
@@ -116,6 +117,11 @@
                                     <button type="reset" id="btn_reset_wenda">取消</button>
                                 </div>
                             </div>
+                        </div>
+                        <%--功能栏学生笔记--%>
+                        <div id="div_stuNote">
+                            <div id="stuNote_title">记笔记</div>
+                            <div id="stuNote_closeBtn"></div>
                         </div>
                     </div>
                 </div>

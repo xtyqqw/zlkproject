@@ -2,8 +2,8 @@ package com.zlk.zlkproject.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Date;
 
 /**
  * @program: zlkproject
@@ -13,21 +13,22 @@ import java.util.Date;
  */
 @Getter
 @Setter
+@ToString
 public class UserSection {
 
-    /**用户id*/
+    /**用户id 主键 对应字段user_id*/
     private Integer userId;
-    /**课程小节id*/
+    /**小节id 主键 对应字段section_id*/
     private Integer sectionId;
-    /**用户当前小节课程学习状态*/
-    private String state;
-    /**当前小节学习时长*/
-    private Integer time;
+    /**小节状态 对应字段state*/
+    private Integer state;
+    /**小节时间记录 对应字段time*/
+    private Double time;
 
     public UserSection() {
     }
 
-    public UserSection(Integer userId, Integer sectionId, String state, Integer time) {
+    public UserSection(Integer userId, Integer sectionId, Integer state, Double time) {
         this.userId = userId;
         this.sectionId = sectionId;
         this.state = state;
