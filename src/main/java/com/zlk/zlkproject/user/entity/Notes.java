@@ -1,18 +1,21 @@
 package com.zlk.zlkproject.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 /*个人笔记*/
 public class Notes {
     private Integer snId;
     private Integer sectionId;
-    private Integer userId;
+    private String userId;
     private String content;
     private Integer up;
     private Integer down;
     private String report;
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
-    public Notes(Integer snId, Integer sectionId, Integer userId, String content, Integer up, Integer down, String report, Date date) {
+    public Notes(Integer snId, Integer sectionId, String userId, String content, Integer up, Integer down, String report, Date date) {
         this.snId = snId;
         this.sectionId = sectionId;
         this.userId = userId;
@@ -42,11 +45,11 @@ public class Notes {
         this.sectionId = sectionId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

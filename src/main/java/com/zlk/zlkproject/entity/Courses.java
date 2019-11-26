@@ -41,6 +41,8 @@ public class Courses {
     private String featurePic;
     /**章节列表*/
     private List<Chapter> chapterList;
+    /**上次学习时间列表*/
+    /*private List<UserCourses> UserCoursesList;*/
 
     public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic) {
         this.coursesId = coursesId;

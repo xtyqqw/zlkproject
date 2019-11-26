@@ -11,7 +11,21 @@
     <title>首页</title>
 </head>
 <body>
+<script>
+    location.href="<%=request.getContextPath() %>/test/toLogin";
+</script>
+<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+
+    });
+</script>
+<%--头部--%>
+
 <%--引入头部--%>
+
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
 index
 <%--引入尾部--%>

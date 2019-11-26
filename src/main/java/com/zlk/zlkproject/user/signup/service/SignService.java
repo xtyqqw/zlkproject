@@ -15,4 +15,6 @@ public interface SignService {
      * 找到返回true 没找到返回false
      * */
     Boolean findUserByPhonenum(String phonenum);
+    User findUserByUserphonenum(String phonenum);
+    User findUserByPhonenumAndPwd(User user);
 }

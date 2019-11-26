@@ -23,6 +23,9 @@
             height: 500px;
             margin: 10px auto;
             overflow: hidden;
+            position: relative;
+            top: 0;
+            left: 0;
         }
         #div_video{
             width: 100%;
@@ -76,8 +79,8 @@
             float: left;
             margin: 10px 10px;
         }
-        #div_void{
-            width: 54%;
+        .float_right{
+            float: right !important;
         }
         #div_time{
             width: 135px;
@@ -180,6 +183,37 @@
             text-align: center;
             padding: 5px 0 0 0;
         }
+        /*清晰度 begin-------------------------------------------------------------------------------------------------*/
+        #sharpness_btn{
+            width: 100%;
+            height: 25px;
+            border-radius: 5px;
+            border: solid 2px white;
+            color: white;
+            font-size: 15px;
+            text-align: center;
+            padding: 3px 0 0 0;
+        }
+        #sharpness_option_box{
+            width: 54px;
+            height: 56px;
+            background-color: #0C0C0C;
+            border-radius: 5px;
+            position: relative;
+            bottom: 110px;
+            display: none;
+        }
+        .sharpness_option{
+            width: 100%;
+            height: 23px;
+            background-color: #0C0C0C;
+            border-radius: 5px;
+            color: white;
+            font-size: 15px;
+            text-align: center;
+            padding: 5px 0 0 0;
+        }
+        /*清晰度 end---------------------------------------------------------------------------------------------------*/
     </style>
     <script>
         window.onload = function () {
@@ -202,6 +236,17 @@
             var move = 0;
             var res = 0;
             var screenState = false;
+
+            //切换视频方法
+            function switchVideo (src) {
+                document.getElementById("video_src").src = src;
+                video1.load();
+                clearInterval(interval1);
+                btn_play.innerHTML = "&#xe652;";
+                btn.style.left = 0 + 'px';
+                bar.style.width = 0 + 'px';
+                currentTime.innerText = '00:00:00';
+            }
 
             //全屏按钮点击
             document.getElementById("fscreen").onclick = function () {
@@ -370,6 +415,40 @@
                 }
             };
 
+            /*清晰度 begin---------------------------------------------------------------------------------------------*/
+
+            //点击清晰度按钮
+            $("#sharpness_btn").click(function () {
+                $("#sharpness_option_box").css("display","block");
+            });
+
+            //点击清晰度选项
+            $(".sharpness_option").click(function () {
+                currentTime = video1.currentTime;
+                if('超清'===$(this).text()){
+                    document.getElementById("video_src").src = "/img/jet-background.mp4";
+                }else if('普清'===$(this).text()){
+                    document.getElementById("video_src").src = "/img/ckin.mp4";
+                }
+                video1.load();
+                video1.currentTime = currentTime;
+                clearInterval(interval1);
+                btn_play.innerHTML = "&#xe652;";
+
+
+                $("#sharpness_btn").text($(this).text());
+                $("#sharpness_option_box").css("display","none");
+            });
+
+            //鼠标 进入/离开 清晰度选项
+            $(".sharpness_option").hover(function () {
+                $(this).css("background-color","#5FB878");
+            },function () {
+                $(this).css("background-color","#0C0C0C");
+            });
+
+            /*清晰度 end-----------------------------------------------------------------------------------------------*/
+
             //点击播放速度选项
             $(".speed_option").click(function () {
                 var str = $(this).text()+'';
@@ -456,7 +535,7 @@
     <div id="div_all">
         <div id="div_video">
             <video id="video1" width="100%" height="100%">
-                <source src="/img/ckin.mp4" type="video/mp4" />
+                <source id="video_src" src="/img/ckin.mp4" type="video/mp4" />
             </video>
         </div>
         <div id="div_controller">
@@ -472,18 +551,19 @@
                 <div id="mid" class="time">/</div>
                 <div id="total_time" class="time"></div>
             </div>
-            <div id="div_void" class="div_btn"></div>
-            <div class="div_btn" style="padding: 2px 0 0 0;">
-                <i id="volume" class="iconfont icon-yinzhong enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;margin: 0 0 0 15px"></i>
-                <div id="volume_bar">
-                    <div id="volume_num" style="">50</div>
-                    <div id="vb_bg">
-                        <div id="vb_bar"></div>
-                    </div>
-                    <div id="vb_btn"></div>
+
+            <div class="div_btn float_right" style="padding: 2px 0 0 0;">
+                <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
+                <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+            </div>
+            <div id="div_sharpness" class="div_btn float_right">
+                <div id="sharpness_btn" class="enableClk">普清</div>
+                <div id="sharpness_option_box">
+                    <div class="sharpness_option enableClk">超清</div>
+                    <div class="sharpness_option enableClk">普清</div>
                 </div>
             </div>
-            <div id="div_speed" class="div_btn">
+            <div id="div_speed" class="div_btn float_right">
                 <div id="speed_btn" class="enableClk">1.0x</div>
                 <div id="speed_option_box">
                     <div class="speed_option enableClk">2.0x</div>
@@ -494,9 +574,15 @@
                     <div class="speed_option enableClk">0.75x</div>
                 </div>
             </div>
-            <div class="div_btn" style="padding: 2px 0 0 0;">
-                <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
-                <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+            <div class="div_btn float_right" style="padding: 2px 0 0 0;">
+                <i id="volume" class="iconfont icon-yinzhong enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;margin: 0 0 0 15px"></i>
+                <div id="volume_bar">
+                    <div id="volume_num" style="">50</div>
+                    <div id="vb_bg">
+                        <div id="vb_bar"></div>
+                    </div>
+                    <div id="vb_btn"></div>
+                </div>
             </div>
         </div>
     </div>
