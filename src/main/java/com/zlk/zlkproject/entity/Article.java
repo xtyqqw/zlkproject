@@ -5,7 +5,9 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: Article
@@ -46,8 +48,18 @@ public class Article {
     private Integer caiCount;
     /**举报*/
     private String inform;
+    /**发文类型*/
+    private String createArticleType;
+    /**文章置顶*/
+    private String articleSetTop;
+    /**发文作者*/
+    private User userRealname;
+    /**作者头像*/
+    private User userImg;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
-    /**建立的是文章和标签的多对一关系*/
-    private Integer tagId;
+    /**发文时调用类别名称*/
+    private List<Tag> tagList;
+    /**查询时调用类别名称*/
+    private List<User> userList=new ArrayList<>();
 }

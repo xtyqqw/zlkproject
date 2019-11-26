@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.zlkproject.community.articleList.mapper.ArticleListMapper">
+    <resultMap id="articleListEntityMap" type="com.zlk.zlkproject.entity.Article">
+        <id column="article_id" property="articleId" javaType="java.lang.String"></id>
+        <result column="title" property="title" javaType="java.lang.String"></result>
+        <result column="browse_count" property="browseCount" javaType="java.lang.Integer"></result>
+        <result column="comment_count" property="commentCount" javaType="java.lang.Integer"></result>
+        <result column="create_time" property="createTime" javaType="java.util.Date"></result>
+        <result column="update_time" property="updateTime" javaType="java.util.Date"></result>
+        <result column="figures" property="figures" javaType="java.lang.String"></result>
+        <result column="figures_real" property="figuresReal" javaType="java.lang.String"></result>
+        <result column="article_digest" property="articleDigest" javaType="java.lang.String"></result>
+        <result column="article_content" property="articleContent" javaType="java.lang.String"></result>
+        <result column="user_img" property="userImg" javaType="java.lang.String"></result>
+        <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
+        <result column="user_name" property="userName" javaType="java.lang.String"></result>
+        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"></result>
+        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"></result>
+        <result column="inform" property="inform" javaType="java.lang.String"></result>
+        <result column="user_id" property="userId" javaType="java.lang.String"></result>
+        <result column="create_article_type" property="createArticleType" javaType="java.lang.String"></result>
+        <result column="article_set_top" property="articleSetTop" javaType="java.lang.String"></result>
+        <association property="userList" javaType="com.zlk.zlkproject.entity.User">
+            <id column="user_id" property="userId" javaType="java.lang.String"></id>
+            <result column="user_phonenum" property="phonenum" javaType="java.lang.String"></result>
+            <result column="user_pwd" property="userPwd" javaType="java.lang.String"></result>
+            <result column="user_realname" property="userRealname" javaType="java.lang.String"></result>
+            <result column="user_sex" property="userSex" javaType="java.lang.String"></result>
+            <result column="user_birthday" property="userBirthday" javaType="java.util.Date"></result>
+            <result column="user_native" property="userNative" javaType="java.lang.String"></result>
+            <result column="user_marry" property="userMarry" javaType="java.lang.String"></result>
+            <result column="user_city" property="userCity" javaType="java.lang.String"></result>
+            <result column="user_state" property="userState" javaType="java.lang.String"></result>
+            <result column="user_target" property="userTarget" javaType="java.lang.String"></result>
+            <result column="user_industry" property="userIndustry" javaType="java.lang.String"></result>
+            <result column="user_hobby" property="userHobby" javaType="java.lang.String"></result>
+            <result column="user_selfappraise" property="userSelfappraise" javaType="java.lang.String"></result>
+            <result column="user_education" property="userEducation" javaType="java.lang.String"></result>
+            <result column="user_academy" property="userAcademy" javaType="java.lang.String"></result>
+            <result column="user_specialty" property="userSpecialty" javaType="java.lang.String"></result>
+            <result column="user_all_time" property="userAllTime" javaType="java.lang.Integer"></result>
+            <result column="user_date_time" property="userDateTime" javaType="java.lang.Integer"></result>
+            <result column="user_img" property="userImg" javaType="java.lang.String"></result>
+            <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
+        </association>
+    </resultMap>
+    <select id="findArticleList" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
+        select * from article #{startPage},#{limit}
+    </select>
+    <select id="findArticleCount" resultType="java.lang.Integer" parameterType="com.zlk.zlkproject.entity.Pagination">
+        select count(1) from article
+    </select>
+    <select id="findByCreateTime" resultMap="articleListEntityMap">
+        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname as userRealname,u.user_realimg as userImg
+        from article a , user u
+        where a.user_id=u.user_id
+        order by a.create_time desc
+    </select>
+    <select id="findByBrowseCount" resultMap="articleListEntityMap">
+        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname,u.user_realimg
+        from article a , user u
+        where a.user_id=u.user_id
+        order by a.browse_count desc
+    </select>
+    <select id="findByUserId" resultMap="articleListEntityMap">
+        select a.article_id as aid,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_realimg
+        from article a
+        join user u on a.user_id=u.user_id
+        where a.user_id=#{userId}
+    </select>
+</mapper>
