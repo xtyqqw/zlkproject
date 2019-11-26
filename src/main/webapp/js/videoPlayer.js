@@ -112,6 +112,65 @@ $(document).ready(function () {
     var cache_res = 0;
     var CTrecord = 0;
     var isMousemove = false;
+    var isClose = false;
+    var sharpState = false;
+
+    /*var player = {
+        elem_all : document.getElementById("div_all"),
+        elem_video : document.getElementById("div_video"),
+        elem_controller : document.getElementById("div_controller"),
+        elem_pgBtn : document.getElementById("pg_btn"),
+        elem_pgBar : document.getElementById("pg_bar"),
+        elem_pgBg : document.getElementById("pg_bg"),
+        elem_vbBtn : document.getElementById("vb_btn"),
+        elem_vbBar : document.getElementById("vb_bar"),
+        elem_vbBg : document.getElementById("vb_bg"),
+        elem_btnPlay : document.getElementById("btn_play"),
+        elem_video1 : document.getElementById("video1"),
+        elem_currentTime : document.getElementById("current_time"),
+        elem_totalTime : document.getElementById("total_time"),
+        elem_volumeNum : document.getElementById("volume_num"),
+
+        format : function (num) {
+            num = Math.round(num);
+            var hour = parseInt((num / 3600)+'');
+            var minute = parseInt(((num % 3600) / 60)+'');
+            var second = (num % 3600) % 60;
+            if (hour === 0){
+                hour = '00';
+            }else if (hour > 0 && hour < 10){
+                hour = '0' + hour;
+            }
+            if (minute === 0){
+                minute = '00';
+            }else if (minute > 0 && minute < 10){
+                minute = '0' + minute;
+            }
+            if (second === 0){
+                second = '00';
+            }else if (second > 0 && second < 10){
+                second = '0' + second;
+            }
+            return hour+':'+minute+':'+second;
+        }
+    };*/
+
+
+    window.onbeforeunload = function () {
+        isClose = true;
+    };
+
+    window.onunload = function () {
+        if (isClose){
+            var data = {'time':video1.currentTime};
+            $.ajax({
+                type : "POST",
+                async: false,
+                url : "/player/recordTime",
+                data : data
+            });
+        }
+    };
 
     //视频等待事件监听
     video1.addEventListener("waiting",function () {
@@ -125,6 +184,20 @@ $(document).ready(function () {
 
     //成功获取资源长度事件监听
     video1.addEventListener("loadedmetadata",function () {
+        if (!sharpState) {
+            $.ajax({
+                type : "POST",
+                async: false,
+                url : "/player/readRecord",
+                success:function (res) {
+                    video1.currentTime = res;
+                    btn.style.left = res/video1.duration * $("#pg_bg").width() + 'px';
+                    bar.style.width = res/video1.duration * $("#pg_bg").width() + 'px';
+                    currentTime.innerText = format(res);
+                }
+            });
+        }
+        sharpState = false;
         interval_cache = setInterval(function () {
             console.log('length:'+video1.buffered.length);
             for (var i=0;i<video1.buffered.length;i++){
@@ -169,13 +242,15 @@ $(document).ready(function () {
         if (screenState) {
             $("#div_video_all").css("overflow","visible");
             $("#div_all").offset({top:0,left:0});
-            all.style.width = window.screen.width + '';
-            all.style.height = window.screen.height + '';
+            all.style.width = window.document.body.offsetWidth + 'px';
+            all.style.height = window.document.body.offsetHeight + 'px';
             all.style.margin = "auto";
             var res = video1.buffered.end(0)/video1.duration * $("#pg_bg").width();
             document.getElementById("pg_cache").style.width = res + 'px';
             document.getElementById("fscreen").style.display = "none";
             document.getElementById("escreen").style.display = "block";
+            document.getElementById("l_func").style.overflow = "visible";
+            document.getElementById("r_video").style.overflow = "visible";
             screenState = false;
         }else{
             $("#div_video_all").css("overflow","hidden");
@@ -187,6 +262,8 @@ $(document).ready(function () {
             document.getElementById("pg_cache").style.width = res + 'px';
             document.getElementById("fscreen").style.display = "block";
             document.getElementById("escreen").style.display = "none";
+            document.getElementById("l_func").style.overflow = "hidden";
+            document.getElementById("r_video").style.overflow = "hidden";
         }
     });
 
@@ -239,8 +316,7 @@ $(document).ready(function () {
 
 
         if (!state) {
-            timeOut_cache = setTimeout(function () {
-                clearTimeout(timeOut_cache);
+            timeOut_cache = setInterval(function () {
                 clearInterval(interval_cache);
                 var clickVideoTime = video1.duration * cache_res/$("#pg_bg").width();
                 var length = video1.buffered.length;
@@ -248,6 +324,7 @@ $(document).ready(function () {
                     var min = video1.buffered.start(i);
                     var max = video1.buffered.end(i);
                     if(clickVideoTime >= min && clickVideoTime <= max){
+                        clearInterval(timeOut_cache);
                         interval_cache = setInterval(function () {
                             console.log('length:'+video1.buffered.length);
                             for (var l=0;l<video1.buffered.length;l++){
@@ -263,7 +340,7 @@ $(document).ready(function () {
                         break;
                     }
                 }
-            },1000);
+            },200);
         }
 
     };
@@ -296,8 +373,7 @@ $(document).ready(function () {
         state = false;
         volumeState = false;
         if (isMousemove){
-            timeOut_cache = setTimeout(function () {
-                clearTimeout(timeOut_cache);
+            timeOut_cache = setInterval(function () {
                 clearInterval(interval_cache);
                 var clickVideoTime = video1.duration * cache_res/$("#pg_bg").width();
                 var length = video1.buffered.length;
@@ -305,6 +381,7 @@ $(document).ready(function () {
                     var min = video1.buffered.start(i);
                     var max = video1.buffered.end(i);
                     if(clickVideoTime >= min && clickVideoTime <= max){
+                        clearInterval(timeOut_cache);
                         interval_cache = setInterval(function () {
                             console.log('length:'+video1.buffered.length);
                             for (var l=0;l<video1.buffered.length;l++){
@@ -320,7 +397,7 @@ $(document).ready(function () {
                         break;
                     }
                 }
-            },1000);
+            },200);
         }
         isMousemove = false;
     };
@@ -483,10 +560,11 @@ $(document).ready(function () {
 
     //点击清晰度选项
     $(".sharpness_option").click(function () {
+        sharpState = true;
         var currentTime = video1.currentTime;
         totalTime.innerText = '--:--:--';
         clearInterval(interval1);
-        clearTimeout(timeOut_cache);
+        clearInterval(timeOut_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
             document.getElementById("video_src").src = "http://47.98.183.4:8888/group1/M00/00/00/rBBUH13Xo7GAK6HTCnvSt70QyI4511.mp4";
