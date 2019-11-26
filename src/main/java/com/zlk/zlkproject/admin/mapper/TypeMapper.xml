@@ -41,4 +41,7 @@
     <delete id="deleteTypeByTypeId" parameterType="java.lang.Integer">
         delete from type where type_id = #{typeId}
     </delete>
+    <select id="findAllTypeName" resultMap="typeEntityMap">
+        select * from type
+    </select>
 </mapper>
