@@ -1,6 +1,6 @@
-package com.zlk.zlkproject.community.articleDetails.controller;
+package com.zlk.zlkproject.community.articleHot.controller;
 
-import com.zlk.zlkproject.community.articleDetails.service.ArticleDetailsService;
+import com.zlk.zlkproject.community.articleHot.service.ArticleHotService;
 import com.zlk.zlkproject.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,41 +12,36 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleDetailsController
+ * @program: ArticleHotController
  * @description:
  * @date 2019/11/19 20:29
  */
 @Controller
-@RequestMapping(value = "/articleDetails")
-public class ArticleDetailsController {
+@RequestMapping(value = "/articleHot")
+public class ArticleHotController {
     @Autowired
-    private ArticleDetailsService articleDetailsService;
-
-    /*@RequestMapping("/articleDetails")
-    public String toArticleDetails() {
-        return "article";
-    }*/
+    private ArticleHotService articleHotService;
 
     /**
-     * 根据条件降序查询文章标题
+     * 根据条件倒序查询文章标题
      * 用ModelAndView查询数据库数据返回到jsp页面对应位置显示
      * @param article
      * @return
      */
-    @RequestMapping("/toArticleDetails")
+    @RequestMapping("/toArticleHot")
     @ResponseBody
     public ModelAndView selectTitleByArticle(Article article) {
         /*根据时间倒序返回文章标题集合 月排序*/
-        List<Article> alist = articleDetailsService.selectTitleByArticle(article);
+        List<Article> alist = articleHotService.selectTitleByArticle(article);
         //System.out.println(alist);
         /*根据浏览量倒序返回文章标题集合 总排序*/
-        List<Article> blist = articleDetailsService.findTitleByBrowseCount(article);
+        List<Article> blist = articleHotService.findTitleByBrowseCount(article);
         //System.out.println(blist);
         ModelAndView mv=new ModelAndView();
 
         mv.addObject("alist",alist);
         mv.addObject("blist",blist);
-        mv.setViewName("view/community/article");
+        mv.setViewName("view/community/communityMain");
 
         return mv;
     }

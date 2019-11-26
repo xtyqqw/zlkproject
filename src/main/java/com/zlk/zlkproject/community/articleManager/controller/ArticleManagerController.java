@@ -1,9 +1,9 @@
-package com.zlk.zlkproject.community.article.controller;
+package com.zlk.zlkproject.community.articleManager.controller;
 
 import com.zlk.zlkproject.admin.util.IDUtil;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
-import com.zlk.zlkproject.community.article.service.ArticleService;
+import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService;
 import com.zlk.zlkproject.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -29,10 +29,10 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/article")
-public class ArticleController {
+public class ArticleManagerController {
 
     @Autowired
-    private ArticleService articleService;
+    private ArticleManagerService articleManagerService;
     @Autowired
     private LogUtil logUtil;
 
@@ -67,8 +67,8 @@ public class ArticleController {
     @ResponseBody
     public Map<String,Object> articleManager(Pagination pagination){
         Map<String,Object> map=new HashMap<>();
-        List<Article> articleList = articleService.selectArticleByLimit(pagination);
-        Integer count = articleService.selectCountByTitle(pagination);
+        List<Article> articleList = articleManagerService.selectArticleByLimit(pagination);
+        Integer count = articleManagerService.selectCountByTitle(pagination);
         map.put("code","0");
         map.put("data",articleList);
         map.put("count",count);
@@ -84,23 +84,24 @@ public class ArticleController {
     public ModelAndView insert(Article article){
         ModelAndView mv=new ModelAndView();
         //判断文章标题是否重复
-        Article articleByTitle = articleService.selectArticleByTitle(article.getTitle());
+        Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         if(articleByTitle != null){
             mv.addObject("flag","true");
             mv.addObject("msg","文章标题已存在");
             mv.setViewName("admin/articleManager");
+
             return mv;
         }
         article.setArticleId(IDUtil.getUUID());
-        Integer flag = articleService.addArticle(article);
+        Integer flag = articleManagerService.addArticle(article);
         if(flag==1){
             mv.addObject("flag","true");
-            mv.addObject("msg","修改成功");
+            mv.addObject("msg","添加成功");
             mv.setViewName("admin/articleManager");
             return mv;
         }else {
             mv.addObject("flag","true");
-            mv.addObject("msg","修改失败");
+            mv.addObject("msg","添加失败");
             mv.setViewName("admin/articleManager");
             return mv;
         }
@@ -116,8 +117,8 @@ public class ArticleController {
     public ModelAndView update(Article article, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         //判断文章是否更改，更改后判断更改后文章是否存在
-        Article articleByTitle = articleService.selectArticleByTitle(article.getTitle());
-        Article articleByArticleId = articleService.selectArticleByArticleId(article.getArticleId());
+        Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
+        Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
         if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","文章已存在");
@@ -125,15 +126,15 @@ public class ArticleController {
             return mv;
         }
         //修改文章信息
-        Integer flag = articleService.updateArticleByArticleId(article);
+        Integer flag = articleManagerService.updateArticleByArticleId(article);
         if(flag == 1){
             mv.addObject("flag","true");
-            mv.addObject("msg","添加成功");
+            mv.addObject("msg","修改成功");
             mv.setViewName("admin/articleManager");
             return mv;
         }else {
             mv.addObject("flag","true");
-            mv.addObject("msg","添加失败");
+            mv.addObject("msg","修改失败");
             mv.setViewName("admin/articleManager");
             return mv;
         }
@@ -149,8 +150,8 @@ public class ArticleController {
     @ResponseBody
     public String deleteArticleByArticleId(String articleId,HttpServletRequest request){
         //获取删除文章id
-        Article articleByArticleId = articleService.selectArticleByArticleId(articleId);
-        articleService.deleteArticleByArticleId(articleId);
+        Article articleByArticleId = articleManagerService.selectArticleByArticleId(articleId);
+        articleManagerService.deleteArticleByArticleId(articleId);
         //日志记录删除文章
         logUtil.setLog(request,"删除文章标题为"+articleByArticleId.getTitle()+"的信息");
 

@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community.articleDetails.mapper;
+package com.zlk.zlkproject.community.articleHot.mapper;
 
 import com.zlk.zlkproject.entity.Article;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,12 +7,12 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleDetailsMapper
+ * @program: ArticleHotMapper
  * @description:
  * @date 2019/11/19 17:27
  */
 @Mapper
-public interface ArticleDetailsMapper {
+public interface ArticleHotMapper {
     /**
      * 根据文章标题倒序返回热门文章标题
      * @param article

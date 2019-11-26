@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community.article.mapper;
+package com.zlk.zlkproject.community.articleManager.mapper;
 
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Article;
@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2019/11/22 14:22
  */
 @Mapper
-public interface ArticleMapper {
+public interface ArticleManagerMapper {
     /**
      * 新增文章
      * @param article

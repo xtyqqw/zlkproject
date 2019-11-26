@@ -1,13 +1,12 @@
-package com.zlk.zlkproject.community.article.service.impl;
+package com.zlk.zlkproject.community.articleManager.service.impl;
 
 import com.zlk.zlkproject.admin.util.Pagination;
-import com.zlk.zlkproject.community.article.mapper.ArticleMapper;
-import com.zlk.zlkproject.community.article.service.ArticleService;
+import com.zlk.zlkproject.community.articleManager.mapper.ArticleManagerMapper;
+import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService;
 import com.zlk.zlkproject.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,9 +16,9 @@ import java.util.List;
  * @date 2019/11/23 9:07
  */
 @Service
-public class ArticleServiceImpl implements ArticleService {
-    @Resource
-    private ArticleMapper articleMapper;
+public class ArticleManagerServiceImpl implements ArticleManagerService {
+    @Autowired
+    private ArticleManagerMapper articleManagerMapperMapper;
 
     /**
      * 新增文章
@@ -28,7 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Integer addArticle(Article article) {
-        return articleMapper.addArticle(article);
+        return articleManagerMapperMapper.addArticle(article);
     }
 
     /**
@@ -38,7 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Integer deleteArticleByArticleId(String articleId) {
-        return articleMapper.deleteArticleByArticleId(articleId);
+        return articleManagerMapperMapper.deleteArticleByArticleId(articleId);
     }
 
     /**
@@ -48,7 +47,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Integer updateArticleByArticleId(Article article) {
-        return articleMapper.updateArticleByArticleId(article);
+        return articleManagerMapperMapper.updateArticleByArticleId(article);
     }
 
     /**
@@ -58,7 +57,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article selectArticleByTitle(String title) {
-        return articleMapper.selectArticleByTitle(title);
+        return articleManagerMapperMapper.selectArticleByTitle(title);
     }
 
     /**
@@ -68,7 +67,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Integer selectCountByTitle(Pagination pagination) {
-        return articleMapper.selectCountByTitle(pagination);
+        return articleManagerMapperMapper.selectCountByTitle(pagination);
     }
 
     /**
@@ -78,7 +77,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article selectArticleByArticleId(String articleId) {
-        return articleMapper.selectArticleByArticleId(articleId);
+        return articleManagerMapperMapper.selectArticleByArticleId(articleId);
     }
 
     @Override
@@ -90,6 +89,6 @@ public class ArticleServiceImpl implements ArticleService {
             pagination.setPage(1);
         }
         pagination.setStartPage((pagination.getPage() - 1) * pagination.getLimit());
-        return articleMapper.selectArticleByLimit(pagination);
+        return articleManagerMapperMapper.selectArticleByLimit(pagination);
     }
 }

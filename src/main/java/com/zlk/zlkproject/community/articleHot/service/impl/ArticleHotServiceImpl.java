@@ -1,7 +1,7 @@
-package com.zlk.zlkproject.community.articleDetails.service.impl;
+package com.zlk.zlkproject.community.articleHot.service.impl;
 
-import com.zlk.zlkproject.community.articleDetails.mapper.ArticleDetailsMapper;
-import com.zlk.zlkproject.community.articleDetails.service.ArticleDetailsService;
+import com.zlk.zlkproject.community.articleHot.mapper.ArticleHotMapper;
+import com.zlk.zlkproject.community.articleHot.service.ArticleHotService;
 import com.zlk.zlkproject.entity.Article;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,15 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleDetailsServiceImpl
+ * @program: ArticleHotServiceImpl
  * @description:
  * @date 2019/11/19 20:17
  */
 @Service
-public class ArticleDetailsServiceImpl implements ArticleDetailsService {
+public class ArticleHotServiceImpl implements ArticleHotService {
 
     @Resource
-    private ArticleDetailsMapper articleDetailsMapper;
+    private ArticleHotMapper articleHotMapper;
 
     /**
      * 通过标题查询相对应的文章内容
@@ -27,7 +27,7 @@ public class ArticleDetailsServiceImpl implements ArticleDetailsService {
      */
     @Override
     public List<Article> selectTitleByArticle(Article article){
-        return articleDetailsMapper.selectTitleByArticle(article);
+        return articleHotMapper.selectTitleByArticle(article);
     }
 
     /**
@@ -37,7 +37,7 @@ public class ArticleDetailsServiceImpl implements ArticleDetailsService {
      */
     @Override
     public List<Article> findTitleByBrowseCount(Article article) {
-        return articleDetailsMapper.findTitleByBrowseCount(article);
+        return articleHotMapper.findTitleByBrowseCount(article);
     }
 
     /**
@@ -47,7 +47,7 @@ public class ArticleDetailsServiceImpl implements ArticleDetailsService {
      */
     @Override
     public List<Article> selectAll(Article article) {
-        return articleDetailsMapper.selectAll(article);
+        return articleHotMapper.selectAll(article);
     }
 
 }

@@ -2,12 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zlk.zlkproject.community.articleDetails.mapper.ArticleDetailsMapper">
+<mapper namespace="com.zlk.zlkproject.community.articleHot.mapper.ArticleHotMapper">
     <resultMap id="articleEntityMap" type="com.zlk.zlkproject.entity.Article">
         <id property="articleId" column="article_id" javaType="java.lang.String"></id>
         <result property="title" column="title" javaType="java.lang.String"></result>
-        <result property="typeName" column="type_name" javaType="java.lang.String"></result>
-        <result property="tagName" column="tag_name" javaType="java.lang.String"></result>
         <result property="browseCount" column="browse_count" javaType="java.lang.Integer"></result>
         <result property="commentCount" column="comment_count" javaType="java.lang.Integer"></result>
         <result property="createTime" column="create_time" javaType="java.util.Date"></result>
@@ -16,9 +14,6 @@
         <result property="figuresReal" column="figures_real" javaType="java.lang.String"></result>
         <result property="articleDigest" column="article_digest" javaType="java.lang.String"></result>
         <result property="articleContent" column="article_content" javaType="java.lang.String"></result>
-        <result property="userImg" column="user_img" javaType="java.lang.String"></result>
-        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"></result>
-        <result property="userName" column="user_name" javaType="java.lang.String"></result>
         <result property="zanCount" column="zan_count" javaType="java.lang.Integer"></result>
         <result property="caiCount" column="cai_count" javaType="java.lang.Integer"></result>
         <result property="inform" column="inform" javaType="java.lang.String"></result>

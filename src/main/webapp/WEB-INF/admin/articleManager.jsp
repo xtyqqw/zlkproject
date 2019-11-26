@@ -9,7 +9,7 @@
     <style type="text/css">
         .search {
             float: right;
-            width: 450px;
+            width: 410px;
         }
 
         .hint {
@@ -51,17 +51,17 @@
 <div id="editForm" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/update" class="form">
         <input type="hidden" name="articleId" id="articleId"><br>
-        文章标题 <input type="text" required placeholder="请输入文章标题" name="title"><br>
-        浏览数 <input type="text" required placeholder="请输入浏览数" name="browseCount"><br>
-        评论数 <input type="text" required placeholder="请输入浏览数" name="commentCount"><br>
-        更新时间 <input type="text" required placeholder="请输入更新时间" id="updateTime" name="updateTime"><br>
-        插图相对路径 <input type="text" required placeholder="请输入插图相对路径" name="figures"><br>
-        插图绝对路径 <input type="text" required placeholder="请输入插图绝对路径" name="figuresReal"><br>
-        文章摘要 <input type="text" required placeholder="请输入文章摘要" name="articleDigest"><br>
-        文章内容 <input type="text" required placeholder="请输入文章内容" name="articleContent"><br>
-        赞数 <input type="text" required placeholder="请输入赞数" name="zanCount"><br>
-        踩数 <input type="text" required placeholder="请输入踩数" name="caiCount"><br>
-        举报 <input type="text" required placeholder="请输入举报" name="inform"><br>
+        文章标题 <input type="text" required id="title" placeholder="请输入文章标题" name="title"><br>
+        浏览数 <input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount"><br>
+        评论数 <input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount"><br>
+        更新时间 <input type="text" required id="updateTime" placeholder="请输入更新时间" id="updateTime" name="updateTime"><br>
+        插图相对路径 <input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures"><br>
+        插图绝对路径 <input type="text" required id="figuresReal" placeholder="请输入插图绝对路径" name="figuresReal"><br>
+        文章摘要 <input type="text" required id="articleDigest" placeholder="请输入文章摘要" name="articleDigest"><br>
+        文章内容 <input type="text" required id="articleContent" placeholder="请输入文章内容" name="articleContent"><br>
+        赞数 <input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"><br>
+        踩数 <input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount"><br>
+        举报 <input type="text" required id="inform" placeholder="请输入举报" name="inform"><br>
     </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
@@ -199,7 +199,6 @@
                 $("#title").val(data.title);
                 $("#browseCount").val(data.browseCount);
                 $("#commentCount").val(data.commentCount);
-                $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
                 $("#figuresReal").val(data.figuresReal);

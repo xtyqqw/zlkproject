@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community.article.service;
+package com.zlk.zlkproject.community.articleManager.service;
 
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Article;
@@ -11,7 +11,7 @@ import java.util.List;
  * @description:
  * @date 2019/11/22 18:01
  */
-public interface ArticleService {
+public interface ArticleManagerService {
     /**
      * 新增文章
      * @param article

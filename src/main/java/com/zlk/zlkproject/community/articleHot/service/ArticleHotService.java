@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community.articleDetails.service;
+package com.zlk.zlkproject.community.articleHot.service;
 
 import com.zlk.zlkproject.entity.Article;
 
@@ -6,11 +6,11 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleService
+ * @program: ArticleHotService
  * @description:
  * @date 2019/11/19 20:11
  */
-public interface ArticleDetailsService {
+public interface ArticleHotService {
     /**
      * 根据文章标题倒序返回热门文章标题
      * @param article

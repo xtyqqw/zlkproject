@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zlk.zlkproject.community.article.mapper.ArticleMapper">
+<mapper namespace="com.zlk.zlkproject.community.articleManager.mapper.ArticleManagerMapper">
     <resultMap id="articleEntityMap" type="com.zlk.zlkproject.entity.Article">
         <id property="articleId" column="article_id" javaType="java.lang.String"></id>
         <result property="title" column="title" javaType="java.lang.String"></result>
@@ -22,7 +22,7 @@
     <insert id="addArticle" parameterType="com.zlk.zlkproject.entity.Article">
         insert into article
         <trim prefix="(" suffix=") " suffixOverrides=",">
-            article_id,title,browse_count,comment_count,create_time,update_time,figures,figures_real,article_digest,article_content,zan_count,caiCount,inform,
+            article_id,title,browse_count,comment_count,create_time,figures,figures_real,article_digest,article_content,zan_count,cai_count,inform,
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -44,7 +44,7 @@
             <if test="commentCount!=null and commentCount!='' ">
                 comment_count=#{commentCount},
             </if>
-            <if test="updateTime!=null and updateTime!='' ">
+            <if test="updateTime!=null">
                 update_time=#{updateTime},
             </if>
             <if test="figures!=null and figures!='' ">
@@ -81,7 +81,7 @@
             where title like CONCAT('%',#{condition},'%')
         </if>
     </select>
-    <select id="selectArticleByArticleId" parameterType="java.lang.String" resultType="articleEntityMap">
+    <select id="selectArticleByArticleId" parameterType="java.lang.String" resultMap="articleEntityMap">
         select * from article where article_id=#{articleId}
     </select>
     <select id="selectArticleByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="articleEntityMap">
