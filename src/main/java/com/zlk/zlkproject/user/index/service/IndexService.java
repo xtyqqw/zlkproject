@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.user.index.service;
 
-import com.zlk.zlkproject.entity.Courses;
-import com.zlk.zlkproject.entity.Pagination;
-import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.entity.*;
 
 import java.util.List;
 
@@ -44,4 +42,21 @@ public interface IndexService {
      * @return List<Courses>
      */
     List<Courses> findCoursesList(Pagination pagination);
+    /**
+     *查询所有方向
+     * @return List<Type>
+     */
+    List<Type> findTypeAll();
+    /**
+     *根据方向ID查询包含类别
+     * @param tagTypeId
+     * @return List<Tag>
+     */
+    List<Tag> findTagsById(Integer tagTypeId);
+    /**
+     *根据方向ID查询课程
+     * @param typeId
+     * @return List<Courses>
+     */
+    List<Courses> findCoursesByTypeId(Integer typeId);
 }
