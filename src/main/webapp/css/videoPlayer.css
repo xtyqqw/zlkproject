@@ -5,9 +5,11 @@
 
 #div_video_all{
     width: 100%;
-    height: 500px;
-    background-color: #009f95;
+    height: 400px;
+    background-color: #2F4056;
     margin: auto;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .layui-col-md2{
@@ -24,6 +26,8 @@
     height: 100%;
     text-align: center;
     float: left;
+    border-radius: 5px;
+    overflow: hidden;
 }
 .l_func_icon{
     background-color: black;
@@ -32,6 +36,9 @@
     color: white;
     text-align: center;
     margin: 30px auto;
+    padding: 4px 0 0 0;
+    border-radius: 5px;
+    overflow: hidden;
 }
 .iconfont{
     font-size: 26px !important;
@@ -49,6 +56,8 @@
     height: 100%;
     margin-left: 1%;
     position: relative;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 #video_row{
@@ -114,6 +123,32 @@
 }
 /*目录 end*/
 
+/*-----stuNote begin-----*/
+#div_stuNote{
+    width: 50%;
+    height: 100%;
+    background-color: #009f95;
+    border-radius: 5px;
+    z-index: 10;
+    position: relative;
+    left: 0;
+    top: 0;
+    display: none;
+}
+#stuNote_title{
+    width: 60px;
+    height: 26px;
+    background-color: #eb7350;
+    font-size: 20px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+#stuNote_closeBtn{
+
+}
+/*-----stuNote end-----*/
+
 /*播放器 begin*/
 #div_all{
     width: 100%;
@@ -150,12 +185,21 @@
     left: 0;
     cursor: pointer !important;
 }
+#pg_cache{
+    width: 0;
+    height: 8px;
+    background-color: #2D93CA;
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer !important;
+}
 #pg_bar{
     width: 0;
     height: 8px;
     background-color: #5FB878;
     position: relative;
-    top: 0;
+    bottom: 8px;
     left: 0;
     cursor: pointer !important;
 }
@@ -166,7 +210,7 @@
     background-color: #ffffff;
     position: relative;
     left: 0;
-    bottom: 12px;
+    bottom: 20px;
     cursor: pointer !important;
 }
 .div_btn{
@@ -279,4 +323,36 @@
     text-align: center;
     padding: 5px 0 0 0;
 }
-/*播放器 end*/
+/*清晰度 begin-------------------------------------------------------------------------------------------------*/
+#sharpness_btn{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    border: solid 2px white;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 3px 0 0 0;
+}
+#sharpness_option_box{
+    width: 54px;
+    height: 56px;
+    background-color: #0C0C0C;
+    border-radius: 5px;
+    position: relative;
+    bottom: 110px;
+    display: none;
+}
+.sharpness_option{
+    width: 100%;
+    height: 23px;
+    background-color: #0C0C0C;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px 0 0 0;
+}
+/*清晰度 end---------------------------------------------------------------------------------------------------*/
+
+/*播放器 end-----------------------------------------------------------------------------------------------------------*/

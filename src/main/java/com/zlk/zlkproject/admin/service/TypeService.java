@@ -69,4 +69,13 @@ public interface TypeService {
      * @return java.lang.Integer
      **/
     Integer deleteTypeByTypeId(Integer typeId);
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询全部方向名称
+     * @Date 11:06 2019/11/23
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Type>
+     **/
+    List<Type> findAllTypeName();
 }

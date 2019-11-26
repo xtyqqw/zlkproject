@@ -6,7 +6,7 @@
     <resultMap type="com.zlk.zlkproject.user.entity.Notes" id="notesMap">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
@@ -15,7 +15,7 @@
     </resultMap>
     <!--查询个人笔记-->
     <select id="selectNotes" resultMap="notesMap" parameterType="com.zlk.zlkproject.user.entity.Notes">
-          select * from stu_note order by sn_id desc
+          select * from stu_note where user_id=#{userId} order by date desc
     </select>
     <!--修改个人笔记-->
     <update id="updateNotes" parameterType="com.zlk.zlkproject.user.entity.Notes">

@@ -135,7 +135,8 @@
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/learnrecord"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-form"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -196,7 +197,7 @@
     <div class="signature">
         <!-- 头像 -->
         <div class="headimg">
-            <img src="//t.cn/RCzsdCq" class="headerimg">
+            <img src="/img/headimg.jpg" class="headerimg">
         </div>
         <!-- 昵称 -->
         <div class="petname">
@@ -211,9 +212,10 @@
 
 <!-- 主体内容 -->
 <iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+<%--iframe自适应高度--%>
 <script type="text/javascript">
-    $(window.parent.document).find("#aboutus-iframe").load(function(){
-        var main = $(window.parent.document).find("#aboutus-iframe");
+    $(window.parent.document).find("#personal-iframe").load(function(){
+        var main = $(window.parent.document).find("#personal-iframe");
         var thisheight = $(document).height()+30;
         main.height(thisheight);
     });

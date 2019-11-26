@@ -26,8 +26,21 @@
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
         <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
     </resultMap>
-    <!--根据id降序查询最新一条数据-->
-    <select id="selectDuration" resultMap="durstionMap">
-        select * from user order by user_id desc limit 0,1
+    <!--根据id查询学习表-->
+    <select id="selectDuration" resultMap="durstionMap" parameterType="java.lang.String">
+        select * from user where user_id=#{userId}
+    </select>
+    <!--查询用户总数-->
+    <select id="findUser" resultType="java.lang.Integer">
+        select count(*) from user
+    </select>
+    <!--根据ID查询学习时长排序后用户的排名-->
+    <select id="findUserById" parameterType="com.zlk.zlkproject.entity.User" resultType="java.lang.Integer">
+        SELECT b.rownum FROM
+        (
+        SELECT t.*, @rownum := @rownum + 1 AS rownum
+        FROM (SELECT @rownum := 0) r,
+        (SELECT * FROM user ORDER BY user_all_time DESC) AS t
+        ) AS b WHERE b.user_id = #{userId};
     </select>
 </mapper>
