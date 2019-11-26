@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
-<<<<<<< HEAD
  * @program: zlkproject
  * @description: 控制类
  * @author: zyx
@@ -26,8 +25,12 @@ public class controller {
     }
 
     @RequestMapping(value = "/HomePage")
-    public String toLogin() throws Exception {//跳转登录页页面的方法
+    public String toLogin() throws Exception {//跳转项目页
         return "view/courseHomePage";
+    }
+    @RequestMapping(value = "/FAQ")
+    public String toFAQ() throws Exception {//跳转登录页页面的方法
+        return "view/FAQ";
     }
 
 

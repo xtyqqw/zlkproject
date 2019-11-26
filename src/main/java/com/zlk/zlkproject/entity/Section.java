@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: zlkproject
@@ -28,6 +29,8 @@ public class Section {
     private Integer sectionTime;
     /**小节序号 对应字段section_num*/
     private Integer sectionNum;
+
+    private List<UserSection> userSectionList;
 
     public Section() {
     }

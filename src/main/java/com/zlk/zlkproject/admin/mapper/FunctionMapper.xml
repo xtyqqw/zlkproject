@@ -8,10 +8,26 @@
         <result property="name" column="function_name" javaType="java.lang.String"/>
         <result property="parentId" column="parent_id" javaType="java.lang.Integer"/>
         <result property="url" column="url" javaType="java.lang.String"/>
+        <result property="comment" column="comment" javaType="java.lang.String"/>
+        <!--<collection property="children" ofType="com.zlk.zlkproject.entity.Function">
+            <id property="functionId" column="a" javaType="java.lang.Integer"/>
+            <result property="name" column="b" javaType="java.lang.String"/>
+            <result property="parentId" column="c" javaType="java.lang.Integer"/>
+            <result property="url" column="d" javaType="java.lang.String"/>
+        </collection>-->
     </resultMap>
     <select id="findFunctionByAdminName" parameterType="java.lang.String" resultMap="functionEntityMap">
         select distinct f.* from roles r,roles_functions rf,functions f
         where r.role_id = rf.roles_id and f.function_id=rf.functions_id
         and r.role_id in (select r.role_id from admins a,roles r,admins_roles ar where a.admin_id=ar.admins_id and r.role_id=ar.roles_id and a.admin_name=#{adminName});
     </select>
+    <select id="functionManager" resultMap="functionEntityMap">
+        select * from functions
+    </select>
+    <insert id="addFunction" parameterType="com.zlk.zlkproject.entity.Function">
+        insert into functions(function_name,parent_id,url,comment) values (#{name},#{parentId},#{url},#{comment})
+    </insert>
+    <delete id="deleteFunction" parameterType="java.lang.String">
+        delete from functions where function_id = #{functionId}
+    </delete>
 </mapper>

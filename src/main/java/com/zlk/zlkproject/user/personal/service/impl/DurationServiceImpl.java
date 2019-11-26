@@ -21,5 +21,13 @@ public class DurationServiceImpl implements DurationService {
         return durationMapper.selectDuration(user);
 
     }
+    @Override
+    public Integer findUser(){
+        return durationMapper.findUser();
+    }
+    @Override
+    public Integer findUserById(String userId){
+        return durationMapper.findUserById(userId);
+    }
 
 }

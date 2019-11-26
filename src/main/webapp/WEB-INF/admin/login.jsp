@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="<%=request.getContextPath()%>/css/base.css" rel="stylesheet" type="text/css">
-    <link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet" type="text/css">
+    <link href="<%=request.getContextPath()%>/css/admin/base.css" rel="stylesheet" type="text/css">
+    <link href="<%=request.getContextPath()%>/css/admin/login.css" rel="stylesheet" type="text/css">
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 </head>

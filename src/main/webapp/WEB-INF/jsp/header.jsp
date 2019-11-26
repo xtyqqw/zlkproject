@@ -129,7 +129,7 @@
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
-        <c:if test="">
+        <c:if test="true">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
                     <li class="layui-nav-item" lay-unselect="">
@@ -150,8 +150,7 @@
     <%--鼠标移入移出头像事件--%>
     <script>
         layui.use('element', function(){
-            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
+            var element = layui.element;
             //监听导航点击
             element.on('nav(demo)', function(elem){
                 //console.log(elem)

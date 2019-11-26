@@ -15,7 +15,7 @@ public class Arith {
     }
 
 
-    public static Integer add(Integer x) {
+    public static Integer ride(Integer x) {
         if (x!=null) {
             Integer y = (x * 5)+ 3;
             return y;
@@ -23,7 +23,7 @@ public class Arith {
             return null;
         }
     }
-    public static Integer acc(Integer c){
+    public static Integer plus(Integer c){
         if(c != null){
             Integer a = (c + 1) * 3;
             return a;
@@ -31,7 +31,7 @@ public class Arith {
             return null;
         }
     }
-    public static Integer abb(Integer b,Integer q){
+    public static Integer divide(Integer b,Integer q){
         /*除法*/
 
         if(q!=0){

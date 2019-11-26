@@ -21,11 +21,19 @@ public class PersonalController {
         return "view/personal/personal";
     }
     /**
-     * 学习看板
+     * 学习记录
      * @return
      */
-    @RequestMapping("/learnlook")
+    @RequestMapping("/learnrecord")
     public String learnlook(){
-        return "view/personal/learnlook";
+        return "view/personal/learnrecord";
+    }
+    /**
+     * 我的关注
+     * @return
+     */
+    @RequestMapping("/myfocus")
+    public String myfocus(){
+        return "view/personal/myfocus";
     }
 }

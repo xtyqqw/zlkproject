@@ -12,11 +12,14 @@
     <title>VideoPlayer</title>
     <link rel="stylesheet" href="/css/videoPlayer.css" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/js/videoPlayer.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
+    <%--引入wangEditor富文本编辑器--%>
+    <script type="text/javascript" src="/js/wangEditor.js"></script>
+    <script type="text/javascript" src="/js/player.js"></script>
+    <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
     <div class="layui-container">
@@ -43,15 +46,16 @@
                         </div>
                     </div>
                     <div id="r_video">
-                        <%--播放器 begin---------------------------------------------------------------------------------%>
+<%--------------------------播放器 begin ------------------------------------------------------------------------------%>
                         <div id="div_all">
                             <div id="div_video">
                                 <video id="video1" width="100%" height="100%">
-                                    <source id="video_src" src="/img/ckin.mp4" type="video/mp4" />
+                                    <source id="video_src" src="http://47.98.183.4:8888/group1/M00/00/00/rBBUH13XjVyAVYH-AxDnTtIGlSU552.mp4" type="video/mp4" />
                                 </video>
                             </div>
                             <div id="div_controller">
                                 <div id="pg_bg">
+                                    <div id="pg_cache"></div>
                                     <div id="pg_bar"></div>
                                     <div id="pg_btn"></div>
                                 </div>
@@ -61,11 +65,18 @@
                                 <div id="div_time" class="div_btn">
                                     <div id="current_time" class="time">00:00:00</div>
                                     <div id="mid" class="time">/</div>
-                                    <div id="total_time" class="time"></div>
+                                    <div id="total_time" class="time">--:--:--</div>
                                 </div>
                                 <div class="div_btn float_right" style="padding: 2px 0 0 0;">
                                     <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
                                     <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+                                </div>
+                                <div id="div_sharpness" class="div_btn float_right">
+                                    <div id="sharpness_btn" class="enableClk">普清</div>
+                                    <div id="sharpness_option_box">
+                                        <div class="sharpness_option enableClk">超清</div>
+                                        <div class="sharpness_option enableClk">普清</div>
+                                    </div>
                                 </div>
                                 <div id="div_speed" class="div_btn float_right">
                                     <div id="speed_btn" class="enableClk">1.0x</div>
@@ -91,18 +102,67 @@
                             </div>
                         </div>
                         <%--播放器 end---------------------------------------------------------------------------------%>
-
+                        <%--功能栏目录--%>
                         <div style="display: none" id="mulu_div">
 
+                        </div>
+                        <%--功能栏问答--%>
+                        <div style="display: none" id="wenda_div">
+                            <div class="editor_title"><span>提问题</span></div>
+                            <div id="editor">
+                                <div id="toolbar_div" class="toolbar"></div>
+                                <div id="text_div" class="text"></div>
+                                <div id="btn_div">
+                                    <button type="button" id="btn_submit_wenda">提交</button>
+                                    <button type="reset" id="btn_reset_wenda">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                        <%--功能栏学生笔记--%>
+                        <div id="div_stuNote">
+                            <div id="stuNote_title">记笔记</div>
+                            <div id="stuNote_closeBtn"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="layui-col-md2"></div>
         </div>
-        <div class="layui-row" id="tab_row">
 
+        <div class="layui-row FS_hidden" id="tab_row">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md8 layui-tab">
+                <div class="layui-tab-title">
+                    <li class="layui-this li_show">讲师笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生评论</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生问答</li>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" id="lay_flow1">
+                        <div>
+                            <span></span>
+                            <div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容而</div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容三</div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容四</div>
+                </div>
+            </div>
+            <div class="layui-col-md2"></div>
         </div>
     </div>
+<%--    <div style="clear: both">--%>
+<%--        <jsp:include page="../jsp/footer.jsp"></jsp:include>--%>
+<%--    </div>--%>
 </body>
 </html>

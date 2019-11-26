@@ -36,7 +36,7 @@
          height: 500px;
          position: relative;
          left: 200px;
-         top: 35px;
+         top: 30px;
      }
 
      .layui-this{
@@ -82,13 +82,13 @@
      .h64{
          position: relative;
          left: 10px;
-         top: -20px;
+         top: -19px;
          color: #ff4413;
 
      }
      .h65{
          position: relative;
-         left: 60px;
+         left: 40px;
          top: -34px;
          color: #807d7c;
      }
@@ -224,6 +224,29 @@
          float: left;
 
      }
+     .a1{
+         position: relative;
+         font-size:15px;
+         font-weight:bold
+        }
+     .a2{
+         position: relative;
+         top: 23px;
+         font-size:15px;
+         font-weight:bold;
+     }
+     .a3{
+         position: relative;
+         top: 43px;
+         font-size:15px;
+         font-weight:bold;
+     }
+     .a4{
+         position: relative;
+         top: 63px;
+         font-size:15px;
+         font-weight:bold;
+     }
 
     </style>
 
@@ -240,10 +263,10 @@
     <div class="layui-tab-content" >
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
-                <a>JAVA</a><br>
-                <a>HTML</a><br>
-                <a>CSS</a><br>
-                <a>JS</a><br>
+                <a class="a1">JAVA</a><br>
+                <a class="a2">HTML</a><br>
+                <a class="a3">CSS</a><br>
+                <a class    ="a4">JS</a><br>
                 <p class="xingxing"></p>
 
             </div>
@@ -311,11 +334,13 @@
 
  <%--瀑布流--%>
 <script>
-    layui.use('flow', function(){
+    layui.use(['flow'], function(){
         var flow = layui.flow;
+
   flow.load({
 elem: '#LAY_demo2' //流加载容器
 ,isAuto: false
+,end: "<p>没有更多了</p>"
 ,done: function(page, next){ //加载下一页
 //模拟插入
 setTimeout(function(){
@@ -336,7 +361,7 @@ $.ajax({
                     '<li class="li1">' +
                     '<dl class="dl1">' +
                     '<dt class="dt1">' +
-                    '<img id="img1" src="../../img/courses.png" style="height: 90px;width: 213px ">' +
+                    '<img id="img1" src="'+courses.introducePic+'" style="height: 90px;width: 213px ">' +
                     '</dt>' +
                     '<dd class="dd2">' +
                     '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
@@ -369,7 +394,7 @@ $.ajax({
                     '<h6 class="h62" id="zhang">'+courses.chapterNum+'章</h6>' +
                     '<h6 class="h63" id="jie">'+courses.sectionNum+'节</h6>' +
                     '<h6 class="h64" id="jin">￥'+courses.price+'</h6>' +
-                    '<h6 class="h65">上次学习时间</h6>' +
+                    '<h6 class="h65">上次学习时间：2019-11-22</h6>' +
                     '<input class="but1" type="button" onclick=window.open("https://www.baidu.com") value="查看详情"/>' +
                     '</dd>' +
                     '</dl>' +
@@ -379,7 +404,7 @@ $.ajax({
 
                 );
         })
-                next(lis.join(''), page < 6); //假设总页数为 6
+                next(lis.join(''), page < 2); //假设总页数为 6
     }
 });
 }, 500);

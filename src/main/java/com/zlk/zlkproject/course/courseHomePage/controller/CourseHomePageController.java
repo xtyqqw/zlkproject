@@ -49,4 +49,15 @@ public class CourseHomePageController {
         return map;
     }
 
+    @RequestMapping(value = "/findUserCoursesList")
+    @ResponseBody
+    public Map<String,Object> findUserCoursesList(Pagination pagination)throws Exception{
+
+        List<Courses> userCoursesList=courseHomePageService.findCoursesList(pagination);
+        Map<String,Object> map=new HashMap<>();
+        map.put("userCoursesList",userCoursesList);
+        return map;
+
+    }
+
 }
