@@ -4,16 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
 /**
  * @program: zlkproject
- * @description: UserSection实体类
- * @author: hry
- * @create: 2019/11/25 14:08
- **/
+ * @description: 用户与小节学习关联类
+ * @author: zyx
+ * @create: 2019-11-22 15:25
+ */
 @Getter
 @Setter
 @ToString
 public class UserSection {
+
     /**用户id 主键 对应字段user_id*/
     private Integer userId;
     /**小节id 主键 对应字段section_id*/

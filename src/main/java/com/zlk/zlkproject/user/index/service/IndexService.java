@@ -1,7 +1,9 @@
 package com.zlk.zlkproject.user.index.service;
 
 import com.zlk.zlkproject.entity.*;
+import com.zlk.zlkproject.user.entity.Signin;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,4 +61,34 @@ public interface IndexService {
      * @return List<Courses>
      */
     List<Courses> findCoursesByTypeId(Integer typeId);
+    /**
+     *根据今天日期返回day
+     * @param today
+     * @return String
+     */
+    String findDayByDate(Date today);
+    /**
+     *根据用户ID查询上次签到日期
+     * @param userId
+     * @return String
+     */
+    String findDayByUserId(String userId);
+    /**
+     *根据用户ID查询连续签到次数
+     * @param userId
+     * @return Integer
+     */
+    Signin findSigninByUserId(String userId);
+    /**
+     *签到
+     * @param signin
+     * @return Integer
+     */
+    Integer signByUserId(Signin signin);
+    /**
+     *首次签到
+     * @param signin
+     * @return Integer
+     */
+    Integer signFirst(Signin signin);
 }

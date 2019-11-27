@@ -25,20 +25,22 @@ public class ArticleTagController {
     @Autowired
     private ArticleTagService articleTagService;
 
-    /*@RequestMapping(value = "/at")
-    public String at(){
-        return "view/articleTag";
-    }*/
-
+    /**
+     * @description: 提供社区页面展示标签接口
+     * @param request
+     * @param tag
+     * @return: org.springframework.web.servlet.ModelAndView
+     * @author: QianKeQin
+     * @date: 2019/11/23 11:42
+     */
     @RequestMapping(value = "/community/tag")
     public ModelAndView getAllTag(HttpServletRequest request, Tag tag){
         ModelAndView mv=new ModelAndView();
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        System.out.println("tagList="+tagList);
-        mv.setViewName("view/articleTag");
+        //System.out.println("tagList="+tagList);
+        mv.setViewName("view/community/articleTag");
         return mv;
     }
-
 
 }

@@ -26,14 +26,19 @@ public class ChapterController {
     @Autowired
     private ChapterService chapterService;
 
+    /**
+     *  查找所有目录信息
+     *@method findChapters
+     *@params [coursesId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/11/22  15:06
+     */
     @RequestMapping(value = "/findChapters")
     @ResponseBody
     public Map<String,Object> findChapters(Integer coursesId)throws Exception{
         coursesId = 1;
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
-        for (Chapter chapter : chapters) {
-            System.out.println(chapter.getSectionList());
-        }
         Map<String,Object> map = new HashMap<>();
         map.put("chapters",chapters);
         return map;

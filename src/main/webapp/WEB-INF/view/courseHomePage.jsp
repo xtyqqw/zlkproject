@@ -334,8 +334,9 @@
 
  <%--瀑布流--%>
 <script>
-    layui.use('flow', function(){
+    layui.use(['flow'], function(){
         var flow = layui.flow;
+
   flow.load({
 elem: '#LAY_demo2' //流加载容器
 ,isAuto: false

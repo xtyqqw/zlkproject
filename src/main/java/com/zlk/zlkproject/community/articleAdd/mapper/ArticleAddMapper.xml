@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.articleAdd.mapper.ArticleAddMapper">
+    <resultMap id="articleAddEntityMap" type="com.zlk.zlkproject.entity.Article">
+        <id column="article_id" property="articleId"/>
+        <result column="title" property="title"/>
+        <result column="browse_count" property="browseCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="figures" property="figures"/>
+        <result column="figures_real" property="figuresReal"/>
+        <result column="article_digest" property="articleDigest"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="zan_count" property="zanCount"/>
+        <result column="cai_count" property="caiCount"/>
+        <result column="inform" property="inform"/>
+        <result column="create_article_type" property="createArticleType"/>
+        <result column="article_set_top" property="articleSetTop"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="type_name" property="typeName"/>
+        <association property="author" javaType="com.zlk.zlkproject.entity.User">
+            <id column="user_id" property="userId"/>
+            <result column="user_realname" property="userRealname"/>
+            <result column="user_img" property="userImg"/>
+        </association>
+        <!--<collection property="" column="" select=""></collection>-->
+    </resultMap>
+    <insert id="createArticle" parameterType="com.zlk.zlkproject.entity.Article" useGeneratedKeys="true" keyProperty="article_id">
+        insert into article (article_id,title,create_time,figures,figures_real,article_digest,article_content,create_article_type,tag_name,type_name)
+        values (#{articleId},#{title},#{createTime},#{figures},#{figuresReal},#{articleDigest},#{articleContent},#{createArticleType},#{tagName},#{typeName})
+    </insert>
+    <insert id="setArticleTags" parameterType="java.lang.Integer">
+        insert into article_tag (tag_id,article_id)
+        values (#{tagId},#{articleId})
+    </insert>
+</mapper>
