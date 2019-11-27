@@ -23,6 +23,7 @@ public class SignServiceImpl implements SignService {
         user.setUserId(UUIDUtil.getUUID());
         String userPwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
         user.setUserPwd(userPwd);
+        user.setUserRealname("用户"+user.getPhonenum());
         return signMapper.signup(user);
     }
 
