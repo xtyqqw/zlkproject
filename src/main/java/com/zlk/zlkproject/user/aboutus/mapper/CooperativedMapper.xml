@@ -26,4 +26,9 @@
     <select id="findHelp" resultMap="helpMap">
         select * from help limit 0,1
     </select>
+
+    <!--查询友情链接-->
+    <select id="findFriendsUrl" resultType="com.zlk.zlkproject.entity.Friends">
+        select url,name from friendurl
+    </select>
 </mapper>

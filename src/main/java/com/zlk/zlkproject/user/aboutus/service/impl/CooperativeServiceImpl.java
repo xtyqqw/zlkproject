@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.aboutus.service.impl;
 
+import com.zlk.zlkproject.entity.Friends;
 import com.zlk.zlkproject.user.aboutus.mapper.CooperativedMapper;
 import com.zlk.zlkproject.user.aboutus.service.CooperativeService;
 import com.zlk.zlkproject.user.entity.Cooperative;
@@ -28,5 +29,10 @@ public class CooperativeServiceImpl implements CooperativeService {
     @Override
     public Help findHelp() {
         return cooperativedMapper.findHelp();
+    }
+
+    @Override
+    public List<Friends> findFriendsUrl() {
+        return cooperativedMapper.findFriendsUrl();
     }
 }

@@ -21,4 +21,9 @@ public class Test {
     public String too(){
         return "/view/aboutus/cooperative";
     }
+
+    @RequestMapping(value = "/friend")
+    public String fri(){
+        return "view/aboutus/friendly";
+    }
 }

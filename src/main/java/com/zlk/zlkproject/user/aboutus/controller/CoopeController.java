@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.aboutus.controller;
 
+import com.zlk.zlkproject.entity.Friends;
 import com.zlk.zlkproject.user.aboutus.service.CooperativeService;
 import com.zlk.zlkproject.user.entity.Cooperative;
 import com.zlk.zlkproject.user.entity.Help;
@@ -44,8 +45,17 @@ public class CoopeController {
     public ModelAndView helpCenter(){
         ModelAndView mv = new ModelAndView();
         Help help = cooperativeService.findHelp();
-        mv.setViewName("/view/aboutus/cooperative");
+        mv.setViewName("/view/aboutus/help");
         mv.addObject("help",help);
+        return mv;
+    }
+
+    @RequestMapping(value = "tofriends")
+    public ModelAndView toFriends(){
+        ModelAndView mv = new ModelAndView();
+        List<Friends> list = cooperativeService.findFriendsUrl();
+        mv.setViewName("/view/aboutus/friendly");
+        mv.addObject("list",list);
         return mv;
     }
 }
