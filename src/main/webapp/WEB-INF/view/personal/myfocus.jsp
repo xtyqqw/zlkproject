@@ -15,27 +15,166 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         /*没有关注信息*/
-        .nomain {
-            margin: 50px auto;
-            text-align: center;
+        .nomain {margin: 50px auto;text-align: center;}
+        .nomain h2 {color: #999999;letter-spacing: 5px;font-size: 24px;}
+        /* 有关注信息 */
+        .main{margin: 0 auto;width: 1000px;}
+        .waik{background-color: #FAFAFA;}
+        .waik:hover{background-color: #fff;box-shadow: 1px 1px 5px 1px #D4D4D4;}
+        /* 上半部分 */
+        .up{margin: 20px;height: 150px;border-bottom: 1px solid #D4D4D4;}
+        /* 上半部分的左边 */
+        .up_left{float: left;padding: 20px;}
+        /* 头像 */
+        .up_left img{
+            height: 50px;width: 50px;
+            border-radius: 50%;
+            float: left;
         }
-
-        .nomain h2 {
+        /* 昵称 */
+        .up_left .name{
+            float: left;
+            font-size: 16px;
+            line-height: 3;
+            margin: 0 20px;
+        }
+        /* 关注状态 */
+        .up_left .attention_type{
+            float: left;
+            margin: 13px auto;
+        }
+        /* 已关注和加关注的图标样式 */
+        .up_left .attention_type .ok,.jia{
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1;
+            color: #fff;
+            font-size: 20px;
+            float: left;
+            margin: auto 10px;
+        }
+        .up_left .attention_type .ok{
+            border: 1px solid #5ab62f;
+            background-color: #5ab62f;
+        }
+        .up_left .attention_type .jia{
+            border: 1px solid #343434;
+            background-color: #343434;
+        }
+        .up_left .attention_type .ok_zi,.no_zi{
+            font-size: 14px;
             color: #999999;
-            letter-spacing: 5px;
-            font-size: 24px;
+            float: left;
+        }
+        /* 个性签名 */
+        .up_left .sdf{
+            margin-top: 50px;
+            margin-left: 70px;
+            font-size: 12px;
+            color: #676767;
+        }
+        /* 关注人情况 */
+        .attention_person{
+            margin: 20px 0 30px 70px;
+        }
+        .attention_person .attention_him,.he_attention{
+            float: left;
+            border: 1px solid #bec3d9;
+            border-radius: 50px;
+            padding: 0 10px;
+            background-color: #bec3d9;
+            color: #fff;
+        }
+        .attention_person .attention_him{
+            margin-right: 20px;
+        }
+        .attention_person .attention_him:hover{
+            background-color: #914ef3;
+            cursor: pointer;
+        }
+        .attention_person .he_attention:hover{
+            background-color: #914ef3;
+            cursor: pointer;
+            color: #fff;
+        }
+        .up_right{
+            float: right;
+        }
+        .up_right .xuexili,.learntime{
+            margin: 20px auto;
+            padding: 8px;
+        }
+        .up_right .xuexili p{
+            float: left;
+            margin-right: 20px;
+            color: #676767;
+            padding: 2px 0;
+        }
+        .up_right .learntime p{
+            float: left;
+            margin-right: 20px;
+            color: #676767;
+            padding: 2px 0;
+        }
+        /* 最新动态 */
+        .down .latest_news{
+            margin-left: 110px;
+            padding-bottom: 10px;
+        }
+        /* 无动态 */
+        .down .down_no_news{
+            margin: 10px auto;
+            text-align: center;
+            font-size: 17px;
+            color: #999;
+            padding-bottom: 70px;
+        }
+        /* 有动态 */
+        .down .down_yes_news{
+            float: left;
+            padding: 5px 20px 10px 150px;
+            width: 800px;
+            font-size: 16px;
+        }
+        .down .bigp{
+            width: 650px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .down .bigp .user{
+            float: left;
+        }
+        .down .bigp .time,.article{
+            color: #904ff1;
+        }
+        .down .down_yes_news .date{
+            float: right;
+            color: #999999;
+            font-size: 15px;
+        }
+        .down .bigp a{
+            color: #904ff1;
+        }
+        .down .up_down{
+            width: 1000px;
+            margin-top: 240px;
+            padding-bottom: 20px;
         }
     </style>
 </head>
 <body>
 <%--没有关注信息--%>
-<c:if test="true">
+<c:if test="">
     <div class="nomain">
         <h2>对不起，你当前暂无任何关注信息</h2>
     </div>
 </c:if>
 <%--有关注信息--%>
-<c:if test="">
+<c:if test="true">
     <div class="main">
         <div class="waik">
             <div class="up">
@@ -78,132 +217,134 @@
                     </div>
                 </div>
             </div>
-            <!-- 最新动态 -->
-            <div class="down">
-                <h2 class="latest_news">最新动态</h2>
-                <!-- 无最新动态 -->
-                <!-- <p class="down_no_news">该用户暂无任何动态信息</p> -->
-                <c:forEach begin="0" end="2">
-                    <%--上传文章--%>
-                    <c:if test="">
-                        <div class="down_yes_new">
-                            <div class="bigp">
-                                <p class="user">骑驴看唱本</p>
-                                <span class="time">刚刚</span>
-                                <span class="action">上传了一篇文章：</span>
-                                <span class="article">
-								<a href="javascript:;">钢铁是怎样炼成的</a>
-							</span>
-                            </div>
-                            <span class="date">2018-8-8   07:08</span>
-                        </div>
-                    </c:if>
-                    <%--评论文章--%>
-                    <c:if test="">
-                        <div class="down_yes_news">
-                            <div class="bigp">
-                                <p class="user">骑驴看唱本</p>
-                                <span class="time">2小时前</span>
-                                <span class="action">评论了</span>
-                                <span class="reply_user">
-								    <a href="javascript:;">小马</a>
-							    </span>
-                                <span class="action">的文章</span>
-                                <span class="article">
-                                    <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
-                                </span>
-                            </div>
-                            <span class="date">2018-8-8   07:08</span>
-                        </div>
-                    </c:if>
-                    <%--回复评论--%>
-                    <c:if test="">
-                        <div class="down_yes_news">
-                            <div class="bigp">
-                                <p class="user">骑驴看唱本</p>
-                                <span class="time">2小时前</span>
-                                <span class="action">回复了</span>
-                                <span class="reply_user">
-								    <a href="javascript:;">小马</a>
-							    </span>
-                                <span class="jiu">就</span>
-                                <span class="problem_user">
-                                    <a href="javascript:;">一笑面恩仇</a>：
-                                </span>
-                                <span class="action">的文章</span>
-                                <span class="article">
-                                    <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
-                                </span>
-                            </div>
-                            <span class="date">2018-8-8   07:08</span>
-                        </div>
-                    </c:if>
-                    <%--提出问题--%>
-                    <c:if test="">
-                        <div class="down_yes_new">
-                            <div class="bigp">
-                                <p class="user">骑驴看唱本</p>
-                                <span class="time">1小时前</span>
-                                <span class="action">提出了一个问题：</span>
-                                <span class="article">
-								<a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
-							</span>
-                            </div>
-                            <span class="date">2018-8-8   07:08</span>
-                        </div>
-                    </c:if>
-                    <%--上传问题--%>
-                    <%--回答问题--%>
-                    <%--回复答案--%>
-                </c:forEach>
-
-                <div class="down_yes_news">
-                    <div class="bigp">
-                        <p class="user">骑驴看唱本</p>
-                        <span class="time">1天前</span>
-                        <span class="action">上传了一篇文章：</span>
-                        <span class="article">
-								<a href="javascript:;">钢铁是怎样炼成的</a>
-							</span>
-                    </div>
-                    <span class="date">2018-8-8   07:08</span>
+            <!-- 无最新动态 -->
+            <c:if test="">
+                <div class="down">
+                    <h2 class="latest_news">最新动态</h2>
+                    <%--无动态--%>
+                    <p class="down_no_news">该用户暂无任何动态信息</p>
                 </div>
-                <div class="down_yes_news">
-                    <div class="bigp">
-                        <p class="user">骑驴看唱本</p>
-                        <span class="time">2天前</span>
-                        <span class="action">提出了一个问题：</span>
-                        <span class="article">
-								<a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
-							</span>
-                    </div>
-                    <span class="date">2018-8-8   07:08</span>
-                </div>
-                <div class="down_yes_news">
-                    <div class="bigp">
-                        <p class="user">骑驴看唱本</p>
-                        <span class="time">4天前</span>
-                        <span class="action">评论了</span>
-                        <span class="reply_user">
-								<a href="javascript:;">一笑面恩仇一笑面恩仇</a>
-							</span>
-                        <span class="jiu">就</span>
-                        <span class="problem_user">
-								<a href="javascript:;">一笑面恩仇</a>：
-							</span>
-                        <span class="article">
-								<a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
-							</span>
-                    </div>
-                    <span class="date">2018-8-8   07:08</span>
-                </div>
-                <div class="up_down">
+            </c:if>
+            <%--有最新动态--%>
+            <c:if test="true">
+                <div class="down">
+                    <h2 class="latest_news">最新动态</h2>
+                    <c:forEach begin="0" end="4" ><%--items=""--%>
+                        <%--1上传文章--%>
+                        <c:if test="">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">刚刚</span>
+                                    <span class="action">上传了一篇文章：</span>
+                                    <span class="article">
+                                        <a href="javascript:;">钢铁是怎样炼成的</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                        <%--2评论文章--%>
+                        <c:if test="">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">2小时前</span>
+                                    <span class="action">评论了</span>
+                                    <span class="reply_user">
+                                        <a href="javascript:;">小马</a>
+                                    </span>
+                                    <span class="action">的文章</span>
+                                    <span class="article">
+                                        <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                        <%--3回复评论--%>
+                        <c:if test="">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">2小时前</span>
+                                    <span class="action">回复了</span>
+                                    <span class="reply_user">
+                                        <a href="javascript:;">小马</a>
+                                    </span>
+                                    <span class="jiu">就</span>
+                                    <span class="problem_user">
+                                        <a href="javascript:;">一笑面恩仇</a>：
+                                    </span>
+                                    <span class="action">的文章</span>
+                                    <span class="article">
+                                        <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                        <%--4提出问题--%>
+                        <c:if test="">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">2天前</span>
+                                    <span class="action">提出了一个问题：</span>
+                                    <span class="article">
+                                        <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                        <%--5回答问题--%>
+                        <c:if test="">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">2小时前</span>
+                                    <span class="action">回答了</span>
+                                    <span class="reply_user">
+                                        <a href="javascript:;">小马</a>
+                                    </span>
+                                    <span class="action">的问题</span>
+                                    <span class="article">
+                                        <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                        <%--6回复答案--%>
+                        <c:if test="true">
+                            <div class="down_yes_news">
+                                <div class="bigp">
+                                    <p class="user">骑驴看唱本</p>
+                                    <span class="time">2小时前</span>
+                                    <span class="action">回复了</span>
+                                    <span class="reply_user">
+                                        <a href="javascript:;">小马小马向前看</a>
+                                    </span>
+                                    <span class="jiu">就</span>
+                                    <span class="problem_user">
+                                        <a href="javascript:;">一笑面恩仇</a>：
+                                    </span>
+                                    <span class="action">的问题</span>
+                                    <span class="article">
+                                        <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
+                                    </span>
+                                </div>
+                                <span class="date">2018-8-8   07:08</span>
+                            </div>
+                        </c:if>
+                    </c:forEach>
                     <!-- <i class="layui-icon layui-icon-up"
                         style="font-size: 30px;margin: 0 485px;color: #999999;"></i> -->
                     <i class="layui-icon layui-icon-down"
                        style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
                 </div>
-            </div>
+            </c:if>
         </div>
     </div>
 </c:if>
