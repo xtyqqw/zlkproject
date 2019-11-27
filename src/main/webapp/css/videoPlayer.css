@@ -177,7 +177,29 @@
 /*}*/
 .w-e-text{
     overflow-y: auto !important;
-    padding: 0 !important;
+    padding: 10px !important;
+    height: 50% !important;
+}
+
+#wenda_bottom_div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.tagName{
+    width: 8%;
+    text-align: center;
+    background-color: grey;
+    color: white;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px !important;
+    margin: 1% !important;
 }
 
 #btn_div{
@@ -206,7 +228,7 @@ button{
 #div_stuNote{
     width: 50%;
     height: 100%;
-    background-color: #009f95;
+    background-color: #e2e2e2;
     border-radius: 5px;
     z-index: 10;
     position: relative;
@@ -214,17 +236,82 @@ button{
     top: 0;
     display: none;
 }
+#stuNote_titleBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+}
 #stuNote_title{
     width: 60px;
     height: 26px;
-    background-color: #eb7350;
     font-size: 20px;
-    position: relative;
-    top: 10px;
-    left: 10px;
+    float: left;
 }
 #stuNote_closeBtn{
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+    float: right;
+    border-radius: 8px;
+}
+.icon-icon-test{
+    font-size: 16px !important;
+    color: #777777;
+}
+#stuNote_textBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 280px;
+    margin: 0 auto;
 
+}
+#editor{
+    width: 100%;
+    height: 100%;
+}
+.toolbar{
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px #777777;
+}
+#div_text{
+    width: 100%;
+    height: 240px;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px #777777;
+}
+.w-e-text{
+    overflow-y: auto !important;
+}
+.w-e-panel-container{
+    width: 300px !important;
+    margin-left:-150px !important;
+}
+#stuNote_btnBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+}
+.stuNote_btn{
+    width: 90px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    padding: 5px 0 0 0;
+    margin: 0 0 0 20px;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
 }
 /*-----stuNote end-----*/
 

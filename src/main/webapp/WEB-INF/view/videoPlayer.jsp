@@ -16,6 +16,7 @@
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_toro6gmnhi.css">
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
     <script type="text/javascript" src="/js/player.js"></script>
@@ -101,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <%--播放器 end---------------------------------------------------------------------------------%>
+<%--------------------------播放器 end---------------------------------------------------------------------------------%>
                         <%--功能栏目录--%>
                         <div style="display: none" id="mulu_div">
 
@@ -120,8 +121,20 @@
                         </div>
                         <%--功能栏学生笔记--%>
                         <div id="div_stuNote">
-                            <div id="stuNote_title">记笔记</div>
-                            <div id="stuNote_closeBtn"></div>
+                            <div id="stuNote_titleBox">
+                                <div id="stuNote_title">记笔记</div>
+                                <div id="stuNote_closeBtn">
+                                    <i id="stuNoteCloseBtn" class="iconfont icon-icon-test enableClk"></i>
+                                </div>
+                            </div>
+                            <div id="stuNote_textBox">
+                                <div id="div_toolBar" class="toolbar"></div>
+                                <div id="div_text" class="text"></div>
+                            </div>
+                            <div id="stuNote_btnBox">
+                                <div id="stuNote_btn1" class="stuNote_btn" style="background-color: #5A5CAD">提交</div>
+                                <div id="stuNote_btn2" class="stuNote_btn" style="background-color: #7aa6da">取消</div>
+                            </div>
                         </div>
                     </div>
                 </div>
