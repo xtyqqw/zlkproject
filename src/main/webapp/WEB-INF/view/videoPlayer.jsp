@@ -128,8 +128,8 @@
                                 </div>
                             </div>
                             <div id="stuNote_textBox">
-                                <div id="div_toolBar" class="toolbar"></div>
-                                <div id="div_text" class="text"></div>
+                                <div id="div_stuNote_toolBar" class="toolbar"></div>
+                                <div id="div_stuNote_text" class="text"></div>
                             </div>
                             <div id="stuNote_btnBox">
                                 <div id="stuNote_btn1" class="stuNote_btn" style="background-color: #5A5CAD">提交</div>
@@ -164,7 +164,57 @@
                         </div>
                     </div>
                     <div class="layui-tab-item"></div>
-                    <div class="layui-tab-item">内容而</div>
+                    <div class="layui-tab-item" style="border: 0px solid white !important;">
+                        <div id="SNS_allBox">
+                            <div id="SNS_top_box">
+                                <div class="SNS_top_selection">最新</div>
+                                <div class="SNS_top_selection">点赞</div>
+                            </div>
+                            <div class="placeSpace"></div>
+                            <div id="SNS_contentBox">
+                                <ul id="SNS_ul_stream">
+                                    <li><div class="SNS_content" style="margin: 0 0 10px 0">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+                                            <div id="toolBar"></div>
+                                            <div class="SNS_textEditor"></div>
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                    <li><div class="SNS_content">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                    <li><div class="SNS_content">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                </ul>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
                     <div class="layui-tab-item"></div>
                     <div class="layui-tab-item">内容三</div>
                     <div class="layui-tab-item"></div>
