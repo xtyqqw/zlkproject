@@ -89,3 +89,8 @@ fdfs:
   storagePort: 8888/
   #缩略图配置
   thumb-image:
+    height: 150
+    width: 150
+  #获取连接池最大数量
+  pool:
+    max-total: 200

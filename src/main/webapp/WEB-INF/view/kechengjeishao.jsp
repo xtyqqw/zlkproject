@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
-    <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/courseDetails.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
 
 </head>
@@ -55,9 +56,11 @@
                 </li>
 
             </ul>
-            <button id="jiaru">
-                参加项目
-            </button>
+            <div id="chanjia">
+                <button id="jiaru">
+                    参加项目
+                </button>
+            </div>
         </div>
     </div>
     <div id="xiangmujeishao">
@@ -74,9 +77,6 @@
         </div>
         <div id="jeishaoneirong">
             <div id="jeishaotText">
-                <div id="jeishaoterjibiaoti">
-                    项目文字版介绍二级标题
-                </div>
                 <div id="jeishaozhengwen">
                     <p>项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div id="jeishaoImg">
-                <img src="bofang.jpg">
+                <img src="#">
             </div>
         </div>
     </div>
@@ -101,12 +101,9 @@
         </div>
         <div id="tedianneirong">
             <div id="tedianImg">
-                <img src="bofang.jpg">
+                <img src="#">
             </div>
             <div id="tediantext">
-                <div id="tedianerjibiaoti">
-                    项目特点文字版介绍二级标题
-                </div>
                 <div id="tedianzhengwenneirong">
                     <p>项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
@@ -117,10 +114,23 @@
 
         </div>
     </div>
+    <div id="xiangmuxiangqing">
+        <div id="xiangqingbiaoti">
+            <span class="layui-badge-dot layui-bg-blue xiao"></span>
+            <span class="layui-badge-dot layui-bg-blue da"></span>
+            <span class="layui-badge-dot layui-bg-blue xiao"></span>
+            <b id="xiangqingbiaotineirong">项目详情</b>
+            <span class="layui-badge-dot layui-bg-blue xiao"></span>
+            <span class="layui-badge-dot layui-bg-blue da"></span>
+            <span class="layui-badge-dot layui-bg-blue xiao"></span>
+        </div>
+        <ul id="xiangqingneirong">
+        </ul>
+    </div>
 </div>
 
 <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
 <script type="text/javascript" src="/js/kechengjeishao.js"  charset="utf-8"></script>
-
+<script src="/js/courseDetails.js" charset="utf-8"></script>
 </body>
 </html>

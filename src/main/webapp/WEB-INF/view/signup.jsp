@@ -18,7 +18,7 @@
 
         #login{
             background-color: #2D93CA;
-            color: white;width: 400px;
+            color: white;width: 500px;
             height:35px;
             margin-top: 20px;
             padding-top: 10px;
@@ -78,9 +78,11 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
+<div style="width: 500px;margin-left: 600px;border: 1px #FFFFFF;height: 650px;box-shadow: 0px 3px 5px 3px #D4D4D4;">
 <center><h3 id="login">欢迎加入智量酷</h3></center>
+    <br><br>
 <center><span style="color:red;">${spanmsg}</span></center>
-<form action="/user/signup" method="post" onsubmit="return check()" style="padding: 50px 660px; ">
+<form action="/user/signup" method="post" onsubmit="return check()" style="padding-left: 50px">
 
 <%--    <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><span class="error" id="phoneError"></span><br>--%>
 <%--    <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <span class="error" id="checktext2"></span><br>--%>
@@ -114,6 +116,7 @@
     <br><br>
     <center><button type="submit" style="border: none;width: 100px;height: 30px;">提交</button></center>
 </form>
+</div>
 <div id="box" onselectstart="return false;" style="visibility: hidden" >
     <div class="bgColor"></div>
     <div class="txt" >滑动解锁</div>

@@ -1,11 +1,13 @@
 package com.zlk.zlkproject.user.index.service.serviceimpl;
 
 import com.zlk.zlkproject.entity.*;
+import com.zlk.zlkproject.user.entity.Signin;
 import com.zlk.zlkproject.user.index.mapper.IndexMapper;
 import com.zlk.zlkproject.user.index.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -98,5 +100,50 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public List<Courses> findCoursesByTypeId(Integer typeId) {
         return indexMapper.findCoursesByTypeId(typeId);
+    }
+    /**
+     *根据今天日期返回day
+     * @param today
+     * @return String
+     */
+    @Override
+    public String findDayByDate(Date today) {
+        return indexMapper.findDayByDate(today);
+    }
+    /**
+     *根据用户ID查询上次签到日期
+     * @param userId
+     * @return String
+     */
+    @Override
+    public String findDayByUserId(String userId) {
+        return indexMapper.findDayByUserId(userId);
+    }
+    /**
+     *根据用户ID查询连续签到次数
+     * @param userId
+     * @return Integer
+     */
+    @Override
+    public Signin findSigninByUserId(String userId){
+        return indexMapper.findSigninByUserId(userId);
+    }
+    /**
+     *签到
+     * @param signin
+     * @return Integer
+     */
+    @Override
+    public Integer signByUserId(Signin signin) {
+        return indexMapper.signByUserId(signin);
+    }
+    /**
+     *首次签到
+     * @param signin
+     * @return Integer
+     */
+    @Override
+    public Integer signFirst(Signin signin) {
+        return indexMapper.signFirst(signin);
     }
 }
