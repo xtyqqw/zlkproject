@@ -7,9 +7,6 @@ import com.zlk.zlkproject.entity.Pagination;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-
 
 
 public interface CourseHomePageService {
