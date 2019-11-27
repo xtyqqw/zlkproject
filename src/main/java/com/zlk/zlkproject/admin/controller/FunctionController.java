@@ -97,6 +97,23 @@ public class FunctionController {
         }
     }
 
+    @RequestMapping(value = "/update")
+    public ModelAndView update(Function function){
+        ModelAndView mv=new ModelAndView();
+        Integer flag = functionService.updateFunction(function);
+        if (flag==1){
+            mv.addObject("flag","true");
+            mv.addObject("msg","修改成功");
+            mv.setViewName("admin/functionManager");
+            return mv;
+        }else {
+            mv.addObject("flag","true");
+            mv.addObject("msg","遇到意外错误");
+            mv.setViewName("admin/functionManager");
+            return mv;
+        }
+    }
+
     @RequestMapping(value = "/delete")
     public String delete(String functionId){
         Integer flag = functionService.deleteFunction(functionId);

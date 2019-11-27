@@ -20,11 +20,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Function {
     //导航栏ID
-    private Integer functionId;
+    private Integer id;
     //导航栏名称
     private String name;
     //父导航栏ID
-    private Integer parentId;
+    private Integer pid;
     //跳转url
     private String url;
     //跳转的iframe

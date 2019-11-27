@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.admin.mapper.FunctionMapper">
     <resultMap id="functionEntityMap" type="com.zlk.zlkproject.entity.Function">
-        <id property="functionId" column="function_id" javaType="java.lang.Integer"/>
+        <id property="id" column="function_id" javaType="java.lang.Integer"/>
         <result property="name" column="function_name" javaType="java.lang.String"/>
-        <result property="parentId" column="parent_id" javaType="java.lang.Integer"/>
+        <result property="pid" column="parent_id" javaType="java.lang.Integer"/>
         <result property="url" column="url" javaType="java.lang.String"/>
         <result property="comment" column="comment" javaType="java.lang.String"/>
         <!--<collection property="children" ofType="com.zlk.zlkproject.entity.Function">
@@ -27,6 +27,24 @@
     <insert id="addFunction" parameterType="com.zlk.zlkproject.entity.Function">
         insert into functions(function_name,parent_id,url,comment) values (#{name},#{parentId},#{url},#{comment})
     </insert>
+    <update id="updateFunction" parameterType="com.zlk.zlkproject.entity.Function">
+        update functions
+        <set>
+            <if test="name!=null and name!='' ">
+                function_name=#{name},
+            </if>
+            <if test="parentId!=null and parentId!='' ">
+                parent_id=#{parentId},
+            </if>
+            <if test="url!=null and url!='' ">
+                url=#{url},
+            </if>
+            <if test="comment!=null and comment!='' ">
+                comment=#{comment},
+            </if>
+        </set>
+        where function_id=#{functionId}
+    </update>
     <delete id="deleteFunction" parameterType="java.lang.String">
         delete from functions where function_id = #{functionId}
     </delete>

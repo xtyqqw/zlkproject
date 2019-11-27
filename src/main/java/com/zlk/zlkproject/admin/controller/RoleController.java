@@ -73,6 +73,13 @@ public class RoleController {
         return map;
     }
 
+    @RequestMapping(value = "/toInsert")
+    public ModelAndView toInsert(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("admin/roleInsert");
+        return mv;
+    }
+
     /**
      * @Author lufengxiang
      * @Description //TODO 新增角色

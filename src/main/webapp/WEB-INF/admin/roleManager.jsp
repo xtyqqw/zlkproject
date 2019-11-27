@@ -12,7 +12,11 @@
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.excheck.js"></script>
+
     <style type="text/css">
         #demo{
             height: 100%;
@@ -29,36 +33,150 @@
             width: auto;
         }
 
-        .form, .form input, .form select {
-            position: relative;
-            text-align: center;
-        }
-
         .form input, .form select {
             margin-top: 15px;
             height: 24px;
             width: auto;
         }
+
+        .ztree,.form{
+            margin-left: 90px;
+        }
+
+        .ztree li a{
+            color: black;
+        }
+
+        .roleFunction{
+            margin-top: 15px;
+        }
+
+        #insertSubmit{
+            margin-left: 300px;
+            padding-bottom: 38px;
+        }
+
+        #updateSubmit{
+            margin-left: 300px;
+            padding-bottom: 38px;
+        }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
-<div id="addForm" hidden="hidden">
+<div id="addForm" style="display: none">
     <form action="<%=request.getContextPath()%>/role/insert" class="form">
         角色名称 <input type="text" required placeholder="请输入角色名称" name="roleName"><br>
         角色代码 <input type="text" required placeholder="请输入角色代码" name="roleCode"><br>
-        <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
+        <p class="roleFunction">角色权限</p>
+        <div class="left">
+            <ul id="zTreeContent" class="ztree"></ul>
+        </div>
+        <input type="submit" class="layui-btn" id="insertSubmit" value="确认">
     </form>
 </div>
-<div id="editForm" hidden="hidden">
+<script type="text/javascript">
+    function getzTreeContent() {
+        var setting = {
+            async: {
+                enable: true,
+                url: "/function/findFunction",
+                dataType: JSON
+            },
+            check: {
+                enable: true,
+                chkStyle: "checkbox",
+                chkboxType: {"Y": "ps", "N": "ps"}
+            },
+            data: {
+                key: {
+                    url: "href"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pid",
+                    rootPId: 0
+                }
+            },
+            callback: {
+                onAsyncSuccess: function () {
+                    var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
+                    zTree.expandAll(true);
+                },
+                beforeClick: function (treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
+                    if (treeNode.isParent) {
+                        zTree.expandNode(treeNode);
+                        return false;
+                    }
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#zTreeContent"), setting);
+        });
+    }
+</script>
+
+<div id="editForm" style="display: none">
     <form action="<%=request.getContextPath()%>/role/update" class="form">
         <input type="hidden" name="roleId" id="roleId"><br>
         角色名称 <input type="text" required id="roleName" placeholder="请输入角色名称" name="roleName"><br>
         角色代码 <input type="text" required id="roleCode" placeholder="请输入角色代码" name="roleCode"><br>
-        <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
+        <p class="roleFunction">角色权限</p>
+        <div class="left">
+            <ul id="tree" class="ztree"></ul>
+        </div>
+        <input type="submit" class="layui-btn" id="updateSubmit" value="确认">
     </form>
 </div>
-<div class="layui-fluid">
+<script type="text/javascript">
+    function getZtree() {
+        var setting = {
+            async: {
+                enable: true,
+                url: "/function/findFunction",
+                dataType: JSON
+            },
+            check: {
+                enable: true,
+                chkStyle: "checkbox",
+                chkboxType: {"Y": "ps", "N": "ps"}
+            },
+            data: {
+                key: {
+                    url: "href"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pid",
+                    rootPId: 0
+                }
+            },
+            callback: {
+                onAsyncSuccess: function () {
+                    var zTree = $.fn.zTree.getZTreeObj("tree");
+                    zTree.expandAll(true);
+                },
+                beforeClick: function (treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj("tree");
+                    if (treeNode.isParent) {
+                        zTree.expandNode(treeNode);
+                        return false;
+                    }
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#tree"), setting);
+        });
+    }
+</script>
+<div class="layui-fluid" id="table" style="display: block">
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
 <script>
@@ -127,16 +245,20 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'add':
-                    layer.open({
+                    /*layer.open({
                         title: "添加",
                         type: 1,
-                        area: ['30%', '70%'],
+                        area: ['30%', '90%'],
                         content: $("#addForm"),
                         btn: ['提交'],
                         yes: function (index, layero) {
                             layero.find("form").find("#insertSubmit").click();
                         }
-                    });
+                    });*/
+                    getzTreeContent();
+                    $("#editForm").css("display","none");
+                    $("#table").css("display","none");
+                    $("#addForm").css("display","block");
                     break;
             }
             ;
@@ -171,16 +293,20 @@
                 $("#roleId").val(data.roleId);
                 $("#roleName").val(data.roleName);
                 $("#roleCode").val(data.roleCode);
-                layer.open({
+                getZtree();
+                $("#editForm").css("display","block");
+                $("#table").css("display","none");
+                $("#addForm").css("display","none");
+                /*layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['30%', '70%'],
+                    area: ['30%', '90%'],
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {
                         layero.find("form").find("#updateSubmit").click();
                     }
-                });
+                });*/
             }
         });
     });

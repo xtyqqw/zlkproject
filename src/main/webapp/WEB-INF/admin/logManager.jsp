@@ -90,8 +90,8 @@
                 {type: 'checkbox'}
                 , {field: 'logId', title: '日志编号', width: 110, sort: true}
                 , {field: 'name', title: '操作者名称', width: 120, sort: true}
-                , {field: 'description', title: '操作描述', width: 370}
-                , {field: 'ip', title: 'IP地址', width: 105}
+                , {field: 'description', title: '操作描述', width: 340}
+                , {field: 'ip', title: 'IP地址', width: 130}
                 , {field: 'type', title: '浏览器类型', width: 105}
                 , {
                     field: 'time',
@@ -100,7 +100,7 @@
                     width: 170
                 }
                 , {
-                    title: '操作', width: 75, align: 'center', toolbar: '' +
+                    title: '操作', align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
                         '</div>'

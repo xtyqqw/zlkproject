@@ -18,16 +18,16 @@
     <style type="text/css">
         .xm-d1{
             width: 100%;
-            height: 45px;
+            height: 38px;
             background-color: #C9C5C5;
         }
         .xm-d1-p{
-            font-size: 16px;
-            margin-left: 10px;
-            padding-top: 12px;
+            font-size: 15px;
+            margin-left: 12px;
+            padding-top: 10px;
         }
         .xm-d2{
-            margin-top: 12px;
+            margin-top: 11px;
         }
         .form, .form input, .form select {
             position: relative;
@@ -71,10 +71,10 @@
         <div class="xm-d2-hang1" id="test">
             <div class="pzright" style="width:101%;display: flex;justify-content: flex-start;float:right;">
                 <p class="xm-d1-p2">
-                    <button id="add" class="layui-btn layui-btn-radius btnys"><i class="layui-icon">&#xe608;</i>添加</button>
-                    <button class="layui-btn" id="btn-expand">全部展开</button>
-                    <button class="layui-btn" id="btn-fold">全部折叠</button>
-                    <button class="layui-btn" id="btn-refresh">刷新表格</button>
+                    <button id="add" class="layui-btn layui-btn-sm layui-btn-radius btnys"><i class="layui-icon">&#xe608;</i>添加</button>
+                    <button class="layui-btn layui-btn-sm" id="btn-expand">全部展开</button>
+                    <button class="layui-btn layui-btn-sm" id="btn-fold">全部折叠</button>
+                    <button class="layui-btn layui-btn-sm" id="btn-refresh">刷新表格</button>
                 </p>
             </div>
             <div class="clear"></div>
@@ -108,20 +108,20 @@
             treeTable.render({
                 treeColIndex: 1,//树形图标显示在第几列
                 treeSpid: 0,//最上级的父级id
-                treeIdName: 'functionId',//id字段的名称
-                treePidName: 'parentId',//pid字段的名称
+                treeIdName: 'id',//id字段的名称
+                treePidName: 'pid',//pid字段的名称
                 treeDefaultClose: false,//是否默认折叠
                 treeLinkage: false,//父级展开时是否自动展开所有子级
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
                 page: false,
-                height: 385,
+                height: 400,
                 cols: [[
-                    {field: 'functionId', title: '编号',width:80},
+                    {field: 'id', title: '编号',width:80},
                     {field: 'name', title: '资源名称',width:200},
-                    {field: 'url', title: '资源路径',width:260},
-                    {field: 'parentId', title: '父编号',width:80},
-                    {field: 'comment', title: '资源简介',width:300},
+                    {field: 'url', title: '资源路径',width:280},
+                    {field: 'pid', title: '父编号',width:80},
+                    {field: 'comment', title: '资源简介',width:320},
                     {field: 'resType', title: '类型',width:90,
                         templet: function(d){
                             if(d.url==null){
@@ -207,6 +207,7 @@
                     $("#functionId").val(data.functionId);
                     $("#name").val(data.name);
                     $("#parentId").val(data.parentId);
+                    $("#url").val(data.url);
                     $("#comment").val(data.comment);
                     layer.open({
                         title: "修改",

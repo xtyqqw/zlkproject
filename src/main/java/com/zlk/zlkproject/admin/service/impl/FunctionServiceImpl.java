@@ -56,6 +56,11 @@ public class FunctionServiceImpl implements FunctionService {
         return functionMapper.addFunction(function);
     }
 
+    @Override
+    public Integer updateFunction(Function function) {
+        return functionMapper.updateFunction(function);
+    }
+
     /**
      * @Author lufengxiang
      * @Description //TODO 通过菜单编号删除菜单

@@ -31,7 +31,16 @@ public interface FunctionService {
      * @return java.lang.Integer
      **/
     Integer addFunction(Function function);
-    
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过菜单编号修改菜单信息
+     * @Date 11:25 2019/11/26
+     * @Param [function]
+     * @return java.lang.Integer
+     **/
+    Integer updateFunction(Function function);
+
     /**
      * @Author lufengxiang
      * @Description //TODO 通过菜单编号删除菜单
