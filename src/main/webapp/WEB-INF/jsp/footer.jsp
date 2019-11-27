@@ -56,7 +56,7 @@
 <div id="footer">
     <ul>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutzlk">关于我们</a>
+            <a href="javascript:;">关于我们</a>
         </li>
         <li>
             <a href="javascript:;">加入我们</a>
@@ -65,13 +65,13 @@
             <a href="javascript:;">联系我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/lecturer/lecturers">讲师合作</a>
+            <a href="javascript:;">讲师合作</a>
         </li>
         <li>
             <a href="javascript:;">帮助中心</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/blogroll">友情链接</a>
+            <a href="javascript:;">友情链接</a>
         </li>
         <li>
             <a href="javascript:;">合作企业</a>

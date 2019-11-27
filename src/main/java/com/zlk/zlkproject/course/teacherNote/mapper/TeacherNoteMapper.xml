@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.teacherNote.mapper.TeacherNoteMapper">
+    <resultMap id="teacherNoteEntityMap" type="com.zlk.zlkproject.entity.TeacherNote">
+        <id property="tnId" column="tn_id" javaType="java.lang.Integer"></id>
+        <result property="sectionId" column="section_id" javaType="java.lang.Integer"></result>
+        <result property="title" column="title" javaType="java.lang.String"></result>
+        <result property="content" column="content" javaType="java.lang.String"></result>
+        <result property="date" column="date" javaType="java.util.Date"></result>
+    </resultMap>
+    <select id="findNotesBySectionId" parameterType="java.lang.Integer" resultMap="teacherNoteEntityMap">
+        select * from teacher_note
+        <if test="sectionId !=null and sectionId != ''">
+            where section_id = #{sectionId}
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="findCountBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from teacher_note
+        <if test="sectionId !=null and sectionId != ''">
+            where section_id = #{sectionId}
+        </if>
+    </select>
+</mapper>

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: Article
@@ -46,8 +47,21 @@ public class Article {
     private Integer caiCount;
     /**举报*/
     private String inform;
+    /**发文类型*/
+    private String createArticleType;
+    /**文章置顶*/
+    private String articleSetTop;
+    /**文章类别*/
+    private String tagName;
+    /**文章方向*/
+    private String typeName;
+    /**发文作者*/
+    private User author;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
-    /**建立的是文章和标签的多对一关系*/
-    private Integer tagId;
+    /**发文时调用类别名称*/
+    private List<Tag> tagList;
+
+    public Article(int id, String articleContent, String title, String articleDigest, String tagName, String typeName) {
+    }
 }

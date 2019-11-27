@@ -3,9 +3,20 @@
     margin: 0;
 }
 
+.layui-container{
+    width: 100% !important;
+    height: 100%;
+    clear: both;
+}
+
+.layui-fluid{
+    width: 100%;
+    height: auto;
+}
+
 #div_video_all{
     width: 100%;
-    height: 400px;
+    height: 100%;
     background-color: #2F4056;
     margin: auto;
     border-radius: 5px;
@@ -61,7 +72,7 @@
 }
 
 #video_row{
-    height: 400px;
+    height: 500px;
 }
 
 #video_div{
@@ -123,6 +134,96 @@
 }
 /*目录 end*/
 
+/*功能栏问答 begin*/
+#wenda_div{
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    padding: 0 5%;
+}
+
+.editor_title{
+    height: 10%;
+    font-size: 30px;
+    font-family: cursive;
+    letter-spacing: 6px;
+}
+#editor{
+    height: 90%;
+}
+
+.toolbar{
+    height: 8%;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+    align-items: center;
+}
+
+.text{
+    height: 76%;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+}
+
+.w-e-text:empty::before{
+    content: attr(placeholder);
+    color: darkgrey;
+}
+
+/*[contenteditable]:focus:before{*/
+/*    content: none;*/
+/*}*/
+.w-e-text{
+    overflow-y: auto !important;
+    padding: 10px !important;
+    height: 50% !important;
+}
+
+#wenda_bottom_div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.tagName{
+    width: 8%;
+    text-align: center;
+    background-color: grey;
+    color: white;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px !important;
+    margin: 1% !important;
+}
+
+#btn_div{
+    width: 100%;
+    height: 16%;
+    float: right;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+button{
+    width: 15%;
+    height: 50%;
+    margin: 0 10px !important;
+    background-color: grey;
+    color: white;
+    letter-spacing: 2px;
+}
+
+#btn_submit_wenda{
+    background-color: blue;
+}
+/*功能栏问答end*/
 /*-----stuNote begin-----*/
 #div_stuNote{
     width: 50%;
@@ -388,6 +489,7 @@
     text-align: center;
     padding: 5px 0 0 0;
 }
+
 /*清晰度 begin-------------------------------------------------------------------------------------------------*/
 #sharpness_btn{
     width: 100%;
@@ -420,4 +522,60 @@
 }
 /*清晰度 end---------------------------------------------------------------------------------------------------*/
 
-/*播放器 end-----------------------------------------------------------------------------------------------------------*/
+/*播放器 end*/
+
+/*选项卡内容 begin*/
+.layui-tab{
+    margin: 30px auto !important;
+}
+.layui-tab-title{
+    border-top:solid 5px blue !important;
+
+}
+.layui-tab-title li{
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 0 0 !important;
+    font-size: 16px !important;
+    color: snow !important;
+    letter-spacing: 5px;
+}
+
+.li_show{
+    width: 16%;
+}
+
+.li_hide{
+    width: 12%;
+}
+
+.layui-this{
+    background-color: darkblue !important;
+}
+
+.layui-tab-item{
+    border: 2px #5d6164 solid;
+    border-radius: 1px;
+}
+
+/*讲师笔记bigin*/
+#lay_flow1{
+    border-right: lightgrey 2px solid;
+    border-left: lightgrey 2px solid;
+    border-top: ghostwhite 2px solid;
+}
+.note_div{
+    width: 80%;
+    height: auto;
+    padding: 10px 10%;
+}
+.note_title{
+    width: 100%;
+    margin: 10px auto;
+}
+.note_content_div{
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+}
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.personal.mapper.FollowerMapper">
+    <resultMap type="com.zlk.zlkproject.entity.User" id="durstionMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="actionMap" type="com.zlk.zlkproject.user.entity.UserAction">
+        <id property="actionId" column="action_id" javaType="java.lang.String"/>
+        <result property="actionType" column="action_type" javaType="java.lang.Integer"/>
+        <result property="articleId" column="article_id" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="replyUserId" column="reply_user_id" javaType="java.util.Date"/>
+        <result property="createTime" column="creat_time" javaType="java.util.Date"/>
+    </resultMap>
+
+    <!--根据id查询关注自己的用户-->
+    <select id="findFollower" resultMap="durstionMap" parameterType="java.lang.String">
+        select * from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id
+    </select>
+
+    <!--根据id查询自己关注的用户-->
+    <select id="findFollowed" resultMap="durstionMap" parameterType="java.lang.String">
+        select * from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId}
+    </select>
+
+    <!--根据文章id查询文章标题-->
+    <select id="findArticleTittleById" resultType="java.lang.String" parameterType="java.lang.String">
+        select article_tittle from article where article = #{articleId}
+    </select>
+
+    <!--根据用户id查询用户最近一周内最多6条动态-->
+    <select id="findActionById" resultMap="actionMap" parameterType="java.lang.String">
+<!--        select * from action where user_id = #{userId} and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(create_time)-->
+    </select>
+
+    <select id="findUserNameByUserId" resultType="java.lang.String" parameterType="java.lang.String">
+        select user_realname from user where user_id = #{userId}
+    </select>
+
+    <!--通过文章id查询userid-->
+    <select id="findUserIdByArticleId" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_id from article where article_id = #{articleId}
+    </select>
+</mapper>
