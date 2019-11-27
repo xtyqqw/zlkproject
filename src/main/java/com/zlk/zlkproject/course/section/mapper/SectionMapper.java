@@ -44,7 +44,7 @@ public interface SectionMapper {
      */
     List<Section> findSectionByChapterId(Integer chapterId);
 
-    String findStateById(Integer sectionId);
+    String findStateById(Integer userId,Integer sectionId);
 
     /**
      *  根据小节id查找视频地址
@@ -63,4 +63,6 @@ public interface SectionMapper {
      * @return
      */
     String findStateByIdAndChapterId(Integer sectionId,Integer userId);
+
+    Section findSectionBySectionIdAndUserId(Integer sectionId,Integer userId);
 }

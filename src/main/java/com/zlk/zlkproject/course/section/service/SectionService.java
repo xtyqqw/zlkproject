@@ -17,7 +17,7 @@ public interface SectionService {
      */
     List<Section> findSectionByChapterId(Integer chapterId);
 
-    String findStateById(Integer sectionId);
+    String findStateById(Integer userId,Integer sectionId);
 
     /**
      *  根据小节id查找视频地址
@@ -45,4 +45,6 @@ public interface SectionService {
      */
     List<Section> findSectionByCourseId(Integer courseId);
 
+
+    Section findSectionBySectionIdAndUserId(Integer sectionId,Integer userId);
 }

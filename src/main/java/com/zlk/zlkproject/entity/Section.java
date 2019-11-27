@@ -3,6 +3,9 @@ package com.zlk.zlkproject.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @program: zlkproject
  * @description: 小节实体类
@@ -27,6 +30,8 @@ public class Section {
     private Integer sectionNum;
     /**小节简介 对应数据库的 section_intro字段*/
     private String sectionIntro;
+
+    private List<UserSection> userSectionList;
 
     public Section() {
     }

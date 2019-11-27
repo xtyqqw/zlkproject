@@ -30,8 +30,8 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public String findStateById(Integer sectionId) {
-        return sectionMapper.findStateById(sectionId);
+    public String findStateById(Integer userId,Integer sectionId) {
+        return sectionMapper.findStateById(userId,sectionId);
     }
 
     @Override
@@ -68,5 +68,10 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public List<Section> findSectionByCourseId(Integer courseId) {
         return sectionMapper.findSectionByCourseId(courseId);
+    }
+
+    @Override
+    public Section findSectionBySectionIdAndUserId(Integer sectionId, Integer userId) {
+        return sectionMapper.findSectionBySectionIdAndUserId(sectionId, userId);
     }
 }

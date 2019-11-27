@@ -21,6 +21,15 @@ import java.io.PrintWriter;
 @Controller
 public class MarkDownImageUpload {
 
+    /**
+     * @description: 测试用 调用文件上传工具类的方法实现图片上传功能 图片保存到本地
+     * @param file
+     * @param request
+     * @param response
+     * @return: void
+     * @author: QianKeQin
+     * @date: 2019/11/23 11:19
+     */
     @RequestMapping("/imageUpload")
     public void imageUpload(@RequestParam(value = "editormd-image-file", required = true) MultipartFile file,
                             HttpServletRequest request, HttpServletResponse response){
@@ -32,7 +41,7 @@ public class MarkDownImageUpload {
             wirte = response.getWriter();
             //文件存放的路径
             String path = request.getSession().getServletContext().getRealPath("upload");
-            String url = "http://localhost:8081"
+            String url = "http://localhost:8080"
                     + request.getContextPath()
                     + "//upload//"
                     + FileUpload.upload(request, file, path);
