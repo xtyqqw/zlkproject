@@ -167,6 +167,21 @@
     </style>
 </head>
 <body>
+<%--点击关注人事件--%>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".attention_him").click(function(){
+            $(".main").css("display","none")
+            $("iframe").css("display","block");
+        });
+        $(".he_attention").click(function(){
+            $(".main").css("display","none")
+            $("iframe").css("display","block");
+        });
+    });
+</script>
+<iframe name="attention" style="border: 1px solid #fff;width: 1000px;margin: 50px 22px;
+			float: left;display: none;height: 800px;"></iframe>
 <%--没有关注信息--%>
 <c:if test="">
     <div class="nomain">
@@ -197,8 +212,10 @@
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
                         <!-- 关注人情况 -->
                         <div class="attention_person">
-                            <a class="attention_him" href="javascript:;">n人关注了他</a>
-                            <a class="he_attention" href="javascript:;">他关注了n人</a>
+                            <a href="<%=request.getContextPath()%>/personal/followhim"
+                               name="attention" class="attention_him">n人关注了ta</a>
+                            <a href="<%=request.getContextPath()%>/personal/hefollows"
+                               name="attention" class="he_attention">ta关注了n人</a>
                         </div>
                     </div>
                     <!-- 上半部分的右边部分 -->
@@ -354,17 +371,15 @@
 <%--点击关注事件--%>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".ok,.ok_zi").click(function () {
-            $(".ok").hide();
-            $(".ok_zi").hide();
-            $(".jia").show();
-            $(".no_zi").show();
+        $(".ok_zi").click(function () {
+            $(this).hide();
+            $(this).siblings(".ok").hide();
+            $(this).siblings(".jia,.no_zi").show();
         });
-        $(".jia,.no_zi").click(function () {
-            $(".ok").show();
-            $(".ok_zi").show();
-            $(".jia").hide();
-            $(".no_zi").hide();
+        $(".no_zi").click(function () {
+            $(this).hide();
+            $(this).siblings(".jia").hide();
+            $(this).siblings(".ok,.ok_zi").show();
         });
     });
 </script>
@@ -372,19 +387,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".down_yes_news:gt(2):lt(5)").hide();
+        /*$(".down_yes_news:eq(2)").hide();
+        $(".down_yes_news:eq(3)").hide();
+        $(".down_yes_news:eq(4)").hide();
+        $(".down_yes_news:eq(5)").hide();*/
         //点击向上箭头
         $(".layui-icon-up").click(function () {
-            $(".layui-icon-up").hide();//向上箭头隐藏
-            $(".layui-icon-down").show();//向下箭头显示
-            $(".down_yes_news:gt(2):lt(5)").slideUp();//动态信息向上隐藏
-            /*$(".down_yes_news:eq(3)").slideUp();
-            $(".down_yes_news:eq(4)").slideUp();
-            $(".down_yes_news:eq(5)").slideUp();*/
+            $(this).hide();
+            $(this).siblings(".layui-icon-down").show();
+            $(this).parent(".down").find(".down_yes_news:gt(2):lt(5)").slideUp();//动态信息向上隐藏
         });
         $(".layui-icon-down").click(function () {
-            $(".layui-icon-down").hide();
-            $(".layui-icon-up").show();
-            $(".down_yes_news").slideDown();
+            $(this).hide();
+            $(this).siblings(".layui-icon-up").show();
+            $(this).siblings().find(".down_yes_news").slideDown();//动态信息向下展示
         });
     });
 </script>

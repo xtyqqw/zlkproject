@@ -36,4 +36,22 @@ public class PersonalController {
     public String myfocus(){
         return "view/personal/myfocus";
     }
+
+    /**
+     * 关注他的人
+     * @return
+     */
+    @RequestMapping("/followhim")
+    public String followhim(){
+        return "view/personal/followhim";
+    }
+
+    /**
+     * 他关注的人
+     * @return
+     */
+    @RequestMapping("/hefollows")
+    public String hefollows(){
+        return "view/personal/hefollows";
+    }
 }
