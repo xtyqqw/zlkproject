@@ -117,7 +117,7 @@ $(document).ready(function () {
                     var str = "";
                     var tagList = result.tagList;
                     str += "<div id='wenda_bottom_div' style='width: 100%'>";
-                    str += "<span>*至少选择1个，最多选择3个</span>";
+                    str += "<span id='wenda_bottom_div_span'>*至少选择1个，最多选择3个</span>";
                     str += "<div style='width: 100%'>";
                     $.each(tagList,function (i,tag) {
                         str += "<div class='tagName' isselect='false'>";
@@ -141,10 +141,7 @@ $(document).ready(function () {
                     $(this).css("background-color","blue");
                     $(this).attr("isselect","true");
                     var tagId = $(this).find("input").val();
-                    console.log("tagId="+tagId);
                     tagIdArray.push(tagId);
-                    console.log(tagIdArray);
-                    console.log(tagIdArray.length);
                 }else {
                     alert("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
@@ -153,8 +150,6 @@ $(document).ready(function () {
                 $(this).attr("isselect","false");
                 var tagId = $(this).find("input").val();
                 tagIdArray.remove(tagId);
-                console.log(tagIdArray);
-                console.log(tagIdArray.length);
             }
         });
 
@@ -178,17 +173,41 @@ $(document).ready(function () {
 
         /*提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
-            var content = $(".w-e-text").val();
+            var content = $(".w-e-text").html();
             console.log(content);
-            var data = {"content":content,"tagIdArray":tagIdArray}
+            var data = {"content":content,"tagIdArray":tagIdArray};
             $.ajax({
                 type:"POST",
-                url:"",
+                url:"/stuQa/insertStuQa",
                 data:data,
+                dataType: "json",
+                traditional:true,
                 success:function (result) {
                     alert(result.message);
+                    if(result.message==="添加成功"){
+                        editor.txt.clear();
+                        $(".tagName").css("background-color","grey");
+                        $(".tagName").attr("isselect","false");
+                        $("#wenda_div").css("display", "none");
+                    }
                 }
             })
+        });
+
+        /*取消按钮点击提交事件*/
+        $(document).on("click", "#btn_reset_wenda", function () {
+            editor.txt.clear();
+            $(".tagName").css("background-color","grey");
+            $(".tagName").attr("isselect","false");
+            // $("#wenda_div").css("display", "none");
+        });
+
+        /*关闭按钮点击提交事件*/
+        $(document).on("click", "#stu_qa_close_btn", function () {
+            editor.txt.clear();
+            $(".tagName").css("background-color","grey");
+            $(".tagName").attr("isselect","false");
+            $("#wenda_div").css("display", "none");
         });
 
         /*富文本编辑器生成*/

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_toro6gmnhi.css">
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
     <script type="text/javascript" src="/js/player.js"></script>
@@ -108,7 +108,14 @@
                         </div>
                         <%--功能栏问答--%>
                         <div style="display: none" id="wenda_div">
-                            <div class="editor_title"><span>提问题</span></div>
+                            <div class="editor_title">
+                                <div id="editor_title_span">
+                                    <span>提问题</span>
+                                </div>
+                                <div id="stu_qa_close_div">
+                                    <i id="stu_qa_close_btn" class="iconfont icon-icon-test enableClk"></i>
+                                </div>
+                            </div>
                             <div id="editor">
                                 <div id="toolbar_div" class="toolbar"></div>
                                 <div id="text_div" class="text"></div>

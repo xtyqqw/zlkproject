@@ -17,7 +17,7 @@
     </resultMap>
 
     <!--添加问答-->
-    <insert id="insertStuQa" parameterType="com.zlk.zlkproject.entity.StuQa">
+    <insert id="insertStuQa" useGeneratedKeys="true" keyProperty="sqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
         INSERT INTO stu_qa
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sqaId != null">
@@ -51,5 +51,42 @@
                 date,
             </if>
         </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sqaId != null">
+                #{sqaId},
+            </if>
+            <if test="pId != null">
+                #{pId},
+            </if>
+            <if test="sectionId != null">
+                #{sectionId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="content != null and content !=''">
+                #{content},
+            </if>
+            <if test="answerNum != null">
+                #{answerNum},
+            </if>
+            <if test="viewNum != null">
+                #{viewNum},
+            </if>
+            <if test="share != null and share !='' ">
+                #{share},
+            </if>
+            <if test="report != null and report !=''">
+                #{report},
+            </if>
+            <if test="date != null">
+                #{date},
+            </if>
+        </trim>
+    </insert>
+    <!--添加问答标签关联信息-->
+    <insert id="insertStuQaTag" parameterType="java.lang.Integer">
+        INSERT INTO stu_qa_tag(sqa_id,tag_id) VALUES (#{sqaId},#{tagId})
     </insert>
 </mapper>
