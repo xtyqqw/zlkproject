@@ -77,7 +77,9 @@ public class DeptController {
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Dept dept){
+
         ModelAndView mv=new ModelAndView();
+
         //判断部门名称是否已存在
         Dept deptByDeptName = deptService.findDeptByDeptName(dept.getDeptName());
         if(deptByDeptName!=null){
@@ -86,8 +88,11 @@ public class DeptController {
             mv.setViewName("admin/deptManager");
             return mv;
         }
+
+        //放UUID并新增
         dept.setDeptId(IDUtil.getUUID());
         Integer flag = deptService.addDept(dept);
+
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
@@ -110,7 +115,9 @@ public class DeptController {
      **/
     @RequestMapping(value = "/update")
     public ModelAndView update(Dept dept,HttpServletRequest request){
+
         ModelAndView mv=new ModelAndView();
+
         /**
          * 判断部门名是否更改
          * 如果更改过则判断更改后的部门名是否存在
@@ -123,8 +130,10 @@ public class DeptController {
             mv.setViewName("admin/deptManager");
             return mv;
         }
+
         //修改部门信息
         Integer flag = deptService.updateDeptByDeptId(dept);
+
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");

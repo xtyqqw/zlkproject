@@ -52,11 +52,15 @@ public class LoginController {
      **/
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, Admin admin){
+
         ModelAndView mv=new ModelAndView();
+
         if(admin.getAdminName()==null){
             mv.setViewName("admin/login");
             return mv;
         }
+
+        //shiro认证
         Subject subject = SecurityUtils.getSubject();
         admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());

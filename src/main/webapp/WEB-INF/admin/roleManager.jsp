@@ -72,6 +72,7 @@
         <div class="left">
             <ul id="zTreeContent" class="ztree"></ul>
         </div>
+        <input type="text" hidden="hidden" id="addFunction" name="addFunction">
         <input type="submit" class="layui-btn" id="insertSubmit" value="确认">
     </form>
 </div>
@@ -80,7 +81,7 @@
         var setting = {
             async: {
                 enable: true,
-                url: "/function/findFunction",
+                url: "/function/findAllFunction",
                 dataType: JSON
             },
             check: {
@@ -110,13 +111,46 @@
                         zTree.expandNode(treeNode);
                         return false;
                     }
+                },
+                onClick: function (e, treeId, treeNode, clickFlag) {
+                    zTreeContent.checkNode(treeNode, !treeNode.checked, true);
                 }
             }
         };
 
         $(document).ready(function () {
-            $.fn.zTree.init($("#zTreeContent"), setting);
+            zTreeContent = $.fn.zTree.init($("#zTreeContent"), setting);
         });
+
+        //创建一个对象
+        function createObj(id,name,pid){
+            this.id = id;
+            this.name = name;
+            this.pid = pid;
+        }
+        createObj.prototype.sayId = function(){
+            alert(this.id);
+        }
+        createObj.prototype.sayName = function(){
+            alert(this.name);
+        }
+        createObj.prototype.sayPid = function(){
+            alert(this.pid);
+        }
+
+        $("#insertSubmit").click(function () {
+            var treeObj=$.fn.zTree.getZTreeObj("zTreeContent");
+            nodes=treeObj.getCheckedNodes(true);
+            var ss=new Array();//创建list集合
+            v="";
+            for(var i=0;i<nodes.length;i++){
+                var person = new createObj(nodes[i].id,nodes[i].name,nodes[i].pid);
+                ss[i]=person;
+            }
+            //打包成json格式数据
+            var appop = JSON.stringify(ss);
+            $("#addFunction").val(appop);
+        })
     }
 </script>
 
@@ -129,15 +163,16 @@
         <div class="left">
             <ul id="tree" class="ztree"></ul>
         </div>
+        <input type="text" hidden="hidden" id="updateFunction" name="updateFunction">
         <input type="submit" class="layui-btn" id="updateSubmit" value="确认">
     </form>
 </div>
 <script type="text/javascript">
-    function getZtree() {
+    function getZtree(data) {
         var setting = {
             async: {
                 enable: true,
-                url: "/function/findFunction",
+                url: "/function/findAllFunction",
                 dataType: JSON
             },
             check: {
@@ -160,6 +195,37 @@
                 onAsyncSuccess: function () {
                     var zTree = $.fn.zTree.getZTreeObj("tree");
                     zTree.expandAll(true);
+                    var treeNode;
+                    $.ajax({
+                        url: "/function/findFunctionByRoleId?roleId="+data.roleId,
+                        type: 'post',
+                        async:false, //==######=请求外部接收到Ajax请求 返回值的关键。===保证不是异步的请求。后面  【外部 接收变量 语句】   一定是后执行。
+                        dataType: "json",
+                        success: function(menus){
+                            //menusData=menus;
+                            //var treeNode = menus;//json总是返回全部，，//=====【嵌套post，返回两个data必须 不同名！！！】
+                            treeNode=menus;
+                        }
+                    });
+                    if (treeNode.length > 0) {
+
+                        //获取ztree对象
+                        //var treeObj = $.fn.zTree.getZTreeObj("menuTree");
+
+                        //alert("findByPidIsNull:menus:===treeNode:==="+JSON.stringify(treeNode))
+                        //遍历勾选角色关联的菜单数据
+                        for (var i = 0; i < treeNode.length; i++) {
+
+                            if (treeNode[i].pid!=0 || ! ("0"==treeNode[i].pid )  ) { //==###=排除选中父节点。
+                                //根据角色菜单节点数据的属性搜索，获取与完整菜单树完全匹配的节点JSON对象集合
+                                var nodes = zTree.getNodesByParam("id", treeNode[i].id, null);
+
+                                //勾选当前选中的节点
+                                zTree.checkNode(nodes[0],true,true);
+                            }
+
+                        };
+                    };
                 },
                 beforeClick: function (treeId, treeNode) {
                     var zTree = $.fn.zTree.getZTreeObj("tree");
@@ -167,6 +233,9 @@
                         zTree.expandNode(treeNode);
                         return false;
                     }
+                },
+                onClick: function (e, treeId, treeNode, clickFlag) {
+                    zTreeContent.checkNode(treeNode, !treeNode.checked, true);
                 }
             }
         };
@@ -174,6 +243,36 @@
         $(document).ready(function () {
             $.fn.zTree.init($("#tree"), setting);
         });
+
+        //创建一个对象
+        function createObj(id,name,pid){
+            this.id = id;
+            this.name = name;
+            this.pid = pid;
+        }
+        createObj.prototype.sayId = function(){
+            alert(this.id);
+        }
+        createObj.prototype.sayName = function(){
+            alert(this.name);
+        }
+        createObj.prototype.sayPid = function(){
+            alert(this.pid);
+        }
+
+        $("#updateSubmit").click(function () {
+            var treeObj=$.fn.zTree.getZTreeObj("tree");
+            nodes=treeObj.getCheckedNodes(true);
+            var ss=new Array();//创建list集合
+            v="";
+            for(var i=0;i<nodes.length;i++){
+                var person = new createObj(nodes[i].id,nodes[i].name,nodes[i].pid);
+                ss[i]=person;
+            }
+            //打包成json格式数据
+            var appop = JSON.stringify(ss);
+            $("#updateFunction").val(appop);
+        })
     }
 </script>
 <div class="layui-fluid" id="table" style="display: block">
@@ -293,7 +392,7 @@
                 $("#roleId").val(data.roleId);
                 $("#roleName").val(data.roleName);
                 $("#roleCode").val(data.roleCode);
-                getZtree();
+                getZtree(data);
                 $("#editForm").css("display","block");
                 $("#table").css("display","none");
                 $("#addForm").css("display","none");

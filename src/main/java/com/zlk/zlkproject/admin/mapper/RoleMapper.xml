@@ -37,6 +37,13 @@
             #{roleId},#{roleName},#{roleCode},
         </trim>
     </insert>
+    <insert id="addRoleAndFunction">
+        insert into roles_functions(roles_id,functions_id)
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{roleId},#{functionId}
+        </trim>
+    </insert>
     <update id="updateRoleByRoleId" parameterType="com.zlk.zlkproject.entity.Role">
         update roles
         <set>
@@ -51,6 +58,9 @@
     </update>
     <delete id="deleteRoleByRoleId" parameterType="java.lang.String">
         delete from roles where role_id=#{roleId}
+    </delete>
+    <delete id="deleteRoleAndFunctionByRoleId" parameterType="java.lang.String">
+        delete from roles_functions where roles_id=#{roleId}
     </delete>
     <select id="findRoleName" resultMap="roleEntityMap">
         select * from roles

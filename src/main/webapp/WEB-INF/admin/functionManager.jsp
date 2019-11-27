@@ -46,7 +46,7 @@
 <div id="addForm" hidden="hidden">
     <form action="<%=request.getContextPath()%>/function/insert" class="form">
         菜单名称 <input type="text" required placeholder="请输入菜单名称" name="name"><br>
-        上级菜单 <input type="text" required placeholder="请输入上级菜单编号" name="parentId"><br>
+        上级菜单 <input type="text" required placeholder="请输入上级菜单编号" name="pid"><br>
         菜单URL <input type="text" required placeholder="请输入菜单路径" name="url"><br>
         菜单简介 <input type="text" required placeholder="请输入菜单简介" name="comment"><br>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
@@ -54,9 +54,9 @@
 </div>
 <div id="editForm" hidden="hidden">
     <form action="<%=request.getContextPath()%>/function/update" class="form">
-        <input type="hidden" name="functionId" id="functionId"><br>
+        <input type="hidden" name="id" id="id"><br>
         菜单名称 <input type="text" required id="name" placeholder="请输入菜单名称" name="name"><br>
-        上级菜单 <input type="text" required id="parentId" placeholder="请输入上级菜单编号" name="parentId"><br>
+        上级菜单 <input type="text" required id="pid" placeholder="请输入上级菜单编号" name="pid"><br>
         菜单URL <input type="text" required id="url" placeholder="请输入菜单路径" name="url"><br>
         菜单简介 <input type="text" required id="comment" placeholder="请输入菜单简介" name="comment"><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
@@ -186,7 +186,7 @@
         table.on('tool(permissionTable)', function (obj) {
             var data = obj.data;
             var layEvent = obj.event;
-            var id = data.functionId;
+            var id = data.id;
             if(data.name!=null){
                 if (layEvent === 'del') {
                     layer.confirm('是否确认删除', function (index) {
@@ -204,9 +204,9 @@
                         layer.close(index);
                     });
                 }else if (layEvent === 'edit') {
-                    $("#functionId").val(data.functionId);
+                    $("#id").val(data.id);
                     $("#name").val(data.name);
-                    $("#parentId").val(data.parentId);
+                    $("#pid").val(data.pid);
                     $("#url").val(data.url);
                     $("#comment").val(data.comment);
                     layer.open({
