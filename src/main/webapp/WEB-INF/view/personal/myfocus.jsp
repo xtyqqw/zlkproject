@@ -42,6 +42,7 @@
         .up_left .attention_type{
             float: left;
             margin: 13px auto;
+            cursor: pointer;
         }
         /* 已关注和加关注的图标样式 */
         .up_left .attention_type .ok,.jia{
@@ -53,7 +54,6 @@
             color: #fff;
             font-size: 20px;
             float: left;
-            margin: auto 10px;
         }
         .up_left .attention_type .ok{
             border: 1px solid #5ab62f;
@@ -62,11 +62,16 @@
         .up_left .attention_type .jia{
             border: 1px solid #343434;
             background-color: #343434;
+            display: none;
+        }
+        .up_left .attention_type .no_zi{
+            display: none;
         }
         .up_left .attention_type .ok_zi,.no_zi{
             font-size: 14px;
             color: #999999;
             float: left;
+            padding-left: 7px;
         }
         /* 个性签名 */
         .up_left .sdf{
@@ -159,11 +164,6 @@
         .down .bigp a{
             color: #904ff1;
         }
-        .down .up_down{
-            width: 1000px;
-            margin-top: 240px;
-            padding-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -176,177 +176,217 @@
 <%--有关注信息--%>
 <c:if test="true">
     <div class="main">
-        <div class="waik">
-            <div class="up">
-                <div class="up_left">
-                    <!-- 头像 -->
-                    <img src="../../img/headimg.jpg"/>
-                    <!-- 昵称 -->
-                    <p class="name">骑驴看唱本</p>
-                    <!-- 关注状态 -->
-                    <div class="attention_type">
-                        <!-- 已关注 -->
-                        <p class="ok">√</p>
-                        <p class="ok_zi">已关注</p>
-                        <!-- 加关注 -->
-                            <%--<p class="jia">+</p>
-                            <p class="no_zi">加关注</p>--%>
+        <c:forEach begin="0" end="5" ><%--items=""--%>
+            <div class="waik">
+                <div class="up">
+                    <div class="up_left">
+                        <!-- 头像 -->
+                        <img src="../../img/headimg.jpg"/>
+                        <!-- 昵称 -->
+                        <p class="name">骑驴看唱本</p>
+                        <!-- 关注状态 -->
+                        <div class="attention_type">
+                            <!-- 已关注 -->
+                            <p class="ok">√</p>
+                            <p class="ok_zi">已关注</p>
+                            <!-- 加关注 -->
+                            <p class="jia">+</p>
+                            <p class="no_zi">加关注</p>
+                        </div>
+                        <!-- 个性签名 -->
+                        <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
+                        <!-- 关注人情况 -->
+                        <div class="attention_person">
+                            <a class="attention_him" href="javascript:;">n人关注了他</a>
+                            <a class="he_attention" href="javascript:;">他关注了n人</a>
+                        </div>
                     </div>
-                    <!-- 个性签名 -->
-                    <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
-                    <!-- 关注人情况 -->
-                    <div class="attention_person">
-                        <a class="attention_him" href="javascript:;">n人关注了他</a>
-                        <a class="he_attention" href="javascript:;">他关注了n人</a>
+                    <!-- 上半部分的右边部分 -->
+                    <div class="up_right">
+                        <div class="xuexili">
+                            <i class="layui-icon layui-icon-chart"
+                               style="float: left;margin-right: 10px;font-size: 20px;"></i>
+                            <p>学习力：710</p>
+                            <p>学习效率：510</p>
+                        </div>
+                        <div class="learntime">
+                            <i class="layui-icon layui-icon-log"
+                               style="float: left;margin-right: 10px;font-size: 20px;"></i>
+                            <p>学习时长：7小时</p>
+                            <p>学习成长量：13</p>
+                            <p>技能水平：100</p>
+                        </div>
                     </div>
                 </div>
-                <!-- 上半部分的右边部分 -->
-                <div class="up_right">
-                    <div class="xuexili">
-                        <i class="layui-icon layui-icon-chart"
-                           style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                        <p>学习力：710</p>
-                        <p>学习效率：510</p>
+                <!-- 无最新动态 -->
+                <c:if test="">
+                    <div class="down">
+                        <h2 class="latest_news">最新动态</h2>
+                            <%--无动态--%>
+                        <p class="down_no_news">该用户暂无任何动态信息</p>
                     </div>
-                    <div class="learntime">
-                        <i class="layui-icon layui-icon-log"
-                           style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                        <p>学习时长：7小时</p>
-                        <p>学习成长量：13</p>
-                        <p>技能水平：100</p>
-                    </div>
-                </div>
-            </div>
-            <!-- 无最新动态 -->
-            <c:if test="">
-                <div class="down">
-                    <h2 class="latest_news">最新动态</h2>
-                    <%--无动态--%>
-                    <p class="down_no_news">该用户暂无任何动态信息</p>
-                </div>
-            </c:if>
-            <%--有最新动态--%>
-            <c:if test="true">
-                <div class="down">
-                    <h2 class="latest_news">最新动态</h2>
-                    <c:forEach begin="0" end="4" ><%--items=""--%>
-                        <%--1上传文章--%>
-                        <c:if test="">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">刚刚</span>
-                                    <span class="action">上传了一篇文章：</span>
-                                    <span class="article">
+                </c:if>
+                    <%--有最新动态--%>
+                <c:if test="true">
+                    <div class="down">
+                        <h2 class="latest_news">最新动态</h2>
+                        <c:forEach begin="0" end="4" ><%--items=""--%>
+                            <%--1上传文章--%>
+                            <c:if test="">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">刚刚</span>
+                                        <span class="action">上传了一篇文章：</span>
+                                        <span class="article">
                                         <a href="javascript:;">钢铁是怎样炼成的</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                        <%--2评论文章--%>
-                        <c:if test="">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">2小时前</span>
-                                    <span class="action">评论了</span>
-                                    <span class="reply_user">
+                            </c:if>
+                            <%--2评论文章--%>
+                            <c:if test="">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">2小时前</span>
+                                        <span class="action">评论了</span>
+                                        <span class="reply_user">
                                         <a href="javascript:;">小马</a>
                                     </span>
-                                    <span class="action">的文章</span>
-                                    <span class="article">
+                                        <span class="action">的文章</span>
+                                        <span class="article">
                                         <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                        <%--3回复评论--%>
-                        <c:if test="">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">2小时前</span>
-                                    <span class="action">回复了</span>
-                                    <span class="reply_user">
+                            </c:if>
+                            <%--3回复评论--%>
+                            <c:if test="">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">2小时前</span>
+                                        <span class="action">回复了</span>
+                                        <span class="reply_user">
                                         <a href="javascript:;">小马</a>
                                     </span>
-                                    <span class="jiu">就</span>
-                                    <span class="problem_user">
+                                        <span class="jiu">就</span>
+                                        <span class="problem_user">
                                         <a href="javascript:;">一笑面恩仇</a>：
                                     </span>
-                                    <span class="action">的文章</span>
-                                    <span class="article">
+                                        <span class="action">的文章</span>
+                                        <span class="article">
                                         <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                        <%--4提出问题--%>
-                        <c:if test="">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">2天前</span>
-                                    <span class="action">提出了一个问题：</span>
-                                    <span class="article">
+                            </c:if>
+                            <%--4提出问题--%>
+                            <c:if test="">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">2天前</span>
+                                        <span class="action">提出了一个问题：</span>
+                                        <span class="article">
                                         <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                        <%--5回答问题--%>
-                        <c:if test="">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">2小时前</span>
-                                    <span class="action">回答了</span>
-                                    <span class="reply_user">
+                            </c:if>
+                            <%--5回答问题--%>
+                            <c:if test="">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">2小时前</span>
+                                        <span class="action">回答了</span>
+                                        <span class="reply_user">
                                         <a href="javascript:;">小马</a>
                                     </span>
-                                    <span class="action">的问题</span>
-                                    <span class="article">
+                                        <span class="action">的问题</span>
+                                        <span class="article">
                                         <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                        <%--6回复答案--%>
-                        <c:if test="true">
-                            <div class="down_yes_news">
-                                <div class="bigp">
-                                    <p class="user">骑驴看唱本</p>
-                                    <span class="time">2小时前</span>
-                                    <span class="action">回复了</span>
-                                    <span class="reply_user">
+                            </c:if>
+                            <%--6回复答案--%>
+                            <c:if test="true">
+                                <div class="down_yes_news">
+                                    <div class="bigp">
+                                        <p class="user">骑驴看唱本</p>
+                                        <span class="time">2小时前</span>
+                                        <span class="action">回复了</span>
+                                        <span class="reply_user">
                                         <a href="javascript:;">小马小马向前看</a>
                                     </span>
-                                    <span class="jiu">就</span>
-                                    <span class="problem_user">
+                                        <span class="jiu">就</span>
+                                        <span class="problem_user">
                                         <a href="javascript:;">一笑面恩仇</a>：
                                     </span>
-                                    <span class="action">的问题</span>
-                                    <span class="article">
+                                        <span class="action">的问题</span>
+                                        <span class="article">
                                         <a href="javascript:;">前端工程师与后端工程师哪个更重要</a>
                                     </span>
+                                    </div>
+                                    <span class="date">2018-8-8   07:08</span>
                                 </div>
-                                <span class="date">2018-8-8   07:08</span>
-                            </div>
-                        </c:if>
-                    </c:forEach>
-                    <!-- <i class="layui-icon layui-icon-up"
-                        style="font-size: 30px;margin: 0 485px;color: #999999;"></i> -->
-                    <i class="layui-icon layui-icon-down"
-                       style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
-                </div>
-            </c:if>
-        </div>
+                            </c:if>
+                        </c:forEach>
+                            <%--上下箭头--%>
+                        <i class="layui-icon layui-icon-up"
+                           style="font-size: 30px;margin: 0 485px;color: #999999;" hidden></i>
+                        <i class="layui-icon layui-icon-down"
+                           style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
+                    </div>
+                </c:if>
+            </div>
+        </c:forEach>
     </div>
 </c:if>
+<%--点击关注事件--%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ok,.ok_zi").click(function () {
+            $(".ok").hide();
+            $(".ok_zi").hide();
+            $(".jia").show();
+            $(".no_zi").show();
+        });
+        $(".jia,.no_zi").click(function () {
+            $(".ok").show();
+            $(".ok_zi").show();
+            $(".jia").hide();
+            $(".no_zi").hide();
+        });
+    });
+</script>
+<%--点击上下箭头显示隐藏动态--%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".down_yes_news:gt(2):lt(5)").hide();
+        //点击向上箭头
+        $(".layui-icon-up").click(function () {
+            $(".layui-icon-up").hide();//向上箭头隐藏
+            $(".layui-icon-down").show();//向下箭头显示
+            $(".down_yes_news:gt(2):lt(5)").slideUp();//动态信息向上隐藏
+            /*$(".down_yes_news:eq(3)").slideUp();
+            $(".down_yes_news:eq(4)").slideUp();
+            $(".down_yes_news:eq(5)").slideUp();*/
+        });
+        $(".layui-icon-down").click(function () {
+            $(".layui-icon-down").hide();
+            $(".layui-icon-up").show();
+            $(".down_yes_news").slideDown();
+        });
+    });
+</script>
 </body>
 </html>
