@@ -3,10 +3,14 @@ package com.zlk.zlkproject.course.section.service.impl;
 import com.zlk.zlkproject.course.section.mapper.SectionMapper;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.entity.Section;
+import com.zlk.zlkproject.entity.vo.SectionDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: zlkproject
@@ -33,5 +37,36 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public String findVideoAddrById(Integer sectionId) {
         return sectionMapper.findVideoAddrById(sectionId);
+    }
+
+
+    @Override
+    public Map findSectionByCourseIdLimit(Integer courseId,Integer page, Integer limit) {
+        Map map=new HashMap();
+        Integer userId=1;
+        List<SectionDetails> sectionDetailsList=new ArrayList<>();
+        int yeishu = sectionMapper.findCountByCourseId(courseId)/3;
+        if(sectionMapper.findCountByCourseId(courseId)%limit!=0){ yeishu++; }
+        int offset = (page-1)*limit;
+        List<Section> sectionList = sectionMapper.findSectionByCourseIdLimit(courseId,offset,limit);
+        //循环赋值
+        for (Section section:sectionList){
+            SectionDetails sectionDetails = new SectionDetails();
+            sectionDetails.setSectionId(section.getSectionId());
+            sectionDetails.setSectionIntro(section.getSectionIntro());
+            sectionDetails.setSectionName(section.getSectionName());
+            sectionDetails.setSectionTime(section.getSectionTime());
+            //根据小节id和用户id查询用户的观看状态
+            sectionDetails.setState(sectionMapper.findStateByIdAndChapterId(section.getSectionId(),userId));
+            sectionDetailsList.add(sectionDetails);
+        }
+        map.put("yeishu",yeishu);
+        map.put("sectionDetailsList",sectionDetailsList);
+        return map;
+    }
+
+    @Override
+    public List<Section> findSectionByCourseId(Integer courseId) {
+        return sectionMapper.findSectionByCourseId(courseId);
     }
 }
