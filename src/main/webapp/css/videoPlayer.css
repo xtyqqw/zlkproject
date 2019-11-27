@@ -177,7 +177,29 @@
 /*}*/
 .w-e-text{
     overflow-y: auto !important;
-    padding: 0 !important;
+    padding: 10px !important;
+    height: 50% !important;
+}
+
+#wenda_bottom_div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.tagName{
+    width: 8%;
+    text-align: center;
+    background-color: grey;
+    color: white;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px !important;
+    margin: 1% !important;
 }
 
 #btn_div{

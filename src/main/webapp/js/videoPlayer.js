@@ -5,8 +5,11 @@ $(document).ready(function () {
             $ = layui.jquery,
             flow = layui.flow,
             sectionId = "";
+        var tagIdArray = new Array();
 
         note_flow(sectionId);
+
+        // $(".w_e_text").attr("placeholder","字数不超过200字");
 
         /*功能栏鼠标移入移出功能*/
         $(".l_func_icon").mouseenter(function () {
@@ -105,10 +108,87 @@ $(document).ready(function () {
 
         /*功能栏问答点击*/
         $("#icon-wenda").click(function () {
-            $(".w_e_text").attr("placeholder","字数不超过200字");
             $("#mulu_div").css("display", "none");
             $("#wenda_div").css("display", "block");
+            $.ajax({
+                type:"POST",
+                url:"/courseTag/findAll",
+                success:function (result) {
+                    var str = "";
+                    var tagList = result.tagList;
+                    str += "<div id='wenda_bottom_div' style='width: 100%'>";
+                    str += "<span>*至少选择1个，最多选择3个</span>";
+                    str += "<div style='width: 100%'>";
+                    $.each(tagList,function (i,tag) {
+                        str += "<div class='tagName' isselect='false'>";
+                        str += "<input hidden name=\"tagId\" value=\"" + tag.tagId + "\">";
+                        str += tag.tagName+"</div>";
+                    });
+                    str += "</div>";
+                    str += "</div>";
+                    $("#text_div").append(str);
+                }
+            })
 
+        });
+
+        /*问答功能中标签点击事件*/
+        $(document).on("click", ".tagName", function () {
+            var isselect = $(this).attr("isselect");
+            console.log(isselect);
+            if (isselect==="false"){
+                if (tagIdArray.length<3){
+                    $(this).css("background-color","blue");
+                    $(this).attr("isselect","true");
+                    var tagId = $(this).find("input").val();
+                    console.log("tagId="+tagId);
+                    tagIdArray.push(tagId);
+                    console.log(tagIdArray);
+                    console.log(tagIdArray.length);
+                }else {
+                    alert("最多选择3个标签,请先取消1个标签后再选择新标签");
+                }
+            }else {
+                $(this).css("background-color","grey");
+                $(this).attr("isselect","false");
+                var tagId = $(this).find("input").val();
+                tagIdArray.remove(tagId);
+                console.log(tagIdArray);
+                console.log(tagIdArray.length);
+            }
+        });
+
+        //获取元素在数组的下标
+        Array.prototype.indexOf = function(val) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == val)	{
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        //根据数组的下标，删除该下标的元素
+        Array.prototype.remove = function(val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+        /*提交按钮点击提交事件*/
+        $(document).on("click", "#btn_submit_wenda", function () {
+            var content = $(".w-e-text").val();
+            console.log(content);
+            var data = {"content":content,"tagIdArray":tagIdArray}
+            $.ajax({
+                type:"POST",
+                url:"",
+                data:data,
+                success:function (result) {
+                    alert(result.message);
+                }
+            })
         });
 
         /*富文本编辑器生成*/
