@@ -53,7 +53,7 @@
 
     <!--根据用户id查询用户最近一周内最多6条动态-->
     <select id="findActionById" resultMap="actionMap" parameterType="java.lang.String">
-<!--        select * from action where user_id = #{userId} and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(create_time)-->
+        select * from action where user_id = #{userId} and DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= date(create_time)
     </select>
 
     <select id="findUserNameByUserId" resultType="java.lang.String" parameterType="java.lang.String">
