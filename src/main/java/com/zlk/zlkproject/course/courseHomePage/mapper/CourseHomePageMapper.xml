@@ -21,6 +21,13 @@
         <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
         <result property="lastStudyTime" column="last_study_time" javaType="java.util.Date"></result>
         </collection>-->
+        <collection property="chapterList" ofType="com.zlk.zlkproject.entity.Chapter">
+            <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"></id>
+            <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
+            <result property="chapterName" column="chapter_name" javaType="java.lang.String"></result>
+            <result property="chapterTime" column="chapter_time" javaType="java.lang.Integer"></result>
+            <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
+        </collection>
     </resultMap>
     <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
 		select * from courses where courses_id=#{coursesId}
