@@ -71,7 +71,7 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
                         userAction.setReplyUser(followerMapper.findUserNameByUserId(userAction.getReplyUserId()));
                     }
                 }
-                list.add(i,userAction);
+                list.set(i,userAction);
             }
             return list;
         }
