@@ -5,7 +5,6 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,16 +49,43 @@ public class Article {
     private String inform;
     /**发文类型*/
     private String createArticleType;
-    /**文章置顶*/
-    private String articleSetTop;
+    /**文章置顶 置顶为0,没有置顶为1*/
+    private Integer articleSetTop;
+    /**文章类别*/
+    private String tagName;
+    /**文章方向*/
+    private String typeName;
     /**发文作者*/
-    private User userRealname;
-    /**作者头像*/
-    private User userImg;
+    private User author;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
     /**发文时调用类别名称*/
     private List<Tag> tagList;
     /**查询时调用类别名称*/
-    private List<User> userList=new ArrayList<>();
+    private User userList;
+
+    public Article() {
+    }
+
+    public Article(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, String inform, String createArticleType, Integer articleSetTop, String tagName, String typeName, String userId) {
+        this.articleId = articleId;
+        this.title = title;
+        this.browseCount = browseCount;
+        this.commentCount = commentCount;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.figures = figures;
+        this.figuresReal = figuresReal;
+        this.articleDigest = articleDigest;
+        this.articleContent = articleContent;
+        this.inform = inform;
+        this.createArticleType = createArticleType;
+        this.articleSetTop = articleSetTop;
+        this.tagName = tagName;
+        this.typeName = typeName;
+        this.userId = userId;
+    }
+
+    public Article(int id, String articleContent, String title, String articleDigest, String tagName, String typeName) {
+    }
 }

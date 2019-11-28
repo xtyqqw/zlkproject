@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.articleList.service;
 
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.User;
 
 import java.util.List;
 

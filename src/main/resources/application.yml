@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+
 spring:
   messages:
     basename: message/msg
@@ -63,20 +64,17 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
-  #  resources:
-  #    chain:
-  #      strategy:
-  #        content:
-  #          enabled: true
-  #          paths: /**
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
+
   main:
     allow-bean-definition-overriding: true
+
   jmx:
     enabled: false
+
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间

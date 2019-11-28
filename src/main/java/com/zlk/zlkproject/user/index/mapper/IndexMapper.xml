@@ -40,6 +40,22 @@
         <result property="featureText" column="feature_text" javaType="java.lang.String"/>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"/>
     </resultMap>
+    <resultMap type="com.zlk.zlkproject.entity.Tag" id="tagMap">
+        <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+        <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+        <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+        <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+    </resultMap>
+    <resultMap type="com.zlk.zlkproject.entity.Type" id="typeMap">
+        <id property="typeId" column="type_id" javaType="java.lang.Integer"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+    </resultMap>
+    <resultMap type="com.zlk.zlkproject.user.entity.Signin" id="signinMap">
+        <id property="signinId" column="signin_id" javaType="java.lang.Integer"/>
+        <result property="signinUserId" column="signin_user_id" javaType="java.lang.String"/>
+        <result property="signinLastTime" column="signin_last_time" javaType="java.util.Date"/>
+        <result property="signinNum" column="signin_num" javaType="java.lang.Integer"/>
+    </resultMap>
     <!--查询所有课程-->
     <select id="findCoursesAll" resultMap="coursesMap">
        select * from coursesr
@@ -69,4 +85,40 @@
     <select id="findUserCount" resultType="java.lang.Integer">
         select count(*) from user
     </select>
+    <!--查询所有方向-->
+    <select id="findTypeAll" resultMap="typeMap">
+        select * from type
+    </select>
+    <!--根据方向ID查询包含类别-->
+    <select id="findTagsById" parameterType="com.zlk.zlkproject.entity.Tag" resultMap="tagMap">
+       select * from tag where tag_type_id = #{tagTypeId}
+    </select>
+    <!--根据方向ID查询课程-->
+    <select id="findCoursesByTypeId" parameterType="com.zlk.zlkproject.entity.Type" resultMap="coursesMap">
+       select c.* from type ty,tag ta,tag_courses tc,courses c
+       where ty.type_id = ta.tag_type_id and ta.tag_id = tc.tag_id
+       and tc.courses_id = c.courses_id and ty.type_id = #{typeId}
+    </select>
+    <!--根据今天时间返回日期day-->
+    <select id="findDayByDate" parameterType="java.util.Date" resultType="java.lang.String">
+        SELECT DATE_FORMAT(#{today},'%d')
+    </select>
+    <!--根据用户ID查询上次签到日期-->
+    <select id="findDayByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT DATE_FORMAT((select signin_last_time from signin where signin_user_id = #{userId}),'%d')
+    </select>
+    <!--根据用户ID查询连续签到次数-->
+    <select id="findSigninByUserId" parameterType="java.lang.String" resultMap="signinMap">
+        select * from signin where signin_user_id = #{userId}
+    </select>
+    <!--签到-->
+    <update id="signByUserId" parameterType="com.zlk.zlkproject.user.entity.Signin">
+        update signin set signin_last_time = #{signinLastTime},signin_num = #{signinNum}
+        where signin_user_id = #{signinUserId}
+    </update>
+    <!--首次签到-->
+    <insert id="signFirst" parameterType="com.zlk.zlkproject.user.entity.Signin">
+        insert into signin(signin_user_id,signin_last_time,signin_num)
+        values(#{signinUserId},#{signinLastTime},#{signinNum})
+    </insert>
 </mapper>

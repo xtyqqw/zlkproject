@@ -49,15 +49,6 @@
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/imageUpload"
             });
-
-            /*
-            testEditor = editormd({
-                id      : "test-editormd",
-                width   : "90%",
-                height  : 640,
-                path    : "../lib/"
-            });
-            */
         });
     </script>
 

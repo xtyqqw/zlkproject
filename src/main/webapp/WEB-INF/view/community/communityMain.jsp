@@ -37,7 +37,6 @@
             top: 30px;
         }
         .all-body-center .body-left{
-            /*border: #2D93CA 1px solid;*/
             float: left;
             width: 920px;
             height: 1100px;
@@ -64,7 +63,7 @@
             position: relative;
             top: -10px;
             left: 940px;
-            width: 280px;
+            width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
@@ -89,7 +88,7 @@
             border: none;
             width: 220px;
             position: relative;
-            left: 0;
+            left: 5px;
             bottom: -2px;
         }
         .tab a{
@@ -114,8 +113,8 @@
             width: 100%;
             height: 100%;
             vertical-align: middle;
-            border: none 0;
             scrolling: auto;
+            border: none 0;
         }
         .wz_remenwenzhang{
             position: absolute;

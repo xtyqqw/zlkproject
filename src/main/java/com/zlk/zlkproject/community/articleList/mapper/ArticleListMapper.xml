@@ -12,15 +12,14 @@
         <result column="figures_real" property="figuresReal" javaType="java.lang.String"></result>
         <result column="article_digest" property="articleDigest" javaType="java.lang.String"></result>
         <result column="article_content" property="articleContent" javaType="java.lang.String"></result>
-        <result column="user_img" property="userImg" javaType="java.lang.String"></result>
-        <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
-        <result column="user_name" property="userName" javaType="java.lang.String"></result>
+        <!--<result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
+        <result column="user_name" property="userName" javaType="java.lang.String"></result>-->
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"></result>
         <result column="cai_count" property="caiCount" javaType="java.lang.Integer"></result>
         <result column="inform" property="inform" javaType="java.lang.String"></result>
         <result column="user_id" property="userId" javaType="java.lang.String"></result>
         <result column="create_article_type" property="createArticleType" javaType="java.lang.String"></result>
-        <result column="article_set_top" property="articleSetTop" javaType="java.lang.String"></result>
+        <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"></result>
         <association property="userList" javaType="com.zlk.zlkproject.entity.User">
             <id column="user_id" property="userId" javaType="java.lang.String"></id>
             <result column="user_phonenum" property="phonenum" javaType="java.lang.String"></result>
@@ -46,25 +45,25 @@
         </association>
     </resultMap>
     <select id="findArticleList" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
-        select * from article #{startPage},#{limit}
+        select * from article limit #{startPage},#{limit}
     </select>
     <select id="findArticleCount" resultType="java.lang.Integer" parameterType="com.zlk.zlkproject.entity.Pagination">
         select count(1) from article
     </select>
     <select id="findByCreateTime" resultMap="articleListEntityMap">
-        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname as userRealname,u.user_realimg as userImg
+        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a , user u
         where a.user_id=u.user_id
-        order by a.create_time desc
+        order by a.article_set_top,a.create_time DESC
     </select>
     <select id="findByBrowseCount" resultMap="articleListEntityMap">
-        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname,u.user_realimg
+        select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a , user u
         where a.user_id=u.user_id
-        order by a.browse_count desc
+        order by a.article_set_top,a.browse_count DESC
     </select>
     <select id="findByUserId" resultMap="articleListEntityMap">
-        select a.article_id as aid,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_realimg
+        select a.article_id as aid,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a
         join user u on a.user_id=u.user_id
         where a.user_id=#{userId}

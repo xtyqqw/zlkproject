@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.articleList.mapper;
 
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

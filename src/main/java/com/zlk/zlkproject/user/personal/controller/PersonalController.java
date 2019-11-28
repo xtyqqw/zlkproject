@@ -28,4 +28,12 @@ public class PersonalController {
     public String learnlook(){
         return "view/personal/learnrecord";
     }
+    /**
+     * 我的关注
+     * @return
+     */
+    @RequestMapping("/myfocus")
+    public String myfocus(){
+        return "view/personal/myfocus";
+    }
 }

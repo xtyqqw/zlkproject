@@ -168,7 +168,8 @@
                 </li>
             </a>
             <%--我的关注--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/myfocus"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-rate"
                        style="font-size: 25px;color: #D4D4D4;"></i>

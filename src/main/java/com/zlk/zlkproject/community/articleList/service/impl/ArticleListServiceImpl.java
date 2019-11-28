@@ -4,6 +4,7 @@ import com.zlk.zlkproject.community.articleList.mapper.ArticleListMapper;
 import com.zlk.zlkproject.community.articleList.service.ArticleListService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ import java.util.List;
 public class ArticleListServiceImpl implements ArticleListService {
     @Autowired
     private ArticleListMapper articleListMapper;
-
     @Override
     public List<Article> findArticleList(Pagination pagination) {
         Integer page = pagination.getPage();
@@ -48,4 +48,5 @@ public class ArticleListServiceImpl implements ArticleListService {
     public List<Article> findByUserId(String userId) {
         return articleListMapper.findByUserId(userId);
     }
+
 }

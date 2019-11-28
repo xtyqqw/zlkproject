@@ -26,12 +26,17 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public String findStateById(Integer sectionId) {
-        return sectionMapper.findStateById(sectionId);
+    public String findStateById(Integer userId,Integer sectionId) {
+        return sectionMapper.findStateById(userId,sectionId);
     }
 
     @Override
     public String findVideoAddrById(Integer sectionId) {
         return sectionMapper.findVideoAddrById(sectionId);
+    }
+
+    @Override
+    public Section findSectionBySectionIdAndUserId(Integer sectionId, Integer userId) {
+        return sectionMapper.findSectionBySectionIdAndUserId(sectionId, userId);
     }
 }

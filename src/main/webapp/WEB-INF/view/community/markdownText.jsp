@@ -15,8 +15,8 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .editormd-html-preview {
-                width: 90%;
-                margin: 0 auto;
+            width: 90%;
+            margin: 0 auto;
         }
     </style>
 </head>
