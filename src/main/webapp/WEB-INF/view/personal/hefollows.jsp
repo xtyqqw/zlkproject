@@ -194,8 +194,8 @@
         $(".ok_zi").click(function () {
             $.ajax({
                 url:"",
-                type:"get",
-                dataType:"ajax",
+                type:"GET",
+                dataType:"json",
                 success:function (data) {
                     if (data.trim()=="1"){
                         $(this).hide();

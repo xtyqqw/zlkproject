@@ -371,11 +371,12 @@
 <%--点击关注事件--%>
 <script type="text/javascript">
     $(document).ready(function () {
+        /*取消关注*/
         $(".ok_zi").click(function () {
             $.ajax({
-                url:"",
-                type:"get",
-                dataType:"ajax",
+                url:"/follow/defollow",
+                type:"GET",
+                dataType:"json",
                 success:function (data) {
                     if (data.trim()=="1"){
                         $(this).hide();
@@ -393,7 +394,7 @@
         });
         $(".no_zi").click(function () {
             $.ajax({
-                url:"",
+                url:"/follow/follow",
                 type:"GET",
                 dataType:"json",
                 success:function (data) {
