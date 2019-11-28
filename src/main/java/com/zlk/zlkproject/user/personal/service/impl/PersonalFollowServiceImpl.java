@@ -48,10 +48,13 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
                 if(type < 4){
                     //从文章表查询文章名
                     userAction.setArticleName(followerMapper.findArticleTittleById(userAction.getArticleId()));
+                    //查出文章创建者
                     pUserId = followerMapper.findUserIdByArticleId(userAction.getArticleId());
                 }else{
                     //从问题表查询问题名
-
+                    userAction.setArticleName(followerMapper.findArticleTittleById(userAction.getArticleId()));
+                    //查出问题提出者
+                    pUserId = followerMapper.findUserIdByArticleId(userAction.getArticleId());
                 }
                 if(type == 2 || type == 3 || type == 5 || type == 6){
                     //从用户表中查出用户名赋予problemUser
