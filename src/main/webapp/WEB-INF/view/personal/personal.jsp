@@ -144,7 +144,7 @@
                 </li>
             </a>
             <%--个人笔记--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/myNote/toMyNote" name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-edit"
                        style="font-size: 25px;color: #D4D4D4;"></i>
