@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.course_tag.mapper.CourseTagMapper">
+    <resultMap id="tagEntityMap" type="com.zlk.zlkproject.entity.Tag">
+        <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+        <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+        <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+    </resultMap>
+    <select id="findAllTags" resultMap="tagEntityMap">
+        select tag_id,tag_name,tag_type_id from tag
+    </select>
+</mapper>
