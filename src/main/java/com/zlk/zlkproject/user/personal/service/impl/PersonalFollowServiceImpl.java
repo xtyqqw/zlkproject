@@ -48,8 +48,8 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
             int length = list.size();
             for(int i = 0;i<length;i++){
                 UserAction userAction = list.get(i);
-                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreatTime()));
-                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreatTime()));
+                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreateTime()));
+                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreateTime()));
                 int type = userAction.getActionType();
                 String pUserId = "";
                 if(type < 4){
@@ -71,7 +71,7 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
                         userAction.setReplyUser(followerMapper.findUserNameByUserId(userAction.getReplyUserId()));
                     }
                 }
-                list.add(i,userAction);
+                list.set(i,userAction);
             }
             return list;
         }

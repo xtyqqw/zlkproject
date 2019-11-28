@@ -54,7 +54,7 @@ public class UserAction {
      * */
     private String articleName;
     /**动态创建时间*/
-    private Date creatTime;
+    private Date createTime;
     /**格式化后的时间*/
     private String dateFormat;
     /**距离当前时间*/
@@ -73,7 +73,7 @@ public class UserAction {
         this.problemUser = problemUser;
         this.articleId = articleId;
         this.articleName = articleName;
-        this.creatTime = creatTime;
+        this.createTime = createTime;
         this.dateFormat = dateFormat;
         this.leaveTime = leaveTime;
     }

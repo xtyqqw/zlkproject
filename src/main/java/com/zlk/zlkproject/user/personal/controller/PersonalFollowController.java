@@ -37,7 +37,6 @@ public class PersonalFollowController {
     @RequestMapping(value = "/follower")
     public ModelAndView personalFollow(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
-        MyFollower m = new MyFollower();
         String userId = (String) request.getSession().getAttribute("userId");
         //测试用数据
         userId = "1";
@@ -45,6 +44,7 @@ public class PersonalFollowController {
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
+            MyFollower m = new MyFollower();
             User user = followerList.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
@@ -56,7 +56,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollower(user.getUserId()).size());
             m.setList(personalFollowService.findUserAction(user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         mv.setViewName("/");
         mv.addObject("list",list);

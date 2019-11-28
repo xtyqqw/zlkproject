@@ -217,8 +217,10 @@
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
         var main = $(window.parent.document).find("#personal-iframe");
-        var thisheight = $(document).height()+30;
+        var thisheight = document.documentElement.clientHeight && $(document).height()+30;
         main.height(thisheight);
+        /*var ifm= document.getElementById("personal-iframe");
+        ifm.height=document.documentElement.clientHeight;*/
     });
 </script>
 <%--侧栏--%>
