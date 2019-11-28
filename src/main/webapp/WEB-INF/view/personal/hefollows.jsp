@@ -14,7 +14,7 @@
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
-        .hefollows{margin: 0;padding: 0;background-color: #FAFAFA;}
+        .hefollows{margin: 0;padding: 0;background-color: #FAFAFA;padding-bottom: 10px}
         .hefollows_top{
             height: 4px;
             background-color: #713ED7;
@@ -145,7 +145,7 @@
     <div class="hefollows_title">
         <p>TA关注的人</p>
     </div>
-<c:forEach begin="0" end="2">
+<c:forEach begin="0" end="6">
     <div class="hefollows_main">
         <div class="main_left">
             <!-- 头像 -->
@@ -192,14 +192,44 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".ok_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".ok").hide();
-            $(this).siblings(".jia,.no_zi").show();
+            $.ajax({
+                url:"",
+                type:"GET",
+                dataType:"json",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".ok").hide();
+                        $(this).siblings(".jia,.no_zi").show();
+                        layer.msg("取消关注成功！")
+                    } else {
+                        layer.msg("取消关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
         });
         $(".no_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".jia").hide();
-            $(this).siblings(".ok,.ok_zi").show();
+            $.ajax({
+                url:"",
+                type:"GET",
+                dataType:"json",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".jia").hide();
+                        $(this).siblings(".ok,.ok_zi").show();
+                        layer.msg("关注成功！");
+                    } else {
+                        layer.msg("关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
         });
     });
 </script>

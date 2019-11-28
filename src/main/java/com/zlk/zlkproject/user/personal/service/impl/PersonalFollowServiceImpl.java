@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.UserAction;
 import com.zlk.zlkproject.user.personal.mapper.FollowerMapper;
 import com.zlk.zlkproject.user.personal.service.PersonalFollowService;
@@ -21,17 +22,36 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
     @Autowired
     FollowerMapper followerMapper;
     @Override
-    public List<User> findFollower(String userId) {
-       List<User> list = followerMapper.findFollower(userId);
+    public List<User> findFollower(FollowerPage followerPage) {
+       followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
+       List<User> list = followerMapper.findFollower(followerPage);
+       return list;
+    }
+
+    @Override
+    public Integer findFollowerNum(String userId) {
+        return followerMapper.findFollowerNum(userId);
+    }
+
+    @Override
+    public List<User> findFollowed(FollowerPage followerPage) {
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
+        List<User> list = followerMapper.findFollowed(followerPage);
         return list;
     }
 
     @Override
-    public List<User> findFollowed(String userId) {
-        List<User> list = followerMapper.findFollowed(userId);
-        return list;
+    public Integer findFollowedNum(String userId) {
+        return followerMapper.findFollowedNum(userId);
     }
 
+    /**
+     * 方法用途：用于查询用户的最近7天内的最多6条动态
+     * 方法实现逻辑：根据数据库action表中的用户操作类型分别给对应属性赋值
+     *              1/4代表文章/问题的提出 2/5代表评论文章/回答问题 3/6代表回复文章的评论/回复问题的回答
+     * 参数类型: String 用于获取对应用户的Id
+     * 返回值类型: List<UserAction> 用户动态实体对象的集合
+     * */
     @Override
     public List<UserAction> findUserAction(String userId) {
         List<UserAction> list = followerMapper.findActionById(userId);
@@ -41,8 +61,8 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
             int length = list.size();
             for(int i = 0;i<length;i++){
                 UserAction userAction = list.get(i);
-                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreatTime()));
-                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreatTime()));
+                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreateTime()));
+                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreateTime()));
                 int type = userAction.getActionType();
                 String pUserId = "";
                 if(type < 4){
@@ -64,7 +84,7 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
                         userAction.setReplyUser(followerMapper.findUserNameByUserId(userAction.getReplyUserId()));
                     }
                 }
-                list.add(i,userAction);
+                list.set(i,userAction);
             }
             return list;
         }

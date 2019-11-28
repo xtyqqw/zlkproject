@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
+/**
+ * 查询个人学习看板
+ */
 @Controller
 @RequestMapping(value = "/duration")
 public class DurationController {
@@ -21,14 +22,14 @@ public class DurationController {
     @RequestMapping(value = "/select")
     @ResponseBody
     /*用视图和模型的方法查询最新的一条数据*/
-    public ModelAndView list(User user){
-        user.setUserId("2");
-        User lists=durationService.selectDuration(user);
+    public ModelAndView list(String userId){
+        /*user.setUserId("2");*/
+        User lists=durationService.selectDuration("2");
         ModelAndView mv=new ModelAndView();
         Integer addd= Arith.ride(lists.getUserDateTime());
         Integer ad = Arith.plus(lists.getUserDateTime());
         Integer all=durationService.findUser();
-        Integer rank=durationService.findUserById(user.getUserId());
+        Integer rank=durationService.findUserById(lists.getUserId());
         Integer rankall=Arith.divide(rank,all);
         mv.addObject("rankall",rankall);
         mv.addObject("ad",ad);
@@ -39,5 +40,13 @@ public class DurationController {
         mv.setViewName("view/personal/learnlook");
         return mv;
     }
+    /*@RequestMapping(value = "/sduration")
+    public ModelAndView selectUser(String userId){
+        User user=durationService.selectDuration("1");
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("user",user);
+        mv.setViewName("view/personal/personal");
+        return mv;
+    }*/
 
 }

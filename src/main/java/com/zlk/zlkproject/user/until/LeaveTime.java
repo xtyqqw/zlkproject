@@ -26,6 +26,11 @@ public class LeaveTime {
         String n = sdf.format(date);
         return n;
     }
+    public static String alterDate(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+        String n = sdf.format(date);
+        return n;
+    }
     public static void main(String[] args){
         Date date = new Date();
         long l = date.getTime()/1000;

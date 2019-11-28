@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.UserAction;
 
 import java.util.List;
@@ -13,9 +14,13 @@ import java.util.List;
  **/
 public interface PersonalFollowService {
     //查询关注自己的用户信息
-    List<User> findFollower(String userId);
+    List<User> findFollower(FollowerPage followerPage);
+    //查询关注自己的人数
+    Integer findFollowerNum(String userId);
     //查询自己关注的用户信息
-    List<User> findFollowed(String userId);
+    List<User> findFollowed(FollowerPage followerPage);
+    //查询自己关注的用户人数
+    Integer findFollowedNum(String userId);
     //查询用户动态
     List<UserAction> findUserAction(String userId);
     //添加关注
