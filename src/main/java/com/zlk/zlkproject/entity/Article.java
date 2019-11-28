@@ -20,7 +20,7 @@ import java.util.List;
 public class Article {
 
     /**文章id uuid*/
-    private String articleId = UUIDUtils.getId();
+    private String articleId;
     /**文章标题*/
     private String title;
     /**浏览数*/
