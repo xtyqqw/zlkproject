@@ -20,7 +20,7 @@ import java.util.List;
 public class Article {
 
     /**文章id uuid*/
-    private String articleId = UUIDUtils.getId();
+    private String articleId;
     /**文章标题*/
     private String title;
     /**浏览数*/
@@ -45,14 +45,12 @@ public class Article {
     private Integer zanCount;
     /**踩数*/
     private Integer caiCount;
-    /**举报*/
+    /**举报：0 是，1 否*/
     private String inform;
-    /**发文类型*/
+    /**发文类型：原创，转载，翻译*/
     private String createArticleType;
-    /**文章置顶*/
-    private String articleSetTop;
-    /**文章类别*/
-    private String tagName;
+    /**文章置顶：0 置顶，1 不置顶*/
+    private Integer articleSetTop;
     /**文章方向*/
     private String typeName;
     /**发文作者*/
@@ -61,7 +59,6 @@ public class Article {
     private String userId;
     /**发文时调用类别名称*/
     private List<Tag> tagList;
-
-    public Article(int id, String articleContent, String title, String articleDigest, String tagName, String typeName) {
-    }
+    /**审核：1 通过，0 不通过*/
+    private Integer approval;
 }

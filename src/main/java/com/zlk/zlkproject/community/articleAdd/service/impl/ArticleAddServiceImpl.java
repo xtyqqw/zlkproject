@@ -22,7 +22,7 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Autowired
     private ArticleAddMapper articleAddMapper;
 
-    @Override
+    /*@Override
     @Transactional
     public Integer createArticle(Article article, List<Integer> tagId) {
         articleAddMapper.createArticle(article,tagId);
@@ -31,6 +31,11 @@ public class ArticleAddServiceImpl implements ArticleAddService {
             articleAddMapper.setArticleTags(articleId,k);
         }
         return Integer.valueOf(articleId);
+    }*/
+
+    @Override
+    public Integer createArticle(Article article) {
+        return articleAddMapper.createArticle(article);
     }
 
     @Override

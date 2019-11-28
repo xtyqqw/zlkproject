@@ -1,9 +1,6 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
 import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
-
-import java.util.List;
 
 /**
  * @program: ArticleAddService
@@ -13,6 +10,9 @@ import java.util.List;
  */
 public interface ArticleAddService {
 
-    Integer createArticle(Article article,List<Integer> tagId);
+    Integer createArticle(Article article);
+
     void setArticleTags(String articleId,Integer tagId);
+
+    Integer addArticleToCommunityAction();
 }
