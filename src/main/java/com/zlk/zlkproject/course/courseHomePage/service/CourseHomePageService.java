@@ -2,12 +2,9 @@ package com.zlk.zlkproject.course.courseHomePage.service;
 
 
 import com.zlk.zlkproject.entity.Courses;
-
 import com.zlk.zlkproject.entity.Pagination;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 
 
@@ -43,4 +40,11 @@ public interface CourseHomePageService {
 
 
     Integer findCoursesCount(Pagination pagination);
+    /**
+     * 修改数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int updateByCoursesId(Courses courses);
 }

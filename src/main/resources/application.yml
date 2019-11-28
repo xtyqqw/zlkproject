@@ -1,7 +1,6 @@
 server:
   port: 8080
 
-
 spring:
   messages:
     basename: message/msg
@@ -64,26 +63,29 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
+  #  resources:
+  #    chain:
+  #      strategy:
+  #        content:
+  #          enabled: true
+  #          paths: /**
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
-
   main:
     allow-bean-definition-overriding: true
-
   jmx:
     enabled: false
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: 47.98.183.4:22122
+  tracker-list: localhost
   #通过nginx 访问地址
-  resHost: http://47.98.183.4
+  resHost: localhost
   storagePort: 8888/
   #缩略图配置
   thumb-image:

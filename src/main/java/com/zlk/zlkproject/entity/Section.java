@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,18 +28,22 @@ public class Section {
     private Integer sectionTime;
     /**小节序号 对应字段section_num*/
     private Integer sectionNum;
+    /**小节简介 对应数据库的 section_intro字段*/
+    private String sectionIntro;
 
     private List<UserSection> userSectionList;
 
     public Section() {
     }
 
-    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr, Integer sectionTime, Integer sectionNum) {
+    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr, Integer sectionTime
+            , Integer sectionNum,String sectionIntro) {
         this.sectionId = sectionId;
         this.chapterId = chapterId;
         this.sectionName = sectionName;
         this.videoAddr = videoAddr;
         this.sectionTime = sectionTime;
         this.sectionNum = sectionNum;
+        this.sectionIntro = sectionIntro;
     }
 }
