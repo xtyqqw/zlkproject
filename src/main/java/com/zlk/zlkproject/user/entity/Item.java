@@ -26,7 +26,8 @@ public class Item {
     /*观看时间*/
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date studyTime;
-
+    /*格式化时间*/
+    private String StuTime;
     public Item(String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime) {
         this.coursesName = coursesName;
         this.coverPic = coverPic;

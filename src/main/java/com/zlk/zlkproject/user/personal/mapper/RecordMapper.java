@@ -20,4 +20,18 @@ public interface RecordMapper {
      * @return
      */
     List<Item> selectCourses(String userId);
+
+    /**
+     * 查询小结状态总数
+     * @param userId
+     * @return
+     */
+    Integer selectUserSection(String userId);
+
+    /**
+     * 查询小结已完成数量
+     * @param userId
+     * @return
+     */
+    Integer selectUser(String userId);
 }

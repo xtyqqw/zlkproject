@@ -49,6 +49,7 @@
             </collection>
         </collection>
     </resultMap>
+    <!--查询我的文章-->
     <select id="selectArticles" resultMap="userMap" parameterType="java.lang.String">
         select
         user_id,

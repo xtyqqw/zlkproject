@@ -136,7 +136,7 @@
     <c:forEach items="${itemList}" var="item"><%--items=""--%>
         <div class="timeline">
             <div class="date">
-                <p class="year">${item.studyTime}</p>
+                <p class="year">${item.stuTime}</p>
 
                 <%--<p class="day">8-8</p>--%>
             </div>
@@ -168,7 +168,7 @@
                 <div class="layui-progress layui-progress-big" lay-showpercent="true"
                      style="width: 520px;height: 20px;background-color: #dfd9fd;
                             margin: 230px 30px auto 350px;float: right;position: fixed;">
-                    <div class="layui-progress-bar" lay-percent="60%"
+                    <div class="layui-progress-bar" lay-percent="${per}%"
                          style="height: 20px;background-color: #9e8dff;"></div>
                 </div>
             </div>
