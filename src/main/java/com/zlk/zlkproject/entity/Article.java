@@ -46,19 +46,25 @@ public class Article {
     /**踩数*/
     private Integer caiCount;
     /**举报：0 是，1 否*/
-    private String inform;
+    private Integer inform;
     /**发文类型：原创，转载，翻译*/
     private String createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
     /**文章方向*/
     private String typeName;
-    /**发文作者*/
-    private User author;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
     /**发文时调用类别名称*/
     private List<Tag> tagList;
-    /**审核：1 通过，0 不通过*/
+    /**审核：0 审核中，1 审核过，2 审核未过*/
     private Integer approval;
+
+    public Article() {
+    }
+
+    @Override
+    public String toString() {
+        return "{\"tagList\":\"" + tagList + "\"}";
+    }
 }
