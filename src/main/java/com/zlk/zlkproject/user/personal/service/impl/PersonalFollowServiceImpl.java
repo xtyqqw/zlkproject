@@ -32,6 +32,13 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
         return list;
     }
 
+    /**
+     * 方法用途：用于查询用户的最近7天内的最多6条动态
+     * 方法实现逻辑：根据数据库action表中的用户操作类型分别给对应属性赋值
+     *              1/4代表文章/问题的提出 2/5代表评论文章/回答问题 3/6代表回复文章的评论/回复问题的回答
+     * 参数类型: String 用于获取对应用户的Id
+     * 返回值类型: List<UserAction> 用户动态实体对象的集合
+     * */
     @Override
     public List<UserAction> findUserAction(String userId) {
         List<UserAction> list = followerMapper.findActionById(userId);

@@ -28,6 +28,12 @@ import java.util.Map;
 public class PersonalFollowController {
     @Autowired
     PersonalFollowService personalFollowService;
+
+    /**
+     * 方法用途：点击我的关注后调用该方法 查询出我关注的所有其他用户相关信息
+     * 参数类型：HttpServletRequest 用途 从session中后去操作的userId
+     * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
+     * */
     @RequestMapping(value = "/follower")
     public ModelAndView personalFollow(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
@@ -57,6 +63,11 @@ public class PersonalFollowController {
         return mv;
     }
 
+    /**
+     * 方法用途：点击‘n人管住了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 参数类型：String 用途：对应用户的userId用于查询相关信息
+     * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
+     * */
     @RequestMapping(value = "/userfollower")
     public ModelAndView userFollower(String userId){
         ModelAndView mv = new ModelAndView();
@@ -80,6 +91,11 @@ public class PersonalFollowController {
         return mv;
     }
 
+    /**
+     * 方法用途：点击‘ta关注了n人’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 参数类型：String 用途：对应用户的userId用于查询相关信息
+     * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
+     * */
     @RequestMapping(value = "/userfollowed")
     public ModelAndView userFollowed(String userId){
         ModelAndView mv = new ModelAndView();
@@ -103,6 +119,11 @@ public class PersonalFollowController {
         return mv;
     }
 
+    /**
+     * 方法用途：点击关注他后调用该方法
+     * 参数类型：HttpServletRequest 用途：获取操作用户的userId ；String 用途：获取将要关注的用户Id
+     * 返回值类型：map 内加入方法运行后返回的标识 1代表成功 其他表示失败
+     * */
     @RequestMapping(value = "/follow")
     @ResponseBody
     public Map<Object,String> follow(HttpServletRequest request,String userId){
@@ -114,6 +135,11 @@ public class PersonalFollowController {
         return map;
     }
 
+    /**
+     * 方法用途：点击已关注后调用该方法 用于取消关注
+     * 参数类型：HttpServletRequest 用途：获取操作用户的userId ；String 用途：获取将要取消关注的用户Id
+     * 返回值类型：map 内加入方法运行后返回的标识 1代表成功 其他表示失败
+     * */
     @RequestMapping(value = "/defollow")
     @ResponseBody
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
