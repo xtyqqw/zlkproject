@@ -2,6 +2,7 @@ package com.zlk.zlkproject.user.personal.controller;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.MyFollower;
 import com.zlk.zlkproject.user.personal.service.PersonalFollowService;
 import com.zlk.zlkproject.user.until.FiveMsg;
@@ -35,12 +36,17 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/follower")
-    public ModelAndView personalFollow(HttpServletRequest request){
-        ModelAndView mv = new ModelAndView();
+    @ResponseBody
+    public Map personalFollow(HttpServletRequest request, FollowerPage followerPage){
+        Map map = new HashMap();
         String userId = (String) request.getSession().getAttribute("userId");
         //测试用数据
         userId = "1";
-        List<User> followerList = personalFollowService.findFollower(userId);
+        //模拟数据
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+        followerPage.setUserId(userId);
+        List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
@@ -52,15 +58,14 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowed(user.getUserId()).size());
-            m.setFollowerNum(personalFollowService.findFollower(user.getUserId()).size());
+            m.setFollowedNum(personalFollowService.findFollowedNum(userId));
+            m.setFollowerNum(personalFollowService.findFollowerNum(userId));
             m.setList(personalFollowService.findUserAction(user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
         }
-        mv.setViewName("/");
-        mv.addObject("list",list);
-        return mv;
+        map.put("list",list);
+        return map;
     }
 
     /**
@@ -69,10 +74,11 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
-    public ModelAndView userFollower(String userId){
-        ModelAndView mv = new ModelAndView();
+    @ResponseBody
+    public Map userFollower(FollowerPage followerPage){
+        Map map = new HashMap();
         MyFollower m = new MyFollower();
-        List<User> followerList = personalFollowService.findFollower(userId);
+        List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
@@ -83,12 +89,13 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowed(user.getUserId()).size());
-            m.setFollowerNum(personalFollowService.findFollower(user.getUserId()).size());
+            m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
+            m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(m);
         }
-        return mv;
+        map.put("list",list);
+        return map;
     }
 
     /**
@@ -97,10 +104,10 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public ModelAndView userFollowed(String userId){
-        ModelAndView mv = new ModelAndView();
+    public Map userFollowed(FollowerPage followerPage){
+        Map map = new HashMap();
         MyFollower m = new MyFollower();
-        List<User> followerList = personalFollowService.findFollowed(userId);
+        List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
@@ -111,12 +118,13 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowed(user.getUserId()).size());
-            m.setFollowerNum(personalFollowService.findFollower(user.getUserId()).size());
+            m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
+            m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(m);
         }
-        return mv;
+        map.put("list",list);
+        return map;
     }
 
     /**
