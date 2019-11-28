@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.personal.mapper.RecordMapper">
+    <!--<resultMap id="userEntityMap" type="com.zlk.zlkproject.user.entity.Users">
+    <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <collection property="coursesList" ofType="com.zlk.zlkproject.entity.Courses" javaType="java.util.List" >
+            <id property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
+            <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
+            <result property="studentNum" column="student_num" javaType="java.lang.Integer"/>
+            <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"/>
+            <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
+            <result property="price" column="price" javaType="java.lang.Double"/>
+            <result property="coverPic" column="cover_pic" javaType="java.lang.String"/>
+            <result property="introduceVideo" column="introduce_video" javaType="java.lang.String"/>
+            <result property="introduceText" column="introduce_text" javaType="java.lang.String"/>
+            <result property="introducePic" column="introduce_pic" javaType="java.lang.String"/>
+            <result property="featureText" column="feature_text" javaType="java.lang.String"/>
+            <result property="featurePic" column="feature_pic" javaType="java.lang.String"/>
+            <collection property="chapterList" ofType="com.zlk.zlkproject.entity.Chapter" javaType="java.util.List" >
+                <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
+                <result property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
+                <result property="chapterName" column="chapter_name" javaType="java.lang.String"/>
+                <result property="chapterTime" column="chapter_time" javaType="java.util.Date"/>
+                <result property="chapterNum" column="chapter_num" javaType="java.lang.String"/>
+                <collection property="sectionList" ofType="com.zlk.zlkproject.entity.Section" javaType="java.util.List" >
+                    <id property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+                    <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
+                    <result property="sectionName" column="section_name" javaType="java.lang.String"/>
+                    <result property="videoAddr" column="video_addr" javaType="java.lang.String"/>
+                    <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>-->
+    <resultMap id="ItemMap" type="com.zlk.zlkproject.user.entity.Item">
+            <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
+            <result property="coverPic" column="cover_pic" javaType="java.lang.String"/>
+            <result property="chapterName" column="chapter_name" javaType="java.lang.String"/>
+            <result property="sectionName" column="section_name" javaType="java.lang.String"/>
+            <result property="studyTime" column="study_time" javaType="java.util.Date"/>
+    </resultMap>
+    <!--查询学习记录-->
+    <select id="selectCourses" resultMap="ItemMap" parameterType="java.lang.String">
+        select * from (select
+        u.user_id,
+        c.courses_id,
+        c.courses_name,
+        c.cover_pic,
+        ch.chapter_name,
+		s.section_name,
+		us.study_time
+        from user u
+        JOIN user_courses uc on u.user_id=uc.user_id
+        JOIN courses c on c.courses_id=uc.courses_id
+        JOIN chapter ch on ch.courses_id=c.courses_id
+		JOIN section s on s.chapter_id=ch.chapter_id
+		JOIN user_section us on us.section_id=s.section_id
+        where u.user_id='1' ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC
+
+    </select>
+</mapper>

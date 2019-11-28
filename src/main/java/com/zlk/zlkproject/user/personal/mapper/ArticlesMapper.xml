@@ -74,6 +74,6 @@
         from user
         JOIN article on user.user_id=article.article_user_id
         JOIN tag on article.article_tag_id=tag.tag_id
-        where user_id = #{userId}
+        where user_id = #{userId} order by update_time desc
     </select>
 </mapper>
