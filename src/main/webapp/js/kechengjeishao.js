@@ -4,24 +4,47 @@ $(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/kechengshipin/selectOne?id=1",
+        url :"/courseHomePage/selectCoursesByCoursesId?coursesId=1",
         data:"",
         success: function (data) {
-            console.log(data.id);
             console.log(data);
-            $("#kechengId").val(data.id);
+            $.ajax({
+                type : "POST",
+                async: false,
+                url :"/kecheng/seleUserCoursesByUserCourses",
+                data:"",
+                success: function (bool) {
+                    var canjia=JSON.stringify(bool);
+                    if (canjia){
+                        $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+                    }
+                }
+            });
+            $("#kechengId").val(data.courses.coursesId);
             $("#kechengshipin").html("<video width='100%' height='100%' controls style='border-radius: 5px;' >"
-                +"<source src="+data.url+" type='video/mp4'>"
+                +"<source src="+data.courses.introduceVideo+" type='video/mp4'>"
                 +"您的浏览器不支持 HTML5 video 标签。"
                 +" </video>");
-            $("#rensu").text(data.rensu+"人");
-            xingsu = data.haopindu;
-            baifansu = data.yiwanchengkecheng/data.zhongkecheng*100;
-            $("#jiage").text("￥"+data.jiage);
-            $("#xianmuliang").text(data.xiangmuliang);
-            $("#huoxingshu").text(data.yiwanchengkecheng+"/"+data.zhongkecheng);
-
-
+            $("#rensu").text(data.courses.studentNum+"人");
+            if(data.courses.studentNum<10){
+                xingsu=0;
+            }else if (data.courses.studentNum>=10&&data.courses.studentNum<50){
+                xingsu=1;
+            } else if (data.courses.studentNum>=50&&data.courses.studentNum<150){
+                xingsu=2;
+            } else if (data.courses.studentNum>=150&&data.courses.studentNum<300){
+                xingsu=3;
+            } else if (data.courses.studentNum>=300&&data.courses.studentNum<500){
+                xingsu=4;
+            }else if (data.courses.studentNum>=500){
+                xingsu=5;
+            }
+            $("#jiage").text("￥"+data.courses.price);
+            $("#xianmuliang").text(data.courses.chapterNum+"章"+data.courses.sectionNum+"节");
+            $("#jeishaozhengwen").html("<p>"+data.courses.introduceText+"</p>");
+            $("#tedianzhengwenneirong").html("<p>"+data.courses.featureText+"</p>");
+            $("#jeishaoImg").html("<img src='"+data.courses.introducePic+"'>");
+            $("#tedianImg").html("<img src='"+data.courses.featurePic+"'>");
         },
         error: function (data) {
             alert(JSON.stringify(data));
@@ -47,7 +70,7 @@ layui.use(['rate'], function(){
 layui.use('element', function(){
     var $ = layui.jquery
         ,element = layui.element;
-    element.progress('demo', baifansu+"%")
+    element.progress('demo', "80%")
 });
 $(".xinxi").mouseenter(function () {
     $(this).css("background-color","#fff");
@@ -68,4 +91,18 @@ $(".xinxi").mouseleave(function () {
     $("#kechengshipin").css("z-index","1");
     $(this).css("box-shadow","none");
     $(this).children().children().first().css("margin-top","0vw");
+});
+$("#jiaru").click(function () {
+    var kechengId = $("#kechengId").val();
+    $.ajax({
+        type : "POST",
+        async: false,
+        url :"/kecheng/insertCourses",
+        data: {"coursesId":kechengId},
+        success: function (data) {
+            console.log(data);
+        }
+    });
+    alert("加入成功");
+    $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
 });

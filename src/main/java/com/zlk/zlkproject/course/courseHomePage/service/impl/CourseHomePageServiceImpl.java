@@ -48,4 +48,9 @@ public class CourseHomePageServiceImpl implements CourseHomePageService {
     public Integer findCoursesCount(Pagination pagination) {
         return courseHomePageMapper.findCoursesCount(pagination);
     }
+
+    @Override
+    public int updateByCoursesId(Courses courses) {
+        return courseHomePageMapper.updateByCoursesId(courses);
+    }
 }

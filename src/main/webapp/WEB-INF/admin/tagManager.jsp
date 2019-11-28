@@ -48,10 +48,9 @@
         类别名称 <input type="text" required placeholder="请输入类别名称" name="tagName"><br>
         所属方向名称 <select required name="tagTypeName">
                         <option value="">请选择</option>
-                        <option value="HTML">HTML</option>
-                        <option value="MYSQL">MYSQL</option>
-                        <option value="JAVA">JAVA</option>
-                        <option value="LINUX">LINUX</option>
+                        <c:forEach var="typeName" items="${typeList}">
+                            <option value="${typeName.typeName}">${typeName.typeName}</option>
+                        </c:forEach>
                     </select><br>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
@@ -62,10 +61,9 @@
         类别名称 <input type="text" required id="tagName" placeholder="请输入类别名称" name="tagName"><br>
         所属方向名称 <select required name="tagTypeName" id="tagTypeName">
                         <option value="">请选择</option>
-                        <option value="HTML">HTML</option>
-                        <option value="MYSQL">MYSQL</option>
-                        <option value="JAVA">JAVA</option>
-                        <option value="LINUX">LINUX</option>
+                        <c:forEach var="typeName" items="${typeList}">
+                            <option value="${typeName.typeName}">${typeName.typeName}</option>
+                        </c:forEach>
                     </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>

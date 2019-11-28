@@ -4,6 +4,7 @@ import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Section;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +47,19 @@ public class SectionController {
         return mv;
     }
 
+    /**
+     *  查找当前用户当前课程学习状态
+     *@method findState
+     *@params [sectionId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/11/23  11:32
+     */
     @RequestMapping(value = "/findState")
     @ResponseBody
     public Map<String, Object> findState(Integer sectionId) throws Exception{
-        String state = sectionService.findStateById(sectionId);
+        Integer userId = 1;
+        String state = sectionService.findStateById(userId,sectionId);
         if (state ==null){
             state = "未开始";
         }
@@ -58,6 +68,14 @@ public class SectionController {
         return map;
     }
 
+    /**
+     *  根据小节跳转视频
+     *@method findVideoAddr
+     *@params [sectionId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/11/23  11:33
+     */
     @RequestMapping(value = "/findVideoAddr")
     @ResponseBody
     public Map<String,Object> findVideoAddr(Integer sectionId) throws Exception{
@@ -65,5 +83,18 @@ public class SectionController {
         Map<String,Object> map = new HashMap<>();
         map.put("videoAddr",videoAddr);
         return map;
+    }
+
+    /**
+     * 根据课程id分页查询课程下的所有小节
+     * @param coureseId
+     * @param page
+     * @param limit
+     * @return 带有课程信息的map
+     */
+    @RequestMapping(value ="/findSectionDetails")
+    @ResponseBody
+    public Map findSectionDetails(Integer coureseId,Integer page,Integer limit){
+        return sectionService.findSectionByCourseIdLimit(coureseId,page,limit);
     }
 }

@@ -47,6 +47,8 @@ public class TagController {
         ModelAndView mv= new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/tagManager");
+        List<Type> typeList = typeService.findAllTypeName();
+        mv.addObject("typeList",typeList);
         return mv;
     }
 
@@ -84,6 +86,8 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
@@ -93,11 +97,15 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
     }
@@ -118,6 +126,8 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
@@ -129,11 +139,15 @@ public class TagController {
             mv.setViewName("admin/tagManager");
             //日志记录类别修改
             logUtil.setLog(request,"修改了类别名称为："+tagByTagId.getTagName()+"的信息");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
     }
