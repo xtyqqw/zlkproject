@@ -18,4 +18,8 @@ public interface PersonalFollowService {
     List<User> findFollowed(String userId);
     //查询用户动态
     List<UserAction> findUserAction(String userId);
+    //添加关注
+    Integer follow(String toUserId,String fromUserId);
+    //取消关注
+    Integer deFollow(String toUserId,String fromUserId);
 }

@@ -8,11 +8,14 @@ import com.zlk.zlkproject.user.until.FiveMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: PersonalFollowController
@@ -98,5 +101,27 @@ public class PersonalFollowController {
             list.add(m);
         }
         return mv;
+    }
+
+    @RequestMapping(value = "/follow")
+    @ResponseBody
+    public Map<Object,String> follow(HttpServletRequest request,String userId){
+        Map<Object,String> map = new HashMap<>();
+        String userId1 = (String) request.getSession().getAttribute("userId");
+        Integer result = personalFollowService.follow(userId1,userId);
+        String code = result.toString();
+        map.put("code",code);
+        return map;
+    }
+
+    @RequestMapping(value = "/defollow")
+    @ResponseBody
+    public Map<Object,String> deFollow(HttpServletRequest request,String userId){
+        Map<Object,String> map = new HashMap<>();
+        String userId1 = (String) request.getSession().getAttribute("userId");
+        Integer result = personalFollowService.deFollow(userId1,userId);
+        String code = result.toString();
+        map.put("code",code);
+        return map;
     }
 }

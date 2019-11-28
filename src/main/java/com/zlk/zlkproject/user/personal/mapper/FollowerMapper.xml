@@ -74,4 +74,14 @@
     <select id="findUserIdByQuestionId" parameterType="java.lang.String" resultType="java.lang.String">
         select user_id from question where question_id = #{questionId}
     </select>
+
+    <!--加关注-->
+    <insert id="follow" parameterType="java.lang.String">
+        insert into attention (to_user_id,from_user_id)value (#{toUserId},#{fromUserId})
+    </insert>
+
+    <!--取消关注-->
+    <delete id="deFollow" parameterType="java.lang.String">
+        delete from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId}
+    </delete>
 </mapper>

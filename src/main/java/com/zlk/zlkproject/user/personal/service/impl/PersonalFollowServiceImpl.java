@@ -70,4 +70,14 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
         }
 
     }
+
+    @Override
+    public Integer follow(String toUserId, String fromUserId) {
+        return followerMapper.follow(toUserId,fromUserId);
+    }
+
+    @Override
+    public Integer deFollow(String toUserId, String fromUserId) {
+        return followerMapper.deFollow(toUserId,fromUserId);
+    }
 }

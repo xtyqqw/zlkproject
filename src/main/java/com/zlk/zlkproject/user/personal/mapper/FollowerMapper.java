@@ -24,4 +24,8 @@ public interface FollowerMapper {
     String findQuestionTittleById(String questionId);
     //根据问题id查询问题提出人id
     String findUserIdByQuestionId(String questionId);
+    //添加关注
+    Integer follow(String toUserId,String fromUserId);
+    //取消关注
+    Integer deFollow(String toUserId,String fromUserId);
 }
