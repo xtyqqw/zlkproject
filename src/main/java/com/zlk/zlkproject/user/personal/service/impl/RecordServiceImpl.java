@@ -1,15 +1,13 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
-import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.user.entity.Item;
-import com.zlk.zlkproject.user.entity.Users;
 import com.zlk.zlkproject.user.personal.mapper.RecordMapper;
 import com.zlk.zlkproject.user.personal.service.RecordService;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 /**
  * @ClassName： RecordServiceImpl
  * @Description： 查询学习记录
@@ -31,8 +29,22 @@ public class RecordServiceImpl implements RecordService {
      */
     @Override
     public List<Item> selectCourses(String userId){
-
-        return recordMapper.selectCourses(userId);
+        /*return recordMapper.selectCourses(userId);*/
+        List<Item> list=recordMapper.selectCourses(userId);
+        int s=list.size();
+        for(int i=0;i<s;i++){
+            Item item=list.get(i);
+            item.setStuTime(LeaveTime.alterDate(item.getStudyTime()));
+            list.set(i,item);
+        }
+        return list;
     }
-
+    @Override
+    public Integer selectUserSection(String userId){
+        return recordMapper.selectUserSection(userId);
+    }
+    @Override
+    public Integer selectUser(String userId){
+        return recordMapper.selectUser(userId);
+    }
 }

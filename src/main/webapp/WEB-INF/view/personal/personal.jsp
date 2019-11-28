@@ -135,7 +135,7 @@
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="<%=request.getContextPath()%>/personal/learnrecord"
+            <a href="<%=request.getContextPath()%>/courses/icourses"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-form"

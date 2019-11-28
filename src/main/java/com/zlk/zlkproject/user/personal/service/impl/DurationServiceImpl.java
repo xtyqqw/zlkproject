@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.jws.soap.SOAPBinding;
 import java.awt.*;
 import java.util.List;
-
+/*查询个人学习看板*/
 @Service
 public class DurationServiceImpl implements DurationService {
     /*加载外部资源*/
@@ -17,8 +17,8 @@ public class DurationServiceImpl implements DurationService {
     private DurationMapper durationMapper;
     /*重写方法*/
     @Override
-    public User selectDuration(User user){
-        return durationMapper.selectDuration(user);
+    public User selectDuration(String userId){
+        return durationMapper.selectDuration(userId);
 
     }
     @Override

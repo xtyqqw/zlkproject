@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.user.personal.controller;
 
-import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.user.entity.Item;
-import com.zlk.zlkproject.user.entity.Users;
 import com.zlk.zlkproject.user.personal.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,32 +27,28 @@ public class RecordController {
     /**
      * 跳转页面
      * @return
-     */
+     *//*
     @RequestMapping(value = "/tocourses")
     public String to(){
         return "view/personal/learnrecord";
-    }
+    }*/
 
     /**
      * 根据userId查询学习记录
      * @param userId
      * @return
      */
-    /*@RequestMapping(value = "/coursess")
-    public ModelAndView selectCourses(String userId){
-        List<String> list=recordService.selectCourses("1");
-        *//*List<Item> itemList=service.ser("1");*//*
-        ModelAndView mv=new ModelAndView();
-        mv.addObject("list",list);
-        mv.setViewName("view/personal/learnrecord");
-        return mv;
-    }*/
-    @RequestMapping(value = "icourses")
+    @RequestMapping(value = "/icourses")
     public ModelAndView selectItem(String userId){
         List<Item> itemList=recordService.selectCourses("1");
+        Integer sum=recordService.selectUserSection("1");
+        Integer done=recordService.selectUser("1");
+        long per=Math.round((100*done)/sum);
         ModelAndView mv=new ModelAndView();
+        mv.addObject("per",per);
         mv.addObject("itemList",itemList);
         mv.setViewName("view/personal/learnrecord");
         return mv;
     }
+
 }
