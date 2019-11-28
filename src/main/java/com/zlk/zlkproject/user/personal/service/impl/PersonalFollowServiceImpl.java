@@ -52,14 +52,15 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
                     pUserId = followerMapper.findUserIdByArticleId(userAction.getArticleId());
                 }else{
                     //从问题表查询问题名
-                    userAction.setArticleName(followerMapper.findArticleTittleById(userAction.getArticleId()));
+                    userAction.setArticleName(followerMapper.findQuestionTittleById(userAction.getArticleId()));
                     //查出问题提出者
-                    pUserId = followerMapper.findUserIdByArticleId(userAction.getArticleId());
+                    pUserId = followerMapper.findUserIdByQuestionId(userAction.getArticleId());
                 }
                 if(type == 2 || type == 3 || type == 5 || type == 6){
                     //从用户表中查出用户名赋予problemUser
                     userAction.setProblemUser(followerMapper.findUserNameByUserId(pUserId));
                     if(type == 3 || type == 6){
+                        //查询回复目标人
                         userAction.setReplyUser(followerMapper.findUserNameByUserId(userAction.getReplyUserId()));
                     }
                 }

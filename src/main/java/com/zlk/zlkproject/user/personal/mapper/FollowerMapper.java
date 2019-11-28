@@ -20,4 +20,8 @@ public interface FollowerMapper {
     String findUserNameByUserId(String userId);
     //根据文章id查询用户id
     String findUserIdByArticleId(String articleId);
+    //根据id查询问题标题
+    String findQuestionTittleById(String questionId);
+    //根据问题id查询问题提出人id
+    String findUserIdByQuestionId(String questionId);
 }

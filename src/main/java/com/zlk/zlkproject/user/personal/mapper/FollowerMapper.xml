@@ -64,4 +64,14 @@
     <select id="findUserIdByArticleId" parameterType="java.lang.String" resultType="java.lang.String">
         select user_id from article where article_id = #{articleId}
     </select>
+
+    <!--根据id查询问题标题-->
+    <select id="findQuestionTittleById" parameterType="java.lang.String" resultType="java.lang.String">
+        select question_tittle from question where question_id = #{questionId}
+    </select>
+
+    <!--根据问题id查询问题提出人id-->
+    <select id="findUserIdByQuestionId" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_id from question where question_id = #{questionId}
+    </select>
 </mapper>
