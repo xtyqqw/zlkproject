@@ -372,35 +372,66 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".ok_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".ok").hide();
-            $(this).siblings(".jia,.no_zi").show();
+            $.ajax({
+                url:"",
+                type:"get",
+                dataType:"ajax",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".ok").hide();
+                        $(this).siblings(".jia,.no_zi").show();
+                        layer.msg("取消关注成功！")
+                    } else {
+                        layer.msg("取消关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
         });
         $(".no_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".jia").hide();
-            $(this).siblings(".ok,.ok_zi").show();
+            $.ajax({
+                url:"",
+                type:"GET",
+                dataType:"json",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".jia").hide();
+                        $(this).siblings(".ok,.ok_zi").show();
+                        layer.msg("关注成功！");
+                    } else {
+                        layer.msg("关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
         });
     });
 </script>
 <%--点击上下箭头显示隐藏动态--%>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".down_yes_news:gt(2):lt(5)").hide();
-        /*$(".down_yes_news:eq(2)").hide();
+        /*$(".down_yes_news:gt(1)").hide();
+        $(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
+        $(".down_yes_news:eq(2)").hide();
         $(".down_yes_news:eq(3)").hide();
         $(".down_yes_news:eq(4)").hide();
-        $(".down_yes_news:eq(5)").hide();*/
+        $(".down_yes_news:eq(5)").hide();
         //点击向上箭头
         $(".layui-icon-up").click(function () {
             $(this).hide();
             $(this).siblings(".layui-icon-down").show();
-            $(this).parent(".down").find(".down_yes_news:gt(2):lt(5)").slideUp();//动态信息向上隐藏
+            $(this).parent(".down").find(".down_yes_news:gt(1):lt(5)").slideUp();//动态信息向上隐藏
         });
         $(".layui-icon-down").click(function () {
             $(this).hide();
             $(this).siblings(".layui-icon-up").show();
-            $(this).siblings().find(".down_yes_news").slideDown();//动态信息向下展示
+            $(this).parent(".down").find(".down_yes_news").slideDown();//动态信息向下展示
         });
     });
 </script>

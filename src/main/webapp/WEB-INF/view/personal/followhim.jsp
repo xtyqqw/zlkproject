@@ -14,7 +14,7 @@
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
-        .followhim{margin: 0;padding: 0;background-color: #FAFAFA;}
+        .followhim{margin: 0;padding: 0;background-color: #FAFAFA;padding-bottom: 10px}
         .followhim_top{
             height: 4px;
             background-color: #713ED7;
@@ -146,7 +146,7 @@
         <p>关注TA的人</p>
     </div>
     <%--<div class="flow_div"></div>--%>
-<c:forEach begin="0" end="2">
+<c:forEach begin="0" end="5">
     <div class="followhim_main">
         <div class="main_left">
             <!-- 头像 -->
@@ -189,6 +189,51 @@
 </c:forEach>
 
 </div>
+<%--点击关注事件--%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ok_zi").click(function () {
+            $.ajax({
+                url:"",
+                type:"get",
+                dataType:"ajax",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".ok").hide();
+                        $(this).siblings(".jia,.no_zi").show();
+                        layer.msg("取消关注成功！")
+                    } else {
+                        layer.msg("取消关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
+        });
+        $(".no_zi").click(function () {
+            $.ajax({
+                url:"",
+                type:"GET",
+                dataType:"json",
+                success:function (data) {
+                    if (data.trim()=="1"){
+                        $(this).hide();
+                        $(this).siblings(".jia").hide();
+                        $(this).siblings(".ok,.ok_zi").show();
+                        layer.msg("关注成功！");
+                    } else {
+                        layer.msg("关注失败，请重新操作！");
+                    }
+                },
+                error:function (data) {
+                    layer.msg("加载超时，请稍后再试！");
+                }
+            });
+        });
+    });
+</script>
 <%--流加载--%>
 <%--<script type="text/javascript">
     layui.use('flow', function () {
@@ -257,20 +302,5 @@
         });
     });
 </script>--%>
-<%--点击关注事件--%>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".ok_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".ok").hide();
-            $(this).siblings(".jia,.no_zi").show();
-        });
-        $(".no_zi").click(function () {
-            $(this).hide();
-            $(this).siblings(".jia").hide();
-            $(this).siblings(".ok,.ok_zi").show();
-        });
-    });
-</script>
 </body>
 </html>
