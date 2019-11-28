@@ -147,17 +147,16 @@
          }
         .div-FAQ1:hover{
             box-shadow:-2px 0 3px -1px #ebebeb,-2px 0 3px -1px #ebebeb,2px 0 3px -1px  #ebebeb;
-            background-color: #ffffff ;
+            background: url("img/remenpinglunbai.png") no-repeat right top #ffffff ;
         }
         .div-FAQ1{
             width: 100%;
-            background-color: #fcf6ff;
             position: relative;
             border-radius:5px;
             height: 200px;
+            background: url("img/remenpinglun.png") no-repeat right top #fbf9ff;
         }
         .sanjiao{
-            background: url("img/remenpinglun.png");
             position: relative;
             left: 790px;
             width: 70px;
@@ -313,15 +312,16 @@
                 setTimeout(function(){
                     var lis = [];
                     var limit =2;
-                    var data={"page":page,"limit":limit};
+                    var commentUserId=1;
+                    var data={"page":page,"limit":limit,"commentUserId":commentUserId};
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"/Faq/findFaqList",
+                        url:"/comment/findCommentListByUserId",
                         dataType:"json",
                         data:data,
                         success:function(result) {
-                            layui.each(result.faqList, function (i, faq) {
+                            layui.each(result.commentList, function (i, comment) {
                                 lis.push(
 
 
@@ -329,7 +329,7 @@
                                 '<div class="div-FAQ1" ><br><br>' +
                                 '<div class="daniu">' +
                                 '<div class="touxiang"></div>' +
-                                '<div class="mingzi">我是大牛</div>'+
+                                '<div class="mingzi">'+comment.userRealname+'</div>'+
                                 '<div class="daxingxing">'+
                                 '<ul class="kechengxiaojeipingfen_ul">'+
                                 '<li id="xing1">'+
@@ -350,9 +350,9 @@
                                 '</ul>'+
                                 '</div>'+
                                 '</div>'+
-                                '<p class="p-FAQ3">问题详情图问题详情图问题详情图问题详情图问题详情图问题详情图问题详情图问题详情图问题详情图问题详情图问题详情</p><br>'+
+                                '<p class="p-FAQ3">'+comment.comments+'</p><br>'+
                                 '<div class="p-FAQ5"><p><span class="badge badge-warning" contenteditable="true">讲师回复</span></p> </div>'+
-                                '<p class="p-FAQ4">老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老师回答老老师回答老师回答老师回答老师回答老师回答老师回答</p><br>'+
+                                '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
                                 '<div style="clear: both"></div>'+
                                 '<div class="sanjiao"></div>'+
                                 '</div>'+
