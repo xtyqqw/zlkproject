@@ -122,7 +122,7 @@
     <div class="header">
         <div style="margin-top: 20px;margin-left: -1220px">
             <a class="btn btn-default" href="<%=request.getContextPath() %>/question/hint" role="button">
-                &lsaquo;&nbsp;&nbsp;返回</a>
+                <_moz_generated_content_before></_moz_generated_content_before> &lsaquo;&nbsp;&nbsp;返回</a>
         </div>
         <div style="margin-top: -35px;">
             <h4 style="color: #778899">问题编辑</h4>
