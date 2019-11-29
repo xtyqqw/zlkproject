@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>文章编辑页面</title>
@@ -21,14 +22,14 @@
             height: 60px;
             background-color: #F5F5F5;
         }
-        .header input {
+        .header #a1 {
             float: left;
             width: 80px;
             padding: 10px;
             margin-left: 67px;
             margin-top: 9px;
         }
-        .header a {
+        .header #a2 {
             text-decoration:none !important;
             color: #8D8D8D;
             font-size: 25px;
@@ -41,8 +42,8 @@
 <body>
     <div>
         <div class="header">
-            <input class="btn btn-default" type="button" value="<&nbsp;&nbsp;返回" οnclick="window.history.go(-1)">
-            <a href="javascript:void(0)">我的草稿</a>
+            <a id="a1" class="btn btn-default" type="button" href="<%=request.getContextPath() %>/community/article-guide"><&nbsp;&nbsp;返回</a>
+            <a href="javascript:void(0)" id="a2">我的草稿</a>
         </div>
         <form action="<%=request.getContextPath() %>/community/article-add" method="post" class="form-group" id="addArticle">
             <div class="form-group input-group input-group-lg" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
@@ -52,7 +53,7 @@
                 <%--<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" placeholder="开始撰写..."></textarea>
                 <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
                 <textarea class="editormd-html-textarea" name="articleContent"></textarea>--%>
-                <textarea style="display: none;/*position:absolute; height:0; width:0; border:0;*/" name="articleContent" class="form-control"></textarea>
+                <textarea style="display: none;" name="articleContent" class="form-control"></textarea>
             </div>
             <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
                 <select class="selectpicker dropup form-control show-tick" data-dropup-auto="false" title="请选择方向" name="typeName">
@@ -63,18 +64,10 @@
                 </select>
             </div>
             <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
-                <select class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="setTags" title="选择标签1/3" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="3">
-                    <option value="java">java</option>
-                    <option value="java开发">java开发</option>
-                    <option value="spring">spring</option>
-                    <option value="mysql">mysql</option>
-                    <option value="技术生活">技术生活</option>
-                    <option value="面试题目">面试题目</option>
-                    <option value="redis">redis</option>
-                    <option value="c">c</option>
-                    <option value="云计算">云计算</option>
-                    <option value="c#">c#</option>
-                    <option value="c++">c++</option>
+                <select id="selectTag" class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="tagName" title="选择标签1/1" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="1">
+                    <c:forEach items="${tagsList}" var="tags">
+                        <option value="${tags.tagId}">${tags.tagName}</option>
+                    </c:forEach>
                 </select>
             </div>
             <div class="form-group" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
@@ -101,7 +94,6 @@
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
     <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-select/1.9.1/js/bootstrap-select.min.js"></script>
-    <%--<script src="https://cdn.bootcss.com/jquery-dropdown/2.0.0/jquery.dropdown.js"></script>--%>
     <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrapValidator.min.js"></script>
 
     <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
@@ -147,7 +139,7 @@
 
         $(function () {
             $('#addArticle').bootstrapValidator({
-                excluded: [':disabled'],//排除无需验证的控件
+                excluded: [":disabled"],//关键配置，表示只对于禁用域不进行验证，其他的表单元素都要验证
                 //表单框里右侧的icon
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
@@ -162,8 +154,8 @@
                             },
                             stringLength: {
                                 min: 0,
-                                max: 20,
-                                message: '标题长度必须在20位以内'
+                                max: 30,
+                                message: '标题长度必须在30位以内'
                             }
                         }
                     },
@@ -171,11 +163,6 @@
                         validators: {
                             notEmpty: {
                                 message: '文章内容不能为空'
-                            },
-                            stringLength: {
-                                min: 0,
-                                max: 20,
-                                message: '文章内容必须在20位以内'
                             }
                         }
                     },*/
@@ -186,8 +173,8 @@
                             },
                             stringLength: {
                                 min: 0,
-                                max: 50,
-                                message: '标题长度必须在50位以内'
+                                max: 100,
+                                message: '摘要长度必须在100位以内'
                             }
                         }
                     },
@@ -198,7 +185,7 @@
                             }
                         }
                     },
-                    setTags: {
+                    tagName: {
                         validators: {
                             notEmpty: {
                                 message: '请至少选择一个文章标签'
@@ -212,7 +199,7 @@
                             }
                         }
                     }
-                },
+                }
                 /*submitHandler: function (validator, form, submitButton) {
                     alert("发表成功");
                 }*/
