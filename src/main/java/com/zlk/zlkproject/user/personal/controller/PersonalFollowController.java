@@ -140,7 +140,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
         mv.setViewName("view/personal/followhim");
@@ -179,7 +179,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
         mv.addObject("list",list);
