@@ -183,13 +183,13 @@
 <iframe name="attention" style="border: 1px solid #fff;width: 1000px;margin: 50px 22px;
 			float: left;display: none;height: 800px;"></iframe>
 <%--没有关注信息--%>
-<c:if test="${list.size} == 0">
+<c:if test="${list.size()} == 0">
     <div class="nomain">
         <h2>对不起，你当前暂无任何关注信息</h2>
     </div>
 </c:if>
 <%--有关注信息--%>
-<c:if test="${list.size} > 0">
+<c:if test="${list.size()!= 0}">
     <div class="main">
         <c:forEach items="${list}" var="bignum" >
             <div class="waik">
@@ -236,7 +236,7 @@
                     </div>
                 </div>
                 <!-- 无最新动态 -->
-                <c:if test="${bignum.size}==0">
+                <c:if test="${bignum.list.size()==0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
                             <%--无动态--%>
@@ -244,15 +244,15 @@
                     </div>
                 </c:if>
                 <%--有最新动态--%>
-                <c:if test="${bignum.size}>0">
+                <c:if test="${bignum.list.size()!=0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
                         <c:forEach items="${bignum.list}" var="snum">
                             <%--1上传文章--%>
-                            <c:if test="${snum.actionType}==1">
+                            <c:if test="${snum.actionType==1}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">上传了一篇文章：</span>
                                         <span class="article">
@@ -263,10 +263,10 @@
                                 </div>
                             </c:if>
                             <%--2评论文章--%>
-                            <c:if test="${snum.actionType}==2">
+                            <c:if test="${snum.actionType==2}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">评论了</span>
                                         <span class="reply_user">
@@ -281,10 +281,10 @@
                                 </div>
                             </c:if>
                             <%--3回复评论--%>
-                            <c:if test="${snum.actionType}==3">
+                            <c:if test="${snum.actionType == 3}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">回复了</span>
                                         <span class="reply_user">
@@ -303,10 +303,10 @@
                                 </div>
                             </c:if>
                             <%--4提出问题--%>
-                            <c:if test="${snum.actionType}==4">
+                            <c:if test="${snum.actionType ==4}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">提出了一个问题：</span>
                                         <span class="article">
@@ -317,10 +317,10 @@
                                 </div>
                             </c:if>
                             <%--5回答问题--%>
-                            <c:if test="${snum.actionType}==5">
+                            <c:if test="${snum.actionType ==5}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">回答了</span>
                                         <span class="reply_user">
@@ -335,10 +335,10 @@
                                 </div>
                             </c:if>
                             <%--6回复答案--%>
-                            <c:if test="${snum.actionType}==6">
+                            <c:if test="${snum.actionType ==6}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
-                                        <p class="user">${snum.userRealname}</p>
+                                        <p class="user">${bignum.userRealname}&nbsp;</p>
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">回复了</span>
                                         <span class="reply_user">

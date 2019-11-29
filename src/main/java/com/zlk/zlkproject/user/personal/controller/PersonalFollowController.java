@@ -39,10 +39,45 @@ public class PersonalFollowController {
      * 参数类型：HttpServletRequest 用途 从session中后去操作的userId
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
+//    @RequestMapping(value = "/follower")
+//    @ResponseBody
+//    public Map personalFollow(HttpServletRequest request, FollowerPage followerPage){
+//        Map map = new HashMap();
+//        String userId = (String) request.getSession().getAttribute("userId");
+//        //测试用数据
+//        userId = "1";
+//        //模拟数据
+//        followerPage.setLimit(10);
+//        followerPage.setPage(1);
+//        followerPage.setUserId(userId);
+//        List<User> followerList = personalFollowService.findFollower(followerPage);
+//        List<MyFollower> list = new ArrayList<MyFollower>();
+//        //根据查询出的User获取页面所需参数
+//        for(int i = 0;i < followerList.size();i++){
+//            MyFollower m = new MyFollower();
+//            User user = followerList.get(i);
+//            m.setUserId(user.getUserId());
+//            m.setUserRealname(user.getUserRealname());
+//            m.setUserAllTime(user.getUserAllTime());
+//            m.setUserDateTime(user.getUserDateTime());
+//            m.setUserImg(user.getUserImg());
+//            m.setUserRealimg(user.getUserRealimg());
+//            m.setFollowedNum(personalFollowService.findFollowedNum(userId));
+//            m.setFollowerNum(personalFollowService.findFollowerNum(userId));
+//            m.setList(personalFollowService.findUserAction(user.getUserId()));
+//            m = FiveMsg.userFiveMsg(m);
+//            list.add(i,m);
+//        }
+//        map.put("list",list);
+//        return map;
+//    }
+
     @RequestMapping(value = "/follower")
-    @ResponseBody
-    public Map personalFollow(HttpServletRequest request, FollowerPage followerPage){
+    public ModelAndView personalFollow(HttpServletRequest request, FollowerPage followerPage){
+        ModelAndView mv = new ModelAndView();
         Map map = new HashMap();
+        followerPage.setLimit(5);
+        followerPage.setPage(1);
         String userId = (String) request.getSession().getAttribute("userId");
         //测试用数据
         userId = "1";
@@ -68,8 +103,10 @@ public class PersonalFollowController {
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
         }
+        mv.setViewName("view/personal/myfocus");
+        mv.addObject("list",list);
         map.put("list",list);
-        return map;
+        return mv;
     }
 
     /**
