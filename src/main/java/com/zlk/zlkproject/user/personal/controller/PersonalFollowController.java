@@ -110,14 +110,14 @@ public class PersonalFollowController {
     }
 
     /**
-     * 方法用途：点击‘n人管住了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 方法用途：点击‘n人关注了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
      * 参数类型：String 用途：对应用户的userId用于查询相关信息
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
-    @ResponseBody
-    public Map userFollower(FollowerPage followerPage){
+    public ModelAndView userFollower(FollowerPage followerPage){
         Map map = new HashMap();
+        ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
@@ -136,7 +136,9 @@ public class PersonalFollowController {
             list.add(m);
         }
         map.put("list",list);
-        return map;
+        mv.setViewName("view/personal/followhim");
+        mv.addObject("list",list);
+        return mv;
     }
 
     /**
@@ -145,8 +147,9 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public Map userFollowed(FollowerPage followerPage){
+    public ModelAndView userFollowed(FollowerPage followerPage){
         Map map = new HashMap();
+        ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
@@ -165,7 +168,9 @@ public class PersonalFollowController {
             list.add(m);
         }
         map.put("list",list);
-        return map;
+        mv.addObject("list",list);
+        mv.setViewName("/view/personal/hefollows");
+        return mv;
     }
 
     /**
