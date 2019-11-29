@@ -85,10 +85,6 @@
         .main_left .attention_type .jia{
             border: 1px solid #343434;
             background-color: #343434;
-            display: none;
-        }
-        .main_left .attention_type .no_zi{
-            display: none;
         }
         .main_left .attention_type .ok_zi,.no_zi{
             font-size: 14px;
@@ -155,11 +151,15 @@
             <!-- 关注状态 -->
             <div class="attention_type">
                 <!-- 已关注 -->
-                <p class="ok">√</p>
-                <p class="ok_zi">已关注</p>
+                <c:if test="${list.followType==1}">
+                    <p class="ok">√</p>
+                    <p class="ok_zi">已关注</p>
+                </c:if>
                 <!-- 加关注 -->
-                <p class="jia">+</p>
-                <p class="no_zi">加关注</p>
+                <c:if test="${list.followType==0}">
+                    <p class="jia">+</p>
+                    <p class="no_zi">加关注</p>
+                </c:if>
             </div>
             <!-- 个性签名 -->
             <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
