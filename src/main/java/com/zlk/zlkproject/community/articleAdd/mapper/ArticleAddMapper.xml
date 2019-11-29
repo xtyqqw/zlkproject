@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.articleAdd.mapper.ArticleAddMapper">
+    <resultMap id="articleAddEntityMap" type="com.zlk.zlkproject.entity.Article">
+        <id column="article_id" property="articleId" javaType="java.lang.String"/>
+        <result column="title" property="title" javaType="java.lang.String"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.Integer"/>
+        <result column="comment_count" property="commentCount" javaType="java.lang.Integer"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" javaType="java.util.Date"/>
+        <result column="figures" property="figures" javaType="java.lang.String"/>
+        <result column="figures_real" property="figuresReal" javaType="java.lang.String"/>
+        <result column="article_digest" property="articleDigest" javaType="java.lang.String"/>
+        <result column="article_content" property="articleContent" javaType="java.lang.String"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="inform" property="inform" javaType="java.lang.String"/>
+        <result column="create_article_type" property="createArticleType" javaType="java.lang.String"/>
+        <result column="article_set_top" property="articleSetTop" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="approval" property="approval" javaType="java.lang.String"/>
+        <result column="user_id" property="userId" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="tagEntityMap" type="com.zlk.zlkproject.entity.Tag">
+        <id column="tag_id" property="tagId"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="tag_type_id" property="tagTypeId"/>
+        <result column="tag_type_name" property="tagTypeName"/>
+    </resultMap>
+
+    <select id="getTagsToAddArticle" resultMap="tagEntityMap" parameterType="java.lang.Integer">
+        select T.tag_id,T.tag_name from tag T
+    </select>
+
+    <insert id="createArticle" parameterType="com.zlk.zlkproject.entity.Article">
+        insert into article (article_id,title,figures,figures_real,article_digest,article_content,create_article_type,type_name,create_time,update_time,approval,article_set_top,user_id,tag_name)
+        values (#{articleId},#{title},#{figures},#{figuresReal},#{articleDigest},#{articleContent},#{createArticleType},#{typeName},#{createTime},#{updateTime},#{approval},#{articleSetTop},#{userId},#{tagName})
+    </insert>
+
+    <insert id="setArticleTags">
+        insert into article_tag (tag_id,article_id)
+        values (#{tagId},#{articleId})
+    </insert>
+
+    <insert id="addArticleToCommunityAction" parameterType="com.zlk.zlkproject.user.entity.Action">
+        insert into actions (action_id,action_type,article_id,user_id)
+        values (#{actionId},#{actionType},#{articleId},#{userId})
+    </insert>
+
+    <select id="getAddArticleOfApproval" resultMap="articleAddEntityMap" parameterType="java.lang.String">
+        select A.article_id,A.approval from article A where article_id=#{articleId}
+    </select>
+</mapper>

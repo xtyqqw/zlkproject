@@ -84,4 +84,17 @@ public class SectionController {
         map.put("videoAddr",videoAddr);
         return map;
     }
+
+    /**
+     * 根据课程id分页查询课程下的所有小节
+     * @param coureseId
+     * @param page
+     * @param limit
+     * @return 带有课程信息的map
+     */
+    @RequestMapping(value ="/findSectionDetails")
+    @ResponseBody
+    public Map findSectionDetails(Integer coureseId,Integer page,Integer limit){
+        return sectionService.findSectionByCourseIdLimit(coureseId,page,limit);
+    }
 }

@@ -29,8 +29,8 @@
             text-indent: 2em;
             line-height: 24px;
             display:block;
-            max-height: 400px;
-            min-height: 400px;
+            max-height: 300px;
+            min-height: 300px;
             margin-top: 30px;
             overflow:hidden;
             width:200px;
@@ -64,6 +64,7 @@
     </style>
 </head>
 <body>
+<%--<p style="color: red">${msg}</p>--%>
 <script type="text/javascript">
     //验证手机号
     function phone() {
@@ -136,13 +137,13 @@
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
                 <legend>请填写个人信息</legend>
             </fieldset>
-            <form class="waik" action="<%=request.getContextPath()%>/recruit/recruits" method="post" onsubmit="return check()">
+            <form class="waik" action="<%=request.getContextPath()%>/recruit/recruits" method="post" onsubmit="return check()" >
                 <ul class="box">
                     <li>
                         <label>姓名</label>
                         <input type="text" placeholder="请输入姓名" required="required"
-                               name="recruitName" id="recruit_name" />
-                        <span class="error"></span>
+                               name="recruitName" id="recruit_name" oninput="if(value.length>2)value=value.slice(0,10)" autocomplete="off"/>
+                        <span class="error" style="color: grey">(不能多于十个文字)</span>
                     </li>
                     <li>
                         <label>学历</label>
@@ -175,8 +176,8 @@
                     <li>
                         <label>地址</label>
                         <input type="text" placeholder="请输入居住地址" required="required"
-                               name="recruitSite" id="recruit_site" />
-                        <span class="error" id="error"></span>
+                               name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)"/>
+                        <span class="error" id="error" style="color: grey">(不能多余五十个字)</span>
                     </li>
                     <li>
                         <label>性别</label>
@@ -186,8 +187,8 @@
                         </select>
                     </li><br />
                 </ul>
-                <div class="submit">
-                    <input class="login" type="submit" id="submit" value="提交" />
+                <div class="submit">                   <%--添加提交弹窗--%>
+                    <input class="login" type="submit" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
                 </div>
             </form>
         </div>
@@ -195,10 +196,13 @@
     </div>
 </div>
     <script>
+
         layui.use(['element', 'layer'], function(){
             var element = layui.element;
             var layer = layui.layer;
         });
+
     </script>
+
 </body>
 </html>
