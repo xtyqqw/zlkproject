@@ -34,7 +34,7 @@ layui.use('flow', function(){
                                 lis.push('<div class="zhengzaikan" ><i class="iconfont icon-play-circle"></i></div>');
                                 color="#FFBb00";
                             }else{
-                                lis.push('<div class="haimeikan"><i class="iconfont icon-md-lock "></i></div>');
+                                lis.push('<div class="haimeikan"><i class="iconfont icon-suoguanbi "></i></div>');
                                 color="rgb(100,100,100)";
                             }
 
