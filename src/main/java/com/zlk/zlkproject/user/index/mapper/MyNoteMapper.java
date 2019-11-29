@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.mapper;
 
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.user.entity.StuNote;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
