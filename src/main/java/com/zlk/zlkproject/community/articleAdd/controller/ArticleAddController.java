@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -46,8 +45,12 @@ public class ArticleAddController {
 
     //发文编辑页面接口
     @GetMapping(value = "/community/articleEdit")
-    public String editArticle(HttpServletRequest request, HttpServletResponse response) {
-        return "view/community/articleEdit";
+    public ModelAndView editArticle(HttpServletRequest request, Tag tag) {
+        ModelAndView mv=new ModelAndView();
+        List<Tag> tagsList=articleAddService.getTagsToAddArticle(tag);
+        mv.addObject("tagsList",tagsList);
+        mv.setViewName("view/community/articleEdit");
+        return mv;
     }
 
     /**
@@ -59,7 +62,7 @@ public class ArticleAddController {
      * @date: 2019/11/28 12:11
      */
     @RequestMapping(value = "/community/article-add")
-    public ModelAndView insert(Article article, HttpServletRequest request, @RequestParam(value = "setTags")String setTags) {
+    public ModelAndView insert(Article article, HttpServletRequest request/*, @RequestParam(value = "setTags")String setTags*/) {
         ModelAndView mv=new ModelAndView();
         //使用主键生成器给主键赋值
         article.setArticleId(UUIDUtils.getId());
@@ -72,8 +75,8 @@ public class ArticleAddController {
         //HttpSession session=request.getSession();
         article.setUserId(UUIDUtils.getId());
         Integer flag=articleAddService.createArticle(article);
-        if (flag==1 && setTags!=null) {
-            //解析前台选择的类别
+        if (flag==1/* && setTags!=null*/) {
+            /*//解析前台选择的类别
             List<Tag> tagList= JSONArray.parseArray(setTags,Tag.class);
             List<Integer> integerList=new ArrayList<>();
             for (Tag tag : tagList) {
@@ -87,7 +90,7 @@ public class ArticleAddController {
                     mv.setViewName("view/community/articleEdit");
                     return mv;
                 }
-            }
+            }*/
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("view/community/articleGuide");
