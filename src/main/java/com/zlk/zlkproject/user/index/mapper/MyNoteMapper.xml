@@ -35,4 +35,8 @@
     <delete id="deleteNoteBySnId" parameterType="com.zlk.zlkproject.entity.StuNote">
         delete from stu_note where sn_id=#{snId}
     </delete>
+    <!--笔记分页查询-->
+    <select id="findNotesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="StuNoteMap">
+        select * from stu_note limit #{startPage},#{limit}
+    </select>
 </mapper>

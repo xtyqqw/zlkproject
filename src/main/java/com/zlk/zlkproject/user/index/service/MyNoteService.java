@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.user.index.service;
 
-import com.zlk.zlkproject.entity.StuNote;
+import com.zlk.zlkproject.entity.Pagination;
 
 import java.util.List;
 
@@ -33,4 +33,10 @@ public interface MyNoteService {
      * @return Integer
      */
     Integer deleteNoteBySnId(Integer snId);
+    /**
+     *流加载查询个人笔记
+     * @param pagination
+     * @return List<StuNote>
+     */
+    List<StuNote> findNotesList(Pagination pagination);
 }

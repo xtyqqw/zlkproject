@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.user.index.service.serviceimpl;
 
-import com.zlk.zlkproject.entity.StuNote;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.index.mapper.MyNoteMapper;
 import com.zlk.zlkproject.user.index.service.MyNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +54,18 @@ public class MyNoteServiceImpl implements MyNoteService {
     @Override
     public Integer deleteNoteBySnId(Integer snId) {
         return myNoteMapper.deleteNoteBySnId(snId);
+    }
+    /**
+     *流加载查询个人笔记
+     * @param pagination
+     * @return List<StuNote>
+     */
+    @Override
+    public List<StuNote> findNotesList(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return myNoteMapper.findNotesList(pagination);
     }
 }
