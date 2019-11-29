@@ -152,7 +152,7 @@
         <p class="noperson">没有任何人关注ta</p>
     </c:if>
     <c:if test="${list.size()!=0}">
-        <c:forEach items="list" var="list">
+        <c:forEach items="${list}" var="list">
             <div class="followhim_main">
                 <div class="main_left">
                     <!-- 头像 -->
