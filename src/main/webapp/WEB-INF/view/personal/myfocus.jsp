@@ -212,9 +212,9 @@
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
                         <!-- 关注人情况 -->
                         <div class="attention_person">
-                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId="+${bignum.userId}
+                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId=${bignum.userId}"
                                name="attention" class="attention_him">${bignum.followerNum}人关注了ta</a>
-                            <a href="<%=request.getContextPath()%>/follow/userfollowed?userId="+${bignum.userId}
+                            <a href="<%=request.getContextPath()%>/follow/userfollowed?userId=${bignum.userId}"
                                name="attention" class="he_attention">ta关注了${bignum.followedNum}人</a>
                         </div>
                     </div>

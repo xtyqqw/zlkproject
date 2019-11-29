@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.user.entity.StuNote;
 import com.zlk.zlkproject.user.index.service.MyNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

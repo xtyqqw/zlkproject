@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.user.index.mapper.MyNoteMapper">
-    <resultMap type="com.zlk.zlkproject.entity.StuNote" id="StuNoteMap">
+    <resultMap type="com.zlk.zlkproject.user.entity.StuNote" id="StuNoteMap">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
         <result property="snSectionId" column="sn_section_id" javaType="java.lang.Integer"/>
         <result property="snUserId" column="sn_user_id" javaType="java.lang.String"/>
@@ -22,7 +22,7 @@
        select count(*) from stu_note where sn_user_id = #{snUserId}
     </select>
     <!--根据ID修改个人笔记-->
-    <update id="editNoteBySnId" parameterType="com.zlk.zlkproject.entity.StuNote">
+    <update id="editNoteBySnId" parameterType="com.zlk.zlkproject.user.entity.StuNote">
         update stu_note
         <set>
             <if test="content!=null and content!=''">
@@ -32,7 +32,7 @@
         where sn_id = #{snId}
     </update>
     <!--根据ID删除个人笔记-->
-    <delete id="deleteNoteBySnId" parameterType="com.zlk.zlkproject.entity.StuNote">
+    <delete id="deleteNoteBySnId" parameterType="com.zlk.zlkproject.user.entity.StuNote">
         delete from stu_note where sn_id=#{snId}
     </delete>
     <!--笔记分页查询-->

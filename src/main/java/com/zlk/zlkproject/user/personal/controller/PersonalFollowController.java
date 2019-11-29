@@ -97,8 +97,8 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowedNum(userId));
-            m.setFollowerNum(personalFollowService.findFollowerNum(userId));
+            m.setFollowedNum(personalFollowService.findFollowedNum(user.getUserId()));
+            m.setFollowerNum(personalFollowService.findFollowerNum(user.getUserId()));
             m.setList(personalFollowService.findUserAction(user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
@@ -121,6 +121,7 @@ public class PersonalFollowController {
         //模拟数据
         followerPage.setLimit(10);
         followerPage.setPage(1);
+
         userId = "1";
 
         ModelAndView mv = new ModelAndView();
@@ -140,7 +141,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
         mv.setViewName("view/personal/followhim");
@@ -179,7 +180,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
         mv.addObject("list",list);

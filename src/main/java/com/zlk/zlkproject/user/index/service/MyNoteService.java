@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.service;
 
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.user.entity.StuNote;
 
 import java.util.List;
 
