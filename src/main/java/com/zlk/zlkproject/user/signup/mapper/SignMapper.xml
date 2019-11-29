@@ -38,4 +38,8 @@
         select * from user where user_phonenum =  #{phonenum} and user_pwd = #{userPwd} limit 0,1
     </select>
 
+    <update id="changePwd" parameterType="com.zlk.zlkproject.entity.User">
+        update user set user_pwd = #{userPwd} where user_phonenum = #{userPhonenum}
+    </update>
+
 </mapper>
