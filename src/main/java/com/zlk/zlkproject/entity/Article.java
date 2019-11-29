@@ -53,6 +53,8 @@ public class Article {
     private Integer articleSetTop;
     /**文章方向*/
     private String typeName;
+
+    private String tagName;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
     /**发文时调用类别名称*/
@@ -61,10 +63,5 @@ public class Article {
     private Integer approval;
 
     public Article() {
-    }
-
-    @Override
-    public String toString() {
-        return "{\"tagList\":\"" + tagList + "\"}";
     }
 }

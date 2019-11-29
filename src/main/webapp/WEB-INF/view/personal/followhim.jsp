@@ -85,10 +85,6 @@
         .main_left .attention_type .jia{
             border: 1px solid #343434;
             background-color: #343434;
-            display: none;
-        }
-        .main_left .attention_type .no_zi{
-            display: none;
         }
         .main_left .attention_type .ok_zi,.no_zi{
             font-size: 14px;
@@ -137,6 +133,13 @@
             color: #676767;
             padding: 2px 0;
         }
+        /*没有人关注*/
+        .followhim .noperson{
+            text-align: center;
+            padding: 30px;
+            font-size: 18px;
+            color:#999;
+        }
     </style>
 </head>
 <body>
@@ -145,56 +148,65 @@
     <div class="followhim_title">
         <p>关注TA的人</p>
     </div>
-    <div class="flow_div"></div>
-<%--<c:forEach begin="0" end="5">
-    <div class="followhim_main">
-        <div class="main_left">
-            <!-- 头像 -->
-            <img src="../../img/headimg.jpg" />
-            <!-- 昵称 -->
-            <p class="name">骑驴看唱本</p>
-            <!-- 关注状态 -->
-            <div class="attention_type">
-                <!-- 已关注 -->
-                <p class="ok">√</p>
-                <p class="ok_zi">已关注</p>
-                <!-- 加关注 -->
-                <p class="jia">+</p>
-                <p class="no_zi">加关注</p>
+    <c:if test="${list.size()==0}">
+        <p class="noperson">没有任何人关注ta</p>
+    </c:if>
+    <c:if test="${list.size()!=0}">
+        <c:forEach items="list" var="list">
+            <div class="followhim_main">
+                <div class="main_left">
+                    <!-- 头像 -->
+                    <img src="../../img/headimg.jpg" />
+                    <!-- 昵称 -->
+                    <p class="name">${list.userRealname}</p>
+                    <!-- 关注状态 -->
+                    <div class="attention_type">
+                        <!-- 已关注 -->
+                        <c:if test="${list.followType==1}">
+                            <p class="ok">√</p>
+                            <p class="ok_zi">已关注</p>
+                        </c:if>
+                        <!-- 加关注 -->
+                        <c:if test="${list.followType==0}">
+                            <p class="jia">+</p>
+                            <p class="no_zi">加关注</p>
+                        </c:if>
+                    </div>
+                    <!-- 个性签名 -->
+                    <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
+                    <!-- 关注人情况 -->
+                    <div class="attention_person">
+                        <a class="attention_him">${list.followedNum}人关注了ta</a>
+                        <a class="he_attention">ta关注了${list.followerNum}人</a>
+                    </div>
+                </div>
+                <div class="main_right">
+                    <div class="xuexili">
+                        <i class="layui-icon layui-icon-chart"
+                           style="float: left;margin-right: 10px;font-size: 20px;"></i>
+                        <p>学习力：${list.studyPower}</p>
+                        <p>学习效率：${list.studyEfficiency}</p>
+                    </div>
+                    <div class="learntime">
+                        <i class="layui-icon layui-icon-log"
+                           style="float: left;margin-right: 10px;font-size: 20px;"></i>
+                        <p>学习时长：${list.userDateTime}小时</p>
+                        <p>学习成长量：${list.studyGrowup}</p>
+                        <p>技能水平：${list.studyStandard}</p>
+                    </div>
+                </div>
             </div>
-            <!-- 个性签名 -->
-            <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
-            <!-- 关注人情况 -->
-            <div class="attention_person">
-                <a class="attention_him">n人关注了ta</a>
-                <a class="he_attention">ta关注了n人</a>
-            </div>
-        </div>
-        <div class="main_right">
-            <div class="xuexili">
-                <i class="layui-icon layui-icon-chart"
-                   style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                <p>学习力：710</p>
-                <p>学习效率：510</p>
-            </div>
-            <div class="learntime">
-                <i class="layui-icon layui-icon-log"
-                   style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                <p>学习时长：7小时</p>
-                <p>学习成长量：13</p>
-                <p>技能水平：100</p>
-            </div>
-        </div>
-    </div>
-</c:forEach>--%>
+        </c:forEach>
+    </c:if>
 
+    <%--<div class="flow_div"></div>--%>
 </div>
 <%--点击关注事件--%>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".ok_zi").click(function () {
             $.ajax({
-                url:"",
+                url:"/follow/defollow",
                 type:"GET",
                 dataType:"json",
                 success:function (data) {
@@ -214,7 +226,7 @@
         });
         $(".no_zi").click(function () {
             $.ajax({
-                url:"",
+                url:"/follow/follow",
                 type:"GET",
                 dataType:"json",
                 success:function (data) {
@@ -235,7 +247,7 @@
     });
 </script>
 <%--流加载--%>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -301,6 +313,6 @@
             }
         });
     });
-</script>
+</script>--%>
 </body>
 </html>
