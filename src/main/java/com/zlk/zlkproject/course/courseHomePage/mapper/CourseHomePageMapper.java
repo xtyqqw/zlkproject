@@ -43,5 +43,12 @@ public interface CourseHomePageMapper {
 
     Integer findCoursesCount(Pagination pagination);
 
+    /**
+     * 修改数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int updateByCoursesId(Courses courses);
 }
 

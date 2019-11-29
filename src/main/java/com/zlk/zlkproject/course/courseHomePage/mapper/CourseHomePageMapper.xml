@@ -16,11 +16,19 @@
         <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
+
         <!--<collection property="UserCoursesList" ofType="com.zlk.zlkproject.entity.UserCourses">
         <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
         <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
         <result property="lastStudyTime" column="last_study_time" javaType="java.util.Date"></result>
         </collection>-->
+        <collection property="chapterList" ofType="com.zlk.zlkproject.entity.Chapter">
+            <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"></id>
+            <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
+            <result property="chapterName" column="chapter_name" javaType="java.lang.String"></result>
+            <result property="chapterTime" column="chapter_time" javaType="java.lang.Integer"></result>
+            <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
+        </collection>
     </resultMap>
     <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
 		select * from courses where courses_id=#{coursesId}
@@ -38,5 +46,43 @@
 		select count(1) from courses
 	</select>
 
-
+    <update id="updateByCoursesId">
+        update courses
+        <set>
+            <if test="coursesName != null and coursesName != ''">
+                courses_name = #{coursesName},
+            </if>
+            <if test="studentNum != null and studentNum != ''">
+                student_num = #{studentNum},
+            </if>
+            <if test="chapterNum != null and chapterNum != ''">
+                chapter_num = #{chapterNum},
+            </if>
+            <if test="sectionNum != null and sectionNum != ''">
+                section_num = #{sectionNum},
+            </if>
+            <if test="price != null and price != ''">
+                price = #{price},
+            </if>
+            <if test="coverPic != null and coverPic != ''">
+                cover_pic = #{coverPic},
+            </if>
+            <if test="introduceVideo != null and introduceVideo != ''">
+                introduce_video = #{introduceVideo},
+            </if>
+            <if test="introduceText != null and introduceText != ''">
+                introduce_text = #{introduceText},
+            </if>
+            <if test="introducePic != null and introducePic != ''">
+                introduce_pic = #{introducePic},
+            </if>
+            <if test="featureText != null and featureText != ''">
+                feature_text = #{featureText},
+            </if>
+            <if test="featurePic != null and featurePic != ''">
+                feature_pic = #{featurePic},
+            </if>
+        </set>
+        where courses_id = #{coursesId}
+    </update>
 </mapper>

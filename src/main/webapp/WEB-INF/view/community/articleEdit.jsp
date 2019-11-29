@@ -12,66 +12,98 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrapValidator.min.css" rel="stylesheet">
     <style>
-        header {
+        .header {
             width: auto;
             height: 60px;
             background-color: #F5F5F5;
-            /*border-style: solid;
-            border-top-style: none;
-            border-left-style: none;
-            border-right-style: none;*/
         }
-        header input {
-            margin-left: -240px;
-            margin-top: 7px;
+        .header input {
+            float: left;
+            width: 80px;
             padding: 10px;
+            margin-left: 67px;
+            margin-top: 9px;
         }
-        header a {
+        .header a {
             text-decoration:none !important;
-            margin-top: 100px;
             color: #8D8D8D;
             font-size: 25px;
-            margin-left: 800px;
+            float: right;
+            margin-top: 9px;
+            margin-right: 67px;
         }
     </style>
 </head>
 <body>
     <div>
-        <header>
-            <input class="btn btn-default" type="button" value="<&nbsp;&nbsp;返回" οnclick="">
+        <div class="header">
+            <input class="btn btn-default" type="button" value="<&nbsp;&nbsp;返回" οnclick="window.history.go(-1)">
             <a href="javascript:void(0)">我的草稿</a>
-        </header>
-        <form action="<%=request.getContextPath() %>/" method="post">
-            <div class="input-group input-group-lg" style="width: 1210px; margin-left: 70px; margin-top: 20px; margin-bottom: 20px;">
+        </div>
+        <form action="<%=request.getContextPath() %>/community/article-add" method="post" class="form-group" id="addArticle">
+            <div class="form-group input-group input-group-lg" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
                 <input type="text" class="form-control" name="title" placeholder="简明扼要的描述你的标题">
             </div>
-            <div id="test-editormd">
-                <textarea style="display:none;" name="articleContent"></textarea>
+            <div id="test-editormd" class="form-group">
+                <%--<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" placeholder="开始撰写..."></textarea>
+                <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+                <textarea class="editormd-html-textarea" name="articleContent"></textarea>--%>
+                <textarea style="display: none;/*position:absolute; height:0; width:0; border:0;*/" name="articleContent" class="form-control"></textarea>
             </div>
-            <div style="width: 1210px; margin-left: 70px; margin-top: 20px; margin-bottom: 20px;">
-                <input type="text" class="form-control" name="title" placeholder="请输入文章摘要">
+            <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
+                <select class="selectpicker dropup form-control show-tick" data-dropup-auto="false" title="请选择方向" name="typeName">
+                    <option value="java">java</option>
+                    <option value="linux">linux</option>
+                    <option value="html">html</option>
+                    <option value="mysql">mysql</option>
+                </select>
             </div>
-            <div class="col-sm-5" style="margin-left: -130px">
-                <label for="" class="radio-inline">
-                    <input type="radio" name="createArticleType" id="" value="0">
-                    原创
+            <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
+                <select class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="setTags" title="选择标签1/3" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="3">
+                    <option value="java">java</option>
+                    <option value="java开发">java开发</option>
+                    <option value="spring">spring</option>
+                    <option value="mysql">mysql</option>
+                    <option value="技术生活">技术生活</option>
+                    <option value="面试题目">面试题目</option>
+                    <option value="redis">redis</option>
+                    <option value="c">c</option>
+                    <option value="云计算">云计算</option>
+                    <option value="c#">c#</option>
+                    <option value="c++">c++</option>
+                </select>
+            </div>
+            <div class="form-group" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
+                <input type="text" class="form-control" name="articleDigest" placeholder="请输入文章摘要">
+            </div>
+            <div class="form-group" style="margin-left: -1043px;">
+                <label class="radio-inline">
+                    <input type="radio" value="原创" name="createArticleType">原创
                 </label>
-                <label for="" class="radio-inline">
-                    <input type="radio" name="createArticleType" id="" value="1">
-                    转载
+                <label class="radio-inline">
+                    <input type="radio" value="转载" name="createArticleType">转载
                 </label>
-                <label for="" class="radio-inline">
-                    <input type="radio" name="createArticleType" id="" value="2">
-                    翻译
+                <label class="radio-inline">
+                    <input type="radio" value="翻译" name="createArticleType">翻译
                 </label>
             </div>
-            <button type="submit" class="btn btn-info col-md-1" style="margin-right: 70px; margin-top: 40px; background-color: #1296db">发表文章</button>
+            <div class="form-group">
+                <button type="submit" οnclick="addArticle();" class="btn btn-info col-md-1 btn-group" style="margin-left: 1170px; margin-top: 40px; background-color: #1296db">发表文章</button>
+            </div>
         </form>
     </div>
 
-    <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <%--受js文件运行机制所致，引用时一定要注意顺序--%>
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
+    <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-select/1.9.1/js/bootstrap-select.min.js"></script>
+    <%--<script src="https://cdn.bootcss.com/jquery-dropdown/2.0.0/jquery.dropdown.js"></script>--%>
+    <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrapValidator.min.js"></script>
+
     <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
@@ -82,16 +114,108 @@
     <script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
     <script type="text/javascript">
+        //MarkDown组件
         var testEditor;
         $(function() {
             testEditor = editormd("test-editormd", {
                 width : "90%",
                 height : 640,
+                placeholder : "开始编辑...",
                 syncScrolling : "single",
+                //你的lib目录的路径
                 path : "../editormd/lib/",
+                emoji : true,
+                taskList : true,
+                tocm : true,
+                tex : true,
+                flowChart : true,
+                sequenceDiagram : true,
+                //dialogLockScreen : true,
+                //dialogShowMask : false,
+                //dialogDraggable : true,
+                dialogMaskOpacity : 0.4,
+                dialogMaskBgColor : "#000",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/imageUpload"
+                imageUploadURL : "/uploadfile"
+                //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
+                //saveHTMLToTextarea : true
+            });
+        });
+
+        $('.selectpicker').selectpicker('refresh');
+
+        $(function () {
+            $('#addArticle').bootstrapValidator({
+                excluded: [':disabled'],//排除无需验证的控件
+                //表单框里右侧的icon
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    title: {
+                        validators: {
+                            notEmpty: {
+                                message: '标题不能为空'
+                            },
+                            stringLength: {
+                                min: 0,
+                                max: 20,
+                                message: '标题长度必须在20位以内'
+                            }
+                        }
+                    },
+                    /*articleContent: {
+                        validators: {
+                            notEmpty: {
+                                message: '文章内容不能为空'
+                            },
+                            stringLength: {
+                                min: 0,
+                                max: 20,
+                                message: '文章内容必须在20位以内'
+                            }
+                        }
+                    },*/
+                    articleDigest: {
+                        validators: {
+                            notEmpty: {
+                                message: '文章摘要不能为空'
+                            },
+                            stringLength: {
+                                min: 0,
+                                max: 50,
+                                message: '标题长度必须在50位以内'
+                            }
+                        }
+                    },
+                    createArticleType: {
+                        validators: {
+                            notEmpty: {
+                                message: '请选择发文类型'
+                            }
+                        }
+                    },
+                    setTags: {
+                        validators: {
+                            notEmpty: {
+                                message: '请至少选择一个文章标签'
+                            }
+                        }
+                    },
+                    typeName: {
+                        validators: {
+                            notEmpty: {
+                                message: '请至少选择一个文章方向'
+                            }
+                        }
+                    }
+                },
+                /*submitHandler: function (validator, form, submitButton) {
+                    alert("发表成功");
+                }*/
             });
         });
     </script>
