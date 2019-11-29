@@ -84,7 +84,7 @@
             </ul>
         </div>
         <%--javascript:void(0)--%>
-        <a href="<%=request.getContextPath() %>/markdown" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
+        <a href="<%=request.getContextPath() %>/community/articleEdit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
     </div>
     <%--<%@include file="../../jsp/footer.jsp"%>--%>
 </body>

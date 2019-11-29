@@ -3,6 +3,7 @@ package com.zlk.zlkproject.community.articleAdd.service.impl;
 import com.zlk.zlkproject.community.articleAdd.mapper.ArticleAddMapper;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.user.entity.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Override
     public List<Article> getAddArticleOfApproval(Action action) {
         return null;
+    }
+
+    @Override
+    public List<Tag> getTagsToAddArticle(Tag tag) {
+        return articleAddMapper.getTagsToAddArticle(tag);
     }
 }
