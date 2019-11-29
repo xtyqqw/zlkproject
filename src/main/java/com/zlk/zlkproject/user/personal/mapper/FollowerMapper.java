@@ -33,4 +33,6 @@ public interface FollowerMapper {
     Integer follow(String toUserId,String fromUserId);
     //取消关注
     Integer deFollow(String toUserId,String fromUserId);
+    //查询量用户之间关注关系
+    Integer findAFollowedB(String toUserId,String fromUserId);
 }
