@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.faq.mapper.FaqerMapper">
+    <resultMap id="faqEntityMap" type="com.zlk.zlkproject.entity.Faq">
+        <id property="faqId" column="faq_id" javaType="java.lang.Integer"></id>
+        <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
+        <result property="answer" column="answer" javaType="java.lang.String"></result>
+        <result property="question" column="question" javaType="java.lang.String"></result>
+
+    </resultMap>
+
+    <select id="findFaqerList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="faqEntityMap">
+        select * from faq limit #{startPage},#{limit}
+    </select>
+
+    <select id="findFaqCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
+		select count(1) from faq
+	</select>
+</mapper>

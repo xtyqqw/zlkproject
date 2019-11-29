@@ -16,6 +16,16 @@ public class Pagination {
     /**起始页*/
     private Integer startPage;
 
+    private User    user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<?> getList() {
         return list;
     }
@@ -64,13 +74,15 @@ public class Pagination {
         this.startPage = startPage;
     }
 
-    public Pagination(List<?> list, Integer page, Integer limit, Integer totalCount, Integer totalPage, Integer startPage) {
+
+    public Pagination(List<?> list, Integer page, Integer limit, Integer totalCount, Integer totalPage, Integer startPage, User user) {
         this.list = list;
         this.page = page;
         this.limit = limit;
         this.totalCount = totalCount;
         this.totalPage = totalPage;
         this.startPage = startPage;
+        this.user = user;
     }
 
     public Pagination() {

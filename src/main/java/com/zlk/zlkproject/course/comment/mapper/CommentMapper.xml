@@ -2,9 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zlk.zlkproject.user.signup.mapper.SignMapper">
-        <resultMap type="com.zlk.zlkproject.entity.User" id="durstionMap">
-            <id property="userId" column="user_id" javaType="java.lang.String"/>
+<mapper namespace="com.zlk.zlkproject.course.comment.mapper.CommentMapper">
+    <resultMap id="commentEntityMap" type="com.zlk.zlkproject.entity.Comment">
+        <id property="commentId" column="comment_id" javaType="java.lang.Integer"></id>
+        <result property="commentUserId" column="comment_user_id" javaType="java.lang.Integer"></result>
+        <result property="comments" column="comments" javaType="java.lang.String"></result>
+        <result property="teacherAnswer" column="teacher_answer" javaType="java.lang.String"></result>
+
+
+            <result property="user_id" column="userId" javaType="java.lang.String"/>
             <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
             <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
             <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
@@ -25,21 +31,12 @@
             <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
             <result property="userImg" column="user_img" javaType="java.lang.String"/>
             <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
-        </resultMap>
 
-    <insert id="signup" parameterType="com.zlk.zlkproject.entity.User">
-        insert into user (user_id,user_phonenum,user_pwd,user_realname)value (#{userId},#{phonenum},#{userPwd},#{userRealname})
-    </insert>
-
-    <select id="findUserByPhonenum" parameterType="java.lang.String" resultMap="durstionMap">
-        select * from user where user_phonenum = #{phonenum} limit 0,1
+    </resultMap>
+    
+    <select id="findCommentListByUserId" parameterType="com.zlk.zlkproject.entity.Comment" resultMap="commentEntityMap">
+      select  user.user_realname,user.user_realimg,comment.comments,comment.teacher_answer
+      FROM user,comment WHERE user.user_id = comment.comment_user_id
+      and comment.comment_user_id=#{commentUserId}  limit #{startPage},#{limit}
     </select>
-    <select id="findUserByPhonenumAndPwd" parameterType="com.zlk.zlkproject.entity.User" resultMap="durstionMap">
-        select * from user where user_phonenum =  #{phonenum} and user_pwd = #{userPwd} limit 0,1
-    </select>
-
-    <update id="changePwd" parameterType="com.zlk.zlkproject.entity.User">
-        update user set user_pwd = #{userPwd} where user_phonenum = #{phonenum}
-    </update>
-
 </mapper>
