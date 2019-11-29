@@ -145,8 +145,8 @@
     <div class="followhim_title">
         <p>关注TA的人</p>
     </div>
-    <%--<div class="flow_div"></div>--%>
-<c:forEach begin="0" end="5">
+    <div class="flow_div"></div>
+<%--<c:forEach begin="0" end="5">
     <div class="followhim_main">
         <div class="main_left">
             <!-- 头像 -->
@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-</c:forEach>
+</c:forEach>--%>
 
 </div>
 <%--点击关注事件--%>
@@ -235,7 +235,7 @@
     });
 </script>
 <%--流加载--%>
-<%--<script type="text/javascript">
+<script type="text/javascript">
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -301,6 +301,6 @@
             }
         });
     });
-</script>--%>
+</script>
 </body>
 </html>

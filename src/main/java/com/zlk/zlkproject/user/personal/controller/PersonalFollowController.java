@@ -29,6 +29,10 @@ import java.util.Map;
 public class PersonalFollowController {
     @Autowired
     PersonalFollowService personalFollowService;
+    /*@RequestMapping("/toMyfoces")
+    public String myfoces(){
+        return "view/personal/myfocus";
+    }*/
 
     /**
      * 方法用途：点击我的关注后调用该方法 查询出我关注的所有其他用户相关信息
