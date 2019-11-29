@@ -34,7 +34,7 @@
     padding: 0px;
 }
 #kechengzhuti{
-    padding: 0px 15vw;
+    padding: 2vw 15vw 0 15vw;
 }
 #kechengzhuti #kechengjeishao{
 
@@ -255,4 +255,13 @@
 }
 #kechengzhuti #kechengtedian #tedianneirong #tediantext #tedianzhengwenneirong p{
     /*white-space: pre-wrap;*/
+}
+
+.touxiang{
+
+    border-radius:50%;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    left: 25px;
 }
