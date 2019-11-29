@@ -229,7 +229,7 @@
                         <div class="learntime">
                             <i class="layui-icon layui-icon-log"
                                style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                            <p>学习时长：${bignum.studyTime}小时</p>
+                            <p>学习时长：${bignum.userDateTime}小时</p>
                             <p>学习成长量：${bignum.studyGrowup}</p>
                             <p>技能水平：${bignum.studyStandard}</p>
                         </div>
@@ -614,12 +614,8 @@
 <%--点击上下箭头显示隐藏动态--%>
 <script type="text/javascript">
     $(document).ready(function () {
-        /*$(".down_yes_news:gt(1)").hide();
-        $(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
-        $(".down_yes_news:eq(2)").hide();
-        $(".down_yes_news:eq(3)").hide();
-        $(".down_yes_news:eq(4)").hide();
-        $(".down_yes_news:eq(5)").hide();
+        $(".down_yes_news:eq(1)").hide();
+        /*$(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
         //点击向上箭头
         $(".layui-icon-up").click(function () {
             $(this).hide();

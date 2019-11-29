@@ -115,8 +115,14 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
-    public ModelAndView userFollower(FollowerPage followerPage){
+    public ModelAndView userFollower(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
+        String userId = (String) request.getSession().getAttribute("userId");
+        //模拟数据
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+        userId = "1";
+
         ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
         List<User> followerList = personalFollowService.findFollower(followerPage);
@@ -132,6 +138,7 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(m);
         }
@@ -147,10 +154,16 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public ModelAndView userFollowed(FollowerPage followerPage){
+    public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
         ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
+        String userId = (String) request.getSession().getAttribute("userId");
+        //模拟数据
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+        userId = "1";
+
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
@@ -164,6 +177,7 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(m);
         }
