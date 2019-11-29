@@ -15,9 +15,9 @@ public class LeaveTime {
         long l = (nDate.getTime()-date.getTime())/3600000;
         if(l>=24){
             l = l/24;
-            return l+"天";
+            return l+"天前";
         }else {
-            return l+"小时";
+            return l+"小时前";
         }
     }
 

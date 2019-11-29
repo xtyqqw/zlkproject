@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.mapper;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.UserAction;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,9 +10,13 @@ import java.util.List;
 @Mapper
 public interface FollowerMapper {
     //查询关注自己的用户信息
-    List<User> findFollower(String userId);
+    List<User> findFollower(FollowerPage followerPage);
+    //查询关注自己的人数
+    Integer findFollowerNum(String userId);
     //查询自己关注的用户信息
-    List<User> findFollowed(String userId);
+    List<User> findFollowed(FollowerPage followerPage);
+    //查询自己关注的用户人数
+    Integer findFollowedNum(String userId);
     //根据文章id查询文章标题
     String findArticleTittleById(String articleId);
     //根据用户id查询动态

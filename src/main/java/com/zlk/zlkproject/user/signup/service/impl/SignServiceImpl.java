@@ -49,4 +49,9 @@ public class SignServiceImpl implements SignService {
         User user1 = signMapper.findUserByPhonenumAndPwd(user);
         return user1;
     }
+
+    @Override
+    public Integer changePwd(User user) {
+        return signMapper.changePwd(user);
+    }
 }

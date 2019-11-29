@@ -168,7 +168,7 @@
                 </li>
             </a>
             <%--我的关注--%>
-            <a href="<%=request.getContextPath()%>/personal/myfocus"
+            <a href="<%=request.getContextPath()%>/follow/follower"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-rate"
