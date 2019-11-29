@@ -16,11 +16,20 @@ import java.util.List;
  */
 @Service
 public class ArticlesServiceImpl implements ArticlesService {
+    /**
+     * 注入资源
+     */
     @Autowired(required = false)
     private ArticlesMapper articlesMapper;
-    @Override
-    public List<Article> selectArticles(){
 
-        return articlesMapper.selectArticles();
+    /**
+     * 根据userid查询user文章的集合
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Article> selectArticles(String userId){
+
+        return articlesMapper.selectArticles(userId);
     }
 }

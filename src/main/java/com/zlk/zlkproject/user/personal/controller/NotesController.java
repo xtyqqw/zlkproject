@@ -23,10 +23,11 @@ public class NotesController {
         return "view/sdd/tst";
     }
     /*查询个人笔记方法*/
-    @RequestMapping(value = "select")
+    @RequestMapping(value = "/select")
     @ResponseBody
-    public Map<String,Object> list(){
-        List<Notes> lists=notesService.selectNotes();
+    public Map<String,Object> list(String userId){
+        userId="1";
+        List<Notes> lists=notesService.selectNotes(userId);
         Map<String,Object> map=new HashMap<>();
         /*查询所有信息*/
         map.put("code",0);

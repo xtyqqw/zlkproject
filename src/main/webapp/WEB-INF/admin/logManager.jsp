@@ -100,7 +100,7 @@
                     width: 170
                 }
                 , {
-                    title: '操作', width: 90, align: 'center', toolbar: '' +
+                    title: '操作', width: 75, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
                         '</div>'

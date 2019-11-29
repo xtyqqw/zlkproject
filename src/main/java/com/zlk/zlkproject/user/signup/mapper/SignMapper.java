@@ -19,6 +19,7 @@ public interface SignMapper {
     Integer signup(User user);
     User findUserByPhonenum(String phonenum);
     User findUserByPhonenumAndPwd(User user);
-
+    //修改密码
+    Integer changePwd(User user);
 
 }

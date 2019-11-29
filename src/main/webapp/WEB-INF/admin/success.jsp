@@ -13,22 +13,23 @@
 %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>学习网站后台管理系统</title>
 
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css">
     <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
 
     <style type="text/css">
         .outer{
-            background-image:url(<%=request.getContextPath()%>/img/login_bg.jpg);
+            background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);
         }
+
         .top {
             width: 100%;
             height: 100px;
-            background-image:url(<%=request.getContextPath()%>/img/admin_logo.png);
+            background-image:url(<%=request.getContextPath()%>/img/admin/admin_logo.png);
             background-repeat:no-repeat;
             background-position: 30px center;
         }
@@ -57,7 +58,7 @@
             color: black;
             position: relative;
             margin-top: 25px;
-            right: -170px;
+            right: -178px;
             float: right;
         }
 
@@ -66,13 +67,39 @@
         }
 
         .left {
-            width: 14.9%;
-            background-image:url(<%=request.getContextPath()%>/img/dao_hang_lan.jpg);
+
+            width: 100%;
+            height: 100%;
+            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+        }
+
+        /* 设置滚动条的样式 */
+        ::-webkit-scrollbar {
+            width:12px;
+            background-color: aqua;
+        }
+
+        /* 滚动槽 */
+        ::-webkit-scrollbar-track {
+            border-radius:10px;
+        }
+
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            border-radius:10px;
+            background:black;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            background-color: #181c32;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #5a76cd;
         }
 
         #tree {
-            width: 100%;
-            height: auto;
             padding-left: 40px;
             padding-top: 35px;
             font-size: 25px;
@@ -87,6 +114,13 @@
             float: left;
             height: 500px;
         }
+
+        .leftOuter{
+            overflow: auto;
+            width: 14.9%;
+            height: 500px;
+            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+        }
     </style>
 </head>
 <body>
@@ -97,13 +131,59 @@
     </div>
 </div>
 <div class="bottom">
-    <div class="left">
-        <ul id="tree" class="ztree"></ul>
+    <div class="leftOuter">
+        <div class="left">
+            <ul id="tree" class="ztree"></ul>
+        </div>
     </div>
     <div class="main">
         <iframe src="<%=request.getContextPath()%>/loginController/toMain" id="maintarget" name="maintarget" frameborder="0"></iframe>
     </div>
 </div>
+
+<%--<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "/function/findFunction",
+            dataType: "json",
+            success: function (data) {
+                console.info(data);
+                layui.tree.render({
+                    elem: '#tree',// 传入元素选择器
+                    nodes: data,
+		     	    spread:true,
+                    click: function (node) {// 点击tree菜单项的时候
+                        var element = layui.element;
+                        var exist = $("li[lay-id='" + node.id + "']").length;//判断是不是用重复的选项卡
+                        if (exist > 0) {
+                            element.tabChange('tabs', node.id);// 切换到已有的选项卡
+                        } else {
+                            if (node.attributes.menuURL != null && node.attributes.menuURL != "") {// 判断是否需要新增选项卡
+                                element.tabAdd(
+                                    'tabs',
+                                    {
+                                        title: node.name,
+                                        content: '<iframe   scrolling="yes" frameborder="0" src=" '
+                                            + node.attributes.menuURL
+                                            + ' " width="100%" height="100%"></iframe>'// 支持传入html
+                                        ,
+                                        // width="99%" height="99%"
+                                        id: node.id
+                                    });
+                                element.tabChange('tabs', node.id);
+                            }
+                        }
+
+                    }
+
+                });
+
+            }
+
+        });
+    })
+</script>--%>
 
 <script type="text/javascript">
     var setting = {

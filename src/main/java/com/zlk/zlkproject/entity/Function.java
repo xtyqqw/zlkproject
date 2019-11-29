@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @ClassName Function
  * @Description: 左侧导航栏实体类
@@ -26,4 +29,6 @@ public class Function {
     private String url;
     //跳转的iframe
     private String target="maintarget";
+    //备注
+    private String comment;
 }

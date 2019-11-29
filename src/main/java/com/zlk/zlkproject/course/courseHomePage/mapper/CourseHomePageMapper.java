@@ -52,5 +52,12 @@ public interface CourseHomePageMapper {
     List<Courses> findAll(Courses courses,Integer startPage,Integer limit);
 
 
+    /**
+     * 修改数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int updateByCoursesId(Courses courses);
 }
 

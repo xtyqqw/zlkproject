@@ -12,11 +12,15 @@
     <title>VideoPlayer</title>
     <link rel="stylesheet" href="/css/videoPlayer.css" type="text/css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/js/videoPlayer.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_toro6gmnhi.css">
+    <%--引入wangEditor富文本编辑器--%>
+    <script type="text/javascript" src="/js/wangEditor.js"></script>
+    <script type="text/javascript" src="/js/player.js"></script>
+    <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
     <div class="layui-container">
@@ -99,18 +103,129 @@
                             </div>
                         </div>
 <%--------------------------播放器 end---------------------------------------------------------------------------------%>
-
+                        <%--功能栏目录--%>
                         <div style="display: none" id="mulu_div">
 
+                        </div>
+                        <%--功能栏问答--%>
+                        <div style="display: none" id="wenda_div">
+                            <div class="editor_title"><span>提问题</span></div>
+                            <div id="editor">
+                                <div id="toolbar_div" class="toolbar"></div>
+                                <div id="text_div" class="text"></div>
+                                <div id="btn_div">
+                                    <button type="button" id="btn_submit_wenda">提交</button>
+                                    <button type="reset" id="btn_reset_wenda">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                        <%--功能栏学生笔记--%>
+                        <div id="div_stuNote">
+                            <div id="stuNote_titleBox">
+                                <div id="stuNote_title">记笔记</div>
+                                <div id="stuNote_closeBtn">
+                                    <i id="stuNoteCloseBtn" class="iconfont icon-icon-test enableClk"></i>
+                                </div>
+                            </div>
+                            <div id="stuNote_textBox">
+                                <div id="div_stuNote_toolBar" class="toolbar"></div>
+                                <div id="div_stuNote_text" class="text"></div>
+                            </div>
+                            <div id="stuNote_btnBox">
+                                <div id="stuNote_btn1" class="stuNote_btn" style="background-color: #5A5CAD">提交</div>
+                                <div id="stuNote_btn2" class="stuNote_btn" style="background-color: #7aa6da">取消</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="layui-col-md2"></div>
         </div>
-        <div class="layui-row" id="tab_row">
 
+        <div class="layui-row FS_hidden" id="tab_row">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md8 layui-tab">
+                <div class="layui-tab-title">
+                    <li class="layui-this li_show">讲师笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生笔记</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生评论</li>
+                    <li class="li_hide"></li>
+                    <li class="li_show">学生问答</li>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show" id="lay_flow1">
+                        <div>
+                            <span></span>
+                            <div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item" style="border: 0px solid white !important;">
+                        <div id="SNS_allBox">
+                            <div id="SNS_top_box">
+                                <div class="SNS_top_selection">最新</div>
+                                <div class="SNS_top_selection">点赞</div>
+                            </div>
+                            <div class="placeSpace"></div>
+                            <div id="SNS_contentBox">
+                                <ul id="SNS_ul_stream">
+                                    <li><div class="SNS_content" style="margin: 0 0 10px 0">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+                                            <div id="toolBar"></div>
+                                            <div class="SNS_textEditor"></div>
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                    <li><div class="SNS_content">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                    <li><div class="SNS_content">
+                                        <div class="SNS_content_user">
+                                            <div class="SNS_headPhoto_box"></div>
+                                            <div class="SNS_userName_box"></div>
+                                        </div>
+                                        <div class="SNS_text_box">
+
+                                        </div>
+                                        <div class="SNS_func_box">
+
+                                        </div>
+                                    </div></li>
+                                </ul>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容三</div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item">内容四</div>
+                </div>
+            </div>
+            <div class="layui-col-md2"></div>
         </div>
     </div>
+<%--    <div style="clear: both">--%>
+<%--        <jsp:include page="../jsp/footer.jsp"></jsp:include>--%>
+<%--    </div>--%>
 </body>
 </html>
