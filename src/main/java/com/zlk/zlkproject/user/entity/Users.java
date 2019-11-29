@@ -1,10 +1,16 @@
 package com.zlk.zlkproject.user.entity;
 
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Section;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * @ClassName： Users
@@ -12,6 +18,8 @@ import java.util.List;
  * @Author： sd
  * @Date： 2019/11/25 19:44
  */
+@Setter
+@Getter
 public class Users {
     /**用户id  32位uuid*/
     private String userId;
@@ -58,9 +66,14 @@ public class Users {
     private String userImg;
     /**头像图片绝对路径*/
     private String userRealimg;
-
+    /*创建文章实体类集合*/
     private List<Article> articleList=new ArrayList<>();
-    public Users(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
+    /*创建课程实体类集合*/
+    private List<Courses> coursesList=new ArrayList<>();
+    /*创建笔记实体类集合*/
+    private List<Notes> notesList=new ArrayList<>();
+
+    public Users(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime, String userImg, String userRealimg, List<Article> articleList, List<Courses> coursesList, List<Notes> notesList) {
         this.userId = userId;
         this.phonenum = phonenum;
         this.userPwd = userPwd;
@@ -80,184 +93,13 @@ public class Users {
         this.userSpecialty = userSpecialty;
         this.userAllTime = userAllTime;
         this.userDateTime = userDateTime;
+        this.userImg = userImg;
+        this.userRealimg = userRealimg;
+        this.articleList = articleList;
+        this.coursesList = coursesList;
+        this.notesList = notesList;
     }
 
     public Users() {
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPhonenum() {
-        return phonenum;
-    }
-
-    public void setPhonenum(String phonenum) {
-        this.phonenum = phonenum;
-    }
-
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
-    }
-
-    public String getUserRealname() {
-        return userRealname;
-    }
-
-    public void setUserRealname(String userRealname) {
-        this.userRealname = userRealname;
-    }
-
-    public String getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
-
-    public Date getUserBirthday() {
-        return userBirthday;
-    }
-
-    public void setUserBirthday(Date userBirthday) {
-        this.userBirthday = userBirthday;
-    }
-
-    public String getUserNative() {
-        return userNative;
-    }
-
-    public void setUserNative(String userNative) {
-        this.userNative = userNative;
-    }
-
-    public String getUserMarry() {
-        return userMarry;
-    }
-
-    public void setUserMarry(String userMarry) {
-        this.userMarry = userMarry;
-    }
-
-    public String getUserCity() {
-        return userCity;
-    }
-
-    public void setUserCity(String userCity) {
-        this.userCity = userCity;
-    }
-
-    public String getUserState() {
-        return userState;
-    }
-
-    public void setUserState(String userState) {
-        this.userState = userState;
-    }
-
-    public String getUserTarget() {
-        return userTarget;
-    }
-
-    public void setUserTarget(String userTarget) {
-        this.userTarget = userTarget;
-    }
-
-    public String getUserIndustry() {
-        return userIndustry;
-    }
-
-    public void setUserIndustry(String userIndustry) {
-        this.userIndustry = userIndustry;
-    }
-
-    public String getUserHobby() {
-        return userHobby;
-    }
-
-    public void setUserHobby(String userHobby) {
-        this.userHobby = userHobby;
-    }
-
-    public String getUserSelfappraise() {
-        return userSelfappraise;
-    }
-
-    public void setUserSelfappraise(String userSelfappraise) {
-        this.userSelfappraise = userSelfappraise;
-    }
-
-    public String getUserEducation() {
-        return userEducation;
-    }
-
-    public void setUserEducation(String userEducation) {
-        this.userEducation = userEducation;
-    }
-
-    public String getUserAcademy() {
-        return userAcademy;
-    }
-
-    public void setUserAcademy(String userAcademy) {
-        this.userAcademy = userAcademy;
-    }
-
-    public String getUserSpecialty() {
-        return userSpecialty;
-    }
-
-    public void setUserSpecialty(String userSpecialty) {
-        this.userSpecialty = userSpecialty;
-    }
-
-    public Integer getUserAllTime() {
-        return userAllTime;
-    }
-
-    public void setUserAllTime(Integer userAllTime) {
-        this.userAllTime = userAllTime;
-    }
-
-    public Integer getUserDateTime() {
-        return userDateTime;
-    }
-
-    public void setUserDateTime(Integer userDateTime) {
-        this.userDateTime = userDateTime;
-    }
-
-    public String getUserImg() {
-        return userImg;
-    }
-
-    public void setUserImg(String userImg) {
-        this.userImg = userImg;
-    }
-
-    public String getUserRealimg() {
-        return userRealimg;
-    }
-
-    public void setUserRealimg(String userRealimg) {
-        this.userRealimg = userRealimg;
-    }
-
-    public List<Article> getArticleList() {
-        return articleList;
-    }
-
-    public void setArticleList(List<Article> articleList) {
-        this.articleList = articleList;
     }
 }

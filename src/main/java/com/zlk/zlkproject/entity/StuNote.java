@@ -2,6 +2,7 @@ package com.zlk.zlkproject.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
+@ToString
 public class StuNote {
     /**
      * 笔记ID 对应数据库的 sn_id 字段
@@ -50,7 +52,7 @@ public class StuNote {
     private String report;
 
     /**
-     * 日期
+     * 日期 对应数据库的 report 字段
      */
     private Date date;
 
