@@ -85,7 +85,7 @@
         }
         .div-FAQ{
             width: 100%;
-            background-color: #f1f4ff;
+            background-color:  #ffffff;
             position: relative;
             border-radius:5px;
 
@@ -101,16 +101,22 @@
             color: #333436;
         }
         .p-FAQ1{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
             text-align: left;
             width:95%;
             margin:0 auto;
             font-size:11px;
             letter-spacing:3px;
             color: #4f5256;
+
         }
         .div-FAQ:hover{
             box-shadow:-2px 0 3px -1px #ebebeb,-2px 0 3px -1px #ebebeb,2px 0 3px -1px  #ebebeb;
-            background-color: #ffffff ;
+            background-color: #f1f4ff ;
         }
         .div1{
             height: 30px;
@@ -366,11 +372,11 @@
             }
         });
     });
+    $("#liu").on("click",".p-FAQ1",function() {
+
+        $(this).css("-webkit-line-clamp","8");
+    });
 </script>
-
-
-
-
 
 
 </body>

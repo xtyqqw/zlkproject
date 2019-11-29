@@ -47,7 +47,7 @@
          color:#000000;
      }
      .dt1{
-         border: solid 1px;
+         border: solid 0px;
          color: black;
          width: 213px;
          height: 90px;
@@ -250,6 +250,47 @@
 
     </style>
 
+    <style type="text/css">
+        body{margin: 0;}
+        #footer{
+            background-color: #333C4D;
+            height: 130px;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 0;
+            position: absolute;
+        }
+        #footer ul{
+            padding-top: 30px;
+            width: 800px;
+            height: 60px;
+            margin: 0 auto;
+            border-bottom: 1px solid #999999;
+        }
+        #footer ul li{
+            float: left;
+            list-style: none;
+            padding-left: 30px;
+        }
+        #footer ul li a{
+            color: #989898;
+            text-decoration: none;
+            float: left;
+            padding-left: 20px;
+        }
+        #footer ul li a:hover{
+            color: #F2F2F2;
+        }
+        #footer hr{
+            width: 800px;
+            color: #989898;
+        }
+        #footer p{
+            color: #989898;
+            text-align: center;
+            padding-top: 10px;
+        }
+    </style>
 
 </head>
 <body>
@@ -349,11 +390,11 @@ var data={"page":page,"limit":limit};
 console.log(data);
 $.ajax({
     type :"POST",
-    url:"/courseHomePage/findCoursesList",
+    url:"/courseHomePage/findAll",
     dataType:"json",
     data:data,
     success:function(result) {
-        layui.each(result.coursesList, function (i, courses) {
+        layui.each(result.allList, function (i, courses) {
                 lis.push(
 
                     '<ul>' +
@@ -366,7 +407,7 @@ $.ajax({
                     '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
                     ' <span class="badge badge-warning" contenteditable="true" id="new1">NEW</span> ' +
                     ' <span class="badge badge-important" contenteditable="true" id="hot1">HOT</span>  ' +
-                    '<p><span class="badge" contenteditable="true" id="badge9">java</span></p>' +
+                    '<p><span class="badge" contenteditable="true" id="badge9">'+courses.tagName+'</span></p>' +
                     '<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +
                     '<div class="xingxing">' +
                     '<ul class="kechengxiaojeipingfen_ul">'+
@@ -392,8 +433,14 @@ $.ajax({
                     '<h6 class="h61" id="renshu">学习人数 ：'+courses.studentNum+'人</h6>' +
                     '<h6 class="h62" id="zhang">'+courses.chapterNum+'章</h6>' +
                     '<h6 class="h63" id="jie">'+courses.sectionNum+'节</h6>' +
-                    '<h6 class="h64" id="jin">￥'+courses.price+'</h6>' +
-                    '<h6 class="h65">上次学习时间：2019-11-22</h6>' +
+                    '<h6 class="h64" id="jin">￥'+courses.price+'</h6>' );
+                    if(courses.lastStudyTime==null){
+                        lis.push(
+                            '<h6 class="h65">上次学习时间：'+"未学习"+'</h6>' );
+                        }else{ lis.push(
+                        '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
+                    }
+                    lis.push(
                     '<input class="but1" type="button" onclick=window.open("https://www.baidu.com") value="查看详情"/>' +
                     '</dd>' +
                     '</dl>' +
@@ -402,7 +449,7 @@ $.ajax({
 
 
                 );
-        })
+        });
                 next(lis.join(''), page < 2); //假设总页数为 6
     }
 });
@@ -414,6 +461,35 @@ $.ajax({
 
 
 <div style="clear: both"></div>
-<jsp:include page="../jsp/footer.jsp"></jsp:include>
+
+<div id="footer">
+    <ul>
+        <li>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutzlk">关于我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">加入我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">联系我们</a>
+        </li>
+        <li>
+            <a href="<%=request.getContextPath()%>/lecturer/lecturers">讲师合作</a>
+        </li>
+        <li>
+            <a href="javascript:;">帮助中心</a>
+        </li>
+        <li>
+            <a href="<%=request.getContextPath()%>/aboutus/blogroll">友情链接</a>
+        </li>
+        <li>
+            <a href="javascript:;">合作企业</a>
+        </li>
+    </ul>
+    <p>
+        copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
+    </p>
+</div>
+
 </body>
 </html>
