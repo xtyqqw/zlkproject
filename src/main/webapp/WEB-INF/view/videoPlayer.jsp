@@ -11,14 +11,16 @@
 <head>
     <title>VideoPlayer</title>
     <link rel="stylesheet" href="/css/videoPlayer.css" type="text/css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <%--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--%>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_toro6gmnhi.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_03zd610p4xl.css">
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
+
     <script type="text/javascript" src="/js/player.js"></script>
     <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
@@ -148,7 +150,7 @@
                 <div class="layui-tab-title">
                     <li class="layui-this li_show">讲师笔记</li>
                     <li class="li_hide"></li>
-                    <li class="li_show">学生笔记</li>
+                    <li id="selection_stuNote" class="li_show">学生笔记</li>
                     <li class="li_hide"></li>
                     <li class="li_show">学生评论</li>
                     <li class="li_hide"></li>
@@ -167,50 +169,13 @@
                     <div class="layui-tab-item" style="border: 0px solid white !important;">
                         <div id="SNS_allBox">
                             <div id="SNS_top_box">
-                                <div class="SNS_top_selection">最新</div>
+                                <div class="SNS_top_selection" style="border-bottom: 3px solid rgb(102,71,238);color:rgb(102,71,238)">最新</div>
                                 <div class="SNS_top_selection">点赞</div>
+                                <div class="SNS_top_btn">只看我的</div>
                             </div>
                             <div class="placeSpace"></div>
                             <div id="SNS_contentBox">
-                                <ul id="SNS_ul_stream">
-                                    <li><div class="SNS_content" style="margin: 0 0 10px 0">
-                                        <div class="SNS_content_user">
-                                            <div class="SNS_headPhoto_box"></div>
-                                            <div class="SNS_userName_box"></div>
-                                        </div>
-                                        <div class="SNS_text_box">
-                                            <div id="toolBar"></div>
-                                            <div class="SNS_textEditor"></div>
-                                        </div>
-                                        <div class="SNS_func_box">
-
-                                        </div>
-                                    </div></li>
-                                    <li><div class="SNS_content">
-                                        <div class="SNS_content_user">
-                                            <div class="SNS_headPhoto_box"></div>
-                                            <div class="SNS_userName_box"></div>
-                                        </div>
-                                        <div class="SNS_text_box">
-
-                                        </div>
-                                        <div class="SNS_func_box">
-
-                                        </div>
-                                    </div></li>
-                                    <li><div class="SNS_content">
-                                        <div class="SNS_content_user">
-                                            <div class="SNS_headPhoto_box"></div>
-                                            <div class="SNS_userName_box"></div>
-                                        </div>
-                                        <div class="SNS_text_box">
-
-                                        </div>
-                                        <div class="SNS_func_box">
-
-                                        </div>
-                                    </div></li>
-                                </ul>
+                                <ul id="SNS_ul_stream"></ul>
                             </div>
                             <div></div>
                         </div>
