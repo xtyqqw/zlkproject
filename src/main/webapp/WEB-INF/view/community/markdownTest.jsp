@@ -41,23 +41,14 @@
         var testEditor;
         $(function() {
             testEditor = editormd("test-editormd", {
-                width : "90%",
-                height : 640,
+                width : 600,
+                height : 250,
                 syncScrolling : "single",
                 path : "../editormd/lib/",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/imageUpload"
             });
-
-            /*
-            testEditor = editormd({
-                id      : "test-editormd",
-                width   : "90%",
-                height  : 640,
-                path    : "../lib/"
-            });
-            */
         });
     </script>
 

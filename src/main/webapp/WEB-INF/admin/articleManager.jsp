@@ -4,8 +4,15 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
+
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+
     <style type="text/css">
         .search {
             float: right;
@@ -48,7 +55,7 @@
     </form>
 </div>--%>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/article/update" class="form">
+    <form action="<%=request.getContextPath()%>/article/update" class="form" method="post">
         <input type="hidden" name="articleId" id="articleId"><br>
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
@@ -109,13 +116,19 @@
             </tr>
             <tr>
                 <td>文章摘要</td>
-                <td><textarea rows="5" cols="60" readonly required id="articleDigest" placeholder="请输入文章摘要" name="articleDigest"></textarea><br></td>
+                <td><textarea rows="5" cols="60" readonly required id="articleDigest" name="articleDigest"></textarea><br></td>
             </tr>
             <tr>
                 <td>文章内容</td>
-                <td><textarea rows="10" cols="60" readonly required id="articleContent" placeholder="请输入文章内容" name="articleContent"></textarea><br></td>
+                <td><textarea rows="10" cols="60" readonly required id="articleContent" name="articleContent"></textarea><br></td>
             </tr>
         </table>
+
+        <%--<div id="test-editormd">
+            <p style="margin-top: -30px;margin-left: 50px;"> 文章内容 </p>
+            <textarea readonly required id="articleContent" name="articleContent"></textarea>
+        </div>--%>
+
     </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
@@ -123,7 +136,46 @@
 <div class="layui-fluid">
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
-<script>
+
+<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+<script type="text/javascript">
+
+    /*var testEditor;
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width : 600,
+            height : 500,
+            syncScrolling : "single",
+            path : "../editormd/lib/",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "/imageUpload"
+        });
+    });*/
+
+    //MarkDown组件
+    $(function() {
+        var editorMdView;
+        editorMdView = editormd.markdownToHTML("articleContent", {
+            htmlDecode : "style,script,iframe",  // you can filter tags decode
+            width : 600,
+            height : 500,
+            emoji : false,
+            taskList : true,
+            tex : true,  // 默认不解析
+            flowChart : true,  // 默认不解析
+            sequenceDiagram : true // 默认不解析
+        });
+    });
+
     layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
         var table = layui.table;
         var laydate = layui.laydate;
@@ -186,7 +238,7 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn" lay-event=""><!--新增文章--></button>' +
+                /*'<button type="button" class="layui-btn" lay-event="">新增文章</button>' +*/
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
@@ -270,7 +322,7 @@
                     type: 1,
                     shadeClose: true,
                     shade: 0.8,
-                    area: ['70%', '70%'],
+                    area: '800px',
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {

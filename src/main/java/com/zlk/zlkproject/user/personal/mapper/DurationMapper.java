@@ -13,7 +13,7 @@ public interface DurationMapper {
      * @param user
      * @return
      */
-    User selectDuration(User user);
+    User selectDuration(String userId);
 
     /**
      * 查询用户总数

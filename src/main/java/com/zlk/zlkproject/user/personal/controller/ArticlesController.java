@@ -32,7 +32,8 @@ public class ArticlesController {
     @RequestMapping(value = "toarticles")
     @ResponseBody
     public Map<String,Object> selectArticles(String userId){
-        /*userId="1";*/
+        /*HttpServletRequest request
+        String userId1 = (String) request.getSession().getAttribute("userId");*/
         List<Article> list=articlesService.selectArticles("1");
         Map<String,Object> map=new HashMap<>();
         map.put("code",0);

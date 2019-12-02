@@ -1,8 +1,12 @@
 package com.zlk.zlkproject.entity;
 
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -11,8 +15,9 @@ import java.util.List;
  * @author: zyx
  * @create: 2019-11-19 11:19
  */
-@Setter
 @Getter
+@Setter
+@ToString
 public class Courses {
 
     /**课程id*/
@@ -41,10 +46,21 @@ public class Courses {
     private String featurePic;
     /**章节列表*/
     private List<Chapter> chapterList;
-    /**上次学习时间列表*/
-    /*private List<UserCourses> UserCoursesList;*/
+    /**用户Id*/
+    private  int  userId;
+    /**中间表Id*/
+    private  int  userCoursesId;
+    /**最后学习时间*/
+    @DateTimeFormat(pattern = "yy-MM-dd")
+    private Date  lastStudyTime;
+    /**标签 Id*/
+    private int tagId;
+    /**标签名字*/
+    private String tagName;
+    /**标签属性Id*/
+    private String tagTypeId;
 
-    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic) {
+    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic, List<Chapter> chapterList, int userId, int userCoursesId, Date lastStudyTime, int tagId, String tagName, String tagTypeId) {
         this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.studentNum = studentNum;
@@ -57,6 +73,13 @@ public class Courses {
         this.introducePic = introducePic;
         this.featureText = featureText;
         this.featurePic = featurePic;
+        this.chapterList = chapterList;
+        this.userId = userId;
+        this.userCoursesId = userCoursesId;
+        this.lastStudyTime = lastStudyTime;
+        this.tagId = tagId;
+        this.tagName = tagName;
+        this.tagTypeId = tagTypeId;
     }
 
     public Courses() {

@@ -10,6 +10,7 @@
 <head>
     <title>首页</title>
 </head>
+<<<<<<< HEAD
 <body>
 
 <script>
@@ -32,5 +33,11 @@
 index
 <%--引入尾部--%>
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+    location.href = "<%=request.getContextPath()%>/index/toIndex";
+</script>
+<body>
+
 </body>
 </html>

@@ -49,6 +49,7 @@
             </collection>
         </collection>
     </resultMap>
+    <!--查询我的文章-->
     <select id="selectArticles" resultMap="userMap" parameterType="java.lang.String">
         select
         user_id,
@@ -74,6 +75,6 @@
         from user
         JOIN article on user.user_id=article.article_user_id
         JOIN tag on article.article_tag_id=tag.tag_id
-        where user_id = #{userId}
+        where user_id = #{userId} order by update_time desc
     </select>
 </mapper>

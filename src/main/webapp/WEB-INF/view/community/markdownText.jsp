@@ -15,8 +15,8 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .editormd-html-preview {
-                width: 90%;
-                margin: 0 auto;
+            width: 90%;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -36,7 +36,6 @@
     <script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
-
     <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
     <script type="text/javascript">
         $(function() {
