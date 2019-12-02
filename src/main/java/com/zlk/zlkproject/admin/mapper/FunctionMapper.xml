@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.admin.mapper.FunctionMapper">
     <resultMap id="functionEntityMap" type="com.zlk.zlkproject.entity.Function">
-        <id property="functionId" column="function_id" javaType="java.lang.Integer"/>
+        <id property="id" column="function_id" javaType="java.lang.Integer"/>
         <result property="name" column="function_name" javaType="java.lang.String"/>
-        <result property="parentId" column="parent_id" javaType="java.lang.Integer"/>
+        <result property="pid" column="parent_id" javaType="java.lang.Integer"/>
         <result property="url" column="url" javaType="java.lang.String"/>
         <result property="comment" column="comment" javaType="java.lang.String"/>
         <!--<collection property="children" ofType="com.zlk.zlkproject.entity.Function">
@@ -25,9 +25,61 @@
         select * from functions
     </select>
     <insert id="addFunction" parameterType="com.zlk.zlkproject.entity.Function">
-        insert into functions(function_name,parent_id,url,comment) values (#{name},#{parentId},#{url},#{comment})
+        insert into functions
+        <trim prefix="(" suffix=") " suffixOverrides=",">
+            function_name,parent_id,
+            <if test="url!=null and url!= '' ">
+                url,
+            </if>
+            comment,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{name},#{pid},
+            <if test="url!=null and url!= '' ">
+                #{url},
+            </if>
+            #{comment},
+        </trim>
     </insert>
-    <delete id="deleteFunction" parameterType="java.lang.String">
+    <update id="updateFunction" parameterType="com.zlk.zlkproject.entity.Function">
+        update functions
+        <set>
+            <if test="name!=null and name!='' ">
+                function_name=#{name},
+            </if>
+            <if test="pid!=null and pid!='' ">
+                parent_id=#{pid},
+            </if>
+            <if test="url!=null and url!='' ">
+                url=#{url},
+            </if>
+            <if test="comment!=null and comment!='' ">
+                comment=#{comment},
+            </if>
+        </set>
+        where function_id=#{id}
+    </update>
+    <delete id="deleteFunction" parameterType="java.lang.Integer">
         delete from functions where function_id = #{functionId}
     </delete>
+    <delete id="deleteFunctionAndRoleByFunctionId" parameterType="java.lang.Integer">
+        delete from roles_functions where functions_id = #{functionId}
+    </delete>
+    <select id="findFunctionByRoleId" parameterType="java.lang.String" resultMap="functionEntityMap">
+        select f.* from functions f,roles r,roles_functions rf where f.function_id=rf.functions_id and r.role_id=rf.roles_id and role_id=#{roleId}
+    </select>
+    <select id="findFunctionByFunctionId" parameterType="java.lang.Integer" resultMap="functionEntityMap">
+        select * from functions where function_id=#{functionId}
+    </select>
+    <select id="findFunctionByFunctionName" parameterType="java.lang.String" resultMap="functionEntityMap">
+        select * from functions where function_name=#{name}
+    </select>
+    <select id="findFunctionByUrl" resultMap="functionEntityMap">
+        select * from functions where url = "" or url is null
+    </select>
+    <select id="findParentFunctionByFunctionId" parameterType="java.lang.Integer" resultMap="functionEntityMap">
+        select * from functions where function_id =
+        (select parent_id from functions where function_id = #{id});
+    </select>
 </mapper>

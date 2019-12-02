@@ -15,14 +15,19 @@ public class LeaveTime {
         long l = (nDate.getTime()-date.getTime())/3600000;
         if(l>=24){
             l = l/24;
-            return l+"天";
+            return l+"天前";
         }else {
-            return l+"小时";
+            return l+"小时前";
         }
     }
 
     public static String formatDate(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String n = sdf.format(date);
+        return n;
+    }
+    public static String alterDate(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
         String n = sdf.format(date);
         return n;
     }

@@ -10,7 +10,7 @@ public interface DurationService {
      * @param user
      * @return
      */
-    User selectDuration(User user);
+    User selectDuration(String userId);
 
     /**
      * 查询用户总数

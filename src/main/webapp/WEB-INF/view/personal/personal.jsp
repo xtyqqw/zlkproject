@@ -135,7 +135,7 @@
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="<%=request.getContextPath()%>/personal/learnrecord"
+            <a href="<%=request.getContextPath()%>/courses/icourses"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-form"
@@ -144,7 +144,7 @@
                 </li>
             </a>
             <%--个人笔记--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/myNote/toMyNote" name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-edit"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -168,7 +168,7 @@
                 </li>
             </a>
             <%--我的关注--%>
-            <a href="<%=request.getContextPath()%>/personal/myfocus"
+            <a href="<%=request.getContextPath()%>/follow/follower"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-rate"
@@ -217,8 +217,10 @@
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
         var main = $(window.parent.document).find("#personal-iframe");
-        var thisheight = $(document).height()+30;
+        var thisheight = document.documentElement.clientHeight && $(document).height()+30;
         main.height(thisheight);
+        /*var ifm= document.getElementById("personal-iframe");
+        ifm.height=document.documentElement.clientHeight;*/
     });
 </script>
 <%--侧栏--%>

@@ -21,7 +21,7 @@
             border-radius: 3px;
         }
         .zi{
-            margin: 40px 30px 0px 30px;
+            margin: 40px 30px 0 30px;
             padding-top: 20px;
         }
         .zi1,.zi2{
@@ -37,7 +37,7 @@
         .pointer p{
             color: #713ED7;
             font-size: 20px;
-            padding: 20px 0px 0px 164px;
+            padding: 20px 0 0 166px;
             margin: 0;
         }
         .pointer img{
@@ -51,7 +51,7 @@
             margin-top: 50px;
         }
         .today-learn-case ul{
-            margin-left: 0;
+            margin-left: 30px;
         }
         .today-learn-case ul li{
             list-style: none;
@@ -72,7 +72,7 @@
         .today-learn-case i{
             font-size: 22px;
             color: #713ED7;
-            margin: 10px 0px;
+            margin: 10px 0;
         }
         .today-learn-case p{
             margin: 0;
@@ -100,17 +100,17 @@
                 <span class="font1">学习时长</span><br />
                 <i>${lists.userDateTime}</i>
                 <span style="font-size: 13px;color: #999999;">小时</span>
-                <p>已超过89%的同学</p>
+                <p>已超过${rankall}%的同学</p>
             </li>
             <li>
                 <span class="font1">学习成长量</span><br />
                 <i>${ad}</i>
-                <p>已超过89%的同学</p>
+                <p>已超过${rankall}%的同学</p>
             </li>
             <li>
                 <span class="font1">技能水平</span><br />
                 <i>${addd}</i>
-                <p>已超过89%的同学</p>
+                <p>已超过${rankall}%的同学</p>
             </li>
         </ul>
     </div>

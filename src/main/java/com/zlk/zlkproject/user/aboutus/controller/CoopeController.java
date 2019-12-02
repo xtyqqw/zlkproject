@@ -39,7 +39,7 @@ public class CoopeController {
     /**
      * 查询帮助中心信息的方法
      * 不需要传入参数
-     * 当访问帮汉族中心时直接访问该方法
+     * 当访问帮帮助中心时直接访问该方法
      * */
     @RequestMapping(value = "/help")
     public ModelAndView helpCenter(){

@@ -60,7 +60,7 @@ public class TagServiceImpl implements TagService {
      * @return com.zlk.zlkproject.entity.Tag
      **/
     @Override
-    public Tag findTagByTagTypeId(Integer tagTypeId) {
+    public List<Tag> findTagByTagTypeId(Integer tagTypeId) {
         return tagMapper.findTagByTagTypeId(tagTypeId);
     }
 

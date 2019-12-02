@@ -41,7 +41,11 @@ public class LogController {
     @RequestMapping(value = "/toLogManager")
     public ModelAndView toLogManager(String condition){
         ModelAndView mv=new ModelAndView();
-        mv.addObject("condition",condition);
+        if(condition!=null && condition!= "") {
+            mv.addObject("msg",condition);
+            mv.addObject("condition", condition);
+            mv.addObject("flag", "true");
+        }
         mv.setViewName("admin/logManager");
         return mv;
     }

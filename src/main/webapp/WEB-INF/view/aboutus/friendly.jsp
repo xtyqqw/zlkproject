@@ -61,6 +61,7 @@
             margin-right: 50px;
             margin-top: 20px;
             width: 150px;
+            margin-bottom: 20px;
         }
         a{
             color: #999999;
@@ -69,6 +70,9 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+        a:hover{
+            color: blue;
         }
     </style>
 </head>

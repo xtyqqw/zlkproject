@@ -66,6 +66,18 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 角色授权
+     * @Date 11:18 2019/11/27
+     * @Param [roleId, functionIdList]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer addRoleAndFunction(String roleId, List<Integer> functionId) {
+        return roleMapper.addRoleAndFunction(roleId,functionId);
+    }
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 通过角色ID查询角色信息
      * @Date 9:22 2019/11/20
      * @Param [roleId]
@@ -110,6 +122,18 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Integer deleteRoleByRoleId(String roleId) {
         return roleMapper.deleteRoleByRoleId(roleId);
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 删除角色一并删除其授权
+     * @Date 11:45 2019/11/27
+     * @Param [roleId]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer deleteRoleAndFunctionByRoleId(String roleId) {
+        return roleMapper.deleteRoleAndFunctionByRoleId(roleId);
     }
 
     /**
