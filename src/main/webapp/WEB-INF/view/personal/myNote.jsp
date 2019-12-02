@@ -32,21 +32,21 @@
 </div>
 <div class="context">
     <ul>
-<%--        <c:forEach items="${stuNoteList}" var="sN">--%>
-<%--        <li>--%>
-<%--            <p class="remove_p con_p">${sN.content}</p>--%>
-<%--            <div>--%>
-<%--                <i class="layui-icon layui-icon-praise"></i>--%>
-<%--                <span class="up">${sN.up}</span>--%>
-<%--                <i class="layui-icon layui-icon-tread"></i>--%>
-<%--                <span class="down">${sN.down}</span>--%>
-<%--                <span class="lookall">查看全文</span>--%>
-<%--                <span class="edit" onclick="editNote('${sN.content}',${sN.snId})">编辑</span>--%>
-<%--                <span class="delete" onclick="delNote(${sN.snId})">删除</span>--%>
-<%--                <span class="time">${sN.snDate}</span>--%>
-<%--            </div>--%>
-<%--        </li>--%>
-<%--        </c:forEach>--%>
+        <c:forEach items="${stuNoteList}" var="sN">
+        <li>
+            <p class="remove_p con_p">${sN.content}</p>
+            <div>
+                <i class="layui-icon layui-icon-praise"></i>
+                <span class="up">${sN.up}</span>
+                <i class="layui-icon layui-icon-tread"></i>
+                <span class="down">${sN.down}</span>
+                <span class="lookall">查看全文</span>
+                <span class="edit" onclick="editNote('${sN.content}',${sN.snId})">编辑</span>
+                <span class="delete" onclick="delNote(${sN.snId})">删除</span>
+                <span class="time">${sN.snDate}</span>
+            </div>
+        </li>
+        </c:forEach>
     </ul>
 </div>
 <div hidden="hidden" id="demo" style="padding: 25px">
@@ -58,17 +58,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    $(function(){
-        $(".lookall").click(function(){
-            if(($(this).html())==="查看全文"){
-                $(this).parent().siblings('.remove_p').removeClass("con_p");
-                $(this).html("收起");
-            }else{
-                $(this).parent().siblings('.remove_p').addClass("con_p");
-                $(this).html("查看全文");
-            }
-        })
-    })
     function delNote(snId){
         var layer = layui.layer;
         layer.confirm('确定删除？',{offset:"100px"},function(index){
@@ -111,43 +100,54 @@
             ]
         });
     });
-    layui.use('flow', function () {
-        var flow = layui.flow;
-        flow.load({
-            elem: '.context ul' //流加载容器
-            , isAuto: false
-            , done: function (page, next) { //执行下一页的回调
-                setTimeout(function () {
-                    var lis = [];
-                    var limit = 5;
-                    var data = {"page": page, "limit": limit};
-                    $.ajax({
-                        type: "POST",
-                        url: "/myNote/toFlow",
-                        dataType: "json",
-                        data: data,
-                        success: function (result) {
-                            layui.each(result.stuNoteList, function (i, stuNote) {
-                                lis.push('<li>' +
-                                    '<p class="remove_p con_p">'+ stuNote.content +'</p>' +
-                                    '<div>' +
-                                    '<i class="layui-icon layui-icon-praise"></i>' +
-                                    '<span class="up">'+stuNote.up +'</span>' +
-                                    '<i class="layui-icon layui-icon-tread"></i>' +
-                                    '<span class="down">'+stuNote.down +'</span>' +
-                                    '<span class="lookall">查看全文</span>' +
-                                    '<span class="edit" onclick="editNote('+ stuNote.content +','+ stuNote.snId +')">编辑</span>\n' +
-                                    '<span class="delete" onclick="delNote('+ stuNote.snId +')">删除</span>\n' +
-                                    '<span class="time">'+ stuNote.snDate +'</span>' +
-                                    '</div>' +
-                                    '</li>' )
-                            })
-                            next(lis.join(''), page < 5);
-                        }
-                    });
-                }, 500);
+    // layui.use('flow', function () {
+    //     var flow = layui.flow;
+    //     flow.load({
+    //         elem: '.context ul' //流加载容器
+    //         , isAuto: false
+    //         , done: function (page, next) { //执行下一页的回调
+    //             setTimeout(function () {
+    //                 var lis = [];
+    //                 var limit = 5;
+    //                 var data = {"page": page, "limit": limit};
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     url: "/myNote/toFlow",
+    //                     dataType: "json",
+    //                     data: data,
+    //                     success: function (result) {
+    //                         layui.each(result.stuNoteList, function (i, stuNote) {
+    //                             lis.push('<li>' +
+    //                                 '<p class="remove_p con_p">'+ stuNote.content +'</p>' +
+    //                                 '<div>' +
+    //                                 '<i class="layui-icon layui-icon-praise"></i>' +
+    //                                 '<span class="up">'+stuNote.up +'</span>' +
+    //                                 '<i class="layui-icon layui-icon-tread"></i>' +
+    //                                 '<span class="down">'+stuNote.down +'</span>' +
+    //                                 '<span class="lookall">查看全文</span>' +
+    //                                 '<span class="edit" onclick="editNote('+ stuNote.content,stuNote.snId +')">编辑</span>\n' +
+    //                                 '<span class="delete" onclick="delNote('+ stuNote.snId +')">删除</span>\n' +
+    //                                 '<span class="time">'+ stuNote.snDate +'</span>' +
+    //                                 '</div>' +
+    //                                 '</li>')
+    //                         })
+    //                         next(lis.join(''), page < 5);
+    //                     }
+    //                 });
+    //             }, 500);
+    //         }
+    //     });
+    // });
+    $(function(){
+        $(".lookall").click(function(){
+            if(($(this).html())==="查看全文"){
+                $(this).parent().siblings('.remove_p').removeClass("con_p");
+                $(this).html("收起");
+            }else{
+                $(this).parent().siblings('.remove_p').addClass("con_p");
+                $(this).html("查看全文");
             }
-        });
-    });
+        })
+     })
 </script>
 </html>
