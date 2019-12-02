@@ -54,6 +54,8 @@ public class AdminController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/adminManager");
+
+        //动态获取可选角色
         List<Role> roleNameList = roleService.findRoleName();
         mv.addObject("roleNameList",roleNameList);
         return mv;
@@ -87,28 +89,35 @@ public class AdminController {
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Admin admin){
+
         ModelAndView mv=new ModelAndView();
+
         //判断用户名是否已存在
         Admin adminByAdminName = loginService.findAdminByAdminName(admin.getAdminName());
         if(adminByAdminName!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","该用户名已存在");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
         }
+
         //放UUID和密码加密
         admin.setAdminId(IDUtil.getUUID());
         admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         Integer flag = adminService.addAdmin(admin);
+
         //添加用户角色中间表记录
         Role roleByRoleName = roleService.findRoleByRoleName(admin.getAdminRole());
         Integer flag1 = adminService.addAdminAndRole(admin.getAdminId(), roleByRoleName.getRoleId());
+
         if(flag==1&&flag1==1){
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
@@ -116,6 +125,7 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
@@ -131,7 +141,9 @@ public class AdminController {
      **/
     @RequestMapping(value = "/update")
     public ModelAndView update(Admin admin,HttpServletRequest request){
+
         ModelAndView mv=new ModelAndView();
+
         /**
          * 判断用户名是否更改
          * 如果更改过则判断更改后的用户名是否存在
@@ -142,24 +154,29 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","该用户名已存在");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
         }
-        //密码加密
+
+        //密码加密并修改
         if(!adminByAdminId.getAdminPassword().equals(admin.getAdminPassword())){
             admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         }
         Integer flag = adminService.updateAdminByAdminId(admin);
+
         //修改用户角色中间表信息
         Role roleByRoleName = roleService.findRoleByRoleName(admin.getAdminRole());
         Integer flag1 = adminService.updateAdminAndRoleByAdminId(admin.getAdminId(), roleByRoleName.getRoleId());
+
         if(flag==1&&flag1==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/adminManager");
             //记录修改用户日志
             logUtil.setLog(request,"修改了后台用户"+adminByAdminId.getAdminName()+"的信息");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
@@ -167,6 +184,7 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
@@ -187,7 +205,7 @@ public class AdminController {
         //删除用户及用户角色中间表记录
         Integer flag = adminService.deleteAdminByAdminId(adminId);
         Integer flag1 = adminService.deleteAdminAndRoleByAdminId(adminId);
-        if(flag==1&&flag1==1){
+        if(flag==1){
             //记录删除用户日志
             logUtil.setLog(request,"删除了后台用户"+adminByAdminId.getAdminName()+"的信息");
         }

@@ -203,18 +203,18 @@
                         <div class="attention_type">
                             <!-- 已关注 -->
                             <p class="ok">√</p>
-                            <p class="ok_zi">已关注</p>
+                            <p class="ok_zi" onclick="nofollow('${bignum.userId}')">已关注</p>
                             <!-- 加关注 -->
                             <p class="jia">+</p>
-                            <p class="no_zi">加关注</p>
+                            <p class="no_zi" onclick="jiafollow('${bignum.userId}')">加关注</p>
                         </div>
                         <!-- 个性签名 -->
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
                         <!-- 关注人情况 -->
                         <div class="attention_person">
-                            <a href="<%=request.getContextPath()%>/follow/userfollower"
+                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId=${bignum.userId}"
                                name="attention" class="attention_him">${bignum.followerNum}人关注了ta</a>
-                            <a href="<%=request.getContextPath()%>/follow/userfollowed"
+                            <a href="<%=request.getContextPath()%>/follow/userfollowed?userId=${bignum.userId}"
                                name="attention" class="he_attention">ta关注了${bignum.followedNum}人</a>
                         </div>
                     </div>
@@ -567,49 +567,64 @@
 </script>--%>
 <%--点击关注事件--%>
 <script type="text/javascript">
-    $(document).ready(function () {
-        /*取消关注*/
-        $(".ok_zi").click(function () {
-            $.ajax({
-                url:"/follow/defollow",
-                type:"GET",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code()=="1"){
-                        $(this).hide();
-                        $(this).siblings(".ok").hide();
-                        $(this).siblings(".jia,.no_zi").show();
-                        layer.msg("取消关注成功！")
-                    } else {
-                        layer.msg("取消关注失败，请重新操作！");
-                    }
-                },
-                error:function (data) {
-                    layer.msg("加载超时，请稍后再试！");
+    /*layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        window.nofollow = function(userId){
+            $(".ok_zi").val(userId);
+            layer.open({
+                type: 1,
+                btn: false,
+                area: ['70%','50%'],
+                offset: '30px'
+            })
+        }
+    });*/
+    /*点击已关注 取消关注*/
+    function nofollow(userId){
+        var dian = $(this);
+        $.ajax({
+            url:"/follow/defollow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            success:function (data) {
+                if (data.code==1){
+                    alert("取消关注成功！");
+                    dian.hide();
+                    dian.siblings(".ok").hide();
+                    dian.siblings(".jia,.no_zi").show();
+                    /*layer.msg("取消关注成功！");*/
+                } else {
+                    alert("取消关注失败，请重新操作！");
+                    /*layer.msg("取消关注失败，请重新操作！");*/
                 }
-            });
+            },
+            error:function (data) {
+                alert("加载超时，请稍后再试！");
+                /*layer.msg("加载超时，请稍后再试！");*/
+            }
         });
-        $(".no_zi").click(function () {
-            $.ajax({
-                url:"/follow/follow",
-                type:"GET",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code() == "1"){
-                        $(this).hide();
-                        $(this).siblings(".jia").hide();
-                        $(this).siblings(".ok,.ok_zi").show();
-                        layer.msg("关注成功！");
-                    } else {
-                        layer.msg("关注失败，请重新操作！");
-                    }
-                },
-                error:function (data) {
-                    layer.msg("加载超时，请稍后再试！");
+    };
+    /*点击加关注*/
+    function jiafollow(userId){
+        $.ajax({
+            url:"/follow/follow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            success:function (data) {
+                if (data.code == 1){
+                    $(this).hide();
+                    $(this).siblings(".jia").hide();
+                    $(this).siblings(".ok,.ok_zi").show();
+                    layer.msg("关注成功！");
+                } else {
+                    layer.msg("关注失败，请重新操作！");
                 }
-            });
+            },
+            error:function (data) {
+                layer.msg("加载超时，请稍后再试！");
+            }
         });
-    });
+    };
 </script>
 <%--点击上下箭头显示隐藏动态--%>
 <script type="text/javascript">

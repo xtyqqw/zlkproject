@@ -42,10 +42,13 @@ public class MyFollower {
     private Integer studyGrowup;
     /**技能水平*/
     private Integer studyStandard;
+    /**与操作人关注关系*/
+    private Integer followType;
     /**动态集合*/
     private List<UserAction> list;
 
-    public MyFollower(String userId, String userRealname, Integer userDateTime, Integer userAllTime, String userImg, String userRealimg, Integer followerNum, Integer followedNum, Integer studyPower, Integer studyEfficiency, Integer studyTime, Integer studyGrowup, Integer studyStandard, List<UserAction> list) {
+
+    public MyFollower(String userId, String userRealname, Integer userDateTime, Integer userAllTime, String userImg, String userRealimg, Integer followerNum, Integer followedNum, Integer studyPower, Integer studyEfficiency, Integer studyTime, Integer studyGrowup, Integer studyStandard, Integer followType, List<UserAction> list) {
         this.userId = userId;
         this.userRealname = userRealname;
         this.userDateTime = userDateTime;
@@ -59,6 +62,7 @@ public class MyFollower {
         this.studyTime = studyTime;
         this.studyGrowup = studyGrowup;
         this.studyStandard = studyStandard;
+        this.followType = followType;
         this.list = list;
     }
 

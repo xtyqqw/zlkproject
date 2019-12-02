@@ -848,14 +848,14 @@
             dataType: "json",
             success: function (data) {
                 if (data.result == "true") {
-                    alert("今天你还没有签到");
+                    layer.msg("今天你还没有签到");
                 } else {
                     $(".s_btn").attr("disabled","disabled");
                     $(".s_btn").css("background", "grey");
                     $(".s_btn").val("已签到");
                 }
-            }, error: function (data) {
-                alert("对不起,找不到界面了");
+            }, error: function () {
+                layer.msg("连接超时，请检查网络");
             }
         })
     });
@@ -871,12 +871,12 @@
                         $(".s_btn").css("background", "grey");
                         $(".s_btn").val("已签到");
                         $(".sign_span").html(data.num);
-                        alert("签到成功");
+                        layer.msg("签到成功");
                     } else {
-                        alert("对不起,签到失败");
+                        layer.msg("对不起,签到失败");
                     }
-                }, error: function (data) {
-                    alert("对不起,找不到界面了");
+                }, error: function () {
+                    layer.msg("连接超时，请检查网络");
                 }
             });
         });

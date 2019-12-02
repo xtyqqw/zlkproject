@@ -3,6 +3,7 @@ package com.zlk.zlkproject.admin.mapper;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,6 +35,15 @@ public interface RoleMapper {
      * @return java.lang.Integer
      **/
     Integer addRole(Role role);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 角色授权
+     * @Date 10:55 2019/11/27
+     * @Param [roleId]
+     * @return java.lang.Integer
+     **/
+    Integer addRoleAndFunction(@Param("roleId") String roleId,@Param("functionId") List<Integer> functionId);
     
     /**
      * @Author lufengxiang
@@ -70,6 +80,15 @@ public interface RoleMapper {
      * @return java.lang.Integer
      **/
     Integer deleteRoleByRoleId(String roleId);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 删除角色一并删除其授权
+     * @Date 11:44 2019/11/27
+     * @Param [roleId]
+     * @return java.lang.Integer
+     **/
+    Integer deleteRoleAndFunctionByRoleId(String roleId);
 
     /**
      * @Author lufengxiang

@@ -13,11 +13,23 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
-<form>
+<form action="changepwd" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label">手机号</label>
         <div class="layui-input-inline">
             <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+            <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input"><span class="error" id="checktext2"></span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">确认密码</label>
+        <div class="layui-input-inline">
+            <input id="pwd2" name="userpwd" type="password" value="" onchange="checkpwd2()" placeholder="请再次输入密码" lay-verify="required"  autocomplete="off" class="layui-input"><span class="error" id="checktext3"></span>
         </div>
     </div>
     <div class="layui-inline">
@@ -26,6 +38,7 @@
             <input id="code1" name="usercode" type="text" value="" onchange="checkcode()" placeholder="请输入验证码" lay-verify="required|phone" autocomplete="off" class="layui-input"><span class="error" id="codeError"></span><button type="button" id="getcod" onclick="openCheck(this);" style="border: none">获取验证码</button>
         </div>
     </div>
+    <button type="submit" style="border: none;width: 100px;height: 30px;">提交</button>
 </form>
 <div id="box" onselectstart="return false;" style="visibility: hidden" >
     <div class="bgColor"></div>
@@ -33,6 +46,7 @@
     <!--给i标签添加上相应字体图标的类名即可-->
     <div class="slider"><i class="iconfont icon-double-right"></i></div>
 </div>
+
 </body>
 <script src="/js/jquery-1.12.4.js"></script>
 <script src="/layui/layui.js"></script>
