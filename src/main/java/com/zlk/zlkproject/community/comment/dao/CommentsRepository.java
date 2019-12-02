@@ -12,7 +12,7 @@ import java.util.List;
  * @author: QianKeQin
  * @date: 2019/12/2 14:50
  */
-public interface CommentRepository extends JpaRepository<Comment,Long> {
+public interface CommentsRepository extends JpaRepository<Comment,Long> {
 
     List<Comment> findByArticleIdAndParentCommentNull(Long articleId, Sort sort);
 }

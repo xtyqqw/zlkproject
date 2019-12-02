@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
-import com.zlk.zlkproject.community.comment.service.CommentService;
+import com.zlk.zlkproject.community.comment.service.CommentsService;
 import com.zlk.zlkproject.community.entity.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,14 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class CommentController {
 
     @Autowired
-    private CommentService commentService;
+    private CommentsService commentsService;
 
     @Autowired
     private ArticleShowService articleShowService;
 
     @GetMapping(value = "/comments/{articleId}")
     public String comments(@PathVariable Long articleId, Model model) {
-        model.addAttribute("comments", commentService.listCommentByArticleId(articleId));
+        model.addAttribute("comments", commentsService.listCommentByArticleId(articleId));
         return "view/community/articleShow :: commentList";
     }
 
@@ -38,7 +38,7 @@ public class CommentController {
     public String post(Comment comment) {
         Long articleId=comment.getArticle().getId();
         comment.setArticle(articleShowService.getArticle(articleId));
-        commentService.saveComment(comment);
+        commentsService.saveComment(comment);
         return "view/community/comments/" +articleId;
     }
 }
