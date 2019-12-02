@@ -4,6 +4,16 @@ server:
 spring:
   messages:
     basename: message/msg
+  jpa:
+    #是否显示sql
+    show-sql: true
+    #指定数据库类型
+    database: mysql
+    #方言
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #自动建表方式
+    hibernate:
+      ddl-auto: update
   datasource:
     druid:
       # 连接池的配置信息
@@ -46,7 +56,6 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-
     username: root
     password:
     url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
