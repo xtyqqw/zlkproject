@@ -26,58 +26,58 @@
 
 
     <style>
-        .kechengzhuti{
+        .kechengzhu{
             padding: 0px 15vw;
         }
-        .kechengzhuti .xiangmuxiangqing{
+        .kechengzhu .xiangmuxiang{
             margin-top: 1vw;
         }
-        .kechengzhuti .xiangmuxiangqing1{
+        .kechengzhu .xiangmuxiangqing1{
             margin-top: 1vw;
         }
-        .kechengzhuti .xiangmuxiangqing .xiangqingbiaoti{
+        .kechengzhu .xiangmuxiang .xiangqingbiao{
             width: 15%;
             margin:  0 auto;
             line-height: 5vw;
             height: 5vw;
         }
-        .kechengzhuti .xiangmuxiangqing1 .xiangqingbiaoti1{
+        .kechengzhu .xiangmuxiangqing1 .xiangqingbiaoti1{
             width: 20%;
             margin:  0 auto;
             line-height: 5vw;
             height: 5vw;
         }
-        .kechengzhuti .xiangmuxiangqing .xiangqingbiaoti .xiangqingbiaotineirong{
+        .kechengzhu .xiangmuxiang .xiangqingbiao .xiangqingbiaotinei{
             font-size: 1.5vw;
             height: 2vw;
             float: left;
         }
-        .kechengzhuti .xiangmuxiangqing1 .xiangqingbiaoti1 .xiangqingbiaotineirong1{
+        .kechengzhu .xiangmuxiangqing1 .xiangqingbiaoti1 .xiangqingbiaotineirong1{
             font-size: 1.5vw;
             height: 2vw;
             float: left;
         }
-        .kechengzhuti .xiangmuxiangqing .xiangqingbiaoti .xiao{
+        .kechengzhu .xiangmuxiang  .xiangqingbiao .xiao{
             margin: 2.2vw 0.2vw 0vw 0.2vw;
             line-height: 5vw;
             width: 0.6vw;
             float: left;
             height: 0.6vw;
         }
-        .kechengzhuti .xiangmuxiangqing1 .xiangqingbiaoti1 .xiao1{
+        .kechengzhu .xiangmuxiangqing1 .xiangqingbiaoti1 .xiao1{
             margin: 2.2vw 0.2vw 0vw 0.2vw;
             line-height: 5vw;
             width: 0.6vw;
             float: left;
             height: 0.6vw;
         }
-        .kechengzhuti .xiangmuxiangqing .xiangqingbiaoti .da{
+        .kechengzhu .xiangmuxiang .xiangqingbiao .da{
             margin-top: 1.7vw;
             width: 1.6vw;
             float: left;
             height: 1.6vw;
         }
-        .kechengzhuti .xiangmuxiangqing1 .xiangqingbiaoti1 .da1{
+        .kechengzhu .xiangmuxiangqing1 .xiangqingbiaoti1 .da1{
             margin-top: 1.7vw;
             width: 1.6vw;
             float: left;
@@ -227,13 +227,13 @@
     </style>
 </head>
 <body>
-<div class="kechengzhuti">
-    <div class="xiangmuxiangqing">
-        <div class="xiangqingbiaoti">
+<div class="kechengzhu">
+    <div class="xiangmuxiang">
+        <div class="xiangqingbiao">
             <span class="layui-badge-dot layui-bg-blue xiao"></span>
             <span class="layui-badge-dot layui-bg-blue da"></span>
             <span class="layui-badge-dot layui-bg-blue xiao"></span>
-            <b class="xiangqingbiaotineirong">FAQ</b>
+            <b class="xiangqingbiaotinei">FAQ</b>
             <span class="layui-badge-dot layui-bg-blue xiao"></span>
             <span class="layui-badge-dot layui-bg-blue da"></span>
             <span class="layui-badge-dot layui-bg-blue xiao"></span>
@@ -244,7 +244,7 @@
     </div>
 </div>
 
-<div class="kechengzhuti">
+<div class="kechengzhu">
     <div class="xiangmuxiangqing1">
         <div class="xiangqingbiaoti1">
             <span class="layui-badge-dot layui-bg-blue xiao1"></span>
