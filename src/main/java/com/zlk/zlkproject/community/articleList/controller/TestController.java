@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
     @RequestMapping(value = "toLogin")
     public String toLogin(){
-        return "view/community/communityMain";
+            return "view/community/communityMain";
     }
 }

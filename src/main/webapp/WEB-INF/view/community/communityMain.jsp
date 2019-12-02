@@ -4,9 +4,7 @@
 <html>
 <head>
     <title>社区</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
@@ -20,7 +18,6 @@
         .all-body-center{
             width: 1300px;
             height: 1300px;
-            /*border: #FFB800 1px solid;*/
             margin:0 auto;
         }
         .all-body-center .body-top{
@@ -28,25 +25,10 @@
             width: 100%;
             height: 115px;
         }
-        /*钱克勤导航栏位置*/
-        .navigation{
-            /*border: #0000cc 2px solid;*/
-            width: 78%;
-            height: 40px;
-            position: relative;
-            top: 30px;
-        }
         .all-body-center .body-left{
             float: left;
             width: 920px;
-            height: 1100px;
-        }
-        /*张照伟热门文章位置*/
-        .all-body-center .body-right{
-            /*border: #00FF00 1px solid;*/
-            float: right;
-            width: 201px;
-            height: 1000px;
+            height: 1138px;
         }
         /*发表按钮样式*/
         .add a {
@@ -61,8 +43,8 @@
         }
         .add{
             position: relative;
-            top: -10px;
-            left: 940px;
+            top: 26px;
+            left: 942px;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
@@ -81,15 +63,16 @@
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
-            bottom: 5px;
+            bottom: -15px;
+            left: 12px;
         }
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
             width: 220px;
             position: relative;
-            left: 5px;
-            bottom: -2px;
+            left: -2px;
+            bottom: -31px;
         }
         .tab a{
             color:  #989898;
@@ -244,11 +227,8 @@
         <%@include file="../../jsp/sidebar.jsp"%>
         <div class="all-body-center">
             <div class="body-top">
-                <div class="navigation">
-
-                </div>
                 <div class="add">
-                    <a role="button" href="<%= request.getContextPath()%>">发表</a>
+                    <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
                 </div>
                 <div class="crossing"></div>
                 <div class="tab">
@@ -264,7 +244,6 @@
                     <iframe name="pageTarget" frameborder="1" src="/article/findByCreateTime"> </iframe>
                 </div>
             </div>
-            <!--张照伟热门文章位置-->
                 <div class="wz_remenwenzhang">
                     <div class="wz_remen">
                         <div class="wz_remen_wz">

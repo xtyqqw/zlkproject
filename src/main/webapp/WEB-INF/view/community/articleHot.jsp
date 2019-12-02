@@ -4,6 +4,9 @@
 <html>
 <head>
     <title>热门</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .context-div{
             overflow-x:hidden;
@@ -15,15 +18,15 @@
         }
         .all{
             width: 100%;
-            height: 187px;
+            height: 178px;
             background-color: #FFFFFF;
             border-bottom: 1px solid #F0F0F0;
             position: relative;
         }
         .title{
             position: relative;
-            left: 14px;
-            top: 26px;
+            left: 23px;
+            top: -9px;
             float: left;
         }
         .title a{
@@ -35,8 +38,8 @@
         }
         .createArticleType{
             position: relative;
-            left: 30px;
-            top: 31px;
+            left: 33px;
+            top: -3px;
             float: left;
             width: 35px;
             height: 20px;
@@ -50,8 +53,8 @@
         }
         .articleSetTop{
             position: relative;
-            left: 40px;
-            top: 31px;
+            left: 44px;
+            top: -3px;
             float: left;
             width: 35px;
             height: 20px;
@@ -70,11 +73,14 @@
             vertical-align: middle;
             text-align: left;
         }
+        .kuang{
+            width: 98%;
+            position: relative;
+            top: 1px;
+        }
         .articleDigest{
-            position: absolute;
-            width: 630px;
-            left: 14px;
-            top: 70px;
+            margin-left: 20px;
+            margin-top: -52px;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -85,24 +91,32 @@
             font-family: Arial;
             color:  #707070;
             text-decoration:none;
+
         }
         .figures{
-            position: absolute;
-            left: 680px;
-            top: 28px;
+            margin-left: 716px;
+            margin-top: 30px;
             width: 170px;
             height: 95px;
             border-radius: 5px;
+            border: none 0;
+        }
+        .imgtest {
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+            border-radius: 5px;
+            border: none 0;
         }
         .icon{
             position: absolute;
-            left: 690px;
-            bottom: 20px;
+            left: 702px;
+            bottom: 26px;
         }
         .browseCount{
             position: absolute;
-            left: 720px;
-            bottom: 20px;
+            left: 727px;
+            bottom: 27px;
         }
         .browseCount a{
             font-size: 16px;
@@ -112,13 +126,13 @@
         }
         .icon1{
             position: absolute;
-            left: 790px;
-            bottom: 20px;
+            left: 811px;
+            bottom: 26px;
         }
         .commentCount{
             position: absolute;
-            left: 820px;
-            bottom: 20px;
+            left: 837px;
+            bottom: 27px;
 
         }
         .commentCount a{
@@ -127,30 +141,48 @@
             color: #989898;
             text-decoration:none;
         }
-        .createTime{
-            position: absolute;
-            bottom: 20px;
-            left: 150px;
-            font-size: 16px;
-            color: #989898;
-            font-family: Arial;
-        }
         .userImg{
             border: 1px crimson solid;
             width: 20px;
             height: 20px;
-            position: absolute;
-            left: 14px;
-            bottom: 16px;
             border-radius: 50px;
+            position: absolute;
+            margin-left: 23px;
+            margin-top: 35px;
         }
         .userRealname{
-            border: 1px crimson solid;
-            width: 70px;
-            height: 20px;
             position: relative;
-            left: 55px;
-            top: 150px;
+            float: left;
+            left: 66px;
+            top: 35px;
+            display: inline;
+        }
+        .userRealname a{
+            font-size: 16px;
+            color: #989898;
+            font-family: Arial;
+            text-decoration:none;
+        }
+        .little{
+            width: 3px;
+            height: 3px;
+            background-color: #989898;
+            border-radius: 50px;
+            position: relative;
+            float: left;
+            left: 79px;
+            top: 44px;
+            display: inline;
+        }
+        .createTime{
+            font-size: 16px;
+            color: #989898;
+            font-family: Arial;
+            position: relative;
+            left: 92px;
+            top: 36px;
+            float: left;
+            display: inline;
         }
         .more{
             font-size: 18px;
@@ -162,12 +194,11 @@
         .more-button{
             text-align: center;
             position: relative;
-            bottom: -20px;
+            bottom: -23px;
         }
-        .imgtest {
-            width: 100%;
-            height: 100%;
-            object-fit:cover;
+        a:hover{
+            color: #1296db;
+            text-decoration:none;
         }
     </style>
 </head>
@@ -180,12 +211,17 @@
             <c:if test="${article.articleSetTop == 0}">
                 <div class="articleSetTop"><p id="p">置顶</p></div>
             </c:if>
-            <div class="articleDigest">${article.articleDigest}</div>
-            <div class="createTime"><fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
-            <div class="figures">
-                <img class="imgtest" src="http://localhost:8080//upload//6f8e3206-fd7e-4ff9-a1eb-fc07de81435f.jpg" alt="">
+            <div class="kuang">
+                <div class="figures" id="figures">
+                    <img class="imgtest" src="">
+                </div>
+                <div class="articleDigest" id="articleDigest" style="width: 660px">${article.articleDigest}</div>
             </div>
-            <div class="userRealname"><a href="#">${article.userList.userRealname}</a></div>
+            <div>
+                <div class="userRealname"><a href="#">${article.userList.userRealname}</a></div>
+                <div class="little"></div>
+                <div class="createTime"><span id="time">1562169599000</span></div>
+            </div>
             <div class="userImg">${article.userList.userImg}</div>
             <svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>
             <div class="browseCount"><a href="#">${article.browseCount}阅读</a></div>
@@ -197,5 +233,57 @@
         <button class="more" id="more">点击加载更多</button>
     </div>
 </div>
+<!--日期转换-->
+<script>
+    $(document).ready(function()
+    {
+        var str = "";
+        var timestamp = 0;
+        var pass = 0;
+        str = $("#time").text();
+        timestamp = (new Date()).valueOf();
+        pass = (timestamp - str) / 1000;
+        $("#time").text(pass);
+        if (pass < 60) {
+            $("#time").text(pass + "秒前");
+        }
+        else
+        {
+            if (pass < (60 * 60))
+            {
+                pass = Math.floor(pass / 60);
+                $("#time").text(pass + "分钟前");
+            }
+            else
+            {
+                if (pass < (60 * 60 * 72))
+                {
+                    pass = Math.floor(pass / 60 / 60);
+                    $("#time").text(pass + "小时前");
+                }
+                else
+                {
+                    if (pass >= (60 * 60 * 72) )
+                    {
+                        pass = Math.floor(pass / 60 / 60 / 24);
+                        $("#time").text(pass + "天前");
+                    }
+                }
+            }
+        }
+    });
+</script>
+<!--没插图就隐藏-->
+<script>
+    $(function () {
+        var img = $("#figures").find("img");
+        if(img.length<=0){
+            $("#figures").hide();
+        }
+    })
+
+    /*var c = $("#articleDigest");
+    c.css("width","900px");*/
+</script>
 </body>
 </html>

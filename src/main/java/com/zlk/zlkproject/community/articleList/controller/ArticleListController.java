@@ -2,12 +2,12 @@ package com.zlk.zlkproject.community.articleList.controller;
 
 import com.zlk.zlkproject.community.articleList.service.ArticleListService;
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -43,6 +43,11 @@ public class ArticleListController {
         ModelAndView mv=new ModelAndView();
         userId = (String) request.getSession().getAttribute("userId");
         List<Article> articleList=articleListService.findByUserId(userId);
+        if (userId == null) {
+            mv.addObject("msg", "请先进行登录");
+            mv.setViewName("");
+            return mv;
+        }
         mv.addObject("articleList",articleList);
         mv.setViewName("view/community/articleMy");
         return mv;

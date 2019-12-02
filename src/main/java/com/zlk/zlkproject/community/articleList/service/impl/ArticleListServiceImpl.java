@@ -4,7 +4,6 @@ import com.zlk.zlkproject.community.articleList.mapper.ArticleListMapper;
 import com.zlk.zlkproject.community.articleList.service.ArticleListService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
-import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
