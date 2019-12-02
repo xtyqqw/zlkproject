@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.player.mapper.PlayerMapper">
+    <resultMap id="userSectionEntityMap" type="com.zlk.zlkproject.entity.UserSection">
+        <id property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <id property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+        <result property="state" column="state" javaType="java.lang.String"/>
+        <result property="time" column="time" javaType="java.lang.Double"/>
+    </resultMap>
+    <update id="recordTime" parameterType="com.zlk.zlkproject.entity.UserSection">
+        update user_section SET time = #{time} WHERE user_id = #{userId} AND section_id = #{sectionId}
+    </update>
+
+    <select id="readRecord" parameterType="com.zlk.zlkproject.entity.UserSection" resultType="java.lang.Double">
+        SELECT time FROM user_section WHERE user_id = #{userId} AND section_id = #{sectionId}
+    </select>
+</mapper>

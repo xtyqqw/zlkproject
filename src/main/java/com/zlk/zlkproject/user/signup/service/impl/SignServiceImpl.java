@@ -23,6 +23,7 @@ public class SignServiceImpl implements SignService {
         user.setUserId(UUIDUtil.getUUID());
         String userPwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
         user.setUserPwd(userPwd);
+        user.setUserRealname("用户"+user.getPhonenum());
         return signMapper.signup(user);
     }
 
@@ -47,5 +48,13 @@ public class SignServiceImpl implements SignService {
         System.out.println(user.getUserPwd());
         User user1 = signMapper.findUserByPhonenumAndPwd(user);
         return user1;
+    }
+
+    @Override
+    public Integer changePwd(User user) {
+        user.setUserId(UUIDUtil.getUUID());
+        String userPwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
+        user.setUserPwd(userPwd);
+        return signMapper.changePwd(user);
     }
 }

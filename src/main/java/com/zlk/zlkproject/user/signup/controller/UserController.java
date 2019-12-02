@@ -177,4 +177,34 @@ public class UserController {
             return mv;
         }
     }
+
+
+    @RequestMapping(value = "/changepwd")
+    public ModelAndView changePwd(HttpServletRequest request,User user,String usercode){
+        ModelAndView mv = new ModelAndView();
+        Boolean f1 = signService.findUserByPhonenum(user.getPhonenum());
+        String code = (String) request.getSession().getAttribute("code");
+        if(f1){
+            if(usercode.equals(code)){
+                signService.changePwd(user);
+                mv.addObject("spanmsg","密码修改成功，请重新登陆");
+                mv.setViewName("view/signin");
+                return mv;
+            }else {
+                mv.addObject("spanmsg","验证码错误，请重新输入");
+                mv.setViewName("view/forgetpwd");
+                return mv;
+            }
+
+        }else {
+            mv.addObject("spanmsg","该用户不存在");
+            mv.setViewName("view/forgetpwd");
+            return mv;
+        }
+    }
+
+    @RequestMapping(value = "/toforget")
+    public String toForget(){
+        return "view/forgetpwd";
+    }
 }

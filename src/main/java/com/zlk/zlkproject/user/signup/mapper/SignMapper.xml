@@ -28,14 +28,18 @@
         </resultMap>
 
     <insert id="signup" parameterType="com.zlk.zlkproject.entity.User">
-        insert into user (user_id,user_phonenum,user_pwd)value (#{userId},#{phonenum},#{userPwd})
+        insert into user (user_id,user_phonenum,user_pwd,user_realname)value (#{userId},#{phonenum},#{userPwd},#{userRealname})
     </insert>
 
-    <select id="findUserByPhonenum" parameterType="java.lang.String" resultType="com.zlk.zlkproject.entity.User">
+    <select id="findUserByPhonenum" parameterType="java.lang.String" resultMap="durstionMap">
         select * from user where user_phonenum = #{phonenum} limit 0,1
     </select>
     <select id="findUserByPhonenumAndPwd" parameterType="com.zlk.zlkproject.entity.User" resultMap="durstionMap">
         select * from user where user_phonenum =  #{phonenum} and user_pwd = #{userPwd} limit 0,1
     </select>
+
+    <update id="changePwd" parameterType="com.zlk.zlkproject.entity.User">
+        update user set user_pwd = #{userPwd} where user_phonenum = #{phonenum}
+    </update>
 
 </mapper>

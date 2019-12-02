@@ -14,7 +14,7 @@ public class Arith {
     private Arith() {
     }
 
-
+    /*技能水平*/
     public static Integer ride(Integer x) {
         if (x!=null) {
             Integer y = (x * 5)+ 3;
@@ -23,6 +23,7 @@ public class Arith {
             return null;
         }
     }
+    /*学习成长量*/
     public static Integer plus(Integer c){
         if(c != null){
             Integer a = (c + 1) * 3;
@@ -31,6 +32,7 @@ public class Arith {
             return null;
         }
     }
+    /*超过多少同学百分比*/
     public static Integer divide(Integer b,Integer q){
         /*除法*/
 

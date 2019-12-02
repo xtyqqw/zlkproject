@@ -17,4 +17,6 @@ public interface SignService {
     Boolean findUserByPhonenum(String phonenum);
     User findUserByUserphonenum(String phonenum);
     User findUserByPhonenumAndPwd(User user);
+    //修改密码
+    Integer changePwd(User user);
 }

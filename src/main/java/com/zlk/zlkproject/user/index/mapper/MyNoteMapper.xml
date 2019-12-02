@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.index.mapper.MyNoteMapper">
+    <resultMap type="com.zlk.zlkproject.user.entity.StuNote" id="StuNoteMap">
+        <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
+        <result property="snSectionId" column="sn_section_id" javaType="java.lang.Integer"/>
+        <result property="snUserId" column="sn_user_id" javaType="java.lang.String"/>
+        <result property="content" column="content" javaType="java.lang.String"/>
+        <result property="up" column="up" javaType="java.lang.Integer"/>
+        <result property="down" column="down" javaType="java.lang.Integer"/>
+        <result property="report" column="report" javaType="java.lang.String"/>
+        <result property="snDate" column="sn_date" javaType="java.sql.Date"/>
+    </resultMap>
+    <!--根据ID查询个人笔记-->
+    <select id="findNotesBySnId" parameterType="java.lang.String" resultMap="StuNoteMap">
+       select * from stu_note where sn_user_id = #{snUserId}
+    </select>
+    <!--根据ID查询个人笔记个数-->
+    <select id="findNoteNumBySnId" parameterType="java.lang.String" resultType="java.lang.Integer">
+       select count(*) from stu_note where sn_user_id = #{snUserId}
+    </select>
+    <!--根据ID修改个人笔记-->
+    <update id="editNoteBySnId" parameterType="com.zlk.zlkproject.user.entity.StuNote">
+        update stu_note
+        <set>
+            <if test="content!=null and content!=''">
+                content = #{content}
+            </if>
+        </set>
+        where sn_id = #{snId}
+    </update>
+    <!--根据ID删除个人笔记-->
+    <delete id="deleteNoteBySnId" parameterType="com.zlk.zlkproject.user.entity.StuNote">
+        delete from stu_note where sn_id=#{snId}
+    </delete>
+    <!--笔记分页查询-->
+    <select id="findNotesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="StuNoteMap">
+        select * from stu_note order by sn_date DESC limit #{startPage},#{limit}
+    </select>
+</mapper>
