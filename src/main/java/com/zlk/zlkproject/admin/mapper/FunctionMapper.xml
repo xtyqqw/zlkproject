@@ -25,7 +25,23 @@
         select * from functions
     </select>
     <insert id="addFunction" parameterType="com.zlk.zlkproject.entity.Function">
-        insert into functions(function_name,parent_id,url,comment) values (#{name},#{pid},#{url},#{comment})
+        insert into functions
+        <trim prefix="(" suffix=") " suffixOverrides=",">
+            function_name,parent_id,
+            <if test="url!=null and url!= '' ">
+                url,
+            </if>
+            comment,
+        </trim>
+        values
+        <foreach collection=""
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{name},#{pid},
+            <if test="url!=null and url!= '' ">
+                #{url},
+            </if>
+            #{comment},
+        </trim>
     </insert>
     <update id="updateFunction" parameterType="com.zlk.zlkproject.entity.Function">
         update functions
@@ -59,5 +75,12 @@
     </select>
     <select id="findFunctionByFunctionName" parameterType="java.lang.String" resultMap="functionEntityMap">
         select * from functions where function_name=#{name}
+    </select>
+    <select id="findFunctionByUrl" resultMap="functionEntityMap">
+        select * from functions where url = "" or url is null
+    </select>
+    <select id="findParentFunctionByFunctionId" parameterType="java.lang.Integer" resultMap="functionEntityMap">
+        select * from functions where function_id =
+        (select parent_id from functions where function_id = #{id});
     </select>
 </mapper>

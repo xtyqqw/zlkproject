@@ -80,8 +80,8 @@ public class RoleController {
     /**
      * @Author lufengxiang
      * @Description //TODO 新增角色
-     * @Date 16:24 2019/11/19
-     * @Param [role]
+     * @Date 9:56 2019/11/28
+     * @Param [role, addFunction]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/insert")
@@ -133,8 +133,8 @@ public class RoleController {
     /**
      * @Author lufengxiang
      * @Description //TODO 通过角色ID修改角色信息
-     * @Date 10:50 2019/11/20
-     * @Param [role, request]
+     * @Date 9:57 2019/11/28
+     * @Param [role, request, updateFunction]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/update")

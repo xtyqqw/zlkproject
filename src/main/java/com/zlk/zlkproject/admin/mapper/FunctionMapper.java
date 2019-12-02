@@ -87,4 +87,22 @@ public interface FunctionMapper {
      * @return com.zlk.zlkproject.entity.Function
      **/
     Function findFunctionByFunctionName(String name);
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过URL查询菜单信息
+     * @Date 9:48 2019/11/29
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Function>
+     **/
+    List<Function> findFunctionByUrl();
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过ID查询父菜单信息
+     * @Date 14:22 2019/11/29
+     * @Param [id]
+     * @return com.zlk.zlkproject.entity.Function
+     **/
+    Function findParentFunctionByFunctionId(Integer id);
 }

@@ -33,9 +33,17 @@
             width: auto;
         }
 
+        #condition{
+            width: 180px;
+        }
+
+        #addForm{
+            margin-top: 15px;
+        }
+
         .form input, .form select {
             margin-top: 15px;
-            height: 24px;
+
             width: auto;
         }
 
@@ -56,8 +64,18 @@
             padding-bottom: 38px;
         }
 
+        #addReturn{
+            margin-left: 30px;
+            padding-bottom: 38px;
+        }
+
         #updateSubmit{
             margin-left: 300px;
+            padding-bottom: 38px;
+        }
+
+        #updateReturn{
+            margin-left: 30px;
             padding-bottom: 38px;
         }
     </style>
@@ -66,14 +84,15 @@
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" style="display: none">
     <form action="<%=request.getContextPath()%>/role/insert" class="form">
-        角色名称 <input type="text" required placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input type="text" required placeholder="请输入角色代码" name="roleCode"><br>
+        角色名称 <input class="layui-input" type="text" required placeholder="请输入角色名称" name="roleName"><br>
+        角色代码 <input class="layui-input" type="text" required placeholder="请输入角色代码" name="roleCode"><br>
         <p class="roleFunction">角色权限</p>
         <div class="left">
             <ul id="zTreeContent" class="ztree"></ul>
         </div>
         <input type="text" hidden="hidden" id="addFunction" name="addFunction">
         <input type="submit" class="layui-btn" id="insertSubmit" value="确认">
+        <input type="button" id="addReturn" class="layui-btn" value="返回"/>
     </form>
 </div>
 <script type="text/javascript">
@@ -152,19 +171,25 @@
             $("#addFunction").val(appop);
         })
     }
+    $("#addReturn").click(function () {
+        $("#editForm").css("display","none");
+        $("#table").css("display","block");
+        $("#addForm").css("display","none");
+    })
 </script>
 
 <div id="editForm" style="display: none">
     <form action="<%=request.getContextPath()%>/role/update" class="form">
         <input type="hidden" name="roleId" id="roleId"><br>
-        角色名称 <input type="text" required id="roleName" placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input type="text" required id="roleCode" placeholder="请输入角色代码" name="roleCode"><br>
+        角色名称 <input class="layui-input" type="text" required id="roleName" placeholder="请输入角色名称" name="roleName"><br>
+        角色代码 <input class="layui-input" type="text" required id="roleCode" placeholder="请输入角色代码" name="roleCode"><br>
         <p class="roleFunction">角色权限</p>
         <div class="left">
             <ul id="tree" class="ztree"></ul>
         </div>
         <input type="text" hidden="hidden" id="updateFunction" name="updateFunction">
         <input type="submit" class="layui-btn" id="updateSubmit" value="确认">
+        <input type="button" id="updateReturn" class="layui-btn" value="返回"/>
     </form>
 </div>
 <script type="text/javascript">
@@ -274,6 +299,11 @@
             $("#updateFunction").val(appop);
         })
     }
+    $("#updateReturn").click(function () {
+        $("#editForm").css("display","none");
+        $("#table").css("display","block");
+        $("#addForm").css("display","none");
+    })
 </script>
 <div class="layui-fluid" id="table" style="display: block">
     <table class="layui-table" id="demo" lay-filter="test"></table>
@@ -325,7 +355,7 @@
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">角色名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的角色名称" autocomplete="off" class="layui-input">\n' +
+                '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入要查询的角色名称" autocomplete="off" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-inline">\n' +

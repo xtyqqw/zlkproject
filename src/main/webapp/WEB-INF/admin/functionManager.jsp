@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: l
@@ -11,10 +12,13 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/module/treetable-lay/treetable.css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/module/treetable-lay/treetable.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
     <script src="<%=request.getContextPath()%>/css/admin/module/treetable-lay/treetable.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.excheck.js"></script>
     <style type="text/css">
         .xm-d1{
             width: 100%;
@@ -29,40 +33,191 @@
         .xm-d2{
             margin-top: 11px;
         }
-        .form, .form input, .form select {
+
+        .form,.ztree{
+            margin-left: 90px;
+        }
+
+        .form p {
+            margin-top: 30px;
+        }
+
+        .form input{
+            width: auto;
+        }
+
+        .name{
+            margin-top: 60px;
+        }
+
+        #catalogAdd{
+            margin-left: 150px;
+        }
+
+        #catalogAdd,#menuAdd,#addReturn,#insertSubmit{
+            margin-top: 24px;
+            margin-bottom: 10px;
+            float: left;
+            margin-right: 13px;
+            padding-bottom: 38px;
+        }
+
+        #insertSubmit{
+            margin-left: 300px;
+        }
+
+        #menuAdd{
+            margin-left: 20px;
+        }
+
+        .radioTitle{
+            margin-top: 21px;
+            float: left;
+        }
+
+        .ztree li a{
+            color: black;
+        }
+
+        .form2,.form2 p{
             position: relative;
             text-align: center;
         }
 
-        .form input, .form select {
-            margin-top: 15px;
-            height: 24px;
+        .form2 input {
+            margin-left: 95px;
+            margin-top: 10px;
+            height: 31px;
             width: auto;
         }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
-<div id="addForm" hidden="hidden">
+
+<div id="addForm" style="display: none">
     <form action="<%=request.getContextPath()%>/function/insert" class="form">
-        菜单名称 <input type="text" required placeholder="请输入菜单名称" name="name"><br>
-        上级菜单 <input type="text" required placeholder="请输入上级菜单编号" name="pid"><br>
-        菜单URL <input type="text" required placeholder="请输入菜单路径" name="url"><br>
-        菜单简介 <input type="text" required placeholder="请输入菜单简介" name="comment"><br>
-        <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
+        <input type="radio" id="catalogAdd" name="类型" title="目录"><span class="radioTitle">目录</span>
+        <input type="radio" id="menuAdd" name="类型" checked><span class="radioTitle">菜单</span><br>
+        <p class="name">名称</p><br>
+        <input type="text" class="layui-input" required placeholder="请输入名称" name="name"><br>
+        <p class="addUrl">路径</p><br>
+        <input class="addUrl layui-input" type="text" placeholder="请输入路径" name="url"><br>
+        <p>简介</p><br>
+        <input type="text" class="layui-input" required placeholder="请输入简介" name="comment"><br>
+        <p>上级目录</p><br>
+        <div class="left">
+            <ul id="zTreeContent" class="ztree"></ul>
+        </div>
+        <input type="text" style="display: none" hidden="hidden" id="addFunction" name="addFunction">
+        <input type="submit" class="layui-btn" id="insertSubmit" value="确认">
+        <input type="button" id="addReturn" class="layui-btn" value="返回"/>
     </form>
 </div>
-<div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/function/update" class="form">
+
+<script>
+    $("#menuAdd").click(function () {
+        $(".addUrl").show()
+    })
+    $("#catalogAdd").click(function () {
+        $(".addUrl").hide()
+    })
+</script>
+
+<script>
+    function getzTreeContent() {
+        var setting = {
+            async: {
+                enable: true,
+                url: "/function/findFunctionByUrl",
+                dataType: JSON
+            },
+            check: {
+                enable: true,
+                chkStyle: "radio",
+                radioType: "all"
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pid",
+                    rootPId: 0
+                }
+            },
+            callback: {
+                onAsyncSuccess: function () {
+                    var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
+                    zTree.expandAll(true);
+                },
+                beforeClick: function (treeId, treeNode) {
+                    var zTree = $.fn.zTree.getZTreeObj("zTreeContent");
+                    if (treeNode.isParent) {
+                        zTree.expandNode(treeNode);
+                        return false;
+                    }
+                },
+                onClick: function (e, treeId, treeNode, clickFlag) {
+                    zTreeContent.checkNode(treeNode, !treeNode.checked, true);
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            zTreeContent = $.fn.zTree.init($("#zTreeContent"), setting);
+        });
+
+        //创建一个对象
+        function createObj(id,name,pid){
+            this.id = id;
+            this.name = name;
+            this.pid = pid;
+        }
+        createObj.prototype.sayId = function(){
+            alert(this.id);
+        }
+        createObj.prototype.sayName = function(){
+            alert(this.name);
+        }
+        createObj.prototype.sayPid = function(){
+            alert(this.pid);
+        }
+
+        $("#insertSubmit").click(function () {
+            var treeObj=$.fn.zTree.getZTreeObj("zTreeContent");
+            nodes=treeObj.getCheckedNodes(true);
+            var ss=new Array();//创建list集合
+            v="";
+            for(var i=0;i<nodes.length;i++){
+                var person = new createObj(nodes[i].id,nodes[i].name,nodes[i].pid);
+                ss[i]=person;
+            }
+            //打包成json格式数据
+            var appop = JSON.stringify(ss);
+            $("#addFunction").val(appop);
+        })
+    }
+    $("#addReturn").click(function () {
+        $("#editForm").hide();
+        $(".xm").show();
+        $("#addForm").hide();
+    })
+</script>
+
+<div id="editForm" style="display: none">
+    <form action="<%=request.getContextPath()%>/function/update" class="form2">
         <input type="hidden" name="id" id="id"><br>
-        菜单名称 <input type="text" required id="name" placeholder="请输入菜单名称" name="name"><br>
-        上级菜单 <input type="text" required id="pid" placeholder="请输入上级菜单编号" name="pid"><br>
-        菜单URL <input type="text" required id="url" placeholder="请输入菜单路径" name="url"><br>
-        菜单简介 <input type="text" required id="comment" placeholder="请输入菜单简介" name="comment"><br>
-        <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
+        <p>名称</p>
+        <input type="text" class="layui-input" required placeholder="请输入名称" id="name" name="name"><br>
+        <p class="addUrl">路径</p>
+        <input class="addUrl layui-input" type="text" placeholder="请输入路径" id="url" name="url"><br>
+        <p>简介</p>
+        <input type="text" class="layui-input" required placeholder="请输入简介" id="comment" name="comment"><br>
+        <input type="submit" style="display:none;" class="layui-btn" id="updateSubmit" value="确认">
     </form>
 </div>
-<div class="xm">
+
+<div class="xm" style="display: block">
     <div class="xm-d1">
         <p class="xm-d1-p">权限管理</p>
     </div>
@@ -110,7 +265,7 @@
                 treeSpid: 0,//最上级的父级id
                 treeIdName: 'id',//id字段的名称
                 treePidName: 'pid',//pid字段的名称
-                treeDefaultClose: false,//是否默认折叠
+                treeDefaultClose: true,//是否默认折叠
                 treeLinkage: false,//父级展开时是否自动展开所有子级
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
@@ -131,7 +286,7 @@
                             }
                         }
                     },
-                    {templet: complain, title: '操作'}
+                    {templet: complain, title: '操作',width:80}
                 ]],
                 //数据渲染完的回调
                 done: function () {
@@ -157,7 +312,11 @@
         });
 
         $('#add').click(function () {
-            layer.open({
+            getzTreeContent();
+            $("#editForm").hide();
+            $(".xm").hide();
+            $("#addForm").show();
+            /*layer.open({
                 title: "添加",
                 type: 1,
                 area: ['30%', '70%'],
@@ -166,7 +325,7 @@
                 yes: function (index, layero) {
                     layero.find("form").find("#insertSubmit").click();
                 }
-            });
+            });*/
         });
 
         function complain(d){//操作中显示的内容
@@ -178,7 +337,10 @@
                     '<i class="layui-icon layui-icon-delete" ></i></a>',
                 ].join('');
             }else{
-                return '';
+                return [
+                    '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
+                    '<i class="layui-icon layui-icon-edit"></i></a>',
+                ].join('');
             }
         }
 
@@ -204,21 +366,38 @@
                         layer.close(index);
                     });
                 }else if (layEvent === 'edit') {
-                    $("#id").val(data.id);
-                    $("#name").val(data.name);
-                    $("#pid").val(data.pid);
-                    $("#url").val(data.url);
-                    $("#comment").val(data.comment);
-                    layer.open({
-                        title: "修改",
-                        type: 1,
-                        area: ['30%', '70%'],
-                        content: $("#editForm"),
-                        btn: ['提交'],
-                        yes: function (index, layero) {
-                            layero.find("form").find("#updateSubmit").click();
-                        }
-                    });
+                    if ((data.url==null||data.url=="")){
+                        $("#id").val(data.id);
+                        $("#name").val(data.name);
+                        $("#comment").val(data.comment);
+                        $(".addUrl").hide();
+                        layer.open({
+                            title: "修改",
+                            type: 1,
+                            area: ['30%', '70%'],
+                            content: $("#editForm"),
+                            btn: ['提交'],
+                            yes: function (index, layero) {
+                                layero.find("form").find("#updateSubmit").click();
+                            }
+                        });
+                    }else {
+                        $("#id").val(data.id);
+                        $("#name").val(data.name);
+                        $("#url").val(data.url);
+                        $("#comment").val(data.comment);
+                        $(".addUrl").show();
+                        layer.open({
+                            title: "修改",
+                            type: 1,
+                            area: ['30%', '70%'],
+                            content: $("#editForm"),
+                            btn: ['提交'],
+                            yes: function (index, layero) {
+                                layero.find("form").find("#updateSubmit").click();
+                            }
+                        });
+                    }
                 }
             }
         });

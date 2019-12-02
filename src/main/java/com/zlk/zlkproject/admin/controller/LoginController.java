@@ -47,7 +47,7 @@ public class LoginController {
      * @Author lufengxiang
      * @Description //TODO 登陆页面点击登陆
      * @Date 17:31 2019/11/18
-     * @Param [request, admin, code]
+     * @Param [request, admin]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/login")

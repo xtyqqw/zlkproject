@@ -56,6 +56,13 @@ public class FunctionServiceImpl implements FunctionService {
         return functionMapper.addFunction(function);
     }
 
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 修改菜单
+     * @Date 10:14 2019/11/28
+     * @Param [function]
+     * @return java.lang.Integer
+     **/
     @Override
     public Integer updateFunction(Function function) {
         return functionMapper.updateFunction(function);
@@ -119,5 +126,29 @@ public class FunctionServiceImpl implements FunctionService {
     @Override
     public Function findFunctionByFunctionName(String name) {
         return functionMapper.findFunctionByFunctionName(name);
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过URL查询菜单信息
+     * @Date 9:48 2019/11/29
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Function>
+     **/
+    @Override
+    public List<Function> findFunctionByUrl() {
+        return functionMapper.findFunctionByUrl();
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过ID查询父菜单信息
+     * @Date 14:22 2019/11/29
+     * @Param [id]
+     * @return com.zlk.zlkproject.entity.Function
+     **/
+    @Override
+    public Function findParentFunctionByFunctionId(Integer id) {
+        return functionMapper.findParentFunctionByFunctionId(id);
     }
 }

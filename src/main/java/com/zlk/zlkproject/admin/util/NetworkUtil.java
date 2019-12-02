@@ -28,12 +28,18 @@ public final class NetworkUtil {
          * @return
          */
         public static String getIpAddr(HttpServletRequest request){
-            String ipAddress = request.getHeader("x-forwarded-for");
+            String ipAddress = request.getHeader("ipAddressX-Forwarded-For");
             if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getHeader("Proxy-Client-IP");
             }
             if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getHeader("WL-Proxy-Client-IP");
+            }
+            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+                ipAddress = request.getHeader("HTTP_CLIENT_IP");
+            }
+            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+                ipAddress = request.getHeader("HTTP_X_FORWARDED_FOR");
             }
             if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
                 ipAddress = request.getRemoteAddr();

@@ -98,6 +98,7 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","该用户名已存在");
             mv.setViewName("admin/adminManager");
+            //动态获取可选角色
             List<Role> roleNameList = roleService.findRoleName();
             mv.addObject("roleNameList",roleNameList);
             return mv;
