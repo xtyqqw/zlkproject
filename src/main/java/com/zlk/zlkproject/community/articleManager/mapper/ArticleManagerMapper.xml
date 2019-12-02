@@ -16,7 +16,11 @@
         <result property="articleContent" column="article_content" javaType="java.lang.String"></result>
         <result property="zanCount" column="zan_count" javaType="java.lang.Integer"></result>
         <result property="caiCount" column="cai_count" javaType="java.lang.Integer"></result>
-        <result property="inform" column="inform" javaType="java.lang.String"></result>
+        <result property="inform" column="inform" javaType="java.lang.Integer"></result>
+        <result property="userId" column="user_id" javaType="java.lang.String"></result>
+        <result property="createArticleType" column="create_article_type" javaType="java.lang.String"></result>
+        <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"></result>
+        <result property="approval" column="approval" javaType="java.lang.Integer"></result>
     </resultMap>
 
     <insert id="addArticle" parameterType="com.zlk.zlkproject.entity.Article">
@@ -44,6 +48,9 @@
             <if test="commentCount!=null and commentCount!='' ">
                 comment_count=#{commentCount},
             </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
             <if test="updateTime!=null">
                 update_time=#{updateTime},
             </if>
@@ -67,6 +74,18 @@
             </if>
             <if test="inform!=null and inform!='' ">
                 inform=#{inform},
+            </if>
+            <if test="userId!=null and userId!='' ">
+                user_id=#{userId},
+            </if>
+            <if test="createArticleType!=null and createArticleType!='' ">
+                create_article_type=#{createArticleType},
+            </if>
+            <if test="articleSetTop!=null and articleSetTop!='' ">
+                article_set_top=#{articleSetTop},
+            </if>
+            <if test="approval!=null and approval!='' ">
+                approval=#{approval},
             </if>
          </set>
         where article_id=#{articleId}

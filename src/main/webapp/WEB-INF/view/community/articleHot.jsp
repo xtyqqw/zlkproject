@@ -5,7 +5,6 @@
     <title>社区</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-
     <script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
 
 </head>

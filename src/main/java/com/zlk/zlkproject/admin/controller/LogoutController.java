@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 @Controller
 public class LogoutController {
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 退出登录
+     * @Date 10:59 2019/11/22
+     * @Param []
+     * @return java.lang.String
+     **/
     @RequestMapping(value = "/")
     public String logout(){
         return "admin/login";

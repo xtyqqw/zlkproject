@@ -24,44 +24,98 @@
         .form input, .form select {
             margin-top: 15px;
             height: 24px;
-            width: auto;
+            width: 60%;
         }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
-<div id="addForm" hidden="hidden">
+<%--<div id="addForm" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/insert" class="form">
         文章ID <input type="text" required placeholder="请输入文章ID" name="articleId"><br>
         文章标题 <input type="text" required placeholder="请输入文章标题" name="title"><br>
         浏览数 <input type="text" required placeholder="请输入浏览数" name="browseCount"><br>
         评论数 <input type="text" required placeholder="请输入浏览数" name="commentCount"><br>
-        发布时间 <input type="text" required placeholder="请输入发布时间" id="createTime" name="createTime"><br>
+        发布时间 <input type="text" required placeholder="请输入发布时间" id="createTime1" name="createTime"><br>
         插图相对路径 <input type="text" required placeholder="请输入插图相对路径" name="figures"><br>
-        插图绝对路径 <input type="text" required placeholder="请输入插图绝对路径" name="figuresReal"><br>
-        文章摘要 <input type="text" required placeholder="请输入文章摘要" name="articleDigest"><br>
-        文章内容 <input type="text" required placeholder="请输入文章内容" name="articleContent"><br>
+        插图绝对路径 <input type="text" required placeholder="请输入插图绝对路径" name="figuresReal"><br><br>
+        文章摘要 <textarea rows="5" cols="60" required placeholder="请输入文章摘要" name="articleDigest"></textarea><br><br>
+        文章内容 <textarea rows="10" cols="60" required placeholder="请输入文章内容" name="articleContent"></textarea><br>
         赞数 <input type="text" required placeholder="请输入赞数" name="zanCount"><br>
         踩数 <input type="text" required placeholder="请输入踩数" name="caiCount"><br>
         举报 <input type="text" required placeholder="请输入举报" name="inform"><br>
-
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
-</div>
+</div>--%>
 <div id="editForm" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/update" class="form">
         <input type="hidden" name="articleId" id="articleId"><br>
-        文章标题 <input type="text" required id="title" placeholder="请输入文章标题" name="title"><br>
-        浏览数 <input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount"><br>
-        评论数 <input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount"><br>
-        更新时间 <input type="text" required id="updateTime" placeholder="请输入更新时间" id="updateTime" name="updateTime"><br>
-        插图相对路径 <input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures"><br>
-        插图绝对路径 <input type="text" required id="figuresReal" placeholder="请输入插图绝对路径" name="figuresReal"><br>
-        文章摘要 <input type="text" required id="articleDigest" placeholder="请输入文章摘要" name="articleDigest"><br>
-        文章内容 <input type="text" required id="articleContent" placeholder="请输入文章内容" name="articleContent"><br>
-        赞数 <input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"><br>
-        踩数 <input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount"><br>
-        举报 <input type="text" required id="inform" placeholder="请输入举报" name="inform"><br>
+        <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
+            <tr>
+                <td valign="bottom">文章标题</td>
+                <td><input type="text" readonly required id="title" placeholder="请输入文章标题" name="title"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">浏览数</td>
+                <td><input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">评论数</td>
+                <td><input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">发布时间</td>
+                <td><input type="text" required id="createTime" placeholder="请输入发布时间" name="createTime"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">更新时间</td>
+                <td><input type="text" required id="updateTime" placeholder="请输入更新时间" name="updateTime"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">插图相对路径</td>
+                <td><input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">插图绝对路径</td>
+                <td><input type="text" required id="figuresReal" placeholder="请输入插图绝对路径" name="figuresReal"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">赞数</td>
+                <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">踩数</td>
+                <td><input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">举报</td>
+                <td><input type="text" required id="inform" placeholder="请输入举报" name="inform"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">用户id</td>
+                <td><input type="text" required id="userId" placeholder="请输入用户id" name="userId"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">发文类型</td>
+                <td><input type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">文章置顶</td>
+                <td><input type="text" required id="articleSetTop" placeholder="请输入文章置顶" name="articleSetTop"></td>
+            </tr>
+            <tr>
+                <td valign="bottom">审核</td>
+                <td><input type="text" required id="approval" placeholder="请输入审核" name="approval"></td>
+            </tr>
+            <tr>
+                <td>文章摘要</td>
+                <td><textarea rows="5" cols="60" readonly required id="articleDigest" placeholder="请输入文章摘要" name="articleDigest"></textarea><br></td>
+            </tr>
+            <tr>
+                <td>文章内容</td>
+                <td><textarea rows="10" cols="60" readonly required id="articleContent" placeholder="请输入文章内容" name="articleContent"></textarea><br></td>
+            </tr>
+        </table>
     </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
@@ -82,13 +136,18 @@
         })
         </c:if>
         laydate.render({
+            elem: '#createTime1'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        laydate.render({
             elem: '#createTime'
             , type: 'datetime'
             , format: 'yyyy-MM-dd HH:mm:ss'
         });
         laydate.render({
             elem: '#updateTime'
-            , type: 'datetime'
+            ,type: 'datetime'
             , format: 'yyyy-MM-dd HH:mm:ss'
         });
         form.render();
@@ -100,22 +159,12 @@
             , height: 450
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'articleId', title: '文章ID', width: 100, sort: true}
+                , {field: 'articleId', title: '文章ID', width: 80, sort: true}
                 , {field: 'title', title: '文章标题', width: 100, sort: true}
                 , {field: 'browseCount', title: '浏览数', width: 80}
                 , {field: 'commentCount', title: '评论数', width: 80}
-                , {
-                    field: 'createTime',
-                    title: '发布时间',
-                    /*templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',*/
-                    width: 80
-                }
-                , {
-                    field: 'updateTime',
-                    title: '更新时间',
-                    /*templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',*/
-                    width: 80
-                }
+                , {field: 'createTime',title: '发布时间',width: 80}
+                , {field: 'updateTime',title: '更新时间',width: 80}
                 , {field: 'figures', title: '插图相对路径', width: 80}
                 , {field: 'figuresReal', title: '插图绝对路径', width: 80}
                 , {field: 'articleDigest', title: '文章摘要', width: 80}
@@ -123,6 +172,10 @@
                 , {field: 'zanCount', title: '赞数', width: 80}
                 , {field: 'caiCount', title: '踩数', width: 80}
                 , {field: 'inform', title: '举报', width: 80}
+                , {field: 'userId', title: '用户id', width: 80}
+                , {field: 'createArticleType', title: '发文类型', width: 80}
+                , {field: 'articleSetTop', title: '文章置顶', width: 80}
+                , {field: 'approval', title: '审核', width: 80}
                 , {
                     title: '操作', width: 180, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
@@ -133,7 +186,7 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn" lay-event="add">增加</button>' +
+                '<button type="button" class="layui-btn" lay-event=""><!--新增文章--></button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
@@ -141,7 +194,7 @@
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">文章标题</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入文章标题名称" autocomplete="off" class="layui-input">\n' +
+                '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入文章标题名称" autocomplete="off" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-inline">\n' +
@@ -163,7 +216,7 @@
                     layer.open({
                         title: "添加",
                         type: 1,
-                        area: ['30%', '70%'],
+                        area: ['70%', '70%'],
                         content: $("#addForm"),
                         btn: ['提交'],
                         yes: function (index, layero) {
@@ -176,8 +229,8 @@
         });
 
         //监听行工具事件
-        table.on('tool(test)', function (obj) {
-            var data = obj.data;
+        table.on('tool(test)', function (obj) {//注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data;//获得当前行数据（json格式的键值对）
             var id = data.articleId;
             if (obj.event === 'del') {
                 layer.confirm('是否确认删除', function (index) {
@@ -199,6 +252,7 @@
                 $("#title").val(data.title);
                 $("#browseCount").val(data.browseCount);
                 $("#commentCount").val(data.commentCount);
+                $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
                 $("#figuresReal").val(data.figuresReal);
@@ -207,10 +261,16 @@
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
+                $("#userId").val(data.userId);
+                $("#createArticleType").val(data.createArticleType);
+                $("#articleSetTop").val(data.articleSetTop);
+                $("#approval").val(data.approval);
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['30%', '70%'],
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['70%', '70%'],
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {

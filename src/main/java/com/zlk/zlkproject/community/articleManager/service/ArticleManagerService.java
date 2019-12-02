@@ -7,9 +7,9 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleService
- * @description:
- * @date 2019/11/22 18:01
+ * @program: ArticleManagerService
+ * @description:文章管理的Service类
+ * @date 2019/11/26 18:01
  */
 public interface ArticleManagerService {
     /**

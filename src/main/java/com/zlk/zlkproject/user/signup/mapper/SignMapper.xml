@@ -34,5 +34,8 @@
     <select id="findUserByPhonenum" parameterType="java.lang.String" resultType="com.zlk.zlkproject.entity.User">
         select * from user where user_phonenum = #{phonenum} limit 0,1
     </select>
+    <select id="findUserByPhonenumAndPwd" parameterType="com.zlk.zlkproject.entity.User" resultMap="durstionMap">
+        select * from user where user_phonenum =  #{phonenum} and user_pwd = #{userPwd} limit 0,1
+    </select>
 
 </mapper>

@@ -47,6 +47,8 @@ public class TagController {
         ModelAndView mv= new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/tagManager");
+        List<Type> typeList = typeService.findAllTypeName();
+        mv.addObject("typeList",typeList);
         return mv;
     }
 
@@ -84,6 +86,8 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
@@ -93,11 +97,15 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
     }
@@ -106,7 +114,7 @@ public class TagController {
      * @Author lufengxiang
      * @Description //TODO 通过类别ID修改类别信息
      * @Date 14:59 2019/11/21
-     * @Param [tag]
+     * @Param [tag,request]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/update")
@@ -118,6 +126,8 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
@@ -129,11 +139,15 @@ public class TagController {
             mv.setViewName("admin/tagManager");
             //日志记录类别修改
             logUtil.setLog(request,"修改了类别名称为："+tagByTagId.getTagName()+"的信息");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            List<Type> typeList = typeService.findAllTypeName();
+            mv.addObject("typeList",typeList);
             return mv;
         }
     }
@@ -142,7 +156,7 @@ public class TagController {
      * @Author lufengxiang
      * @Description //TODO 通过类别ID删除类别
      * @Date 16:44 2019/11/21
-     * @Param [tagId]
+     * @Param [tagId,request]
      * @return java.lang.String
      **/
     @RequestMapping(value = "/delete")

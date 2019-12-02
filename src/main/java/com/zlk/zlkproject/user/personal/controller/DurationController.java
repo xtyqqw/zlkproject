@@ -22,10 +22,15 @@ public class DurationController {
     @ResponseBody
     /*用视图和模型的方法查询最新的一条数据*/
     public ModelAndView list(User user){
+        user.setUserId("2");
         User lists=durationService.selectDuration(user);
         ModelAndView mv=new ModelAndView();
-        Integer ad= Arith.add(lists.getUserDateTime());
-        Integer addd = Arith.add(ad);
+        Integer addd= Arith.ride(lists.getUserDateTime());
+        Integer ad = Arith.plus(lists.getUserDateTime());
+        Integer all=durationService.findUser();
+        Integer rank=durationService.findUserById(user.getUserId());
+        Integer rankall=Arith.divide(rank,all);
+        mv.addObject("rankall",rankall);
         mv.addObject("ad",ad);
         mv.addObject("addd",addd);
         /*添加一个对象*/

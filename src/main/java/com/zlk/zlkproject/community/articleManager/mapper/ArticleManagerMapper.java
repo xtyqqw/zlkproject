@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * @author 张照伟
- * @program: ArticleMapper
- * @description:
- * @date 2019/11/22 14:22
+ * @program: ArticleManagerMapper
+ * @description:文章管理的映射类
+ * @date 2019/11/27 14:22
  */
 @Mapper
 public interface ArticleManagerMapper {

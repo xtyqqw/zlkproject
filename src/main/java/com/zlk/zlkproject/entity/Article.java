@@ -1,11 +1,12 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: Article
@@ -27,10 +28,12 @@ public class Article {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**更新时间*/
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**插图相对路径*/
     private String figures;
@@ -44,33 +47,22 @@ public class Article {
     private Integer zanCount;
     /**踩数*/
     private Integer caiCount;
-    /**举报*/
-    private String inform;
-    /**用户对象实例*/
-    private User user;
-    /**方向对象实例*/
-    private Type type;
-    /**标签对象实例*/
-    private Tag tag;
-
-    public Article(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, String inform, User user, Type type, Tag tag) {
-        this.articleId = articleId;
-        this.title = title;
-        this.browseCount = browseCount;
-        this.commentCount = commentCount;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.figures = figures;
-        this.figuresReal = figuresReal;
-        this.articleDigest = articleDigest;
-        this.articleContent = articleContent;
-        this.zanCount = zanCount;
-        this.caiCount = caiCount;
-        this.inform = inform;
-        this.user = user;
-        this.type = type;
-        this.tag = tag;
-    }
+    /**举报：0 是，1 否*/
+    private Integer inform;
+    /**发文类型：原创，转载，翻译*/
+    private String createArticleType;
+    /**文章置顶：0 置顶，1 不置顶*/
+    private Integer articleSetTop;
+    /**文章方向*/
+    private String typeName;
+    /**发文作者*/
+    private User author;
+    /**建立的是文章和用户的多对一关系*/
+    private String userId;
+    /**发文时调用类别名称*/
+    private List<Tag> tagList;
+    /**审核：0 审核中，1 通过，2 不通过*/
+    private Integer approval;
 
     public Article() {
     }

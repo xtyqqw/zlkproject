@@ -25,8 +25,8 @@
         </where>
         order by admin_id limit #{startPage},#{limit}
     </select>
-    <select id="findAdminByRoleName" parameterType="java.lang.String" resultMap="adminEntityMap">
-        select * from admins where admin_role=#{roleName}
+    <select id="findAdminByRoleId" parameterType="java.lang.String" resultMap="adminEntityMap">
+        select * from admins a,roles r,admins_roles ar where a.admin_id=ar.admins_id and r.role_id=ar.roles_id and r.role_id=#{roleId}
     </select>
     <select id="findAdminByAdminId" parameterType="java.lang.String" resultMap="adminEntityMap">
         select * from admins where admin_id = #{adminId}

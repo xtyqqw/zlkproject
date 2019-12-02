@@ -3,9 +3,7 @@
 <head>
 	<title>社区</title>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-
 	<script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
-
 	<script src="<%=request.getContextPath() %>/layui/layui.js"></script>
 
 	<style>

@@ -15,12 +15,30 @@ public class Arith {
     }
 
 
-    public static Integer add(Integer x) {
+    public static Integer ride(Integer x) {
         if (x!=null) {
-            Integer y = x * 5;
+            Integer y = (x * 5)+ 3;
             return y;
         }else {
-            return 0;
+            return null;
+        }
+    }
+    public static Integer plus(Integer c){
+        if(c != null){
+            Integer a = (c + 1) * 3;
+            return a;
+        }else {
+            return null;
+        }
+    }
+    public static Integer divide(Integer b,Integer q){
+        /*除法*/
+
+        if(q!=0){
+            Integer h=100-(b*100)/q;
+            return h;
+        }else {
+            return null;
         }
     }
 

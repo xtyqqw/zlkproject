@@ -31,12 +31,10 @@ public class ArticleHotController {
     @RequestMapping("/toArticleHot")
     @ResponseBody
     public ModelAndView selectTitleByArticle(Article article) {
-        /*根据时间倒序返回文章标题集合 月排序*/
+        /**根据时间倒序返回文章标题集合 月排序*/
         List<Article> alist = articleHotService.selectTitleByArticle(article);
-        //System.out.println(alist);
-        /*根据浏览量倒序返回文章标题集合 总排序*/
+        /**根据浏览量倒序返回文章标题集合 总排序*/
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
-        //System.out.println(blist);
         ModelAndView mv=new ModelAndView();
 
         mv.addObject("alist",alist);

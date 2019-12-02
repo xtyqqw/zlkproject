@@ -52,4 +52,7 @@
     <delete id="deleteRoleByRoleId" parameterType="java.lang.String">
         delete from roles where role_id=#{roleId}
     </delete>
+    <select id="findRoleName" resultMap="roleEntityMap">
+        select * from roles
+    </select>
 </mapper>

@@ -14,6 +14,12 @@
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <style type="text/css">
+        #demo{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
         .search {
             float: right;
             width: 450px;
@@ -78,7 +84,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 450
+            , height: 480
             , limit: 100
             , cols: [[ //表头
                 {type: 'checkbox'}
@@ -94,7 +100,7 @@
                     width: 170
                 }
                 , {
-                    title: '操作', width: 90, align: 'center', toolbar: '' +
+                    title: '操作', width: 75, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
                         '</div>'

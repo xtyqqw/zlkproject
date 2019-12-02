@@ -78,6 +78,7 @@ public class DeptController {
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Dept dept){
         ModelAndView mv=new ModelAndView();
+        //判断部门名称是否已存在
         Dept deptByDeptName = deptService.findDeptByDeptName(dept.getDeptName());
         if(deptByDeptName!=null){
             mv.addObject("flag","true");

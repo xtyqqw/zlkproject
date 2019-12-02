@@ -13,4 +13,31 @@ public interface FunctionService {
      * @return java.util.List<com.zlk.zlkproject.entity.Function>
      **/
     List<Function> findFunctionByAdminName(String adminName);
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 菜单管理数据接口
+     * @Date 10:06 2019/11/25
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Function>
+     **/
+    List<Function> functionManager();
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 新增菜单
+     * @Date 17:31 2019/11/25
+     * @Param [function]
+     * @return java.lang.Integer
+     **/
+    Integer addFunction(Function function);
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 通过菜单编号删除菜单
+     * @Date 18:19 2019/11/25
+     * @Param [functionId]
+     * @return java.lang.Integer
+     **/
+    Integer deleteFunction(String functionId);
 }

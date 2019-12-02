@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zlk.zlkproject.admin.service.AdminService;
 import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.service.RoleService;
@@ -161,7 +162,7 @@ public class RoleController {
          * 查找是否有用户拥有该角色
          * 如果有则提示仍有用户属于该角色,无法删除
          **/
-        List<Admin> adminByRoleName = adminService.findAdminByRoleName(roleByRoleId.getRoleName());
+        List<Admin> adminByRoleName = adminService.findAdminByRoleId(roleId);
         if(adminByRoleName.size()!=0){
             return false;
         }else {

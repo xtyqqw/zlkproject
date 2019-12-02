@@ -54,6 +54,8 @@ public class AdminController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/adminManager");
+        List<Role> roleNameList = roleService.findRoleName();
+        mv.addObject("roleNameList",roleNameList);
         return mv;
     }
 
@@ -92,6 +94,8 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","该用户名已存在");
             mv.setViewName("admin/adminManager");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }
         //放UUID和密码加密
@@ -105,11 +109,15 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/adminManager");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/adminManager");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }
     }
@@ -134,6 +142,8 @@ public class AdminController {
             mv.addObject("flag","true");
             mv.addObject("msg","该用户名已存在");
             mv.setViewName("admin/adminManager");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }
         //密码加密
@@ -150,11 +160,15 @@ public class AdminController {
             mv.setViewName("admin/adminManager");
             //记录修改用户日志
             logUtil.setLog(request,"修改了后台用户"+adminByAdminId.getAdminName()+"的信息");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/adminManager");
+            List<Role> roleNameList = roleService.findRoleName();
+            mv.addObject("roleNameList",roleNameList);
             return mv;
         }
     }

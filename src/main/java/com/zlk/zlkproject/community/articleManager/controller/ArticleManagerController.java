@@ -23,9 +23,9 @@ import java.util.Map;
 
 /**
  * @author 张照伟
- * @program: ArticleController 文章管理控制类
- * @description:
- * @date 2019/11/23 9:35
+ * @program: ArticleManagerController 文章管理控制类
+ * @description:文章管理的Controller类
+ * @date 2019/11/27 9:35
  */
 @Controller
 @RequestMapping(value = "/article")
@@ -50,12 +50,12 @@ public class ArticleManagerController {
     }
 
     /**
-     *当前端页面传过来的的String类型的日期与后台实体类的Date类型不匹配时，需要加上该方法
+     *当前端页面传过来的String类型的日期与后台实体类的Date类型不匹配时，需要加上该方法
      * @param binder
      */
     @InitBinder
     public void init(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
     }
 
     /**
@@ -76,14 +76,14 @@ public class ArticleManagerController {
     }
 
     /**
-     * 添加文章
+     * 添加文章，仅限于测试为数据库添加数据使用，后期项目测试时删除或注释
      * @param article
      * @return
      */
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Article article){
         ModelAndView mv=new ModelAndView();
-        //判断文章标题是否重复
+        /**判断文章标题是否重复*/
         Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         if(articleByTitle != null){
             mv.addObject("flag","true");
@@ -116,7 +116,7 @@ public class ArticleManagerController {
     @RequestMapping(value = "/update")
     public ModelAndView update(Article article, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        //判断文章是否更改，更改后判断更改后文章是否存在
+        /**判断文章是否更改，更改后判断更改后的文章是否存在*/
         Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
         if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
@@ -125,12 +125,14 @@ public class ArticleManagerController {
             mv.setViewName("admin/articleManager");
             return mv;
         }
-        //修改文章信息
+        /**修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败*/
         Integer flag = articleManagerService.updateArticleByArticleId(article);
         if(flag == 1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/articleManager");
+            //日志记录修改文章
+            logUtil.setLog(request," 修改文章标题为"+articleByArticleId.getTitle()+"的信息");
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -149,7 +151,7 @@ public class ArticleManagerController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public String deleteArticleByArticleId(String articleId,HttpServletRequest request){
-        //获取删除文章id
+        /**获取删除文章id*/
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(articleId);
         articleManagerService.deleteArticleByArticleId(articleId);
         //日志记录删除文章

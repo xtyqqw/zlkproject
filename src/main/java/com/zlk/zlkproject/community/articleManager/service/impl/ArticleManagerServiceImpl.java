@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * @author 张照伟
  * @program: ArticleServiceImpl
- * @description:
- * @date 2019/11/23 9:07
+ * @description:文章管理的Service实现类
+ * @date 2019/11/27 9:07
  */
 @Service
 public class ArticleManagerServiceImpl implements ArticleManagerService {
@@ -61,7 +61,7 @@ public class ArticleManagerServiceImpl implements ArticleManagerService {
     }
 
     /**
-     * 通过标题模糊查询返回数据数量
+     * 文章管理通过标题模糊查询返回数据数量
      * @param pagination
      * @return
      */
@@ -80,6 +80,11 @@ public class ArticleManagerServiceImpl implements ArticleManagerService {
         return articleManagerMapperMapper.selectArticleByArticleId(articleId);
     }
 
+    /**
+     * 文章管理的分页查询
+     * @param pagination
+     * @return
+     */
     @Override
     public List<Article> selectArticleByLimit(Pagination pagination) {
         if (pagination.getLimit() == null) {

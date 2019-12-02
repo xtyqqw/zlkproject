@@ -21,7 +21,7 @@ public class ArticleHotServiceImpl implements ArticleHotService {
     private ArticleHotMapper articleHotMapper;
 
     /**
-     * 通过标题查询相对应的文章内容
+     * 通过当月创建时间createTime降序查询热门文章标题
      * @param article
      * @return
      */
