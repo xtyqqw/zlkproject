@@ -34,7 +34,6 @@
             comment,
         </trim>
         values
-        <foreach collection=""
         <trim prefix="(" suffix=")" suffixOverrides=",">
             #{name},#{pid},
             <if test="url!=null and url!= '' ">

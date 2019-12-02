@@ -105,23 +105,22 @@ public class RoleController {
         if(flag==1&&addFunction!=null){
             //解析前台勾选权限
             List<Function> functionList = JSONArray.parseArray(addFunction,Function.class);
-            List<Integer> integerList=new ArrayList<>();
+            List<Integer> functionId=new ArrayList<>();
             for(Function fun:functionList){
-                //角色授权
-                integerList.add(roleService.addRoleAndFunction(role.getRoleId(), fun.getId()));
+                functionId.add(fun.getId());
             }
-            for(int i=0;i<integerList.size();i++){
-                if(integerList.get(i)==0){
-                    mv.addObject("flag","true");
-                    mv.addObject("msg","遇到意外错误");
-                    mv.setViewName("admin/roleManager");
-                    return mv;
-                }
+            Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
+            if(flag2==0){
+                mv.addObject("flag","true");
+                mv.addObject("msg","遇到意外错误");
+                mv.setViewName("admin/roleManager");
+                return mv;
+            }else {
+                mv.addObject("flag", "true");
+                mv.addObject("msg", "添加成功");
+                mv.setViewName("admin/roleManager");
+                return mv;
             }
-            mv.addObject("flag","true");
-            mv.addObject("msg","添加成功");
-            mv.setViewName("admin/roleManager");
-            return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
@@ -159,20 +158,22 @@ public class RoleController {
         Integer flag = roleService.updateRoleByRoleId(role);
         //解析前台勾选权限
         List<Function> functionList = JSONArray.parseArray(updateFunction,Function.class);
+        List<Integer> functionId=new ArrayList<>();
+        for(Function fun:functionList){
+            functionId.add(fun.getId());
+        }
+
         //修改角色权限中间表
         Integer flag1 = roleService.deleteRoleAndFunctionByRoleId(role.getRoleId());
         List<Integer> integerList=new ArrayList<>();
-        for(Function fun:functionList){
-            //角色授权
-            integerList.add(roleService.addRoleAndFunction(role.getRoleId(), fun.getId()));
-        }
-        for(int i=0;i<integerList.size();i++){
-            if(integerList.get(i)==0){
-                mv.addObject("flag","true");
-                mv.addObject("msg","遇到意外错误");
-                mv.setViewName("admin/roleManager");
-                return mv;
-            }
+
+        //角色授权
+        Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
+        if(flag2==0){
+            mv.addObject("flag","true");
+            mv.addObject("msg","遇到意外错误");
+            mv.setViewName("admin/roleManager");
+            return mv;
         }
 
         //判断是否成功

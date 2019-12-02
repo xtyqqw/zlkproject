@@ -40,7 +40,7 @@ public interface RoleService {
      * @Param [roleId]
      * @return java.lang.Integer
      **/
-    Integer addRoleAndFunction(String roleId,Integer functionId);
+    Integer addRoleAndFunction(String roleId,List<Integer> functionId);
 
     /**
      * @Author lufengxiang

@@ -72,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
      * @return java.lang.Integer
      **/
     @Override
-    public Integer addRoleAndFunction(String roleId, Integer functionId) {
+    public Integer addRoleAndFunction(String roleId, List<Integer> functionId) {
         return roleMapper.addRoleAndFunction(roleId,functionId);
     }
 

@@ -206,9 +206,6 @@
                 chkboxType: {"Y": "ps", "N": "ps"}
             },
             data: {
-                key: {
-                    url: "href"
-                },
                 simpleData: {
                     enable: true,
                     idKey: "id",
@@ -241,7 +238,7 @@
                         //遍历勾选角色关联的菜单数据
                         for (var i = 0; i < treeNode.length; i++) {
 
-                            if (treeNode[i].pid!=0 || ! ("0"==treeNode[i].pid )  ) { //==###=排除选中父节点。
+                            if (treeNode[i].url!=null && treeNode[i].url!=''  ) { //==###=排除选中父节点。
                                 //根据角色菜单节点数据的属性搜索，获取与完整菜单树完全匹配的节点JSON对象集合
                                 var nodes = zTree.getNodesByParam("id", treeNode[i].id, null);
 

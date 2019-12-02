@@ -43,7 +43,7 @@ public interface RoleMapper {
      * @Param [roleId]
      * @return java.lang.Integer
      **/
-    Integer addRoleAndFunction(@Param("roleId") String roleId,@Param("functionId") Integer functionId);
+    Integer addRoleAndFunction(@Param("roleId") String roleId,@Param("functionId") List<Integer> functionId);
     
     /**
      * @Author lufengxiang

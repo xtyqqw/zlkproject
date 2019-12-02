@@ -40,9 +40,11 @@
     <insert id="addRoleAndFunction">
         insert into roles_functions(roles_id,functions_id)
         values
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{roleId},#{functionId}
-        </trim>
+        <foreach collection="functionId" item="fid" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                    #{roleId},#{fid}
+            </trim>
+        </foreach>
     </insert>
     <update id="updateRoleByRoleId" parameterType="com.zlk.zlkproject.entity.Role">
         update roles
