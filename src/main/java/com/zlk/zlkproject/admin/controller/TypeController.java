@@ -161,7 +161,7 @@ public class TypeController {
          * 若有则提示无法删除
          **/
         List<Tag> tagList = tagService.findTagByTagTypeId(typeId);
-        if(tagList==null){
+        if(tagList.size()==0){
             typeService.deleteTypeByTypeId(typeId);
             //记录删除方向日志
             logUtil.setLog(request,"删除了方向名为"+typeByTypeId.getTypeName()+"的信息");

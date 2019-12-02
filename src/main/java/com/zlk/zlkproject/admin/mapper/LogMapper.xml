@@ -16,7 +16,7 @@
         <if test="condition!='' and condition!=null">
             where name like CONCAT('%',#{condition},'%')
         </if>
-        order by log_id limit #{startPage},#{limit}
+        order by time desc limit #{startPage},#{limit}
     </select>
     <select id="findTotalCountByName" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
         select count(*) from logs

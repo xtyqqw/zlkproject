@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/module/treetable-lay/treetable.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
     <script src="<%=request.getContextPath()%>/css/admin/module/treetable-lay/treetable.js"></script>
+    <script type="test/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.excheck.js"></script>
@@ -34,7 +35,7 @@
             margin-top: 11px;
         }
 
-        .form,.ztree{
+        .ztree{
             margin-left: 90px;
         }
 
@@ -46,8 +47,8 @@
             width: auto;
         }
 
-        .name{
-            margin-top: 60px;
+        #parentCatalogAdd{
+            margin-left: 68px;
         }
 
         #catalogAdd{
@@ -57,7 +58,7 @@
         #catalogAdd,#menuAdd,#addReturn,#insertSubmit{
             margin-top: 24px;
             margin-bottom: 10px;
-            float: left;
+
             margin-right: 13px;
             padding-bottom: 38px;
         }
@@ -70,10 +71,6 @@
             margin-left: 20px;
         }
 
-        .radioTitle{
-            margin-top: 21px;
-            float: left;
-        }
 
         .ztree li a{
             color: black;
@@ -83,29 +80,40 @@
             position: relative;
             text-align: center;
         }
-
-        .form2 input {
-            margin-left: 95px;
-            margin-top: 10px;
-            height: 31px;
-            width: auto;
-        }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
 
 <div id="addForm" style="display: none">
-    <form action="<%=request.getContextPath()%>/function/insert" class="form">
-        <input type="radio" id="catalogAdd" name="类型" title="目录"><span class="radioTitle">目录</span>
-        <input type="radio" id="menuAdd" name="类型" checked><span class="radioTitle">菜单</span><br>
-        <p class="name">名称</p><br>
-        <input type="text" class="layui-input" required placeholder="请输入名称" name="name"><br>
-        <p class="addUrl">路径</p><br>
-        <input class="addUrl layui-input" type="text" placeholder="请输入路径" name="url"><br>
-        <p>简介</p><br>
-        <input type="text" class="layui-input" required placeholder="请输入简介" name="comment"><br>
-        <p>上级目录</p><br>
+    <form action="<%=request.getContextPath()%>/function/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block" id="IsPurchased">
+                <input type="radio" id="catalogAdd" name="类型" value="0" title="目录" lay-filter="aaa"/>
+                <input type="radio"  id="menuAdd" name="类型" value="1" title="菜单" checked lay-filter="aaa"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="name"  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" id="addUrl">
+            <label class="layui-form-label">路径</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="url" placeholder="请输入路径" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="comment"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <p id="parentCatalogAdd">上级目录</p><br>
         <div class="left">
             <ul id="zTreeContent" class="ztree"></ul>
         </div>
@@ -116,12 +124,18 @@
 </div>
 
 <script>
-    $("#menuAdd").click(function () {
-        $(".addUrl").show()
-    })
-    $("#catalogAdd").click(function () {
-        $(".addUrl").hide()
-    })
+    layui.use(['form','jquery'], function(){
+        var form = layui.form;
+        var $= layui.$;
+        form.on('radio(aaa)', function(data){
+            //alert(data.value); //被点击的radio的value值
+            if(data.value == "1"){
+                $("#addUrl").show();
+            }else{
+                $("#addUrl").hide();
+            }
+        });
+    });
 </script>
 
 <script>
@@ -205,14 +219,26 @@
 </script>
 
 <div id="editForm" style="display: none">
-    <form action="<%=request.getContextPath()%>/function/update" class="form2">
+    <form action="<%=request.getContextPath()%>/function/update" class="form2 layui-form">
         <input type="hidden" name="id" id="id"><br>
-        <p>名称</p>
-        <input type="text" class="layui-input" required placeholder="请输入名称" id="name" name="name"><br>
-        <p class="addUrl">路径</p>
-        <input class="addUrl layui-input" type="text" placeholder="请输入路径" id="url" name="url"><br>
-        <p>简介</p>
-        <input type="text" class="layui-input" required placeholder="请输入简介" id="comment" name="comment"><br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="name" name="name"  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item updateUrl">
+            <label class="layui-form-label">路径</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="url" name="url"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="comment" name="comment"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <input type="submit" style="display:none;" class="layui-btn" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -370,7 +396,7 @@
                         $("#id").val(data.id);
                         $("#name").val(data.name);
                         $("#comment").val(data.comment);
-                        $(".addUrl").hide();
+                        $(".updateUrl").hide();
                         layer.open({
                             title: "修改",
                             type: 1,
@@ -386,7 +412,7 @@
                         $("#name").val(data.name);
                         $("#url").val(data.url);
                         $("#comment").val(data.comment);
-                        $(".addUrl").show();
+                        $(".updateUrl").show();
                         layer.open({
                             title: "修改",
                             type: 1,

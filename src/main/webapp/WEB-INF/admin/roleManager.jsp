@@ -37,14 +37,8 @@
             width: 180px;
         }
 
-        #addForm{
-            margin-top: 15px;
-        }
-
-        .form input, .form select {
-            margin-top: 15px;
-
-            width: auto;
+        #addForm,#editForm{
+            margin-top: 18px;
         }
 
         .ztree,.form{
@@ -56,7 +50,9 @@
         }
 
         .roleFunction{
-            margin-top: 15px;
+            margin-top: 22px;
+            margin-left: 40px;
+            margin-bottom: 10px;
         }
 
         #insertSubmit{
@@ -83,9 +79,20 @@
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" style="display: none">
-    <form action="<%=request.getContextPath()%>/role/insert" class="form">
-        角色名称 <input class="layui-input" type="text" required placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input class="layui-input" type="text" required placeholder="请输入角色代码" name="roleCode"><br>
+    <form action="<%=request.getContextPath()%>/role/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="roleName"  lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色代码</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="roleCode"  lay-verify="required" placeholder="请输入角色代码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
         <p class="roleFunction">角色权限</p>
         <div class="left">
             <ul id="zTreeContent" class="ztree"></ul>
@@ -179,10 +186,20 @@
 </script>
 
 <div id="editForm" style="display: none">
-    <form action="<%=request.getContextPath()%>/role/update" class="form">
-        <input type="hidden" name="roleId" id="roleId"><br>
-        角色名称 <input class="layui-input" type="text" required id="roleName" placeholder="请输入角色名称" name="roleName"><br>
-        角色代码 <input class="layui-input" type="text" required id="roleCode" placeholder="请输入角色代码" name="roleCode"><br>
+    <form action="<%=request.getContextPath()%>/role/update" class="form layui-form">
+        <input type="hidden" name="roleId" id="roleId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="roleName" name="roleName"  lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色代码</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="roleCode" name="roleCode"  lay-verify="required" placeholder="请输入角色代码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <p class="roleFunction">角色权限</p>
         <div class="left">
             <ul id="tree" class="ztree"></ul>
