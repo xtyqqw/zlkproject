@@ -97,8 +97,8 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowedNum(userId));
-            m.setFollowerNum(personalFollowService.findFollowerNum(userId));
+            m.setFollowedNum(personalFollowService.findFollowedNum(user.getUserId()));
+            m.setFollowerNum(personalFollowService.findFollowerNum(user.getUserId()));
             m.setList(personalFollowService.findUserAction(user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
@@ -121,6 +121,7 @@ public class PersonalFollowController {
         //模拟数据
         followerPage.setLimit(10);
         followerPage.setPage(1);
+
         userId = "1";
 
         ModelAndView mv = new ModelAndView();
@@ -213,6 +214,7 @@ public class PersonalFollowController {
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
         String userId1 = (String) request.getSession().getAttribute("userId");
+        userId1 = "1";
         Integer result = personalFollowService.deFollow(userId1,userId);
         String code = result.toString();
         map.put("code",code);
