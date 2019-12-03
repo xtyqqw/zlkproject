@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.course.stunote.controller;
 
-import com.zlk.zlkproject.course.stunote.service.StuNoteService;
+import com.zlk.zlkproject.course.stuNote.service.StuNoteService;
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
 import com.zlk.zlkproject.utils.CommonFileUtil;
@@ -45,6 +45,8 @@ public class StuNoteController {
     @ResponseBody
     public Map submit(StuNote stuNote){
         HashMap map = new HashMap<>();
+        stuNote.setSnSectionId(1);
+        stuNote.setSnUserId("1");
         stuNote.setDate(new Date());
         Integer res = stuNoteService.addStuNote(stuNote);
         String retmsg;

@@ -1,7 +1,6 @@
 package com.zlk.zlkproject.course.courseHomePage.service;
 
 
-import com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 
@@ -59,4 +58,34 @@ public interface CourseHomePageService {
      */
     int updateByCoursesId(Courses courses);
 
+    /**
+     * 查询全部并分页
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    List<Courses> selectCoursesByLimit(Integer page,Integer limit);
+
+    /**
+     * 查询课程数量
+     * @return 课程数量
+     */
+    Integer selectCount();
+
+    /**
+     * 根据coursesId删除数据
+     *
+     * @param coursesId
+     * @return
+     */
+    int deleteByCoursesId(Integer coursesId);
+
+    /**
+     * 新增数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int insertByCourses(Courses courses);
 }
