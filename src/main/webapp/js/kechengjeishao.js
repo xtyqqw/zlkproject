@@ -72,7 +72,7 @@ layui.use(['rate'], function(){
 layui.use('element', function(){
     var $ = layui.jquery
         ,element = layui.element;
-    element.progress('demo', "80%")
+    element.progress('demo', "80%");
 });
 $(".xinxi").mouseenter(function () {
     $(this).css("background-color","#fff");

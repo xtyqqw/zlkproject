@@ -212,7 +212,7 @@
 
         }
     </style>
-    
+
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"></jsp:include>
