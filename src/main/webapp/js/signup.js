@@ -54,6 +54,7 @@ function countdown(e){
         //这里时设置当时间到0的时候重新设置点击事件，并且默认time修改为60
         a.setAttribute("onclick","openCheck(this)");
         document.getElementById("getcod").innerText="获取验证码";
+        location.reload();
         time = 60;
         clearInterval(t);
     }else{
@@ -122,12 +123,22 @@ function mousemoveHandler(e){
     slider.style.left = offsetX + "px";
 
     if(offsetX == successMoveDistance){
+        txt.innerHTML = "验证成功";
         success();
+
         // sleep(5000);
         // layer.closeAll('page');
         getcode(e);
+
     }
+
+    // if(offsetX == successMoveDistance){
+    //     sleep(5000);
+    //     layer.closeAll();
+    //     box.style.visibility = "hidden";
+    // }
     //如果不设置滑块滑动时会出现问题（目前还不知道为什么）
+
     e.preventDefault();
 };
 
@@ -151,7 +162,6 @@ function success(){
     slider.className = "slider active";
     icon.className = "iconfont icon-xuanzhong";
     //滑动成功时，移除鼠标按下事件和鼠标移动事件
-    box.style.visibility = "hidden";
     slider.onmousedown = null;
     document.onmousemove = null;
 };
@@ -163,8 +173,14 @@ function openCheck(){
     layui.use('layer', function(){ //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
         layer.open({
+            anim: 5,
+            title: 0,//去除标题
+            closeBtn:2,//x按钮格式
             type: 1,
-            content: $('#box') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+            content: $('#box'),//这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+            end:function (res) {
+                $("#box").hide();
+            }
         });
 
     })

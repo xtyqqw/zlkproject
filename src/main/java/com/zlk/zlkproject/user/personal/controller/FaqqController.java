@@ -9,10 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- * @program: Test
- * @description: 占位用文件
+ * @program: FaqqController
+ * @description:
  * @author: xty
- * @create: 2019/11/18 10:21
+ * @create: 2019/12/3 15:59
  **/
-public class Test {
+@Controller
+public class FaqqController {
+    @Autowired
+    FaqqService faqqService;
+    @RequestMapping(value = "faqtest")
+    public String faqTest(){
+        List<MyQuestions> list = faqqService.findQuestion("1");
+        return "";
+    }
 }

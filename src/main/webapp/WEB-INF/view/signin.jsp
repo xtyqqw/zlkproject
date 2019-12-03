@@ -43,15 +43,41 @@
 <center><h3 id="login">用户登录</h3>
 <div class="layui-tab layui-tab-card" style="margin-top: 20px;width: 400px;height: 500px;">
     <ul class="layui-tab-title">
-        <li class="layui-this" >手机号/密码登陆</li>
-        <li >验证码登陆</li>
+        <li class="layui-this" >验证码登陆</li>
+        <li >手机号/密码登陆</li>
     </ul>
     <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
+            <span>${spanmsg}</span>
+            <form action="/user/signupbycode" method="post">
+                <%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
+                <%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号</label>
+                    <div class="layui-input-inline">
+                        <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">验证码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="usercode" lay-verify="required" autocomplete="off" class="layui-input"><button type="button" id="getcod" onclick="openCheck(this);" style="border: none">获取验证码</button>
+                    </div>
+                </div>
+                <%--                <div class="layui-form-item">--%>
+                <%--                    <label class="layui-form-label">密码</label>--%>
+                <%--                    <div class="layui-input-inline">--%>
+                <%--                        <input name="code" type="password" value="" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input"><button type="button">获取验证码</button>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+                <center><button class="login" type="submit">登陆</button><a class="signup" href="<%=request.getContextPath()%>/user/tosignup">注册</a></center>
+            </form>
+        </div>
+        <div class="layui-tab-item">
             <span style="margin-left: 25px;color: red">${spanmsg}</span>
             <form action="/user/signupbypwd" method="post">
-<%--                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><br>--%>
-<%--                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <br>--%>
+                <%--                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><br>--%>
+                <%--                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <br>--%>
                 <div class="layui-form-item">
                     <label class="layui-form-label">手机号</label>
                     <div class="layui-input-inline">
@@ -67,34 +93,9 @@
                 <center><button class="login" type="submit" style="">登陆</button><a class="signup" href="<%=request.getContextPath()%>/user/tosignup"  >注册</a></center>
             </form>
         </div>
-        <div class="layui-tab-item">
-            <span>${spanmsg}</span>
-            <form action="/user/signupbycode" method="post">
-<%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
-<%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">手机号</label>
-                    <div class="layui-input-inline">
-                        <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">验证码</label>
-                    <div class="layui-input-inline">
-                        <input type="tel" name="usercode" lay-verify="required|phone" autocomplete="off" class="layui-input"><button type="button" id="getcod" onclick="openCheck(this);" style="border: none">获取验证码</button>
-                    </div>
-                </div>
-<%--                <div class="layui-form-item">--%>
-<%--                    <label class="layui-form-label">密码</label>--%>
-<%--                    <div class="layui-input-inline">--%>
-<%--                        <input name="code" type="password" value="" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input"><button type="button">获取验证码</button>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-               <center><button class="login" type="submit">登陆</button><a class="signup" href="<%=request.getContextPath()%>/user/tosignup">注册</a></center>
-            </form>
-        </div>
     </div>
 </div>
+    <div>
     <div id="box" onselectstart="return false;" style="visibility: hidden" >
         <div class="bgColor"></div>
         <div class="txt" >滑动解锁</div>
@@ -108,7 +109,6 @@
 
 <script src="/js/signup.js"></script>
 
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('element', function(){
         var $ = layui.jquery

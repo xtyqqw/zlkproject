@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.personal.mapper.FaqqMapper">
+    <resultMap type="com.zlk.zlkproject.user.entity.Users" id="userMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+        <collection property="questionList" ofType="com.zlk.zlkproject.user.entity.MyQuestions" javaType="java.util.List">
+            <id property="userId" column="user_id" javaType="java.lang.String"/>
+            <result property="questionTitle" column="question_title" javaType="java.lang.String"/>
+            <result property="createTime" column="create_time" javaType="java.sql.Date"/>
+            <result property="browseCount" column="browse_count" javaType="java.lang.Integer"/>
+            <result property="responseCount" column="response_count" javaType="java.lang.Integer"/>
+            <result property="typeName" column="type_name" javaType="java.lang.String"/>
+            <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
+                <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+                <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+                <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+                <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="questionMap" type="com.zlk.zlkproject.user.entity.MyQuestions">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="questionTitle" column="question_title" javaType="java.lang.String"/>
+        <result property="createTime" column="create_time" javaType="java.sql.Date"/>
+        <result property="browseCount" column="browse_count" javaType="java.lang.Integer"/>
+        <result property="responseCount" column="response_count" javaType="java.lang.Integer"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+
+        <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
+            <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+            <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+            <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+<!--    <resultMap id="responseMap" type="com.zlk.zlkproject.user.entity.MyResponse">-->
+
+<!--    </resultMap>-->
+    <select id="findQuestion" resultMap="userMap" parameterType="java.lang.String">
+            select q.question_title,tag_name  from question q,question_tag qt,tag t where qt.question_id = q.question_id AND qt.tag_id = t.tag_id and q.user_id = #{userId}
+    </select>
+</mapper>
