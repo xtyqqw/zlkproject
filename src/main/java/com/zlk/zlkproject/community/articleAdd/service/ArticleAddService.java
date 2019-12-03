@@ -23,4 +23,6 @@ public interface ArticleAddService {
     List<Article> getAddArticleOfApproval(Action action);
 
     List<Tag> getTagsToAddArticle(Tag tag);
+
+
 }

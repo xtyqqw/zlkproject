@@ -164,6 +164,74 @@
         .down .bigp a{
             color: #904ff1;
         }
+        /*取消关注弹窗*/
+        .att_success1,.att_success2,.att_success3,.att_success4,.att_success5{
+            width: 400px;
+            height: 70px;
+            text-align: center;
+            position: relative;
+            margin: -100px auto;
+            box-shadow: 1px 1px 5px 1px #D4D4D4;
+            background-color: #FFFFFF;
+            border-radius: 3px;
+        }
+        .att_success_zi1,.att_success_zi2,.att_success_zi3,.att_success_zi4,.att_success_zi5{
+            font-size: 18px;
+            position: fixed;
+        }
+        .main .att_success_zi1{
+            margin: 23px 160px;
+        }
+        .main .att_success_zi2{
+            margin: 23px 100px;
+        }
+        .main .att_success_zi3{
+            margin: 23px 120px;
+        }
+        .main .att_success_zi4{
+            margin: 23px 170px;
+        }
+        .main .att_success_zi5{
+            margin: 23px 130px;
+        }
+        .att_success_ok1,.att_success_ok2,.att_success_no1,.att_success_no2,.att_success_noo{
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1;
+            color: #fff;
+            font-size: 20px;
+            float: left;
+            position: fixed;
+            margin: 25px 20px 25px 90px;
+        }
+        .att_success_ok1,.att_success_ok2{
+            border: 1px solid #5ab62f;
+            background-color: #5ab62f;
+        }
+        .att_success_ok1{
+            margin-left: 130px;
+        }
+        .att_success_ok2{
+            margin-left: 135px;
+        }
+        .att_success_no1,.att_success_no2{
+            border: 1px solid #d34748;
+            background-color: #d34748;
+            margin-left: 60px;
+        }
+        .att_success_no1{
+            margin-left: 60px;
+        }
+        .att_success_no2{
+            margin-left: 100px;
+        }
+        .att_success_noo{
+            border: 1px solid #f5bb29;
+            background-color: #f5bb29;
+            margin-left: 85px;
+        }
     </style>
 </head>
 <body>
@@ -366,8 +434,29 @@
                 </c:if>
             </div>
         </c:forEach>
+        <div class="att_success1">
+            <p class="att_success_ok1">√</p>
+            <p class="att_success_zi1">取消关注成功!</p>
+        </div>
+        <div class="att_success2">
+            <p class="att_success_no1">X</p>
+            <p class="att_success_zi2">取消关注失败，请重新操作！</p>
+        </div>
+        <div class="att_success3">
+            <p class="att_success_noo">!</p>
+            <p class="att_success_zi3">加载超时，请稍后再试！</p>
+        </div>
+        <div class="att_success4">
+            <p class="att_success_ok2">√</p>
+            <p class="att_success_zi4">关注成功!</p>
+        </div>
+        <div class="att_success5">
+            <p class="att_success_no2">X</p>
+            <p class="att_success_zi5">关注失败，请重新操作！</p>
+        </div>
     </div>
     <%--<div class="flow_div"></div>--%>
+
 </c:if>
 <%--流加载--%>
 <%--<script type="text/javascript">
@@ -567,7 +656,7 @@
 </script>--%>
 <%--点击关注事件--%>
 <script type="text/javascript">
-    /*layui.use('layer', function(){
+        /*layui.use('layer', function(){
         var $ = layui.jquery, layer = layui.layer;
         window.nofollow = function(userId){
             $(".ok_zi").val(userId);
@@ -580,27 +669,28 @@
         }
     });*/
     /*点击已关注 取消关注*/
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     function nofollow(userId){
-        var dian = $(this);
+        /*var mythis = $(this);*/
         $.ajax({
             url:"/follow/defollow?userId="+userId,
             type:"GET",
             dataType:"json",
+            context: userId,
             success:function (data) {
                 if (data.code==1){
-                    alert("取消关注成功！");
-                    dian.hide();
-                    dian.siblings(".ok").hide();
-                    dian.siblings(".jia,.no_zi").show();
-                    /*layer.msg("取消关注成功！");*/
+                    $(".ok,.ok_zi").hide();
+                    $(".jia,.no_zi").show();
+                    $(".att_success1").show().delay(2000).hide(300);
+                    /*mythis.hide();
+                    mythis.siblings(".ok").hide();
+                    mythis.siblings(".jia,.no_zi").show();*/
                 } else {
-                    alert("取消关注失败，请重新操作！");
-                    /*layer.msg("取消关注失败，请重新操作！");*/
+                    $(".att_success2").show().delay(2000).hide(300);
                 }
             },
-            error:function (data) {
-                alert("加载超时，请稍后再试！");
-                /*layer.msg("加载超时，请稍后再试！");*/
+            error:function () {
+                $(".att_success3").show().delay(2000).hide(300);
             }
         });
     };
@@ -612,16 +702,19 @@
             dataType:"json",
             success:function (data) {
                 if (data.code == 1){
-                    $(this).hide();
+                    $(".ok,.ok_zi").show();
+                    $(".jia,.no_zi").hide();
+                    $(".att_success4").show().delay(2000).hide(300);
+                    /*$(this).hide();
                     $(this).siblings(".jia").hide();
                     $(this).siblings(".ok,.ok_zi").show();
-                    layer.msg("关注成功！");
+                    layer.msg("关注成功！");*/
                 } else {
-                    layer.msg("关注失败，请重新操作！");
+                    $(".att_success5").show().delay(2000).hide(300);
                 }
             },
-            error:function (data) {
-                layer.msg("加载超时，请稍后再试！");
+            error:function () {
+                $(".att_success3").show().delay(2000).hide(300);
             }
         });
     };

@@ -20,9 +20,9 @@ public interface ArticleListMapper {
     List<Article> findArticleList(Pagination pagination);
     Integer findArticleCount(Pagination pagination);
     /**查询最新发布日期（默认）*/
-    List<Article> findByCreateTime();
+    List<Article> findByCreateTime(Pagination pagination);
     /**查询最高浏览量（浏览次数）*/
-    List<Article> findByBrowseCount();
+    List<Article> findByBrowseCount(Pagination pagination);
     /**查询我的文章*/
-    List<Article> findByUserId(String userId,Integer startPage,Integer limit);
+    List<Article> findByUserId(Pagination pagination);
 }

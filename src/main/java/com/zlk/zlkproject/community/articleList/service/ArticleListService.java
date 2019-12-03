@@ -2,7 +2,6 @@ package com.zlk.zlkproject.community.articleList.service;
 
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
-import com.zlk.zlkproject.entity.User;
 
 import java.util.List;
 
@@ -16,10 +15,10 @@ public interface ArticleListService {
     /**显示分页*/
     List<Article> findArticleList(Pagination pagination);
     Integer findArticleCount(Pagination pagination);
-    /**倒序查询最新发布日期（默认）*/
-    List<Article> findByCreateTime();
-    /**倒序查询浏览量（浏览次数）*/
-    List<Article> findByBrowseCount();
+    /**倒序查询最新（默认）*/
+    List<Article> findByCreateTime(Pagination pagination);
+    /**倒序查询热门（浏览次数）*/
+    List<Article> findByBrowseCount(Pagination pagination);
     /**查询我的文章*/
-    List<Article> findByUserId(String userId,Integer page,Integer limit);
+    List<Article> findByUserId(Pagination pagination);
 }

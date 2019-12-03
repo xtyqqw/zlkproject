@@ -16,19 +16,20 @@
             border: none 0;
         }
         .all-body-center{
-            width: 1300px;
-            height: 1300px;
+            width: 1340px;
+            height: 1600px;
             margin:0 auto;
+            border: none 0;
         }
         .all-body-center .body-top{
-            /*border: #00B83F 2px solid;*/
             width: 100%;
             height: 115px;
         }
         .all-body-center .body-left{
             float: left;
-            width: 920px;
-            height: 1138px;
+            width: 930px;
+            height: 1500px;
+            border: none 0;
         }
         /*发表按钮样式*/
         .add a {
@@ -59,7 +60,7 @@
         }
         /*横线样式*/
         .crossing{
-            width: 70%;
+            width: 68%;
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
@@ -94,9 +95,8 @@
         /*选项卡内容框样式*/
         iframe{
             width: 100%;
-            height: 100%;
+            height: 98%;
             vertical-align: middle;
-            scrolling: auto;
             border: none 0;
         }
         .wz_remenwenzhang{
@@ -241,7 +241,7 @@
             </div>
             <div class="body-left">
                 <div class="body-context">
-                    <iframe name="pageTarget" frameborder="1" src="/article/findByCreateTime"> </iframe>
+                    <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
                 </div>
             </div>
                 <div class="wz_remenwenzhang">

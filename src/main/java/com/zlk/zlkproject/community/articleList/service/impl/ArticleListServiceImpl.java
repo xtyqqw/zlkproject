@@ -34,21 +34,29 @@ public class ArticleListServiceImpl implements ArticleListService {
     }
 
     @Override
-    public List<Article> findByCreateTime() {
-        return articleListMapper.findByCreateTime();
-    }
-
-    @Override
-    public List<Article> findByBrowseCount() {
-        return articleListMapper.findByBrowseCount();
-    }
-
-    @Override
-    public List<Article> findByUserId(String userId,Integer page,Integer limit) {
-        /*page=1;
-        limit=5;*/
+    public List<Article> findByCreateTime(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
-        return articleListMapper.findByUserId(userId,startPage,limit);
+        pagination.setStartPage(startPage);
+        return articleListMapper.findByCreateTime(pagination);
     }
 
+    @Override
+    public List<Article> findByBrowseCount(Pagination pagination) {
+        Integer page = 1;
+        Integer limit = 5;
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return articleListMapper.findByBrowseCount(pagination);
+    }
+
+    @Override
+    public List<Article> findByUserId(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return articleListMapper.findByUserId(pagination);
+    }
 }

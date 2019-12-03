@@ -51,10 +51,10 @@
     border-radius: 5px;
     overflow: hidden;
 }
-.iconfont{
+/*.iconfont{
     font-size: 26px !important;
-    /*color: white;*/
-}
+    !*color: white;*!
+}*/
 .icon_text{
     font-size: 18px;
     /*color: white;*/
@@ -318,33 +318,29 @@ button{
 
 /*-----stuNoteSelection begin-----*/
 #SNS_allBox{
-    background-color: #009f95;
+    background-color: rgb(255,255,255);
     width: 100%;
     position: relative;
     left: 0;
     top: 0;
 }
 .placeSpace{
-    background-color: #009f95;
     width: 90%;
     height: 30px;
     margin: 0 auto;
 }
 #SNS_top_box{
-    background-color: #eb7350;
     width: 90%;
     height: 50px;
     margin: 0 auto;
 }
 #SNS_contentBox{
-    background-color: #eb7350;
     width: 90%;
     margin: 0 auto;
 }
 .SNS_top_selection{
-    background-color: #2F4056;
-    border-bottom: 3px solid #e2e2e2;
-    color: white;
+    border-bottom: 0px solid rgb(102,71,238);
+    color: rgb(109,109,109);
     font-size: 20px;
     text-align: center;
     padding: 10px 0 0 0;
@@ -354,60 +350,114 @@ button{
     float: left;
     cursor: pointer;
 }
+.SNS_top_btn{
+    width: 100px;
+    height: 37px;
+    font-size: 20px;
+    color: rgb(109,109,109);
+    padding: 10px 0 0 0;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
 .SNS_content{
-    background-color: #2D93CA;
+    background-color: rgb(250,250,250);
+    border-radius: 5px;
     width: 100%;
     height: 200px;
     margin: 15px 0;
 }
 .SNS_content_user{
-    background-color: #e2e2e2;
-    width: 130px;
+    width: 15%;
+    height: 200px;
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+}
+.SNS_rightBox{
+    position: relative;
+    width: 85%;
     height: 100%;
+    left: 15%;
+}
+.SNS_text_box{
+    width: 100%;
+    height: 86%;
     position: relative;
     top: 0;
     left: 0;
 }
-.SNS_text_box{
-    background-color: #2F4056;
-    width: 745px;
-    height: 170px;
-    position: relative;
-    bottom: 200px;
-    left: 130px;
-}
 .SNS_func_box{
-    background-color: #FFB94F;
-    width: 745px;
-    height: 30px;
+    width: 100%;
+    height: 28px;
     position: relative;
-    bottom: 200px;
-    left: 130px;
+    top: 0;
+    left: 0;
 }
 .SNS_headPhoto_box{
-    background-color: #009f95;
     position: relative;
-    width: 100px;
+    width: 80%;
     height: 100px;
-    border-radius: 50px;
+    border-radius: 50%;
     margin: 0 auto;
     top: 11%;
 }
 .SNS_userName_box{
-    background-color: #009f95;
     position: relative;
-    width: 110px;
+    width: 90%;
     height: 22px;
     margin: 0 auto;
     top: 15%;
+    text-align: center;
+    color: rgb(52,52,52);
+    font-size: 18px;
 }
 .SNS_textEditor{
-    background-color: #e2e2e2;
     position: relative;
     width: 98%;
-    height: 90%;
-    top: 5%;
+    height: 96%;
+    bottom: 200px;
     left: 1%;
+    overflow: hidden;
+}
+.SNS_textEditor div{
+    overflow: hidden !important;
+    height: auto !important;
+    word-wrap: break-word !important;
+}
+.SNS_f_b_moduleBox{
+    width: 70px;
+    height: 100%;
+    margin: 0 4px;
+    color: rgb(121,121,121);
+    text-align: center;
+    font-size: 15px;
+    position: relative;
+    right: 130px;
+}
+.SNS_moduleBox_lbox{
+    width: 30px;
+    height: 28px;
+    float: left;
+}
+.SNS_moduleBox_rbox{
+    width: 40px;
+    height: 23px;
+    float: left;
+    color: rgb(121,121,121);
+    text-align: left;
+    padding: 5px 0 0 0;
+    font-size: 12px;
+}
+.UDBtn{
+    cursor: pointer;
+}
+.reportBtn{
+    cursor: pointer;
+}
+.collectBtn{
+    cursor: pointer;
 }
 /*-----stuNoteSelection end-----*/
 
