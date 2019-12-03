@@ -33,7 +33,7 @@ public interface TagMapper {
      * @Param [tagTypeId]
      * @return com.zlk.zlkproject.entity.Tag
      **/
-    Tag findTagByTagTypeId(Integer tagTypeId);
+    List<Tag> findTagByTagTypeId(Integer tagTypeId);
 
     /**
      * @Author lufengxiang

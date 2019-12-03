@@ -38,7 +38,6 @@ public class ArticleTagController {
         ModelAndView mv=new ModelAndView();
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        //System.out.println("tagList="+tagList);
         mv.setViewName("view/community/articleTag");
         return mv;
     }

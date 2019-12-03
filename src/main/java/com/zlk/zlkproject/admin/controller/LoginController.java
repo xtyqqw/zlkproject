@@ -47,16 +47,20 @@ public class LoginController {
      * @Author lufengxiang
      * @Description //TODO 登陆页面点击登陆
      * @Date 17:31 2019/11/18
-     * @Param [request, admin, code]
+     * @Param [request, admin]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, Admin admin){
+
         ModelAndView mv=new ModelAndView();
+
         if(admin.getAdminName()==null){
             mv.setViewName("admin/login");
             return mv;
         }
+
+        //shiro认证
         Subject subject = SecurityUtils.getSubject();
         admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());

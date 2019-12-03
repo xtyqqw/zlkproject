@@ -133,18 +133,19 @@
     })
 </script>--%>
 <div class="learnrecord">
-    <c:forEach begin="0" end="2"><%--items=""--%>
+    <c:forEach items="${itemList}" var="item"><%--items=""--%>
         <div class="timeline">
             <div class="date">
-                <p class="year">2018</p>
-                <p class="day">8-8</p>
+                <p class="year">${item.stuTime}</p>
+
+                <%--<p class="day">8-8</p>--%>
             </div>
             <div class="yuan"></div>
             <div class="learn-main mainname main">
                 <div class="learn-title">
-                    <h2>大数据（项目名称）</h2>
-                    <p>解锁任务：项目任务-课程名称-视频名称</p>
-                    <img src="../../img/headimg.jpg">
+                    <h2>${item.coursesName}</h2>
+                    <p>解锁任务：${item.coursesName}-${item.chapterName}-${item.sectionName}</p>
+                    <img src="${item.coverPic}">
                 </div>
                 <div class="learn-main-getstar">
                     <p>获星数量</p>
@@ -167,12 +168,12 @@
                 <div class="layui-progress layui-progress-big" lay-showpercent="true"
                      style="width: 520px;height: 20px;background-color: #dfd9fd;
                             margin: 230px 30px auto 350px;float: right;position: fixed;">
-                    <div class="layui-progress-bar" lay-percent="60%"
+                    <div class="layui-progress-bar" lay-percent="${per}%"
                          style="height: 20px;background-color: #9e8dff;"></div>
                 </div>
             </div>
         </div>
-    </c:forEach>
+</c:forEach>
 </div>
 </body>
 </html>

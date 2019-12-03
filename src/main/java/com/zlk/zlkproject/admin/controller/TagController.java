@@ -47,6 +47,8 @@ public class TagController {
         ModelAndView mv= new ModelAndView();
         mv.addObject("condition",condition);
         mv.setViewName("admin/tagManager");
+
+        //动态获取可选方向
         List<Type> typeList = typeService.findAllTypeName();
         mv.addObject("typeList",typeList);
         return mv;
@@ -80,23 +82,31 @@ public class TagController {
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Tag tag){
+
         ModelAndView mv=new ModelAndView();
+
+        //判断类别名称是否存在
         Tag tagByTagName = tagService.findTagByTagName(tag.getTagName());
         if(tagByTagName!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
         }
+
+        //新增类别
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
         tag.setTagTypeId(type.getTypeId());
         Integer flag = tagService.addTag(tag);
+
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/tagManager");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
@@ -104,6 +114,7 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
@@ -119,26 +130,37 @@ public class TagController {
      **/
     @RequestMapping(value = "/update")
     public ModelAndView update(Tag tag, HttpServletRequest request){
+
         ModelAndView mv=new ModelAndView();
+
+        /**
+         * 判断类别名称是否更改
+         * 若更改则判断是否重复
+         **/
         Tag tagByTagName = tagService.findTagByTagName(tag.getTagName());
         Tag tagByTagId = tagService.findTagByTagId(tag.getTagId());
         if(!tagByTagId.getTagName().equals(tag.getTagName())&&tagByTagName!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","类别名称已存在");
             mv.setViewName("admin/tagManager");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
         }
+
+        //修改类别信息
         Type type = typeService.findTypeByTypeName(tag.getTagTypeName());
         tag.setTagTypeId(type.getTypeId());
         Integer flag = tagService.updateTagByTagID(tag);
+
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/tagManager");
             //日志记录类别修改
             logUtil.setLog(request,"修改了类别名称为："+tagByTagId.getTagName()+"的信息");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
@@ -146,6 +168,7 @@ public class TagController {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
             mv.setViewName("admin/tagManager");
+            //动态获取可选方向
             List<Type> typeList = typeService.findAllTypeName();
             mv.addObject("typeList",typeList);
             return mv;
@@ -161,6 +184,7 @@ public class TagController {
      **/
     @RequestMapping(value = "/delete")
     public String delete(Integer tagId,HttpServletRequest request){
+        //获取删除前类别信息
         Tag tagByTagId = tagService.findTagByTagId(tagId);
         tagService.deleteTagByTagId(tagId);
         //日志记录类别删除

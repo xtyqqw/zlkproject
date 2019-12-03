@@ -1,11 +1,15 @@
 package com.zlk.zlkproject.user.personal.controller;
 
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.user.entity.Articles;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,15 +33,89 @@ public class ArticlesController {
      * @param userId
      * @return
      */
-    @RequestMapping(value = "toarticles")
+    @RequestMapping(value = "/toarticles")
+    public ModelAndView selectArticles(String userId)throws Exception{
+        /*HttpServletRequest request
+        String userId1 = (String) request.getSession().getAttribute("userId");*/
+        List<Articles> list=articlesService.selectArticles("1");
+        Integer articles=articlesService.findArticlesId("1");
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("list",list);
+        mv.addObject("articles",articles);
+        mv.setViewName("");
+        return mv;
+    }
+
+    /**
+     * 修改
+     * @param articles
+     * @return
+     */
+    @RequestMapping(value = "update")
+    public String updateArticles(Articles articles)throws Exception{
+        Integer flag=articlesService.updateArticles(articles);
+        if(flag == 1){
+            return "";
+        }else {
+            return null;
+        }
+    }
+
+    /**
+     * 删除
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(value = "/datele")
+    public String deleteArticles(String articleId)throws Exception{
+        Integer flag=articlesService.deleteArticles("1");
+        if(flag == 1){
+            return "";
+        }else {
+            return null;
+        }
+    }
+    /*流加载*/
+    @RequestMapping(value = "/flow")
     @ResponseBody
-    public Map<String,Object> selectArticles(String userId){
-        /*userId="1";*/
-        List<Article> list=articlesService.selectArticles("1");
+    public Map<String,Object> findArticlesAll(Pagination pagination){
+        List<Articles> articlesList=articlesService.findArticlesAll(pagination);
         Map<String,Object> map=new HashMap<>();
-        map.put("code",0);
-        map.put("data",list);
+        map.put("articlesList",articlesList);
         return map;
+    }
+
+    /**
+     * 插入标签
+     *
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(value = "/updates")
+    public ModelAndView updateTag(String articleId){
+        ModelAndView mv=new ModelAndView();
+        Integer article=articlesService.updateTag(articleId);
+        mv.addObject("article",article);
+        mv.setViewName("");
+        return mv;
+    }
+
+    /**
+     * 添加标签
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(value = "/insert")
+    public ModelAndView insertTag(String articleId){
+        ModelAndView mv=new ModelAndView();
+        List<Tag> tagList=articlesService.insertTag(articleId);
+        if(tagList!=null && !tagList.isEmpty()){
+            mv.setViewName("");
+            return mv;
+        }else{
+            mv.setViewName("");
+            return mv;
+        }
     }
 
 }
