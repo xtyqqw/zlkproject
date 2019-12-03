@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.excheck.js"></script>
 
     <style type="text/css">
         .outer{
@@ -198,8 +199,8 @@
         data: {
             simpleData: {
                 enable: true,
-                idKey: "functionId",
-                pIdKey: "parentId",
+                idKey: "id",
+                pIdKey: "pid",
                 rootPId: 0
             }
         },

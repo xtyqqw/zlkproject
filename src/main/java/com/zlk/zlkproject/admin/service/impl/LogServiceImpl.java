@@ -63,6 +63,13 @@ public class LogServiceImpl implements LogService {
         return logMapper.addLog(log);
     }
 
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 删除日志
+     * @Date 10:14 2019/11/28
+     * @Param [logId]
+     * @return java.lang.Integer
+     **/
     @Override
     public Integer deleteLogByLogId(String logId) {
         return logMapper.deleteLogByLogId(logId);

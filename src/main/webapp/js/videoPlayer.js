@@ -276,90 +276,564 @@ $(document).ready(function () {
             })
         }
 
-    });
-
 
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
-
-    $("#icon-biji").click(function () {
-        $("#div_stuNote").css("display","block");
-    });
-    $("#stuNote_btn1").click(function () {
-        var isEmpty = true;
-        var lengthState = true;
-        var contentHtml = '' + stu_editor.txt.html();
-        var contentText = '' + stu_editor.txt.text();
-        if (contentText === ''){
-            isEmpty = true;
-        }else {
-            isEmpty = false;
-        }
-        var arrP = $("#div_text").children(0).children();
-        for (var i=0;i<arrP.length;i++){
-            if (arrP.eq(i).children("img").length > 0){
-                isEmpty = false;
-            }
-        }
-        var data = {'content':contentHtml};
-        if(contentHtml.length>512){
-            alert("内容超出最大长度限制！");
-            lengthState = false;
-        }
-        if (isEmpty){
-            alert("内容为空无法提交！");
-        }
-        if(lengthState && !isEmpty){
-            $.ajax({
-                type : "POST",
-                url : "/stuNote/submit",
-                data : data,
-                success : function (res) {
-                    alert(res.retmsg);
-                    if (res.retmsg === '保存成功'){
-                        stu_editor.txt.clear();
+        {
+            $("#icon-biji").click(function () {
+                $("#div_stuNote").css("display","block");
+            });
+            $("#stuNote_btn1").click(function () {
+                let isEmpty = true;
+                let lengthState = true;
+                let contentHtml = '' + stu_editor.txt.html();
+                let contentText = '' + stu_editor.txt.text();
+                if (contentText === ''){
+                    isEmpty = true;
+                }else {
+                    isEmpty = false;
+                }
+                let arrP = $("#div_text").children(0).children();
+                for (let i=0;i<arrP.length;i++){
+                    if (arrP.eq(i).children("img").length > 0){
+                        isEmpty = false;
                     }
                 }
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let sectionId = 1;
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let userId = 1;
+                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                if(contentHtml.length>512){
+                    alert("内容超出最大长度限制！");
+                    lengthState = false;
+                }
+                if (isEmpty){
+                    alert("内容为空无法提交！");
+                }
+                if(lengthState && !isEmpty){
+                    $.ajax({
+                        type : "POST",
+                        url : "/stuNote/submit",
+                        data : data,
+                        success : function (res) {
+                            alert(res.retmsg);
+                            if (res.retmsg === '保存成功'){
+                                stu_editor.txt.clear();
+                            }
+                        }
+                    });
+                }
+                lengthState = true;
             });
-        }
-        lengthState = true;
-    });
-    $("#stuNote_btn2").click(function () {
-        $("#div_stuNote").css("display","none");
-    });
-    $("#stuNoteCloseBtn").click(function () {
-        $("#div_stuNote").css("display","none");
-    });
+            $("#stuNote_btn2").click(function () {
+                $("#div_stuNote").css("display","none");
+            });
+            $("#stuNoteCloseBtn").click(function () {
+                $("#div_stuNote").css("display","none");
+            });
 
-    var stuE = window.wangEditor;
-    var stu_editor = new stuE('#div_stuNote_toolBar', '#div_stuNote_text');
-    stu_editor.customConfig.menus = [
-        'bold',
-        'italic',
-        'underline',
-        'image',
-        'code'
-    ];
-    // 隐藏"网络图片"tab
-    stu_editor.customConfig.showLinkImg = false;
-    stu_editor.customConfig.uploadFileName = 'file';
-    stu_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
-    stu_editor.customConfig.uploadImgTimeout = 1000*20;
-    stu_editor.customConfig.uploadImgMaxLength = 1;
-    stu_editor.customConfig.uploadImgHooks = {
-        customInsert: function (insertImg, result, stu_editor) {
-            var url = result.data;
-            insertImg(url)
+            let stuE = window.wangEditor;
+            let stu_editor = new stuE('#div_stuNote_toolBar', '#div_stuNote_text');
+            stu_editor.customConfig.menus = [
+                'bold',
+                'italic',
+                'underline',
+                'image',
+                'code'
+            ];
+            // 隐藏"网络图片"tab
+            stu_editor.customConfig.showLinkImg = false;
+            stu_editor.customConfig.uploadFileName = 'file';
+            stu_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+            stu_editor.customConfig.uploadImgTimeout = 1000*20;
+            stu_editor.customConfig.uploadImgMaxLength = 1;
+            stu_editor.customConfig.uploadImgHooks = {
+                customInsert: function (insertImg, result, stu_editor) {
+                    let url = result.data;
+                    insertImg(url)
+                }
+            };
+            stu_editor.create();
         }
-    };
-    stu_editor.create();
 
 /*-----------------------------------------学生笔记 end----------------------------------------------------------------*/
 
 /*-----------------------------------------学生笔记选项卡 begin---------------------------------------------------------*/
-    $(".SNS_top_selection").mouseover(function () {
-        $(this).css("color","#");
-    });
+        var flag = 0;
+        var flexState = false;
+        var userId = "-1";
+
+        $(".SNS_top_selection").click(function () {
+            $(this).css("border-bottom","3px solid rgb(102,71,238)");
+            $(this).css("color","rgb(102,71,238)");
+            $(this).siblings().eq(0).css("border-bottom","0px solid rgb(102,71,238)");
+            $(this).siblings().eq(0).css("color","rgb(109,109,109)");
+            if ($(this).text() === '最新'){
+                flowLoad("/stuNote/findStuNote",userId);
+            }else {
+                flowLoad("/stuNote/findStuNoteUp",userId);
+            }
+        });
+
+        //只看我的
+        var SNS_top_btn_state = false;
+        $(".SNS_top_btn").click(function () {
+            if(SNS_top_btn_state){
+                $(this).css("color","rgb(109,109,109)");
+                userId = "-1";
+                SNS_top_btn_state = false;
+            }else {
+                $(this).css("color","rgb(102,71,238)");
+                //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                userId = "1";
+                SNS_top_btn_state = true;
+            }
+        });
+
+        //采集
+        $("#SNS_contentBox").on('click','.collectBtn',function () {
+            var snId = parseInt($(this).parent().parent().children().eq(0).text());
+            //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            var userId = 1;
+            if ($(this).prev().text() === 'false'){
+                $(this).prev().text('true');
+                var data = {'state':'true','snId':snId,'userId':userId};
+                var thisObj = $(this);
+                $.ajax({
+                    type:'POST',
+                    url:'/stuNote/collect',
+                    dataType:'json',
+                    data:data,
+                    success:function (res) {
+                        if (res.error === 0){
+                            thisObj.text("已采集");
+                            thisObj.css('color','rgb(102,71,238)');
+                            var num = parseInt(thisObj.next().text());
+                            num++;
+                            thisObj.next().text(num);
+                        }
+                    }
+                });
+            }else {
+                $(this).prev().text('false');
+                var data = {'state':'false','snId':snId,'userId':userId};
+                var thisObj = $(this);
+                $.ajax({
+                    type:'POST',
+                    url:'/stuNote/collect',
+                    dataType:'json',
+                    data:data,
+                    success:function (res) {
+                        if (res.error === 0){
+                            thisObj.text("采集");
+                            thisObj.css('color','rgb(121,121,121)');
+                            var num = parseInt(thisObj.next().text());
+                            num--;
+                            thisObj.next().text(num);
+                        }
+                    }
+                });
+            }
+        });
+
+        //举报
+        $("#SNS_contentBox").on("click",".reportBtn",function () {
+            var snId = parseInt($(this).parent().children().eq(0).text());
+            if ($(this).prev().text() === 'false'){
+                $(this).prev().text('true');
+                var data = {'state':'true','snId':snId};
+                var thisObj = $(this);
+                $.ajax({
+                    type:'POST',
+                    url:'/stuNote/report',
+                    dataType:'json',
+                    data:data,
+                    success:function (res) {
+                        if (res.error === 0){
+                            thisObj.text("已举报");
+                            thisObj.css('color','rgb(102,71,238)');
+                        }
+                    }
+                });
+            }else {
+                $(this).prev().text('false');
+                var data = {'state':'false','snId':snId};
+                var thisObj = $(this);
+                $.ajax({
+                    type:'POST',
+                    url:'/stuNote/report',
+                    dataType:'json',
+                    data:data,
+                    success:function (res) {
+                        if (res.error === 0){
+                            thisObj.text("举报");
+                            thisObj.css('color','rgb(121,121,121)');
+                        }
+                    }
+                });
+            }
+        });
+
+        //点赞点踩
+        $("#SNS_contentBox").on("click",".UDBtn",function () {
+            //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            var userId = 1;
+            var thisObj = $(this);
+            if($(this).parent().parent().attr("data_name") === 'up'){
+                var snId = parseInt($(this).parent().parent().prev().prev().text());
+                var data = {"userId":userId,"snId":snId};
+                if($(this).parent().parent().prev().text() === 'none'){
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/upAdd",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                thisObj.addClass('icon-dianzan');
+                                thisObj.css("color","rgb(102,71,238)");
+                                var value = parseInt(thisObj.parent().next().text()) + 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().text("up");
+                            }
+                        }
+                    });
+                }else if ($(this).parent().parent().prev().text() === 'up'){
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/upDelete",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-dianzan');
+                                thisObj.addClass('icon-qinziAPPtubiao-1');
+                                thisObj.css("color","rgb(121,121,121)");
+                                var value = parseInt(thisObj.parent().next().text()) - 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().text("none");
+                            }
+                        }
+                    });
+                }else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/upAddDownDelete",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                thisObj.addClass('icon-dianzan');
+                                thisObj.css("color","rgb(102,71,238)");
+                                var value = parseInt(thisObj.parent().next().text()) + 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().text("up");
+
+                                var downPic = thisObj.parent().parent().next().children().eq(0).children();
+                                downPic.removeClass('icon-dianzan_active');
+                                downPic.addClass('icon-qinziAPPtubiao-');
+                                downPic.css('font-size','17px');
+                                downPic.css('color','rgb(121,121,121)');
+                                value = parseInt(downPic.parent().next().text()) - 1;
+                                downPic.parent().next().text(value);
+                            }
+                        }
+                    });
+                }
+            }else {
+                var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
+                var data = {"userId":userId,"snId":snId};
+                if($(this).parent().parent().prev().prev().text() === 'none'){
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/downAdd",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-qinziAPPtubiao-');
+                                thisObj.addClass('icon-dianzan_active');
+                                thisObj.css('font-size','20px');
+                                thisObj.css("color","rgb(102,71,238)");
+                                var value = parseInt(thisObj.parent().next().text()) + 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().prev().text("down");
+                            }
+                        }
+                    });
+                }else if ($(this).parent().parent().prev().prev().text() === 'down'){
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/downDelete",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-dianzan_active');
+                                thisObj.addClass('icon-qinziAPPtubiao-');
+                                thisObj.css('font-size','17px');
+                                thisObj.css("color","rgb(121,121,121)");
+                                var value = parseInt(thisObj.parent().next().text()) - 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().prev().text("none");
+                            }
+                        }
+                    });
+                }else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/stuNote/downAddUpDelete",
+                        dataType: "json",
+                        data: data,
+                        success:function (res) {
+                            if (res.error === 0){
+                                thisObj.removeClass('icon-qinziAPPtubiao-');
+                                thisObj.addClass('icon-dianzan_active');
+                                thisObj.css('font-size','20px');
+                                thisObj.css("color","rgb(102,71,238)");
+                                var value = parseInt(thisObj.parent().next().text()) + 1;
+                                thisObj.parent().next().text(value);
+                                thisObj.parent().parent().prev().prev().text("down");
+
+                                var upPic = thisObj.parent().parent().prev().children().eq(0).children();
+                                upPic.removeClass('icon-dianzan');
+                                upPic.addClass('icon-qinziAPPtubiao-1');
+                                upPic.css("color","rgb(121,121,121)");
+                                var value = parseInt(upPic.parent().next().text()) - 1;
+                                upPic.parent().next().text(value);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $("#SNS_contentBox").on("mouseover",".SNS_content",function () {
+            $(this).css("background-color",'rgb(255,255,255)');
+            $(this).css('box-shadow','0 0 15px rgb(181,179,180)');
+        });
+
+        $("#SNS_contentBox").on("mouseout",".SNS_content",function () {
+            $(this).css("background-color",'rgb(250,250,250)');
+            $(this).css('box-shadow','0 0 0 rgb(255,255,255)');
+        });
+
+        // 展开/收起
+        $("#SNS_contentBox").on("click",".flexBtn",function () {
+            if(flexState){
+                $(this).parent().parent().css("height","100%");
+                $(this).parent().parent().parent().css("height","200px");
+                $(this).parent().prev().css("height","86%");
+                $(this).parent().prev().children().eq(1).css("height","90%");
+                $(".SNS_f_b_moduleBox").css("right",130);
+                flexState = false;
+            }else{
+                $(this).parent().parent().css("height","auto");
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().prev().children().eq(1).css("height","auto");
+                var height = $(this).parent().prev().children().eq(1).height();
+                if (height < 200){
+                    height = 200;
+                }
+                $(this).css("right",0);
+                $(this).siblings().css("right",0);
+                $(this).parent().prev().css("height",height);
+                flexState = true;
+            }
+        });
+
+
+        $("#selection_stuNote").click(function () {
+            flowLoad("/stuNote/findStuNote",userId);
+        });
+
+        function flowLoad(url,userId) {
+            $("#SNS_ul_stream").empty();
+            flow.load({
+                elem: '#SNS_ul_stream',//流加载容器
+                isAuto: false,
+                done: function (page, next) { //加载下一页
+                    var lis = [];
+                    var size = 3;
+                    var data = {"sectionId": 1, "page": page, "size": size};
+                    $.ajax({
+                        type: "POST",
+                        url: ""+url+"?userId="+userId,
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            var str = "";
+                            layui.each(result.notes, function (i, note) {
+                                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                var uId = '1';
+                                var upStr = '<i class="iconfont icon-qinziAPPtubiao-1 UDBtn" style="font-size: 20px !important;color: rgb(121,121,121) !important;"></i>';
+                                var downStr = '<i class="iconfont icon-qinziAPPtubiao- UDBtn" style="font-size: 17px !important;color: rgb(121,121,121) !important;"></i>';
+                                var upDownState = "none";
+                                for (var i in note.stuNoteUpDown){
+                                    if(note.stuNoteUpDown[i].userId === uId){
+                                        if(note.stuNoteUpDown[i].upDown === 'up'){
+                                            upStr = '<i class="iconfont icon-dianzan UDBtn" style="font-size: 20px !important;color: rgb(102,71,238) !important;"></i>';
+                                            upDownState = "up";
+                                        } else if(note.stuNoteUpDown[i].upDown === 'down'){
+                                            downStr = '<i class="iconfont icon-dianzan_active UDBtn" style="font-size: 20px !important;color: rgb(102,71,238) !important;"></i>';
+                                            upDownState = "down";
+                                        }
+                                    }
+                                }
+                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 45px">采集</div>';
+                                var collectState = 'false';
+                                for (var i in note.stuNoteCollect){
+                                    if (note.stuNoteCollect[i].userId === uId){
+                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 45px">已采集</div>';
+                                        collectState = 'true';
+                                    }
+                                }
+                                flag ++;
+                                console.log(note.date);
+                                str='<div id="SNS_content_'+ flag +'" class="SNS_content" style="margin: 0 0 10px 0">\n' +
+                                        '<div class="SNS_content_user">\n' +
+                                            '<div class="SNS_headPhoto_box">\n' +
+                                                '<img src="'+ note.userImg +'" style="width: 100%;height: 100%">\n' +
+                                            '</div>\n' +
+                                            '<div class="SNS_userName_box">'+ note.userRealName +'</div>\n' +
+                                        '</div>\n' +
+                                        '<div class="SNS_rightBox">\n' +
+                                            '<div class="SNS_text_box">\n' +
+                                                '<div id="SNS_tooBarId'+ flag +'" class="SNS_toolBar" style="display: none"></div>\n' +
+                                                '<div id="SNS_textEditorId'+ flag +'" class="SNS_textEditor"></div>\n' +
+                                            '</div>\n' +
+                                            '<div class="SNS_func_box">' +
+                                                '<span style="display: none">'+ note.snId +'</span>' +
+                                                '<span style="display: none">'+ upDownState +'</span>' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left">' +
+                                                    '<div class="SNS_moduleBox_lbox">' +
+                                                        upStr +
+                                                    '</div>' +
+                                                    '<div class="SNS_moduleBox_rbox">'+ note.up +'</div>' +
+                                                '</div>' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left">' +
+                                                    '<div class="SNS_moduleBox_lbox" style="padding: 2px 0 0 0;height: 26px">' +
+                                                        downStr +
+                                                    '</div>' +
+                                                    '<div class="SNS_moduleBox_rbox">'+ note.down +'</div>' +
+                                                '</div>' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 85px">' +
+                                                    '<span style="display: none">'+ collectState +'</span>' +
+                                                    collectStr +
+                                                    '<div class="SNS_moduleBox_rbox" style="padding: 5px 0 0 5px;width: 35px;height: 18px">'+ note.collect +'</div>' +
+                                                '</div>' +
+                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left">展开/收起</div>' +
+                                                '<span style="display: none">false</span>' +
+                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left">举报</div>' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 140px;padding: 2px 0 0 0">'+ note.dateString +'</div>' +
+                                            '</div>\n' +
+                                        '</div>\n' +
+                                    '</div>' +
+                                    '<script>\n' +
+                                    'var SNS_E = window.wangEditor;\n' +
+                                    'var SNS_editor'+ flag +' = new SNS_E(\'#SNS_tooBarId'+ flag +'\', \'#SNS_textEditorId'+ flag +'\');\n' +
+                                    'SNS_editor'+ flag +'.create();\n' +
+                                    'SNS_editor'+ flag +'.txt.html(\''+ note.content +'\');\n' +
+                                    'SNS_editor'+ flag +'.$textElem.attr(\'contenteditable\', false);\n' +
+                                    '</script>';
+
+                                lis.push(str);
+                            });
+                            next(lis.join(''), page < result.pages);
+                        }
+                    });
+
+                }
+            });
+        }
 /*-----------------------------------------学生笔记选项卡 end-----------------------------------------------------------*/
+
+/*-----------------------------------------学生评论 begin--------------------------------------------------------------*/
+        {
+            $("#icon-pinglun").click(function () {
+                $("#div_stuCmt").css("display","block");
+            });
+            $("#stuCmt_btn1").click(function () {
+                let isEmpty = true;
+                let lengthState = true;
+                let contentHtml = '' + stuCmt_editor.txt.html();
+                let contentText = '' + stuCmt_editor.txt.text();
+                if (contentText === ''){
+                    isEmpty = true;
+                }else {
+                    isEmpty = false;
+                }
+                let arrP = $("#div_text").children(0).children();
+                for (let i=0;i<arrP.length;i++){
+                    if (arrP.eq(i).children("img").length > 0){
+                        isEmpty = false;
+                    }
+                }
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let sectionId = 1;
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let userId = 1;
+                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                if(contentHtml.length>512){
+                    alert("内容超出最大长度限制！");
+                    lengthState = false;
+                }
+                if (isEmpty){
+                    alert("内容为空无法提交！");
+                }
+                if(lengthState && !isEmpty){
+                    $.ajax({
+                        type : "POST",
+                        url : "/stuComment/submit",
+                        data : data,
+                        success : function (res) {
+                            alert(res.retmsg);
+                            if (res.retmsg === '保存成功'){
+                                stuCmt_editor.txt.clear();
+                            }
+                        }
+                    });
+                }
+                lengthState = true;
+            });
+            $("#stuCmt_btn2").click(function () {
+                $("#div_stuCmt").css("display","none");
+            });
+            $("#stuCmtCloseBtn").click(function () {
+                $("#div_stuCmt").css("display","none");
+            });
+
+            let stuCmtE = window.wangEditor;
+            let stuCmt_editor = new stuCmtE('#div_stuCmt_toolBar', '#div_stuCmt_text');
+            stuCmt_editor.customConfig.menus = [
+                'bold',
+                'italic',
+                'underline',
+                'image',
+                'code'
+            ];
+            // 隐藏"网络图片"tab
+            stuCmt_editor.customConfig.showLinkImg = false;
+            stuCmt_editor.customConfig.uploadFileName = 'file';
+            stuCmt_editor.customConfig.uploadImgServer = 'stuComment/uploadPic';
+            stuCmt_editor.customConfig.uploadImgTimeout = 1000*20;
+            stuCmt_editor.customConfig.uploadImgMaxLength = 1;
+            stuCmt_editor.customConfig.uploadImgHooks = {
+                customInsert: function (insertImg, result, stuCmt_editor) {
+                    let url = result.data;
+                    insertImg(url)
+                }
+            };
+            stuCmt_editor.create();
+        }
+
+
+/*-----------------------------------------学生评论 end----------------------------------------------------------------*/
+
+    });
+
 
 });
 

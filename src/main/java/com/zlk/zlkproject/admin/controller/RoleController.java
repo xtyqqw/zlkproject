@@ -1,26 +1,28 @@
 package com.zlk.zlkproject.admin.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.zlk.zlkproject.admin.service.AdminService;
+import com.zlk.zlkproject.admin.service.FunctionService;
 import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.service.RoleService;
 import com.zlk.zlkproject.admin.util.IDUtil;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Admin;
+import com.zlk.zlkproject.entity.Function;
 import com.zlk.zlkproject.entity.Log;
 import com.zlk.zlkproject.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName RoleController
@@ -38,6 +40,8 @@ public class RoleController {
     private AdminService adminService;
     @Autowired
     private LogUtil logUtil;
+    @Autowired
+    private FunctionService functionService;
 
     /**
      * @Author lufengxiang
@@ -76,13 +80,15 @@ public class RoleController {
     /**
      * @Author lufengxiang
      * @Description //TODO 新增角色
-     * @Date 16:24 2019/11/19
-     * @Param [role]
+     * @Date 9:56 2019/11/28
+     * @Param [role, addFunction]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/insert")
-    public ModelAndView insert(Role role){
+    public ModelAndView insert(Role role,@RequestParam(value="addFunction")String addFunction){
+
         ModelAndView mv=new ModelAndView();
+
         //判断角色名是否重复
         Role roleByRoleName = roleService.findRoleByRoleName(role.getRoleName());
         if(roleByRoleName!=null){
@@ -91,14 +97,30 @@ public class RoleController {
             mv.setViewName("admin/roleManager");
             return mv;
         }
+
         //放UUID并添加
         role.setRoleId(IDUtil.getUUID());
         Integer flag = roleService.addRole(role);
-        if(flag==1){
-            mv.addObject("flag","true");
-            mv.addObject("msg","添加成功");
-            mv.setViewName("admin/roleManager");
-            return mv;
+
+        if(flag==1&&addFunction!=null){
+            //解析前台勾选权限
+            List<Function> functionList = JSONArray.parseArray(addFunction,Function.class);
+            List<Integer> functionId=new ArrayList<>();
+            for(Function fun:functionList){
+                functionId.add(fun.getId());
+            }
+            Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
+            if(flag2==0){
+                mv.addObject("flag","true");
+                mv.addObject("msg","遇到意外错误");
+                mv.setViewName("admin/roleManager");
+                return mv;
+            }else {
+                mv.addObject("flag", "true");
+                mv.addObject("msg", "添加成功");
+                mv.setViewName("admin/roleManager");
+                return mv;
+            }
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
@@ -110,13 +132,15 @@ public class RoleController {
     /**
      * @Author lufengxiang
      * @Description //TODO 通过角色ID修改角色信息
-     * @Date 10:50 2019/11/20
-     * @Param [role, request]
+     * @Date 9:57 2019/11/28
+     * @Param [role, request, updateFunction]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/update")
-    public ModelAndView update(Role role, HttpServletRequest request){
+    public ModelAndView update(Role role, HttpServletRequest request,@RequestParam(value="updateFunction")String updateFunction){
+
         ModelAndView mv=new ModelAndView();
+
         /**
          * 判断角色名是否更改
          * 如果更改过则判断更改后的角色名是否存在
@@ -129,8 +153,30 @@ public class RoleController {
             mv.setViewName("admin/roleManager");
             return mv;
         }
+
         //修改角色信息
         Integer flag = roleService.updateRoleByRoleId(role);
+        //解析前台勾选权限
+        List<Function> functionList = JSONArray.parseArray(updateFunction,Function.class);
+        List<Integer> functionId=new ArrayList<>();
+        for(Function fun:functionList){
+            functionId.add(fun.getId());
+        }
+
+        //修改角色权限中间表
+        Integer flag1 = roleService.deleteRoleAndFunctionByRoleId(role.getRoleId());
+        List<Integer> integerList=new ArrayList<>();
+
+        //角色授权
+        Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
+        if(flag2==0){
+            mv.addObject("flag","true");
+            mv.addObject("msg","遇到意外错误");
+            mv.setViewName("admin/roleManager");
+            return mv;
+        }
+
+        //判断是否成功
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
@@ -166,7 +212,8 @@ public class RoleController {
         if(adminByRoleName.size()!=0){
             return false;
         }else {
-            roleService.deleteRoleByRoleId(roleId);
+            Integer flag = roleService.deleteRoleAndFunctionByRoleId(roleId);
+            Integer flag1 = roleService.deleteRoleByRoleId(roleId);
             //记录删除角色日志
             logUtil.setLog(request,"将角色名为"+roleByRoleId.getRoleName()+"的角色删除了");
             return true;
