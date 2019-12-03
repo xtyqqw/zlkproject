@@ -24,17 +24,17 @@ public class CommentsServiceImpl implements CommentsService {
     private CommentsRepository commentsRepository;
 
     @Override
-    public List<Comment> listCommentByArticleId(Long articleId) {
+    public List<Comment> listCommentByArticleId(String articleId) {
         Sort.Order order=Sort.Order.desc("createTime");
         Sort sort=Sort.by(order);
-        return commentsRepository.findByArticleIdAndParentCommentNull(articleId,sort);
+        return commentsRepository.findByArticleId(articleId,sort);
     }
 
     @Transactional
     @Override
     public Comment saveComment(Comment comment) {
-        Long parentCommentId=comment.getParentComment().getId();
-        if (parentCommentId != -1) {
+        String parentCommentId= String.valueOf(comment.getParentComment().getId());
+        if (!parentCommentId .equals("-1")) {
             comment.setParentComment(commentsRepository.findById(parentCommentId).get());
         } else {
             comment.setParentComment(null);

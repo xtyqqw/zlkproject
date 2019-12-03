@@ -1,9 +1,9 @@
 package com.zlk.zlkproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -28,9 +28,11 @@ public class Article {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**更新时间*/
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**插图相对路径*/
@@ -53,7 +55,7 @@ public class Article {
     private Integer articleSetTop;
     /**文章方向*/
     private String typeName;
-
+   /**文章类别*/
     private String tagName;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
