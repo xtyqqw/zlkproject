@@ -59,7 +59,7 @@ public class StuNote {
     public StuNote() {
     }
 
-    public StuNote(Integer snId, Integer snSectionId, Integer snUserId, String content, Integer up, Integer down, String report, Date date) {
+    public StuNote(Integer snId, Integer snSectionId, String snUserId, String content, Integer up, Integer down, String report, Date date) {
         this.snId = snId;
         this.snSectionId = snSectionId;
         this.snUserId = snUserId;
