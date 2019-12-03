@@ -64,7 +64,21 @@
        WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
     </select>
 
+    <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
+        select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
+        introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{page},#{limit};
+    </select>
 
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from courses
+    </select>
+
+    <insert id="insertByCourses" keyProperty="coursesId" useGeneratedKeys="true">
+        insert into courses(section_num,courses_name,student_num,chapter_num,price,cover_pic,introduce_video
+        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{sectionNum},#{coursesName},#{studentNum}
+        ,#{chapterNum},#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
+        #{featureText},#{featurePic})
+    </insert>
 
     <update id="updateByCoursesId">
         update courses
@@ -106,4 +120,7 @@
         where courses_id = #{coursesId}
     </update>
 
+    <delete id="deleteByCoursesId">
+        delete from courses where courses_id=#{coursesId}
+    </delete>
 </mapper>

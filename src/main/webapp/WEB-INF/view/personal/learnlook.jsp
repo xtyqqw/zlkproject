@@ -21,7 +21,7 @@
             border-radius: 3px;
         }
         .zi{
-            margin: 40px 30px 0px 30px;
+            margin: 40px 30px 0 30px;
             padding-top: 20px;
         }
         .zi1,.zi2{
@@ -37,7 +37,7 @@
         .pointer p{
             color: #713ED7;
             font-size: 20px;
-            padding: 20px 0px 0px 164px;
+            padding: 20px 0 0 166px;
             margin: 0;
         }
         .pointer img{
@@ -51,7 +51,7 @@
             margin-top: 50px;
         }
         .today-learn-case ul{
-            margin-left: 0;
+            margin-left: 30px;
         }
         .today-learn-case ul li{
             list-style: none;
@@ -72,7 +72,7 @@
         .today-learn-case i{
             font-size: 22px;
             color: #713ED7;
-            margin: 10px 0px;
+            margin: 10px 0;
         }
         .today-learn-case p{
             margin: 0;
