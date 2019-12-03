@@ -44,8 +44,8 @@ public class ArticleListServiceImpl implements ArticleListService {
 
     @Override
     public List<Article> findByBrowseCount(Pagination pagination) {
-        Integer page = 1;
-        Integer limit = 5;
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
         return articleListMapper.findByBrowseCount(pagination);

@@ -47,16 +47,12 @@ public class Article {
     private Integer caiCount;
     /**举报：0 是，1 否*/
     private Integer inform;
-    /**发文类型：0 原创，1 转载，2 翻译*/
+    /**发文类型：原创，转载，翻译*/
     private Integer createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
     /**文章方向*/
     private String typeName;
-    /**标签*/
-    private String tagName;
-    /**建立的是文章和用户的多对一关系*/
-    private String userId;
     /**发文时调用类别名称*/
     private List<Tag> tagList;
     /**查询时调用类别名称*/
@@ -67,27 +63,4 @@ public class Article {
     public Article() {
     }
 
-    public Article(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, Integer inform, Integer createArticleType, Integer articleSetTop, String typeName, String tagName, String userId, List<Tag> tagList, User userList, Integer approval) {
-        this.articleId = articleId;
-        this.title = title;
-        this.browseCount = browseCount;
-        this.commentCount = commentCount;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.figures = figures;
-        this.figuresReal = figuresReal;
-        this.articleDigest = articleDigest;
-        this.articleContent = articleContent;
-        this.zanCount = zanCount;
-        this.caiCount = caiCount;
-        this.inform = inform;
-        this.createArticleType = createArticleType;
-        this.articleSetTop = articleSetTop;
-        this.typeName = typeName;
-        this.tagName = tagName;
-        this.userId = userId;
-        this.tagList = tagList;
-        this.userList = userList;
-        this.approval = approval;
-    }
 }

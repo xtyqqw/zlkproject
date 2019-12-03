@@ -29,4 +29,28 @@ public class LoginServiceImpl implements LoginService {
     public Admin findAdminByAdminName(String adminName) {
         return loginMapper.findAdminByAdminName(adminName);
     }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查找浏览量
+     * @Date 16:16 2019/12/3
+     * @Param []
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer findVisitNumber() {
+        return loginMapper.findVisitNumber();
+    }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 每次被访问访问量+1
+     * @Date 16:30 2019/12/3
+     * @Param []
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer updateVisitNumber() {
+        return loginMapper.updateVisitNumber();
+    }
 }

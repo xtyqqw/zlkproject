@@ -23,7 +23,7 @@ public class Comment {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String nickname;
     private String content;
     private String avatar;

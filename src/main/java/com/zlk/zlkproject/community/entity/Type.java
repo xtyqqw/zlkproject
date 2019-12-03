@@ -21,12 +21,11 @@ import java.util.List;
 public class Type {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private Integer id;
     private String name;
 
-    @OneToMany(mappedBy = "type")
-    private List<Article> articles=new ArrayList<>();
+    /*@OneToMany(mappedBy = "type")
+    private List<Article> articles=new ArrayList<>();*/
 
     public Type() {
     }
@@ -34,9 +33,8 @@ public class Type {
     @Override
     public String toString() {
         return "Type{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", articles=" + articles +
                 '}';
     }
 }

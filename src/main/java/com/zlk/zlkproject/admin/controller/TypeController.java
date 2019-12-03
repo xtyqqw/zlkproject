@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zlk.zlkproject.admin.service.TagService;
 import com.zlk.zlkproject.admin.service.TypeService;
 import com.zlk.zlkproject.admin.util.LogUtil;
@@ -161,7 +162,7 @@ public class TypeController {
          * 若有则提示无法删除
          **/
         List<Tag> tagList = tagService.findTagByTagTypeId(typeId);
-        if(tagList==null){
+        if(tagList.size()==0){
             typeService.deleteTypeByTypeId(typeId);
             //记录删除方向日志
             logUtil.setLog(request,"删除了方向名为"+typeByTypeId.getTypeName()+"的信息");
@@ -169,6 +170,13 @@ public class TypeController {
         }else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/findTypeContainsTag")
+    @ResponseBody
+    public String findTypeContainsTag(){
+        List<Type> typeList = typeService.findTypeContainsTag();
+        return JSON.toJSONString(typeList);
     }
     
 }

@@ -36,8 +36,8 @@ public interface RoleService {
     /**
      * @Author lufengxiang
      * @Description //TODO 角色授权
-     * @Date 10:55 2019/11/27
-     * @Param [roleId]
+     * @Date 18:04 2019/12/2
+     * @Param [roleId, functionId]
      * @return java.lang.Integer
      **/
     Integer addRoleAndFunction(String roleId,List<Integer> functionId);
