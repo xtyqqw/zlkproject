@@ -138,6 +138,23 @@
                                 <div id="stuNote_btn2" class="stuNote_btn" style="background-color: #7aa6da">取消</div>
                             </div>
                         </div>
+                        <%--功能栏学生评论--%>
+                        <div id="div_stuCmt">
+                            <div id="stuCmt_titleBox">
+                                <div id="stuCmt_title">评论</div>
+                                <div id="stuCmt_closeBtn">
+                                    <i id="stuCmtCloseBtn" class="iconfont icon-icon-test enableClk"></i>
+                                </div>
+                            </div>
+                            <div id="stuCmt_textBox">
+                                <div id="div_stuCmt_toolBar" class="toolbar"></div>
+                                <div id="div_stuCmt_text" class="text"></div>
+                            </div>
+                            <div id="stuCmt_btnBox">
+                                <div id="stuCmt_btn1" class="stuCmt_btn" style="background-color: #5A5CAD">提交</div>
+                                <div id="stuCmt_btn2" class="stuCmt_btn" style="background-color: #7aa6da">取消</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

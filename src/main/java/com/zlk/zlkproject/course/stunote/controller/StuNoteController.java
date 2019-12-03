@@ -5,7 +5,6 @@ import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +45,6 @@ public class StuNoteController {
     @ResponseBody
     public Map submit(StuNote stuNote){
         HashMap map = new HashMap<>();
-        stuNote.setSectionId(1);
-        stuNote.setUserId(1);
         stuNote.setDate(new Date());
         Integer res = stuNoteService.addStuNote(stuNote);
         String retmsg;

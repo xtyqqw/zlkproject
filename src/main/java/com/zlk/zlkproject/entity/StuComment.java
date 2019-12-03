@@ -8,21 +8,23 @@ import java.util.Date;
 
 /**
  * @program: zlkproject
- * @description: StuNote实体类
+ * @description: StuComment实体类
  * @author: hry
- * @create: 2019/11/27 11:13
+ * @create: 2019/12/03 11:02
  **/
 @Getter
 @Setter
 @ToString
-public class StuNote {
-    /**表id 主键 对应字段sn_id*/
-    private Integer snId;
+public class StuComment {
+    /**表id 主键 对应字段sm_id*/
+    private Integer smId;
+    /**父id 对应字段pid*/
+    private Integer pId;
     /**小节id 对应字段section_id*/
     private Integer sectionId;
     /**用户id 对应字段user_id*/
     private String userId;
-    /**笔记内容 对应字段content*/
+    /**评论内容 对应字段content*/
     private String content;
     /**赞数 对应字段up*/
     private Integer up;
