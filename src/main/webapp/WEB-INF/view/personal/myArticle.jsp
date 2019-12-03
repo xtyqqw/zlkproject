@@ -139,13 +139,14 @@
 <body>
 <div>
     <p class="all">我的文章</p>
-    <p class="num">共<span>10</span>条文章</p>
+    <p class="num">共<span>${articles}</span>条文章</p>
 </div>
 <div class="context">
     <ul>
+        <c:forEach items="${list}" var="list">
         <li>
             <div class="img">
-                <img src="1.jpg" style="height: 70px;width: 70px;border-radius: 3px;">
+                <img src="${list.figuresReal}" style="height: 70px;width: 70px;border-radius: 3px;">
             </div>
             <div class="main">
                 <p>
@@ -179,6 +180,7 @@
                 </div>
             </div>
         </li>
+        </c:forEach>>
     </ul>
 </div>
 <div hidden="hidden" id="demo" style="padding: 25px">
