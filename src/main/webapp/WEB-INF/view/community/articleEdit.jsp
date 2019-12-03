@@ -15,7 +15,8 @@
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
     <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrapValidator.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet">
     <style>
         .header {
             width: auto;
@@ -75,17 +76,17 @@
             </div>
             <div class="form-group" style="margin-left: -1043px;">
                 <label class="radio-inline">
-                    <input type="radio" value="原创" name="createArticleType">原创
+                    <input type="radio" value="0" name="createArticleType">原创
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="转载" name="createArticleType">转载
+                    <input type="radio" value="1" name="createArticleType">转载
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="翻译" name="createArticleType">翻译
+                    <input type="radio" value="2" name="createArticleType">翻译
                 </label>
             </div>
             <div class="form-group">
-                <button type="submit" οnclick="addArticle();" class="btn btn-info col-md-1 btn-group" style="margin-left: 1170px; margin-top: 40px; background-color: #1296db">发表文章</button>
+                <button type="submit" id="btn_edit" class="btn btn-info col-md-1 btn-group" style="margin-left: 1170px; margin-top: 40px; background-color: #1296db">发表文章</button>
             </div>
         </form>
     </div>
@@ -94,7 +95,8 @@
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
     <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-select/1.9.1/js/bootstrap-select.min.js"></script>
-    <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
@@ -183,28 +185,52 @@
                             notEmpty: {
                                 message: '请选择发文类型'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     },
                     tagName: {
                         validators: {
                             notEmpty: {
                                 message: '请至少选择一个文章标签'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     },
                     typeName: {
                         validators: {
                             notEmpty: {
                                 message: '请至少选择一个文章方向'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     }
-                }
+                },
                 /*submitHandler: function (validator, form, submitButton) {
                     alert("发表成功");
                 }*/
             });
         });
+
+        /*$(function(){
+             //参数设置，若用默认值可以省略以下面代
+            toastr.options = {
+                "closeButton": false, //是否显示关闭按钮
+                "debug": false, //是否使用debug模式
+                "positionClass": "toast-top-full-width",//弹出窗的位置
+                "showDuration": "300",//显示的动画时间
+                "hideDuration": "1000",//消失的动画时间
+                "timeOut": "5000", //展现时间
+                "extendedTimeOut": "1000",//加长展示时间
+                "showEasing": "swing",//显示时的动画缓冲方式
+                "hideEasing": "linear",//消失时的动画缓冲方式
+                "showMethod": "fadeIn",//显示时的动画方式
+                "hideMethod": "fadeOut" //消失时的动画方式
+            };
+            //成功提示绑定
+            $("#btn_edit").click(function(){
+                toastr.success("文章发表成功");
+            });
+        });*/
     </script>
 </body>
 </html>

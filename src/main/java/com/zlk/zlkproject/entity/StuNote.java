@@ -29,10 +29,10 @@ public class StuNote {
     /**
      * 用户ID 对应数据库的 user_id 字段
      */
-    private Integer snUserId;
+    private String snUserId;
 
     /**
-     * 内容 对应数据库的 content 字段
+     * 笔记内容 对应数据库的 content 字段
      */
     private String content;
 
