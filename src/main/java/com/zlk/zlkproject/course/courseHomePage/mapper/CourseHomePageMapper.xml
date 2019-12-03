@@ -17,6 +17,15 @@
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
 
+        <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
+        <result property="userCoursesId" column="user_courses_id" javaType="java.lang.Integer"></result>
+        <result property="lastStudyTime" column="last_study_time" javaType="java.sql.Date"></result>
+        <result property="tagId" column="tag_id" javaType="java.lang.Integer"></result>
+        <result property="tagName" column="tag_name" javaType="java.lang.String"></result>
+        <result property="tagTypeId" column="tag_type_id" javaType="java.lang.String"></result>
+
+
+
         <!--<collection property="UserCoursesList" ofType="com.zlk.zlkproject.entity.UserCourses">
         <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
         <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
@@ -29,6 +38,7 @@
             <result property="chapterTime" column="chapter_time" javaType="java.lang.Integer"></result>
             <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
         </collection>
+
     </resultMap>
     <select id="selectCoursesByCoursesId" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
 		select * from courses where courses_id=#{coursesId}
@@ -45,6 +55,30 @@
     <select id="findCoursesCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
 		select count(1) from courses
 	</select>
+
+    <select id="findAll" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
+       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
+       FROM courses c
+       LEFT JOIN user_courses uc ON c.courses_id=uc.user_courses_id
+       ,tag_courses tc,tag t
+       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
+    </select>
+
+    <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
+        select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
+        introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{page},#{limit};
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from courses
+    </select>
+
+    <insert id="insertByCourses" keyProperty="coursesId" useGeneratedKeys="true">
+        insert into courses(section_num,courses_name,student_num,chapter_num,price,cover_pic,introduce_video
+        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{sectionNum},#{coursesName},#{studentNum}
+        ,#{chapterNum},#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
+        #{featureText},#{featurePic})
+    </insert>
 
     <update id="updateByCoursesId">
         update courses
@@ -85,4 +119,8 @@
         </set>
         where courses_id = #{coursesId}
     </update>
+
+    <delete id="deleteByCoursesId">
+        delete from courses where courses_id=#{coursesId}
+    </delete>
 </mapper>

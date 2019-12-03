@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>我的问题</title>
@@ -14,21 +15,22 @@
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
     <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrapValidator.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet">
     <style>
         .header {
             width: auto;
             height: 60px;
             background-color: #F5F5F5;
         }
-        .header input {
+        .header #a1 {
             float: left;
             width: 80px;
             padding: 10px;
             margin-left: 67px;
             margin-top: 9px;
         }
-        .header a {
+        .header #a2 {
             text-decoration:none !important;
             color: #8D8D8D;
             font-size: 25px;
@@ -41,8 +43,8 @@
 <body>
     <div>
         <div class="header">
-            <input class="btn btn-default" type="button" value="<&nbsp;&nbsp;返回" οnclick="window.history.go(-1)">
-            <a href="javascript:void(0)">我的草稿</a>
+            <a id="a1" class="btn btn-default" type="button" href="<%=request.getContextPath() %>/community/article-guide"><&nbsp;&nbsp;返回</a>
+            <a href="javascript:void(0)" id="a2">我的草稿</a>
         </div>
         <form action="<%=request.getContextPath() %>/community/article-add" method="post" class="form-group" id="addArticle">
             <div class="form-group input-group input-group-lg" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
@@ -52,7 +54,7 @@
                 <%--<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" placeholder="开始撰写..."></textarea>
                 <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
                 <textarea class="editormd-html-textarea" name="articleContent"></textarea>--%>
-                <textarea style="display: none;/*position:absolute; height:0; width:0; border:0;*/" name="articleContent" class="form-control"></textarea>
+                <textarea style="display: none;" name="articleContent" class="form-control"></textarea>
             </div>
             <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
                 <select class="selectpicker dropup form-control show-tick" data-dropup-auto="false" title="请选择方向" name="typeName">
@@ -63,18 +65,10 @@
                 </select>
             </div>
             <div style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
-                <select class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="setTags" title="选择标签1/3" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="3">
-                    <option value="java">java</option>
-                    <option value="java开发">java开发</option>
-                    <option value="spring">spring</option>
-                    <option value="mysql">mysql</option>
-                    <option value="技术生活">技术生活</option>
-                    <option value="面试题目">面试题目</option>
-                    <option value="redis">redis</option>
-                    <option value="c">c</option>
-                    <option value="云计算">云计算</option>
-                    <option value="c#">c#</option>
-                    <option value="c++">c++</option>
+                <select id="selectTag" class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="tagName" title="选择标签1/1" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="1">
+                    <c:forEach items="${tagsList}" var="tags">
+                        <option value="${tags.tagId}">${tags.tagName}</option>
+                    </c:forEach>
                 </select>
             </div>
             <div class="form-group" style="width: 1215px; margin-left: 67px; margin-top: 20px; margin-bottom: 20px;">
@@ -82,17 +76,17 @@
             </div>
             <div class="form-group" style="margin-left: -1043px;">
                 <label class="radio-inline">
-                    <input type="radio" value="原创" name="createArticleType">原创
+                    <input type="radio" value="0" name="createArticleType">原创
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="转载" name="createArticleType">转载
+                    <input type="radio" value="1" name="createArticleType">转载
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="翻译" name="createArticleType">翻译
+                    <input type="radio" value="2" name="createArticleType">翻译
                 </label>
             </div>
             <div class="form-group">
-                <button type="submit" οnclick="addArticle();" class="btn btn-info col-md-1 btn-group" style="margin-left: 1170px; margin-top: 40px; background-color: #1296db">发表文章</button>
+                <button type="submit" id="btn_edit" class="btn btn-info col-md-1 btn-group" style="margin-left: 1170px; margin-top: 40px; background-color: #1296db">发表文章</button>
             </div>
         </form>
     </div>
@@ -101,8 +95,8 @@
     <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
     <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-select/1.9.1/js/bootstrap-select.min.js"></script>
-    <%--<script src="https://cdn.bootcss.com/jquery-dropdown/2.0.0/jquery.dropdown.js"></script>--%>
-    <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
@@ -147,7 +141,7 @@
 
         $(function () {
             $('#addArticle').bootstrapValidator({
-                excluded: [':disabled'],//排除无需验证的控件
+                excluded: [":disabled"],//关键配置，表示只对于禁用域不进行验证，其他的表单元素都要验证
                 //表单框里右侧的icon
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
@@ -162,8 +156,8 @@
                             },
                             stringLength: {
                                 min: 0,
-                                max: 20,
-                                message: '标题长度必须在20位以内'
+                                max: 30,
+                                message: '标题长度必须在30位以内'
                             }
                         }
                     },
@@ -171,11 +165,6 @@
                         validators: {
                             notEmpty: {
                                 message: '文章内容不能为空'
-                            },
-                            stringLength: {
-                                min: 0,
-                                max: 20,
-                                message: '文章内容必须在20位以内'
                             }
                         }
                     },*/
@@ -186,8 +175,8 @@
                             },
                             stringLength: {
                                 min: 0,
-                                max: 50,
-                                message: '标题长度必须在50位以内'
+                                max: 100,
+                                message: '摘要长度必须在100位以内'
                             }
                         }
                     },
@@ -196,21 +185,24 @@
                             notEmpty: {
                                 message: '请选择发文类型'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     },
-                    setTags: {
+                    tagName: {
                         validators: {
                             notEmpty: {
                                 message: '请至少选择一个文章标签'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     },
                     typeName: {
                         validators: {
                             notEmpty: {
                                 message: '请至少选择一个文章方向'
                             }
-                        }
+                        },
+                        feedbackIcons: false
                     }
                 },
                 /*submitHandler: function (validator, form, submitButton) {
@@ -218,6 +210,27 @@
                 }*/
             });
         });
+
+        /*$(function(){
+             //参数设置，若用默认值可以省略以下面代
+            toastr.options = {
+                "closeButton": false, //是否显示关闭按钮
+                "debug": false, //是否使用debug模式
+                "positionClass": "toast-top-full-width",//弹出窗的位置
+                "showDuration": "300",//显示的动画时间
+                "hideDuration": "1000",//消失的动画时间
+                "timeOut": "5000", //展现时间
+                "extendedTimeOut": "1000",//加长展示时间
+                "showEasing": "swing",//显示时的动画缓冲方式
+                "hideEasing": "linear",//消失时的动画缓冲方式
+                "showMethod": "fadeIn",//显示时的动画方式
+                "hideMethod": "fadeOut" //消失时的动画方式
+            };
+            //成功提示绑定
+            $("#btn_edit").click(function(){
+                toastr.success("文章发表成功");
+            });
+        });*/
     </script>
 </body>
 </html>

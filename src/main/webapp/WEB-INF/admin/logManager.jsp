@@ -29,6 +29,10 @@
             width: auto;
         }
 
+        #condition{
+            width: 200px;
+        }
+
         .form, .form input, .form select {
             position: relative;
             text-align: center;
@@ -68,11 +72,7 @@
         var layer = layui.layer;
         var util = layui.util;
         var form = layui.form;
-        <c:if test="${flag}">
-        $(function () {
-            layer.alert($("#msg").val());
-        })
-        </c:if>
+
         laydate.render({
             elem: '#createTime'
             , type: 'datetime'
@@ -80,65 +80,67 @@
         });
         form.render();
         //第一个实例
-        table.render({
-            elem: '#demo'
-            , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
-            , page: true //开启分页
-            , height: 480
-            , limit: 100
-            , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'logId', title: '日志编号', width: 110, sort: true}
-                , {field: 'name', title: '操作者名称', width: 120, sort: true}
-                , {field: 'description', title: '操作描述', width: 370}
-                , {field: 'ip', title: 'IP地址', width: 105}
-                , {field: 'type', title: '浏览器类型', width: 105}
-                , {
-                    field: 'time',
-                    title: '操作时间',
-                    templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',
-                    width: 170
-                }
-                , {
-                    title: '操作', width: 75, align: 'center', toolbar: '' +
-                        '<div class="layui-btn-group">' +
-                        '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
-                        '</div>'
-                }
-            ]]
-            , limits: [50, 100, 200]
-            , toolbar: '<div class="layui-btn-group">' +
-                '<button type="hidden" class="layui-btn" lay-event="add"></button>' +
-                '<div class="layui-card search">\n' +
-                '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
-                '            <div class="layui-form-item">' +
-                '               <form type="post" action="/log/toLogManager"> \n' +
-                '                <div class="layui-inline">\n' +
-                '                    <label class="layui-form-label hint">操作者名称</label>\n' +
-                '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的操作者名称" autocomplete="off" class="layui-input">\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '                <div class="layui-inline">\n' +
-                '                    <button type="submit" class="layui-btn layuiadmin-btn-useradmin" id="sel">\n' +
-                '                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
-                '                    </button>\n' +
-                '                </div>' +
-                '               </form>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>' +
-                '</div>'
-        });
+        var renderTable = function () {
+            table.render({
+                elem: '#demo'
+                , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
+                , page: true //开启分页
+                , height: 480
+                , limit: 100
+                , cols: [[ //表头
+                    {type: 'checkbox'}
+                    , {field: 'logId', title: '日志编号', width: 110, sort: true}
+                    , {field: 'name', title: '操作者名称', width: 120, sort: true}
+                    , {field: 'description', title: '操作描述', width: 340}
+                    , {field: 'ip', title: 'IP地址', width: 130}
+                    , {field: 'type', title: '浏览器类型', width: 105}
+                    , {
+                        field: 'time',
+                        title: '操作时间',
+                        templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',
+                        width: 170
+                    }
+                    , {
+                        title: '操作', align: 'center', toolbar: '' +
+                            '<div class="layui-btn-group">' +
+                            '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
+                            '</div>'
+                    }
+                ]]
+                , limits: [50, 100, 200]
+                , toolbar: '<div class="layui-btn-group">' +
+                    '<button type="hidden" class="layui-btn" lay-event="add">刷新</button>' +
+                    '<div class="layui-card search">\n' +
+                    '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
+                    '            <div class="layui-form-item">' +
+                    '               <form type="post" action="/log/toLogManager"> \n' +
+                    '                <div class="layui-inline">\n' +
+                    '                    <label class="layui-form-label hint">操作者名称</label>\n' +
+                    '                    <div class="layui-input-block">\n' +
+                    '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入要查询的操作者名称" autocomplete="off" class="layui-input">\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '                <div class="layui-inline">\n' +
+                    '                    <button type="submit" class="layui-btn layuiadmin-btn-useradmin" id="sel">\n' +
+                    '                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
+                    '                    </button>\n' +
+                    '                </div>' +
+                    '               </form>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>' +
+                    '</div>'
+            });
+        };
+
+        renderTable();
+
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'add':
-                    $.ajax({
-                        type: "POST",
-                        url:"<%=request.getContextPath()%>/log/logManager"
-                    });
+                    renderTable();
                     break;
             }
             ;

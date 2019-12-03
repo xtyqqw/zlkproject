@@ -52,6 +52,9 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public Integer changePwd(User user) {
+        user.setUserId(UUIDUtil.getUUID());
+        String userPwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
+        user.setUserPwd(userPwd);
         return signMapper.changePwd(user);
     }
 }

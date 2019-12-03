@@ -123,4 +123,16 @@ public class TypeServiceImpl implements TypeService {
     public List<Type> findAllTypeName() {
         return typeMapper.findAllTypeName();
     }
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询每种方向包含类别
+     * @Date 9:47 2019/12/3
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Type>
+     **/
+    @Override
+    public List<Type> findTypeContainsTag() {
+        return typeMapper.findTypeContainsTag();
+    }
 }

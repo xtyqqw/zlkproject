@@ -8,7 +8,6 @@ import java.util.List;
 
 
 
-
 public interface CourseHomePageService {
     /**
      *@Author luanke
@@ -40,6 +39,17 @@ public interface CourseHomePageService {
 
 
     Integer findCoursesCount(Pagination pagination);
+
+
+    /**
+     *@Author luanke
+     *@Description //查询项目有关内容
+     *@Date 17:01 2019/11/28
+     *@Param [courseHomePageMapper, startPage, limit]
+     *@return java.util.List<com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper>
+    **/
+    List<Courses> findAll(Courses courses, Integer page, Integer limit);
+
     /**
      * 修改数据
      *
@@ -47,4 +57,35 @@ public interface CourseHomePageService {
      * @return 影响行数
      */
     int updateByCoursesId(Courses courses);
+
+    /**
+     * 查询全部并分页
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    List<Courses> selectCoursesByLimit(Integer page,Integer limit);
+
+    /**
+     * 查询课程数量
+     * @return 课程数量
+     */
+    Integer selectCount();
+
+    /**
+     * 根据coursesId删除数据
+     *
+     * @param coursesId
+     * @return
+     */
+    int deleteByCoursesId(Integer coursesId);
+
+    /**
+     * 新增数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int insertByCourses(Courses courses);
 }

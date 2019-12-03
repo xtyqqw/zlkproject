@@ -164,6 +164,74 @@
         .down .bigp a{
             color: #904ff1;
         }
+        /*取消关注弹窗*/
+        .att_success1,.att_success2,.att_success3,.att_success4,.att_success5{
+            width: 400px;
+            height: 70px;
+            text-align: center;
+            position: relative;
+            margin: -100px auto;
+            box-shadow: 1px 1px 5px 1px #D4D4D4;
+            background-color: #FFFFFF;
+            border-radius: 3px;
+        }
+        .att_success_zi1,.att_success_zi2,.att_success_zi3,.att_success_zi4,.att_success_zi5{
+            font-size: 18px;
+            position: fixed;
+        }
+        .main .att_success_zi1{
+            margin: 23px 160px;
+        }
+        .main .att_success_zi2{
+            margin: 23px 100px;
+        }
+        .main .att_success_zi3{
+            margin: 23px 120px;
+        }
+        .main .att_success_zi4{
+            margin: 23px 170px;
+        }
+        .main .att_success_zi5{
+            margin: 23px 130px;
+        }
+        .att_success_ok1,.att_success_ok2,.att_success_no1,.att_success_no2,.att_success_noo{
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 1;
+            color: #fff;
+            font-size: 20px;
+            float: left;
+            position: fixed;
+            margin: 25px 20px 25px 90px;
+        }
+        .att_success_ok1,.att_success_ok2{
+            border: 1px solid #5ab62f;
+            background-color: #5ab62f;
+        }
+        .att_success_ok1{
+            margin-left: 130px;
+        }
+        .att_success_ok2{
+            margin-left: 135px;
+        }
+        .att_success_no1,.att_success_no2{
+            border: 1px solid #d34748;
+            background-color: #d34748;
+            margin-left: 60px;
+        }
+        .att_success_no1{
+            margin-left: 60px;
+        }
+        .att_success_no2{
+            margin-left: 100px;
+        }
+        .att_success_noo{
+            border: 1px solid #f5bb29;
+            background-color: #f5bb29;
+            margin-left: 85px;
+        }
     </style>
 </head>
 <body>
@@ -203,18 +271,18 @@
                         <div class="attention_type">
                             <!-- 已关注 -->
                             <p class="ok">√</p>
-                            <p class="ok_zi">已关注</p>
+                            <p class="ok_zi" onclick="nofollow('${bignum.userId}')">已关注</p>
                             <!-- 加关注 -->
                             <p class="jia">+</p>
-                            <p class="no_zi">加关注</p>
+                            <p class="no_zi" onclick="jiafollow('${bignum.userId}')">加关注</p>
                         </div>
                         <!-- 个性签名 -->
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
                         <!-- 关注人情况 -->
                         <div class="attention_person">
-                            <a href="<%=request.getContextPath()%>/follow/userfollower"
+                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId=${bignum.userId}"
                                name="attention" class="attention_him">${bignum.followerNum}人关注了ta</a>
-                            <a href="<%=request.getContextPath()%>/follow/userfollowed"
+                            <a href="<%=request.getContextPath()%>/follow/userfollowed?userId=${bignum.userId}"
                                name="attention" class="he_attention">ta关注了${bignum.followedNum}人</a>
                         </div>
                     </div>
@@ -229,7 +297,7 @@
                         <div class="learntime">
                             <i class="layui-icon layui-icon-log"
                                style="float: left;margin-right: 10px;font-size: 20px;"></i>
-                            <p>学习时长：${bignum.studyTime}小时</p>
+                            <p>学习时长：${bignum.userDateTime}小时</p>
                             <p>学习成长量：${bignum.studyGrowup}</p>
                             <p>技能水平：${bignum.studyStandard}</p>
                         </div>
@@ -366,8 +434,29 @@
                 </c:if>
             </div>
         </c:forEach>
+        <div class="att_success1">
+            <p class="att_success_ok1">√</p>
+            <p class="att_success_zi1">取消关注成功!</p>
+        </div>
+        <div class="att_success2">
+            <p class="att_success_no1">X</p>
+            <p class="att_success_zi2">取消关注失败，请重新操作！</p>
+        </div>
+        <div class="att_success3">
+            <p class="att_success_noo">!</p>
+            <p class="att_success_zi3">加载超时，请稍后再试！</p>
+        </div>
+        <div class="att_success4">
+            <p class="att_success_ok2">√</p>
+            <p class="att_success_zi4">关注成功!</p>
+        </div>
+        <div class="att_success5">
+            <p class="att_success_no2">X</p>
+            <p class="att_success_zi5">关注失败，请重新操作！</p>
+        </div>
     </div>
     <%--<div class="flow_div"></div>--%>
+
 </c:if>
 <%--流加载--%>
 <%--<script type="text/javascript">
@@ -567,59 +656,74 @@
 </script>--%>
 <%--点击关注事件--%>
 <script type="text/javascript">
-    $(document).ready(function () {
-        /*取消关注*/
-        $(".ok_zi").click(function () {
-            $.ajax({
-                url:"/follow/defollow",
-                type:"GET",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code()=="1"){
-                        $(this).hide();
-                        $(this).siblings(".ok").hide();
-                        $(this).siblings(".jia,.no_zi").show();
-                        layer.msg("取消关注成功！")
-                    } else {
-                        layer.msg("取消关注失败，请重新操作！");
-                    }
-                },
-                error:function (data) {
-                    layer.msg("加载超时，请稍后再试！");
+        /*layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        window.nofollow = function(userId){
+            $(".ok_zi").val(userId);
+            layer.open({
+                type: 1,
+                btn: false,
+                area: ['70%','50%'],
+                offset: '30px'
+            })
+        }
+    });*/
+    /*点击已关注 取消关注*/
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+    function nofollow(userId){
+        /*var mythis = $(this);*/
+        $.ajax({
+            url:"/follow/defollow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            context: userId,
+            success:function (data) {
+                if (data.code==1){
+                    $(".ok,.ok_zi").hide();
+                    $(".jia,.no_zi").show();
+                    $(".att_success1").show().delay(2000).hide(300);
+                    /*mythis.hide();
+                    mythis.siblings(".ok").hide();
+                    mythis.siblings(".jia,.no_zi").show();*/
+                } else {
+                    $(".att_success2").show().delay(2000).hide(300);
                 }
-            });
+            },
+            error:function () {
+                $(".att_success3").show().delay(2000).hide(300);
+            }
         });
-        $(".no_zi").click(function () {
-            $.ajax({
-                url:"/follow/follow",
-                type:"GET",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code() == "1"){
-                        $(this).hide();
-                        $(this).siblings(".jia").hide();
-                        $(this).siblings(".ok,.ok_zi").show();
-                        layer.msg("关注成功！");
-                    } else {
-                        layer.msg("关注失败，请重新操作！");
-                    }
-                },
-                error:function (data) {
-                    layer.msg("加载超时，请稍后再试！");
+    };
+    /*点击加关注*/
+    function jiafollow(userId){
+        $.ajax({
+            url:"/follow/follow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            success:function (data) {
+                if (data.code == 1){
+                    $(".ok,.ok_zi").show();
+                    $(".jia,.no_zi").hide();
+                    $(".att_success4").show().delay(2000).hide(300);
+                    /*$(this).hide();
+                    $(this).siblings(".jia").hide();
+                    $(this).siblings(".ok,.ok_zi").show();
+                    layer.msg("关注成功！");*/
+                } else {
+                    $(".att_success5").show().delay(2000).hide(300);
                 }
-            });
+            },
+            error:function () {
+                $(".att_success3").show().delay(2000).hide(300);
+            }
         });
-    });
+    };
 </script>
 <%--点击上下箭头显示隐藏动态--%>
 <script type="text/javascript">
     $(document).ready(function () {
-        /*$(".down_yes_news:gt(1)").hide();
-        $(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
-        $(".down_yes_news:eq(2)").hide();
-        $(".down_yes_news:eq(3)").hide();
-        $(".down_yes_news:eq(4)").hide();
-        $(".down_yes_news:eq(5)").hide();
+        $(".down_yes_news:eq(1)").hide();
+        /*$(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
         //点击向上箭头
         $(".layui-icon-up").click(function () {
             $(this).hide();

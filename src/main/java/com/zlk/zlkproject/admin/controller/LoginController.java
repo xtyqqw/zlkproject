@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.admin.controller;
 
 import com.zlk.zlkproject.admin.service.LogService;
+import com.zlk.zlkproject.admin.service.LoginService;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.entity.Admin;
@@ -29,6 +30,8 @@ import java.util.Date;
 public class LoginController {
 
     @Autowired
+    private LoginService loginService;
+    @Autowired
     private LogUtil logUtil;
 
     /**
@@ -47,22 +50,27 @@ public class LoginController {
      * @Author lufengxiang
      * @Description //TODO 登陆页面点击登陆
      * @Date 17:31 2019/11/18
-     * @Param [request, admin, code]
+     * @Param [request, admin]
      * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, Admin admin){
+
         ModelAndView mv=new ModelAndView();
+
         if(admin.getAdminName()==null){
             mv.setViewName("admin/login");
             return mv;
         }
+
+        //shiro认证
         Subject subject = SecurityUtils.getSubject();
         admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         UsernamePasswordToken token=new UsernamePasswordToken(admin.getAdminName(),admin.getAdminPassword());
         try {
             subject.login(token);
             request.getSession().setAttribute("loginName",admin.getAdminName());
+            loginService.updateVisitNumber();
             logUtil.setLog(request,"登陆了管理系统");
             mv.setViewName("admin/success");
             return mv;
@@ -101,8 +109,12 @@ public class LoginController {
      * @return java.lang.String
      **/
     @RequestMapping(value = "/toMain")
-    public String toMain(){
-        return "admin/main";
+    public ModelAndView toMain(){
+        ModelAndView mv=new ModelAndView();
+        Integer visitNumber = loginService.findVisitNumber();
+        mv.addObject("visitNumber",visitNumber);
+        mv.setViewName("admin/main");
+        return mv;
     }
 
 }

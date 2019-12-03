@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.articleAdd.mapper;
 
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.user.entity.Action;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +25,6 @@ public interface ArticleAddMapper {
     Integer addArticleToCommunityAction(Action action);
 
     List<Article> getAddArticleOfApproval(Action action);
+
+    List<Tag> getTagsToAddArticle(Tag tag);
 }

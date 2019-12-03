@@ -97,8 +97,8 @@ public class PersonalFollowController {
             m.setUserDateTime(user.getUserDateTime());
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
-            m.setFollowedNum(personalFollowService.findFollowedNum(userId));
-            m.setFollowerNum(personalFollowService.findFollowerNum(userId));
+            m.setFollowedNum(personalFollowService.findFollowedNum(user.getUserId()));
+            m.setFollowerNum(personalFollowService.findFollowerNum(user.getUserId()));
             m.setList(personalFollowService.findUserAction(user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
@@ -110,14 +110,21 @@ public class PersonalFollowController {
     }
 
     /**
-     * 方法用途：点击‘n人管住了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 方法用途：点击‘n人关注了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
      * 参数类型：String 用途：对应用户的userId用于查询相关信息
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
-    @ResponseBody
-    public Map userFollower(FollowerPage followerPage){
+    public ModelAndView userFollower(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
+        String userId = (String) request.getSession().getAttribute("userId");
+        //模拟数据
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+
+        userId = "1";
+
+        ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
@@ -132,11 +139,14 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
-        return map;
+        mv.setViewName("view/personal/followhim");
+        mv.addObject("list",list);
+        return mv;
     }
 
     /**
@@ -145,9 +155,16 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public Map userFollowed(FollowerPage followerPage){
+    public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
+        ModelAndView mv = new ModelAndView();
         MyFollower m = new MyFollower();
+        String userId = (String) request.getSession().getAttribute("userId");
+        //模拟数据
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+        userId = "1";
+
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
@@ -161,11 +178,14 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(m);
+            list.add(i,m);
         }
         map.put("list",list);
-        return map;
+        mv.addObject("list",list);
+        mv.setViewName("/view/personal/hefollows");
+        return mv;
     }
 
     /**
@@ -194,6 +214,7 @@ public class PersonalFollowController {
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
         String userId1 = (String) request.getSession().getAttribute("userId");
+        userId1 = "1";
         Integer result = personalFollowService.deFollow(userId1,userId);
         String code = result.toString();
         map.put("code",code);

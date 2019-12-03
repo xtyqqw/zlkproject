@@ -31,7 +31,7 @@ public class LogUtil {
     public Integer setLog(HttpServletRequest request,String description){
         Log log=new Log();
         //获取IP
-        log.setIp(NetworkUtil.getIpAddress(request));
+        log.setIp(NetworkUtil.getIpAddr(request));
         String agent = request.getHeader("user-agent");//获取版本
         //判断agent的浏览器版本
         if(agent.toLowerCase().contains("chrome")){

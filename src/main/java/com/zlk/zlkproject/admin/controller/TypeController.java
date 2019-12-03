@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zlk.zlkproject.admin.service.TagService;
 import com.zlk.zlkproject.admin.service.TypeService;
 import com.zlk.zlkproject.admin.util.LogUtil;
@@ -77,7 +78,9 @@ public class TypeController {
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Type type){
+
         ModelAndView mv=new ModelAndView();
+
         //判断方向名是否存在
         Type typeByTypeName = typeService.findTypeByTypeName(type.getTypeName());
         if (typeByTypeName!=null){
@@ -86,12 +89,13 @@ public class TypeController {
             mv.setViewName("admin/typeManager");
             return mv;
         }
+
+        //新增方向
         Integer flag = typeService.addType(type);
         if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/typeManager");
-
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","遇到意外错误");
@@ -109,7 +113,13 @@ public class TypeController {
      **/
     @RequestMapping(value = "/update")
     public ModelAndView update(Type type,HttpServletRequest request){
+
         ModelAndView mv=new ModelAndView();
+
+        /**
+         * 判断是否更改方向名称
+         * 若更改则判断是否重复
+         **/
         Type typeByTypeId = typeService.findTypeByTypeId(type.getTypeId());
         Type typeByTypeName = typeService.findTypeByTypeName(type.getTypeName());
         if(!typeByTypeId.getTypeName().equals(type.getTypeName())&&typeByTypeName!=null){
@@ -118,6 +128,8 @@ public class TypeController {
             mv.setViewName("admin/typeManager");
             return mv;
         }
+
+        //修改方向信息
         Integer flag = typeService.updateType(type);
         if(flag==1){
             mv.addObject("flag","true");
@@ -143,9 +155,14 @@ public class TypeController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Boolean delete(Integer typeId, HttpServletRequest request){
-        Tag tag = tagService.findTagByTagTypeId(typeId);
+        //获取删除前方向信息
         Type typeByTypeId = typeService.findTypeByTypeId(typeId);
-        if(tag==null){
+        /**
+         * 判断是否有类别属于该方向
+         * 若有则提示无法删除
+         **/
+        List<Tag> tagList = tagService.findTagByTagTypeId(typeId);
+        if(tagList.size()==0){
             typeService.deleteTypeByTypeId(typeId);
             //记录删除方向日志
             logUtil.setLog(request,"删除了方向名为"+typeByTypeId.getTypeName()+"的信息");
@@ -153,6 +170,13 @@ public class TypeController {
         }else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/findTypeContainsTag")
+    @ResponseBody
+    public String findTypeContainsTag(){
+        List<Type> typeList = typeService.findTypeContainsTag();
+        return JSON.toJSONString(typeList);
     }
     
 }

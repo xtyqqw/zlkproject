@@ -93,4 +93,9 @@
     <delete id="deFollow" parameterType="java.lang.String">
         delete from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId}
     </delete>
+
+    <!--查询A是否关注了B-->
+    <select id="findAFollowedB" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId} limit 0,1
+    </select>
 </mapper>
