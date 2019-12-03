@@ -21,7 +21,7 @@ public class StuNote {
     /**小节id 对应字段section_id*/
     private Integer sectionId;
     /**用户id 对应字段user_id*/
-    private Integer userId;
+    private String userId;
     /**笔记内容 对应字段content*/
     private String content;
     /**赞数 对应字段up*/
