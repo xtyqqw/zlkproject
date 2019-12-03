@@ -25,8 +25,9 @@ public class Comment {
      private String comments;
     /**讲师回复 */
      private String teacherAnswer;
-    /**用户id  32位uuid*/
-
+     /** 点赞数 */
+     private int like;
+     /**用户id  32位uuid*/
     private String userId;
     /**用户手机号*/
     private String phonenum;

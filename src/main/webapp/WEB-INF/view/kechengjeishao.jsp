@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <link rel="stylesheet" href="http:////at.alicdn.com/t/font_1355944_am32levhe7.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
     <link rel="stylesheet" href="/css/courseDetails.css">
@@ -11,16 +12,6 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
---%>
-
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 
     <style>
         .kechengzhu{
@@ -122,34 +113,44 @@
         .p-FAQ3{
             text-align: left;
             width:75%;
-            margin:0 auto;
-            font-size:12px;
             font-weight:bold;
             letter-spacing:3px;
             color: #333436;
-            position: relative;
-            left:35px;
-            top: -125px;
+            height: 57px;
         }
         .p-FAQ4{
-            text-align: left;
             width:65%;
-            margin:0 auto;
             font-size:12px;
             letter-spacing:3px;
             color: #4f5256;
-            position: relative;
-            left:78px;
-            top: -155px;
+            display: inline-block;
+            float: left;
+            margin-left: 40px;
         }
         .p-FAQ5{
-            position: relative;
-            width: 7%;
+            /*position: relative;
+
             left:140px ;
-            top: -125px;
+            top: -125px;*/
+
+        }
+
+        .span-FAQ5{
+            width: 8%;
             border-radius:5px ;
             background-color: #eae944;
             color: #FFFFFF;
+            display: inline-block;
+            float: left;
+        }
+        .p-FAQ6{
+            position: relative;
+            width: 7%;
+            left:240px ;
+            top: -40px;
+            border-radius:5px ;
+
+            color: grey;
 
         }
         .div-FAQ1:hover{
@@ -173,11 +174,15 @@
         .daniu{
             width: 13%;
             height: 110px;
-            position: relative;
-            left: 15px;
-            top: -10px;
+            display: inline-block;
         }
-
+        .you{
+            width: 86%;
+            height: 199px;
+            display: inline-block;
+            float: right;
+            margin-top: -20px;
+        }
         .mingzi{
             position: relative;
             text-align:center;
@@ -218,6 +223,13 @@
             left: 20px;
             float: left;
 
+        }
+
+        .icon-good{
+            font-size: 30px;
+            position: relative;
+            top: 20px;
+            left: 20px;
         }
     </style>
 
@@ -408,7 +420,7 @@
                                 lis.push(
                                     '<div class="div-FAQ">' +
                                     '<br>' +
-                                    '<p class="p-FAQ2">'+faq.answer+'</p> <br>' +
+                                    '<p class="p-FAQ2">'+faq.answer+'</p><br>' +
                                     '<p class="p-FAQ1">'+faq.question+'</p><br>'+
 
                                     '</div>'+
@@ -475,11 +487,21 @@
                                     '</ul>'+
                                     '</div>'+
                                     '</div>'+
-                                    '<p class="p-FAQ3">'+comment.comments+'</p><br>'+
-                                    '<div class="p-FAQ5"><div>&nbsp;讲师回复</div></div>'+
+                                    '<div class="you">' +
+
+                                    '<p class="p-FAQ3">'+comment.comments+'</p>'+
+                                    '<div class="p-FAQ5"><span class="span-FAQ5">&nbsp;讲师回复</span>' +
                                     '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
+                                    '</div>'+
+
+
+
+
+
                                     '<div style="clear: both"></div>'+
                                     '<div class="sanjiao"></div>'+
+                                    '</div>'+
+                                    '<p class="p-FAQ6"><i class="iconfont icon-good"></i></p>' +
                                     '</div>'+
                                     '<div class="div1"></div>'
                                 );
