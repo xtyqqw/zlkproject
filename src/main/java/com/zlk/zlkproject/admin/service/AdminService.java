@@ -9,8 +9,8 @@ public interface AdminService {
     /**
      * @Author lufengxiang
      * @Description //TODO 分页查找后台用户
-     * @Date 10:41 2019/11/19
-     * @Param []
+     * @Date 18:03 2019/12/2
+     * @Param [pagination]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     List<Admin> findAdminByLimit(Pagination pagination);
@@ -27,8 +27,8 @@ public interface AdminService {
     /**
      * @Author lufengxiang
      * @Description //TODO 查找有该角色的用户集合
-     * @Date 19:09 2019/11/19
-     * @Param [roleName]
+     * @Date 18:04 2019/12/2
+     * @Param [roleId]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     List<Admin> findAdminByRoleId(String roleId);
@@ -55,7 +55,7 @@ public interface AdminService {
      * @Author lufengxiang
      * @Description //TODO 新增用户关联对应的角色
      * @Date 16:47 2019/11/19
-     * @Param [adminId, roleId]
+     * @Param [adminsId, rolesId]
      * @return java.lang.Integer
      **/
     Integer addAdminAndRole(String adminsId,String rolesId);
@@ -91,7 +91,7 @@ public interface AdminService {
      * @Author lufengxiang
      * @Description //TODO 通过用户ID删除与其角色关联
      * @Date 17:03 2019/11/19
-     * @Param [adminId]
+     * @Param [adminsId]
      * @return java.lang.Integer
      **/
     Integer deleteAdminAndRoleByAdminId(String adminsId);

@@ -3,25 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_1nuc1djggf7.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
     <link rel="stylesheet" href="/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<%--
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
---%>
-
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
+    <style type="text/css" >
+        body {
+            line-height: 0px;
+            font: 0px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+        }
+    </style>
     <style>
         .kechengzhu{
             padding: 0px 15vw;

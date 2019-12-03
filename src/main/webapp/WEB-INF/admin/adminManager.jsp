@@ -38,39 +38,70 @@
             text-align: center;
         }
 
-        .form input, .form select {
+        .form{
             margin-top: 15px;
-            height: 24px;
-            width: auto;
         }
+
+        /*.form input, .form select {
+            margin-top: 15px;
+        }*/
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/admin/insert" class="form">
-        用户名称 <input type="text" required placeholder="请输入用户名" name="adminName"><br>
-        用户密码 <input type="text" required placeholder="请输入密码" name="adminPassword"><br>
-        所属角色 <select required name="adminRole">
+    <form action="<%=request.getContextPath()%>/admin/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="adminName"  lay-verify="required" placeholder="请输入用户名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户密码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="adminPassword" required  lay-verify="required" placeholder="请输入用户密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属角色</label>
+            <div class="layui-input-inline">
+                <select name="adminRole" required lay-verify="required">
                     <option value="">请选择</option>
                     <c:forEach var="roleName" items="${roleNameList}">
                         <option value="${roleName.roleName}">${roleName.roleName}</option>
                     </c:forEach>
-                </select><br>
+                </select>
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
 </div>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/admin/update" class="form">
-        <input type="hidden" name="adminId" id="adminId"><br>
-        用户名称 <input type="text" required id="adminName" placeholder="请输入用户名" name="adminName"><br>
-        用户密码 <input type="text" required id="adminPassword" placeholder="请输入密码" name="adminPassword"><br>
-        所属角色 <select required name="adminRole" id="adminRole">
-                    <option value="">请选择</option>
+    <form action="<%=request.getContextPath()%>/admin/update" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="adminName" name="adminName"  lay-verify="required" placeholder="请输入用户名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户密码</label>
+            <div class="layui-input-inline">
+                <input type="text" id="adminPassword" name="adminPassword" required  lay-verify="required" placeholder="请输入用户密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属角色</label>
+            <div class="layui-input-inline">
+                <select name="adminRole" id="adminRole" required lay-verify="required">
                     <c:forEach var="roleName" items="${roleNameList}">
-                        <option value="${roleName.roleName}">${roleName.roleName}</option>
+                        <option value="${roleName.roleName}" <%--<c:if test="${roleName.roleName.equals($('#adminRole').val())}">selected</c:if>--%> >${roleName.roleName}</option>
                     </c:forEach>
-                </select><br>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="adminId" id="adminId"><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -189,6 +220,9 @@
                     area: ['30%', '70%'],
                     content: $("#editForm"),
                     btn: ['提交'],
+                    success: function(){
+                      form.render('select');
+                    },
                     yes: function (index, layero) {
                         layero.find("form").find("#updateSubmit").click();
                     }
