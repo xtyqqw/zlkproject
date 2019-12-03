@@ -16,14 +16,17 @@
             <result property="articleContent" column="article_content" javaType="java.lang.String"/>
             <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
             <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
-            <result property="inform" column="inform" javaType="java.lang.String"/>
-            <result property="userId" column="article_user_id" javaType="java.lang.String"/>
-            <result property="tagId" column="article_tag_id" javaType="java.lang.Integer"/>
+            <result property="inform" column="inform" javaType="java.lang.Integer"/>
+            <result property="userId" column="user_id" javaType="java.lang.String"/>
+            <result property="createArticleType" column="create_article_type" javaType="java.lang.Integer"/>
+            <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"/>
+            <result property="approval" column="approval" javaType="java.lang.Integer"/>
+            <result property="typeName" column="type_name" javaType="java.lang.String"/>
+            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
             <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
                 <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
                 <result property="tagName" column="tag_name" javaType="java.lang.String"/>
                 <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
-                <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
             </collection>
     </resultMap>
     <!--根据用户ID查询我的文章-->
