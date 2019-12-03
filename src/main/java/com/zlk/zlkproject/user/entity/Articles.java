@@ -49,7 +49,7 @@ public class Articles {
     /**举报：0 是，1 否*/
     private Integer inform;
     /**发文类型：原创，转载，翻译*/
-    private String createArticleType;
+    private Integer createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
     /**文章方向*/
@@ -66,7 +66,7 @@ public class Articles {
     public Articles() {
     }
 
-    public Articles(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, Integer inform, String createArticleType, Integer articleSetTop, String typeName, String tagName, String userId, List<Tag> tagList, Integer approval) {
+    public Articles(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, Integer inform, Integer createArticleType, Integer articleSetTop, String typeName, String tagName, String userId, List<Tag> tagList, Integer approval) {
         this.articleId = articleId;
         this.title = title;
         this.browseCount = browseCount;
