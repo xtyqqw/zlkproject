@@ -10,7 +10,7 @@ import java.util.List;
  * @author: QianKeQin
  * @date: 2019/12/2 14:46
  */
-public interface CommentService {
+public interface CommentsService {
 
     List<Comment> listCommentByArticleId(Long articleId);
 
