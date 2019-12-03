@@ -1,9 +1,12 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: zlkproject
@@ -13,6 +16,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
+@ToString
 public class StuQa {
 
     /**问答id 对应字段 sqa_id*/
@@ -34,7 +38,10 @@ public class StuQa {
     /**举报状态 对应字段 report*/
     private String report;
     /**问答日期 对应字段 date*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date date;
+    /**与标签表多对多关联*/
+    private List<Tag> tagList;
 
     public StuQa() {
     }

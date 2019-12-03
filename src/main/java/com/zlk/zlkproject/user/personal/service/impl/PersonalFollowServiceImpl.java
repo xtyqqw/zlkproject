@@ -4,6 +4,7 @@ import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.UserAction;
 import com.zlk.zlkproject.user.personal.mapper.FollowerMapper;
 import com.zlk.zlkproject.user.personal.service.PersonalFollowService;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,8 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
             int length = list.size();
             for(int i = 0;i<length;i++){
                 UserAction userAction = list.get(i);
+                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreatTime()));
+                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreatTime()));
                 int type = userAction.getActionType();
                 String pUserId = "";
                 if(type < 4){

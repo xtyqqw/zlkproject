@@ -51,7 +51,7 @@
     border-radius: 5px;
     overflow: hidden;
 }
-.iconfont{
+.side-bar-icon{
     font-size: 26px !important;
     /*color: white;*/
 }
@@ -130,6 +130,7 @@
 }
 
 .state{
+    font-size: 26px !important;
     color: darkslateblue;
 }
 /*目录 end*/
@@ -165,7 +166,7 @@
     align-items: center;
 }
 
-#editor{
+#stu_qa_editor{
     height: 90%;
 }
 
@@ -250,7 +251,7 @@ button{
 #div_stuNote{
     width: 50%;
     height: 100%;
-    background-color: #009f95;
+    background-color: #e2e2e2;
     border-radius: 5px;
     z-index: 10;
     position: relative;
@@ -258,19 +259,180 @@ button{
     top: 0;
     display: none;
 }
+#stuNote_titleBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+}
 #stuNote_title{
     width: 60px;
     height: 26px;
-    background-color: #eb7350;
     font-size: 20px;
-    position: relative;
-    top: 10px;
-    left: 10px;
+    float: left;
 }
 #stuNote_closeBtn{
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+    float: right;
+    border-radius: 8px;
+}
+.icon-icon-test{
+    font-size: 16px !important;
+    color: #777777;
+}
+#stuNote_textBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 380px;
+    margin: 0 auto;
 
 }
+#editor{
+    width: 100%;
+    height: 100%;
+}
+.toolbar{
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px #777777;
+}
+#div_stuNote_text{
+    width: 100%;
+    height: 320px;
+    background-color: white;
+    border-radius: 3px;
+    border: solid 1px #777777;
+}
+#div_stuNote_text div{
+    overflow-y: auto !important;
+    height: 100% !important;
+}
+.w-e-panel-container{
+    width: 300px !important;
+    margin-left:-150px !important;
+}
+#stuNote_btnBox{
+    position: relative;
+    top: 10px;
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+}
+.stuNote_btn{
+    width: 90px;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    padding: 5px 0 0 0;
+    margin: 0 0 0 20px;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
+}
 /*-----stuNote end-----*/
+
+/*-----stuNoteSelection begin-----*/
+#SNS_allBox{
+    background-color: #009f95;
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+.placeSpace{
+    background-color: #009f95;
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+}
+#SNS_top_box{
+    background-color: #eb7350;
+    width: 90%;
+    height: 50px;
+    margin: 0 auto;
+}
+#SNS_contentBox{
+    background-color: #eb7350;
+    width: 90%;
+    margin: 0 auto;
+}
+.SNS_top_selection{
+    background-color: #2F4056;
+    border-bottom: 3px solid #e2e2e2;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0 0 0;
+    width: 100px;
+    height: 37px;
+    margin: 0 10px;
+    float: left;
+    cursor: pointer;
+}
+.SNS_content{
+    background-color: #2D93CA;
+    width: 100%;
+    height: 200px;
+    margin: 15px 0;
+}
+.SNS_content_user{
+    background-color: #e2e2e2;
+    width: 130px;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.SNS_text_box{
+    background-color: #2F4056;
+    width: 745px;
+    height: 170px;
+    position: relative;
+    bottom: 200px;
+    left: 130px;
+}
+.SNS_func_box{
+    background-color: #FFB94F;
+    width: 745px;
+    height: 30px;
+    position: relative;
+    bottom: 200px;
+    left: 130px;
+}
+.SNS_headPhoto_box{
+    background-color: #009f95;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    margin: 0 auto;
+    top: 11%;
+}
+.SNS_userName_box{
+    background-color: #009f95;
+    position: relative;
+    width: 110px;
+    height: 22px;
+    margin: 0 auto;
+    top: 15%;
+}
+.SNS_textEditor{
+    background-color: #e2e2e2;
+    position: relative;
+    width: 98%;
+    height: 90%;
+    top: 5%;
+    left: 1%;
+}
+/*-----stuNoteSelection end-----*/
 
 /*播放器 begin*/
 #div_all{
@@ -482,14 +644,15 @@ button{
 /*播放器 end*/
 
 /*选项卡内容 begin*/
-.layui-tab{
+#layui-tab-title .layui-tab{
     margin: 30px auto !important;
 }
-.layui-tab-title{
+
+#layui-tab-title{
     border-top:solid 5px blue !important;
 
 }
-.layui-tab-title li{
+#layui-tab-title li{
     background-color: lightgrey;
     border-radius: 5px;
     padding: 0 0 !important;
@@ -506,12 +669,12 @@ button{
     width: 12%;
 }
 
-.layui-this{
-    background-color: darkblue !important;
+#layui-tab-title .layui-this{
+    background-color: #5d65e1 !important;
 }
 
 .layui-tab-item{
-    border: 2px #5d6164 solid;
+    /*border: 2px #5d6164 solid;*/
     border-radius: 1px;
 }
 
@@ -535,4 +698,149 @@ button{
     height: auto;
     font-size: 18px;
 }
+/*-------------------------讲师笔记end-----------------------------------------------*/
+/*-------------------------学生问答bigin-----------------------------------------------*/
+
+#stuQatab .layui-this{
+    color: dodgerblue;
+}
+
+.stuQa-box{
+    height: 200px;
+    display: flex;
+    margin: 20px 0;
+    background-color: rgb(250,250,250);
+}
+
+.stuQa-user{
+    height: 100%;
+    width: 20%;
+    display: block;
+    text-align: center;
+}
+
+.stuQa-userPhoto{
+    width: 100%;
+    height: 80%;
+    position: relative;
+}
+
+.userPhoto{
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.stuQa-userName{
+    height: 20%;
+}
+.stuQa-content-box{
+    width: 80%;
+    display: block;
+}
+
+.stuQa-tag-box{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.stuQa-tag{
+    width: 8%;
+    text-align: center;
+    background-color: #bec3d9;
+    color: white;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 10px;
+}
+
+.stuQa-toolbar{
+    display: none !important;
+}
+
+.stuQa-content{
+    width: 95%;
+    height: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.stuQa-function-box{
+    height: 20%;
+    width: 100%;
+    display: block;
+}
+
+.stuQa-function-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 12px;
+}
+.stuQa-answer-div{
+    width: 100%;
+    height: auto;
+}
+
+.stuQa-answer-box{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    margin: 0 0;
+}
+
+.stuQa-textEditor{
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.stuQa-func-tag{
+    text-align: center;
+    font-size: 10px;
+    margin: 0 5px;
+}
+
+.stuQa-answer{
+    cursor: pointer;
+}
+
+.stuQa-readMore{
+    width: 10%;
+    cursor: pointer;
+}
+
+.stuQa-share{
+    cursor: pointer;
+}
+
+.stuQa-report{
+    cursor: pointer;
+}
+
+.stuQa-reply{
+    cursor: pointer;
+}
+
+.stuQa-date{
+    margin-left: auto;
+    margin-right: 3%;
+}
+/*-------------------------学生问答end-----------------------------------------------*/
 

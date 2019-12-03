@@ -55,12 +55,15 @@ public class UserAction {
     private String articleName;
     /**动态创建时间*/
     private Date creatTime;
-
+    /**格式化后的时间*/
+    private String dateFormat;
+    /**距离当前时间*/
+    private String leaveTime;
 
     public UserAction() {
     }
 
-    public UserAction(String actionId, String userId, String userName, Integer actionType, String replyUserId, String replyUser, String problemUser, String articleId, String articleName, Date creatTime) {
+    public UserAction(String actionId, String userId, String userName, Integer actionType, String replyUserId, String replyUser, String problemUser, String articleId, String articleName, Date creatTime, String dateFormat, String leaveTime) {
         this.actionId = actionId;
         this.userId = userId;
         this.userName = userName;
@@ -71,5 +74,7 @@ public class UserAction {
         this.articleId = articleId;
         this.articleName = articleName;
         this.creatTime = creatTime;
+        this.dateFormat = dateFormat;
+        this.leaveTime = leaveTime;
     }
 }

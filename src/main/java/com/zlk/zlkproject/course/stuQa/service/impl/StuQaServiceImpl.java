@@ -6,9 +6,7 @@ import com.zlk.zlkproject.entity.StuQa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.plugin2.message.Message;
 
-import java.sql.Array;
 import java.util.List;
 
 /**
@@ -25,22 +23,100 @@ public class StuQaServiceImpl implements StuQaService {
 
     @Override
     @Transactional
-    public String insertStuQa(StuQa stuQa, Integer[] tagIdArray) {
+    public String insertStuQa(StuQa stuQa, List<Integer> tagIdList) {
         Integer integer = stuQaMapper.insertStuQa(stuQa);
         Integer sqaId = stuQa.getSqaId();
         Integer flag = 0;
         String message;
-        for (Integer tagId : tagIdArray) {
+        for (Integer tagId : tagIdList) {
             Integer integer1 = stuQaMapper.insertStuQaTag(sqaId, tagId);
             if (integer1>0){
                 flag ++;
             }
         }
-        if (integer>0 && flag == tagIdArray.length){
+        if (integer>0 && flag == tagIdList.size()){
             message = "添加成功";
         }else {
             message = "添加失败";
         }
         return message;
+    }
+
+    @Override
+    public List<StuQa> findStuQaBySectionId(Integer sectionId, Integer page, Integer limit) {
+        Integer offset = (page-1) * limit;
+        return stuQaMapper.findStuQaBySectionId(sectionId,offset,limit);
+    }
+
+    @Override
+    public Integer getPages(Integer sectionId, Integer limit) {
+        Integer count = stuQaMapper.findCountBySectionId(sectionId);
+        Integer pages;
+        if (count%limit==0){
+            pages = count/limit;
+        }else {
+            pages = count/limit +1;
+        }
+        return pages;
+    }
+
+    @Override
+    public List<StuQa> findStuQaBySectionIdElite(Integer sectionId, Integer page, Integer limit) {
+        Integer offset = (page-1) * limit;
+        return stuQaMapper.findStuQaBySectionIdElite(sectionId, offset, limit);
+    }
+
+    @Override
+    public Integer updateShareOrReportBySqaId(StuQa stuQa) {
+        return stuQaMapper.updateShareOrReportBySqaId(stuQa);
+    }
+
+    @Override
+    public StuQa findStuQaBySqaId(Integer sqaId) {
+        return stuQaMapper.findStuQaBySqaId(sqaId);
+    }
+
+    @Override
+    public List<StuQa> findStuQaBySectionIdAndPId(Integer sectionId, Integer pId) {
+//        Integer offset = (page-1) * limit;
+        return stuQaMapper.findStuQaBySectionIdAndPId(sectionId, pId);
+    }
+
+    @Override
+    public Integer getPages(Integer sectionId, Integer pId, Integer limit) {
+        Integer count = stuQaMapper.findCountBySectionIdAndPId(sectionId,pId);
+        Integer pages;
+        if (count%limit==0){
+            pages = count/limit;
+        }else {
+            pages = count/limit +1;
+        }
+        return pages;
+    }
+
+    @Override
+    public List<Integer> findTagIdBySqaId(Integer sqaId) {
+        return stuQaMapper.findTagIdBySqaId(sqaId);
+    }
+
+    @Override
+    public Integer updateStuQaBySqaId(StuQa stuQa) {
+        return stuQaMapper.updateStuQaBySqaId(stuQa);
+    }
+
+    @Override
+    @Transactional
+    public String updateAnswerNum(Integer sqaId) {
+        //根据sqaId查找主问题信息
+        StuQa stuQa = stuQaMapper.findStuQaBySqaId(sqaId);
+        Integer answerNum = stuQa.getAnswerNum();
+        stuQa.setAnswerNum(answerNum+1);
+        //问题回答数加1
+        Integer flag = stuQaMapper.updateStuQaBySqaId(stuQa);
+        if (flag>0){
+            return "修改成功";
+        }else {
+            return "修改失败";
+        }
     }
 }
