@@ -91,7 +91,7 @@ public class ArticlesController {
      * @param articleId
      * @return
      */
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/updates")
     public ModelAndView updateTag(String articleId){
         ModelAndView mv=new ModelAndView();
         Integer article=articlesService.updateTag(articleId);
