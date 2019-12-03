@@ -55,7 +55,7 @@ public class UserController {
       HttpSession session = request.getSession();
       //获取前台传输的手机号
       String userPhonenu = request.getParameter("userPhonenum");
-//      System.out.println(userPhonenu);
+//      Sys.out.println(userPhonenu);
 
       Map<String,Object> map = new HashMap<String,Object>();
       //获取验证码

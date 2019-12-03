@@ -54,6 +54,6 @@ public class MarkDownImageUpload {
             wirte.flush();
             wirte.close();
         }
-        //System.out.println("imageUpload");
+        //Sys.out.println("imageUpload");
     }
 }

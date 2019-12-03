@@ -144,7 +144,8 @@
                 </li>
             </a>
             <%--个人笔记--%>
-            <a href="<%=request.getContextPath()%>/myNote/toMyNote" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/myNote/toMyNote"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-edit"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -152,7 +153,8 @@
                 </li>
             </a>
             <%--我的问答--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/myquestion"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-survey"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -160,7 +162,8 @@
                 </li>
             </a>
             <%--我的文章--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="javascript:;"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-list"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -177,7 +180,8 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="javascript:;" name="dian"
+               target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-dialogue"
                        style="font-size: 25px;color: #D4D4D4;"></i>
@@ -185,7 +189,8 @@
                 </li>
             </a>
             <%--愿望清单--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="javascript:;"
+               name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-release"
                        style="font-size: 25px;color: #D4D4D4;"></i>
