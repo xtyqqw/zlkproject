@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zlk.zlkproject.admin.service.TagService;
 import com.zlk.zlkproject.admin.service.TypeService;
 import com.zlk.zlkproject.admin.util.LogUtil;
@@ -169,6 +170,13 @@ public class TypeController {
         }else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/findTypeContainsTag")
+    @ResponseBody
+    public String findTypeContainsTag(){
+        List<Type> typeList = typeService.findTypeContainsTag();
+        return JSON.toJSONString(typeList);
     }
     
 }

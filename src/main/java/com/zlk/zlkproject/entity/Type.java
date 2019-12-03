@@ -19,6 +19,8 @@ public class Type {
     /**方向种类
      * 分为：java，linux，html，mysql四种*/
     private String typeName;
+    //每种方向所含类别数
+    private Integer tagNumber;
 
     public Type(Integer typeId, String typeName) {
         this.typeId = typeId;

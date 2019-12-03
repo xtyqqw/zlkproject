@@ -9,7 +9,17 @@
         <result property="adminPassword" column="admin_password" javaType="java.lang.String"/>
         <result property="adminRole" column="admin_role" javaType="java.lang.String"/>
     </resultMap>
+    <resultMap id="systemEntityMap" type="com.zlk.zlkproject.entity.Sys">
+        <id property="sysId" column="system_id" javaType="java.lang.Integer"/>
+        <result property="visitNumber" column="visit_number" javaType="java.lang.Integer"/>
+    </resultMap>
     <select id="findAdminByAdminName" parameterType="java.lang.String" resultMap="adminEntityMap">
         select * from admins where admin_name = #{adminName}
     </select>
+    <select id="findVisitNumber" resultType="java.lang.Integer">
+        select visit_number from system where system_id = 1
+    </select>
+    <update id="updateVisitNumber">
+        update system set visit_number = visit_number + 1 where system_id = 1
+    </update>
 </mapper>

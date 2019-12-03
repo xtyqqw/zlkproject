@@ -230,7 +230,7 @@
         <div class="layui-form-item updateUrl">
             <label class="layui-form-label">路径</label>
             <div class="layui-input-inline">
-                <input type="text" required id="url" name="url"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+                <input type="text" id="url" name="url" placeholder="请输入路径" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
