@@ -42,7 +42,7 @@ public class ArticlesController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("list",list);
         mv.addObject("articles",articles);
-        mv.setViewName("");
+        mv.setViewName("view/personal/myArticle");
         return mv;
     }
 
