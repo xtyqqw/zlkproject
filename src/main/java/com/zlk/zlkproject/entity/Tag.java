@@ -16,12 +16,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tag {
-    /**tag对应id*/
+    /**
+     * tag对应id
+     */
     private Integer tagId;
-    /**tag名称*/
+    /**
+     * tag名称
+     */
     private String tagName;
-    /**tag对应方向id*/
+    /**
+     * tag对应方向id
+     */
     private Integer tagTypeId;
-    /**tag对应方向名*/
+
     private String tagTypeName;
 }

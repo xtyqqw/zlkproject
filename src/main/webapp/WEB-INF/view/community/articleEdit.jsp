@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>文章编辑页面</title>
+    <title>我的问题</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />

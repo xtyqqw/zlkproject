@@ -6,98 +6,181 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <title>tag测试</title>
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <script src="/layui/layui.js"></script>
+    <style type="text/css">
+        .comment_cen_div {
+            width: 1300px;
+            height: 150px;
+            border: 1px solid #ccc;
+            margin-left: 100px;
+            margin-top: -193px;
+        }
 
-    <title>标签选择器</title>
-    <style>
         .input {
-            margin-top: 337px;
-            margin-left: 107px;
-            position: absolute;
+            height: 30px;
+            width: 1250px;
+            font-size: 12px;
+            margin-left: 8px;
+            margin-top: 5px;
+            border: none;
         }
-        .test {
-            overflow-x: hidden;
-            overflow-y: hidden;
-            position: absolute;
-            left: 115px;
-            width: 1298px;
-            float: left;
-            height: 130px;
-            top: 206px;
-            border: 1px solid #ccc;
-            display: none;
-            background-color: #FFF;
+
+        .one {
+            cursor: pointer;
+            width: 1300px;
+            margin-top: 233px;
+            margin-left: 100px;
+            height: 40px;
             border: 1px solid #ccc;
         }
 
+        .la {
+            text-align: center;
+            float: left;
+            height: 18px;
+            width: auto;
+            padding: 5px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin: 8px;
+        }
+
+        .li {
+            margin-top: -5px;
+
+        }
     </style>
 
+    <script type="text/javascript">
+        $(function () {
+            $("#click").hide();
+            $("#click").dialog('close')
+        });
+
+        function btn() {
+            var show = document.getElementById("click");
+            if (show.style.display == '') {
+                show.style.display = 'none';
+            } else {
+                show.style.display = '';
+            }
+        }
+
+        $("#click").click(function (event) {
+            event.stopPropagation();
+        });
+    </script>
 </head>
 <body>
-<input id="tt" name="tt" class="input" type="text" placeholder="选择标签"
-       style="width:1300px; height:35px; font-size: 12px; border:1px solid #ccc"/>
-<div class="test" id="div">
-
+<div class="one" id="btn" onclick="btn()">
+    <input type="text" class="input" id="input" minlength="2" maxlength="50" placeholder="选择标签">
 
 </div>
-<template>
-    <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
-        <el-radio-button label="top">top</el-radio-button>
-        <el-radio-button label="right">right</el-radio-button>
-        <el-radio-button label="bottom">bottom</el-radio-button>
-        <el-radio-button label="left">left</el-radio-button>
-    </el-radio-group>
 
-    <el-tabs :tab-position="tabPosition" style="height: 200px;">
-        <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
-    </el-tabs>
-</template>
-<script language="javascript" type="text/javascript">
+<div id="click" class="comment_cen_div">
+    <div class="layui-tab" style="margin: 0px;">
+        <ul class="layui-tab-title">
+                <li class="layui-this" style="margin-top: 0px;">java</li>
+                <li  style="margin-top: 0px;">mysql</li>
+                <li  style="margin-top: 0px;">s ss</li>
+                <li  style="margin-top: 0px;">qqqq</li>
+        </ul>
 
-        export default {
-            data() {
-                return {
-                    tabPosition: 'top'
-                };
-            }
-        };
+        <div class="layui-tab-content">
 
+            <div class="layui-tab-item layui-show">
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+            </div>
+            <div class="layui-tab-item">
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+            </div>
+            <div class="layui-tab-item ">
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+            </div>
+            <div class="layui-tab-item">
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+                <a href="javascript:;" class="li">
+                    <li class="la">java</li>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
 </script>
-
-<script language="javascript" type="text/javascript">
-    function $(id) {
-        return document.getElementById(id);
-    }
-
-    window.onload = function () {
-        document.onclick = function (e) {
-            $("div").style.display = "none";
-        }
-        $("tt").onclick = function (e) {
-            if ($("div").style.display == "none") {
-                $("div").style.display = "block";
-            } else {
-                $("div").style.display = "none";
-            }
-            stopFunc(e);
-        }
-        $("div").onclick = function (e) {
-            stopFunc(e);
-        }
-    }
-
-    function stopFunc(e) {
-        document.all ? event.cancelBubble = true : e.stopPropagation();
-    }
-</script>
-
-
 </body>
 </html>
