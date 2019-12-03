@@ -1,15 +1,14 @@
-package com.zlk.zlkproject.community.articleShow.dao;
+package com.zlk.zlkproject.community.articleAdd.dao;
 
 import com.zlk.zlkproject.community.entity.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @program: ArticleShowRepository
+ * @program: ArticleAddRepository
  * @description:
  * @author: QianKeQin
- * @date: 2019/12/2 12:39
+ * @date: 2019/12/3 13:33
  */
-public interface ArticleShowRepository extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
-
+public interface ArticleAddRepository extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
 }
