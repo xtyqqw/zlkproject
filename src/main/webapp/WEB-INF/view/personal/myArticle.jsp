@@ -151,12 +151,11 @@
             <div class="main">
                 <p>
                 <ul>
+                    <c:forEach items="${list.tagList}" var="tagList">
                     <li>
-                        <span class="tag">Java</span>
+                        <span class="tag">${tagList.tagName}</span>
                     </li>
-                    <li>
-                        <span class="tag">Html</span>
-                    </li>
+                    </c:forEach>
                 </ul>
                 <span class="time">2019-12-02 10:55</span>
                 </p>
