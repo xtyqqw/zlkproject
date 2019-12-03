@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class CommentController {
+public class CommentsController {
 
     @Autowired
     private CommentsService commentsService;
@@ -28,17 +28,25 @@ public class CommentController {
     @Autowired
     private ArticleShowService articleShowService;
 
+    /*@GetMapping(value = "/comments/{articleId}")
+    public ModelAndView comments(String articleId) {
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("comments", commentsService.listCommentByArticleId(articleId));
+        mv.setViewName("view/community/articleShow");
+        return mv;
+    }*/
+
     @GetMapping(value = "/comments/{articleId}")
-    public String comments(@PathVariable Long articleId, Model model) {
+    public String comments(@PathVariable String articleId, Model model) {
         model.addAttribute("comments", commentsService.listCommentByArticleId(articleId));
-        return "view/community/articleShow :: commentList";
+        return "view/community/articleShow";
     }
 
     @PostMapping(value = "/comments")
     public String post(Comment comment) {
-        Long articleId=comment.getArticle().getId();
+        String articleId=comment.getArticle().getId();
         comment.setArticle(articleShowService.getArticle(articleId));
         commentsService.saveComment(comment);
-        return "view/community/comments/" +articleId;
+        return "redirect:/comments/" +articleId;
     }
 }

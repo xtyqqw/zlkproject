@@ -21,12 +21,12 @@ public class ArticleShowServiceImpl implements ArticleShowService {
     private ArticleShowRepository articleShowRepository;
 
     @Override
-    public Article getArticle(Long id) {
+    public Article getArticle(String id) {
         return articleShowRepository.findById(id).get();
     }
 
     @Override
-    public Article getAndConvert(Long id) {
+    public Article getAndConvert(String id) {
         Article article=articleShowRepository.findById(id).get();
 
         Article a=new Article();
