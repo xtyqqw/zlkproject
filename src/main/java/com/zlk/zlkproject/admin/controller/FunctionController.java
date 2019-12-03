@@ -93,11 +93,11 @@ public class FunctionController {
     }
 
     /**
-     * @return org.springframework.web.servlet.ModelAndView
      * @Author lufengxiang
      * @Description //TODO 菜单管理点击添加
-     * @Date 17:51 2019/11/25
-     * @Param [function]
+     * @Date 18:00 2019/12/2
+     * @Param [function, addFunction]
+     * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Function function, @RequestParam(value = "addFunction") String addFunction) {

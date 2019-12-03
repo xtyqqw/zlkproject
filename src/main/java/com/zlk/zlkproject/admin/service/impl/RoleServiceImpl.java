@@ -68,7 +68,7 @@ public class RoleServiceImpl implements RoleService {
      * @Author lufengxiang
      * @Description //TODO 角色授权
      * @Date 11:18 2019/11/27
-     * @Param [roleId, functionIdList]
+     * @Param [roleId, functionId]
      * @return java.lang.Integer
      **/
     @Override
