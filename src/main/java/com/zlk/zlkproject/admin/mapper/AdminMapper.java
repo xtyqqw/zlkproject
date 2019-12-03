@@ -30,7 +30,7 @@ public interface AdminMapper {
      * @Author lufengxiang
      * @Description //TODO 查找有该角色的用户集合
      * @Date 19:09 2019/11/19
-     * @Param [roleName]
+     * @Param [roleId]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     List<Admin> findAdminByRoleId(String roleId);
@@ -57,7 +57,7 @@ public interface AdminMapper {
      * @Author lufengxiang
      * @Description //TODO 新增用户关联对应的角色
      * @Date 16:48 2019/11/19
-     * @Param [adminId, roleId]
+     * @Param [adminsId, rolesId]
      * @return java.lang.Integer
      **/
     Integer addAdminAndRole(String adminsId,String rolesId);
@@ -93,7 +93,7 @@ public interface AdminMapper {
      * @Author lufengxiang
      * @Description //TODO 通过用户ID删除与其角色关联
      * @Date 17:03 2019/11/19
-     * @Param [adminId]
+     * @Param [adminsId]
      * @return java.lang.Integer
      **/
     Integer deleteAdminAndRoleByAdminId(String adminsId);

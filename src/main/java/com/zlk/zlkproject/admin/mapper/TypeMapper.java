@@ -80,4 +80,13 @@ public interface TypeMapper {
      * @return java.util.List<com.zlk.zlkproject.entity.Type>
      **/
     List<Type> findAllTypeName();
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查询每种方向包含类别
+     * @Date 9:46 2019/12/3
+     * @Param []
+     * @return java.util.List<com.zlk.zlkproject.entity.Type>
+     **/
+    List<Type> findTypeContainsTag();
 }

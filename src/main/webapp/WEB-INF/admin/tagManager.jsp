@@ -33,42 +33,55 @@
             width: 180px;
         }
 
-        .form, .form input, .form select {
-            position: relative;
-            text-align: center;
-        }
-
-        .form input, .form select {
-            margin-top: 15px;
-            height: 24px;
-            width: auto;
+        .form{
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/tag/insert" class="form">
-        类别名称 <input type="text" required placeholder="请输入类别名称" name="tagName"><br>
-        所属方向名称 <select required name="tagTypeName">
-                        <option value="">请选择</option>
-                        <c:forEach var="typeName" items="${typeList}">
-                            <option value="${typeName.typeName}">${typeName.typeName}</option>
-                        </c:forEach>
-                    </select><br>
+    <form action="<%=request.getContextPath()%>/tag/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类别名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="tagName"  lay-verify="required" placeholder="请输入类别名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属方向</label>
+            <div class="layui-input-inline">
+                <select name="tagTypeName" required lay-verify="required">
+                    <option value="">请选择</option>
+                    <c:forEach var="typeName" items="${typeList}">
+                        <option value="${typeName.typeName}">${typeName.typeName}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
 </div>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/tag/update" class="form">
-        <input type="hidden" name="tagId" id="tagId"><br>
-        类别名称 <input type="text" required id="tagName" placeholder="请输入类别名称" name="tagName"><br>
-        所属方向名称 <select required name="tagTypeName" id="tagTypeName">
-                        <option value="">请选择</option>
-                        <c:forEach var="typeName" items="${typeList}">
-                            <option value="${typeName.typeName}">${typeName.typeName}</option>
-                        </c:forEach>
-                    </select><br>
+    <form action="<%=request.getContextPath()%>/tag/update" class="form layui-form">
+        <input type="hidden" name="tagId" id="tagId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类别名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="tagName" name="tagName"  lay-verify="required" placeholder="请输入类别名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属方向</label>
+            <div class="layui-input-inline">
+                <select name="tagTypeName" id="tagTypeName" required lay-verify="required">
+                    <option value="">请选择</option>
+                    <c:forEach var="typeName" items="${typeList}">
+                        <option value="${typeName.typeName}">${typeName.typeName}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -185,6 +198,9 @@
                     area: ['30%', '70%'],
                     content: $("#editForm"),
                     btn: ['提交'],
+                    success: function(){
+                        form.render('select');
+                    },
                     yes: function (index, layero) {
                         layero.find("form").find("#updateSubmit").click();
                     }
