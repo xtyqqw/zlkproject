@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.user.personal.mapper.RecordMapper">
-    <!--<resultMap id="userEntityMap" type="com.zlk.zlkproject.user.entity.Users">
+    <resultMap id="userEntityMap" type="com.zlk.zlkproject.user.entity.Users">
     <id property="userId" column="user_id" javaType="java.lang.String"/>
         <collection property="coursesList" ofType="com.zlk.zlkproject.entity.Courses" javaType="java.util.List" >
             <id property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
@@ -33,7 +33,7 @@
                 </collection>
             </collection>
         </collection>
-    </resultMap>-->
+    </resultMap>
     <resultMap id="ItemMap" type="com.zlk.zlkproject.user.entity.Item">
             <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
             <result property="coverPic" column="cover_pic" javaType="java.lang.String"/>
@@ -57,7 +57,18 @@
         JOIN chapter ch on ch.courses_id=c.courses_id
 		JOIN section s on s.chapter_id=ch.chapter_id
 		JOIN user_section us on us.section_id=s.section_id
-        where u.user_id='1' ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC
-
+        where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC
+    </select>
+    <select id="selectUserSection"  parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(state) from user_section
+        JOIN user on user.user_id=user_section.user_id
+        JOIN section on section.section_id=user_section.section_id
+        where user.user_id=#{userId}
+    </select>
+    <select id="selectUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(state) from user_section
+          JOIN user on user.user_id=user_section.user_id
+          JOIN section on section.section_id=user_section.section_id
+          where state='已完成' and user.user_id=#{userId}
     </select>
 </mapper>

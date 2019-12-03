@@ -42,10 +42,18 @@ public class IndexController {
         List<Courses> courses2 = indexService.findCoursesByTypeId(typeList.get(1).getTypeId());
         List<Courses> courses3 = indexService.findCoursesByTypeId(typeList.get(2).getTypeId());
         List<Courses> courses4 = indexService.findCoursesByTypeId(typeList.get(3).getTypeId());
-        String userId = "5";
+        String userId = "4";
         String today = indexService.findDayByDate(new Date());
+        Integer todayInt = Integer.valueOf(today);
         Signin sign = indexService.findSigninByUserId(userId);
-        Integer signNum = sign.getSigninNum();
+        String lastDay = indexService.findDayByUserId(userId);
+        Integer lastDayInt = Integer.valueOf(lastDay);
+        Integer signNum;
+        if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
+            signNum = sign.getSigninNum();
+        }else {
+            signNum = 0;
+        }
         User user = indexService.findUsersById(userId);
         Integer rank = indexService.findUserRankById(userId);
         Integer count = indexService.findUserCount();
@@ -90,8 +98,8 @@ public class IndexController {
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> signIn()throws Exception {
-        Map<String, Object> resultMap = new HashMap<String,Object>();
-        String userId = "5";
+        Map<String, Object> resultMap = new HashMap<>();
+        String userId = "4";
         String today = indexService.findDayByDate(new Date());
         String lastDay = indexService.findDayByUserId(userId);
         if (today.equals(lastDay)) {
@@ -109,8 +117,8 @@ public class IndexController {
     @RequestMapping(value = "/toSignIn", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> toSignIn()throws Exception {
-        Map<String, Object> resultMap = new HashMap<String,Object>();
-        String userId = "5";
+        Map<String, Object> resultMap = new HashMap<>();
+        String userId = "4";
         Signin signin = indexService.findSigninByUserId(userId);
         String today = indexService.findDayByDate(new Date());
         Integer todayInt = Integer.valueOf(today);

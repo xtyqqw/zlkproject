@@ -32,23 +32,32 @@
         <result property="actionType" column="action_type" javaType="java.lang.Integer"/>
         <result property="articleId" column="article_id" javaType="java.lang.String"/>
         <result property="userId" column="user_id" javaType="java.lang.String"/>
-        <result property="replyUserId" column="reply_user_id" javaType="java.util.Date"/>
-        <result property="createTime" column="creat_time" javaType="java.util.Date"/>
+        <result property="replyUserId" column="reply_user_id" javaType="java.lang.String"/>
+        <result property="createTime" column="create_time" javaType="java.util.Date"/>
     </resultMap>
 
     <!--根据id查询关注自己的用户-->
-    <select id="findFollower" resultMap="durstionMap" parameterType="java.lang.String">
-        select * from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id
+    <select id="findFollower" resultMap="durstionMap" parameterType="com.zlk.zlkproject.user.entity.FollowerPage">
+        select * from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id limit #{index},#{limit}
+    </select>
+    <!--查询关注自己的人数-->
+    <select id="findFollowerNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id
     </select>
 
     <!--根据id查询自己关注的用户-->
-    <select id="findFollowed" resultMap="durstionMap" parameterType="java.lang.String">
-        select * from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId}
+    <select id="findFollowed" resultMap="durstionMap" parameterType="com.zlk.zlkproject.user.entity.FollowerPage">
+        select * from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId} limit #{index},#{limit}
+    </select>
+
+    <!--查询自己关注的人数-->
+    <select id="findFollowedNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId}
     </select>
 
     <!--根据文章id查询文章标题-->
     <select id="findArticleTittleById" resultType="java.lang.String" parameterType="java.lang.String">
-        select article_tittle from article where article = #{articleId}
+        select title from article where article_id = #{articleId}
     </select>
 
     <!--根据用户id查询用户最近一周内最多6条动态-->
@@ -84,4 +93,9 @@
     <delete id="deFollow" parameterType="java.lang.String">
         delete from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId}
     </delete>
+
+    <!--查询A是否关注了B-->
+    <select id="findAFollowedB" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId} limit 0,1
+    </select>
 </mapper>

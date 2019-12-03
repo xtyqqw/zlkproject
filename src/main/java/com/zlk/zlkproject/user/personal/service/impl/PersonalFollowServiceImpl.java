@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.UserAction;
 import com.zlk.zlkproject.user.personal.mapper.FollowerMapper;
 import com.zlk.zlkproject.user.personal.service.PersonalFollowService;
@@ -21,15 +22,27 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
     @Autowired
     FollowerMapper followerMapper;
     @Override
-    public List<User> findFollower(String userId) {
-       List<User> list = followerMapper.findFollower(userId);
+    public List<User> findFollower(FollowerPage followerPage) {
+       followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
+       List<User> list = followerMapper.findFollower(followerPage);
+       return list;
+    }
+
+    @Override
+    public Integer findFollowerNum(String userId) {
+        return followerMapper.findFollowerNum(userId);
+    }
+
+    @Override
+    public List<User> findFollowed(FollowerPage followerPage) {
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
+        List<User> list = followerMapper.findFollowed(followerPage);
         return list;
     }
 
     @Override
-    public List<User> findFollowed(String userId) {
-        List<User> list = followerMapper.findFollowed(userId);
-        return list;
+    public Integer findFollowedNum(String userId) {
+        return followerMapper.findFollowedNum(userId);
     }
 
     /**
@@ -48,8 +61,8 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
             int length = list.size();
             for(int i = 0;i<length;i++){
                 UserAction userAction = list.get(i);
-                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreatTime()));
-                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreatTime()));
+                userAction.setLeaveTime(LeaveTime.leaveTime(userAction.getCreateTime()));
+                userAction.setDateFormat(LeaveTime.formatDate(userAction.getCreateTime()));
                 int type = userAction.getActionType();
                 String pUserId = "";
                 if(type < 4){
@@ -86,5 +99,10 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
     @Override
     public Integer deFollow(String toUserId, String fromUserId) {
         return followerMapper.deFollow(toUserId,fromUserId);
+    }
+
+    @Override
+    public Integer findAFollowedB(String toUserId, String fromUserId) {
+        return followerMapper.findAFollowedB(toUserId,fromUserId);
     }
 }

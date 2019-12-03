@@ -44,8 +44,11 @@ public class ArticleListServiceImpl implements ArticleListService {
     }
 
     @Override
-    public List<Article> findByUserId(String userId) {
-        return articleListMapper.findByUserId(userId);
+    public List<Article> findByUserId(String userId,Integer page,Integer limit) {
+        /*page=1;
+        limit=5;*/
+        Integer startPage = (page-1)*limit;
+        return articleListMapper.findByUserId(userId,startPage,limit);
     }
 
 }

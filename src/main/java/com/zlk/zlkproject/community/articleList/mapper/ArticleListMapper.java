@@ -24,5 +24,5 @@ public interface ArticleListMapper {
     /**查询最高浏览量（浏览次数）*/
     List<Article> findByBrowseCount();
     /**查询我的文章*/
-    List<Article> findByUserId(String userId);
+    List<Article> findByUserId(String userId,Integer startPage,Integer limit);
 }

@@ -61,10 +61,10 @@
         where a.user_id=u.user_id
         order by a.article_set_top,a.browse_count DESC
     </select>
-    <select id="findByUserId" resultMap="articleListEntityMap">
+    <select id="findByUserId" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Article">
         select a.article_id as aid,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a
         join user u on a.user_id=u.user_id
-        where a.user_id=#{userId}
+        where a.user_id=#{userId} limit #{startPage},#{limit}
     </select>
 </mapper>

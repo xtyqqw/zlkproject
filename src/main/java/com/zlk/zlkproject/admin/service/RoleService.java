@@ -35,6 +35,15 @@ public interface RoleService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 角色授权
+     * @Date 10:55 2019/11/27
+     * @Param [roleId]
+     * @return java.lang.Integer
+     **/
+    Integer addRoleAndFunction(String roleId,List<Integer> functionId);
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 通过角色ID查询角色信息
      * @Date 9:21 2019/11/20
      * @Param [roleId]
@@ -68,6 +77,15 @@ public interface RoleService {
      * @return java.lang.Integer
      **/
     Integer deleteRoleByRoleId(String roleId);
+    
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 删除角色一并删除其授权
+     * @Date 11:45 2019/11/27
+     * @Param [roleId]
+     * @return java.lang.Integer
+     **/
+    Integer deleteRoleAndFunctionByRoleId(String roleId);
     
     /**
      * @Author lufengxiang

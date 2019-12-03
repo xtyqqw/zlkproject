@@ -45,47 +45,52 @@ public class Article {
     private Integer zanCount;
     /**踩数*/
     private Integer caiCount;
-    /**举报*/
-    private String inform;
-    /**发文类型*/
+    /**举报：0 是，1 否*/
+    private Integer inform;
+    /**发文类型：原创，转载，翻译*/
     private String createArticleType;
-    /**文章置顶 置顶为0,没有置顶为1*/
+    /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
-    /**文章类别*/
-    private String tagName;
     /**文章方向*/
     private String typeName;
-    /**发文作者*/
-    private User author;
+    /**标签*/
+    private String tagName;
     /**建立的是文章和用户的多对一关系*/
     private String userId;
     /**发文时调用类别名称*/
     private List<Tag> tagList;
     /**查询时调用类别名称*/
     private User userList;
+    /**审核：0 审核中，1 审核过，2 审核未过*/
+    private Integer approval;
 
     public Article() {
     }
 
-    public Article(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, String inform, String createArticleType, Integer articleSetTop, String tagName, String typeName, String userId) {
-        this.articleId = articleId;
-        this.title = title;
-        this.browseCount = browseCount;
-        this.commentCount = commentCount;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.figures = figures;
-        this.figuresReal = figuresReal;
-        this.articleDigest = articleDigest;
-        this.articleContent = articleContent;
-        this.inform = inform;
-        this.createArticleType = createArticleType;
-        this.articleSetTop = articleSetTop;
-        this.tagName = tagName;
-        this.typeName = typeName;
-        this.userId = userId;
-    }
-
-    public Article(int id, String articleContent, String title, String articleDigest, String tagName, String typeName) {
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId='" + articleId + '\'' +
+                ", title='" + title + '\'' +
+                ", browseCount=" + browseCount +
+                ", commentCount=" + commentCount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", figures='" + figures + '\'' +
+                ", figuresReal='" + figuresReal + '\'' +
+                ", articleDigest='" + articleDigest + '\'' +
+                ", articleContent='" + articleContent + '\'' +
+                ", zanCount=" + zanCount +
+                ", caiCount=" + caiCount +
+                ", inform=" + inform +
+                ", createArticleType='" + createArticleType + '\'' +
+                ", articleSetTop=" + articleSetTop +
+                ", typeName='" + typeName + '\'' +
+                ", tagName='" + tagName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", tagList=" + tagList +
+                ", userList=" + userList +
+                ", approval=" + approval +
+                '}';
     }
 }

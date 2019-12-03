@@ -21,5 +21,5 @@ public interface ArticleListService {
     /**倒序查询浏览量（浏览次数）*/
     List<Article> findByBrowseCount();
     /**查询我的文章*/
-    List<Article> findByUserId(String userId);
+    List<Article> findByUserId(String userId,Integer page,Integer limit);
 }

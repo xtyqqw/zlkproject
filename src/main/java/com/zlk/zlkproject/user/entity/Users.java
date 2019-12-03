@@ -70,10 +70,9 @@ public class Users {
     private List<Article> articleList=new ArrayList<>();
     /*创建课程实体类集合*/
     private List<Courses> coursesList=new ArrayList<>();
-    /*创建笔记实体类集合*/
-    private List<Notes> notesList=new ArrayList<>();
 
-    public Users(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime, String userImg, String userRealimg, List<Article> articleList, List<Courses> coursesList, List<Notes> notesList) {
+
+    public Users(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime, String userImg, String userRealimg, List<Article> articleList, List<Courses> coursesList) {
         this.userId = userId;
         this.phonenum = phonenum;
         this.userPwd = userPwd;
@@ -97,7 +96,6 @@ public class Users {
         this.userRealimg = userRealimg;
         this.articleList = articleList;
         this.coursesList = coursesList;
-        this.notesList = notesList;
     }
 
     public Users() {

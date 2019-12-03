@@ -29,6 +29,10 @@
             width: auto;
         }
 
+        #condition{
+            width: 180px;
+        }
+
         .form, .form input, .form select {
             position: relative;
             text-align: center;
@@ -108,7 +112,7 @@
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">部门名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的部门名称" autocomplete="off" class="layui-input">\n' +
+                '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入要查询的部门名称" autocomplete="off" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-inline">\n' +
