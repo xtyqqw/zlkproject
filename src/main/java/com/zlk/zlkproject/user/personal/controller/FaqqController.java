@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: FaqqController
@@ -22,6 +24,12 @@ import java.util.List;
 public class FaqqController {
     @Autowired
     FaqqService faqqService;
+    /**
+     * 方法用途：点击我的问答后调用该方法 查询出我的问答所有信息并按照时间排序
+     * 参数类型：HttpServletRequest 用途 从session中后去操作的userId
+     * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
+     *            其中 list为全部数据 qList为我的问题rList为我的回答
+     * */
     @RequestMapping(value = "faqtest")
     public ModelAndView faqTest(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
@@ -30,18 +38,35 @@ public class FaqqController {
         List<MyQuestions> qList = faqqService.findQuestion("1");
         List<MyResponse> rList = faqqService.findResponse("1");
         mv.setViewName("/view/personal/myquestion");
+        mv.addObject("qList",qList);
+        mv.addObject("rList",rList);
         mv.addObject("list",list);
         return mv;
     }
 
+    /**
+     * 方法用途：点击我的问答中删除答案调用该方法
+     * 参数类型：Integer 用途 获取对应的回答
+     * 返回值类型：Map 返回方法执行结果
+     * */
     @RequestMapping(value = "removeResponse")
-    public void removeResponse(Integer responseId){
-        faqqService.deleteResponse(responseId);
+    public Map<String,Object> removeResponse(Integer responseId){
+        Map<String,Object> map = new HashMap<>();
+        Integer code = faqqService.deleteResponse(responseId);
+        map.put("code",code);
+        return map;
     }
 
-
+    /**
+     * 方法用途：点击我的问答中编辑答案调用该方法
+     * 参数类型：MyResponse 用途 获取对应的回答和修改的结果
+     * 返回值类型：Map 返回方法执行结果
+     * */
     @RequestMapping(value = "updateResponse")
-    public void updateResponse(MyResponse myResponse){
-        faqqService.updateResponse(myResponse);
+    public Map<String,Object> updateResponse(MyResponse myResponse){
+        Map<String,Object> map = new HashMap<>();
+        Integer code = faqqService.updateResponse(myResponse);
+        map.put("code",code);
+        return map;
     }
 }
