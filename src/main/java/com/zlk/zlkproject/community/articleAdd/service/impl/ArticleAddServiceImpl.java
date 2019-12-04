@@ -1,14 +1,17 @@
 package com.zlk.zlkproject.community.articleAdd.service.impl;
 
+import com.zlk.zlkproject.community.articleAdd.dao.ArticleAddRepository;
 import com.zlk.zlkproject.community.articleAdd.mapper.ArticleAddMapper;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
-import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
-import com.zlk.zlkproject.user.entity.Action;
+
+import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.community.entity.Tag;
+import com.zlk.zlkproject.community.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,30 +25,17 @@ import java.util.List;
 public class ArticleAddServiceImpl implements ArticleAddService {
 
     @Autowired
-    private ArticleAddMapper articleAddMapper;
+    private ArticleAddRepository articleAddRepository;
 
+    @Transactional
     @Override
-    public Integer createArticle(Article article) {
-        return articleAddMapper.createArticle(article);
+    public Article saveArticle(Article article) {
+        article.setId(UUIDUtils.getId());
+        article.setCreateTime(new Date());
+        article.setUpdateTime(new Date());
+        article.setApproval(0);
+        article.setArticleSetTop(1);
+        return articleAddRepository.save(article);
     }
 
-    @Override
-    public Integer setArticleTags(String articleId, Integer tagId) {
-        return articleAddMapper.setArticleTags(articleId,tagId);
-    }
-
-    @Override
-    public Integer addArticleToCommunityAction(Action action) {
-        return articleAddMapper.addArticleToCommunityAction(action);
-    }
-
-    @Override
-    public List<Article> getAddArticleOfApproval(Action action) {
-        return null;
-    }
-
-    @Override
-    public List<Tag> getTagsToAddArticle(Tag tag) {
-        return articleAddMapper.getTagsToAddArticle(tag);
-    }
 }

@@ -21,7 +21,7 @@
         }
         .timeline{
             width: 900px;
-            margin: 0 auto 0 30px;
+            margin: 0 auto 0 0;
         }
         /* 时间 */
         .timeline .date{
@@ -54,7 +54,7 @@
         .learn-main{
             background-color: #FAFAFA;
             float: left;
-            margin-left: 100px;
+            margin-left: 130px;
             width: 900px;
         }
         .learn-main:hover{
@@ -122,29 +122,29 @@
 <!-- 鼠标移入移出显示隐藏继续学习 -->
 <%--<script type="text/javascript">
     $(function(){
-        $(".mainname").on("mouseenter",function(){
+        $(".learn-main").mouseenter(function(){
             var index = $(this).index();
-            $(this).addClass("main").siblings().removeClass("main");
-            $(".continue-learn").eq(index).addClass("active").siblings().removeClass("active");
+            /*$(this).addClass("main").siblings().removeClass("main");
+            $(".continue-learn").eq(index).addClass("active").siblings().removeClass("active");*/
+            $(this).$(".continue-learn").show()/*.siblings().removeClass("continue-learn")*/;
+            $(this).$(".yuan").css("background-color","#914FF1");
         });
-        $('.mainname').mouseleave(function() {
+        $('.learn-main').mouseleave(function() {
             $(".continue-learn").removeClass("active").siblings().removeClass("active");
         });
     })
 </script>--%>
 <div class="learnrecord">
-    <c:forEach items="${itemList}" var="item"><%--items=""--%>
+    <c:forEach items="${itemList}" var="item">
         <div class="timeline">
             <div class="date">
                 <p class="year">${item.stuTime}</p>
-
-                <%--<p class="day">8-8</p>--%>
             </div>
             <div class="yuan"></div>
             <div class="learn-main mainname main">
                 <div class="learn-title">
                     <h2>${item.coursesName}</h2>
-                    <p>解锁任务：${item.coursesName}-${item.chapterName}-${item.sectionName}</p>
+                    <p>解锁任务：${item.coursesName} — ${item.chapterName} — ${item.sectionName}</p>
                     <img src="${item.coverPic}">
                 </div>
                 <div class="learn-main-getstar">
@@ -154,22 +154,16 @@
                          style="width: 100px;margin: 10px 0 0 auto;">
                         <div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>
                     </div>
-                    <%--如果进度条不是100% 显示继续学习--%>
-                    <c:if test="true">
-                        <a href="javascript:;">
-                            <div class="continue-learn">继续学习</div>
-                        </a>
-                    </c:if>
-                    <%--如果进度条是100% 啥都不显示--%>
-                    <c:if test=""></c:if>
-
+                    <a href="javascript:;">
+                        <div class="continue-learn">继续学习</div>
+                    </a>
                 </div>
                 <!-- 大进度条 -->
                 <div class="layui-progress layui-progress-big" lay-showpercent="true"
                      style="width: 520px;height: 20px;background-color: #dfd9fd;
                             margin: 230px 30px auto 350px;float: right;position: fixed;">
                     <div class="layui-progress-bar" lay-percent="${per}%"
-                         style="height: 20px;background-color: #9e8dff;"></div>
+                         style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>
                 </div>
             </div>
         </div>

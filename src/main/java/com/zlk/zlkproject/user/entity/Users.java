@@ -71,7 +71,7 @@ public class Users {
     /*创建课程实体类集合*/
     private List<Courses> coursesList=new ArrayList<>();
 
-
+    private List<MyQuestions> questionList = new ArrayList<>();
     public Users(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime, String userImg, String userRealimg, List<Article> articleList, List<Courses> coursesList) {
         this.userId = userId;
         this.phonenum = phonenum;

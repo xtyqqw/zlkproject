@@ -202,9 +202,9 @@
                     <%--<c:if test="">--%>
                         <div class="question_waik">
                             <ul class="head_lebel">
-                                <li class="lebel_li">Java</li>
-                                <li class="lebel_li">HTML5</li>
-                                <li class="lebel_li">Java</li>
+                                <c:forEach begin="0" end="2">
+                                    <li class="lebel_li">Java</li>
+                                </c:forEach>
                             </ul><br />
                             <p class="title">请问，为何最后那个函数function conf()里的classname不能生效？</p>
                             <p class="from">来自：人工智能-百度无人车项目-Python基础-Hello World</p>
@@ -258,9 +258,9 @@
                 <c:forEach begin="0" end="4">
                     <div class="question_waik">
                         <ul class="head_lebel">
-                            <li class="lebel_li">Java</li>
-                            <li class="lebel_li">HTML5</li>
-                            <li class="lebel_li">Java</li>
+                            <c:forEach begin="0" end="2">
+                                <li class="lebel_li">Java</li>
+                            </c:forEach>
                         </ul><br />
                         <p class="title">请问，为何最后那个函数function conf()里的classname不能生效？</p>
                         <p class="from">来自：人工智能-百度无人车项目-Python基础-Hello World</p>
@@ -334,7 +334,7 @@
                 url: "/myyNote/delete?snId="+snId,
                 success: function(msg){
                     layer.msg(msg);
-                    window.location.href = location.href;
+                    window.location.href = location.href;//删除后刷新当前页面
                 }
             });
             layer.close(index);

@@ -139,50 +139,50 @@
 <body>
 <div>
     <p class="all">我的文章</p>
-    <p class="num">共<span>10</span>条文章</p>
+    <p class="num">共<span>${articles}</span>条文章</p>
 </div>
 <div class="context">
     <ul>
+        <c:forEach items="${list}" var="list">
         <li>
             <div class="img">
-                <img src="1.jpg" style="height: 70px;width: 70px;border-radius: 3px;">
+                <img src="${list.figuresReal}" style="height: 70px;width: 70px;border-radius: 3px;">
             </div>
             <div class="main">
                 <p>
                 <ul>
+                    <c:forEach items="${list.tagList}" var="tagList">
                     <li>
-                        <span class="tag">Java</span>
+                        <span class="tag">${tagList.tagName}</span>
                     </li>
-                    <li>
-                        <span class="tag">Html</span>
-                    </li>
+                    </c:forEach>
                 </ul>
                 <span class="time">2019-12-02 10:55</span>
                 </p>
-                <p class="title">我是文章标题</p>
-                <p class="type">大数据</p>
-                <p class="con con_p">
-                    习近平在主持学习时发表了讲话。他指出，新中国成立后，党和国家始终高度重视应急管理工作，我国应急管理体系不断调整和完善，应对自然灾害和生产事故灾害能力不断提高，成功应对了一次又一次重大突发事件，有效化解了一个又一个重大安全风险，创造了许多抢险救灾、应急管理的奇迹，我国应急管理体制机制在实践中充分展现出自己的特色和优势。习近平强调，我国是世界上自然灾害最为严重的国家之一，灾害种类多，分布地域广，发生频率高，造成损失重，这是一个基本国情。同时，我国各类事故隐患和安全风险交织叠加、易发多发，影响公共安全的因素日益增多。加强应急管理体系和能力建设，既是一项紧迫任务，又是一项长期任务。</p>
+                <p class="title">${list.title}</p>
+                <p class="type">${list.typeName}</p>
+                <p class="con con_p">${list.articleContent}</p>
                 <div class="bom">
                     <i class="layui-icon layui-icon-praise"></i>
-                    <span class="span_w">0000</span>
+                    <span class="span_w">${list.zanCount}</span>
                     <i class="layui-icon layui-icon-tread"></i>
-                    <span class="span_w">0000</span>
+                    <span class="span_w">${list.caiCount}</span>
                     <span>浏览</span>
-                    <span class="span_w">0000</span>
+                    <span class="span_w">${list.browseCount}</span>
                     <span>评论</span>
-                    <span class="span_w">0000</span>
+                    <span class="span_w">${list.commentCount}</span>
                     <span class="lookall">查看全文</span>
-                    <span class="delete cur" onclick="deleteArt('articleId')">删除</span>
-                    <span class="edit cur" onclick="editArt()">编辑</span>
+                    <span class="delete cur" onclick="deleteArt('${list.articleId}')">删除</span>
+                    <span class="edit cur" onclick="editArt('${list.articleContent}','${list.articleId}')">编辑</span>
                     <span class="cur">分享</span>
                 </div>
             </div>
         </li>
+        </c:forEach>
     </ul>
 </div>
 <div hidden="hidden" id="demo" style="padding: 25px">
-    <form action="<%=request.getContextPath()%>" method="post">
+    <form action="<%=request.getContextPath()%>/articles/" method="post">
         <textarea id="articleContent" name="articleContent"></textarea>
         <input type="text" id="input_hid" hidden="hidden" name="articleId">
         <h4>请选择文章栏目</h4>
@@ -220,6 +220,7 @@
                 url: "<%=request.getContextPath()%>/articles/datele?articleId="+articleId,
                 success: function(msg){
                     layer.msg(msg);
+                    window.location.href = location.href;
                 }
             });
             layer.close(index);
@@ -227,9 +228,9 @@
     }
     layui.use('layer', function(){
         var $ = layui.jquery, layer = layui.layer;
-        window.editArt = function(){
-            // $("#articleContent").html(obj);
-            // $("#input_hid").val(articleId);
+        window.editArt = function(obj,articleId){
+            $("#articleContent").html(obj);
+            $("#input_hid").val(articleId);
             layer.open({
                 type: 1
                 ,title: '编辑'
