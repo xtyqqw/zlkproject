@@ -6,6 +6,7 @@ import com.zlk.zlkproject.user.personal.service.FaqqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,7 @@ public class FaqqController {
      * 返回值类型：Map 返回方法执行结果
      * */
     @RequestMapping(value = "removeResponse")
+    @ResponseBody
     public Map<String,Object> removeResponse(Integer responseId){
         Map<String,Object> map = new HashMap<>();
         Integer code = faqqService.deleteResponse(responseId);
@@ -63,6 +65,7 @@ public class FaqqController {
      * 返回值类型：Map 返回方法执行结果
      * */
     @RequestMapping(value = "updateResponse")
+    @ResponseBody
     public Map<String,Object> updateResponse(MyResponse myResponse){
         Map<String,Object> map = new HashMap<>();
         Integer code = faqqService.updateResponse(myResponse);
