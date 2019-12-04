@@ -176,6 +176,14 @@
             left: 15px;
             top: -15px;
         }
+        .you{
+            width: 86%;
+            height: 199px;
+            background-color: black;
+            position: relative;
+            left: 130px;
+            top: -150px;
+        }
         .touxiang{
             background: url("img/courses.png");
             border-radius:50%;
@@ -261,6 +269,25 @@
     <div id="liu1">
     </div>
 
+
+    <form action="#" method="post">
+        数字:<input type="text" id="num" readonly="readonly" value="0"/>
+        <input type="button" id="btn" value="增加"/>
+    </form>
+    <script>
+        var nums;
+        window.onload = function()
+        {
+            nums = document.getElementById("num").value;
+            document.getElementById("btn").onclick = changeNum;
+        };
+
+        function changeNum()
+        {
+            nums++;
+            document.getElementById("num").value = nums;
+        }
+    </script>
 
 </div>
 
@@ -356,11 +383,13 @@
                                 '</ul>'+
                                 '</div>'+
                                 '</div>'+
+                                '<div class="you">'+
                                 '<p class="p-FAQ3">'+comment.comments+'</p><br>'+
                                 '<div class="p-FAQ5"><p><span class="badge badge-warning" contenteditable="true">讲师回复</span></p> </div>'+
                                 '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
                                 '<div style="clear: both"></div>'+
                                 '<div class="sanjiao"></div>'+
+                                '</div>'+
                                 '</div>'+
                                 '<div class="div1"></div>'
                                 );
