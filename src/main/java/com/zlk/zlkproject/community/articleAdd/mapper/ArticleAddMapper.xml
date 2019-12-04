@@ -16,12 +16,12 @@
         <result column="article_content" property="articleContent" javaType="java.lang.String"/>
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
         <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
-        <result column="inform" property="inform" javaType="java.lang.String"/>
-        <result column="create_article_type" property="createArticleType" javaType="java.lang.String"/>
-        <result column="article_set_top" property="articleSetTop" javaType="java.lang.String"/>
+        <result column="inform" property="inform" javaType="java.lang.Integer"/>
+        <result column="create_article_type" property="createArticleType" javaType="java.lang.Integer"/>
+        <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"/>
         <result column="tag_name" property="tagName"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
-        <result column="approval" property="approval" javaType="java.lang.String"/>
+        <result column="approval" property="approval" javaType="java.lang.Integer"/>
         <result column="user_id" property="userId" javaType="java.lang.String"/>
     </resultMap>
 

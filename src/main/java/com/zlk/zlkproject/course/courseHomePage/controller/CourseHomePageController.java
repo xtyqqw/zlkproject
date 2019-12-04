@@ -64,7 +64,6 @@ public class CourseHomePageController {
     @ResponseBody
     public Map<String,Object> findAll(Courses courses,Integer page,Integer limit)throws Exception{
         List<Courses> allList=courseHomePageService.findAll(courses,page,limit);
-
         Map<String,Object> map=new HashMap<>();
         map.put("allList",allList);
         return map;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -43,7 +44,8 @@ public class DetailsController {
      * @return 课程介绍页面路径
      */
     @RequestMapping("/kecheng/kechengjianjie")
-    public String kechenjianjie(){
+    public String kechenjianjie(HttpServletRequest request,Integer coursesId){
+        request.getSession().setAttribute("coursesId",coursesId);
         return "/view/kechengjeishao";
     }
 

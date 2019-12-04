@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
-    <link rel="stylesheet" href="http:////at.alicdn.com/t/font_1355944_am32levhe7.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_am32levhe7.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
     <link rel="stylesheet" href="/css/courseDetails.css">
@@ -112,7 +113,7 @@
         }
         .p-FAQ3{
             text-align: left;
-            width:75%;
+            width:80%;
             font-weight:bold;
             letter-spacing:3px;
             color: #333436;
@@ -127,13 +128,7 @@
             float: left;
             margin-left: 40px;
         }
-        .p-FAQ5{
-            /*position: relative;
 
-            left:140px ;
-            top: -125px;*/
-
-        }
 
         .span-FAQ5{
             width: 8%;
@@ -143,26 +138,52 @@
             display: inline-block;
             float: left;
         }
-        .p-FAQ6{
+        .p-ZAN{
             position: relative;
             width: 7%;
-            left:240px ;
-            top: -40px;
+            left:230px ;
+            top: 20px;
             border-radius:5px ;
-
             color: grey;
-
+            height: 30px;
         }
+        .p-CAI{
+            position: relative;
+            width: 7%;
+            left:330px;
+            top: -10px;
+            border-radius:5px ;
+            color: grey;
+            height: 30px;
+        }
+        .p-FAQ6{
+            display: inline-block;
+            float: left;
+            width: 40%;
+            height: 30PX;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+        .p-FAQ7{
+            display: inline-block;
+            float: left;
+            width: 40%;
+            height: 30PX;
+            margin-left: 30px;
+            margin-top: -28px;
+            font-size: 20px;
+        }
+
         .div-FAQ1:hover{
-            box-shadow:-2px 0 3px -1px #ebebeb,-2px 0 3px -1px #ebebeb,2px 0 3px -1px  #ebebeb;
-            background: url("img/remenpinglunbai.png") no-repeat right top #ffffff ;
+            box-shadow:-2px 0 3px -1px #e5e5e5,-2px 0 3px -1px #e5e5e5,2px 0 3px -1px  #e5e5e5;
+
         }
         .div-FAQ1{
             width: 100%;
             position: relative;
             border-radius:5px;
             height: 200px;
-            background: url("img/remenpinglun.png") no-repeat right top #fbf9ff;
+            background: url("img/remenpinglun.png") no-repeat right top #ffffff;
         }
         .sanjiao{
             position: relative;
@@ -227,9 +248,30 @@
 
         .icon-good{
             font-size: 30px;
+            display: inline-block;
+            float: left;
+        }
+        .biao1{
+            font-size: 30px;
+            display: inline-block;
+            float: left;
+            margin-top: -5px;
+        }
+        .img1{
+
+            height: 70px;
+            width:70px;
             position: relative;
-            top: 20px;
-            left: 20px;
+            top: -204px;
+            left:813px;
+        }
+        .img1:hover{
+            height: 70px;
+            width:70px;
+            position: relative;
+            top: -204px;
+            left:813px;
+            background:url("img/remenpinglunbai.png");
         }
     </style>
 
@@ -328,7 +370,7 @@
             </div>
             <div id="tediantext">
                 <div id="tedianzhengwenneirong">
-                    <p>项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
+                    <p> 项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。
                     </p>
@@ -417,6 +459,7 @@
                         data:data,
                         success:function(result) {
                             layui.each(result.faqList, function (i, faq) {
+
                                 lis.push(
                                     '<div class="div-FAQ">' +
                                     '<br>' +
@@ -460,9 +503,6 @@
                         success:function(result) {
                             layui.each(result.commentList, function (i, comment) {
                                 lis.push(
-
-
-
                                     '<div class="div-FAQ1" ><br><br>' +
                                     '<div class="daniu">' +
                                     '<div class="touxiang"> <img id="img1" src="'+comment.userImg+'" style="height: 70px;width: 70px;border-radius:50%;"></div>' +
@@ -494,18 +534,25 @@
                                     '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
                                     '</div>'+
 
-
-
-
-
                                     '<div style="clear: both"></div>'+
                                     '<div class="sanjiao"></div>'+
                                     '</div>'+
-                                    '<p class="p-FAQ6"><i class="iconfont icon-good"></i></p>' +
+                                    '<div class="p-ZAN"><i class="iconfont icon-good"></i>' +
+                                        '<p class="p-FAQ6">&nbsp'+comment.like+'</p>'+
+                                    '</div>' +
+                                    '<div class="p-CAI"><i class="iconfont icon-good biao1"></i>' +
+                                    '<p class="p-FAQ7">&nbsp'+comment.dislike+'</p>'+
+                                    '</div>');
+                                if(comment.flag === "true"){
+                                    lis.push('<img class="img1" src="../img/remenpinglunbai.png">');
+                                }else{
+
+                                }
+                                lis.push(
                                     '</div>'+
                                     '<div class="div1"></div>'
                                 );
-                            })
+                            });
                             next(lis.join(''), page < 3); //假设总页数为 6
                         }
                     });

@@ -444,8 +444,9 @@ $.ajax({
                         }else{ lis.push(
                         '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
                     }
+            console.log(courses);
                     lis.push(
-                    '<input class="but1" type="button" onclick=window.open("https://www.baidu.com") value="查看详情"/>' +
+                    '<input class="but1" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="查看详情"/>' +
                     '</dd>' +
                     '</dl>' +
                     '</li>' +
