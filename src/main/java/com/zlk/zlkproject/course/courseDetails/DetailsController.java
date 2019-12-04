@@ -66,7 +66,7 @@ public class DetailsController {
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
     public String insertCourses(Integer coursesId){
-        int userId=2;
+        int userId=1;
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -102,10 +102,11 @@ public class DetailsController {
     public boolean seleUserCoursesByUserCourses(UserCourses userCourses){
         userCourses.setUserId(1);
         userCourses.setCoursesId(1);
-        if(userCoursesService.queryAll(userCourses)!=null){
-            return false;
+        List<UserCourses> UC=userCoursesService.queryAll(userCourses);
+        if(UC.size()!=0){
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -114,6 +115,16 @@ public class DetailsController {
      */
     @RequestMapping("/note/toNoteManager")
     public String toNoteManager(){
-        return null;
+        return "/view/toNoteManager";
     }
+
+    /**
+     * 跳转到课程管理页面
+     * @return
+     */
+    @RequestMapping("/course/toCourseManager")
+    public String toCourseManager(){
+        return "/view/toCourseManager";
+    }
+
 }

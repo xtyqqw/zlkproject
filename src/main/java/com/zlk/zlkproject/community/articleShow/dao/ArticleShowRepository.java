@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @author: QianKeQin
  * @date: 2019/12/2 12:39
  */
-public interface ArticleShowRepository extends JpaRepository<Article, Long>, JpaSpecificationExecutor<Article> {
+public interface ArticleShowRepository extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
 
 }

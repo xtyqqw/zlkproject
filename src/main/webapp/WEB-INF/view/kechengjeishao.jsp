@@ -6,14 +6,23 @@
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_am32levhe7.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_1nuc1djggf7.css">
+
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
     <link rel="stylesheet" href="/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+=======
+    <style type="text/css" >
+        body {
+            line-height: 0px;
+            font: 0px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+        }
+    </style>
+>>>>>>> 3909b6fb0d676d7eab203759830fffae0d983d9b
     <style>
         .kechengzhu{
             padding: 0px 15vw;

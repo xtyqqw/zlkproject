@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zlk.zlkproject.course.stunote.mapper.StuNoteMapper">
+<mapper namespace="com.zlk.zlkproject.course.stuNote.mapper.StuNoteMapper">
     <resultMap id="stuNoteEntityMap" type="com.zlk.zlkproject.entity.StuNote">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>

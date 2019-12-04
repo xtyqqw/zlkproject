@@ -278,78 +278,83 @@ $(document).ready(function () {
 
 
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
-
-        $("#icon-biji").click(function () {
-            $("#div_stuNote").css("display","block");
-        });
-        $("#stuNote_btn1").click(function () {
-            var isEmpty = true;
-            var lengthState = true;
-            var contentHtml = '' + stu_editor.txt.html();
-            var contentText = '' + stu_editor.txt.text();
-            if (contentText === ''){
-                isEmpty = true;
-            }else {
-                isEmpty = false;
-            }
-            var arrP = $("#div_text").children(0).children();
-            for (var i=0;i<arrP.length;i++){
-                if (arrP.eq(i).children("img").length > 0){
+        {
+            $("#icon-biji").click(function () {
+                $("#div_stuNote").css("display","block");
+            });
+            $("#stuNote_btn1").click(function () {
+                let isEmpty = true;
+                let lengthState = true;
+                let contentHtml = '' + stu_editor.txt.html();
+                let contentText = '' + stu_editor.txt.text();
+                if (contentText === ''){
+                    isEmpty = true;
+                }else {
                     isEmpty = false;
                 }
-            }
-            var data = {'content':contentHtml};
-            if(contentHtml.length>512){
-                alert("内容超出最大长度限制！");
-                lengthState = false;
-            }
-            if (isEmpty){
-                alert("内容为空无法提交！");
-            }
-            if(lengthState && !isEmpty){
-                $.ajax({
-                    type : "POST",
-                    url : "/stuNote/submit",
-                    data : data,
-                    success : function (res) {
-                        alert(res.retmsg);
-                        if (res.retmsg === '保存成功'){
-                            stu_editor.txt.clear();
-                        }
+                let arrP = $("#div_text").children(0).children();
+                for (let i=0;i<arrP.length;i++){
+                    if (arrP.eq(i).children("img").length > 0){
+                        isEmpty = false;
                     }
-                });
-            }
-            lengthState = true;
-        });
-        $("#stuNote_btn2").click(function () {
-            $("#div_stuNote").css("display","none");
-        });
-        $("#stuNoteCloseBtn").click(function () {
-            $("#div_stuNote").css("display","none");
-        });
+                }
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let sectionId = 1;
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let userId = 1;
+                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                if(contentHtml.length>512){
+                    alert("内容超出最大长度限制！");
+                    lengthState = false;
+                }
+                if (isEmpty){
+                    alert("内容为空无法提交！");
+                }
+                if(lengthState && !isEmpty){
+                    $.ajax({
+                        type : "POST",
+                        url : "/stuNote/submit",
+                        data : data,
+                        success : function (res) {
+                            alert(res.retmsg);
+                            if (res.retmsg === '保存成功'){
+                                stu_editor.txt.clear();
+                            }
+                        }
+                    });
+                }
+                lengthState = true;
+            });
+            $("#stuNote_btn2").click(function () {
+                $("#div_stuNote").css("display","none");
+            });
+            $("#stuNoteCloseBtn").click(function () {
+                $("#div_stuNote").css("display","none");
+            });
 
-        var stuE = window.wangEditor;
-        var stu_editor = new stuE('#div_stuNote_toolBar', '#div_stuNote_text');
-        stu_editor.customConfig.menus = [
-            'bold',
-            'italic',
-            'underline',
-            'image',
-            'code'
-        ];
-        // 隐藏"网络图片"tab
-        stu_editor.customConfig.showLinkImg = false;
-        stu_editor.customConfig.uploadFileName = 'file';
-        stu_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
-        stu_editor.customConfig.uploadImgTimeout = 1000*20;
-        stu_editor.customConfig.uploadImgMaxLength = 1;
-        stu_editor.customConfig.uploadImgHooks = {
-            customInsert: function (insertImg, result, stu_editor) {
-                var url = result.data;
-                insertImg(url)
-            }
-        };
-        stu_editor.create();
+            let stuE = window.wangEditor;
+            let stu_editor = new stuE('#div_stuNote_toolBar', '#div_stuNote_text');
+            stu_editor.customConfig.menus = [
+                'bold',
+                'italic',
+                'underline',
+                'image',
+                'code'
+            ];
+            // 隐藏"网络图片"tab
+            stu_editor.customConfig.showLinkImg = false;
+            stu_editor.customConfig.uploadFileName = 'file';
+            stu_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+            stu_editor.customConfig.uploadImgTimeout = 1000*20;
+            stu_editor.customConfig.uploadImgMaxLength = 1;
+            stu_editor.customConfig.uploadImgHooks = {
+                customInsert: function (insertImg, result, stu_editor) {
+                    let url = result.data;
+                    insertImg(url)
+                }
+            };
+            stu_editor.create();
+        }
 
 /*-----------------------------------------学生笔记 end----------------------------------------------------------------*/
 
@@ -745,6 +750,87 @@ $(document).ready(function () {
         }
 /*-----------------------------------------学生笔记选项卡 end-----------------------------------------------------------*/
 
+/*-----------------------------------------学生评论 begin--------------------------------------------------------------*/
+        {
+            $("#icon-pinglun").click(function () {
+                $("#div_stuCmt").css("display","block");
+            });
+            $("#stuCmt_btn1").click(function () {
+                let isEmpty = true;
+                let lengthState = true;
+                let contentHtml = '' + stuCmt_editor.txt.html();
+                let contentText = '' + stuCmt_editor.txt.text();
+                if (contentText === ''){
+                    isEmpty = true;
+                }else {
+                    isEmpty = false;
+                }
+                let arrP = $("#div_text").children(0).children();
+                for (let i=0;i<arrP.length;i++){
+                    if (arrP.eq(i).children("img").length > 0){
+                        isEmpty = false;
+                    }
+                }
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let sectionId = 1;
+                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                let userId = 1;
+                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                if(contentHtml.length>512){
+                    alert("内容超出最大长度限制！");
+                    lengthState = false;
+                }
+                if (isEmpty){
+                    alert("内容为空无法提交！");
+                }
+                if(lengthState && !isEmpty){
+                    $.ajax({
+                        type : "POST",
+                        url : "/stuComment/submit",
+                        data : data,
+                        success : function (res) {
+                            alert(res.retmsg);
+                            if (res.retmsg === '保存成功'){
+                                stuCmt_editor.txt.clear();
+                            }
+                        }
+                    });
+                }
+                lengthState = true;
+            });
+            $("#stuCmt_btn2").click(function () {
+                $("#div_stuCmt").css("display","none");
+            });
+            $("#stuCmtCloseBtn").click(function () {
+                $("#div_stuCmt").css("display","none");
+            });
+
+            let stuCmtE = window.wangEditor;
+            let stuCmt_editor = new stuCmtE('#div_stuCmt_toolBar', '#div_stuCmt_text');
+            stuCmt_editor.customConfig.menus = [
+                'bold',
+                'italic',
+                'underline',
+                'image',
+                'code'
+            ];
+            // 隐藏"网络图片"tab
+            stuCmt_editor.customConfig.showLinkImg = false;
+            stuCmt_editor.customConfig.uploadFileName = 'file';
+            stuCmt_editor.customConfig.uploadImgServer = 'stuComment/uploadPic';
+            stuCmt_editor.customConfig.uploadImgTimeout = 1000*20;
+            stuCmt_editor.customConfig.uploadImgMaxLength = 1;
+            stuCmt_editor.customConfig.uploadImgHooks = {
+                customInsert: function (insertImg, result, stuCmt_editor) {
+                    let url = result.data;
+                    insertImg(url)
+                }
+            };
+            stuCmt_editor.create();
+        }
+
+
+/*-----------------------------------------学生评论 end----------------------------------------------------------------*/
 
     });
 
