@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
      * @Author lufengxiang
      * @Description //TODO 分页查找后台用户
      * @Date 10:41 2019/11/19
-     * @Param []
+     * @Param [pagination]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     @Override
@@ -56,7 +56,7 @@ public class AdminServiceImpl implements AdminService {
      * @Author lufengxiang
      * @Description //TODO 通过用户所属角色查询用户
      * @Date 9:15 2019/11/20
-     * @Param [roleName]
+     * @Param [roleId]
      * @return java.util.List<com.zlk.zlkproject.entity.Admin>
      **/
     @Override
@@ -116,7 +116,7 @@ public class AdminServiceImpl implements AdminService {
      * @Author lufengxiang
      * @Description //TODO 通过用户ID修改其关联角色
      * @Date 17:09 2019/11/19
-     * @Param [adminsId]
+     * @Param [adminsId,rolesId]
      * @return java.lang.Integer
      **/
     @Override

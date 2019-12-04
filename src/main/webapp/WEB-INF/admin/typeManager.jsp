@@ -29,30 +29,38 @@
             width: auto;
         }
 
-        .form, .form input, .form select {
-            position: relative;
-            text-align: center;
+        #condition{
+            width: 180px;
         }
 
-        .form input, .form select {
-            margin-top: 15px;
-            height: 24px;
-            width: auto;
+        .form{
+            margin-top: 20px;
         }
+
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/type/insert" class="form">
-        方向名称 <input type="text" required placeholder="请输入方向名称" name="typeName"><br>
+    <form action="<%=request.getContextPath()%>/type/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">方向名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="typeName"  lay-verify="required" placeholder="请输入方向名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
 </div>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/type/update" class="form">
-        <input type="hidden" name="typeId" id="typeId"><br>
-        方向名称 <input type="text" required id="typeName" placeholder="请输入方向名称" name="typeName"><br>
+    <form action="<%=request.getContextPath()%>/type/update" class="form layui-form">
+        <input type="hidden" name="typeId" id="typeId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">方向名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="typeName" name="typeName"  lay-verify="required" placeholder="请输入方向名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -105,7 +113,7 @@
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">方向名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" placeholder="请输入要查询的方向名称" autocomplete="off" class="layui-input">\n' +
+                '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入要查询的方向名称" autocomplete="off" class="layui-input">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="layui-inline">\n' +

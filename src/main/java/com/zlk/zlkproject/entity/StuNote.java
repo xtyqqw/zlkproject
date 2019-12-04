@@ -7,29 +7,66 @@ import lombok.ToString;
 import java.util.Date;
 
 /**
- * @program: zlkproject
- * @description: StuNote实体类
- * @author: hry
- * @create: 2019/11/27 11:13
- **/
-@Getter
+ * (StuNote)实体类
+ * @author wangzheng
+ * @version 1.0
+ * @date 2019/11/27 13:42
+ */
 @Setter
+@Getter
 @ToString
 public class StuNote {
-    /**表id 主键 对应字段sn_id*/
+    /**
+     * 笔记ID 对应数据库的 sn_id 字段
+     */
     private Integer snId;
-    /**小节id 对应字段section_id*/
-    private Integer sectionId;
-    /**用户id 对应字段user_id*/
-    private Integer userId;
-    /**笔记内容 对应字段content*/
+
+    /**
+     * 小节ID 对应数据库的 section_id 字段
+     */
+    private Integer snSectionId;
+
+    /**
+     * 用户ID 对应数据库的 user_id 字段
+     */
+    private String snUserId;
+
+    /**
+     * 笔记内容 对应数据库的 content 字段
+     */
     private String content;
-    /**赞数 对应字段up*/
+
+    /**
+     * 赞 对应数据库的 up 字段
+     */
     private Integer up;
-    /**踩数 对应字段down*/
+
+    /**
+     * 踩 对应数据库的 down 字段
+     */
     private Integer down;
-    /**举报 对应字段report*/
+
+    /**
+     * 举报 对应数据库的 report 字段
+     */
     private String report;
-    /**创建时间 对应字段date*/
+
+    /**
+     * 日期 对应数据库的 report 字段
+     */
     private Date date;
+
+    public StuNote() {
+    }
+
+    public StuNote(Integer snId, Integer snSectionId, String snUserId, String content, Integer up, Integer down, String report, Date date) {
+        this.snId = snId;
+        this.snSectionId = snSectionId;
+        this.snUserId = snUserId;
+        this.content = content;
+        this.up = up;
+        this.down = down;
+        this.report = report;
+        this.date = date;
+    }
 }

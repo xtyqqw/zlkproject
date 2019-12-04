@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,8 @@ import java.util.List;
 @Getter
 @Setter
 public class MyQuestions {
+    /**对应userId*/
+    private String userId;
     /**type为0表示为问题*/
     private Integer type = 0;
     /**问题Id*/
@@ -26,7 +28,6 @@ public class MyQuestions {
     /**问题标题*/
     private String questionTitle;
     /**提问时间*/
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date createTime;
     /**浏览数*/
     private Integer browseCount;
@@ -34,6 +35,8 @@ public class MyQuestions {
     private Integer responseCount;
     /**问题方向*/
     private String typeName;
+    /**格式化后的日期*/
+    private String formatDate;
     /**问题标签*/
     private List<Tag> tagList = new ArrayList<>();
 

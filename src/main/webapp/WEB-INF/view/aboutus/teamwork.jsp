@@ -15,6 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="/js/jquery-1.12.4.js"></script>
     <script src="../layui/layui.js"></script>
     <style type="text/css">
         body{
@@ -177,7 +178,7 @@
                         <label>地址</label>
                         <input type="text" placeholder="请输入居住地址" required="required"
                                name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)"/>
-                        <span class="error" id="error" style="color: grey">(不能多余五十个字)</span>
+                        <span class="error" id="error" style="color: grey">(不能多余五十个文字)</span>
                     </li>
                     <li>
                         <label>性别</label>
@@ -188,7 +189,7 @@
                     </li><br />
                 </ul>
                 <div class="submit">                   <%--添加提交弹窗--%>
-                    <input class="login" type="submit" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
+                    <input class="login" type="button" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
                 </div>
             </form>
         </div>
@@ -201,6 +202,36 @@
             var element = layui.element;
             var layer = layui.layer;
         });
+        $(function () {
+            $(".login").click(function () {
+                var recruitName=$("#recruit_name").val();
+                var recruitBac=$("#recruit_bac").val();
+                var recruitNumber=$("#recruit_number").val();
+                var recruitPhone=$("#recruit_phone").val();
+                var recruitMail=$("#recruit_mail").val();
+                var recruitSite=$("#recruit_site").val();
+                var recruitSex=$("#recruit_sex").val();
+                var recruit={
+                    "recruitName":recruitName,
+                    "recruitBac":recruitBac,
+                    "recruitNumber":recruitNumber,
+                    "recruitPhone":recruitPhone,
+                    "recruitMail":recruitMail,
+                    "recruitSite":recruitSite,
+                    "recruitSex":recruitSex
+                };
+                $.ajax({
+                    type:'post',
+                    url:"<%=request.getContextPath()%>/recruit/recruits",
+                    data:recruit,
+                    datatype:'json',
+                    success:function (msg) {
+                        alert(msg.msg);
+
+                    }
+                });
+            })
+        })
 
     </script>
 

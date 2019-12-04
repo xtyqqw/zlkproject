@@ -35,7 +35,7 @@
     </resultMap>
     
     <select id="findCommentListByUserId" parameterType="com.zlk.zlkproject.entity.Comment" resultMap="commentEntityMap">
-      select  user.user_realname,user.user_realimg,comment.comments,comment.teacher_answer
+      select  user.user_realname,user.user_realimg,comment.comments,comment.teacher_answer,user.user_img
       FROM user,comment WHERE user.user_id = comment.comment_user_id
       and comment.comment_user_id=#{commentUserId}  limit #{startPage},#{limit}
     </select>

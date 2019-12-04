@@ -214,6 +214,7 @@ public class PersonalFollowController {
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
         String userId1 = (String) request.getSession().getAttribute("userId");
+        userId1 = "1";
         Integer result = personalFollowService.deFollow(userId1,userId);
         String code = result.toString();
         map.put("code",code);

@@ -2,7 +2,7 @@ package com.zlk.zlkproject.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @program: MyResponse
@@ -13,6 +13,8 @@ import java.sql.Date;
 public class MyResponse {
     /**type为1表示为回答*/
     private Integer type = 1;
+    /**主键Id*/
+    private Integer responseId;
     /**对应问题Id*/
     private Integer questionId;
     /**问题内容*/
@@ -26,8 +28,29 @@ public class MyResponse {
     /**是否已采纳*/
     private Integer accept;
     /**回答时间*/
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date createTime;
+    /**格式化后的时间*/
+    private String formatDate;
+
+    public Integer getResponseId() {
+        return responseId;
+    }
+
+    public void setResponseId(Integer responseId) {
+        this.responseId = responseId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public String getFormatDate() {
+        return formatDate;
+    }
+
+    public void setFormatDate(String formatDate) {
+        this.formatDate = formatDate;
+    }
 
     public Integer getQuestionId() {
         return questionId;
