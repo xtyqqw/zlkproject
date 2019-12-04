@@ -52,7 +52,7 @@ public class QuestionController {
     @RequestMapping(value = "/test")
     public String test() {
 
-        return "/view/community/tagTest";
+        return "/view/community/articleEdit";
     }
 
     /*

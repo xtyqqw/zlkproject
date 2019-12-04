@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kaiguan
@@ -9,6 +10,7 @@
 <html>
 <head>
     <title>发文须知</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .main {
@@ -86,6 +88,25 @@
         <%--javascript:void(0)--%>
         <a href="<%=request.getContextPath() %>/community/articleEdit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
     </div>
+    <div class="ui success message">
+        <c:if test="${not empty message}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p>${message}</p>
+        </c:if>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+    <script>
+        //消息提示关闭初始化
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+    </script>
     <%--<%@include file="../../jsp/footer.jsp"%>--%>
 
 </body>

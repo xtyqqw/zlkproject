@@ -10,7 +10,7 @@ import com.zlk.zlkproject.community.entity.Article;
  */
 public interface ArticleShowService {
 
-    Article getArticle(Long id);
+    Article getArticle(String id);
 
-    Article getAndConvert(Long id);
+    Article getAndConvert(String id);
 }

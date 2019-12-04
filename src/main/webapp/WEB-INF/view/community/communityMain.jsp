@@ -15,12 +15,20 @@
         }
         .all-body{
             text-align:center;
+<<<<<<< HEAD
             border: none 0;
         }
         .all-body-center{
             width: 1110px;
             height: 1250px;
             border: #FFB800 1px solid;
+=======
+        }
+        .all-body-center{
+            width: 1050px;
+            height: 1250px;
+            /*border: #FFB800 1px solid;*/
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             margin:0 auto;
         }
         .all-body-center .body-top{
@@ -63,8 +71,13 @@
         .add{
             position: relative;
             top: -12px;
+<<<<<<< HEAD
             left: 910px;
             width: 180px;
+=======
+            left: 860px;
+            width: 165px;
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             height: 38px;
             border-radius: 5%;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
@@ -75,7 +88,11 @@
         }
         /*横线样式*/
         .crossing{
+<<<<<<< HEAD
             width: 76%;
+=======
+            width: 80%;
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
@@ -110,7 +127,11 @@
             width: 100%;
             height: 100%;
             vertical-align: middle;
+<<<<<<< HEAD
             /*border: none 0;*/
+=======
+            /*border: #9f161b 3px solid;*/
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             scrolling: auto;
         }
         .wz_remenwenzhang{
@@ -168,7 +189,11 @@
             text-align: center;
             width: 2vw;
             height: 2vw;
-            color: black;	
+<<<<<<< HEAD
+            color: black;
+=======
+            color: black;
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             background-color: white;
         }
         .wz_remen_zt1{
@@ -204,7 +229,15 @@
             margin-top: 0.5vw;
         }
 
+<<<<<<< HEAD
 
+=======
+        .wz_remen_img{
+            float: left;
+            width: 3vw;
+            height: 3vw;
+        }
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
         .wz_remen_img img{
             width: 100%;
             height: 100%
@@ -242,6 +275,10 @@
         <div class="all-body-center">
             <div class="body-top">
                 <div class="navigation">
+<<<<<<< HEAD
+=======
+
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
                 </div>
                 <div class="add">
                     <a role="button" href="<%= request.getContextPath()%>">发表</a>
@@ -257,7 +294,11 @@
             </div>
             <div class="body-left">
                 <div class="body-context">
+<<<<<<< HEAD
                     <iframe name="pageTarget" frameborder="1" src="/article/findByCreateTime"> </iframe>
+=======
+                    <iframe name="pageTarget" frameborder="1" <%--src="/article/findByCreateTime"--%>> </iframe>
+>>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
                 </div>
             </div>
             <!--张照伟热门文章位置-->
