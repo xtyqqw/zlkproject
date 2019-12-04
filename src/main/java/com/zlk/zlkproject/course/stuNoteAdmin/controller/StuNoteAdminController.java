@@ -50,12 +50,11 @@ public class StuNoteAdminController {
      * @return
      */
     @RequestMapping("/stuNote/updateStuNoteByStuNote")
-    @ResponseBody
     public String updateStuNoteByStuNote(StuNote stuNote, HttpServletRequest request){
         int i = stuNoteAdminService.updateStuNoteByStuNote(stuNote);
         if(i>0){
             logUtil.setLog(request,"修改了笔记内容为"+stuNote+"的信息");
-            return "修改成功";
+            return "/view/toNoteManager";
         }
         return "修改失败";
     }

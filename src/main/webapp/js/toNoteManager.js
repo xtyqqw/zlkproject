@@ -15,7 +15,7 @@ layui.use(['table','form','layer'], function(){
             ,{field:'down', title: '踩', width:100}
             ,{field:'report', title: '举报', width:100, sort: true}
             ,{field:'date', title: '日期',templet: '<div>{{ layui.util.toDateString(d.date,"yyyy-MM-dd HH:mm:ss") }}</div>', width:170}
-            ,{fixed: '', title:'操作', toolbar:'#toolbarDemo', width:100, fixed: 'right'}
+            ,{fixed: 'right', title:'操作', toolbar:'#toolbarDemo', width:100, fixed: 'right'}
         ]]
         ,page: {
             curr:1
@@ -56,6 +56,27 @@ layui.use(['table','form','layer'], function(){
                     flag = false;
                 }
             });
-        };
+        }
+        else if(obj.event === 'edit'){
+            $("#snId").val(snId);
+            console.log(obj.data.report);
+            if(obj.data.report=="false"){
+                $("#report").find("#reportFalse").prop("selected",true);
+                form.render();
+            }else if (obj.data.report=="true"){
+                $("#report").find("#reportTrue").prop("selected",true);
+                form.render();
+            }else{
+                $("#report").find("#reportNull").prop("selected",true);
+                form.render();
+
+            }
+            layer.open({
+                title: "修改",
+                type: 1,
+                area: ['40%', '80%'],
+                content: $("#updateStuNote")
+            });
+        }
     });
 });
