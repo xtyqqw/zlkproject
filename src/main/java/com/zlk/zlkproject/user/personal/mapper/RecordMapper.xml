@@ -29,7 +29,7 @@
                     <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
                     <result property="sectionName" column="section_name" javaType="java.lang.String"/>
                     <result property="videoAddr" column="video_addr" javaType="java.lang.String"/>
-                    <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
+                    <result property="sectionTime" column="section_time" javaType="java.util.Date"/>
                 </collection>
             </collection>
         </collection>
