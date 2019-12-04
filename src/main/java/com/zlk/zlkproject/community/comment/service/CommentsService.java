@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CommentsService {
 
-    List<Comment> listCommentByArticleId(Long articleId);
+    List<Comment> listCommentByArticleId(String articleId);
 
     Comment saveComment(Comment comment);
 }
