@@ -178,7 +178,7 @@
                 </div>
             </div>
         </li>
-        </c:forEach>>
+        </c:forEach>
     </ul>
 </div>
 <div hidden="hidden" id="demo" style="padding: 25px">
@@ -220,6 +220,7 @@
                 url: "<%=request.getContextPath()%>/articles/datele?articleId="+articleId,
                 success: function(msg){
                     layer.msg(msg);
+                    window.location.href = location.href;
                 }
             });
             layer.close(index);
@@ -227,7 +228,7 @@
     }
     layui.use('layer', function(){
         var $ = layui.jquery, layer = layui.layer;
-        window.editArt = function(){
+        window.editArt = function(obj,articleId){
             $("#articleContent").html(obj);
             $("#input_hid").val(articleId);
             layer.open({

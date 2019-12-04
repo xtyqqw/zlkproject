@@ -68,11 +68,11 @@ public class ArticlesController {
      */
     @RequestMapping(value = "/datele")
     public String deleteArticles(String articleId)throws Exception{
-        Integer flag=articlesService.deleteArticles("1");
+        Integer flag=articlesService.deleteArticles(articleId);
         if(flag == 1){
-            return "";
+            return "删除成功";
         }else {
-            return null;
+            return "删除失败";
         }
     }
     /*流加载*/
