@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.articleShow.controller;
 
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
+import com.zlk.zlkproject.community.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,10 @@ public class ArticleShowController {
     @Autowired
     private ArticleShowService articleShowService;
 
-    @GetMapping(value = "/community/article-show/{id}")
-    public ModelAndView articleShow(Long id) {
+    @GetMapping(value = "/community/article-show")
+    public ModelAndView articleShow(String id) {
         ModelAndView mv=new ModelAndView();
+        id="1829739930";
         mv.addObject("article", articleShowService.getAndConvert(id));
         mv.setViewName("view/community/articleShow");
         return mv;
