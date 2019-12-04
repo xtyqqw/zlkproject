@@ -18,6 +18,7 @@ import java.util.List;
  * @create: 2019/12/3 15:59
  **/
 @Controller
+@RequestMapping(value = "/myfaqq")
 public class FaqqController {
     @Autowired
     FaqqService faqqService;
