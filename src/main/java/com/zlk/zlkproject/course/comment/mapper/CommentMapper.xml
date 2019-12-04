@@ -8,9 +8,10 @@
         <result property="commentUserId" column="comment_user_id" javaType="java.lang.Integer"></result>
         <result property="comments" column="comments" javaType="java.lang.String"></result>
         <result property="teacherAnswer" column="teacher_answer" javaType="java.lang.String"></result>
+        <result property="like" column="like" javaType="java.lang.Integer"></result>
+        <result property="dislike" column="dislike" javaType="java.lang.Integer"></result>
 
-
-            <result property="user_id" column="userId" javaType="java.lang.String"/>
+        <result property="user_id" column="userId" javaType="java.lang.String"/>
             <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
             <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
             <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
@@ -35,8 +36,8 @@
     </resultMap>
     
     <select id="findCommentListByUserId" parameterType="com.zlk.zlkproject.entity.Comment" resultMap="commentEntityMap">
-      select  user.user_realname,user.user_realimg,comment.comments,comment.teacher_answer,user.user_img
+      select  user.user_realname,user.user_realimg,comment.comments,comment.teacher_answer,user.user_img,comment.like,comment.dislike
       FROM user,comment WHERE user.user_id = comment.comment_user_id
-      and comment.comment_user_id=#{commentUserId}  limit #{startPage},#{limit}
+      and comment.comment_user_id=#{commentUserId}  ORDER BY comment.like DESC limit #{startPage},#{limit}
     </select>
 </mapper>

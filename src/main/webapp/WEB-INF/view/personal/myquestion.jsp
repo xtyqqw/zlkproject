@@ -334,7 +334,7 @@
                 url: "/myyNote/delete?snId="+snId,
                 success: function(msg){
                     layer.msg(msg);
-                    window.location.href = location.href;
+                    window.location.href = location.href;//删除后刷新当前页面
                 }
             });
             layer.close(index);
