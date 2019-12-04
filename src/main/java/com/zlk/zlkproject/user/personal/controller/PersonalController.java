@@ -54,4 +54,13 @@ public class PersonalController {
     public String hefollows(){
         return "view/personal/hefollows";
     }
+
+    /**
+     * 我的问答
+     * @return
+     */
+    @RequestMapping("/myquestion")
+    public String myquestion(){
+        return "view/personal/myquestion";
+    }
 }

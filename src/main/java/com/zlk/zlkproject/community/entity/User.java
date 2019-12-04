@@ -22,8 +22,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String nickname;
     private String avatar;
     @Temporal(TemporalType.TIMESTAMP)
