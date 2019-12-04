@@ -42,7 +42,7 @@ public class ArticlesController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("list",list);
         mv.addObject("articles",articles);
-        mv.setViewName("");
+        mv.setViewName("view/personal/myArticle");
         return mv;
     }
 
@@ -52,10 +52,11 @@ public class ArticlesController {
      * @return
      */
     @RequestMapping(value = "update")
+//    @ResponseBody
     public String updateArticles(Articles articles)throws Exception{
         Integer flag=articlesService.updateArticles(articles);
         if(flag == 1){
-            return "";
+            return "redirect:/articles/toarticles";
         }else {
             return null;
         }
@@ -68,9 +69,9 @@ public class ArticlesController {
      */
     @RequestMapping(value = "/datele")
     public String deleteArticles(String articleId)throws Exception{
-        Integer flag=articlesService.deleteArticles("1");
+        Integer flag=articlesService.deleteArticles(articleId);
         if(flag == 1){
-            return "";
+            return "redirect:/articles/toarticles";
         }else {
             return null;
         }
