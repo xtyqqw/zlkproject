@@ -14,6 +14,5 @@ public interface QuestionService {
      * @return com.zlk.zlkproject.entity.Question
      * @date 2019/12/3 11:44
      */
-    Integer addQuestion( String questionTitle, String questionContent, Date createTime, String typeName, String tagName);
-
+    Integer addQuestion(Question question);
 }

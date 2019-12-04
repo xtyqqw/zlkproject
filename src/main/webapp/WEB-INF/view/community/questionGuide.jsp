@@ -183,7 +183,7 @@
                 <li>恶意谩骂攻击他人</li>
             </ul>
         </div>
-            <a href="<%=request.getContextPath() %>/question/edit" role="button" class="btn btn-info col-md-3">知道了，开始提问</a>
+            <a href="<%=request.getContextPath() %>/question/editQuestion" role="button" class="btn btn-info col-md-3">知道了，开始提问</a>
     </div>
     <%--<%@include file="../../jsp/footer.jsp"%>--%>
 </div>

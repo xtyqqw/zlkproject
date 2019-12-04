@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.question.service.impl;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import com.zlk.zlkproject.community.question.mapper.QuestionTagMapper;
 import com.zlk.zlkproject.community.question.service.QuestionTagService;
 import com.zlk.zlkproject.entity.Tag;
@@ -20,7 +21,7 @@ public class QuestionTagServiceImpl implements QuestionTagService {
     private QuestionTagMapper questionTagMapper;
 
     @Override
-    public List<Tag> selectTagByTypeId(String tagTypeId) {
-        return questionTagMapper.selectTagByTypeId(tagTypeId);
+    public List<Tag> listTagAll() {
+        return questionTagMapper.listTagAll();
     }
 }

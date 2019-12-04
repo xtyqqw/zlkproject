@@ -4,9 +4,7 @@
 <html>
 <head>
     <title>社区</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
@@ -15,54 +13,45 @@
         }
         .all-body{
             text-align:center;
-<<<<<<< HEAD
+
             border: none 0;
         }
         .all-body-center{
             width: 1110px;
             height: 1250px;
             border: #FFB800 1px solid;
-=======
+
         }
         .all-body-center{
             width: 1050px;
             height: 1250px;
             /*border: #FFB800 1px solid;*/
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
+
+            border: none 0;
+        }
+        .all-body-center{
+            width: 1340px;
+            height: 1600px;
+
             margin:0 auto;
+            border: none 0;
         }
         .all-body-center .body-top{
-            border: #00B83F 2px solid;
             width: 100%;
-            height: 110px;
-        }
-        /*钱克勤导航栏位置*/
-        .navigation{
-            /*border: #0000cc 2px solid;*/
-            width: 78%;
-            height: 40px;
-            position: relative;
-            top: 30px;
+            height: 115px;
         }
         .all-body-center .body-left{
-           /* border: #2D93CA 1px solid;*/
             float: left;
-            width: 845px;
-            height: 1000px;
-        }
-        /*张照伟热门文章位置*/
-        .all-body-center .body-right{
-            /*border: #00FF00 1px solid;*/
-            float: right;
-            width: 201px;
-            height: 1000px;
+            width: 930px;
+            height: 1500px;
+            border: none 0;
         }
         /*发表按钮样式*/
         .add a {
             /*background-color: #9933FF;*/
             font-family: "Arial";
             color: #F8F8F8;
-            font-size: 14px;
+            font-size: 18px;
             /*border: solid #1296db 1px;*/
             text-decoration: none;
             display: block;
@@ -71,43 +60,43 @@
         .add{
             position: relative;
             top: -12px;
-<<<<<<< HEAD
             left: 910px;
             width: 180px;
-=======
-            left: 860px;
-            width: 165px;
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             height: 38px;
             border-radius: 5%;
+      /*      top: 26px;
+            left: 942px;
+            width: 320px;
+            height: 42px;*/
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
             background-color: #1296db;
             text-align:center;
+            line-height:45px;
+            overflow:hidden;
+            vertical-align:middle;
         }
         /*横线样式*/
         .crossing{
-<<<<<<< HEAD
             width: 76%;
-=======
-            width: 80%;
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
-            bottom: 5px;
+            bottom: -15px;
+            left: 12px;
         }
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
             width: 220px;
             position: relative;
-            left: 0;
-            bottom: -1px;
+            left: -2px;
+            bottom: -31px;
         }
         .tab a{
             color:  #989898;
+            font-size: 16px;
             padding: 0 10px;
             line-height: 1px;
             text-align: left;
@@ -125,18 +114,16 @@
         /*选项卡内容框样式*/
         iframe{
             width: 100%;
-            height: 100%;
+            height: 98%;
             vertical-align: middle;
-<<<<<<< HEAD
             /*border: none 0;*/
-=======
             /*border: #9f161b 3px solid;*/
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             scrolling: auto;
-        }
+            border: none 0;
+      }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: -4vw;
+            margin-left: 55vw;
             margin-top: 0vw;
         }
         .wz_remen{
@@ -189,17 +176,13 @@
             text-align: center;
             width: 2vw;
             height: 2vw;
-<<<<<<< HEAD
             color: black;
-=======
-            color: black;
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
             background-color: white;
         }
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 4vw;
+            margin-left: 63vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -216,7 +199,7 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 4vw;
+            margin-left: 63vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -229,15 +212,11 @@
             margin-top: 0.5vw;
         }
 
-<<<<<<< HEAD
-
-=======
         .wz_remen_img{
             float: left;
             width: 3vw;
             height: 3vw;
         }
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
         .wz_remen_img img{
             width: 100%;
             height: 100%
@@ -275,13 +254,9 @@
         <div class="all-body-center">
             <div class="body-top">
                 <div class="navigation">
-<<<<<<< HEAD
-=======
-
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
                 </div>
                 <div class="add">
-                    <a role="button" href="<%= request.getContextPath()%>">发表</a>
+                    <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
                 </div>
                 <div class="crossing"></div>
                 <div class="tab">
@@ -294,15 +269,11 @@
             </div>
             <div class="body-left">
                 <div class="body-context">
-<<<<<<< HEAD
-                    <iframe name="pageTarget" frameborder="1" src="/article/findByCreateTime"> </iframe>
-=======
-                    <iframe name="pageTarget" frameborder="1" <%--src="/article/findByCreateTime"--%>> </iframe>
->>>>>>> e28dac0a4530db72e5cc3089e335fd52faf646c4
+
+                    <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
+
                 </div>
             </div>
-            <!--张照伟热门文章位置-->
-            <div class="body-right">
                 <div class="wz_remenwenzhang">
                     <div class="wz_remen">
                         <div class="wz_remen_wz">
@@ -354,8 +325,6 @@
                         </ul>
                     </div>
                 </div>
-
-            </div>
         </div>
         <%@include file="../../jsp/footer.jsp"%>
     </div>

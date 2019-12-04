@@ -1,23 +1,19 @@
 package com.zlk.zlkproject.community.question.controller;
 
-import com.zlk.zlkproject.community.question.mapper.QuestionTagMapper;
-import com.zlk.zlkproject.community.question.mapper.QuestionTypeMapper;
+import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.question.service.QuestionTagService;
-import com.zlk.zlkproject.community.question.service.QuestionTypeService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
-import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
-import com.zlk.zlkproject.entity.Type;
 import org.apache.commons.io.FileUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,12 +34,10 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
     @Autowired
-    private QuestionTypeService questionTypeService;
-    @Autowired
     private QuestionTagService questionTagService;
 
     /*
-     * @descrption 分类选择标签页面
+     * @descrption 测试页面
      * @author gby
      * @param []
      * @return java.lang.String
@@ -52,7 +46,7 @@ public class QuestionController {
     @RequestMapping(value = "/test")
     public String test() {
 
-        return "/view/community/articleEdit";
+        return "/view/community/questionMain";
     }
 
     /*
@@ -95,10 +89,13 @@ public class QuestionController {
      * @return org.springframework.web.servlet.ModelAndView
      * @date 2019/12/3 14:20
      */
-    @RequestMapping(value = "/edit")
-    public String edit() {
-
-        return "/view/community/questionEdit";
+    @RequestMapping(value = "/editQuestion")
+    public ModelAndView edit(Tag tag) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<Tag> tagList = questionTagService.listTagAll();
+        mv.addObject("tagList",tagList);
+        mv.setViewName("/view/community/questionEdit");
+        return mv;
     }
 
     /*
@@ -109,18 +106,44 @@ public class QuestionController {
      * @date 2019/11/27 16:46
      */
     @PostMapping(value = "/addQuestion")
-    public String addQuestion(Question question,Model model, String questionTitle, String questionContent, Date createTime, String typeName, String tagName) throws Exception {
-        questionService.addQuestion(questionTitle, questionContent, createTime, typeName, tagName);
-        question.setQuestionId(UUIDUtils.getId());
-        model.addAttribute("questionTitle",questionTitle);
-        model.addAttribute("questionContent",questionContent);
-        model.addAttribute("createTime",createTime);
-        model.addAttribute("typeName",typeName);
-        model.addAttribute("tagName",tagName);
-        return "/view/community/communityMain";
-
+    public String addQuestion(Question question, RedirectAttributes attributes) throws Exception {
+        Integer qu = questionService.addQuestion(question);
+        if (qu != null){
+            attributes.addAttribute("msg","发表成功");
+            return "/view/community/communityMain";
+        }else {
+            attributes.addAttribute("msg","发表失败");
+            return "/view/community/questionEdit";
+        }
     }
 
+    //文章编辑页面的图片上传方法
+    @RequestMapping(value="/uploadfile",method= RequestMethod.POST)
+    public void hello(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
+        try {
+            request.setCharacterEncoding( "utf-8" );
+            response.setHeader( "Content-Type" , "text/html" );
+            String rootPath = request.getSession().getServletContext().getRealPath("upload1");
+            /**
+             * 文件路径不存在则需要创建文件路径
+             */
+            File filePath=new File(rootPath);
+            if(!filePath.exists()){
+                filePath.mkdirs();
+            }
+            //最终文件名
+            File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
+            FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
+            //下面response返回的json格式是editor.md所限制的，规范输出就OK
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 
 
 }

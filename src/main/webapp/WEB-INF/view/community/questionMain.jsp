@@ -45,7 +45,7 @@
 
     <div class="add">
         <div style="margin-top: 2px;text-align: center;color: red">
-            <a role="button" href="<%= request.getContextPath()%>/question/hint">我要提问</a>
+            <a role="button" href="<%= request.getContextPath()%>/question/main">我要提问</a>
         </div>
     </div>
 </div>

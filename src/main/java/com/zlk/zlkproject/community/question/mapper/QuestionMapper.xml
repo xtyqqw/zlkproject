@@ -18,11 +18,12 @@
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
         <result column="section_id" property="sectionId" javaType="java.lang.Integer"/>
         <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
+        <result column="create_question_type" property="createQuestionType" javaType="java.lang.String"/>
     </resultMap>
 
-    <insert id="addQuestion">
-        insert into question (question_title,question_content,create_time,type_name,tag_name)
-            values (#{questionTitle},#{questionContent},#{createTime},#{typeName},#{tagName})
+    <insert id="addQuestion"  parameterType="com.zlk.zlkproject.entity.Question" >
+        insert into question (question_id,question_title,question_content,create_time,type_name,tag_name,create_question_type)
+            values (#{questionId},#{questionTitle},#{questionContent},#{createTime},#{typeName},#{tagName},#{createQuestionType})
     </insert>
 
 

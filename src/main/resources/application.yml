@@ -60,11 +60,9 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:192.168.124.17
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT

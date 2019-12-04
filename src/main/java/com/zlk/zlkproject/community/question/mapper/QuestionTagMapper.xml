@@ -9,12 +9,9 @@
         <result column="tag_type_id" property="tagTypeId" javaType="java.lang.Integer"/>
         <result column="tag_type_name" property="tagTypeName" javaType="java.lang.String"/>
     </resultMap>
-    <resultMap id="typeEntityMap" type="com.zlk.zlkproject.entity.Type">
-        <id column="type_id" property="typeId" javaType="java.lang.Integer"/>
-        <result column="type_name" property="typeName" javaType="java.lang.String"/>
-    </resultMap>
 
-    <select id="selectTagByTypeId" resultMap="tagEntityMap" parameterType="java.lang.Integer">
-        SELECT tag_name=#{tagName} from tag where (tag_type_id=#{tagTypeId})=(SELECT type_id=#{typeId} FROM type where type_name=typeName)
+
+    <select id="listTagAll" resultMap="tagEntityMap" parameterType="java.lang.String">
+      select * from tag
     </select>
 </mapper>

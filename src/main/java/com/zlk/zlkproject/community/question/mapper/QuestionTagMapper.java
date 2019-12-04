@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.question.mapper;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import com.zlk.zlkproject.entity.Tag;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,5 +15,5 @@ public interface QuestionTagMapper {
      * @return
      * @date 2019/12/3 11:42
      */
-    List<Tag> selectTagByTypeId(String tagTypeId);
+    List<Tag> listTagAll();
 }

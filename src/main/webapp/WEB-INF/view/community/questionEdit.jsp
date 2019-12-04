@@ -13,41 +13,42 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrapValidator.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="/layui/layui.js"></script>
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css"
+          rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
+       body{
+            background: url("/img/12949615.jpg");
+        }
         .top {
             height: auto;
-            width: 100%;
-            left: 0px;
-            margin-top: 0px; /*离顶部的距离为0*/
+            width: auto;
+            left: 0;
+            top: 0; /*离顶部的距离为0*/
         }
+
         .header {
             width: 100%;
             height: 60px;
-            background-color: #FCFCFC;
-            left: 0px;
-            margin-top: 0px;
-            border-bottom: 1px solid #F5F5F5;
+            background-color: #F5F5F5;
         }
-        header input {
-            margin-left: -240px;
-            margin-top: 7px;
-            padding: 10px;
-            border: 0; /* 去除未选中状态边框*/
-            outline: none; /* 去除选中状态边框*/
-            background-color: rgba(0, 0, 0, 0); /* 透明背景*/
-        }
-        header a {
-            text-decoration: none !important;
-            margin-top: 100px;
 
-            font-size: 25px;
-            margin-left: 800px;
+        .header #a1 {
+            float: left;
+            width: 80px;
+            padding: 10px;
+            margin-left: 100px;
+            margin-top: 10px;
+        }
+
+        #h4 {
+           color: #778899;
+            font-size: 20px;
+            text-align: center;
         }
 
     </style>
@@ -56,145 +57,142 @@
 <body>
 <div class="top">
     <div class="header">
-        <div style="margin-top: 20px;margin-left: -1220px">
-            <a class="btn btn-default" href="<%=request.getContextPath() %>/question/hint" role="button">
-                &lsaquo;&nbsp;&nbsp;返回</a>
-        </div>
-        <div style="margin-top: -35px;">
-            <h4 style="color: #778899">问题编辑</h4>
+        <%-- <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>--%>
+        <a class="btn btn-default" id="a1" href="<%=request.getContextPath() %>/question/hint" role="button">
+            &lsaquo;&nbsp;&nbsp;返回</a>
+    </div>
+    <div style="margin-top: -45px;margin-left: 730px;float: left;">
+        <h4 id="h4">问题编辑</h4>
+    </div>
+
+    <div class="m-container m-padded-tb-big">
+        <div class="ui container">
+            <form action="<%=request.getContextPath() %>/question/addQuestion" method="post" class="ui form">
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <div class="ui selection compact teal basic dropdown label">
+                            <input type="hidden" value="原创" name="createQuestionType">
+                            <i class="dropdown icon"></i>
+                            <div class="text">原创</div>
+                            <div class="menu">
+                                <div class="item" data-value="原创">原创</div>
+                                <div class="item" data-value="转载">转载</div>
+                            </div>
+                        </div>
+                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="required field">
+                    <div id="md-content" style="z-index: 1 !important;">
+                        <textarea name="questionContent" style="display: none"></textarea>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact teal basic label">方向</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="typeName">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择方向</div>
+                                <div class="menu">
+                                    <div class="item" data-value="java">java</div>
+                                    <div class="item" data-value="linux">linux</div>
+                                    <div class="item" data-value="html">html</div>
+                                    <div class="item" data-value="mysql">mysql</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact teal basic label">标签</label>
+                            <div class="ui fluid selection multiple search dropdown">
+                                <input type="hidden" name="tagName" maxlength="3">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择标签</div>
+                                <div class="menu">
+                                    <div class="item" data-value="java">java</div>
+                                    <div class="item" data-value="linux">linux</div>
+                                    <div class="item" data-value="html">html</div>
+                                    <div class="item" data-value="mysql">mysql</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui error message"></div>
+                <div class="ui right aligned container">
+                    <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>
+                </div>
+            </form>
         </div>
     </div>
-    <form action="<%=request.getContextPath() %>/question/addQuestion" method="post">
-        <div>
-            <input type="text" id="title" style="color: #8D8D8D;font-size:30px;border:none;width: 1290px;height:70px;"
-                   name="questionTitle"
-                   placeholder="简明扼要的描述你的标题" option="none" required minlength="2" maxlength="50">
-        </div>
-        <div id="test-editormd" class="form-group">
-            <textarea style="display:none;" name="questionContent" class="form-control" minlength="10" maxlength="99999"></textarea>
-        </div>
-        <div style="width: 1293px; margin-left: 113px; margin-top: 20px; margin-bottom: 20px;" class="form-group">
-            <select class="selectpicker dropup form-control show-tick" data-dropup-auto="false" title="请选择分类" name="typeName">
-                <option value="java">java</option>
-                <option value="linux">linux</option>
-                <option value="html">html</option>
-                <option value="mysql">mysql</option>
-            </select>
-        </div>
-        <div style="width: 1293px; margin-left: 113px; margin-top: 20px; " class="form-group">
-            <select class="selectpicker dropup form-control" data-dropup-auto="false" data-size="7" multiple name="tagName" title="选择标签0/3" data-live-search="true" data-live-search-placeholder="可以搜索标签..." data-max-options="3">
-                <option value="java">java</option>
-                <option value="java开发">java开发</option>
-                <option value="spring">spring</option>
-                <option value="mysql">mysql</option>
-                <option value="技术生活">技术生活</option>
-                <option value="面试题目">面试题目</option>
-                <option value="redis">redis</option>
-                <option value="c">c</option>
-                <option value="云计算">云计算</option>
-                <option value="c#">c#</option>
-                <option value="c++">c++</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-info col-md-1"
-                style="margin-left: 1280px; margin-top: 20px; margin-bottom:40px;background-color: #1296db">发布问题
-        </button>
-    </form>
 </div>
-
-<script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-select/1.9.1/js/bootstrap-select.min.js"></script>
-<script src="<%=request.getContextPath() %>/bootstrap/js/bootstrapValidator.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
+    /*MarkDown组件*/
     var testEditor;
     $(function () {
-        testEditor = editormd("test-editormd", {
-            codeFold: true,
-            saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
-            searchReplace: true,
-            htmlDecode: "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
-            emoji: true,
-            taskList: true,
-            tocm: true,
-            tex: true,
-            flowChart: true,
-            sequenceDiagram: true,
+        testEditor = editormd("md-content", {
+            width: "100%",
+            height: 640,
             placeholder: " 例:详细描述你所遇到的问题细节\n    通过图片、代码或链接完善内容\n    尝试哪些方法仍没有解决\n    你期待一个什么样的结果",
-            dialogMaskBgColor: "#fff",
-            gotoLine: true,
-            width: "85%",
-            height: 520,
             syncScrolling: "single",
+            //你的lib目录的路径
             path: "../editormd/lib/",
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/upload"
-        });
-    });
-    $('.selectpicker').selectpicker('refresh');
-
-    $(function () {
-        $('#addArticle').bootstrapValidator({
-            excluded: [':disabled'],//排除无需验证的控件
-            //表单框里右侧的icon
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                title: {
-                    validators: {
-                        notEmpty: {
-                            message: '标题不能为空'
-                        },
-                        stringLength: {
-                            min: 0,
-                            max: 50,
-                            message: '标题长度必须在50位以内'
-                        }
-                    }
-                },
-
-                createArticleType: {
-                    validators: {
-                        notEmpty: {
-                            message: '请选择发文类型'
-                        }
-                    }
-                },
-                setTags: {
-                    validators: {
-                        notEmpty: {
-                            message: '请至少选择一个文章标签'
-                        }
-                    }
-                },
-                typeName: {
-                    validators: {
-                        notEmpty: {
-                            message: '请至少选择一个文章方向'
-                        }
-                    }
-                }
-            },
-            /*submitHandler: function (validator, form, submitButton) {
-                alert("发表成功");
-            }*/
+            imageUploadURL: "/uploadfile"
+            //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
+            //saveHTMLToTextarea : true
         });
     });
 
-
+    /*下拉框渲染开启*/
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+    /*表单验证开启*/
+    $('.ui.form').form({
+        fields: {
+            questionTitle: {
+                identifier: 'questionTitle',
+                rules: [{
+                    type: 'empty',
+                    prompt: '提示：请输入文章标题'
+                }]
+            },
+            questionContent: {
+                identifier: 'questionContent',
+                rules: [{
+                    type: 'empty',
+                    prompt: '提示：请输入文章内容'
+                }]
+            },
+            typeName: {
+                identifier: 'typeName',
+                rules: [{
+                    type: 'empty',
+                    prompt: '提示：请选择文章分类'
+                }]
+            },
+            tagName : {
+                identifier: 'tagName',
+                rules: [{
+                    type : 'empty',
+                    prompt: '提示：请选择文章标签'
+                }]
+            },
+        }
+    });
 </script>
 </body>
 </html>

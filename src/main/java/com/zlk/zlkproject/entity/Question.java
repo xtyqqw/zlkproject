@@ -23,8 +23,10 @@ public class Question {
     /*是否解决：0没有解决，1已解决，2待解决*/
     private Integer solve;
     /*提问时间*/
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "ETC/GMT-8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    /**问题类型：0 原创，1 转载，2 翻译*/
+    private String createQuestionType;
     /*浏览数*/
     private Integer browseCount;
     /*用户表主键*/
@@ -37,7 +39,7 @@ public class Question {
     private Integer check;
     /**标签名称*/
     private String tagName;
-    /**问题分类*/
+    /*分类*/
     private String typeName;
     /*小节表主键*/
     private Integer sectionId;
@@ -47,23 +49,4 @@ public class Question {
     public Question() {
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionId='" + questionId + '\'' +
-                ", questionTitle='" + questionTitle + '\'' +
-                ", questionContent='" + questionContent + '\'' +
-                ", solve=" + solve +
-                ", createTime=" + createTime +
-                ", browseCount=" + browseCount +
-                ", userId=" + userId +
-                ", zanCount=" + zanCount +
-                ", caiCount=" + caiCount +
-                ", check=" + check +
-                ", tagName='" + tagName + '\'' +
-                ", typeName='" + typeName + '\'' +
-                ", sectionId=" + sectionId +
-                ", responseCount=" + responseCount +
-                '}';
-    }
 }

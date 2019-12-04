@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.question.service;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import com.zlk.zlkproject.entity.Tag;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,5 @@ public interface QuestionTagService {
      * @return
      * @date 2019/12/3 11:42
      */
-    List<Tag> selectTagByTypeId(String tagTypeId);
+    List<Tag> listTagAll();
 }
