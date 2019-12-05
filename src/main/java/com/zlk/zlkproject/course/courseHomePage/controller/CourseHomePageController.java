@@ -31,7 +31,8 @@ public class CourseHomePageController {
 
     @RequestMapping(value = "/selectCoursesByCoursesId")
     @ResponseBody
-    public Map<String,Object> selectCoursesByCoursesId(Integer coursesId) {
+    public Map<String,Object> selectCoursesByCoursesId(HttpServletRequest request,Integer coursesId) {
+        coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         System.out.println(courses);
         Map<String,Object> map=new HashMap<>();

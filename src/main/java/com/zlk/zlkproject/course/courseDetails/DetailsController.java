@@ -99,9 +99,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public boolean seleUserCoursesByUserCourses(UserCourses userCourses){
+    public boolean seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
         userCourses.setUserId(1);
-        userCourses.setCoursesId(1);
+        userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
             return true;
