@@ -138,8 +138,8 @@
                             ${user.userRealname}
                         </a>
                         <dl class="layui-nav-child">
-                            <a href="javascript:;">个人中心</a>
-                            <a href="javascript:;">退了</a>
+                            <a href="/personal/person">个人中心</a>
+                            <a href="/user/logout;">退了</a>
                         </dl>
                     </li>
                 </ul>

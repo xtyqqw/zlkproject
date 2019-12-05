@@ -42,7 +42,7 @@
             <result property="studyTime" column="study_time" javaType="java.util.Date"/>
     </resultMap>
     <!--查询学习记录-->
-    <select id="selectCourses" resultMap="ItemMap" parameterType="java.lang.String">
+    <select id="selectCourses" resultMap="ItemMap" parameterType="com.zlk.zlkproject.user.entity.FollowerPage">
         select * from (select
         u.user_id,
         c.courses_id,
@@ -57,7 +57,7 @@
         JOIN chapter ch on ch.courses_id=c.courses_id
 		JOIN section s on s.chapter_id=ch.chapter_id
 		JOIN user_section us on us.section_id=s.section_id
-        where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC
+        where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC limit #{index},#{limit}
     </select>
     <select id="selectUserSection"  parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(state) from user_section

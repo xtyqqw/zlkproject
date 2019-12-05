@@ -31,6 +31,12 @@ public class UserController {
     @Autowired
     SignService signService;
 
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "redirect:/index/toIndex";
+    }
+
     @RequestMapping(value = "/test")
     public String test() throws ClientException {
         GetCode getCode = new GetCode();
@@ -163,7 +169,7 @@ public class UserController {
                 session.setAttribute("user",user1);
                 mv.addObject("userId",user1.getUserId());
                 //跳转至首页
-                mv.setViewName("/index/toIndex");
+                mv.setViewName("redirect:/index/toIndex");
                 return mv;
             }else {
                 mv.setViewName("/view/signin");
