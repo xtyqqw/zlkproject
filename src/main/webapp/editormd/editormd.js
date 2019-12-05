@@ -31,7 +31,7 @@
 	} 
 	else
 	{ 
-        window.editormd = factory();
+            window.editormd = factory();
 	}
     
 }(function() {    

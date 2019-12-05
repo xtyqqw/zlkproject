@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.mapper.RecordMapper;
@@ -47,5 +48,9 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public Integer selectUser(String userId){
         return recordMapper.selectUser(userId);
+    }
+    @Override
+    public Integer findCourses(String userId){
+        return recordMapper.findCourses(userId);
     }
 }
