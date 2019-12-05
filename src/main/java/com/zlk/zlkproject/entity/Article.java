@@ -5,6 +5,7 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 
