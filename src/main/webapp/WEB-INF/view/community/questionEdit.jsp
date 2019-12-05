@@ -20,10 +20,12 @@
           rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <style>
-       body{
+        body {
             background: url("/img/12949615.jpg");
         }
+
         .top {
             height: auto;
             width: auto;
@@ -46,7 +48,7 @@
         }
 
         #h4 {
-           color: #778899;
+            color: #778899;
             font-size: 20px;
             text-align: center;
         }
@@ -67,7 +69,7 @@
 
     <div class="m-container m-padded-tb-big">
         <div class="ui container">
-            <form action="<%=request.getContextPath() %>/question/addQuestion" method="post" class="ui form">
+            <form action="<%=request.getContextPath() %>/question/addQuestion" method="post" class="ui form" id="publish">
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact teal basic dropdown label">
@@ -79,7 +81,7 @@
                                 <div class="item" data-value="转载">转载</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题" maxlength="50">
+                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题,最多只能输入50字" maxlength="50">
                     </div>
                 </div>
 
@@ -92,11 +94,11 @@
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label">方向</label>
+                            <label class="ui compact teal basic label" placeholder="">分类</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">请选择方向</div>
+                                <div class="default text">请选择问答分类</div>
                                 <div class="menu">
                                     <div class="item" data-value="java">java</div>
                                     <div class="item" data-value="linux">linux</div>
@@ -110,9 +112,9 @@
                         <div class="ui left labeled action input">
                             <label class="ui compact teal basic label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
-                                <input type="hidden" name="tagName" maxlength="3">
+                                <input type="hidden" name="tagName">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">请选择标签</div>
+                                <div class="default text">请选择问答标签</div>
                                 <div class="menu">
                                     <div class="item" data-value="java">java</div>
                                     <div class="item" data-value="linux">linux</div>
@@ -134,65 +136,87 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
-<script type="text/javascript">
-    /*MarkDown组件*/
-    var testEditor;
-    $(function () {
-        testEditor = editormd("md-content", {
-            width: "100%",
-            height: 640,
-            placeholder: " 例:详细描述你所遇到的问题细节\n    通过图片、代码或链接完善内容\n    尝试哪些方法仍没有解决\n    你期待一个什么样的结果",
-            syncScrolling: "single",
-            //你的lib目录的路径
-            path: "../editormd/lib/",
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/question/uploadImg"
-            //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
-            //saveHTMLToTextarea : true
-        });
-    });
+    <script type="text/javascript">
+        /*MarkDown组件*/
+        var testEditor;
+        $(function () {
+            testEditor = editormd("md-content", {
+                width: "100%",
+                height: 640,
+                placeholder: " 例:详细描述你所遇到的问题细节\n    通过图片、代码或链接完善内容\n    尝试哪些方法仍没有解决\n    你期待一个什么样的结果",
+                syncScrolling: "single",
+                //你的lib目录的路径
+                path: "../editormd/lib/",
+                image: "添加图片",
+                imageUpload: true,
+                uploadButton: "本地上传",
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/question/uploadImg"
 
-    /*下拉框渲染开启*/
-    $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-    });
-    $('.ui.dropdown').dropdown({
-        on: 'hover'
-    });
-    /*表单验证开启*/
-    $('.ui.form').form({
-        fields: {
-            questionTitle: {
-                identifier: 'questionTitle',
-                rules: [{
-                    type: 'empty',
-                    prompt: '提示：请输入文章标题'
-                }]
-            },
-            questionContent: {
-                identifier: 'questionContent',
-                rules: [{
-                    type: 'empty',
-                    prompt: '提示：请输入文章内容'
-                }]
-            },
-            typeName: {
-                identifier: 'typeName',
-                rules: [{
-                    type: 'empty',
-                    prompt: '提示：请选择文章分类'
-                }]
-            },
-            tagName : {
-                identifier: 'tagName',
-                rules: [{
-                    type : 'empty',
-                    prompt: '提示：请选择文章标签'
-                }]
-            },
+            });
+        });
+
+        /*下拉框渲染开启*/
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+        $('.ui.dropdown').dropdown({
+            on: 'hover'
+        });
+
+        /*编辑完后审核*/
+        function publish() {
+            $.ajax({
+                type: 'POST',
+                url: '/question/addQuestion',
+                data: $('#publish'),
+                success: function (res) {
+                    if (res.data()) {
+                        alert("正在审核,请耐心等待");
+                    }
+                },
+                error: function (res) {
+                    if (res.data() == null) {
+                        alert("文章不符合要求");
+                    }
+                }
+            });
         }
-    });
-</script>
+
+        /*表单验证开启*/
+        $('.ui.form').form({
+            fields: {
+                questionTitle: {
+                    identifier: 'questionTitle',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '提示：请输入文章标题'
+                    }]
+                },
+                questionContent: {
+                    identifier: 'questionContent',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '提示：请输入文章内容'
+                    }]
+                },
+                typeName: {
+                    identifier: 'typeName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '提示：请选择文章分类'
+                    }]
+                },
+                tagName: {
+                    identifier: 'tagName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '提示：请选择文章标签'
+                    }]
+                },
+            }
+        });
+    </script>
+
 </body>
 </html>

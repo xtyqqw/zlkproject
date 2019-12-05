@@ -103,14 +103,19 @@ public class QuestionController {
      * @date 2019/11/27 16:46
      */
     @PostMapping(value = "/addQuestion")
-    public String addQuestion(Question question, RedirectAttributes attributes) throws Exception {
+    public ModelAndView addQuestion(Question question) throws Exception {
+        ModelAndView mv = new ModelAndView();
         Integer qu = questionService.addQuestion(question);
         if (qu != null){
-            attributes.addAttribute("msg","发表成功");
-            return "/view/community/communityMain";
+            mv.addObject("flag","true");
+            mv.addObject("error","正在审核,请耐心等待");
+            mv.setViewName("view/community/questioinMain    ");
+            return mv;
         }else {
-            attributes.addAttribute("msg","发表失败");
-            return "/view/community/questionEdit";
+            mv.addObject("flag","true");
+            mv.addObject("error","发表失败");
+            mv.setViewName("view/community/questionEdit");
+            return mv;
         }
     }
 

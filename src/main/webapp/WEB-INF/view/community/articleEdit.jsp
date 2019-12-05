@@ -10,16 +10,10 @@
 <html>
 <head>
     <title>文章发布</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
-
     <style>
         .header {
             width: auto;
@@ -157,8 +151,6 @@
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/uploadfile"
-                //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
-                //saveHTMLToTextarea : true
             });
         });
 
@@ -180,8 +172,10 @@
                         alert("发布成功");
                     }
                 },
-                error: function () {
-                    alert("发布失败");
+                error: function (res) {
+                    if (res.data() == null){
+                        alert("发布失败");
+                    }
                 }
             })
         }

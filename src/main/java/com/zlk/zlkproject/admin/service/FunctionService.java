@@ -22,6 +22,15 @@ public interface FunctionService {
      * @return java.util.List<com.zlk.zlkproject.entity.Function>
      **/
     List<Function> functionManager();
+
+    /**
+     * @Author lufengxiang
+     * @Description //TODO 查找子级菜单数
+     * @Date 9:55 2019/12/5
+     * @Param [id]
+     * @return java.lang.Integer
+     **/
+    Integer findChildrenNumber(Integer id);
     
     /**
      * @Author lufengxiang

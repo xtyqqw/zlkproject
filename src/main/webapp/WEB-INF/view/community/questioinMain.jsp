@@ -17,7 +17,7 @@
             border: none 0;
         }
         .all-body-center{
-            width: autopx;
+            width: auto;
             height: auto;
             margin:0 auto;
             border: none 0;
@@ -194,7 +194,10 @@
 
     <div class="all-body-center">
         <div class="body-top">
+        <div>
+            <input type="hidden" value="${error}" id="msg">
 
+        </div>
             <div class="tab">
               <%--  <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
                 <span>|</span>
@@ -314,6 +317,17 @@
     $(document).on('click','.zonganniu',function(){
         $('.wz_remen_zt2').css('display','block');
         $('.wz_remen_zt1').css('display','none');
+    })
+</script>
+<script>
+    layui.use(['layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        <c:if test="${flag}">
+        $(function () {
+            layer.alert($("#msg").val());
+        })
+        </c:if>
     })
 </script>
 </body>

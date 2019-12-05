@@ -3,8 +3,7 @@ package com.zlk.zlkproject.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 /**
  * @author gby
@@ -14,8 +13,11 @@ import java.util.Date;
  */
 @Getter
 @Setter
+@Entity
+@Table(name = "question")
 public class Question {
     /*问题表id uuid*/
+    @Id
     private String questionId ;
     /*问题标题*/
     private String questionTitle;
@@ -23,7 +25,7 @@ public class Question {
     private String questionContent;
     /*是否解决：0没有解决，1已解决，2待解决*/
     private Integer solve;
-    /*提问时间*/
+    /*发布时间*/
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     /**问题类型：0 原创，1 转载，2 翻译*/

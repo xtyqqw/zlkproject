@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ArticleShowController {
+
     @Autowired
     private ArticleShowService articleShowService;
+
     @GetMapping(value = "/community/article-show")
     public ModelAndView articleShow(String id) {
         ModelAndView mv=new ModelAndView();

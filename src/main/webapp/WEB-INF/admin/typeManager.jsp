@@ -90,7 +90,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/type/typeManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'typeId', title: '类别编号', width: 180, sort: true}
