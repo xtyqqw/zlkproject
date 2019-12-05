@@ -108,6 +108,5 @@
             });*/
     </script>
     <%--<%@include file="../../jsp/footer.jsp"%>--%>
-
 </body>
 </html>
