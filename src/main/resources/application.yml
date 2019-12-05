@@ -46,9 +46,15 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
+<<<<<<< HEAD
     username: root
     password:
     url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+=======
+    username: user1
+    password: 
+    url: jdbc:mysql:///zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+>>>>>>> 62dfe9052200991458729a4ffb0d3a93d76881ba
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
@@ -83,9 +89,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: localhost
+  tracker-list:
   #通过nginx 访问地址
-  resHost: localhost
+  resHost:
   storagePort: 8888/
   #缩略图配置
   thumb-image:
