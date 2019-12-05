@@ -186,7 +186,7 @@
         </div>
         <span>${spanmsg}</span>
 <center><span style="color:red;">${spanmsg}</span></center>
-<form action="/user/signup" method="post" onsubmit="return check()" style="padding-left: 50px">
+<form action="/users/signup" method="post" onsubmit="return check()" style="padding-left: 50px">
 
 <%--    <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><span class="error" id="phoneError"></span><br>--%>
 <%--    <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <span class="error" id="checktext2"></span><br>--%>
