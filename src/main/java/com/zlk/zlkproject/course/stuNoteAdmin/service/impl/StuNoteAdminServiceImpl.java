@@ -41,6 +41,16 @@ public class StuNoteAdminServiceImpl implements StuNoteAdminService {
     }
 
     /**
+     * 根据笔记对象修改笔记
+     * @param stuNote
+     * @return 影响行数
+     */
+    @Override
+    public Integer updateStuNoteByStuNote(StuNote stuNote) {
+        return stuNoteAdminMapper.updateStuNoteByStuNote(stuNote);
+    }
+
+    /**
      * 通过主键删除数据
      *
      * @param snId 主键

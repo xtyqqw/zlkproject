@@ -43,7 +43,7 @@
                 <span class="lookall">查看全文</span>
                 <span class="edit" onclick="editNote('${sN.content}',${sN.snId})">编辑</span>
                 <span class="delete" onclick="delNote(${sN.snId})">删除</span>
-                <span class="time">${sN.snDate}</span>
+                <span class="time">${sN.stuTime}</span>
             </div>
         </li>
         </c:forEach>

@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div id="comment-form" class="ui form">
-                <input type="hidden" name="article.id" value="${article.id}">
+                <input type="hidden" name="article.id" value="${article.articleId}">
                 <input type="hidden" name="parentComment.id" value="-1">
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息..."></textarea>

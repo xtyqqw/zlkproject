@@ -41,7 +41,7 @@
     <div>
         <%--顶部内容--%>
         <div class="header">
-            <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)" >返回</button>
+            <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
             <a href="javascript:void(0)" id="a2">我的草稿</a>
         </div>
         <!--中间内容-->
@@ -98,7 +98,7 @@
                                     <div class="default text">请选择标签</div>
                                     <div class="menu">
                                         <c:forEach items="${tags}" var="tag">
-                                            <div class="item" data-value="${tag.id}">${tag.name}</div>
+                                            <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
                                         </c:forEach>
                                     </div>
                                 </div>

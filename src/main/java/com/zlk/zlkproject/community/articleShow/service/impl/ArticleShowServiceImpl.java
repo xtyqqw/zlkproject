@@ -2,9 +2,8 @@ package com.zlk.zlkproject.community.articleShow.service.impl;
 
 import com.zlk.zlkproject.community.articleShow.dao.ArticleShowRepository;
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
-import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.community.util.MarkdownUtils;
-import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

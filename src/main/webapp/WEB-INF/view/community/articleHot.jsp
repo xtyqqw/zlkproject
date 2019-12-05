@@ -1,183 +1,306 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>社区</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
+    <title>热门</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .context-div{
+            overflow-x:hidden;
+            position: absolute;
+            overflow: hidden;
+            margin: auto 0;
+            width: 98%;
+            height: 98%;
+        }
+        .all{
+            width: 100%;
+            height: 178px;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #F0F0F0;
+            position: relative;
+        }
+        .title{
+            position: relative;
+            left: 23px;
+            top: -9px;
+            float: left;
+        }
+        .title a{
+            font-size: 22px;
+            font-family: Arial;
+            font-weight: bold;
+            color: #383838;
+            text-decoration:none;
+        }
+        .createArticleType{
+            position: relative;
+            left: 33px;
+            top: -3px;
+            float: left;
+            width: 35px;
+            height: 20px;
+            background-color: #1296db;
+            border-radius: 8%;
+            font-size: 15px;
+            font-family: Arial;
+            color: #FFFFFF;
+            text-decoration:none;
+            text-align: center;
+        }
+        .articleSetTop{
+            position: relative;
+            left: 44px;
+            top: -3px;
+            float: left;
+            width: 35px;
+            height: 20px;
+            background-color: #914ff1;
+            border-radius: 8%;
+            text-align: center;
+        }
+        .articleSetTop #p{
+            font-size: 15px;
+            font-family: Arial;
+            color: #FFFFFF;
+            text-decoration:none;
+            margin:0;
+            padding:0;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+        }
+        .kuang{
+            width: 98%;
+            position: relative;
+            top: 1px;
+        }
+        .articleDigest{
+            margin-left: 20px;
+            margin-top: -52px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            /*border: #914ff1 2px solid;*/
+            font-size: 17px;
+            font-family: Arial;
+            color:  #707070;
+            text-decoration:none;
 
+        }
+        .figures{
+            margin-left: 716px;
+            margin-top: 30px;
+            width: 170px;
+            height: 95px;
+            border-radius: 5px;
+            border: none 0;
+        }
+        .imgtest {
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+            border-radius: 5px;
+            border: none 0;
+        }
+        .icon{
+            position: absolute;
+            left: 702px;
+            bottom: 26px;
+        }
+        .browseCount{
+            position: absolute;
+            left: 727px;
+            bottom: 27px;
+        }
+        .browseCount a{
+            font-size: 16px;
+            font-family: "Arial";
+            color: #989898;
+            text-decoration:none;
+        }
+        .icon1{
+            position: absolute;
+            left: 811px;
+            bottom: 26px;
+        }
+        .commentCount{
+            position: absolute;
+            left: 837px;
+            bottom: 27px;
+
+        }
+        .commentCount a{
+            font-size: 16px;
+            font-family: "Arial";
+            color: #989898;
+            text-decoration:none;
+        }
+        .userImg{
+            border: 1px crimson solid;
+            width: 20px;
+            height: 20px;
+            border-radius: 50px;
+            position: absolute;
+            margin-left: 23px;
+            margin-top: 35px;
+        }
+        .userRealname{
+            position: relative;
+            float: left;
+            left: 66px;
+            top: 35px;
+            display: inline;
+        }
+        .userRealname a{
+            font-size: 16px;
+            color: #989898;
+            font-family: Arial;
+            text-decoration:none;
+        }
+        .little{
+            width: 3px;
+            height: 3px;
+            background-color: #989898;
+            border-radius: 50px;
+            position: relative;
+            float: left;
+            left: 79px;
+            top: 44px;
+            display: inline;
+        }
+        .createTime{
+            font-size: 16px;
+            color: #989898;
+            font-family: Arial;
+            position: relative;
+            left: 92px;
+            top: 36px;
+            float: left;
+            display: inline;
+        }
+        .more{
+            font-size: 18px;
+            font-family: Arial;
+            color: #989898;
+            background-color: #FFFFFF;
+            border: none 0;
+        }
+        .more-button{
+            text-align: center;
+            position: relative;
+            bottom: -23px;
+        }
+        a:hover{
+            color: #1296db;
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body>
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header" style="background-color: #FFFFFF">
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <div>
-            <img src="../../../img/1.png">
-        </div>
-        <ul class="ul1">
-            <li><a href="">首页</a></li>
-            <li><a href="">项目</a></li>
-            <li><a href="">社区</a></li>
-        </ul>
-        <ul class="layui-nav layui-layout-center">
-            <div class="demoTable">
-                <div class="layui-inline">
-                    <input class="layui-input" autocomplete="off" placeholder="请输入关键字" style="width: 220px">
-                </div>
-                <button class="layui-btn" data-type="reload" style="color:#F8F8F8;background-color: #6600FF">搜索</button>
-            </div>
-        </ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon layui-icon-dialogue" style="color: #555555;font-size: 20px"><span class="layui-badge-dot layui-bg-red"></span></i>
-                </a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="layui-body">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 80px;border:2px solid #6600FF;width: 98%">
-        </fieldset>
-        <div class="div">
-            <div class="div1">
-
-            </div>
-
-            <div class="div2">
-                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" >
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">全部</li>
-                        <li>我的文章</li>
-                        <li>草稿箱</li>
-                    </ul>
-                    <div class="layui-tab-content" style="height: 100px;">
-                        <div class="layui-tab-item layui-show">1</div>
-                        <div class="layui-tab-item">内容2</div>
-                        <div class="layui-tab-item">内容3</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%--<div class="div3">--%>
-        <div class="wz_remenwenzhang">
-            <div class="wz_remen">
-                <div class="wz_remen_wz">
-                    <span>热门文章</span>
-                </div>
-                <div class="anniu">
-                    <div class="yueanniu">月</div><div class="zonganniu">总</div>
-                </div>
-            </div>
-            <div class="wz_remen_zt1">
-                <ul>
-                    <c:forEach items="${alist}" var="article">
-                    <li>
-                        <a href="/test/community">
-                            <%--<div class="wz_remen_img">
-                                <img src="<c:out value="${article.userImg}"></c:out>" >
-                            </div>--%>
-                            <div class="wz_remen_bt">
-                                <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                <div class="wz_bt_bq">
-                                    <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                    <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    </c:forEach>
-                </ul>
-            </div>
-
-            <div class="wz_remen_zt2">
-                <ul>
-                    <c:forEach items="${blist}" var="article">
-                        <li>
-                            <a href="/test/community">
-                                <%--<div class="wz_remen_img">
-                                    <img src="<c:out value="${article.userImg}"></c:out>" >
-                                </div>--%>
-                                <div class="wz_remen_bt">
-                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                    <div class="wz_bt_bq">
-                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-
-        </div>
-
-
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).on('mouseenter','.wz_remen_zt1>ul>li',function(){
-        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).children().css('color','blue');
-    })
-    $(document).on('mouseleave','.wz_remen_zt1>ul>li',function(){
-        $(this).css('box-shadow','none');
-        $(this).children().css('color','black');
-    })
-    $(document).on('mouseenter','.wz_remen_zt2>ul>li',function(){
-        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).children().css('color','blue');
-    })
-    $(document).on('mouseleave','.wz_remen_zt2>ul>li',function(){
-        $(this).css('box-shadow','none');
-        $(this).children().css('color','black');
-    })
-
-    $(document).on('mouseenter','.yueanniu',function(){
-        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
-    })
-    $(document).on('mouseleave','.yueanniu',function(){
-        $(this).css('box-shadow','none');
-        $(this).css('border','1px solid white');
-    })
-
-    $(document).on('mouseenter','.zonganniu',function(){
-        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
-    })
-    $(document).on('mouseleave','.zonganniu',function(){
-        $(this).css('box-shadow','none');
-        $(this).css('border','1px solid white');
-    })
-
-    $(document).on('click','.yueanniu',function(){
-        $('.yueanniu').css('background-color','blue');
-        $('.yueanniu').css('color','white');
-        $('.zonganniu').css('background-color','white');
-        $('.zonganniu').css('color','black');
-    })
-    $(document).on('click','.zonganniu',function(){
-        $('.yueanniu').css('background-color','white');
-        $('.yueanniu').css('color','black');
-        $('.zonganniu').css('background-color','blue');
-        $('.zonganniu').css('color','white');
-    })
-    $(document).on('click','.yueanniu',function(){
-        $('.wz_remen_zt1').css('display','block');
-        $('.wz_remen_zt2').css('display','none');
-    })
-    $(document).on('click','.zonganniu',function(){
-        $('.wz_remen_zt2').css('display','block');
-        $('.wz_remen_zt1').css('display','none');
-    })
+    <div class="context-div" id="context-div"></div>
+    <!--日期转换-->
+    <script>
+        $(document).ready(function()
+        {
+            var str = "";
+            var timestamp = 0;
+            var pass = 0;
+            str = $("#time").text();
+            timestamp = (new Date()).valueOf();
+            pass = (timestamp - str) / 1000;
+            $("#time").text(pass);
+            if (pass < 60) {
+                $("#time").text(pass + "秒前");
+            }
+            else
+            {
+                if (pass < (60 * 60))
+            {
+                pass = Math.floor(pass / 60);
+                $("#time").text(pass + "分钟前");
+            }
+            else
+            {
+                if (pass < (60 * 60 * 72))
+                {
+                    pass = Math.floor(pass / 60 / 60);
+                    $("#time").text(pass + "小时前");
+                }
+                else
+                {
+                    if (pass >= (60 * 60 * 72) )
+                    {
+                            pass = Math.floor(pass / 60 / 60 / 24);
+                            $("#time").text(pass + "天前");
+                    }
+                }
+            }
+            }
+        });
+    </script>
+    <!--没插图就隐藏-->
+    <script>
+        $(function () {
+            var img = $("#figures").find("img");
+            if(img.length<=0){
+                $("#figures").hide();
+            }
+        })
+    </script>
+<script>
+    layui.use('flow', function(){
+        var flow = layui.flow;
+        var $ =layui.jquery;
+        flow.load({
+            elem: '#context-div' //流加载容器
+            ,isAuto: false
+            ,end: "<p>没有更多了</p>"
+            ,done: function(page, next){ //加载下一页
+                //模拟插入
+                setTimeout(function(){
+                    var lis = [];
+                    var limit = "5";
+                    $.ajax({
+                        url:"/article/findByBrowseCount?page="+page+"&limit="+limit,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (result) {
+                            layui.each(result.articleList, function (i, article) {
+                                lis.push(
+                                    '<div class="all" >' +
+                                    '<div class="title"><a href="#">'+article.title+'</a></div>'+
+                                    '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>' +
+                                    '<div class="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
+                                    '<div class="kuang">'+
+                                    '<div class="figures" id="figures">'+'<img class="imgtest" src="http://localhost:8080//upload//6f8e3206-fd7e-4ff9-a1eb-fc07de81435f.jpg">'+'</div>'+
+                                    '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
+                                    '</div>'+
+                                    '<div>'+
+                                    '<div class="userRealname"><a href="#">'+article.userList.userRealname+'</a></div>'+
+                                    '<div class="little"></div>'+
+                                    '<div class="createTime" id="createTime"><span id="time">'+article.createTime+'</span></div>'+
+                                    '</div>'+
+                                    '<div class="userImg">'+article.userList.userImg+'</div>'+
+                                    '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
+                                    '<div class="browseCount"><a href="#">'+article.browseCount+'阅读'+'</a></div>'+
+                                    '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
+                                    '<div class="commentCount"><a href="#">'+article.commentCount+'评论'+'</a></div>'+
+                                    '</div>'
+                                );
+                            });
+                            next(lis.join(''), page < 3);
+                        }
+                    });
+                }, 500);
+            }
+        });
+    });
 </script>
 </body>
 </html>

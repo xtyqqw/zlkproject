@@ -1,11 +1,7 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
+import com.zlk.zlkproject.entity.Article;
 
-
-import com.zlk.zlkproject.community.entity.Article;
-import com.zlk.zlkproject.community.entity.Tag;
-
-import java.util.List;
 
 /**
  * @program: ArticleAddService

@@ -162,7 +162,7 @@
                 </li>
             </a>
             <%--我的文章--%>
-            <a href="javascript:;"
+            <a href="<%=request.getContextPath()%>/articles/toarticles"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-list"

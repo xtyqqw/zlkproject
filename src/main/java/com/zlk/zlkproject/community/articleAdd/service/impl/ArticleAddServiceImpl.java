@@ -3,7 +3,7 @@ package com.zlk.zlkproject.community.articleAdd.service.impl;
 import com.zlk.zlkproject.community.articleAdd.dao.ArticleAddRepository;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 
-import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.entity.Article;
 
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Transactional
     @Override
     public Article saveArticle(Article article) {
-        article.setId(UUIDUtils.getId());
+        article.setArticleId(UUIDUtils.getId());
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
         article.setApproval(0);
