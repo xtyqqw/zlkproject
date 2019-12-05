@@ -65,7 +65,7 @@
 
         .span {
             float: right;
-            margin-top: 50px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -92,15 +92,17 @@
         <%--文章标题及特征--%>
         <div style="margin-top: 50px;height: 100px;width: auto;">
             <div class="title" style="font-size: 10px;float: left">
-                <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px; ">
+                <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px;border-radius: 5%; ">
                     <span style="color: white">${article.createArticleType}</span>
                 </div>
                 <div class="div2">
                     <h2> ${article.title}</h2>
                 </div>
-            </div>
-            <div style="width: 40px;height:20px;background-color:#E8E8E8;float: left;margin-top: 50px;margin-left: -230px;">
-                <p class="tag"><%--${article.tagName}--%>JAVA</p>
+            </div><br><br>
+            <div style="float: left; margin-top: 10px;">
+                <div style="width: 40px;height:20px;background-color:#E8E8E8;border-radius: 5%;">
+                    <p class="tag"><%--${article.tagName}--%>JAVA</p>
+                </div>
             </div>
             <div class="span">
                 <small>

@@ -88,24 +88,24 @@
         <%--javascript:void(0)--%>
         <a href="<%=request.getContextPath() %>/community/article-edit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
     </div>
-    <div class="ui success message">
+    <%--<div class="ui success message">
         <c:if test="${not empty message}">
             <i class="close icon"></i>
             <div class="header">提示：</div>
             <p>${message}</p>
         </c:if>
-    </div>
+    </div>--%>
 
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
     <script>
         //消息提示关闭初始化
-        $('.message .close')
+        /*$('.message .close')
             .on('click', function () {
                 $(this)
                     .closest('.message')
                     .transition('fade');
-            });
+            });*/
     </script>
     <%--<%@include file="../../jsp/footer.jsp"%>--%>
 

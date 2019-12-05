@@ -31,10 +31,11 @@
     </resultMap>
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
-        SELECT a.*,t.* FROM article a
-        LEFT JOIN article_tag az ON az.article_id=a.article_id
-        ,tag t
-        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc
+        SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,a.figures_real,
+        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
+        FROM article a
+        LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
+        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by create_time desc
     </select>
     <!--根据用户ID查询我的文章数量-->
     <select id="findArticlesId" parameterType="java.lang.String" resultType="java.lang.Integer">

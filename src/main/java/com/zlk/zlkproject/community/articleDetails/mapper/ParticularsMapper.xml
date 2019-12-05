@@ -9,7 +9,6 @@
         <result column="create_time" property="createTime" javaType="java.util.Date"></result>
         <result column="update_time" property="updateTime" javaType="java.util.Date"></result>
         <result column="figures" property="figures" javaType="java.lang.String"></result>
-        <result column="figures_real" property="figuresReal" javaType="java.lang.String"></result>
         <result column="article_digest" property="articleDigest" javaType="java.lang.String"></result>
         <result column="article_content" property="articleContent" javaType="java.lang.String"></result>
        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"></result>

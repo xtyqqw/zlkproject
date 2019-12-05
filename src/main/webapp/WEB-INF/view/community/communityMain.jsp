@@ -197,7 +197,7 @@
         .zonganniu {
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -211,7 +211,7 @@
         .wz_remen_zt1 {
             background-color: rgba(192, 192, 192, 0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -230,7 +230,7 @@
             display: none;
             background-color: rgba(192, 192, 192, 0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -286,6 +286,7 @@
     </style>
 </head>
 <body>
+
 <div class="all-body">
     <%@include file="../../jsp/header.jsp" %>
     <%@include file="../../jsp/sidebar.jsp" %>
@@ -319,34 +320,45 @@
             <div class="wz_remen">
                 <div class="wz_remen_wz">
                     <span>热门文章</span>
+
+    <div class="all-body">
+        <%@include file="../../jsp/header.jsp"%>
+        <%@include file="../../jsp/sidebar.jsp"%>
+        <div class="all-body-center">
+            <div class="body-top">
+                <div>
+                    <div class="show">
+                        <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
+                        <c:forEach items="${tagList}" var="tag" begin="0" end="10">
+                            <div>
+                                <ul>
+                                    <li><a href="<%=request.getContextPath() %>/" type="button" class="">${tag.tagName}</a></li>
+                                </ul>
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="hide">
+                        <a href="javascript:void(0)" type="button" class="all">全部</a>
+                        <a style="display: none" id="a"></a>
+                        <c:forEach items="${tagList}" var="tag">
+                            <div>
+                                <ul>
+                                    <li><a href="javascript:void(0)" type="button" onclick="dj(this);">${tag.tagName}</a></li>
+                                </ul>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+                <div class="add">
+                    <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
+
                 </div>
                 <div class="anniu">
                     <div class="yueanniu">月</div>
                     <div class="zonganniu">总</div>
                 </div>
             </div>
-            <div class="wz_remen_zt1">
-                <ul>
-                    <c:forEach items="${alist}" var="article">
-                        <li>
-                            <a href="/test/community">
-                                    <%--<div class="wz_remen_img">
-                                        <img src="<c:out value="${article.userImg}"></c:out>" >
-                                    </div>--%>
-                                <div class="wz_remen_bt">
-                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                    <div class="wz_bt_bq">
-                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out
-                                                value="${article.browseCount}"></c:out></span>
-                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out
-                                                value="${article.commentCount}"></c:out></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
+
 
             <div class="wz_remen_zt2">
                 <ul>
@@ -370,6 +382,38 @@
                     </c:forEach>
                 </ul>
             </div>
+
+                <div class="wz_remenwenzhang">
+                    <div class="wz_remen">
+                        <div class="wz_remen_wz">
+                            <span>热门文章</span>
+                        </div>
+                        <div class="anniu">
+                            <div class="yueanniu">月</div><div class="zonganniu">总</div>
+                        </div>
+                    </div>
+
+                    <div class="wz_remen_zt2">
+                        <ul>
+                            <c:forEach items="${blist}" var="article">
+                                <li>
+                                    <a href="/community/article-show">
+                                            <%--<div class="wz_remen_img">
+                                                <img src="<c:out value="${article.userImg}"></c:out>" >
+                                            </div>--%>
+                                        <div class="wz_remen_bt">
+                                            <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                            <div class="wz_bt_bq">
+                                                <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                                <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
     <%@include file="../../jsp/footer.jsp" %>

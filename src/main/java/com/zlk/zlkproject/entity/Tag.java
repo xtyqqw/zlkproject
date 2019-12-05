@@ -2,6 +2,11 @@ package com.zlk.zlkproject.entity;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +20,11 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "tag")
 public class Tag {
-    /**
-     * tag对应id
-     */
+    /**tag对应id*/
+    @Id
     private Integer tagId;
     /**
      * tag名称
@@ -30,4 +36,7 @@ public class Tag {
     private Integer tagTypeId;
 
     private String tagTypeName;
+    /**标签和文章多对多关系*/
+    @ManyToMany(mappedBy = "tags")
+    private List<Article> articles=new ArrayList<>();
 }
