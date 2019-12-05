@@ -135,7 +135,7 @@
     })
 </script>--%>
 <div class="learnrecord">
-    <%--<c:forEach items="${itemList}" var="item">
+    <c:forEach items="${itemList}" var="item">
         <div class="timeline">
             <div class="date">
                 <p class="year">${item.stuTime}</p>
@@ -167,11 +167,25 @@
                 </div>
             </div>
         </div>
-    </c:forEach>--%>
-    <div class="flow_div"></div>
+    </c:forEach>
+    <div id="demo1"></div>
+    <%--<div class="flow_div"></div>--%>
 </div>
+<script>
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage, layer = layui.layer;
+        //总页数大于页码总数
+        laypage.render({
+            elem: 'demo1'
+            ,count: 70 //数据总数
+            ,jump: function(obj){
+                console.log(obj)
+            }
+        });
+    });
+</script>
 <%--流加载--%>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -227,6 +241,6 @@
             }
         });
     });
-</script>
+</script>--%>
 </body>
 </html>
