@@ -27,6 +27,15 @@ public interface FunctionMapper {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 查找子级菜单数
+     * @Date 9:55 2019/12/5
+     * @Param [id]
+     * @return java.lang.Integer
+     **/
+    Integer findChildrenNumber(Integer id);
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 新增菜单
      * @Date 17:30 2019/11/25
      * @Param [function]

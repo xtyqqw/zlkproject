@@ -85,7 +85,7 @@
                 elem: '#demo'
                 , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
                 , page: true //开启分页
-                , height: 480
+                , height: 503
                 , limit: 100
                 , cols: [[ //表头
                     {type: 'checkbox'}
