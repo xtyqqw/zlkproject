@@ -647,7 +647,7 @@
             <i class="layui-icon layui-icon-up"></i>
         </div>
         <div class="clear"></div>
-        <c:if test="true">
+        <c:if test="${userId!= null and userId!=''}">
             <!--我的任务-->
             <div class="mission">
                 <div class="title">

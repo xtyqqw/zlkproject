@@ -52,25 +52,25 @@ spring:
     url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  thymeleaf:
-#    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
-#    mode: HTML5
-#    #编码 可不用配置
-#    encoding: UTF-8
-#    #开发配置为false,避免修改模板还要重启服务器
-#    cache: false
-#    #配置模板路径，默认是templates，可以不用配置
-#    prefix: classpath:/templates/
-#    servlet:
-#      #内容类别,可不用配置
-#      content-type: text/html
-#    suffix: .html
-#  resources:
-#    chain:
-#      strategy:
-#        content:
-#          enabled: true
-#          paths: /**
+  #  thymeleaf:
+  #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
+  #    mode: HTML5
+  #    #编码 可不用配置
+  #    encoding: UTF-8
+  #    #开发配置为false,避免修改模板还要重启服务器
+  #    cache: false
+  #    #配置模板路径，默认是templates，可以不用配置
+  #    prefix: classpath:/templates/
+  #    servlet:
+  #      #内容类别,可不用配置
+  #      content-type: text/html
+  #    suffix: .html
+  #  resources:
+  #    chain:
+  #      strategy:
+  #        content:
+  #          enabled: true
+  #          paths: /**
   mvc:
     view:
       prefix: /WEB-INF/
