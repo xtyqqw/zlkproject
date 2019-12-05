@@ -67,14 +67,14 @@
      }
      .h62{
          position: relative;
-         left: 128px;
+         left: 135px;
          top: -8px;
          color: #1f2022;
          font-weight:bold;
      }
      .h63{
          position: relative;
-         left: 155px;
+         left: 167px;
          top: -23px;
          color: #1f2022;
          font-weight:bold;
@@ -82,15 +82,18 @@
      .h64{
          position: relative;
          left: 10px;
-         top: -19px;
+         top: -20px;
          color: #ff4413;
+         font-size: 13px;
+         font-weight:bold;
 
      }
      .h65{
          position: relative;
-         left: 40px;
+         left: 60px;
          top: -34px;
          color: #807d7c;
+         font-size: 12px;
      }
      .but1{
          width: 100px;
@@ -307,7 +310,7 @@
                 <a class="a1">JAVA</a><br>
                 <a class="a2">HTML</a><br>
                 <a class="a3">CSS</a><br>
-                <a class    ="a4">JS</a><br>
+                <a class="a4">JS</a><br>
                 <p class="xingxing"></p>
 
             </div>
@@ -431,7 +434,7 @@ $.ajax({
                     '</div>'+
                     '</dd>' +
                     '<dd class="dd3">' +
-                    '<h6 class="h61" id="renshu">学习人数 ：'+courses.studentNum+'人</h6>' +
+                    '<h6 class="h61" id="renshu">学习人数:'+courses.studentNum+'人</h6>' +
                     '<h6 class="h62" id="zhang">'+courses.chapterNum+'章</h6>' +
                     '<h6 class="h63" id="jie">'+courses.sectionNum+'节</h6>' +
                     '<h6 class="h64" id="jin">￥'+courses.price+'</h6>' );
@@ -441,8 +444,9 @@ $.ajax({
                         }else{ lis.push(
                         '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
                     }
+            console.log(courses);
                     lis.push(
-                    '<input class="but1" type="button" onclick=window.open("https://www.baidu.com") value="查看详情"/>' +
+                    '<input class="but1" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="查看详情"/>' +
                     '</dd>' +
                     '</dl>' +
                     '</li>' +

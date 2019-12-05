@@ -33,6 +33,13 @@ public interface StuNoteAdminMapper {
     Integer selectCount();
 
     /**
+     * 根据笔记对象修改笔记
+     * @param stuNote
+     * @return 影响行数
+     */
+    Integer updateStuNoteByStuNote(StuNote stuNote);
+
+    /**
      * 通过主键删除数据
      *
      * @param snId 主键

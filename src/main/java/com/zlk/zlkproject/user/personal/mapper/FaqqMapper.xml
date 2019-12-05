@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.personal.mapper.FaqqMapper">
+
+    <resultMap id="questionMap" type="com.zlk.zlkproject.user.entity.MyQuestions">
+        <id property="questionTitle" column="question_title" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="createTime" column="create_time" javaType="java.util.Date"/>
+        <result property="browseCount" column="browse_count" javaType="java.lang.Integer"/>
+        <result property="responseCount" column="response_count" javaType="java.lang.Integer"/>
+        <result property="typeName" column="type_name" javaType="java.lang.String"/>
+        <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
+            <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+            <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+            <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="responseMap" type="com.zlk.zlkproject.user.entity.MyResponse">
+        <id property="responseId" column="response_id" javaType="java.lang.Integer"/>
+        <result property="questionId" column="question_id" javaType="java.lang.Integer"/>
+        <result property="responseContent" column="response_content" javaType="java.lang.String"/>
+        <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
+        <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
+        <result property="replyCount" column="reply_count" javaType="java.lang.Integer"/>
+        <result property="accept" column="accept" javaType="java.lang.Integer"/>
+        <result property="createTime" column="create_time" javaType="java.util.Date"/>
+    </resultMap>
+    <select id="findQuestion" resultMap="questionMap" parameterType="java.lang.String">
+        select q.*,t.tag_name
+        from question q LEFT JOIN question_tag qt
+        ON qt.question_id = q.question_id,tag t
+        WHERE t.tag_id = qt.tag_id AND q.user_id = '1'
+    </select>
+    
+    <select id="findResponse" resultMap="responseMap" parameterType="java.lang.String">
+        select * from q_response where user_id = #{userId}
+    </select>
+
+    <delete id="deleteResponse" parameterType="java.lang.Integer">
+        delete from q_response where response_id = #{responseId}
+    </delete>
+
+    <update id="updateResponse" parameterType="com.zlk.zlkproject.user.entity.MyResponse">
+        update q_response set response_content = #{responseContent} where response_id = #{responseId}
+    </update>
+</mapper>

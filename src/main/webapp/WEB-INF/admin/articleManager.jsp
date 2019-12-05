@@ -83,10 +83,10 @@
                 <td style="width: 100px;" valign="bottom">举报</td>
                 <td><input type="text" required id="inform" placeholder="请输入举报" name="inform"></td>
             </tr>
-            <tr>
+            <%--<tr>
                 <td style="width: 100px;" valign="bottom">用户id</td>
                 <td><input type="text" required id="userId" placeholder="请输入用户id" name="userId"></td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td style="width: 100px;" valign="bottom">发文类型</td>
                 <td><input type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType"></td>
@@ -103,10 +103,10 @@
                 <td style="width: 100px;" valign="bottom">文章方向</td>
                 <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
-            <tr>
+            <%--<tr>
                 <td style="width: 100px;" valign="bottom">文章类别</td>
                 <td><input type="text" required id="tagName" placeholder="请输入文章类别" name="tagName"></td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td style="width: 100px;">文章摘要</td>
                 <td><textarea rows="5" cols="66" required id="articleDigest" name="articleDigest"></textarea><br></td>
@@ -223,12 +223,12 @@
                 , {field: 'zanCount', title: '赞数', width: 60}
                 , {field: 'caiCount', title: '踩数', width: 60}
                 , {field: 'inform', title: '举报', width: 60}
-                , {field: 'userId', title: '用户id', width: 80}
+                /*, {field: 'userId', title: '用户id', width: 80}*/
                 , {field: 'createArticleType', title: '发文类型', width: 90}
                 , {field: 'articleSetTop', title: '文章置顶', width: 90}
                 , {field: 'approval', title: '审核', width: 60}
                 , {field: 'typeName', title: '文章方向', width: 90}
-                , {field: 'tagName', title: '文章类别', width: 90}
+                /*, {field: 'tagName', title: '文章类别', width: 90}*/
                 , {
                     title: '操作', width: 180, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
@@ -314,12 +314,12 @@
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
-                $("#userId").val(data.userId);
+                /*$("#userId").val(data.userId);*/
                 $("#createArticleType").val(data.createArticleType);
                 $("#articleSetTop").val(data.articleSetTop);
                 $("#approval").val(data.approval);
                 $("#typeName").val(data.typeName);
-                $("#tagName").val(data.tagName);
+                /*$("#tagName").val(data.tagName);*/
                 layer.open({
                     title: "编辑",
                     type: 1,
