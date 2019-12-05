@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service;
 
 import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.entity.Users;
@@ -33,5 +34,10 @@ public interface RecordService {
      * @return
      */
     Integer selectUser(String userId);
-
+    /**
+     * 查询课程数量
+     * @param userId
+     * @return
+     */
+    Integer findCourses(String userId);
 }

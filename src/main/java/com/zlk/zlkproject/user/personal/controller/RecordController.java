@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.personal.controller;
 
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.service.RecordService;
@@ -67,7 +68,9 @@ public class RecordController {
         Integer sum = recordService.selectUserSection("1");
         Integer done = recordService.selectUser("1");
         long per = Math.round((100 * done) / sum);
+        Integer all=recordService.findCourses("1");
         ModelAndView mv=new ModelAndView();
+        mv.addObject("all",all);
         mv.addObject("itemList",itemList);
         mv.addObject("per",per);
         mv.setViewName("view/personal/learnrecord");

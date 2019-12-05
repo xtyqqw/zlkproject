@@ -52,7 +52,6 @@ public class ArticlesController {
      * @return
      */
     @RequestMapping(value = "update")
-//    @ResponseBody
     public String updateArticles(Articles articles)throws Exception{
         Integer flag=articlesService.updateArticles(articles);
         if(flag == 1){

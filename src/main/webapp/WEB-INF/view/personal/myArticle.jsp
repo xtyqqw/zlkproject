@@ -158,7 +158,7 @@
                     </li>
                     </c:forEach>
                 </ul>
-                <span class="time">2019-12-02 10:55</span>
+                <span class="time">${list.createDate}</span>
                 </p>
                 <p class="title">${list.title}</p>
                 <p class="type">${list.typeName}</p>
