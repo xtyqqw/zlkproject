@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.personal.controller;
 
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.MyQuestions;
 import com.zlk.zlkproject.user.entity.MyResponse;
 import com.zlk.zlkproject.user.personal.service.FaqqService;
@@ -34,10 +35,11 @@ public class FaqqController {
     @RequestMapping(value = "faqtest")
     public ModelAndView faqTest(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
-        String userId = (String) request.getSession().getAttribute("userId");
-        List list = faqqService.findAll("1");
-        List<MyQuestions> qList = faqqService.findQuestion("1");
-        List<MyResponse> rList = faqqService.findResponse("1");
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        List list = faqqService.findAll(userId);
+        List<MyQuestions> qList = faqqService.findQuestion(userId);
+        List<MyResponse> rList = faqqService.findResponse(userId);
         mv.setViewName("/view/personal/myquestion");
         mv.addObject("qList",qList);
         mv.addObject("rList",rList);

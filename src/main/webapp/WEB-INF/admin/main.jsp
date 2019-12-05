@@ -26,9 +26,9 @@
         #right{
             position: relative;
             float: right;
-            top: -163px;
+            top: -53px;
             right: 73px;
-            border: 1px solid black;
+            border: 1px solid #ccc;
         }
         #rightTop{
             text-align: center;
@@ -103,7 +103,7 @@
 </div>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width: 800px;height:333px;"></div>
+<div id="main" style="width: 800px;height:356px;"></div>
 
 <div id="right">
     <div id="rightTop">
@@ -113,7 +113,7 @@
         <table id="rigitTable">
             <tr><td>系统名</td><td>学习网站后台管理系统</td></tr>
             <tr><td>技术架构</td><td>SSM</td></tr>
-            <tr><td>版本</td><td>v-0.0.1</td></tr>
+            <tr><td>版本</td><td>v0.0.1</td></tr>
         </table>
     </div>
 </div>
