@@ -123,9 +123,9 @@
         <c:if test="${user==null}">
             <!-- 注册登录 -->
             <div class="header-login">
-                <a href="/user/tosignup">注册</a>
+                <a href="/users/tosignup">注册</a>
                 <a style="color: #000000;">/</a>
-                <a href="/user/tosignin">登录</a>
+                <a href="/users/tosignin">登录</a>
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
@@ -139,7 +139,7 @@
                         </a>
                         <dl class="layui-nav-child">
                             <a href="/personal/person">个人中心</a>
-                            <a href="/user/logout;">退了</a>
+                            <a href="/users/logout;">退了</a>
                         </dl>
                     </li>
                 </ul>
