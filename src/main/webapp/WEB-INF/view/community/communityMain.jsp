@@ -147,7 +147,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -160,7 +160,7 @@
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -177,7 +177,7 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -280,7 +280,7 @@
                         <ul>
                             <c:forEach items="${alist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>
@@ -301,7 +301,7 @@
                         <ul>
                             <c:forEach items="${blist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>
