@@ -1,16 +1,12 @@
 package com.zlk.zlkproject.community.question.controller;
 
-import com.sun.xml.bind.v2.runtime.unmarshaller.TagName;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.question.service.QuestionTagService;
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import org.apache.commons.io.FileUtils;
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,19 +31,6 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private QuestionTagService questionTagService;
-
-    /*
-     * @descrption 测试页面
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/11/29 14:39
-     */
-    @RequestMapping(value = "/test")
-    public String test() {
-
-        return "/view/community/main";
-    }
     /*
      * @descrption 提问首页
      * @author gby
@@ -59,7 +41,7 @@ public class QuestionController {
     @RequestMapping(value = "/questionMain")
     public String question(){
 
-        return "/view/community/questioinMain";
+        return "/view/community/main";
     }
 
     /*
@@ -75,7 +57,7 @@ public class QuestionController {
         Object userId = request.getSession().getAttribute("userId");
         if (userId == null) {
             mv.addObject("msg","你还没有登录，请先登录");
-            mv.setViewName("/view/signin");
+            mv.setViewName("redirect:/user/test");
             return mv;
         } else {
             mv.addObject("msg","您已登录成功，请进行操作");
@@ -133,12 +115,12 @@ public class QuestionController {
     }
 
     //文章编辑页面的图片上传方法
-    @RequestMapping(value="/uploadfile",method= RequestMethod.POST)
+    @RequestMapping(value="/uploadImg",method= RequestMethod.POST)
     public void hello(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
         try {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
-            String rootPath = request.getSession().getServletContext().getRealPath("upload1");
+            String rootPath = request.getSession().getServletContext().getRealPath("community/upload1");
             /**
              * 文件路径不存在则需要创建文件路径
              */
@@ -150,7 +132,7 @@ public class QuestionController {
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
             //下面response返回的json格式是editor.md所限制的，规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/community/upload1/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {
                 response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );

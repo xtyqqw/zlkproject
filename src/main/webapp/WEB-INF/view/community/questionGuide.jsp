@@ -185,7 +185,7 @@
         </div>
             <a href="<%=request.getContextPath() %>/question/editQuestion" role="button" class="btn btn-info col-md-3">知道了，开始提问</a>
     </div>
-    <%--<%@include file="../../jsp/footer.jsp"%>--%>
+
 </div>
 <%--鼠标移入移出头像事件--%>
 <script>

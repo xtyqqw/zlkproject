@@ -24,6 +24,7 @@
         .header {
             width: auto;
             height: 60px;
+
             background-color: #F5F5F5;
         }
         .header #a1 {

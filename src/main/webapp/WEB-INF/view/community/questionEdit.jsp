@@ -147,7 +147,7 @@
             path: "../editormd/lib/",
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/uploadfile"
+            imageUploadURL: "/question/uploadImg"
             //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
             //saveHTMLToTextarea : true
         });

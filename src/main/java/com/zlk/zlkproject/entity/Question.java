@@ -1,9 +1,10 @@
 package com.zlk.zlkproject.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 /**
  * @author gby
@@ -23,7 +24,7 @@ public class Question {
     /*是否解决：0没有解决，1已解决，2待解决*/
     private Integer solve;
     /*提问时间*/
-    @JsonFormat(timezone = "ETC/GMT-8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     /**问题类型：0 原创，1 转载，2 翻译*/
     private String createQuestionType;
