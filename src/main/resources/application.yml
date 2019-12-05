@@ -64,7 +64,8 @@ spring:
     password: xianglongshibazhang666
     url: jdbc:mysql://47.98.183.4/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-  #  thymeleaf:
+  #  thymeleaf:192.168.124.17
+
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
   #    #编码 可不用配置
@@ -77,12 +78,7 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
-  #  resources:
-  #    chain:
-  #      strategy:
-  #        content:
-  #          enabled: true
-  #          paths: /**
+
   mvc:
     view:
       prefix: /WEB-INF/
@@ -108,3 +104,6 @@ fdfs:
   #获取连接池最大数量
   pool:
     max-total: 200
+comment.avatar: /community/img/matt.jpg
+    max-total: 200
+

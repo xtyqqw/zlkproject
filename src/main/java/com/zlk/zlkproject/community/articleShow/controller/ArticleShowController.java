@@ -5,6 +5,7 @@ import com.zlk.zlkproject.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -16,10 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ArticleShowController {
-
     @Autowired
     private ArticleShowService articleShowService;
-
     @GetMapping(value = "/community/article-show")
     public ModelAndView articleShow(String id) {
         ModelAndView mv=new ModelAndView();

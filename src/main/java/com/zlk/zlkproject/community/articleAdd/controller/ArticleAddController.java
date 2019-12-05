@@ -66,7 +66,7 @@ public class ArticleAddController {
         } else {
             attributes.addFlashAttribute("message","操作成功");
         }
-        return "redirect:/community/article-guide";
+        return "redirect:/community/articleAll";
     }
 
     //文章编辑页面的图片上传方法
