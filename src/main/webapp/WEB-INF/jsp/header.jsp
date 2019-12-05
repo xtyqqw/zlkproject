@@ -139,7 +139,7 @@
                         </a>
                         <dl class="layui-nav-child">
                             <a href="/personal/person">个人中心</a>
-                            <a href="/user/logout;">退了</a>
+                            <a href="/users/logout;">退了</a>
                         </dl>
                     </li>
                 </ul>
