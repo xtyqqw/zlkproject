@@ -11,8 +11,8 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <style type="text/css">
         #demo{
             height: 100%;
@@ -81,6 +81,7 @@
 </div>
 <script>
     layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
+        var $ = layui.jquery;
         var table = layui.table;
         var laydate = layui.laydate;
         var layer = layui.layer;
@@ -89,7 +90,7 @@
         <c:if test="${flag}">
         $(function () {
             layer.alert($("#msg").val());
-        })
+        });
         </c:if>
         laydate.render({
             elem: '#createTime'
@@ -102,7 +103,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/dept/deptManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'deptId', title: '部门编号', width: 290, sort: true}

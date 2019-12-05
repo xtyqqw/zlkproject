@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,7 +31,7 @@ public class IndexController {
     private IndexService indexService;
 
     @RequestMapping("/toIndex")
-    public ModelAndView toIndex() throws Exception {
+    public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<User> userList = indexService.findUsersByAllTime();
         List<Type> typeList = indexService.findTypeAll();
@@ -42,41 +43,44 @@ public class IndexController {
         List<Courses> courses2 = indexService.findCoursesByTypeId(typeList.get(1).getTypeId());
         List<Courses> courses3 = indexService.findCoursesByTypeId(typeList.get(2).getTypeId());
         List<Courses> courses4 = indexService.findCoursesByTypeId(typeList.get(3).getTypeId());
-        String userId = "4";
-        String today = indexService.findDayByDate(new Date());
-        Integer todayInt = Integer.valueOf(today);
-        Signin sign = indexService.findSigninByUserId(userId);
-        String lastDay = indexService.findDayByUserId(userId);
-        Integer lastDayInt = Integer.valueOf(lastDay);
-        Integer signNum;
-        if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
-            signNum = sign.getSigninNum();
-        }else {
-            signNum = 0;
+        User user2 = (User) httpServletRequest.getSession().getAttribute("user");
+        if (user2 != null){
+            String userId = user2.getUserId();
+            String today = indexService.findDayByDate(new Date());
+            Integer todayInt = Integer.valueOf(today);
+            Signin sign = indexService.findSigninByUserId(userId);
+            String lastDay = indexService.findDayByUserId(userId);
+            Integer lastDayInt = Integer.valueOf(lastDay);
+            Integer signNum;
+            if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
+                signNum = sign.getSigninNum();
+            }else {
+                signNum = 0;
+            }
+            User user = indexService.findUsersById(userId);
+            Integer rank = indexService.findUserRankById(userId);
+            Integer count = indexService.findUserCount();
+            Integer rankBai = Arith.divide(rank, count);
+            Integer jiNeng = Arith.ride(user.getUserDateTime());
+            Integer xueXi = Arith.plus(user.getUserDateTime());
+            mv.addObject("userList", userList);
+            mv.addObject("user1", user);
+            mv.addObject("rank", rank);
+            mv.addObject("rankBai", rankBai);
+            mv.addObject("jiNeng", jiNeng);
+            mv.addObject("xueXi", xueXi);
+            mv.addObject("today", today);
+            mv.addObject("signNum", signNum);
         }
-        User user = indexService.findUsersById(userId);
-        Integer rank = indexService.findUserRankById(userId);
-        Integer count = indexService.findUserCount();
-        Integer rankBai = Arith.divide(rank, count);
-        Integer jiNeng = Arith.ride(user.getUserDateTime());
-        Integer xueXi = Arith.plus(user.getUserDateTime());
-        mv.addObject("userList", userList);
         mv.addObject("typeList", typeList);
-        mv.addObject("user1", user);
-        mv.addObject("rank", rank);
-        mv.addObject("rankBai", rankBai);
-        mv.addObject("jiNeng", jiNeng);
-        mv.addObject("xueXi", xueXi);
-        mv.addObject("tags", tags);
-        mv.addObject("tags2", tags2);
-        mv.addObject("tags3", tags3);
-        mv.addObject("tags4", tags4);
         mv.addObject("courses", courses);
         mv.addObject("courses2", courses2);
         mv.addObject("courses3", courses3);
         mv.addObject("courses4", courses4);
-        mv.addObject("today", today);
-        mv.addObject("signNum", signNum);
+        mv.addObject("tags", tags);
+        mv.addObject("tags2", tags2);
+        mv.addObject("tags3", tags3);
+        mv.addObject("tags4", tags4);
         mv.setViewName("index");
         return mv;
     }
