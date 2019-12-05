@@ -27,8 +27,8 @@ public class ArticleCommentsController {
     @Autowired
     private ArticleShowService articleShowService;
 
-    @Value("${comment.avatar}")
-    private String avatar;
+    /*@Value("${comment.avatar}")
+    private String avatar;*/
 
     /*@GetMapping(value = "/comments/{articleId}")
     public ModelAndView comments(@PathVariable String articleId) {
@@ -48,7 +48,7 @@ public class ArticleCommentsController {
     public String post(ArticleComment articleComment) {
         String articleId=articleComment.getArticle().getArticleId();
         articleComment.setArticle(articleShowService.getArticle(articleId));
-        articleComment.setAvatar(avatar);
+        //articleComment.setAvatar(avatar);
         commentsService.saveComment(articleComment);
         return "redirect:/comments/" +articleId;
     }
