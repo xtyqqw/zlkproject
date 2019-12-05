@@ -51,12 +51,13 @@
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
-            background-color: #1296db;
+            background-color: #914ff1;
             text-align:center;
             height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
+            border-radius: 5px;
         }
         /*横线样式*/
         .crossing{
@@ -115,7 +116,7 @@
             line-height: 4vw;
             border-bottom: 0.1vw solid blue;
             margin-left: 4vw;
-            margin-top: 1vw;
+            margin-top: 0vw;
         }
         .wz_remen_wz{
             margin-left: 1vw;
@@ -147,7 +148,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -301,13 +302,13 @@
 
     <script type="text/javascript">
         $(document).on('mouseenter','.bt',function(){
-            $(this).css('color','blue');
+            $(this).css('color','#914ff1');
         })
         $(document).on('mouseleave','.bt',function(){
             $(this).css('color','black');
         })
         $(document).on('mouseenter','.wz_bt_bq>span',function(){
-            $(this).css('color','blue');
+            $(this).css('color','#D0D0D0');
         })
         $(document).on('mouseleave','.wz_bt_bq>span',function(){
             $(this).css('color','black');

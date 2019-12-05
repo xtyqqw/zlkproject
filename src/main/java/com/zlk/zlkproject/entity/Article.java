@@ -48,7 +48,7 @@ public class Article {
     /**举报：0 是，1 否*/
     private Integer inform;
     /**发文类型：原创，转载，翻译*/
-    private Integer createArticleType;
+    private String createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
     /**文章方向*/

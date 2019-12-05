@@ -210,7 +210,7 @@
     <div class="context-div" id="context-div"></div>
     <!--日期转换-->
     <script>
-        $(document).ready(function()
+        /*$(document).ready(function()
         {
                 var str = "";
                 var timestamp = 0;
@@ -246,7 +246,7 @@
                         }
                     }
                 }
-            });
+            });*/
     </script>
     <!--没插图就隐藏-->
     <script>
@@ -280,7 +280,7 @@
                                         '<div class="all" >' +
                                         '<div class="title"><a href="#">'+article.title+'</a></div>'+
                                         '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>' +
-                                        '<div class="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
+                                        '<div class="articleSetTop" id="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
                                         '<div class="kuang">'+
                                         '<div class="figures" id="figures">'+'<img class="imgtest" src="http://localhost:8080//upload//6f8e3206-fd7e-4ff9-a1eb-fc07de81435f.jpg">'+'</div>'+
                                         '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
@@ -288,7 +288,7 @@
                                         '<div>'+
                                         '<div class="userRealname"><a href="#">'+article.userList.userRealname+'</a></div>'+
                                         '<div class="little"></div>'+
-                                        '<div class="createTime" id="createTime"><span id="time">'+article.createTime+'</span></div>'+
+                                        '<div class="createTime" id="createTime"><span >'+article.createTime+'</span></div>'+
                                         '</div>'+
                                         '<div class="userImg">'+article.userList.userImg+'</div>'+
                                         '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
@@ -305,10 +305,6 @@
                 }
             });
         });
-    </script>
-    <!--置顶和标签-->
-    <script>
-
     </script>
 </body>
 </html>
