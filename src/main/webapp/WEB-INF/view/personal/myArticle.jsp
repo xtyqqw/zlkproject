@@ -147,7 +147,7 @@
         <c:forEach items="${list}" var="list">
         <li>
             <div class="img">
-                <img src="${list.figuresReal}" style="height: 70px;width: 70px;border-radius: 3px;">
+                <img src="${list.figures}" style="height: 70px;width: 70px;border-radius: 3px;">
             </div>
             <div class="main">
                 <p>

@@ -10,8 +10,14 @@
 <html>
 <head>
     <title>文章发布</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
 
     <style>
