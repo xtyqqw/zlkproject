@@ -45,7 +45,7 @@
         }
 
         .layui-form{
-            width: 97%;
+            width: 32.5vw;
 
             float: left;
             margin-top: 3vw;

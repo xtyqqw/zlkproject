@@ -41,11 +41,11 @@
         }
         #guanyuwomenzhuti #zhuti_tou{
             border-radius: 0.3VW;
-            width: 10vw;
-            height: 4vw;
+            width: 18vw;
+            height: 5vw;
             background-color: #713ED7;
             border: none;
-            font-size: 1.5vw;
+            font-size: 2vw;
             line-height: 4vw;/*垂直居中*/
             text-align: center;
             color: #ffffff;

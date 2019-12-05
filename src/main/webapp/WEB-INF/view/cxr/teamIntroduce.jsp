@@ -35,11 +35,11 @@
         #tuanduizhuti #zhuti_tou{
             position: relative;
             border-radius: 0.3VW;
-            width: 10vw;
-            height: 4vw;
+            width: 18vw;
+            height: 5vw;
             background-color: #713ED7;
             border: none;
-            font-size: 1.5vw;
+            font-size: 2vw;
             line-height: 4vw;/*垂直居中*/
             text-align: center;
             color: #ffffff;
@@ -51,13 +51,13 @@
         }
 
         #tuanduizhuti #zhuti_zhong{
-            margin: 0vw 2vw 0vw 3vw;
+            margin: 0vw 0vw 0vw 3vw;
         }
         #tuanduizhuti #zhuti_zhong div{
             margin: 0.5vw 0vw;
         }
         #tuanduizhuti #zhuti_zhong #datu{
-            width: 97%;
+            width: 96%;
             float: left;
             height: 20vw;
             margin-right: 1vw;
@@ -66,7 +66,7 @@
             width: 40%;
             float: left;
             height: 20vw;
-            margin-right: 1vw;
+           margin-right: 1vw;
         }
         #tuanduizhuti #zhuti_zhong .liufen{
             width: 55%;
@@ -74,7 +74,6 @@
             height: 20vw;
             margin-right: 1vw;
         }
-
 
         .wenzi{
             display: none;
@@ -86,16 +85,15 @@
             list-style-type:none;
         }
 
-
         .layui-flow-more a cite{
             padding:0 20px;
             border-radius:55px;
 
             font-size: 1.5vw;
-            background-color:blue;
+            background-color:#713ED7;
             color:white;
             font-style:normal;
-            margin-left:30vw;
+            margin-left:-5vw;
 
         }
 
@@ -103,9 +101,6 @@
 
 </head>
 <body>
-
-
-
 
 
 <div id="tuanduizhuti">
@@ -120,15 +115,14 @@
                 </div> </li>
             <!-- 流加载 -->
             <ul class="flow-default" id="LAY_demo1"></ul>
+        </div>
+    </ul>
 </div>
-</ul>
-</div>
-<script src="/layui/layui.js"></script>
+
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script src="/layui/layui.js"></script>
+
 <script>
-
-
-
 
     /*流加载*/
     layui.use(['flow','element'], function(){
@@ -178,11 +172,6 @@
         });
 
     });
-
-
-
-
-
 
 </script>
 </body>

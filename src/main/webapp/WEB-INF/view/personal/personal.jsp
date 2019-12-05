@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
+
         #personal{
             height: 550px;
         }
