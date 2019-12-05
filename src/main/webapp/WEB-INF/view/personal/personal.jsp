@@ -129,17 +129,15 @@
             <a href="<%=request.getContextPath()%>/duration/select"
                name="dian" class="nodian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-chart-screen"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-chart-screen" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>学习看板</span>
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="<%=request.getContextPath()%>/courses/icourses"
+            <a href="<%=request.getContextPath()%>/courses/tocourses"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-form"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-form" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>学习记录</span>
                 </li>
             </a>
@@ -147,8 +145,7 @@
             <a href="<%=request.getContextPath()%>/myNote/toMyNote"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-edit"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-edit" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>个人笔记</span>
                 </li>
             </a>
@@ -156,8 +153,7 @@
             <a href="<%=request.getContextPath()%>/myfaqq/faqtest"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-survey"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-survey" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的问答</span>
                 </li>
             </a>
@@ -165,8 +161,7 @@
             <a href="<%=request.getContextPath()%>/articles/toarticles"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-list"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-list" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的文章</span>
                 </li>
             </a>
@@ -174,8 +169,7 @@
             <a href="<%=request.getContextPath()%>/follow/follower"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-rate"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-rate" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的关注</span>
                 </li>
             </a>
@@ -183,8 +177,7 @@
             <a href="javascript:;" name="dian"
                target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-dialogue"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-dialogue" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>个人信息</span>
                 </li>
             </a>
@@ -192,8 +185,7 @@
             <a href="javascript:;"
                name="dian" target="personal-main">
                 <li>
-                    <i class="layui-icon layui-icon-release"
-                       style="font-size: 25px;color: #D4D4D4;"></i>
+                    <i class="layui-icon layui-icon-release" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>愿望清单</span>
                 </li>
             </a>

@@ -168,16 +168,21 @@
             </div>
         </div>
     </c:forEach>
-    <div id="demo1"></div>
+    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+    <%--<div>共3条</div>--%>
     <%--<div class="flow_div"></div>--%>
 </div>
 <script>
     layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage, layer = layui.layer;
-        //总页数大于页码总数
+        //完整功能
         laypage.render({
-            elem: 'demo1'
-            ,count: 70 //数据总数
+            elem: 'demo7'
+            ,count: 100 //数据总数
+            ,theme: '#914FF1'
+            ,first: '首页'
+            ,last: '尾页'
+            ,layout: ['prev', 'page', 'next', 'count']
             ,jump: function(obj){
                 console.log(obj)
             }
