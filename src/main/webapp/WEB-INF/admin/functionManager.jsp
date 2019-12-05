@@ -296,7 +296,7 @@
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
                 page: false,
-                height: 400,
+                height: 423,
                 cols: [[
                     {field: 'id', title: '编号',width:80},
                     {field: 'name', title: '资源名称',width:200},
@@ -355,19 +355,19 @@
         });
 
         function complain(d){//操作中显示的内容
-            if(d.childrenNumber==0){
+            /*if(d.childrenNumber==0){*/
                 return [
                     '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
                     '<i class="layui-icon layui-icon-edit"></i></a>',
                     '<a class="operation" lay-event="del" href="javascript:void(0)" onclick="delDepartment(\''+ d.permissionId + '\')" title="删除">',
                     '<i class="layui-icon layui-icon-delete" ></i></a>',
                 ].join('');
-            }else{
+            /*}else{
                 return [
                     '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
                     '<i class="layui-icon layui-icon-edit"></i></a>',
                 ].join('');
-            }
+            }*/
         }
 
         //监听工具条
@@ -378,12 +378,17 @@
             if(data.name!=null){
                 if (layEvent === 'del') {
                     layer.confirm('是否确认删除', function (index) {
-                        obj.del();
                         $.ajax({
                             type: "POST",
                             url: "<%=request.getContextPath()%>/function/delete?functionId=" + id,
                             success: function (msg) {
-                                layer.alert("删除成功");
+                                if(msg){
+                                    layer.alert("删除成功");
+                                    obj.del();
+                                }
+                                if(!msg){
+                                    layer.alert("该目录下仍有目录或菜单,无法删除");
+                                }
                             },
                             error: function (msg) {
                                 layer.alert("遇到意外错误");

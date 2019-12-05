@@ -345,7 +345,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/role/roleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'roleId', title: '角色编号', width: 290, sort: true}

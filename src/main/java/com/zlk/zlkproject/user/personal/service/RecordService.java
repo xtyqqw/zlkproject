@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service;
 
 import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.entity.Users;
 
@@ -18,7 +19,7 @@ public interface RecordService {
      * @param userId
      * @return
      */
-    List<Item> selectCourses(String userId);
+    List<Item> selectCourses(FollowerPage followerPage);
     /**
      * 查询小结状态总数
      * @param userId

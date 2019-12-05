@@ -103,7 +103,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/dept/deptManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'deptId', title: '部门编号', width: 290, sort: true}

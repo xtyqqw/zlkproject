@@ -31,8 +31,10 @@
     </resultMap>
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
-        select * from article a
-        where a.user_id=#{userId} order by update_time desc
+        SELECT a.*,t.* FROM article a
+        LEFT JOIN article_tag az ON az.article_id=a.article_id
+        ,tag t
+        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc
     </select>
     <!--根据用户ID查询我的文章数量-->
     <select id="findArticlesId" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -40,12 +42,7 @@
     </select>
     <!--根据文章ID修改我的文章-->
     <update id="updateArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">
-        update article
-        <set>
-            <if test="article_content!=null and article_content!=''">
-                article_content=#{articleContent}
-            </if>
-        </set>
+        update article set article_content=#{articleContent}
         where article_id=#{articleId}
     </update>
     <!--根据文章ID删除文章-->

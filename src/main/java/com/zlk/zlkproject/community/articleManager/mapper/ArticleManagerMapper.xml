@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.articleManager.mapper.ArticleManagerMapper">
+    <resultMap id="articleEntityMap" type="com.zlk.zlkproject.entity.Article">
+        <id property="articleId" column="article_id" javaType="java.lang.String"></id>
+        <result property="title" column="title" javaType="java.lang.String"></result>
+        <result property="browseCount" column="browse_count" javaType="java.lang.Integer"></result>
+        <result property="commentCount" column="comment_count" javaType="java.lang.Integer"></result>
+        <result property="createTime" column="create_time" javaType="java.util.Date"></result>
+        <result property="updateTime" column="update_time" javaType="java.util.Date"></result>
+        <result property="figures" column="figures" javaType="java.lang.String"></result>
+        <result property="figuresReal" column="figures_real" javaType="java.lang.String"></result>
+        <result property="articleDigest" column="article_digest" javaType="java.lang.String"></result>
+        <result property="articleContent" column="article_content" javaType="java.lang.String"></result>
+        <result property="zanCount" column="zan_count" javaType="java.lang.Integer"></result>
+        <result property="caiCount" column="cai_count" javaType="java.lang.Integer"></result>
+        <result property="inform" column="inform" javaType="java.lang.Integer"></result>
+        <!--<result property="userId" column="user_id" javaType="java.lang.String"></result>-->
+        <result property="createArticleType" column="create_article_type" javaType="java.lang.Integer"></result>
+        <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"></result>
+        <result property="approval" column="approval" javaType="java.lang.Integer"></result>
+        <result property="typeName" column="type_name" javaType="java.lang.String"></result>
+        <!--<result property="tagName" column="tag_name" javaType="java.lang.String"></result>-->
+    </resultMap>
+
+    <insert id="addArticle" parameterType="com.zlk.zlkproject.entity.Article">
+        insert into article
+        <trim prefix="(" suffix=") " suffixOverrides=",">
+            article_id,title,browse_count,comment_count,create_time,figures,figures_real,article_digest,article_content,zan_count,cai_count,inform,create_article_type,article_set_top,approval,type_name,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{articleId},#{title},#{browseCount},#{commentCount},#{createTime},#{figures},#{figuresReal},#{articleDigest},#{articleContent},#{zanCount},#{caiCount},#{inform},#{createArticleType},#{articleSetTop},#{approval},#{typeName},
+        </trim>
+    </insert>
+    <delete id="deleteArticleByArticleId" parameterType="java.lang.String">
+        delete from article where article_id=#{articleId}
+    </delete>
+    <update id="updateArticleByArticleId" parameterType="com.zlk.zlkproject.entity.Article">
+        update article
+        <set>
+            <if test="title!=null and title!='' ">
+                title=#{title},
+            </if>
+            <if test="browseCount!=null and browseCount!='' ">
+                browse_count=#{browseCount},
+            </if>
+            <if test="commentCount!=null and commentCount!='' ">
+                comment_count=#{commentCount},
+            </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="figures!=null and figures!='' ">
+                figures=#{figures},
+            </if>
+            <if test="figuresReal!=null and figuresReal!='' ">
+                figures_real=#{figuresReal},
+            </if>
+            <if test="articleDigest!=null and articleDigest!='' ">
+                article_digest=#{articleDigest},
+            </if>
+            <if test="articleContent!=null and articleContent!='' ">
+                article_content=#{articleContent},
+            </if>
+            <if test="zanCount!=null and zanCount!='' ">
+                zan_count=#{zanCount},
+            </if>
+            <if test="caiCount!=null and caiCount!='' ">
+                cai_count=#{caiCount},
+            </if>
+            <if test="inform!=null and inform!='' ">
+                inform=#{inform},
+            </if>
+            <!--<if test="userId!=null and userId!='' ">
+                user_id=#{userId},
+            </if>-->
+            <if test="createArticleType!=null and createArticleType!='' ">
+                create_article_type=#{createArticleType},
+            </if>
+            <if test="articleSetTop!=null and articleSetTop!='' ">
+                article_set_top=#{articleSetTop},
+            </if>
+            <if test="approval!=null and approval!='' ">
+                approval=#{approval},
+            </if>
+            <if test="typeName!=null and typeName!='' ">
+                type_name=#{typeName},
+            </if>
+            <!--<if test="tagName!=null and tagName!='' ">
+                tag_name=#{tagName},
+            </if>-->
+         </set>
+        where article_id=#{articleId}
+    </update>
+    <select id="selectArticleByTitle" parameterType="java.lang.String" resultMap="articleEntityMap">
+        select * from article where title=#{title}
+    </select>
+    <!-- 标题模糊查询 -->
+    <select id="selectCountByTitle" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from article
+        <if test="condition!='' and condition!=null">
+            where title like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <select id="selectArticleByArticleId" parameterType="java.lang.String" resultMap="articleEntityMap">
+        select * from article where article_id=#{articleId}
+    </select>
+    <select id="selectArticleByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="articleEntityMap">
+        select * from article
+        <if test="condition!='' and condition!=null">
+            where title like CONCAT('%',#{condition},'%')
+        </if>
+        order by article_id limit #{startPage},#{limit}
+    </select>
+</mapper>

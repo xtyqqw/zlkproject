@@ -103,7 +103,7 @@
 </div>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width: 800px;height:333px;"></div>
+<div id="main" style="width: 800px;height:356px;"></div>
 
 <div id="right">
     <div id="rightTop">

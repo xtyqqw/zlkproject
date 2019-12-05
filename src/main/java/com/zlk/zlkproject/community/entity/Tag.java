@@ -21,8 +21,7 @@ import java.util.List;
 public class Tag {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private Integer id;
     private String name;
 
     @ManyToMany(mappedBy = "tags")
