@@ -87,7 +87,7 @@
         order by a.article_set_top,a.browse_count DESC
         limit #{startPage},#{limit}
     </select>
-    <select id="findByUserId" resultMap="paginationEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
+    <select id="findByUserId" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
         select a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a
         join user u on a.user_id=u.user_id

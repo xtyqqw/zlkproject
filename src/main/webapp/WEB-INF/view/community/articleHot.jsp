@@ -271,7 +271,7 @@
                     var lis = [];
                     var limit = "5";
                     $.ajax({
-                        url:"/article/findByBrowseCount?page="+page+"&limit="+limit,
+                        url:"/articles/findByBrowseCount?page="+page+"&limit="+limit,
                         type: 'post',
                         dataType: "json",
                         success: function (result) {

@@ -258,7 +258,7 @@
                         var limit = "5";
                         var userId = "adfd95a4b3634b58b0cf3b8c67b18a26";
                         $.ajax({
-                            url:"/article/findByUserId?page="+page+"&limit="+limit+"&userId="+userId,
+                            url:"/articles/findByUserId?page="+page+"&limit="+limit+"&userId="+userId,
                             type: 'post',
                             dataType: "json",
                             success: function (result) {
