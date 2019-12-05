@@ -49,13 +49,26 @@ public class IndexController {
             String today = indexService.findDayByDate(new Date());
             Integer todayInt = Integer.valueOf(today);
             Signin sign = indexService.findSigninByUserId(userId);
-            String lastDay = indexService.findDayByUserId(userId);
-            Integer lastDayInt = Integer.valueOf(lastDay);
             Integer signNum;
-            if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
-                signNum = sign.getSigninNum();
-            }else {
-                signNum = 0;
+            if(sign != null){
+                String lastDay = indexService.findDayByUserId(userId);
+                Integer lastDayInt = Integer.valueOf(lastDay);
+                if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
+                    signNum = sign.getSigninNum();
+                }else {
+                    signNum = 0;
+                }
+            }else{
+                Signin signin1 = new Signin();
+                signin1.setSigninLastTime(new Date());
+                signin1.setSigninUserId(userId);
+                signin1.setSigninNum(0);
+                Integer flag = indexService.signFirst(signin1);
+                if (flag == 1){
+                    signNum = signin1.getSigninNum();
+                }else{
+                    signNum = 0;
+                }
             }
             User user = indexService.findUsersById(userId);
             Integer rank = indexService.findUserRankById(userId);
@@ -64,6 +77,7 @@ public class IndexController {
             Integer jiNeng = Arith.ride(user.getUserDateTime());
             Integer xueXi = Arith.plus(user.getUserDateTime());
             mv.addObject("userList", userList);
+            mv.addObject("userId",userId);
             mv.addObject("user1", user);
             mv.addObject("rank", rank);
             mv.addObject("rankBai", rankBai);
@@ -101,9 +115,10 @@ public class IndexController {
      */
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> signIn()throws Exception {
+    public Map<String,Object> signIn(HttpServletRequest httpServletRequest)throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
-        String userId = "4";
+        User user2 = (User) httpServletRequest.getSession().getAttribute("user");
+        String userId = user2.getUserId();
         String today = indexService.findDayByDate(new Date());
         String lastDay = indexService.findDayByUserId(userId);
         if (today.equals(lastDay)) {
@@ -120,9 +135,10 @@ public class IndexController {
      */
     @RequestMapping(value = "/toSignIn", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> toSignIn()throws Exception {
+    public Map<String,Object> toSignIn(HttpServletRequest httpServletRequest)throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
-        String userId = "4";
+        User user2 = (User) httpServletRequest.getSession().getAttribute("user");
+        String userId = user2.getUserId();
         Signin signin = indexService.findSigninByUserId(userId);
         String today = indexService.findDayByDate(new Date());
         Integer todayInt = Integer.valueOf(today);
