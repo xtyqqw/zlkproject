@@ -1,6 +1,8 @@
 package com.zlk.zlkproject.user.personal.mapper;
 
 
+import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +21,7 @@ public interface RecordMapper {
      * @param userId
      * @return
      */
-    List<Item> selectCourses(String userId);
+    List<Item> selectCourses(FollowerPage followerPage);
 
     /**
      * 查询小结状态总数
@@ -34,4 +36,11 @@ public interface RecordMapper {
      * @return
      */
     Integer selectUser(String userId);
+
+    /**
+     * 查询课程数量
+     * @param userId
+     * @return
+     */
+    Integer findCourses(String userId);
 }

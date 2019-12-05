@@ -4,20 +4,6 @@ server:
 spring:
   messages:
     basename: message/msg
-  jpa:
-    #是否显示sql
-    show-sql: true
-    #指定数据库类型
-    database: mysql
-    #方言
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #自动建表方式
-    hibernate:
-      ddl-auto: update
-    #格式化sql
-    properties:
-      hibernate:
-        format-sql: true
   datasource:
     druid:
       # 连接池的配置信息
@@ -60,9 +46,11 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
+
     username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    password:
+    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
@@ -91,22 +79,15 @@ spring:
     allow-bean-definition-overriding: true
   jmx:
     enabled: false
-  servlet:
-    multipart:
-      #上传文件大小限制
-      max-file-size: -1
-      max-request-size: -1
-
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: 47.98.183.4:22122
+  tracker-list: localhost
   #通过nginx 访问地址
-  resHost: http://47.98.183.4
+  resHost: localhost
   storagePort: 8888/
   #缩略图配置
   thumb-image:
