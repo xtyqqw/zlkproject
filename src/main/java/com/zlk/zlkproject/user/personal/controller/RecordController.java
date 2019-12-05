@@ -1,13 +1,17 @@
 package com.zlk.zlkproject.user.personal.controller;
 
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName： RecordController
@@ -35,20 +39,23 @@ public class RecordController {
 
     /**
      * 根据userId查询学习记录
-     * @param userId
+     * @param
      * @return
      */
     @RequestMapping(value = "/icourses")
-    public ModelAndView selectItem(String userId){
-        List<Item> itemList=recordService.selectCourses("1");
+    @ResponseBody
+    public Map<String,Object> selectItem(FollowerPage followerPage){
+        followerPage.setUserId("1");
+        followerPage.setPage(1);
+        followerPage.setLimit(3);
+        List<Item> itemList=recordService.selectCourses(followerPage);
         Integer sum=recordService.selectUserSection("1");
         Integer done=recordService.selectUser("1");
         long per=Math.round((100*done)/sum);
-        ModelAndView mv=new ModelAndView();
-        mv.addObject("per",per);
-        mv.addObject("itemList",itemList);
-        mv.setViewName("view/personal/learnrecord");
-        return mv;
+        Map<String,Object> map=new HashMap<>();
+        map.put("itemList",itemList);
+        map.put("per",per);
+        return map;
     }
 
 }
