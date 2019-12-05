@@ -33,7 +33,7 @@ body {
     padding-bottom: 2em !important;
 }
 .m-padded-tb-big {
-    padding-top: 3em !important;
+    padding-top: 2em !important;
     padding-bottom: 3em !important;
 }
 .m-padded-tb-huge {
@@ -114,7 +114,7 @@ body {
 /*-----container*/
 
 .m-container {
-    max-width: 72em !important;
+    max-width: 81em !important;
     margin: auto !important;
 }
 .m-container-small {

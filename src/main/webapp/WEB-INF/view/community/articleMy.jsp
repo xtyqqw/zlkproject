@@ -264,7 +264,7 @@
                                 layui.each(result.articleList, function (i, article) {
                                     lis.push(
                                         '<div class="all" >' +
-                                        '<div class="title"><a href="#">'+article.title+'</a></div>'+
+                                        '<div class="title"><a href="<%=request.getContextPath() %>/draft/find/${articleId}">'+article.title+'</a></div>'+
                                         '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>' +
                                         '<div class="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
                                         '<div class="kuang">'+
