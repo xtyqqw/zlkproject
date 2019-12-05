@@ -180,7 +180,7 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="javascript:;" name="dian"
+            <a href="<%=request.getContextPath()%>/user/findUser" name="dian"
                target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-dialogue"
