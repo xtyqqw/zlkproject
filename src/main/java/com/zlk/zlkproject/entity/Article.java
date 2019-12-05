@@ -56,7 +56,7 @@ public class Article {
     /**发文时调用类别名称*/
     private List<Tag> tagList;
     /**查询时调用类别名称*/
-    private User userList;
+    private User user;
     /**审核：0 审核中，1 审核过，2 审核未过*/
     private Integer approval;
 

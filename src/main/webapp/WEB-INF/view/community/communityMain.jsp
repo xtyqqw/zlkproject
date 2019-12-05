@@ -3,11 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <title>社区</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body{
             overflow-x:hidden;
         }
@@ -22,7 +27,7 @@
             border: none 0;
         }
         .all-body-center .body-top{
-            width: 100%;
+            width: 1308px;
             height: 115px;
         }
         .all-body-center .body-left{
@@ -61,7 +66,7 @@
         }
         /*横线样式*/
         .crossing{
-            width: 68%;
+            width: 69%;
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
@@ -71,7 +76,7 @@
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
-            width: 220px;
+            width: 233px;
             position: relative;
             left: -2px;
             bottom: -31px;
@@ -229,21 +234,19 @@
         <div class="all-body-center">
             <div class="body-top">
                 <div class="add">
-                    <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
+                    <a role="button" href="<%= request.getContextPath()%>/article/toArticleEdit">我要发文</a>
                 </div>
                 <div class="crossing"></div>
                 <div class="tab">
-                    <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
+                    <a href="<%=request.getContextPath()%>/article/toArticleAll" target="pageTarget">最新</a>
                     <span>|</span>
-                    <a href="<%= request.getContextPath()%>/article/findByBrowseCount" target="pageTarget">热门</a>
+                    <a href="<%= request.getContextPath()%>/article/toArticleHot" target="pageTarget">热门</a>
                     <span>|</span>
-                    <a href="<%= request.getContextPath()%>/article/findByUserId" target="pageTarget">我的文章</a>
+                    <a href="<%= request.getContextPath()%>/article/toArticleMy" target="pageTarget">我的文章</a>
                 </div>
             </div>
             <div class="body-left">
-                <div class="body-context">
-                    <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
-                </div>
+                <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
             </div>
                 <div class="wz_remenwenzhang">
                     <div class="wz_remen">

@@ -7,10 +7,10 @@ import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +34,24 @@ public class ArticleListController {
         mv.setViewName("view/community/articleAll");
         return mv;
     }
-
+    @RequestMapping(value = "/toArticleHot")
+    public ModelAndView toArticleHot(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("view/community/articleHot");
+        return mv;
+    }
+    @RequestMapping(value = "/toArticleMy")
+    public ModelAndView toArticleMy(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("view/community/articleMy");
+        return mv;
+    }
+    @RequestMapping(value = "/toArticleEdit")
+    public ModelAndView toArticleEdit(HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("view/community/articleEdit");
+        return mv;
+    }
     @RequestMapping(value = "/findByCreateTime")
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{
@@ -43,11 +60,12 @@ public class ArticleListController {
         map.put("articleList",articleList);
         return map;
     }
+
     @RequestMapping(value = "/findByBrowseCount")
     @ResponseBody
     public Map<String,Object> findByBrowseCount(Pagination pagination)throws Exception{
-        List<Article> articleList=articleListService.findByBrowseCount(pagination);
-        Map<String,Object> map=new HashMap<>();
+        List<Article> articleList = articleListService.findByBrowseCount(pagination);
+        Map<String,Object> map =new HashMap<>();
         map.put("articleList",articleList);
         return map;
     }
@@ -67,10 +85,10 @@ public class ArticleListController {
     }*/
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
-    public Map<String,Object> findByUserId(Pagination pagination)throws Exception{
+    public Map<String,Object> findByUserId(String userId,Integer page,Integer limit)throws Exception{
         User user=new User();
         user.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
-        List<Article> articleList=articleListService.findByUserId(pagination);
+        List<Article> articleList=articleListService.findByUserId(userId,page,limit);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
         return map;

@@ -39,11 +39,8 @@ public class ArticleListServiceImpl implements ArticleListService {
     }
 
     @Override
-    public List<Article> findByUserId(Pagination pagination) {
-        Integer page = pagination.getPage();
-        Integer limit = pagination.getLimit();
+    public List<Article> findByUserId(String userId,Integer page,Integer limit) {
         Integer startPage= (page-1)*limit;
-        pagination.setStartPage(startPage);
-        return articleListMapper.findByUserId(pagination);
+        return articleListMapper.findByUserId(userId,startPage,limit);
     }
 }

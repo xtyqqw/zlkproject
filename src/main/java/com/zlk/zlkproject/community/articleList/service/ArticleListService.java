@@ -18,5 +18,5 @@ public interface ArticleListService {
     /**倒序查询热门（浏览次数）*/
     List<Article> findByBrowseCount(Pagination pagination);
     /**查询我的文章*/
-    List<Article> findByUserId(Pagination pagination);
+    List<Article> findByUserId(String userId,Integer page,Integer limit);
 }
