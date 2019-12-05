@@ -169,7 +169,6 @@
         </div>
     </c:forEach>
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
-    <%--<div>共3条</div>--%>
     <%--<div class="flow_div"></div>--%>
 </div>
 <script>
