@@ -31,7 +31,7 @@
     </resultMap>
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
-        SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,a.figures_real,
+        SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
         a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
