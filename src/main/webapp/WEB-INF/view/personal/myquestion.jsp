@@ -74,7 +74,7 @@
             border: 1px solid #bec3d9;
             background-color: #bec3d9;
             border-radius: 50px;
-            padding: 2px 10px;
+            padding: 0 10px;
             margin: 0 10px;
             color: #FFFFFF;
         }
@@ -184,6 +184,63 @@
             color: #494949;
             cursor: pointer;
         }
+        .main_ul a{
+            text-decoration: none;
+        }
+        .answer_succ1,.answer_succ2,.answer_succ3{
+            width: 400px;
+            height: 70px;
+            border: 1px solid #fff;
+            box-shadow: 1px 1px 5px 1px #D4D4D4;
+            text-align: center;
+            border-radius: 5px;
+            position: fixed;
+            top: 200px;
+            left: 300px;
+        }
+        .answer_succ1{
+            display: none;
+        }
+        .answer_succ2{
+            display: none;
+        }
+        .answer_succ3{
+            display: none;
+        }
+        .att_succ_ok,.att_succ_no,.att_succ_noo{
+            float: left;
+            margin-right: 10px;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            color: #ffffff;
+            margin-top: 25px;
+        }
+        .att_succ_ok{
+            border: 1px solid #5ab62f;
+            background-color: #5ab62f;
+            margin-left: 110px;
+            font-size: 20px;
+            line-height: 1;
+        }
+        .att_succ_no{
+            border: 1px solid #d34748;
+            background-color: #d34748;
+            margin-left: 100px;
+            line-height: 1.5;
+        }
+        .att_succ_noo{
+            border: 1px solid #f5bb29;
+            background-color: #f5bb29;
+            margin-left: 90px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .att_succ_zi1,.att_succ_zi2,.att_succ_zi3{
+            font-size: 17px;
+            float: left;
+            margin-top: 25px;
+        }
     </style>
 </head>
 <body>
@@ -197,158 +254,190 @@
         <ul class="main_ul">
             <%--全部--%>
             <li class="main_li_show">
-                <p class="count">共6条笔记</p><br>
-                <c:forEach begin="0" end="1">
-                    <%--<c:if test="">--%>
+                <p class="count">共${list.size()}条记录</p><br>
+                <c:forEach items="${list}" var="all">
+                    <%--我的提问--%>
+                    <c:if test="${all.type==0}">
                         <div class="question_waik">
                             <ul class="head_lebel">
-                                <c:forEach begin="0" end="2">
-                                    <li class="lebel_li">Java</li>
+                                <c:forEach items="${all.tagList}" var="tag">
+                                    <li class="lebel_li">${tag.tagName}</li>
                                 </c:forEach>
                             </ul><br />
-                            <p class="title">请问，为何最后那个函数function conf()里的classname不能生效？</p>
-                            <p class="from">来自：人工智能-百度无人车项目-Python基础-Hello World</p>
-                            <p class="question_num">回答 0000</p>
-                            <p class="look_num">浏览 0000</p>
+                            <p class="title">
+                                <a href="javascript:;">${all.questionTitle}</a>
+                            </p>
+                            <p class="from">来自：${all.typeName}</p>
+                            <p class="question_num">回答 ${all.responseCount}</p>
+                            <p class="look_num">浏览 ${all.browseCount}</p>
                             <p class="question_share">分享</p>
-                            <p class="question_date">2018-11-8 09：09</p>
+                            <p class="question_date">${all.formatDate}</p>
                         </div>
-                    <%--</c:if>
-                    <c:if test="">--%>
-                        <!-- 我的回答 已采纳 -->
+                    </c:if>
+                    <!-- 我的回答 已采纳 -->
+                    <c:if test="${all.type==1&&all.accept==1}">
                         <div class="reply_waik_adopted">
-                            <p class="reply_date">2018-11-8 09：09</p>
+                            <p class="reply_date">${all.formatDate}</p>
                             <p class="adopted">已采纳</p>
                             <p class="reply_adopted_msg">
-                                一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人。
+                                <a href="javascript:;">${all.responseContent}</a>
                             </p>
                             <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> 0000</i>
+                               style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
                             <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
                             <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
                             <p class="reply_adopted_share">分享</p>
                         </div>
-                    <%--</c:if>
-                    <c:if test="">--%>
-                        <!-- 我的回答 -->
+                    </c:if>
+                    <!-- 我的回答 未采纳 -->
+                    <c:if test="${all.type==1&&all.accept==0}">
                         <div class="reply_waik">
-                            <p class="reply_date">2018-11-8 09：09</p>
+                            <p class="reply_date">${all.formatDate}</p>
                             <p class="reply_msg">
-                                一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人。一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人
+                                <a href="javascript:;">${all.responseContent}</a>
                             </p>
                             <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> 0000</i>
+                               style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
                             <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
                             <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
                             <p class="reply_dian">...</p>
-                            <p class="reply_delete" onclick="delNote(${sN.snId})">删除</p>
-                            <p class="reply_edit" onclick="editNote('${sN.content}',${sN.snId})">编辑</p>
+                            <p class="reply_delete" onclick="delNote(${all.responseId})">删除</p>
+                            <p class="reply_edit" onclick="editNote('${all.responseContent}',${all.responseId})">编辑</p>
                             <p class="reply_share">分享</p>
                         </div>
-                    <%--</c:if>--%>
+                    </c:if>
                 </c:forEach>
             </li>
             <%--我的提问--%>
             <li class="main_li2">
-                <p class="count">共5条笔记</p><br>
-                <c:forEach begin="0" end="4">
+                <p class="count">共${qList.size()}条笔记</p><br>
+                <c:forEach items="${qList}" var="question">
                     <div class="question_waik">
                         <ul class="head_lebel">
-                            <c:forEach begin="0" end="2">
-                                <li class="lebel_li">Java</li>
+                            <c:forEach items="${question.tagList}" var="tag1">
+                                <li class="lebel_li">${tag1.tagName}</li>
                             </c:forEach>
                         </ul><br />
-                        <p class="title">请问，为何最后那个函数function conf()里的classname不能生效？</p>
-                        <p class="from">来自：人工智能-百度无人车项目-Python基础-Hello World</p>
-                        <p class="question_num">回答 0000</p>
-                        <p class="look_num">浏览 0000</p>
+                        <p class="title">
+                             <a href="javascript:;">${question.questionTitle}</a>
+                        </p>
+                        <p class="from">来自：${question.typeName}</p>
+                        <p class="question_num">回答 ${question.responseCount}</p>
+                        <p class="look_num">浏览 ${question.browseCount}</p>
                         <p class="question_share">分享</p>
-                        <p class="question_date">2018-11-8 09：09</p>
+                        <p class="question_date">${question.formatDate}</p>
                     </div>
                 </c:forEach>
             </li>
             <%--我的回答--%>
             <li class="main_li3">
-                <p class="count">共4条笔记</p><br>
-                <c:forEach begin="0" end="1">
-                    <%--<c:if test="">--%>
-                        <!-- 我的回答 已采纳 -->
+                <p class="count">共${rList.size()}条笔记</p><br>
+                <c:forEach items="${rList}" var="response">
+                    <!-- 我的回答 已采纳 -->
+                    <c:if test="${response.accept==1}">
                         <div class="reply_waik_adopted">
-                            <p class="reply_date">2018-11-8 09：09</p>
+                            <p class="reply_date">${response.formatDate}</p>
                             <p class="adopted">已采纳</p>
                             <p class="reply_adopted_msg">
-                                一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人。
+                                 <a href="javascript:;">${response.responseContent}</a>
                             </p>
                             <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> 0000</i>
+                               style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
                             <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
                             <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
                             <p class="reply_adopted_share">分享</p>
                         </div>
-                    <%--</c:if>
-                    <c:if test="true">--%>
-                        <!-- 我的回答 -->
+                    </c:if>
+                    <!-- 我的回答 未采纳 -->
+                    <c:if test="${response.accept==0}">
                         <div class="reply_waik">
-                            <p class="reply_date">2018-11-8 09：09</p>
+                            <p class="reply_date">${response.formatDate}</p>
                             <p class="reply_msg">
-                                一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人。一下子买了前端路径的所有课程，比外面的培训机构便宜多了，而且内容很充实，老师讲的也很细致，课后选择题，编程习题，作业都很有针对性，不懂得的地方有老师专程讲解，我很喜欢，我是一个喜欢自学的人
+                                 <a href="javascript:;">${response.responseContent}</a>
                             </p>
                             <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> 0000</i>
+                               style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
                             <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
                             <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> 0000</i>
+                               style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
                             <p class="reply_dian">...</p>
-                            <p class="reply_delete" onclick="delNote(${sN.snId})">删除</p>
-                            <p class="reply_edit" onclick="editNote('${sN.content}',${sN.snId})">编辑</p>
+                            <p class="reply_delete" onclick="delNote(${response.responseId})">删除</p>
+                            <p class="reply_edit"
+                               onclick="editNote('${response.responseContent}',${response.responseId})">编辑</p>
                             <p class="reply_share">分享</p>
                         </div>
-                    <%--</c:if>--%>
+                    </c:if>
                 </c:forEach>
             </li>
             <%--富文本编辑框--%>
             <div hidden="hidden" id="demo" style="padding: 25px">
-                <form action="<%=request.getContextPath()%>/myyNote/edit" method="post">
-                    <textarea id="content" name="content"></textarea>
-                    <input type="text" id="input_hid" hidden="hidden" name="snId">
+                <form action="<%=request.getContextPath()%>/myfaqq/updateResponse" method="post">
+                    <textarea id="content" name="responseContent"></textarea>
+                    <input type="text" id="input_hid" hidden="hidden" name="responseId">
                     <input type="submit" class="layui-btn" style="float: right;" value="提交">
                 </form>
+                <%--<div>
+                    <textarea id="content" name="responseContent"></textarea>
+                    <input type="text" id="input_hid" style="display: none"  name="responseId">
+                    <input type="submit" class="layui-btn" style="float: right;"
+                           onclick="submit()" value="提交">
+                </div>--%>
+                <%--<div class="answer_tan">
+                    <div class="answer_succ1">
+                        <p class="att_succ_ok">√</p>
+                        <p class="att_succ_zi1">答案提交已成功！</p>
+                    </div>
+                    <div class="answer_succ2">
+                        <p class="att_succ_no">X</p>
+                        <p class="att_succ_zi2">提交失败，请重新操作！</p>
+                    </div>
+                    <div class="answer_succ3">
+                        <p class="att_succ_noo">!</p>
+                        <p class="att_succ_zi3">加载超时，请稍后再试！</p>
+                    </div>
+                </div>--%>
             </div>
         </ul>
     </div>
 </div>
 <script type="text/javascript">
     /*点击删除*/
-    /*function delNote(snId){
+    function delNote(responseId){
         var layer = layui.layer;
         layer.confirm('确定删除？',{offset:"100px"},function(index){
             $.ajax({
                 type: "POST",
-                url: "/myyNote/delete?snId="+snId,
-                success: function(msg){
-                    layer.msg(msg);
-                    window.location.href = location.href;//删除后刷新当前页面
+                url: "/myfaqq/removeResponse?responseId="+responseId,
+                success: function(data){
+                    if(data.code==1){
+                        /*alert("删除成功！");*/
+                        layer.msg(data);
+                        window.location.href = location.href;//删除后刷新当前页面
+                    } else {
+                        /*alert("删除失败，请重新操作！");*/
+                        layer.msg(data);
+                    }
                 }
             });
             layer.close(index);
         });
-    }*/
+    }
     /*点击编辑*/
     layui.use('layer', function(){
         var $ = layui.jquery, layer = layui.layer;
-        window.editNote = function(obj,snId){
+        window.editNote = function(obj,responseId){
             $("#content").html(obj);
-            $("#input_hid").val(snId);
+            $("#input_hid").val(responseId);
             layer.open({
                 type: 1,
-                title: '编辑',
+                title: '我要回答',
                 btn: false,
                 area: ['70%','50%'],
                 content: $('#demo'),
@@ -356,6 +445,33 @@
             })
         }
     });
+    /*点击提交触发事件*/
+    /*function submit(){
+        var layer = layui.layer;
+        var content = $("#content").val();
+        var resId = $("#input_hid").val();
+        var jsonstr = {"responseId":resId,"responseContent":content};
+        $.ajax({
+            url:"/myfaqq/updateResponse",
+            type:"POST",
+            dataType: JSON,
+            data: jsonstr,
+            success: function (data) {
+                if(data.code==1){
+                    $(".answer_succ1").show().delay(2000).hide(300);
+                    $("#demo").hide();
+                    layer.closeAll();
+                } else {
+                    $(".answer_succ2").show().delay(2000).hide(300);
+                    $("#demo").hide();
+                }
+            }, error: function () {
+                $(".answer_succ3").show().delay(2000).hide(300);
+                $("#demo").hide();
+            }
+        });
+    }*/
+
     /*富文本编辑*/
     layui.use('layedit', function(){
         var layedit = layui.layedit;
@@ -369,7 +485,7 @@
         });
     });
 </script>
-<%--点击...事件--%>
+<%--点击...显示分享 编辑 删除事件--%>
 <script>
     $(".reply_delete,.reply_edit,.reply_share").hide();
     $(document).ready(function(){
@@ -379,7 +495,7 @@
         });
     });
 </script>
-<!--点击选项卡事件-->
+<!--点击选项卡(全部 我的提问 我的回答)事件-->
 <script>
     $(".main_li2,.main_li3").hide();
     $(document).ready(function () {
