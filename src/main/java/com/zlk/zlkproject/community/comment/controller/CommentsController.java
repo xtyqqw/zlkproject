@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @program: CommentController
@@ -28,16 +27,20 @@ public class CommentsController {
     @Autowired
     private ArticleShowService articleShowService;
 
+    @Value("${comment.avatar}")
+    private String avatar;
+
     /*@GetMapping(value = "/comments/{articleId}")
-    public ModelAndView comments(String articleId) {
+    public ModelAndView comments(@PathVariable String articleId) {
         ModelAndView mv=new ModelAndView();
-        mv.addObject("comments", commentsService.listCommentByArticleId(articleId));
+        mv.addObject("comments",commentsService.listCommentByArticleId(articleId));
         mv.setViewName("view/community/articleShow");
         return mv;
     }*/
 
     @GetMapping(value = "/comments/{articleId}")
     public String comments(@PathVariable String articleId, Model model) {
+        articleId="871743534";
         model.addAttribute("comments", commentsService.listCommentByArticleId(articleId));
         return "view/community/articleShow";
     }
@@ -46,6 +49,7 @@ public class CommentsController {
     public String post(Comment comment) {
         String articleId=comment.getArticle().getId();
         comment.setArticle(articleShowService.getArticle(articleId));
+        comment.setAvatar(avatar);
         commentsService.saveComment(comment);
         return "redirect:/comments/" +articleId;
     }

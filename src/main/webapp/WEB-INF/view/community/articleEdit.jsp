@@ -47,7 +47,7 @@
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="add">
                     <%--<input type="hidden" name="approval">
                     <input type="hidden" name="articleSetTop">--%>
                     <div class="required field">
@@ -109,22 +109,22 @@
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui teal basic label">摘要</label>
-                            <input type="text" value="" name="articleDigest" placeholder="请输入文章摘要">
+                            <input type="text" name="articleDigest" placeholder="请输入文章摘要">
                         </div>
                     </div>
 
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui teal basic label">首图</label>
-                            <input type="text" name="figures" value="" placeholder="首图引用地址">
+                            <input type="text" name="figures" placeholder="首图引用地址">
                         </div>
                     </div>
 
-                    <div class="ui error message"></div>
+                    <%--<div class="ui error message"></div>--%>
 
                     <div class="ui right aligned container">
-                        <button <%--type="button" id="save-btn"--%> class="ui secondary button">保存</button>
-                        <button type="submit" id="publish-btn" class="ui teal button">发布</button>
+                        <button <%--id="save-btn"--%> type="reset" class="ui reset secondary button">重置</button>
+                        <button type="submit" id="publish-btn" class="ui teal button" onclick="add()">发布</button>
                     </div>
 
                 </form>
@@ -163,6 +163,22 @@
             on : 'hover'
         });
 
+        function add() {
+            $.ajax({
+                type: 'POST',
+                url: '/articles',
+                data: $('#add'),
+                success: function (res) {
+                    if(res.data()) {
+                        alert("发布成功");
+                    }
+                },
+                error: function () {
+                    alert("发布失败");
+                }
+            })
+        }
+
         /*初始化审核，置顶状态*/
         /*$('#publish-btn').click(function () {
             $('[name="approval"]').val(0);
@@ -172,47 +188,58 @@
 
         /*表单验证开启*/
         $('.ui.form').form({
+            inline: true,
+            on: 'blur',
             fields : {
                 title : {
                     identifier: 'title',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章标题'
+                        prompt: '请注意文章标题不能为空'
+                    },{
+                        type : 'maxLength[50]',
+                        prompt: '请注意文章标题最大长度不能超过50'
                     }]
                 },
                 articleContent : {
                     identifier: 'articleContent',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章内容'
+                        prompt: '请注意文章内容不能为空'
                     }]
                 },
                 typeName : {
                     identifier: 'typeName',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章方向'
+                        prompt: '请选择一个文章方向'
                     }]
                 },
-                /*tagIds : {
-                    identifier: 'tagName',
+                tagIds : {
+                    identifier: 'tagIds',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章标签'
+                        prompt: '请至少选择一个文章标签'
                     }]
-                },*/
+                },
                 figures : {
                     identifier: 'figures',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章首图地址'
+                        prompt: '请注意文章首图地址不能为空'
+                    },{
+                        type : 'url',
+                        prompt: '请输入正确的URL格式'
                     }]
                 },
                 articleDigest : {
                     identifier: 'articleDigest',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章摘要'
+                        prompt: '请注意文章摘要不能为空'
+                    },{
+                        type : 'maxLength[150]',
+                        prompt: '请注意文章摘要最大长度不能超过150'
                     }]
                 }
             }

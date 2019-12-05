@@ -1,18 +1,16 @@
 package com.zlk.zlkproject.community.articleAdd.service.impl;
 
 import com.zlk.zlkproject.community.articleAdd.dao.ArticleAddRepository;
-import com.zlk.zlkproject.community.articleAdd.mapper.ArticleAddMapper;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 
 import com.zlk.zlkproject.community.entity.Article;
-import com.zlk.zlkproject.community.entity.Tag;
+
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @program: ArticleAddServiceImpl
@@ -37,5 +35,4 @@ public class ArticleAddServiceImpl implements ArticleAddService {
         article.setArticleSetTop(1);
         return articleAddRepository.save(article);
     }
-
 }

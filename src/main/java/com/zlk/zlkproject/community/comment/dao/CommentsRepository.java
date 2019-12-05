@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface CommentsRepository extends JpaRepository<Comment,String> {
 
-    List<Comment> findByArticleId(String articleId, Sort sort);
+    List<Comment> findByArticleIdAndParentCommentNull(String articleId, Sort sort);
 }
