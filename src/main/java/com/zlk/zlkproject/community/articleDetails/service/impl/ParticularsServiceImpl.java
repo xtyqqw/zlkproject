@@ -19,11 +19,6 @@ public class ParticularsServiceImpl implements ParticularsService {
     private ParticularsMapper particularsMapper;
 
     @Override
-    public Integer addArticleContent(String title,String articleId,String articleContent) {
-        return particularsMapper.addArticleContent(title,articleId,articleContent);
-    }
-
-    @Override
     public Article findById(String articleId) {
         return particularsMapper.findById(articleId);
     }

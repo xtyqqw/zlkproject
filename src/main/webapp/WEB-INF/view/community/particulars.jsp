@@ -26,99 +26,9 @@
     <style type="text/css">
         .top {
             height: auto;
-            width:100%;
-            left: 0;
-            top: 0;/*离顶部的距离为0*/
-        }
-
-        .header {
-            background-color: #FFFFFF;
-            top: 0px;
-            height: 60px;
             width: 100%;
-            border: 1px #989898;
-            box-shadow: 1px 1px 5px 3px #D4D4D4;
-            position: fixed;
-        }
-        /* 头部logo样式 */
-        .header .header-logo{
-            display: inline;
-            padding-top: 5px;
-            float: left;
-        }
-
-        /* 头部导航 */
-        .header .header-nav .nav {
-            color: #000000;
-            text-decoration: none;
-            font-size: 20px;
-            float: left;
-            margin: 26px 30px;
-            padding: 1px;
-
-        }
-
-        .header .nav:hover {
-            color: #914EF3;
-        }
-
-        /*点击事件样式*/
-        .header .active {
-            color: #914EF3 !important;
-            text-decoration: none;
-            font-size: 20px;
-            float: left;
-            margin: 26px 30px;
-            padding: 1px;
-        }
-
-        /* 头部搜索 */
-        .header .header-search {
-            float: left;
-            display: inline;
-            margin-left: 400px;
-            margin-top: 18px;
-        }
-
-        /* 头部搜索框样式 */
-        .header .header-search .text {
-            height: 40px;
-            background-color: #FAFAFA;
-            border: 1px #FAFAFA;
-            border-radius: 3px; /* 边框圆角 */
-            text-indent: 1em; /* 首行缩进 */
-            font-size: 16px;
-            font-weight: bold; /* 粗体 */
-            color: #989898;
-        }
-
-        /* 头部搜索按钮样式 */
-        .header .header-search .submit {
-            background-color: #914FF1;
-            border: none;
-            color: #FFFFFF;
-            height: 40px;
-            width: 70px;
-            border-radius: 3px;
-            font-size: 16px;
-        }
-
-        .header .eheader-login {
-            display: inline;
-            float: left;
-            margin-top: 18px;
-            padding: 10px 50px;
-        }
-
-        /* 头部注册登录样式 */
-        .header .header-login a {
-            text-decoration: none;
-            color: #000000;
-            font-size: 20px;
-        }
-
-        .header .header-login a:hover {
-            color: #914EF3;
+            left: 0;
+            top: 0; /*离顶部的距离为0*/
         }
 
         /*导航栏变异部分*/
@@ -130,10 +40,32 @@
             background-color: white;
         }
 
+        .nav3 {
+            float: left;
+            margin-left: 200px;
+            margin-top: 15px;
+        }
+
         .fixnav {
             position: fixed;
             top: 0px;
             left: 0px;
+        }
+
+        .div1 {
+            margin-left: 175px;
+            width: 920px;
+        }
+
+        .div2 {
+            margin-top: -27px;
+            float: left;
+            margin-left: 50px;
+        }
+
+        .span {
+            float: right;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -149,113 +81,66 @@
 %>
 <body>
 <div class="top">
-    <div class="header">
-        <!-- logo -->
-         <div class="header-logo">
-             <a href="javascript:;"title="专业的IT技术社区">
-                 <img src="/img/logo.png"/>
-             </a>
-         </div>
-        <!-- 导航 -->
-        <div class="header-nav" style="margin-left: 300px;margin-top: -10px">
-            <a href="javascript:;" name="nav" class="nav">首页</a>
-            <a href="javascript:;" name="nav" class="nav">项目</a>
-            <a href="javascript:;" name="nav" class="nav">社区</a>
-        </div>
-        <!-- 搜索 -->
-        <div class="header-search">
-            <form action="">
-                <input class="text" type="text" placeholder="请输入关键词"/>
-                <input class="submit" type="submit" value="我要提问"/>
-            </form>
-        </div>
-
-        <%--未登录显示注册登录--%>
-        <c:if test="">
-            <!-- 注册登录 -->
-            <div class="header-login">
-                <a href="javascript:;">注册</a>
-                <a style="color: #000000;">/</a>
-                <a href="javascript:;">登录</a>
-            </div>
-        </c:if>
-        <%--已登录显示登录信息--%>
-        <c:if test="">
-            <div>
-                <ul class="layui-nav" style="margin: 0 330px 0 1150px">
-                    <li class="layui-nav-item" lay-unselect="">
-                        <a href="javascript:;">
-                            <img src="//t.cn/RCzsdCq" class="layui-nav-img">
-                            我
-                        </a>
-                        <dl class="layui-nav-child">
-                            <a href="javascript:;">个人中心</a>
-                            <a href="javascript:;">退了</a>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </c:if>
-    </div>
+    <%@include file="../../jsp/header.jsp" %>
+    <%@include file="../../jsp/sidebar.jsp" %>
     <div class="nav2">
-        <div>
+        <div class="nav3">
             <h2>${article.title}</h2>
         </div>
     </div>
-    <div>
-        <div style="margin-top: 70px;margin-left:200px;width: 850px">
-            <div style="margin-top: 50px">
-                <div style="left: 0px">
-                    <div  class="title" style="font-size: 10px;">
-                        <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px; ">
-                            <span style="color: white">原创</span>
-                        </div>
-                       <h2> ${article.title}</h2>
-                    </div>
-                    <div style="width: 40px;height:20px;background-color:#E8E8E8">
-                        <p class="tag">标签</p>
-                    </div>
+    <div class="div1">
+        <%--文章标题及特征--%>
+        <div style="margin-top: 50px;height: 100px;width: auto;">
+            <div class="title" style="font-size: 10px;float: left">
+                <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px; ">
+                    <span style="color: white">${article.createArticleType}</span>
                 </div>
-                <div style="margin-left: 720px;margin-top: -15px;">
-                    <small>
-                        <span><%=application.getAttribute("counter") %>浏览</span>
-                        <i>|</i>
-                        <span>分类：开发语言</span>
-                    </small>
+                <div class="div2">
+                    <h2> ${article.title}</h2>
                 </div>
             </div>
-            <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;"></fieldset>
-            <div id="layout" style="margin-left: -60px;">
-                <div id="test-editormd-view">
-                    <textarea id="articleContent" style="display:none;">${article.articleContent}</textarea>
-                </div>
+            <div style="width: 40px;height:20px;background-color:#E8E8E8;float: left;margin-top: 50px;margin-left: -230px;">
+                <p class="tag"><%--${article.tagName}--%>JAVA</p>
             </div>
-
-            <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
-
+            <div class="span">
+                <small>
+                    <span><%=application.getAttribute("counter") %>${arcitle.browseCount}浏览</span>
+                    <i>|</i>
+                    <span>分类：${article.typeName}</span>
+                </small>
+            </div>
+        </div>
+        <%--文章--%>
+        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;"></fieldset>
+        <div id="layout" style="margin-left: -60px;height: auto">
+            <div id="test-editormd-view">
+                <textarea id="articleContent" style="display:none;">${article.articleContent}</textarea>
+            </div>
+        </div>
+        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
+        <%--评论--%>
+        <div>
             <label class="layui-form-label" style="margin-left: -30px">评论</label><br><br>
             <div class="layui-input-block" style="margin-left: 1px">
-            <textarea name="articleDigest" placeholder="开始编辑..."
-                      style="text-decoration-top: 300px;" oninput="if(value.length>3)value=value.slice(0,150)"
-                      class="layui-textarea" lay-verify="required"></textarea>
+                    <textarea name="articleDigest" placeholder="开始编辑..."
+                              style="text-decoration-top: 300px;" oninput="if(value.length>3)value=value.slice(0,150)"
+                              class="layui-textarea" lay-verify="required"></textarea>
             </div>
-
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="submit" style="margin-left: 640px;background-color: #1296db;" class="layui-btn"
-                            lay-submit="sub"
-                            lay-filter="demo2">
-                        提交评论
-                    </button>
-                </div>
+        </div>
+         <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" style="float:right;background-color: #1296db;" class="layui-btn"
+                        lay-submit="sub" lay-filter="demo2">提交评论
+                </button>
             </div>
-
-            <div style="margin-left: 300px;">
+             <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
+             <div style="float: left;">
                 评论数：${article.commentCount}
             </div>
         </div>
     </div>
-
+</div>
+</div>
 </div>
 
 <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
@@ -270,13 +155,13 @@
 
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
-    document.title = "${article.title}双十一狂欢节"
+    document.title = "${article.title}"
     $(function () {
         $(".nav2").hide();
         $(window).scroll(function () {
             if ($(document).scrollTop() > 50) {
                 $(".nav2").addClass("fixnav").slideDown();
-            }else {
+            } else {
                 $(".nav2").hide();
             }
         })
@@ -284,7 +169,7 @@
     })
 </script>
 <%--鼠标移入移出头像事件--%>
-<script>
+<%--<script>
     layui.use('element', function () {
         var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 
@@ -294,25 +179,25 @@
             layer.msg(elem.text());
         });
     });
-</script>
+</script>--%>
 <%--头部导航点击事件--%>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     $(function () {
         $("a[name='nav']").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
         });
     });
-</script>
+</script>--%>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         var testEditormdView;
         testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-            htmlDecode : "style,script,iframe",  // you can filter tags decode
-            emoji : true,
-            taskList : true,
-            tex : true,  // 默认不解析
-            flowChart : true,  // 默认不解析
-            sequenceDiagram : true  // 默认不解析
+            htmlDecode: "style,script,iframe",  // you can filter tags decode
+            emoji: true,
+            taskList: true,
+            tex: true,  // 默认不解析
+            flowChart: true,  // 默认不解析
+            sequenceDiagram: true  // 默认不解析
         });
     });
 </script>

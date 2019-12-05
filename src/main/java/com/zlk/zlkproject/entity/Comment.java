@@ -25,8 +25,13 @@ public class Comment {
      private String comments;
     /**讲师回复 */
      private String teacherAnswer;
+    /** 点赞数 */
+    private int like;
+    /** 踩数 */
+    private int dislike;
+    /** 定义全局变量为了显示前三热门评论*/
+    private String flag;
     /**用户id  32位uuid*/
-
     private String userId;
     /**用户手机号*/
     private String phonenum;

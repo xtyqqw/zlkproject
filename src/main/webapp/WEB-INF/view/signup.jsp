@@ -117,7 +117,7 @@
     <center><button type="submit" style="border: none;width: 100px;height: 30px;">提交</button></center>
 </form>
 </div>
-<div id="box" onselectstart="return false;" style="visibility: hidden" >
+<div id="box" onselectstart="return false;" style="display: none" >
     <div class="bgColor"></div>
     <div class="txt" >滑动解锁</div>
     <!--给i标签添加上相应字体图标的类名即可-->

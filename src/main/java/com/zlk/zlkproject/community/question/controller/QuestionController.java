@@ -7,6 +7,7 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import org.apache.commons.io.FileUtils;
+import org.apache.jasper.tagplugins.jstl.core.Redirect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,19 @@ public class QuestionController {
     @RequestMapping(value = "/test")
     public String test() {
 
-        return "/view/community/questionMain";
+        return "/view/community/main";
+    }
+    /*
+     * @descrption 提问首页
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/5 10:19
+     */
+    @RequestMapping(value = "/questionMain")
+    public String question(){
+
+        return "/view/community/questioinMain";
     }
 
     /*
@@ -61,9 +74,11 @@ public class QuestionController {
         ModelAndView mv = new ModelAndView();
         Object userId = request.getSession().getAttribute("userId");
         if (userId == null) {
+            mv.addObject("msg","你还没有登录，请先登录");
             mv.setViewName("/view/signin");
             return mv;
         } else {
+            mv.addObject("msg","您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionMain");
             return mv;
         }

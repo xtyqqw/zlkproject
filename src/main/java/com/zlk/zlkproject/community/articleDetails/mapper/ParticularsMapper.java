@@ -9,15 +9,6 @@ import java.util.List;
 @Mapper
 public interface ParticularsMapper {
 
-    /*
-     * @descrption
-     * @author gby
-     * @param 新增文章内容
-     * @return
-     * @date 2019/11/24 16:18
-     */
-
-    Integer addArticleContent(String title, String articleId, String articleContent);
 
     /*
      * @descrption 根据id查询文章

@@ -86,7 +86,7 @@
             </ul>
         </div>
         <%--javascript:void(0)--%>
-        <a href="<%=request.getContextPath() %>/community/articleEdit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
+        <a href="<%=request.getContextPath() %>/community/article-edit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
     </div>
     <div class="ui success message">
         <c:if test="${not empty message}">

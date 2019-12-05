@@ -22,35 +22,6 @@ public class ParticularsController {
     private ParticularsService particularsService;
 
     /*
-     * @descrption
-     * @author gby
-     * @param 跳转makedown编辑页面
-     * @return java.lang.String
-     * @date 2019/11/24 16:30
-     */
-    @RequestMapping(value = "/content")
-    public String content() {
-
-        return "/view/community/add";
-    }
-
-    /*
-     * @descrption
-     * @author gby
-     * @param 新增文章内容
-     * @return
-     * @date 2019/11/24 16:19
-     */
-    @RequestMapping(value = "/add")
-    public String add(Model model, String title, String articleId, @RequestParam("articleContent") String articleContent) throws Exception {
-        particularsService.addArticleContent(title, articleId, articleContent);
-        model.addAttribute("title", title);
-        model.addAttribute("articleId", articleId);
-        model.addAttribute("articleContent", articleContent);
-        return "/view/community/title";
-    }
-
-    /*
      * @descrption 通过id查询文章
      * @author gby
      * @param [articleId]
@@ -59,7 +30,7 @@ public class ParticularsController {
      */
     @RequestMapping(value = "/find/{articleId}", method = RequestMethod.GET)
     public ModelAndView find(@PathVariable("articleId")String articleId,HttpServletRequest request )throws Exception {
-/*        String articleId1 = (String) request.getSession().getAttribute("articleId");*/
+   /*     String articleId1 = (String) request.getSession().getAttribute("articleId");*/
         Article article = particularsService.findById(articleId);
         ModelAndView mv = new ModelAndView();
         mv.addObject("article",article);

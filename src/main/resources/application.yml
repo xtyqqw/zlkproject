@@ -4,20 +4,6 @@ server:
 spring:
   messages:
     basename: message/msg
-  jpa:
-    #是否显示sql
-    show-sql: true
-    #指定数据库类型
-    database: mysql
-    #方言
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #自动建表方式
-    hibernate:
-      ddl-auto: update
-    #格式化sql
-    properties:
-      hibernate:
-        format-sql: true
   datasource:
     druid:
       # 连接池的配置信息
