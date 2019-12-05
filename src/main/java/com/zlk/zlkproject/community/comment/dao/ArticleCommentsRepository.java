@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.comment.dao;
 
-import com.zlk.zlkproject.community.entity.Comment;
+import com.zlk.zlkproject.entity.ArticleComment;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @author: QianKeQin
  * @date: 2019/12/2 14:50
  */
-public interface CommentsRepository extends JpaRepository<Comment,String> {
+public interface ArticleCommentsRepository extends JpaRepository<ArticleComment,String> {
 
-    List<Comment> findByArticleId(String articleId, Sort sort);
+    List<ArticleComment> findByArticleArticleIdAndParentCommentNull(String articleId, Sort sort);
 }

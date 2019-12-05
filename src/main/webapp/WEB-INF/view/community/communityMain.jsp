@@ -147,7 +147,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -160,7 +160,7 @@
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -177,7 +177,7 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -227,6 +227,29 @@
         <%@include file="../../jsp/sidebar.jsp"%>
         <div class="all-body-center">
             <div class="body-top">
+                <div>
+                    <div class="show">
+                        <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
+                        <c:forEach items="${tagList}" var="tag" begin="0" end="10">
+                            <div>
+                                <ul>
+                                    <li><a href="<%=request.getContextPath() %>/" type="button" class="">${tag.tagName}</a></li>
+                                </ul>
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="hide">
+                        <a href="javascript:void(0)" type="button" class="all">全部</a>
+                        <a style="display: none" id="a"></a>
+                        <c:forEach items="${tagList}" var="tag">
+                            <div>
+                                <ul>
+                                    <li><a href="javascript:void(0)" type="button" onclick="dj(this);">${tag.tagName}</a></li>
+                                </ul>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
                 <div class="add">
                     <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
                 </div>
@@ -257,7 +280,7 @@
                         <ul>
                             <c:forEach items="${alist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>
@@ -278,7 +301,7 @@
                         <ul>
                             <c:forEach items="${blist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>
