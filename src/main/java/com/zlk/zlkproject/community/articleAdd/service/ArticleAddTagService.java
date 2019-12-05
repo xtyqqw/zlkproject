@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
-import com.zlk.zlkproject.community.entity.Tag;
+import com.zlk.zlkproject.entity.Tag;
 
 import java.util.List;
 
