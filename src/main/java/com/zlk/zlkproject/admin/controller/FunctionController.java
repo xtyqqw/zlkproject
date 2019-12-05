@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,13 +80,17 @@ public class FunctionController {
      * @Author lufengxiang
      * @Description //TODO 菜单管理数据接口
      * @Date 10:05 2019/11/25
-     * @Param [request]
+     * @Param []
      **/
     @RequestMapping(value = "/functionManager")
     @ResponseBody
-    public Map<String, Object> functionManager(HttpServletRequest request) {
+    public Map<String, Object> functionManager() {
         Map<String, Object> map = new HashMap<>();
         List<Function> functionList = functionService.functionManager();
+        for(Function function:functionList){
+            Integer childrenNumber = functionService.findChildrenNumber(function.getId());
+            function.setChildrenNumber(childrenNumber);
+        }
         map.put("code", "0");
         map.put("msg", "true");
         map.put("data", functionList);
