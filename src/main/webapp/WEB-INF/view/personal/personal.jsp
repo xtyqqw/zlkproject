@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
+
         #personal{
             height: 550px;
         }
@@ -174,7 +175,7 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="javascript:;" name="dian"
+            <a href="<%=request.getContextPath()%>/user/findUser" name="dian"
                target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-dialogue" style="font-size: 25px;color: #D4D4D4;"></i>

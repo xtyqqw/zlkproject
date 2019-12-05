@@ -46,6 +46,18 @@ public class FunctionServiceImpl implements FunctionService {
 
     /**
      * @Author lufengxiang
+     * @Description //TODO 查找子级菜单数
+     * @Date 9:57 2019/12/5
+     * @Param [id]
+     * @return java.lang.Integer
+     **/
+    @Override
+    public Integer findChildrenNumber(Integer id) {
+        return functionMapper.findChildrenNumber(id);
+    }
+
+    /**
+     * @Author lufengxiang
      * @Description //TODO 新增菜单
      * @Date 17:31 2019/11/25
      * @Param [function]

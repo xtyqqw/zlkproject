@@ -40,6 +40,8 @@
 <input type="hidden" value="${error}" id="msg">
 <script>
     layui.use(['layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
         <c:if test="${flag}">
         $(function () {
             layer.alert($("#msg").val());

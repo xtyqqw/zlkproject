@@ -120,26 +120,26 @@
         </div>
 
         <%--未登录显示注册登录--%>
-        <c:if test="">
+        <c:if test="${user==null}">
             <!-- 注册登录 -->
             <div class="header-login">
-                <a href="javascript:;">注册</a>
+                <a href="/users/tosignup">注册</a>
                 <a style="color: #000000;">/</a>
-                <a href="javascript:;">登录</a>
+                <a href="/users/tosignin">登录</a>
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
-        <c:if test="true">
+        <c:if test="${user!=null}">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
                     <li class="layui-nav-item" lay-unselect="">
                         <a href="javascript:;">
                             <img src="//t.cn/RCzsdCq" class="layui-nav-img">
-                            我
+                            ${user.userRealname}
                         </a>
                         <dl class="layui-nav-child">
-                            <a href="javascript:;">个人中心</a>
-                            <a href="javascript:;">退了</a>
+                            <a href="/personal/person">个人中心</a>
+                            <a href="/users/logout;">退了</a>
                         </dl>
                     </li>
                 </ul>

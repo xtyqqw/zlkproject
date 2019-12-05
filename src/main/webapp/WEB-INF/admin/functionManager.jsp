@@ -104,13 +104,13 @@
         <div class="layui-form-item" id="addUrl">
             <label class="layui-form-label">路径</label>
             <div class="layui-input-inline">
-                <input type="text" required name="url" placeholder="请输入路径" autocomplete="off" class="layui-input">
+                <input type="text" name="url" placeholder="请输入路径" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-inline">
-                <input type="text" required name="comment"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+                <input type="text" required name="comment"  lay-verify="required" placeholder="请输入简介" autocomplete="off" class="layui-input">
             </div>
         </div>
         <p id="parentCatalogAdd">上级目录</p><br>
@@ -236,7 +236,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-inline">
-                <input type="text" required id="comment" name="comment"  lay-verify="required" placeholder="请输入路径" autocomplete="off" class="layui-input">
+                <input type="text" required id="comment" name="comment"  lay-verify="required" placeholder="请输入简介" autocomplete="off" class="layui-input">
             </div>
         </div>
         <input type="submit" style="display:none;" class="layui-btn" id="updateSubmit" value="确认">
@@ -250,7 +250,7 @@
 
     <div class="xm-d2">
         <div class="xm-d2-hang1" id="test">
-            <div class="pzright" style="width:101%;display: flex;justify-content: flex-start;float:right;">
+            <div class="pzright" style="width:100%;display: flex;justify-content: flex-start;float:right;">
                 <p class="xm-d1-p2">
                     <button id="add" class="layui-btn layui-btn-sm layui-btn-radius btnys"><i class="layui-icon">&#xe608;</i>添加</button>
                     <button class="layui-btn layui-btn-sm" id="btn-expand">全部展开</button>
@@ -296,7 +296,7 @@
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
                 page: false,
-                height: 400,
+                height: 423,
                 cols: [[
                     {field: 'id', title: '编号',width:80},
                     {field: 'name', title: '资源名称',width:200},
@@ -355,19 +355,19 @@
         });
 
         function complain(d){//操作中显示的内容
-            if(d.url!=null){
+            /*if(d.childrenNumber==0){*/
                 return [
                     '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
                     '<i class="layui-icon layui-icon-edit"></i></a>',
                     '<a class="operation" lay-event="del" href="javascript:void(0)" onclick="delDepartment(\''+ d.permissionId + '\')" title="删除">',
                     '<i class="layui-icon layui-icon-delete" ></i></a>',
                 ].join('');
-            }else{
+            /*}else{
                 return [
                     '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
                     '<i class="layui-icon layui-icon-edit"></i></a>',
                 ].join('');
-            }
+            }*/
         }
 
         //监听工具条
@@ -378,12 +378,17 @@
             if(data.name!=null){
                 if (layEvent === 'del') {
                     layer.confirm('是否确认删除', function (index) {
-                        obj.del();
                         $.ajax({
                             type: "POST",
                             url: "<%=request.getContextPath()%>/function/delete?functionId=" + id,
                             success: function (msg) {
-                                layer.alert("删除成功");
+                                if(msg){
+                                    layer.alert("删除成功");
+                                    obj.del();
+                                }
+                                if(!msg){
+                                    layer.alert("该目录下仍有目录或菜单,无法删除");
+                                }
                             },
                             error: function (msg) {
                                 layer.alert("遇到意外错误");
