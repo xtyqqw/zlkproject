@@ -6,6 +6,8 @@ import com.zlk.zlkproject.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,10 +31,11 @@ public class Articles {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
+    private String createDate;
     /**更新时间*/
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
     /**插图相对路径*/
     private String figures;
@@ -66,12 +69,13 @@ public class Articles {
     public Articles() {
     }
 
-    public Articles(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, Integer inform, Integer createArticleType, Integer articleSetTop, String typeName, String tagName, String userId, List<Tag> tagList, Integer approval) {
+    public Articles(String articleId, String title, Integer browseCount, Integer commentCount, Date createTime, String createDate, Date updateTime, String figures, String figuresReal, String articleDigest, String articleContent, Integer zanCount, Integer caiCount, Integer inform, Integer createArticleType, Integer articleSetTop, String typeName, String tagName, String userId, List<Tag> tagList, Integer approval) {
         this.articleId = articleId;
         this.title = title;
         this.browseCount = browseCount;
         this.commentCount = commentCount;
         this.createTime = createTime;
+        this.createDate = createDate;
         this.updateTime = updateTime;
         this.figures = figures;
         this.figuresReal = figuresReal;

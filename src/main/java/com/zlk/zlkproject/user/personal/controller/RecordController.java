@@ -1,10 +1,12 @@
 package com.zlk.zlkproject.user.personal.controller;
 
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +44,7 @@ public class RecordController {
      * @param
      * @return
      */
-    @RequestMapping(value = "/icourses")
+    /*@RequestMapping(value = "/icourses")
     @ResponseBody
     public Map<String,Object> selectItem(FollowerPage followerPage){
         followerPage.setUserId("1");
@@ -56,6 +58,22 @@ public class RecordController {
         map.put("itemList",itemList);
         map.put("per",per);
         return map;
+    }*/
+    @RequestMapping(value = "/tocourses")
+    public ModelAndView selectItem(FollowerPage followerPage) {
+        followerPage.setUserId("1");
+        followerPage.setPage(1);
+        followerPage.setLimit(3);
+        List<Item> itemList = recordService.selectCourses(followerPage);
+        Integer sum = recordService.selectUserSection("1");
+        Integer done = recordService.selectUser("1");
+        long per = Math.round((100 * done) / sum);
+        Integer all=recordService.findCourses("1");
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("all",all);
+        mv.addObject("itemList",itemList);
+        mv.addObject("per",per);
+        mv.setViewName("view/personal/learnrecord");
+        return mv;
     }
-
 }

@@ -1,8 +1,8 @@
 package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
-import com.zlk.zlkproject.community.comment.service.CommentsService;
-import com.zlk.zlkproject.community.entity.Comment;
+import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
+import com.zlk.zlkproject.entity.ArticleComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @program: CommentController
@@ -20,18 +19,21 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class CommentsController {
+public class ArticleCommentsController {
 
     @Autowired
-    private CommentsService commentsService;
+    private ArticleCommentsService commentsService;
 
     @Autowired
     private ArticleShowService articleShowService;
 
+    @Value("${comment.avatar}")
+    private String avatar;
+
     /*@GetMapping(value = "/comments/{articleId}")
-    public ModelAndView comments(String articleId) {
+    public ModelAndView comments(@PathVariable String articleId) {
         ModelAndView mv=new ModelAndView();
-        mv.addObject("comments", commentsService.listCommentByArticleId(articleId));
+        mv.addObject("comments",commentsService.listCommentByArticleId(articleId));
         mv.setViewName("view/community/articleShow");
         return mv;
     }*/
@@ -43,10 +45,11 @@ public class CommentsController {
     }
 
     @PostMapping(value = "/comments")
-    public String post(Comment comment) {
-        String articleId=comment.getArticle().getId();
-        comment.setArticle(articleShowService.getArticle(articleId));
-        commentsService.saveComment(comment);
+    public String post(ArticleComment articleComment) {
+        String articleId=articleComment.getArticle().getArticleId();
+        articleComment.setArticle(articleShowService.getArticle(articleId));
+        articleComment.setAvatar(avatar);
+        commentsService.saveComment(articleComment);
         return "redirect:/comments/" +articleId;
     }
 }
