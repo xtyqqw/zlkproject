@@ -2,7 +2,7 @@ package com.zlk.zlkproject.community.articleAdd.service.impl;
 
 import com.zlk.zlkproject.community.articleAdd.dao.ArticleAddTagRepository;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
-import com.zlk.zlkproject.community.entity.Tag;
+import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -71,4 +71,8 @@
           JOIN section on section.section_id=user_section.section_id
           where state='已完成' and user.user_id=#{userId}
     </select>
+    <select id="findCourses" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from courses ,user_courses
+        WHERE user_id=#{userId} AND courses.courses_id=user_courses.courses_id
+    </select>
 </mapper>
