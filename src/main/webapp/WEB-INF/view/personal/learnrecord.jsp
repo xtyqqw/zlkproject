@@ -188,17 +188,17 @@
                         dataType: "json",
                         data: data,
                         success: function (map) {
-                            layui.each(map.list, function (i, courses) {
+                            layui.each(map.itemList, function (i, item) {
                                 lis.push('<div class="timeline">'
                                     +'<div class="date">'
-                                    +'<p class="year">courses.stuTime</p>'
+                                    +'<p class="year">'+item.stuTime+'</p>'
                                     +'</div>'
                                     +'<div class="yuan"></div>'
                                     +'<div class="learn-main mainname main">'
                                     +'<div class="learn-title">'
-                                    +'<h2>courses.coursesName</h2>'
-                                    +'<p>解锁任务：courses.coursesName — courses.chapterName — courses.sectionName</p>'
-                                    +'<img src="courses.coverPic">'
+                                    +'<h2>'+item.coursesName+'</h2>'
+                                    +'<p>解锁任务：'+item.coursesName+' — '+item.chapterName+' — '+item.sectionName+'</p>'
+                                    +'<img src="'+item.coverPic +'">'
                                     +'</div>'
                                     +'<div class="learn-main-getstar">'
                                     +'<p>获星数量</p>'
@@ -213,7 +213,7 @@
                                     +'<div class="layui-progress layui-progress-big" lay-showpercent="true"'
                                     +'     style="width: 520px;height: 20px;background-color: #dfd9fd;'
                                     +'            margin: 230px 30px auto 350px;float: right;position: fixed;">'
-                                    +'<div class="layui-progress-bar" lay-percent="courses.per%"'
+                                    +'<div class="layui-progress-bar" lay-percent="'+map.per + ' %"'
                                     +'     style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>'
                                     +'</div>'
                                     +'</div>'
