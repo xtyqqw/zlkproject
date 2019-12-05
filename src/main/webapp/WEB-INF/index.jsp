@@ -876,7 +876,7 @@
                         layer.msg("对不起,签到失败");
                     }
                 }, error: function () {
-                    layer.msg("连接超时，请检查网络");
+
                 }
             });
         });
