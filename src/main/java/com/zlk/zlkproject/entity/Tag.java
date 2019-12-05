@@ -26,11 +26,15 @@ public class Tag {
     /**tag对应id*/
     @Id
     private Integer tagId;
-    /**tag名称*/
+    /**
+     * tag名称
+     */
     private String tagName;
-    /**tag对应方向id*/
+    /**
+     * tag对应方向id
+     */
     private Integer tagTypeId;
-    /**tag对应方向名*/
+
     private String tagTypeName;
     /**标签和文章多对多关系*/
     @ManyToMany(mappedBy = "tags")

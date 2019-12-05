@@ -70,6 +70,7 @@ public class RecordController {
         long per = Math.round((100 * done) / sum);
         Integer all=recordService.findCourses("1");
         ModelAndView mv=new ModelAndView();
+        mv.addObject("all",all);
         mv.addObject("itemList",itemList);
         mv.addObject("per",per);
         mv.setViewName("view/personal/learnrecord");
