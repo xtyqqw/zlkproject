@@ -1,12 +1,9 @@
 package com.zlk.zlkproject.community.articleAdd.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
-import com.zlk.zlkproject.community.entity.Article;
-import com.zlk.zlkproject.community.entity.Tag;
-import com.zlk.zlkproject.community.entity.User;
-import com.zlk.zlkproject.community.util.UUIDUtils;
+import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Tag;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

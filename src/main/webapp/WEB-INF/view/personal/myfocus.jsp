@@ -439,29 +439,29 @@
                 </c:if>
             </div>
         </c:forEach>
-        <div class="att_tan">
-            <div class="att_success1">
-                <p class="att_success_ok1">√</p>
-                <p class="att_success_zi1">取消关注成功!</p>
-            </div>
-            <div class="att_success2">
-                <p class="att_success_no1">X</p>
-                <p class="att_success_zi2">取消关注失败，请重新操作！</p>
-            </div>
-            <div class="att_success3">
-                <p class="att_success_noo">!</p>
-                <p class="att_success_zi3">加载超时，请稍后再试！</p>
-            </div>
-            <div class="att_success4">
-                <p class="att_success_ok2">√</p>
-                <p class="att_success_zi4">关注成功!</p>
-            </div>
-            <div class="att_success5">
-                <p class="att_success_no2">X</p>
-                <p class="att_success_zi5">关注失败，请重新操作！</p>
-            </div>
-        </div>
 
+    </div>
+    <div class="att_tan">
+        <div class="att_success1">
+            <p class="att_success_ok1">√</p>
+            <p class="att_success_zi1">取消关注成功!</p>
+        </div>
+        <div class="att_success2">
+            <p class="att_success_no1">X</p>
+            <p class="att_success_zi2">取消关注失败，请重新操作！</p>
+        </div>
+        <div class="att_success3">
+            <p class="att_success_noo">!</p>
+            <p class="att_success_zi3">加载超时，请稍后再试！</p>
+        </div>
+        <div class="att_success4">
+            <p class="att_success_ok2">√</p>
+            <p class="att_success_zi4">关注成功!</p>
+        </div>
+        <div class="att_success5">
+            <p class="att_success_no2">X</p>
+            <p class="att_success_zi5">关注失败，请重新操作！</p>
+        </div>
     </div>
     <%--<div class="flow_div"></div>--%>
 
