@@ -4,6 +4,20 @@ server:
 spring:
   messages:
     basename: message/msg
+  jpa:
+    #是否显示sql
+    show-sql: true
+    #指定数据库类型
+    database: mysql
+    #方言
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #自动建表方式
+    hibernate:
+      ddl-auto: none
+    #格式化sql
+    properties:
+      hibernate:
+        format-sql: true
   datasource:
     druid:
       # 连接池的配置信息
@@ -46,11 +60,11 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-    username: root
-    password:
-    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: user1
+    password: xianglongshibazhang666
+    url: jdbc:mysql://47.98.183.4/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-  #  thymeleaf:
+  #  thymeleaf:192.168.124.17
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
   #    #编码 可不用配置
@@ -63,12 +77,7 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
-  #  resources:
-  #    chain:
-  #      strategy:
-  #        content:
-  #          enabled: true
-  #          paths: /**
+
   mvc:
     view:
       prefix: /WEB-INF/
@@ -83,9 +92,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: localhost
+  tracker-list: 47.98.183.4:22122
   #通过nginx 访问地址
-  resHost: localhost
+  resHost: http://47.98.183.4
   storagePort: 8888/
   #缩略图配置
   thumb-image:
