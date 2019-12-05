@@ -147,7 +147,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2.1vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -257,7 +257,7 @@
                         <ul>
                             <c:forEach items="${alist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>
@@ -278,7 +278,7 @@
                         <ul>
                             <c:forEach items="${blist}" var="article">
                                 <li>
-                                    <a href="/test/community">
+                                    <a href="/community/article-show">
                                             <%--<div class="wz_remen_img">
                                                 <img src="<c:out value="${article.userImg}"></c:out>" >
                                             </div>--%>

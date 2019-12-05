@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/community/css/typo.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
-
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="<%=request.getContextPath()%>/community/prism/prism.js"></script>
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -41,7 +39,7 @@
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
-<div id="editForm" hidden="hidden">
+<div id="editForm" class="layui-table-view" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/update" class="form" method="post">
         <input type="hidden" name="articleId" id="articleId"><br>
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
@@ -115,7 +113,7 @@
             </tr>
             <tr>
                 <td style="width: 100px;">文章内容</td>
-                <td><pre required id="articleContent" name="articleContent"><%--<code class="language-css"></code>--%></pre><br></td>
+                <td><pre required id="articleContent" name="articleContent"><code class="language-css"></code></pre><br></td>
             </tr>
         </table>
 
@@ -137,6 +135,31 @@
 <script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
+    //后台文章管理页面中，文章标题的移入事件，显示具体内容
+    $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this,{
+            tips: [3, '#000'],
+            time: 2000
+        });
+    });
+    //后台文章管理页面中，文章内容的移入事件，显示具体内容
+    $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this,{
+            tips: [3, '#000'],
+            time: 2000
+        });
+    });
+    //后台文章管理页面中，文章摘要的移入事件，显示具体内容
+    $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this,{
+            tips: [3, '#000'],
+            time: 2000
+        });
+    });
+
     //MarkDown组件
     $(function() {
         var editorMdView;
@@ -277,7 +300,7 @@
                     });
                     layer.close(index);
                 });
-            } else if (obj.event === 'edit') {
+            } else if (obj.event === 'edit') {//编辑
                 $("#articleId").val(data.articleId);
                 $("#title").val(data.title);
                 $("#browseCount").val(data.browseCount);
@@ -287,7 +310,7 @@
                 $("#figures").val(data.figures);
                 $("#figuresReal").val(data.figuresReal);
                 $("#articleDigest").val(data.articleDigest);
-                $("#articleContent").html(marked(data.articleContent));
+                $("#articleContent").html(marked(data.articleContent));// 将数据库中存储的.md文件转换成html文件
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
