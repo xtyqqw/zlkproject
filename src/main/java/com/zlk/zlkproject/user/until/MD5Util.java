@@ -29,4 +29,9 @@ public class MD5Util {
         }
         return hex.toString().toLowerCase();
     }
+
+    public static void main(String[] args) {
+        String a = md5Encrypt32Lower("1");
+        System.out.println(a);
+    }
 }

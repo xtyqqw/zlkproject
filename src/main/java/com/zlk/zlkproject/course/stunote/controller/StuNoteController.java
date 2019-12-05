@@ -3,7 +3,7 @@ package com.zlk.zlkproject.course.stunote.controller;
 import com.zlk.zlkproject.course.stuNote.service.StuNoteService;
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
-import com.zlk.zlkproject.utils.CommonFileUtil;
+
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("stuNote")
 public class StuNoteController {
-    @Autowired
-    private CommonFileUtil commonFileUtil;
+
     @Autowired
     private FdfsConfig fdfsConfig;
     @Autowired

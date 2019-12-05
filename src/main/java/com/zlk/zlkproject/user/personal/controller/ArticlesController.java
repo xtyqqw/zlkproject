@@ -55,7 +55,7 @@ public class ArticlesController {
     public String updateArticles(Articles articles)throws Exception{
         Integer flag=articlesService.updateArticles(articles);
         if(flag == 1){
-            return "";
+            return "redirect:/articles/toarticles";
         }else {
             return null;
         }
@@ -70,9 +70,9 @@ public class ArticlesController {
     public String deleteArticles(String articleId)throws Exception{
         Integer flag=articlesService.deleteArticles(articleId);
         if(flag == 1){
-            return "删除成功";
+            return "redirect:/articles/toarticles";
         }else {
-            return "删除失败";
+            return null;
         }
     }
     /*流加载*/

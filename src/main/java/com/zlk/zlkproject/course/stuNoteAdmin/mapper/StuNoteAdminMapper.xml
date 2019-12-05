@@ -5,7 +5,7 @@
     <resultMap type="com.zlk.zlkproject.entity.StuNote" id="StuNoteMap">
         <result property="snId" column="sn_id" javaType="java.lang.Integer"/>
         <result property="snSectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="snUserId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="snUserId" column="user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
@@ -23,6 +23,34 @@
     <select id="selectCount" resultType="java.lang.Integer">
         select count(1) from stu_note
     </select>
+
+    <update id="updateStuNoteByStuNote" >
+        update kaohe.stu_note
+        <set>
+            <if test="snSectionId != null and snSectionId != ''">
+                section_id = #{snSectionId},
+            </if>
+            <if test="snUserId != null and snUserId != ''">
+                user_id = #{snUserId},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="up != null and up != ''">
+                up = #{up},
+            </if>
+            <if test="down != null and down != ''">
+                down = #{down},
+            </if>
+            <if test="report != null and report != ''">
+                report = #{report},
+            </if>
+            <if test="date != null and date != ''">
+                date = #{date},
+            </if>
+        </set>
+        where sn_id = #{snId}
+    </update>
 
     <!--根据id删除数据-->
     <delete id="deleteStuNoteBySnId" >

@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.articleShow.service;
 
-import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.entity.Article;
 
 /**
  * @program: ArticleShowService
