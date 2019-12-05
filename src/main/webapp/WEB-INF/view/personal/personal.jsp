@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
+
         #personal{
             height: 550px;
         }
@@ -153,7 +154,7 @@
                 </li>
             </a>
             <%--我的问答--%>
-            <a href="<%=request.getContextPath()%>/personal/myquestion"
+            <a href="<%=request.getContextPath()%>/myfaqq/faqtest"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-survey"
@@ -162,7 +163,7 @@
                 </li>
             </a>
             <%--我的文章--%>
-            <a href="javascript:;"
+            <a href="<%=request.getContextPath()%>/articles/toarticles"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-list"
@@ -180,7 +181,7 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="javascript:;" name="dian"
+            <a href="<%=request.getContextPath()%>/user/findUser" name="dian"
                target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-dialogue"

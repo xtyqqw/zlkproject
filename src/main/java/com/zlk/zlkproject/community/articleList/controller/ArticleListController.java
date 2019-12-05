@@ -73,7 +73,7 @@ public class ArticleListController {
     @RequestMapping(value = "/toArticleEdit")
     public ModelAndView toArticleEdit(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleEdit");
+        mv.setViewName("view/community/articleGuide");
         return mv;
     }
     @RequestMapping(value = "/findByCreateTime")

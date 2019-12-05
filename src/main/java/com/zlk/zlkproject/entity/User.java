@@ -4,7 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: User
@@ -15,8 +21,11 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Entity
+@Table(name = "user")
 public class User {
     /**用户id  32位uuid*/
+    @Id
     private String userId;
     /**用户手机号*/
     private String phonenum;
@@ -61,6 +70,9 @@ public class User {
     private String userImg;
     /**头像图片绝对路径*/
     private String userRealimg;
+    /**用户和文章一对多关系*/
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles=new ArrayList<>();
 
     public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
         this.userId = userId;

@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.articleAdd.dao;
 
-import com.zlk.zlkproject.community.entity.Tag;
+import com.zlk.zlkproject.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

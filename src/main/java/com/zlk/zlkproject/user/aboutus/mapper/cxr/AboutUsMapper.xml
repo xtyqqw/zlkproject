@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.cxr.AboutUsMapper">
+    <resultMap id="AboutUsEntityMap" type="com.zlk.zlkproject.user.entity.AboutUs">
+        <id property="aboutusId" column="aboutus_id" javaType="java.lang.String"></id>
+        <result property="aboutusOrganization" column="aboutus_organization" javaType="java.lang.String"></result>
+        <result property="aboutusCause" column="aboutus_cause" javaType="java.lang.String"></result>
+        <result property="aboutusJob" column="aboutus_job" javaType="java.lang.String"></result>
+        <result property="aboutusChase" column="aboutus_chase" javaType="java.lang.String"></result>
+        <result property="aboutusZlk" column="aboutus_zlk" javaType="java.lang.String"></result>
+    </resultMap>
+    <!--根据ID查询单个信息-->
+    <select id="selectAboutUsById" parameterType="com.zlk.zlkproject.user.entity.AboutUs" resultMap="AboutUsEntityMap">
+        select *from aboutus where aboutus_id=#{aboutusId}
+    </select>
+</mapper>

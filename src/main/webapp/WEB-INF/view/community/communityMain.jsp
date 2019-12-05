@@ -55,12 +55,13 @@
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
-            background-color: #1296db;
+            background-color: #914ff1;
             text-align:center;
             height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
+            border-radius: 5px;
         }
         /*横线样式*/
         .crossing{
@@ -232,7 +233,7 @@
     <div class="all-body-center">
         <div class="body-top">
             <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">

@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.courseHomePage.controller;
 
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,9 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/courseHomePage")
 public class CourseHomePageController {
+    @Autowired
+    private LogUtil logUtil;
+
     @Autowired
     private CourseHomePageService courseHomePageService;
 
@@ -69,7 +74,6 @@ public class CourseHomePageController {
     @ResponseBody
     public Map<String,Object> findAll(Courses courses,Integer page,Integer limit)throws Exception{
         List<Courses> allList=courseHomePageService.findAll(courses,page,limit);
-
         Map<String,Object> map=new HashMap<>();
         map.put("allList",allList);
         return map;
@@ -99,7 +103,8 @@ public class CourseHomePageController {
      */
     @RequestMapping(value = "/deleteByCourseId" )
     @ResponseBody
-    public Integer deleteByCourseId(Integer courseId){
+    public Integer deleteByCourseId(Integer courseId, HttpServletRequest request){
+        logUtil.setLog(request,"删除了课程id为"+courseId+"的信息");
         return courseHomePageService.deleteByCoursesId(courseId);
     }
 

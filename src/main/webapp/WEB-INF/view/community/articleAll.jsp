@@ -5,8 +5,19 @@
 <head>
     <title>最新</title>
     <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
     <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .htmleaf-content{
+            width: 700px;
+            margin:30px auto;
+        }
+        pre{
+            font-family: "Microsoft YaHei","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+    </style>
     <style type="text/css">
         .context-div{
             overflow-x:hidden;
@@ -209,44 +220,28 @@
 <body>
     <div class="context-div" id="context-div"></div>
     <!--日期转换-->
-    <script>
-        /*$(document).ready(function()
-        {
-                var str = "";
-                var timestamp = 0;
-                var pass = 0;
-                str = $("#time").text();
-                timestamp = (new Date()).valueOf();
-                pass = (timestamp - str) / 1000;
-                $("#time").text(pass);
-                if (pass < 60) {
-                    $("#time").text(pass + "秒前");
+    <script src="http://libs.useso.com/js/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+    <script type="text/javascript" src="js/jquery.liveTimeAgo.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.liveTime').liveTimeAgo({
+                translate: {
+                    'year': '% 年前',
+                    'years': '% 年前',
+                    'month':'% 个月前',
+                    'months':'% 个月前',
+                    'day': '% 天前',
+                    'days': '% 天前',
+                    'hour': '% 小时前',
+                    'hours': '% 小时前',
+                    'minute': '% 分钟前',
+                    'minutes': '% 分钟前',
+                    'seconds': '几秒钟前',
+                    'error': '未知的时间'
                 }
-                else
-                {
-                    if (pass < (60 * 60))
-                    {
-                        pass = Math.floor(pass / 60);
-                        $("#time").text(pass + "分钟前");
-                    }
-                    else
-                    {
-                        if (pass < (60 * 60 * 72))
-                        {
-                            pass = Math.floor(pass / 60 / 60);
-                            $("#time").text(pass + "小时前");
-                        }
-                        else
-                        {
-                            if (pass >= (60 * 60 * 72) )
-                            {
-                                pass = Math.floor(pass / 60 / 60 / 24);
-                                $("#time").text(pass + "天前");
-                            }
-                        }
-                    }
-                }
-            });*/
+            });
+        })
     </script>
     <!--没插图就隐藏-->
     <script>
@@ -257,6 +252,7 @@
             }
         })
     </script>
+    <!--瀑布流-->
     <script>
         layui.use('flow', function(){
             var flow = layui.flow;
@@ -288,7 +284,7 @@
                                         '<div>'+
                                         '<div class="userRealname"><a href="#">'+article.user.userRealname+'</a></div>'+
                                         '<div class="little"></div>'+
-                                        '<div class="createTime" id="createTime"><span >'+article.createTime+'</span></div>'+
+                                        '<div class="createTime" id="createTime"><span class="liveTime">'+article.createTime+'</span></div>'+
                                         '</div>'+
                                         '<div class="userImg">'+article.user.userImg+'</div>'+
                                         '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
