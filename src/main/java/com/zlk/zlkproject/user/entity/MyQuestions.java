@@ -28,6 +28,7 @@ public class MyQuestions {
     /**问题标题*/
     private String questionTitle;
     /**提问时间*/
+    @JsonFormat(timezone = "GMT+8")
     private Date createTime;
     /**浏览数*/
     private Integer browseCount;

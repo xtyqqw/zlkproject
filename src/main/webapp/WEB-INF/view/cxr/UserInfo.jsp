@@ -81,7 +81,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-block">
-                <input type="text" name="userPhonenum" id="userPhonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">
+                <input type="text" name="phonenum" id="phonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">
                 <span class="error" id="phoneError"></span>
             </div>
         </div>
@@ -255,50 +255,68 @@
     //后台用户管理页面中，籍贯的移入事件，显示具体内容，重点
     $('body').on('mouseenter','.layui-table-view td[data-field = "userNative"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所在城市的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userCity"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，兴趣爱好的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userHobby"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，自我评价的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userSelfappraise"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所在院校的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userAcademy"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所属专业的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userSpecialty"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
 
     //js表格
@@ -335,7 +353,7 @@
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
                 , {field: 'userRealname', title: '姓名', width: 80, sort: true}
                 , {field: 'userSex', title: '性别', width: 60}
-                , {field: 'userPhonenum', title: '手机号码', width: 120}
+                , {field: 'phonenum', title: '手机号码', width: 120}
                 , {field: 'userBirthday', title: '出生年月', width: 120}
                 , {field: 'userMarry', title: '婚否', width: 60}
                 , {field: 'userNative', title: '籍贯', width: 120}
@@ -432,7 +450,7 @@
                 //获取需要修改的变量
                 $("#userId").val(data.userId);
                 $("#userRealname").val(data.userRealname);
-                $("#userPhonenum").val(data.userPhonenum);
+                $("#phonenum").val(data.phonenum);
                 $("#userSex").val(data.userSex);
                 $("#userBirthday").val(data.userBirthday);
                 $("#userNative").val(data.userNative);
