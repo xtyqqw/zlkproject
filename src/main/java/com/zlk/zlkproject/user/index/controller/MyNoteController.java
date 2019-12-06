@@ -28,9 +28,10 @@ public class MyNoteController {
     private MyNoteService myNoteService;
 
     @RequestMapping("/toMyNote")
-    public ModelAndView toMyNote()throws Exception{
+    public ModelAndView toMyNote(HttpServletRequest request)throws Exception{
         ModelAndView mv = new ModelAndView();
-        String userId = "1";
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         List<StuNote> stuNoteList = myNoteService.findNotesBySnId(userId);
         Integer noteNum = myNoteService.findNoteNumBySnId(userId);
         mv.addObject("stuNoteList",stuNoteList);
@@ -49,6 +50,12 @@ public class MyNoteController {
         }
     }
 
+    /**
+     * 修改正文
+     * @param stuNote
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/edit")
     public String editNote(StuNote stuNote)throws Exception{
         Integer flag = myNoteService.editNoteBySnId(stuNote);
@@ -58,6 +65,14 @@ public class MyNoteController {
             return null;
         }
     }
+
+    /**
+     * 流加载查询
+     * @param pagination
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/toFlow")
     @ResponseBody
     public Map<String, Object> findCoursesList(Pagination pagination,HttpServletRequest request) throws Exception {
@@ -70,6 +85,13 @@ public class MyNoteController {
         return map;
     }
 
+    /**
+     * 分页查询
+     * @param pagination
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/toPage")
     @ResponseBody
     public Map<String, Object> toPage(Pagination pagination,HttpServletRequest request) throws Exception {
