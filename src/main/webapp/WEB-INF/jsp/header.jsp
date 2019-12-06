@@ -58,7 +58,7 @@
         .header .header-search{
             float: left;
             display: inline;
-            margin-left: 400px;
+            margin-left: 300px;
             margin-top: 18px;
         }
         /* 头部搜索框样式 */

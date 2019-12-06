@@ -2,6 +2,20 @@ server:
   port: 8080
 
 spring:
+  jpa:
+    #是否显示sql
+    show-sql: true
+    #指定数据库类型
+    database: mysql
+    #方言
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #自动建表方式
+    hibernate:
+      ddl-auto: none
+    #格式化sql
+    properties:
+      hibernate:
+        format-sql: true
   messages:
     basename: message/msg
   datasource:
@@ -49,7 +63,6 @@ spring:
     username: user1
     password: xianglongshibazhang666
     url: jdbc:mysql://47.98.183.4/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
@@ -83,9 +96,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: localhost
+  tracker-list: 47.98.183.4:22122
   #通过nginx 访问地址
-  resHost: localhost
+  resHost: 47.98.183.4
   storagePort: 8888/
   #缩略图配置
   thumb-image:
