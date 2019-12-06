@@ -1,4 +1,4 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: wy
   Date: 2019/11/25
@@ -135,7 +135,7 @@
     })
 </script>--%>
 <div class="learnrecord">
-    <%--<c:forEach items="${itemList}" var="item">
+    <c:forEach items="${itemList}" var="item">
         <div class="timeline">
             <div class="date">
                 <p class="year">${item.stuTime}</p>
@@ -167,7 +167,7 @@
                 </div>
             </div>
         </div>
-    </c:forEach>--%>
+    </c:forEach>
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
     <%--<div class="flow_div"></div>--%>
 </div>
@@ -187,9 +187,9 @@
                 "limit": limit,
             },
             success: function (data) {
-                total = data.count; //设置总条数
+                total = data.count;
+                var per = data.per;
                 var data1 = data.data;
-                var per = data.data;
                 var html = '';
                 for (var i = 0;i<data1.length;i++){
                     html += '<div class="timeline">';
@@ -199,13 +199,13 @@
                     html += '<div class="yuan"></div>';
                     html += '<div class="learn-main mainname main">';
                     html += '<div class="learn-title">';
-                    html += '<h2>'+ data1[i].coursesName +'</h2>';
-                    html += '<p>解锁任务：'+ data1[i].coursesName+' — '+ data1[i].chapterName +' — '+ data1[i].sectionName +'</p>';
+                    html += '<h2>'+ data1[i].coursesName+'</h2>';
+                    html += '<p>解锁任务：'+ data1[i].coursesName+' — '+ data1[i].chapterName+' — '+ data1[i].sectionName+'</p>';
                     html += '<img src="'+ data1[i].coverPic+'">';
                     html += '</div>';
                     html += '<div class="learn-main-getstar">';
                     html += '<p>获星数量</p>';
-                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true"\n' +
+                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
                         'style="width: 100px;margin: 10px 0 0 auto;">';
                     html += '<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>';
                     html += '</div>';
@@ -213,15 +213,15 @@
                     html += '<div class="continue-learn">继续学习</div>';
                     html += '</a>';
                     html += '</div>';
-                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true"\n' +
-                        'style="width: 520px;height: 20px;background-color: #dfd9fd;\n' +
+                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
+                        'style="width: 520px;height: 20px;background-color: #dfd9fd;' +
                         'margin: 230px 30px auto 350px;float: right;position: fixed;">';
-                    html += '<div class="layui-progress-bar" lay-percent="'+ per+'\%+"style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>';
+                    html += '<div class="layui-progress-bar" lay-percent="'+per+'\%'+'" ' +
+                        'style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>';
                     html += '</div>';
                     html += '</div>';
                     html += '</div>';
                 }
-                $(".learnrecord").empty().append(html);
             }
         })
     }
@@ -232,13 +232,16 @@
             elem: 'demo7'
             ,count: total //数据总数
             ,theme: '#914FF1'
-            ,limit: limit
+            ,first: '首页'
+            ,last: '尾页'
+            , curr: 1  //起始页
+            , groups: 5 //连续页码个数
+            ,layout: ['prev', 'page', 'next', 'count']
             ,jump: function(obj,first){
-                page=obj.curr;
-                limit=obj.limit;
                 if(!first){
-                    showRecord();
+                    showRecord(obj.curr,obj.limit);
                 }
+                console.log(obj)
             }
         });
     });
