@@ -255,50 +255,68 @@
     //后台用户管理页面中，籍贯的移入事件，显示具体内容，重点
     $('body').on('mouseenter','.layui-table-view td[data-field = "userNative"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所在城市的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userCity"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，兴趣爱好的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userHobby"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，自我评价的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userSelfappraise"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所在院校的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userAcademy"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
     //后台用户管理页面中，所属专业的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "userSpecialty"]',function () {
         var msg = $(this).find('div').text();
-        tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
-            time: 2000
-        });
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#f00000'],
+                time: 2000
+            });
+        }
     });
 
     //js表格
