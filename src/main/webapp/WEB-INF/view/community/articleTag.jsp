@@ -53,14 +53,8 @@
             border: #1E9FFF 2px solid;
             width: 750px;
             height: 100px;
-            /*padding: 12px;*/
             border-radius: 5px;
             box-shadow: 0 3px 11px 0 rgba(0,0,0,0.2), 0 0 11px 0 rgba(0,0,0,0.19);
-        }
-        .hide .all {
-            float: left;
-            margin-left: 12px;
-            margin-top: 12px;
         }
         .hide li{
             float: left;
@@ -81,21 +75,11 @@
             border: none;
             transition-duration: 0.4s;
         }
-        .start {
-            cursor: pointer;
-        }
-        .end {
-            cursor: pointer;
-            background-color: #AFEEEE;
-            color: #0a61ff;
-            border: none;
-        }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="show">
-            <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
             <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                 <div>
                     <ul>
@@ -105,8 +89,6 @@
             </c:forEach>
         </div>
         <div class="hide">
-            <a href="javascript:void(0)" type="button" class="all">全部</a>
-            <a style="display: none" id="a"></a>
             <c:forEach items="${tagList}" var="tag">
                 <div>
                     <ul>

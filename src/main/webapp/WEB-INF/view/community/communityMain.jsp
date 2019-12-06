@@ -283,6 +283,70 @@
             color: black;
             margin-right: 0.6vw;
         }
+        <%-----------------------------------文章标签卡 start---------------------------------------%>
+        .show {
+            border: #8D8D8D 2px solid;
+            width: 750px;
+            height: 25px;
+            padding: 12px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .show li {
+            float: left;
+            padding-left: 12px;
+            display: inline-block;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .show a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        .hide a:hover{
+            background-color: #AFEEEE;
+            color: #0a61ff;
+        }
+        .hide {
+            margin: 20px;
+            display: none;
+            border: #1E9FFF 2px solid;
+            width: 750px;
+            height: 100px;
+            border-radius: 5px;
+            box-shadow: 0 3px 11px 0 rgba(0,0,0,0.2), 0 0 11px 0 rgba(0,0,0,0.19);
+        }
+        .hide li{
+            float: left;
+            padding-left: 12px;
+            padding-top: 12px;
+        }
+        .hide a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        <%-----------------------------------文章标签卡 end---------------------------------------%>
     </style>
 </head>
 <body>
@@ -326,9 +390,8 @@
         <%@include file="../../jsp/sidebar.jsp"%>
         <div class="all-body-center">
             <div class="body-top">
-                <div>
+                <div class="top-tags"><%--文章标签卡--%>
                     <div class="show">
-                        <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
                         <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                             <div>
                                 <ul>
@@ -338,8 +401,6 @@
                         </c:forEach>
                     </div>
                     <div class="hide">
-                        <a href="javascript:void(0)" type="button" class="all">全部</a>
-                        <a style="display: none" id="a"></a>
                         <c:forEach items="${tagList}" var="tag">
                             <div>
                                 <ul>
@@ -471,6 +532,34 @@
         $('.wz_remen_zt2').css('display', 'block');
         $('.wz_remen_zt1').css('display', 'none');
     })
+    <%-----------------------------------文章标签卡 start---------------------------------------%>
+    $(document).on('mouseenter','.show',function () {
+        $('.hide').css('display','block');
+        $(this).css('display','none');
+    });
+    $(document).on('mouseleave','.hide',function () {
+        $('.show').css('display','block');
+        $(this).css('display','none');
+    });
+    $(function() {
+        /*$("#a").click(function() {
+            if($(this).nextAll().is('.hide li')) {
+                $(".hide").append($(this));
+            }
+            else {
+                $(".hide").prepend($(this));
+            }
+        });*/
+        $(".hide li").click(function() {
+            if($(this).nextAll().is('#a')) {
+                $(".hide").append($(this));
+            }
+            else {
+                $(".hide").prepend($(this));
+            }
+        });
+    });
+    <%-----------------------------------文章标签卡 end---------------------------------------%>
 </script>
 </body>
 </html>
