@@ -31,11 +31,11 @@ public class ArticleShowController {
     }
 
     //跳转文章详情页测试用方法，使用时解开注释
-    /*@GetMapping(value = "/community/article-show/{articleId}")
+    @GetMapping(value = "/community/article-show/{articleId}")
     public ModelAndView articleShowTest(String articleId) {
         ModelAndView mv=new ModelAndView();
         mv.addObject("article", articleShowService.getAndConvert(articleId));
         mv.setViewName("view/community/articleShow");
         return mv;
-    }*/
+    }
 }
