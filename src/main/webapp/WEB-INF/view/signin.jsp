@@ -105,7 +105,7 @@
                 </ul>
                 <div class="layui-tab-content" style="height: 100px;">
                     <div class="layui-tab-item layui-show">
-                        <span>${spanmsg}</span>
+                        <span style="margin-left: 25px;color: red">${spanmsg}</span>
                         <form action="/users/signupbycode" method="post">
                             <%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
                             <%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="lgD">
                                     <img src="img/logName.png" width="20" height="20" alt=""/>
-                                    <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input"><span class="error" id="checktext2"></span>
+                                    <input id="pwd1" name="userPwd" type="password" value="" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="logC">
                                     <a href="" target="_self"><button>登陆</button></a>

@@ -140,7 +140,7 @@ public class UserController {
         user.setUserPwd(MD5Pwd);
         User user1 = signService.findUserByPhonenumAndPwd(user);
         if(user1!=null){
-            //将验证码放入session
+            //将user对象放入session
             session.setAttribute("user",user1);
 //            mv.addObject("userId",user1.getUserId());
             //跳转至首页
