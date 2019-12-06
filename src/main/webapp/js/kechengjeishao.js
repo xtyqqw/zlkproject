@@ -4,7 +4,7 @@ $(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/courseHomePage/selectCoursesByCoursesId?coursesId=1",
+        url :"/courseHomePage/selectCoursesByCoursesId",
         data:"",
         success: function (data) {
             console.log(data);
