@@ -1,10 +1,11 @@
 package com.zlk.zlkproject.community.articleShow.controller;
 
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
-import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,10 +22,19 @@ public class ArticleShowController {
     private ArticleShowService articleShowService;
 
     @GetMapping(value = "/community/article-show")
-    public ModelAndView articleShow(String id) {
+    public ModelAndView articleShow(String articleId) {
         ModelAndView mv=new ModelAndView();
-        id="1829739930";
-        mv.addObject("article", articleShowService.getAndConvert(id));
+        articleId="492352066";
+        mv.addObject("article", articleShowService.getAndConvert(articleId));
+        mv.setViewName("view/community/articleShow");
+        return mv;
+    }
+
+    //跳转文章详情页测试用方法，使用时解开注释
+    @GetMapping(value = "/community/article-show/{articleId}")
+    public ModelAndView articleShowTest(String articleId) {
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("article", articleShowService.getAndConvert(articleId));
         mv.setViewName("view/community/articleShow");
         return mv;
     }

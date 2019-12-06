@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>文章发布</title>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
-
     <style>
         .header {
             width: auto;
@@ -41,15 +41,13 @@
     <div>
         <%--顶部内容--%>
         <div class="header">
-            <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)" >返回</button>
+            <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
             <a href="javascript:void(0)" id="a2">我的草稿</a>
         </div>
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
-                    <%--<input type="hidden" name="approval">
-                    <input type="hidden" name="articleSetTop">--%>
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="layerDemo">
                     <div class="required field">
                         <div class="ui left labeled input">
                             <div class="ui selection compact teal basic dropdown label">
@@ -98,7 +96,7 @@
                                     <div class="default text">请选择标签</div>
                                     <div class="menu">
                                         <c:forEach items="${tags}" var="tag">
-                                            <div class="item" data-value="${tag.id}">${tag.name}</div>
+                                            <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
                                         </c:forEach>
                                     </div>
                                 </div>
@@ -109,22 +107,22 @@
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui teal basic label">摘要</label>
-                            <input type="text" value="" name="articleDigest" placeholder="请输入文章摘要">
+                            <input type="text" name="articleDigest" placeholder="请输入文章摘要">
                         </div>
                     </div>
 
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui teal basic label">首图</label>
-                            <input type="text" name="figures" value="" placeholder="首图引用地址">
+                            <input type="text" name="figures" placeholder="首图引用地址">
                         </div>
                     </div>
 
-                    <div class="ui error message"></div>
+                    <%--<div class="ui error message"></div>--%>
 
                     <div class="ui right aligned container">
-                        <button <%--type="button" id="save-btn"--%> class="ui secondary button">保存</button>
-                        <button type="submit" id="publish-btn" class="ui teal button">发布</button>
+                        <button type="reset" class="ui reset secondary button">重置</button>
+                        <button type="submit" id="publish-btn" class="ui teal button" <%--onclick="add()"--%>>发布</button>
                     </div>
 
                 </form>
@@ -143,15 +141,13 @@
             testEditor = editormd("md-content", {
                 width : "100%",
                 height : 640,
-                placeholder : "开始编辑...",
+                placeholder : "开始撰写...",
                 syncScrolling : "single",
                 //你的lib目录的路径
                 path : "../editormd/lib/",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/uploadfile"
-                //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
-                //saveHTMLToTextarea : true
             });
         });
 
@@ -163,60 +159,89 @@
             on : 'hover'
         });
 
-        /*初始化审核，置顶状态*/
-        /*$('#publish-btn').click(function () {
-            $('[name="approval"]').val(0);
-            $('[name="articleSetTop"]').val(1);
-            $('#blog-form').submit();
-        });*/
+        /*function add() {
+            $.ajax({
+                type: 'POST',
+                url: '/articles',
+                data: $('#add'),
+                success: function (res) {
+                    if(res.data()) {
+                        alert("发布成功");
+                    }
+                },
+                error: function (res) {
+                    if (res.data() == null){
+                        alert("发布失败");
+                    }
+                }
+            })
+        }*/
 
         /*表单验证开启*/
         $('.ui.form').form({
+            inline: true,
+            on: 'blur',
             fields : {
                 title : {
                     identifier: 'title',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章标题'
+                        prompt: '请注意文章标题不能为空'
+                    },{
+                        type : 'maxLength[10]',
+                        prompt: '请注意文章标题最大长度不能超过10'
                     }]
                 },
                 articleContent : {
                     identifier: 'articleContent',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章内容'
+                        prompt: '请注意文章内容不能为空'
                     }]
                 },
                 typeName : {
                     identifier: 'typeName',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章方向'
+                        prompt: '请选择一个文章方向'
                     }]
                 },
-                /*tagIds : {
-                    identifier: 'tagName',
+                tagIds : {
+                    identifier: 'tagIds',
                     rules: [{
-                        type : 'empty',
-                        prompt: '提示：请输入文章标签'
+                        type : 'minCount[1]',
+                        prompt: '请至少选择一个文章标签'
+                    },{
+                        type : 'maxCount[3]',
+                        prompt: '请最多选择三个文章标签'
                     }]
-                },*/
+                },
                 figures : {
                     identifier: 'figures',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章首图地址'
+                        prompt: '请注意文章首图地址不能为空'
+                    },{
+                        type : 'regExp',
+                        value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
+                        prompt: '请输入正确的图片URL格式'
                     }]
                 },
                 articleDigest : {
                     identifier: 'articleDigest',
                     rules: [{
                         type : 'empty',
-                        prompt: '提示：请输入文章摘要'
+                        prompt: '请注意文章摘要不能为空'
+                    },{
+                        type : 'maxLength[150]',
+                        prompt: '请注意文章摘要最大长度不能超过150'
                     }]
                 }
             }
         });
+    </script>
+    <script>
+
     </script>
 </body>
 </html>

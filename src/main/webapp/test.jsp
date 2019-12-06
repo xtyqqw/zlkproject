@@ -165,7 +165,7 @@
         <div class="logD logDtip">
             <p class="p1">重置密码</p>
         </div>
-        <form>
+        <form action="/user/changepwd" onsubmit="return check()" method="post">
             <div class="lgD">
                 <img src="img/logName.png" width="20" height="20" alt=""/>
                 <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">

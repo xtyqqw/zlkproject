@@ -87,18 +87,18 @@
 <!-- 侧边导航 -->
 <div id="about-nav">
     <ul>
-        <a href="<%=request.getContextPath()%>/aboutus/aboutzlk"
+        <a href="<%=request.getContextPath()%>/aboutus/findAboutus"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>关于我们</span>
             </li>
         </a>
-        <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/toCoo" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>合作企业</span>
             </li>
@@ -108,23 +108,23 @@
                 <span>讲师合作</span>
             </li>
         </a>
-        <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/help" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>帮助中心</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/blogroll"
+        <a href="<%=request.getContextPath()%>/coop/tofriends"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>友情链接</span>
             </li>
         </a>
-        <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/contactus/findContactus" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="javascript:;" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/addOpinion" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>

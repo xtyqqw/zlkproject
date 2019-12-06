@@ -167,7 +167,102 @@
                 </div>
             </div>
         </div>
-</c:forEach>
+    </c:forEach>
+    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+    <%--<div class="flow_div"></div>--%>
 </div>
+<%--分页--%>
+<script>
+    function showRecord(page,limit) {
+        $.get("<%=request.getContextPath()%>/courses/tocourses",
+            {page:page,limit:limit},
+            function (data) {
+                for (var i = 0; i < data.length; i++){
+
+                }
+            },
+            "json"
+        );
+    }
+    var total = "${all}";
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage, layer = layui.layer;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            ,count: total //数据总数
+            ,theme: '#914FF1'
+            ,first: '首页'
+            ,last: '尾页'
+            , curr: 1  //起始页
+            , groups: 5 //连续页码个数
+            ,layout: ['prev', 'page', 'next', 'count']
+            ,jump: function(obj,first){
+                if(!first){
+                    showRecord(obj.curr,obj.limit);
+                }
+                console.log(obj)
+            }
+        });
+    });
+</script>
+<%--流加载--%>
+<%--<script type="text/javascript">
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        flow.load({
+            elem: '.flow_div' //流加载容器
+            , isAuto: false
+            , done: function (page, next) { //执行下一页的回调
+                setTimeout(function () {
+                    var lis = [];
+                    var limit = 8;
+                    var data = {"page": page, "limit": limit};
+                    $.ajax({
+                        type: "POST",
+                        url: "/courses/icourses",
+                        dataType: "json",
+                        data: data,
+                        success: function (map) {
+                            layui.each(map.itemList, function (i, item) {
+                                lis.push('<div class="timeline">'
+                                    +'<div class="date">'
+                                    +'<p class="year">'+item.stuTime+'</p>'
+                                    +'</div>'
+                                    +'<div class="yuan"></div>'
+                                    +'<div class="learn-main mainname main">'
+                                    +'<div class="learn-title">'
+                                    +'<h2>'+item.coursesName+'</h2>'
+                                    +'<p>解锁任务：'+item.coursesName+' — '+item.chapterName+' — '+item.sectionName+'</p>'
+                                    +'<img src="'+item.coverPic +'">'
+                                    +'</div>'
+                                    +'<div class="learn-main-getstar">'
+                                    +'<p>获星数量</p>'
+                                    +'<div class="layui-progress layui-progress-big" lay-showpercent="true"'
+                                    +'     style="width: 100px;margin: 10px 0 0 auto;">'
+                                    +'<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>'
+                                    +'</div>'
+                                    +'<a href="javascript:;">'
+                                    +'<div class="continue-learn">继续学习</div>'
+                                    +'</a>'
+                                    +'</div>'
+                                    +'<div class="layui-progress layui-progress-big" lay-showpercent="true"'
+                                    +'     style="width: 520px;height: 20px;background-color: #dfd9fd;'
+                                    +'            margin: 230px 30px auto 350px;float: right;position: fixed;">'
+                                    +'<div class="layui-progress-bar" lay-percent="'+map.per + ' %"'
+                                    +'     style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>'
+                                    +'</div>'
+                                    +'</div>'
+                                    +'</div>'
+                                )
+                            });
+                            next(lis.join(''), page < 3);
+                        }
+                    });
+                }, 500);
+            }
+        });
+    });
+</script>--%>
 </body>
 </html>

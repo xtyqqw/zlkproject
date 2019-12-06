@@ -29,7 +29,6 @@ public class ArticleHotController {
      * @return
      */
     @RequestMapping("/toArticleHot")
-    @ResponseBody
     public ModelAndView selectTitleByArticle(Article article) {
         /**根据时间倒序返回文章标题集合 月排序*/
         List<Article> alist = articleHotService.selectTitleByArticle(article);

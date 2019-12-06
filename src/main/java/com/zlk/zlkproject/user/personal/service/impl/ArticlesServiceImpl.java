@@ -4,8 +4,10 @@ import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.user.entity.Articles;
+import com.zlk.zlkproject.user.entity.StuNote;
 import com.zlk.zlkproject.user.personal.mapper.ArticlesMapper;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,14 @@ public class ArticlesServiceImpl implements ArticlesService {
      */
     @Override
     public List<Articles> selectArticles(String userId){
-
-        return articlesMapper.selectArticles(userId);
+        List<Articles> list = articlesMapper.selectArticles(userId);
+        int s=list.size();
+        for(int i=0;i<s;i++){
+            Articles articles=list.get(i);
+            articles.setCreateDate(LeaveTime.formatDate(articles.getCreateTime()));
+            list.set(i,articles);
+        }
+        return list;
     }
 
     /**

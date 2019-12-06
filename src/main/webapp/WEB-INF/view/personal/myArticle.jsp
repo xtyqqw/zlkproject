@@ -76,7 +76,7 @@
     .main .tag {
         width: 50px;
         height: 18px;
-        background: gainsboro;
+        background: #914ff1;
         display: inline-block;
         border-radius: 5px;
         text-align: center;
@@ -135,6 +135,7 @@
     .hid_bom {
         display: none;
     }
+    .check_all{width: 40px;height: 20px;background: #009688;color: white;display: inline-block;text-align: center;line-height: 20px;cursor: pointer;}
 </style>
 <body>
 <div>
@@ -146,7 +147,7 @@
         <c:forEach items="${list}" var="list">
         <li>
             <div class="img">
-                <img src="${list.figuresReal}" style="height: 70px;width: 70px;border-radius: 3px;">
+                <img src="${list.figures}" style="height: 70px;width: 70px;border-radius: 3px;">
             </div>
             <div class="main">
                 <p>
@@ -157,7 +158,7 @@
                     </li>
                     </c:forEach>
                 </ul>
-                <span class="time">2019-12-02 10:55</span>
+                <span class="time">${list.createDate}</span>
                 </p>
                 <p class="title">${list.title}</p>
                 <p class="type">${list.typeName}</p>
@@ -182,17 +183,19 @@
     </ul>
 </div>
 <div hidden="hidden" id="demo" style="padding: 25px">
-    <form action="<%=request.getContextPath()%>/articles/" method="post">
+    <form action="<%=request.getContextPath()%>/articles/update" method="post">
         <textarea id="articleContent" name="articleContent"></textarea>
         <input type="text" id="input_hid" hidden="hidden" name="articleId">
-        <h4>请选择文章栏目</h4>
-        <p class="tag_p"><span style="color: red;">*</span>至少选择一个，最多选择三个</p>
-        <div class="layui-form" pane>
-            <input type="checkbox" value="JAVA" name="" title="JAVA" checked>
-            <input type="checkbox" value="HTML" name="" title="HTML">
-            <input type="checkbox" value="MYSQL" name="" title="MYSQL">
-        </div>
-        <input class="layui-btn" value="提交" style="float: right;margin-top: 20px;">
+<%--        <input type="text" id="input_hid2" hidden="hidden" name="tagList">--%>
+<%--        <h4>请选择文章栏目</h4>--%>
+<%--        <p class="tag_p"><span style="color: red;">*</span>至少选择一个，最多选择三个</p>--%>
+<%--        <div class="layui-form" pane>--%>
+<%--            <input type="checkbox" value="JAVA" name="checkbox" title="JAVA" checked>--%>
+<%--            <input type="checkbox" value="HTML" name="checkbox" title="HTML">--%>
+<%--            <input type="checkbox" value="MYSQL" name="checkbox" title="MYSQL">--%>
+<%--            <span class="check_all">确定</span>--%>
+<%--        </div>--%>
+        <input type="submit" class="layui-btn" value="提交" style="float: right;margin-top: 20px;">
     </form>
 </div>
 </body>
@@ -235,7 +238,7 @@
                 type: 1
                 ,title: '编辑'
                 ,btn: false
-                ,area: ['70%','50%']
+                ,area: ['70%','30%']
                 ,content: $('#demo')
                 ,offset: '30px'
             })
@@ -252,5 +255,14 @@
             ]
         });
     });
+    // $(function(){
+    //     var layer = layui.layer;
+    //     $(".check_all").click(function(){
+    //         var temp =new Array();
+    //         $("input[name='checkbox']:checked").each(function(i){
+    //             temp[i] = $(this).val();
+    //         });
+    //     })
+    // })
 </script>
 </html>
