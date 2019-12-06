@@ -2,20 +2,6 @@ server:
   port: 8080
 
 spring:
-  jpa:
-    #是否显示sql
-    show-sql: true
-    #指定数据库类型
-    database: mysql
-    #方言
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #自动建表方式
-    hibernate:
-      ddl-auto: none
-    #格式化sql
-    properties:
-      hibernate:
-        format-sql: true
   messages:
     basename: message/msg
   datasource:
@@ -98,8 +84,3 @@ fdfs:
   storagePort: 8888/
   #缩略图配置
   thumb-image:
-    height: 150
-    width: 150
-  #获取连接池最大数量
-  pool:
-    max-total: 200

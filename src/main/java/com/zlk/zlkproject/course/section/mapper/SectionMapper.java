@@ -44,7 +44,15 @@ public interface SectionMapper {
      */
     List<Section> findSectionByChapterId(Integer chapterId);
 
-    String findStateById(Integer userId,Integer sectionId);
+    /**
+     *  根据id查找当前小节状态
+     *@method findStateById
+     *@params [userId, sectionId]
+     *@return java.lang.String
+     *@author zhang
+     *@time 2019/12/6  14:49
+     */
+    String findStateById(String userId,Integer sectionId);
 
     /**
      *  根据小节id查找视频地址
@@ -62,7 +70,15 @@ public interface SectionMapper {
      * @param userId
      * @return
      */
-    String findStateByIdAndChapterId(Integer sectionId,Integer userId);
+    String findStateByIdAndChapterId(Integer sectionId,String userId);
 
-    Section findSectionBySectionIdAndUserId(Integer sectionId,Integer userId);
+    /**
+     *  根据sectionId和userId查找section
+     *@method findSectionBySectionIdAndUserId
+     *@params [sectionId, userId]
+     *@return com.zlk.zlkproject.entity.Section
+     *@author zhang
+     *@time 2019/12/6  14:50
+     */
+    Section findSectionBySectionIdAndUserId(Integer sectionId,String userId);
 }

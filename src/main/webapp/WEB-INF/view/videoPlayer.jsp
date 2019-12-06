@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_362dvudv818.css">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_03zd610p4xl.css">
+
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
 
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
+<jsp:include page="../jsp/header.jsp"></jsp:include>
     <div class="layui-container">
         <div class="layui-row" id="video_row">
             <div class="layui-col-md2"></div>
@@ -32,19 +33,19 @@
                 <div id="div_video_all">
                     <div id="l_func">
                         <div class="l_func_icon" id="icon-mulu">
-                            <i class="iconfont icon-mulu-copy"></i><br>
+                            <i class="iconfont icon-mulu-copy side-bar-icon"></i><br>
                             <span class="icon_text">目录</span>
                         </div>
                         <div class="l_func_icon" id="icon-wenda">
-                            <i class="iconfont icon-wenda"></i><br>
+                            <i class="iconfont icon-wenda side-bar-icon"></i><br>
                             <span class="icon_text">问答</span>
                         </div>
                         <div class="l_func_icon" id="icon-biji">
-                            <i class="iconfont icon-shenhebijijishibenxiezi"></i><br>
+                            <i class="iconfont icon-shenhebijijishibenxiezi side-bar-icon"></i><br>
                             <span class="icon_text">笔记</span>
                         </div>
                         <div class="l_func_icon" id="icon-pinglun">
-                            <i class="iconfont icon-pinglun"></i><br>
+                            <i class="iconfont icon-pinglun side-bar-icon"></i><br>
                             <span class="icon_text">评论</span>
                         </div>
                     </div>
@@ -111,10 +112,17 @@
                         </div>
                         <%--功能栏问答--%>
                         <div style="display: none" id="wenda_div">
-                            <div class="editor_title"><span>提问题</span></div>
-                            <div id="editor">
+                            <div class="editor_title">
+                                <div id="editor_title_span">
+                                    <span>提问题</span>
+                                </div>
+                                <div id="stu_qa_close_div">
+                                    <i id="stu_qa_close_btn" class="iconfont icon-icon-test enableClk"></i>
+                                </div>
+                            </div>
+                            <div id="stu_qa_editor">
                                 <div id="toolbar_div" class="toolbar"></div>
-                                <div id="text_div" class="text"></div>
+                                <div id="text_div" class="text" onkeyup="checkLength(400);"></div>
                                 <div id="btn_div">
                                     <button type="button" id="btn_submit_wenda">提交</button>
                                     <button type="reset" id="btn_reset_wenda">取消</button>
@@ -164,14 +172,14 @@
         <div class="layui-row FS_hidden" id="tab_row">
             <div class="layui-col-md2"></div>
             <div class="layui-col-md8 layui-tab">
-                <div class="layui-tab-title">
-                    <li class="layui-this li_show">讲师笔记</li>
+                <div class="layui-tab-title" id="layui-tab-title">
+                    <li class="layui-this li_show" id="teacherNote-tab">讲师笔记</li>
                     <li class="li_hide"></li>
                     <li id="selection_stuNote" class="li_show">学生笔记</li>
                     <li class="li_hide"></li>
                     <li id="selection_stuCmt" class="li_show">学生评论</li>
                     <li class="li_hide"></li>
-                    <li class="li_show">学生问答</li>
+                    <li class="li_show" id="stuQa-tab">学生问答</li>
                 </div>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" id="lay_flow1">
@@ -205,16 +213,34 @@
                         </div>
                     </div>
                     <div class="layui-tab-item"></div>
-                    <div class="layui-tab-item">内容四</div>
+                    <div class="layui-tab-item">
+                        <div class="layui-tab layui-tab-brief" id="stuQatab" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this" id="stuQaall-tab">全部</li>
+                                <li id="stuQaelite-tab">精华</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <div class="layui-tab-item layui-show stuQa-item" id="stuQaall">
+
+                                </div>
+                                <div class="layui-tab-item stuQa-item" id="stuQaelite"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="layui-col-md2"></div>
         </div>
     </div>
-<%--    <div style="clear: both">--%>
-<%--        <jsp:include page="../jsp/footer.jsp"></jsp:include>--%>
-<%--    </div>--%>
 
+    <div style="clear: both">
+        <jsp:include page="../jsp/footer.jsp"></jsp:include>
+    </div>
+
+    <div id="answer-div" hidden="hidden">
+        <div id="answer-editor"></div>
+        <button class="layui-btn" id="answer-submit" style="display: none">提交</button>
+    </div>
 
     <%------------------------------------------------------------------------%>
     <%--<div class="SCS_content" style="width: 96%">
