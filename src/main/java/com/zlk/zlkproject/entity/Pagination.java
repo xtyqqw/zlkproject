@@ -16,7 +16,7 @@ public class Pagination {
     /**起始页*/
     private Integer startPage;
 
-    private User    user;
+    private User user;
 
     public User getUser() {
         return user;

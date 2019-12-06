@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.user.personal.mapper.cxr;
 
 import com.zlk.zlkproject.user.entity.CxrPaging;
-import com.zlk.zlkproject.user.entity.User;
+import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

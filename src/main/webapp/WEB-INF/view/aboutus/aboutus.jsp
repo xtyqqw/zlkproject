@@ -98,7 +98,7 @@
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/findAll" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/toCoo" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>合作企业</span>
             </li>
@@ -113,7 +113,7 @@
                 <span>帮助中心</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/blogroll"
+        <a href="<%=request.getContextPath()%>/coop/tofriends"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>友情链接</span>
@@ -124,7 +124,7 @@
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/toOpinion" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/addOpinion" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>

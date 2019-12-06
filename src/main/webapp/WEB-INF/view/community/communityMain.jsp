@@ -8,6 +8,10 @@
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body{
             overflow-x:hidden;
         }
@@ -22,7 +26,7 @@
             border: none 0;
         }
         .all-body-center .body-top{
-            width: 100%;
+            width: 1308px;
             height: 115px;
         }
         .all-body-center .body-left{
@@ -51,16 +55,17 @@
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
-            background-color: #1296db;
+            background-color: #914ff1;
             text-align:center;
             height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
+            border-radius: 5px;
         }
         /*横线样式*/
         .crossing{
-            width: 68%;
+            width: 69%;
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
@@ -228,15 +233,15 @@
     <div class="all-body-center">
         <div class="body-top">
             <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
+                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">
-                <a href="<%=request.getContextPath()%>/articles/findByCreateTime" target="pageTarget">最新</a>
+                <a href="<%=request.getContextPath()%>/articles/toArticleAll" target="pageTarget">最新</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/articles/findByBrowseCount" target="pageTarget">热门</a>
+                <a href="<%= request.getContextPath()%>/articles/toArticleHot" target="pageTarget">热门</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/articles/findByUserId" target="pageTarget">我的文章</a>
+                <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
             </div>
         </div>
         <div class="body-left">

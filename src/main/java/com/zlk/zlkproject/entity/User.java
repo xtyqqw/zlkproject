@@ -3,6 +3,7 @@ package com.zlk.zlkproject.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,6 +38,7 @@ public class User {
     /**用户性别*/
     private String userSex;
     /**用户出生年月*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date userBirthday;
     /**用户籍贯*/
     private String userNative;
