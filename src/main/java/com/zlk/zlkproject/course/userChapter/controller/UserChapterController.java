@@ -30,7 +30,7 @@ public class UserChapterController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public UserChapter selectOne(Integer id) {
+    public UserChapter selectOne(String id) {
         return this.userChapterService.queryById(id);
     }
 

@@ -120,4 +120,34 @@ public interface StuQaMapper {
      *@time 2019/12/3  13:46
      */
     Integer updateStuQaBySqaId(StuQa stuQa);
+
+    /**
+     *  查找全部问答并分页
+     *@method selectAllLimit
+     *@params [startPage, limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuQa>
+     *@author zhang
+     *@time 2019/12/6  10:31
+     */
+    List<StuQa> selectAllLimit(Integer startPage,Integer limit);
+
+    /**
+     *  查找全部数量
+     *@method selectAllCount
+     *@params []
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/6  10:39
+     */
+    Integer selectAllCount();
+
+    /**
+     *  根据id删除问答信息
+     *@method deleteBySqaId
+     *@params [stuQa]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/6  10:33
+     */
+    Integer deleteBySqaId(StuQa stuQa);
 }

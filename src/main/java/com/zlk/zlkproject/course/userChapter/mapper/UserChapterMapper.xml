@@ -3,7 +3,7 @@
 <mapper namespace="com.zlk.zlkproject.course.userChapter.mapper.UserChapterMapper">
 
     <resultMap type="com.zlk.zlkproject.entity.UserChapter" id="UserChapterMap">
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="chapterId" column="chapter_id" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -29,7 +29,7 @@
         user_id, chapter_id
         from kaohe.user_chapter
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId != ''">
                 and user_id = #{userId}
             </if>
             <if test="chapterId != null">

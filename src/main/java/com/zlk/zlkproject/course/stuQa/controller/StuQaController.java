@@ -40,7 +40,7 @@ public class StuQaController {
     public Map<String,Object> insertStuQa(HttpServletRequest request, @RequestParam String content,
                                           Integer[] tagIdArray) throws Exception{
         //获取session中的userid值
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        String userId = (String) request.getSession().getAttribute("userId");
         //获取session中的sectionId值
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         StuQa stuQa = new StuQa();
@@ -143,12 +143,20 @@ public class StuQaController {
         return map;
     }
 
+    /**
+     *  添加回复
+     *@method insertAnswer
+     *@params [request, sqaId, content]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/6  10:42
+     */
     @RequestMapping(value = "/insertAnswer",method = RequestMethod.POST)
     @ResponseBody
     @Transactional
     public Map<String,Object> insertAnswer(HttpServletRequest request,@RequestParam Integer sqaId,String content) throws Exception{
         //获取session中的userid值
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        String userId = (String) request.getSession().getAttribute("userId");
         //获取session中的sectionId值
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         StuQa stuQa = new StuQa();
@@ -172,6 +180,100 @@ public class StuQaController {
         Map<String,Object> map = new HashMap<>();
         map.put("message",message);
         map.put("stuQa",stuQa1);
+        return map;
+    }
+
+    /**
+     *  跳转至后台问答管理页面
+     *@method toStuQaManager
+     *@params []
+     *@return java.lang.String
+     *@author zhang
+     *@time 2019/12/6  10:42
+     */
+    @RequestMapping(value = "/toStuQaManager")
+    public String toStuQaManager() throws Exception{
+        return "view/StuQaManager";
+    }
+
+    /**
+     *  查找全部问答
+     *@method findStuQaList
+     *@params [page, limit]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/6  10:43
+     */
+    @RequestMapping(value = "/selectAllLimit",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> selectAllLimit(Integer page,Integer limit) throws Exception{
+        //分页查询stuQa
+        List<StuQa> stuQaList = stuQaService.selectAllLimit(page, limit);
+        //获得全部数量
+        Integer count = stuQaService.selectAllCount();
+        System.out.println(count);
+        Map<String,Object> map= new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",count);
+        map.put("data",stuQaList);
+        return map;
+    }
+
+    /**
+     *  根据id删除stuQa
+     *@method deleteStuQa
+     *@params [stuQa]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/6  13:58
+     */
+    @RequestMapping(value = "/deleteStuQa",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> deleteStuQa(StuQa stuQa) throws Exception{
+        Integer integer = stuQaService.deleteBySqaId(stuQa);
+        Map<String,Object> map= new HashMap<>();
+        if (integer>0){
+            map.put("msg","删除成功");
+        }else {
+            map.put("msg","删除失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/fuzzySelect",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> fuzzySelect(String name,String val,Integer page,Integer limit) throws Exception{
+
+//        if ("userName".equals(name)){
+//
+//        }
+        Map<String,Object> map= new HashMap<>();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",1);
+        map.put("data","");
+        return map;
+    }
+
+    /**
+     *  分享与举报按钮点击
+     *@method \
+     *@params [stuQa]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/2  11:35
+     */
+    @RequestMapping(value = "/updateReport")
+    @ResponseBody
+    public Map<String,Object> updateReport(StuQa stuQa) throws Exception{
+        Integer integer = stuQaService.updateShareOrReportBySqaId(stuQa);
+        Map<String,Object> map = new HashMap<>();
+        if (integer >0){
+            map.put("msg","修改成功");
+        }else {
+            map.put("msg","修改失败");
+        }
         return map;
     }
 }

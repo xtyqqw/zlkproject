@@ -117,4 +117,36 @@ public interface StuQaService {
      *@time 2019/12/3  13:57
      */
     String updateAnswerNum(Integer sqaId);
+
+    /**
+     *  查找全部问答并分页
+     *@method selectAllLimit
+     *@params [page, limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuQa>
+     *@author zhang
+     *@time 2019/12/6  10:31
+     */
+    List<StuQa> selectAllLimit(Integer page,Integer limit);
+
+    /**
+     *  查找全部数量
+     *@method selectAllCount
+     *@params []
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/6  10:39
+     */
+    Integer selectAllCount();
+
+    /**
+     *  根据id删除问答信息
+     *@method deleteBySqaId
+     *@params [stuQa]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/6  10:33
+     */
+    Integer deleteBySqaId(StuQa stuQa);
+
+//    fuzzySelect(String name,String val,Integer page,Integer limit)
 }

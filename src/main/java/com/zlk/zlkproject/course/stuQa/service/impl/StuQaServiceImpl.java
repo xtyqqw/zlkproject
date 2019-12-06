@@ -119,4 +119,22 @@ public class StuQaServiceImpl implements StuQaService {
             return "修改失败";
         }
     }
+
+    @Override
+    public List<StuQa> selectAllLimit(Integer page, Integer limit) {
+        Integer startPage = (page-1)*limit;
+        return stuQaMapper.selectAllLimit(startPage,limit);
+    }
+
+    @Override
+    public Integer selectAllCount() {
+        return stuQaMapper.selectAllCount();
+    }
+
+    @Override
+    public Integer deleteBySqaId(StuQa stuQa) {
+        return stuQaMapper.deleteBySqaId(stuQa);
+    }
+
+
 }

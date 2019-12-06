@@ -23,7 +23,7 @@
             <result property="approval" column="approval" javaType="java.lang.Integer"/>
             <result property="typeName" column="type_name" javaType="java.lang.String"/>
             <result property="tagName" column="tag_name" javaType="java.lang.String"/>
-            <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
+            <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
                 <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
                 <result property="tagName" column="tag_name" javaType="java.lang.String"/>
                 <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
@@ -32,12 +32,11 @@
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
         select * from article a
-        JOIN tag t on t.tag_id=a.article_tag_id
-        where a.article_user_id=#{userId} order by update_time desc
+        where a.user_id=#{userId} order by update_time desc
     </select>
     <!--根据用户ID查询我的文章数量-->
     <select id="findArticlesId" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select count(*) from article where article_user_id=#{userId}
+        select count(*) from article where user_id=#{userId}
     </select>
     <!--根据文章ID修改我的文章-->
     <update id="updateArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">

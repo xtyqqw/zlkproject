@@ -7,7 +7,7 @@
         <id property="sqaId" column="sqa_id" javaType="java.lang.Integer"/>
         <result property="pId" column="pid" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="answerNum" column="answer_num" javaType="java.lang.Integer"/>
         <result property="viewNum" column="view_num" javaType="java.lang.Integer"/>
@@ -161,7 +161,7 @@
             <if test="pId != null and pId != ''">
                 AND pid = #{pId}
             </if>
-        </where>
+        </where> ORDER BY date DESC
         ) s
         LEFT JOIN stu_qa_tag sqt ON sqt.sqa_id = s.sqa_id
         LEFT JOIN tag t ON t.tag_id = sqt.tag_id
@@ -192,7 +192,7 @@
             <if test="sectionId != null">
                 section_id = #{sectionId},
             </if>
-            <if test="userId != null">
+            <if test="userId != null and userId !=''">
                 user_id = #{userId},
             </if>
             <if test="content != null and content !=''">
@@ -216,4 +216,16 @@
         </set>
             WHERE sqa_id = #{sqaId}
     </update>
+    <!--全部查询并分页-->
+    <select id="selectAllLimit" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa limit #{startPage},#{limit}
+    </select>
+    <!--查找全部数量-->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa
+    </select>
+    <!--根据id删除问答信息-->
+    <delete id="deleteBySqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
+        DELETE FROM stu_qa WHERE sqa_id = #{sqaId}
+    </delete>
 </mapper>

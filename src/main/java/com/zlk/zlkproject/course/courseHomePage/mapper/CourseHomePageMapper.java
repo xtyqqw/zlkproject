@@ -59,5 +59,56 @@ public interface CourseHomePageMapper {
      * @return 影响行数
      */
     int updateByCoursesId(Courses courses);
+
+    /**
+     * 根据coursesId删除数据
+     *
+     * @param coursesId
+     * @return
+     */
+    int deleteByCoursesId(Integer coursesId);
+
+    /**
+     * 查询全部并分页
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<Courses> selectCoursesByLimit(Integer offset,Integer limit);
+
+    /**
+     * 新增数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int insertByCourses(Courses courses);
+
+    /**
+     * 查询课程数量
+     * @return 课程数量
+     */
+    Integer selectCount();
+
+    /**
+     *  根据课程名称模糊查询并分页
+     *@method findByCoursesNameLimit
+     *@params [pagination]
+     *@return java.util.List<com.zlk.zlkproject.entity.Courses>
+     *@author zhang
+     *@time 2019/12/4  11:10
+     */
+    List<Courses> findByCoursesNameLimit(String coursesName,Integer startPage,Integer limit);
+
+    /**
+     *  根据课程名称模糊查询总数量
+     *@method findCountsByCoursesName
+     *@params [coursesName]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/4  11:19
+     */
+    Integer findCountsByCoursesName(String coursesName);
 }
 

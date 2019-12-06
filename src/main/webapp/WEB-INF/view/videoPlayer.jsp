@@ -25,6 +25,7 @@
     <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
+<jsp:include page="../jsp/header.jsp"></jsp:include>
     <div class="layui-container">
         <div class="layui-row" id="video_row">
             <div class="layui-col-md2"></div>
@@ -226,9 +227,10 @@
             <div class="layui-col-md2"></div>
         </div>
     </div>
-<%--    <div style="clear: both">--%>
-<%--        <jsp:include page="../jsp/footer.jsp"></jsp:include>--%>
-<%--    </div>--%>
+
+    <div style="clear: both">
+        <jsp:include page="../jsp/footer.jsp"></jsp:include>
+    </div>
 
     <div id="answer-div" hidden="hidden">
         <div id="answer-editor"></div>

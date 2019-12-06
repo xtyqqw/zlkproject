@@ -17,7 +17,7 @@ import lombok.ToString;
 public class UserSection {
 
     /**用户id 主键 对应字段user_id*/
-    private Integer userId;
+    private String userId;
     /**小节id 主键 对应字段section_id*/
     private Integer sectionId;
     /**小节状态 对应字段state*/
@@ -28,7 +28,7 @@ public class UserSection {
     public UserSection() {
     }
 
-    public UserSection(Integer userId, Integer sectionId, Integer state, Double time) {
+    public UserSection(String userId, Integer sectionId, Integer state, Double time) {
         this.userId = userId;
         this.sectionId = sectionId;
         this.state = state;

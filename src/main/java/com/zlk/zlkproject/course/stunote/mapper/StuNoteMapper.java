@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.course.stunote.mapper;
+package com.zlk.zlkproject.course.stuNote.mapper;
 
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;

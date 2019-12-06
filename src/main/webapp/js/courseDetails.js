@@ -21,10 +21,12 @@ layui.use('flow', function(){
                     success:function(result) {
                         console.log(result);
                         number=result.yeishu;
+                        /*循环遍历数据*/
                         layui.each(result.sectionDetailsList, function (index, courses) {
                             lis.push('<li  class="xiangqingneirong_li">'+
                                 '<div class="tishi">'+
                                 '<div class="shuxian"></div>');
+                            /*判断观看状态*/
                             if (courses.state==="已看完") {
                                 lis.push('<div class="yikanguo"><i class="iconfont icon-check-circle "></i></div>');
                                 color="#FFBb00";
@@ -32,7 +34,7 @@ layui.use('flow', function(){
                                 lis.push('<div class="zhengzaikan" ><i class="iconfont icon-play-circle"></i></div>');
                                 color="#FFBb00";
                             }else{
-                                lis.push('<div class="haimeikan"><i class="iconfont icon-md-lock "></i></div>');
+                                lis.push('<div class="haimeikan"><i class="iconfont icon-suoguanbi "></i></div>');
                                 color="rgb(100,100,100)";
                             }
 
@@ -46,6 +48,7 @@ layui.use('flow', function(){
                                 '<div class="kechengxiaojeijeishao">'+courses.sectionIntro+'</div>'+
                                 '<div class="kechengxiaojeipingfen">'+
                                 '<ul class="kechengxiaojeipingfen_ul">');
+                            /*判断评分数*/
                             if (courses.state==="已看完") {
                                 if(courses.xiaojeiPinfen==="3"){
                                     lis.push(
@@ -92,7 +95,7 @@ layui.use('flow', function(){
                                         '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>' +
                                         '<li class="kechengxiaojeipingfen_li">' +
-                                        '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
+                                        '<i class="iconfont icon-star-fill xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>');
                                 }
                             }else if (courses.state==="正在看") {
@@ -170,5 +173,21 @@ layui.use('flow', function(){
     });
 });
 $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function(){
-    alert($(this).children().first().val());
+    var sectionId = $(this).children().first().val();
+    $.ajax({
+        type : "POST",
+        async: false,
+        url :"/kecheng/seleUserCoursesByUserCourses",
+        data:"",
+        success: function (bool) {
+            if (bool){
+                alert(sectionId);
+            }else {
+                alert("您还未参加项目")
+            }
+        }
+
+    });
+
 });
+

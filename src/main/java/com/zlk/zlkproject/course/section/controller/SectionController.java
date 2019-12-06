@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,8 +58,10 @@ public class SectionController {
      */
     @RequestMapping(value = "/findState")
     @ResponseBody
-    public Map<String, Object> findState(Integer sectionId) throws Exception{
-        Integer userId = 1;
+    public Map<String, Object> findState(HttpServletRequest request,Integer sectionId) throws Exception{
+//        String userId = "1";
+        //获取当前登录的用户id
+        String userId = (String) request.getSession().getAttribute("userId");
         String state = sectionService.findStateById(userId,sectionId);
         if (state ==null){
             state = "未开始";
@@ -94,7 +97,9 @@ public class SectionController {
      */
     @RequestMapping(value ="/findSectionDetails")
     @ResponseBody
-    public Map findSectionDetails(Integer coureseId,Integer page,Integer limit){
-        return sectionService.findSectionByCourseIdLimit(coureseId,page,limit);
+    public Map findSectionDetails(HttpServletRequest request,Integer coureseId,Integer page,Integer limit){
+        //获取当前登录的用户id
+        String userId = (String) request.getSession().getAttribute("userId");
+        return sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
     }
 }

@@ -18,14 +18,14 @@ import java.util.Date;
 @ToString
 public class UserCourses {
     /**用户ID*/
-    private int userId;
+    private String userId;
     /**课程ID*/
     private int coursesId;
     /**上次学习时间*/
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastStudyTime;
 
-    public UserCourses(int userId, int coursesId, Date lastStudyTime) {
+    public UserCourses(String userId, int coursesId, Date lastStudyTime) {
         this.userId = userId;
         this.coursesId = coursesId;
         this.lastStudyTime = lastStudyTime;

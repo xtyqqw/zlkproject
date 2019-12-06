@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -63,8 +64,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
-    public String insertCourses(Integer coursesId){
-        int userId=2;
+    public String insertCourses(HttpServletRequest request,Integer coursesId){
+        //获取当前登录的用户id
+        String userId = (String) request.getSession().getAttribute("userId");
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -98,12 +100,13 @@ public class DetailsController {
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
     public boolean seleUserCoursesByUserCourses(UserCourses userCourses){
-        userCourses.setUserId(1);
+        userCourses.setUserId("1");
         userCourses.setCoursesId(1);
-        if(userCoursesService.queryAll(userCourses)!=null){
-            return false;
+        List<UserCourses> UC=userCoursesService.queryAll(userCourses);
+        if(UC.size()!=0){
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -112,6 +115,16 @@ public class DetailsController {
      */
     @RequestMapping("/note/toNoteManager")
     public String toNoteManager(){
-        return null;
+        return "/view/toNoteManager";
     }
+
+    /**
+     * 跳转到课程管理页面
+     * @return
+     */
+    @RequestMapping("/course/toCourseManager")
+    public String toCourseManager(){
+        return "view/CourseManager";
+    }
+
 }

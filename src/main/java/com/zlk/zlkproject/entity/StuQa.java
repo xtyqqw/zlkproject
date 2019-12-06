@@ -26,7 +26,7 @@ public class StuQa {
     /**小节id 对应字段 section_id*/
     private Integer sectionId;
     /**用户id 对应字段 user_id*/
-    private Integer userId;
+    private String userId;
     /**问答内容 对应字段 content*/
     private String content;
     /**回答数量 对应字段 answer_num*/
@@ -46,7 +46,7 @@ public class StuQa {
     public StuQa() {
     }
 
-    public StuQa(Integer sqaId, Integer pId, Integer sectionId, Integer userId, String content, Integer answerNum, Integer viewNum, String share, String report, Date date) {
+    public StuQa(Integer sqaId, Integer pId, Integer sectionId, String userId, String content, Integer answerNum, Integer viewNum, String share, String report, Date date) {
         this.sqaId = sqaId;
         this.pId = pId;
         this.sectionId = sectionId;

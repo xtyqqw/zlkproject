@@ -3,7 +3,7 @@
 <mapper namespace="com.zlk.zlkproject.course.userCourses.mapper.UserCoursesMapper">
 
     <resultMap type="com.zlk.zlkproject.entity.UserCourses" id="UserCoursesMap">
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="coursesId" column="courses_id" jdbcType="INTEGER"/>
         <result property="lastStudyTime" column="last_study_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -30,7 +30,7 @@
         user_id, courses_id, last_study_time
         from kaohe.user_courses
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId !=''">
                 and user_id = #{userId}
             </if>
             <if test="coursesId != null">
