@@ -60,7 +60,6 @@ public class IndexController {
                 }
             }else{
                 Signin signin1 = new Signin();
-                signin1.setSigninLastTime(new Date());
                 signin1.setSigninUserId(userId);
                 signin1.setSigninNum(0);
                 Integer flag = indexService.signFirst(signin1);
@@ -118,15 +117,20 @@ public class IndexController {
     public Map<String,Object> signIn(HttpServletRequest httpServletRequest)throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         User user2 = (User) httpServletRequest.getSession().getAttribute("user");
-        String userId = user2.getUserId();
-        String today = indexService.findDayByDate(new Date());
-        String lastDay = indexService.findDayByUserId(userId);
-        if (today.equals(lastDay)) {
-            resultMap.put("result", "false");
-        } else {
-            resultMap.put("result", "true");
+        if(user2 != null){
+            String userId = user2.getUserId();
+            String today = indexService.findDayByDate(new Date());
+            String lastDay = indexService.findDayByUserId(userId);
+            if (today.equals(lastDay)) {
+                resultMap.put("result", "false");
+            } else {
+                resultMap.put("result", "true");
+            }
+            return resultMap;
+        }else {
+            resultMap.put("result", "null");
+            return resultMap;
         }
-        return resultMap;
     }
     /**
      *签到方法
