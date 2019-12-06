@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.User;
 
 
 /**
@@ -11,5 +12,5 @@ import com.zlk.zlkproject.entity.Article;
  */
 public interface ArticleAddService {
 
-    Article saveArticle(Article article);
+    Article saveArticle(Article article, User userId);
 }

@@ -52,12 +52,21 @@ body{
 	font-size: 1.05em;
 	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 }
-a{color: #2fa0ec;outline: none;text-decoration: none;}
+a{ color: rgba(255, 255, 255, 0.6);outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
 a:hover,a:focus{color:#74777b;text-decoration: none;}
 .htmleaf-container{
 	margin: 0 auto;
 }
-
+.htmleaf-content{
+	width: 500px;
+	margin: 20px auto;
+}
+.time{
+	font-size: 1.5em;
+	font-weight: 900;
+}
+h2{font-size: 32px;}
+h2 img{vertical-align: middle;}
 .bgcolor-1 { background: #f0efee; }
 .bgcolor-2 { background: #f9f9f9; }
 .bgcolor-3 { background: #e8e8e8; }/*light grey*/
@@ -194,8 +203,9 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
 .related a:active img {
 	opacity: 1;
 }
-.related h3{font-family: "Microsoft YaHei", sans-serif;}
+.related h3{font-family: "Microsoft YaHei", sans-serif;font-size: 1.2em}
 .related a h3 {
+	font-size: 0.85em;
 	font-weight: 300;
 	margin-top: 0.15em;
 	color: #fff;
