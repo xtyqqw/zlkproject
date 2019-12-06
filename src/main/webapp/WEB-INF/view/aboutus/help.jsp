@@ -57,7 +57,7 @@
         }
     </style>
 </head>
-<body>
+<body style="width: 99%">
 <!-- 内容 -->
 <div class="about-main">
     <div class="tiao"></div>
