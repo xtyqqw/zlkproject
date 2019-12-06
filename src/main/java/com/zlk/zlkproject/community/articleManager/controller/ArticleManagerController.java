@@ -149,7 +149,7 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    @ResponseBody
+
     public String deleteArticleByArticleId(String articleId,HttpServletRequest request){
         /**获取删除文章id*/
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(articleId);

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.cxr.OpinionMapper">
+    <resultMap id="opinionEntityMap" type="com.zlk.zlkproject.user.entity.Opinion">
+        <id property="opinionId" column="opinion_id" javaType="java.lang.String"></id>
+        <result property="opinionUserId" column="opinion_user_id" javaType="java.lang.String"></result>
+        <result property="opinionContext" column="opinion_content" javaType="java.lang.String"></result>
+        <result property="opinionTime" column="opinion_time" javaType="java.util.Date"></result>
+    </resultMap>
+    <insert id="addOpinion" parameterType="com.zlk.zlkproject.user.entity.Opinion">
+
+        insert  into opinion(opinion_user_id,opinion_content,opinion_time) values (#{opinionUserId},#{opinionContext},
+       now())
+    </insert>
+
+
+</mapper>

@@ -10,16 +10,10 @@
 <html>
 <head>
     <title>文章发布</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
-
     <style>
         .header {
             width: auto;
@@ -53,9 +47,7 @@
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="add">
-                    <%--<input type="hidden" name="approval">
-                    <input type="hidden" name="articleSetTop">--%>
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="layerDemo">
                     <div class="required field">
                         <div class="ui left labeled input">
                             <div class="ui selection compact teal basic dropdown label">
@@ -129,8 +121,8 @@
                     <%--<div class="ui error message"></div>--%>
 
                     <div class="ui right aligned container">
-                        <button <%--id="save-btn"--%> type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" id="publish-btn" class="ui teal button" onclick="add()">发布</button>
+                        <button type="reset" class="ui reset secondary button">重置</button>
+                        <button type="submit" id="publish-btn" class="ui teal button" <%--onclick="add()"--%>>发布</button>
                     </div>
 
                 </form>
@@ -149,15 +141,13 @@
             testEditor = editormd("md-content", {
                 width : "100%",
                 height : 640,
-                placeholder : "开始编辑...",
+                placeholder : "开始撰写...",
                 syncScrolling : "single",
                 //你的lib目录的路径
                 path : "../editormd/lib/",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/uploadfile"
-                //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
-                //saveHTMLToTextarea : true
             });
         });
 
@@ -169,7 +159,7 @@
             on : 'hover'
         });
 
-        function add() {
+        /*function add() {
             $.ajax({
                 type: 'POST',
                 url: '/articles',
@@ -179,18 +169,13 @@
                         alert("发布成功");
                     }
                 },
-                error: function () {
-                    alert("发布失败");
+                error: function (res) {
+                    if (res.data() == null){
+                        alert("发布失败");
+                    }
                 }
             })
-        }
-
-        /*初始化审核，置顶状态*/
-        /*$('#publish-btn').click(function () {
-            $('[name="approval"]').val(0);
-            $('[name="articleSetTop"]').val(1);
-            $('#blog-form').submit();
-        });*/
+        }*/
 
         /*表单验证开启*/
         $('.ui.form').form({
@@ -203,8 +188,8 @@
                         type : 'empty',
                         prompt: '请注意文章标题不能为空'
                     },{
-                        type : 'maxLength[50]',
-                        prompt: '请注意文章标题最大长度不能超过50'
+                        type : 'maxLength[10]',
+                        prompt: '请注意文章标题最大长度不能超过10'
                     }]
                 },
                 articleContent : {
@@ -224,8 +209,11 @@
                 tagIds : {
                     identifier: 'tagIds',
                     rules: [{
-                        type : 'empty',
+                        type : 'minCount[1]',
                         prompt: '请至少选择一个文章标签'
+                    },{
+                        type : 'maxCount[3]',
+                        prompt: '请最多选择三个文章标签'
                     }]
                 },
                 figures : {
@@ -234,8 +222,9 @@
                         type : 'empty',
                         prompt: '请注意文章首图地址不能为空'
                     },{
-                        type : 'url',
-                        prompt: '请输入正确的URL格式'
+                        type : 'regExp',
+                        value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
+                        prompt: '请输入正确的图片URL格式'
                     }]
                 },
                 articleDigest : {
@@ -250,6 +239,9 @@
                 }
             }
         });
+    </script>
+    <script>
+
     </script>
 </body>
 </html>

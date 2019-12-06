@@ -1,7 +1,9 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,10 +33,14 @@ public class Article {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**更新时间*/
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**插图相对路径*/
     private String figures;
@@ -63,7 +69,7 @@ public class Article {
     /**文章和标签多对多关系*/
     @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(name = "article_tag",joinColumns = {@JoinColumn(name = "article_id",referencedColumnName = "articleId")},
-    inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
+            inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
     private List<Tag> tags=new ArrayList<>();
 
     /**文章和用户多对一关系*/

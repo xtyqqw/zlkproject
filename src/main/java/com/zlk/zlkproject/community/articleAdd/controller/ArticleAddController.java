@@ -4,6 +4,7 @@ import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,16 +58,16 @@ public class ArticleAddController {
     }
 
     @PostMapping(value = "/articles")
-    public String post(Article article, RedirectAttributes attributes, HttpSession session) {
+    public String post(Article article, RedirectAttributes attributes, HttpSession session, User userId) {
         //article.setUser((User) session.getAttribute("user"));
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
-        Article a=articleAddService.saveArticle(article);
+        Article a=articleAddService.saveArticle(article,userId);
         if (a == null) {
             attributes.addFlashAttribute("message","操作失败");
         } else {
             attributes.addFlashAttribute("message","操作成功");
         }
-        return "redirect:/community/articleAll";
+        return "redirect:/community/article-guide";
     }
 
     //文章编辑页面的图片上传方法

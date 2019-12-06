@@ -38,4 +38,12 @@ public class AboutusController {
     public String blogroll(){
         return "view/aboutus/blogroll";
     }
+    /**
+     * 跳转团队介绍页面
+     * @return
+     */
+    @RequestMapping("/teamIntroduce")
+    public String teamIntroduce(){
+        return "view/cxr/teamIntroduce";
+    }
 }

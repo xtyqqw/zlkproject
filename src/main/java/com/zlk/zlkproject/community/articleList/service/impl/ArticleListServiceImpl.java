@@ -7,6 +7,7 @@ import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -19,20 +20,6 @@ import java.util.List;
 public class ArticleListServiceImpl implements ArticleListService {
     @Autowired
     private ArticleListMapper articleListMapper;
-    @Override
-    public List<Article> findArticleList(Pagination pagination) {
-        Integer page = pagination.getPage();
-        Integer limit = pagination.getLimit();
-        Integer startPage = (page-1)*limit;
-        pagination.setStartPage(startPage);
-        return articleListMapper.findArticleList(pagination);
-    }
-
-    @Override
-    public Integer findArticleCount(Pagination pagination) {
-        return articleListMapper.findArticleCount(pagination);
-    }
-
     @Override
     public List<Article> findByCreateTime(Pagination pagination) {
         Integer page = pagination.getPage();
@@ -52,11 +39,8 @@ public class ArticleListServiceImpl implements ArticleListService {
     }
 
     @Override
-    public List<Article> findByUserId(Pagination pagination) {
-        Integer page = pagination.getPage();
-        Integer limit = pagination.getLimit();
-        Integer startPage = (page-1)*limit;
-        pagination.setStartPage(startPage);
-        return articleListMapper.findByUserId(pagination);
+    public List<Article> findByUserId(String userId,Integer page,Integer limit) {
+        Integer startPage= (page-1)*limit;
+        return articleListMapper.findByUserId(userId,startPage,limit);
     }
 }
