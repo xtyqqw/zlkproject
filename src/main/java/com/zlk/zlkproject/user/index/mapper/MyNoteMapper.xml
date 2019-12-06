@@ -11,7 +11,7 @@
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
-        <result property="snDate" column="sn_date" javaType="java.sql.Date"/>
+        <result property="snDate" column="sn_date" javaType="java.util.Date"/>
     </resultMap>
     <!--根据ID查询个人笔记-->
     <select id="findNotesBySnId" parameterType="java.lang.String" resultMap="StuNoteMap">
@@ -19,7 +19,7 @@
     </select>
     <!--根据ID查询个人笔记个数-->
     <select id="findNoteNumBySnId" parameterType="java.lang.String" resultType="java.lang.Integer">
-       select count(*) from stu_note where sn_user_id = #{snUserId}
+       select count(*) from stu_note where sn_user_id = #{userId}
     </select>
     <!--根据ID修改个人笔记-->
     <update id="editNoteBySnId" parameterType="com.zlk.zlkproject.user.entity.StuNote">
@@ -37,6 +37,6 @@
     </delete>
     <!--笔记分页查询-->
     <select id="findNotesList" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="StuNoteMap">
-        select * from stu_note order by sn_date DESC limit #{startPage},#{limit}
+        select * from stu_note where sn_user_id = #{userId}  order by sn_date DESC limit #{startPage},#{limit}
     </select>
 </mapper>

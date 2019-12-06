@@ -40,7 +40,7 @@ public interface RoleMapper {
      * @Author lufengxiang
      * @Description //TODO 角色授权
      * @Date 10:55 2019/11/27
-     * @Param [roleId]
+     * @Param [roleId,functionId]
      * @return java.lang.Integer
      **/
     Integer addRoleAndFunction(@Param("roleId") String roleId,@Param("functionId") List<Integer> functionId);

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.user.aboutus.mapper.cxr.ContactusMapper">
+    <resultMap id="contactusEntityMap" type="com.zlk.zlkproject.user.entity.Contactus">
+        <id property="contactusId" column="contactus_Id" javaType="java.lang.String"></id>
+        <result property="contactusEmail" column="contactus_email" javaType="java.lang.String"></result>
+        <result property="contactusPhone" column="contactus_phone" javaType="java.lang.String"></result>
+        <result property="contactusWorktime" column="contactus_worktime" javaType="java.lang.String"></result>
+        <result property="contactusRemind" column="contactus_remind" javaType="java.lang.String"></result>
+        <result property="contactusAddress" column="contactus_address" javaType="java.lang.String"></result>
+        <result property="contactusPostcode" column="contactus_postcode" javaType="java.lang.String"></result>
+        <result property="contactusWeixin" column="contactus_weixin" javaType="java.lang.String"></result>
+    </resultMap>
+    <!--根据ID查询单个信息-->
+    <select id="secletContactusById" parameterType="com.zlk.zlkproject.user.entity.Contactus" resultMap="contactusEntityMap">
+        select * from contactus where contactus_Id=#{contactusId}
+    </select>
+
+</mapper>

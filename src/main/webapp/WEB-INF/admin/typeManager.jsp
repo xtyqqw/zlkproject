@@ -33,30 +33,34 @@
             width: 180px;
         }
 
-        .form, .form input, .form select {
-            position: relative;
-            text-align: center;
+        .form{
+            margin-top: 20px;
         }
 
-        .form input, .form select {
-            margin-top: 15px;
-            height: 24px;
-            width: auto;
-        }
     </style>
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
 <div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/type/insert" class="form">
-        方向名称 <input type="text" required placeholder="请输入方向名称" name="typeName"><br>
+    <form action="<%=request.getContextPath()%>/type/insert" class="form layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">方向名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required name="typeName"  lay-verify="required" placeholder="请输入方向名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
     </form>
 </div>
 <div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/type/update" class="form">
-        <input type="hidden" name="typeId" id="typeId"><br>
-        方向名称 <input type="text" required id="typeName" placeholder="请输入方向名称" name="typeName"><br>
+    <form action="<%=request.getContextPath()%>/type/update" class="form layui-form">
+        <input type="hidden" name="typeId" id="typeId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">方向名称</label>
+            <div class="layui-input-inline">
+                <input type="text" required id="typeName" name="typeName"  lay-verify="required" placeholder="请输入方向名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -86,7 +90,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/type/typeManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'typeId', title: '类别编号', width: 180, sort: true}

@@ -44,7 +44,8 @@ public class DetailsController {
      * @return 课程介绍页面路径
      */
     @RequestMapping("/kecheng/kechengjianjie")
-    public String kechenjianjie(){
+    public String kechenjianjie(HttpServletRequest request,Integer coursesId){
+        request.getSession().setAttribute("coursesId",coursesId);
         return "/view/kechengjeishao";
     }
 
@@ -99,9 +100,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public boolean seleUserCoursesByUserCourses(UserCourses userCourses){
+    public boolean seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
         userCourses.setUserId("1");
-        userCourses.setCoursesId(1);
+        userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
             return true;
@@ -125,6 +126,15 @@ public class DetailsController {
     @RequestMapping("/course/toCourseManager")
     public String toCourseManager(){
         return "view/CourseManager";
+    }
+
+    /**
+     * 跳转到笔记管理页面
+     * @return
+     */
+    @RequestMapping("/note/toTeacherNoteManager")
+    public String toTeacherNoteManager(){
+        return "/view/toTeacherNoteManager";
     }
 
 }

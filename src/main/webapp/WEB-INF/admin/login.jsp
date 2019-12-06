@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>学习网站后台管理系统</title>
     <link href="<%=request.getContextPath()%>/css/admin/base.css" rel="stylesheet" type="text/css">
     <link href="<%=request.getContextPath()%>/css/admin/login.css" rel="stylesheet" type="text/css">
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -40,6 +40,8 @@
 <input type="hidden" value="${error}" id="msg">
 <script>
     layui.use(['layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
         <c:if test="${flag}">
         $(function () {
             layer.alert($("#msg").val());

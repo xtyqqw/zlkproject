@@ -1,10 +1,8 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
 import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
-import com.zlk.zlkproject.user.entity.Action;
+import com.zlk.zlkproject.entity.User;
 
-import java.util.List;
 
 /**
  * @program: ArticleAddService
@@ -14,15 +12,5 @@ import java.util.List;
  */
 public interface ArticleAddService {
 
-    Integer createArticle(Article article);
-
-    Integer setArticleTags(String articleId,Integer tagId);
-
-    Integer addArticleToCommunityAction(Action action);
-
-    List<Article> getAddArticleOfApproval(Action action);
-
-    List<Tag> getTagsToAddArticle(Tag tag);
-
-
+    Article saveArticle(Article article, User userId);
 }

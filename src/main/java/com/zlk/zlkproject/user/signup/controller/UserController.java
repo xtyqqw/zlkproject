@@ -26,10 +26,16 @@ import java.util.Map;
  * @create: 2019/11/19 10:06
  **/
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     SignService signService;
+
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "redirect:/index/toIndex";
+    }
 
     @RequestMapping(value = "/test")
     public String test() throws ClientException {
@@ -55,7 +61,7 @@ public class UserController {
       HttpSession session = request.getSession();
       //获取前台传输的手机号
       String userPhonenu = request.getParameter("userPhonenum");
-//      System.out.println(userPhonenu);
+//      Sys.out.println(userPhonenu);
 
       Map<String,Object> map = new HashMap<String,Object>();
       //获取验证码
@@ -135,13 +141,13 @@ public class UserController {
         User user1 = signService.findUserByPhonenumAndPwd(user);
         if(user1!=null){
             //将验证码放入session
-            session.setAttribute("userId",user1.getUserId());
-            mv.addObject("userId",user1.getUserId());
+            session.setAttribute("user",user1);
+//            mv.addObject("userId",user1.getUserId());
             //跳转至首页
-            mv.setViewName("");
+            mv.setViewName("redirect:/index/toIndex");
             return mv;
         }else {
-            mv.setViewName("/view/signin");
+            mv.setViewName("view/signin");
             mv.addObject("spanmsg","用户名或密码错误");
             return mv;
         }
@@ -160,10 +166,10 @@ public class UserController {
         if(user1!=null){
             if (code1.equals(usercode)){
                 //将验证码放入session
-                session.setAttribute("userId",user1.getUserId());
+                session.setAttribute("user",user1);
                 mv.addObject("userId",user1.getUserId());
                 //跳转至首页
-                mv.setViewName("");
+                mv.setViewName("redirect:/index/toIndex");
                 return mv;
             }else {
                 mv.setViewName("/view/signin");

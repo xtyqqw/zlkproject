@@ -1,3 +1,17 @@
+
+$('body').on('mouseenter','.layui-table-view td[data-field = "content"]',function () {
+    var msg = $(this).find('div').text();
+    console.log(msg);
+    //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+    if(msg!=null&msg!=""){
+        tipsInx = layer.tips(msg, this,{
+            tips: [3, '#f00000'],
+            time: 2000
+        });
+    }
+
+});
+
 layui.use(['table','form','layer'], function(){
     var table = layui.table;
     var form = layui.form;
@@ -7,15 +21,15 @@ layui.use(['table','form','layer'], function(){
         ,url:'/stuNote/selectStuNoteAllByLimit'
         ,height: 480
         ,cols: [[
-            {field:'snId', title: '笔记ID', width:100}
-            ,{field:'snSectionId', title: '小节ID', width:100}
-            ,{field:'snUserId', title: '用户ID', width:100}
-            ,{field:'content', title: '内容', width:100}
-            ,{field:'up', title: '赞', width:100}
-            ,{field:'down', title: '踩', width:100}
-            ,{field:'report', title: '举报', width:100, sort: true}
-            ,{field:'date', title: '日期',templet: '<div>{{ layui.util.toDateString(d.date,"yyyy-MM-dd HH:mm:ss") }}</div>', width:170}
-            ,{fixed: '', title:'操作', toolbar:'#toolbarDemo', width:100, fixed: 'right'}
+            {field:'snId', title: '用户笔记序号', width:120}
+            ,{field:'snSectionId', title: '所对应小节的序号', width:150}
+            ,{field:'snUserId', title: '写笔记用户的序号', width:150}
+            ,{field:'content', title: '笔记内容', width:100}
+            ,{field:'up', title: '点赞数', width:100}
+            ,{field:'down', title: '点踩数', width:100}
+            ,{field:'report', title: '是否被举报', width:130, sort: true}
+            ,{field:'date', title: '写笔记时的日期',templet: '<div>{{ layui.util.toDateString(d.date,"yyyy-MM-dd HH:mm:ss") }}</div>', width:170}
+            ,{fixed: 'right', title:'操作', toolbar:'#toolbarDemo', fixed: 'right'}
         ]]
         ,page: {
             curr:1
@@ -56,6 +70,28 @@ layui.use(['table','form','layer'], function(){
                     flag = false;
                 }
             });
-        };
+        }
+        else if(obj.event === 'edit'){
+            $("#snId").val(snId);
+            console.log(obj.data.report);
+            /*回显下拉框*/
+            if(obj.data.report=="false"){
+                $("#report").find("#reportFalse").prop("selected",true);
+                form.render();
+            }else if (obj.data.report=="true"){
+                $("#report").find("#reportTrue").prop("selected",true);
+                form.render();
+            }else{
+                $("#report").find("#reportNull").prop("selected",true);
+                form.render();
+
+            }
+            layer.open({
+                title: "修改",
+                type: 1,
+                area: ['40%', '80%'],
+                content: $("#updateStuNote")
+            });
+        }
     });
 });

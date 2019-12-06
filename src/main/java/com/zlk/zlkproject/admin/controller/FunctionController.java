@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,13 +80,17 @@ public class FunctionController {
      * @Author lufengxiang
      * @Description //TODO 菜单管理数据接口
      * @Date 10:05 2019/11/25
-     * @Param [request]
+     * @Param []
      **/
     @RequestMapping(value = "/functionManager")
     @ResponseBody
-    public Map<String, Object> functionManager(HttpServletRequest request) {
+    public Map<String, Object> functionManager() {
         Map<String, Object> map = new HashMap<>();
         List<Function> functionList = functionService.functionManager();
+        /*for(Function function:functionList){
+            Integer childrenNumber = functionService.findChildrenNumber(function.getId());
+            function.setChildrenNumber(childrenNumber);
+        }*/
         map.put("code", "0");
         map.put("msg", "true");
         map.put("data", functionList);
@@ -93,11 +98,11 @@ public class FunctionController {
     }
 
     /**
-     * @return org.springframework.web.servlet.ModelAndView
      * @Author lufengxiang
      * @Description //TODO 菜单管理点击添加
-     * @Date 17:51 2019/11/25
-     * @Param [function]
+     * @Date 18:00 2019/12/2
+     * @Param [function, addFunction]
+     * @return org.springframework.web.servlet.ModelAndView
      **/
     @RequestMapping(value = "/insert")
     public ModelAndView insert(Function function, @RequestParam(value = "addFunction") String addFunction) {
@@ -179,15 +184,21 @@ public class FunctionController {
      * @Param [functionId, request]
      **/
     @RequestMapping(value = "/delete")
-    public String delete(Integer functionId, HttpServletRequest request) {
+    @ResponseBody
+    public Boolean delete(Integer functionId, HttpServletRequest request) {
         //获取删除前菜单信息
         Function functionByFunctionId = functionService.findFunctionByFunctionId(functionId);
         //删除权限一并删除角色拥有的该权限
-        Integer flag1 = functionService.deleteFunctionAndRoleByFunctionId(functionId);
-        Integer flag = functionService.deleteFunction(functionId);
-        //保存删除菜单日志
-        logUtil.setLog(request, "删除了菜单名称为" + functionByFunctionId.getName() + "的菜单");
-        return "admin/functionManager";
+        Integer childrenNumber = functionService.findChildrenNumber(functionId);
+        if(childrenNumber==0) {
+            Integer flag1 = functionService.deleteFunctionAndRoleByFunctionId(functionId);
+            Integer flag = functionService.deleteFunction(functionId);
+            //保存删除菜单日志
+            logUtil.setLog(request, "删除了菜单名称为" + functionByFunctionId.getName() + "的菜单");
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**

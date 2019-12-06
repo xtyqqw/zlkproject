@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.courseHomePage.controller;
 
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,9 @@ import java.util.Map;
 @RequestMapping(value="/courseHomePage")
 public class CourseHomePageController {
     @Autowired
+    private LogUtil logUtil;
+
+    @Autowired
     private CourseHomePageService courseHomePageService;
     @Autowired
     private CommonFileUtil commonFileUtil;
@@ -33,7 +37,8 @@ public class CourseHomePageController {
 
     @RequestMapping(value = "/selectCoursesByCoursesId")
     @ResponseBody
-    public Map<String,Object> selectCoursesByCoursesId(Integer coursesId) {
+    public Map<String,Object> selectCoursesByCoursesId(HttpServletRequest request,Integer coursesId) {
+        coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         System.out.println(courses);
         Map<String,Object> map=new HashMap<>();
@@ -76,8 +81,8 @@ public class CourseHomePageController {
     @ResponseBody
     public Map<String,Object> findAll(Courses courses,Integer page,Integer limit)throws Exception{
         List<Courses> allList=courseHomePageService.findAll(courses,page,limit);
-
         Map<String,Object> map=new HashMap<>();
+
         map.put("allList",allList);
         return map;
     }
@@ -106,11 +111,12 @@ public class CourseHomePageController {
      */
     @RequestMapping(value = "/deleteByCourseId" )
     @ResponseBody
-    public Map<String,Object> deleteByCourseId(Integer courseId){
+    public Map<String,Object> deleteByCourseId(HttpServletRequest request,Integer courseId){
         int i = courseHomePageService.deleteByCoursesId(courseId);
         String message ="";
         if (i>0){
-            message = "修改成功";
+            message = "删除成功";
+            logUtil.setLog(request,"删除了课程id为"+courseId+"的信息");
         }
         Map<String,Object> map=new HashMap<>();
         map.put("message",message);

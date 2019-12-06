@@ -3,6 +3,7 @@ package com.zlk.zlkproject.user.personal.controller;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Articles;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +36,14 @@ public class ArticlesController {
      * @return
      */
     @RequestMapping(value = "/toarticles")
-    public ModelAndView selectArticles(String userId)throws Exception{
-        /*HttpServletRequest request
-        String userId1 = (String) request.getSession().getAttribute("userId");*/
-        List<Articles> list=articlesService.selectArticles("1");
-        Integer articles=articlesService.findArticlesId("1");
+    public ModelAndView selectArticles(HttpServletRequest request, String userId)throws Exception{
+        User user = (User) request.getSession().getAttribute("user");
+        List<Articles> list=articlesService.selectArticles(user.getUserId());
+        Integer articles=articlesService.findArticlesId(user.getUserId());
         ModelAndView mv=new ModelAndView();
         mv.addObject("list",list);
         mv.addObject("articles",articles);
-        mv.setViewName("");
+        mv.setViewName("view/personal/myArticle");
         return mv;
     }
 
@@ -55,7 +56,7 @@ public class ArticlesController {
     public String updateArticles(Articles articles)throws Exception{
         Integer flag=articlesService.updateArticles(articles);
         if(flag == 1){
-            return "";
+            return "redirect:/articles/toarticles";
         }else {
             return null;
         }
@@ -68,9 +69,9 @@ public class ArticlesController {
      */
     @RequestMapping(value = "/datele")
     public String deleteArticles(String articleId)throws Exception{
-        Integer flag=articlesService.deleteArticles("1");
+        Integer flag=articlesService.deleteArticles(articleId);
         if(flag == 1){
-            return "";
+            return "redirect:/articles/toarticles";
         }else {
             return null;
         }

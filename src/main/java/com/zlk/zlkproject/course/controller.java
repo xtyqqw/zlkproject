@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.course;
 
-
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @program: zlkproject
@@ -20,7 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class controller {
 
     @RequestMapping(value = "/toVideo")
-    public String toVideo() throws Exception{
+    public String toVideo(HttpServletRequest request, Integer sectionId) throws Exception{
+       if (sectionId==null){
+           return "/view/videoPlayer";
+       }
+        request.getSession().setAttribute("sectionId",sectionId);
         return "/view/videoPlayer";
     }
 

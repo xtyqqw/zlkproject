@@ -20,7 +20,7 @@ public class UserCourses {
     /**用户ID*/
     private String userId;
     /**课程ID*/
-    private int coursesId;
+    private Integer coursesId;
     /**上次学习时间*/
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastStudyTime;

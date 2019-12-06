@@ -4,7 +4,6 @@ import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Section;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -97,9 +96,11 @@ public class SectionController {
      */
     @RequestMapping(value ="/findSectionDetails")
     @ResponseBody
+
     public Map findSectionDetails(HttpServletRequest request,Integer coureseId,Integer page,Integer limit){
         //获取当前登录的用户id
         String userId = (String) request.getSession().getAttribute("userId");
+        coureseId = (Integer) request.getSession().getAttribute("coursesId");
         return sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
     }
 }

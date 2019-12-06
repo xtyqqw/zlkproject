@@ -3,11 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_am32levhe7.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_1nuc1djggf7.css">
+
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
     <link rel="stylesheet" href="/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css" >
         body {
             line-height: 0px;
@@ -113,47 +119,77 @@
         }
         .p-FAQ3{
             text-align: left;
-            width:75%;
-            margin:0 auto;
-            font-size:12px;
+            width:80%;
             font-weight:bold;
             letter-spacing:3px;
             color: #333436;
-            position: relative;
-            left:35px;
-            top: -125px;
+            height: 57px;
         }
         .p-FAQ4{
-            text-align: left;
             width:65%;
-            margin:0 auto;
             font-size:12px;
             letter-spacing:3px;
             color: #4f5256;
-            position: relative;
-            left:78px;
-            top: -155px;
+            display: inline-block;
+            float: left;
+            margin-left: 40px;
         }
-        .p-FAQ5{
-            position: relative;
-            width: 7%;
-            left:140px ;
-            top: -125px;
+
+
+        .span-FAQ5{
+            width: 8%;
             border-radius:5px ;
             background-color: #eae944;
             color: #FFFFFF;
-
+            display: inline-block;
+            float: left;
         }
+        .p-ZAN{
+            position: relative;
+            width: 7%;
+            left:230px ;
+            top: 20px;
+            border-radius:5px ;
+            color: grey;
+            height: 30px;
+        }
+        .p-CAI{
+            position: relative;
+            width: 7%;
+            left:330px;
+            top: -10px;
+            border-radius:5px ;
+            color: grey;
+            height: 30px;
+        }
+        .p-FAQ6{
+            display: inline-block;
+            float: left;
+            width: 40%;
+            height: 30PX;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+        .p-FAQ7{
+            display: inline-block;
+            float: left;
+            width: 40%;
+            height: 30PX;
+            margin-left: 30px;
+            margin-top: -28px;
+            font-size: 20px;
+        }
+
         .div-FAQ1:hover{
-            box-shadow:-2px 0 3px -1px #ebebeb,-2px 0 3px -1px #ebebeb,2px 0 3px -1px  #ebebeb;
-            background: url("img/remenpinglunbai.png") no-repeat right top #ffffff ;
+            box-shadow:-2px 0 3px -1px #e5e5e5,-2px 0 3px -1px #e5e5e5,2px 0 3px -1px  #e5e5e5;
+
         }
         .div-FAQ1{
             width: 100%;
             position: relative;
             border-radius:5px;
             height: 200px;
-            background: url("img/remenpinglun.png") no-repeat right top #fbf9ff;
+            background: url("img/remenpinglun.png") no-repeat right top #ffffff;
         }
         .sanjiao{
             position: relative;
@@ -165,11 +201,15 @@
         .daniu{
             width: 13%;
             height: 110px;
-            position: relative;
-            left: 15px;
-            top: -10px;
+            display: inline-block;
         }
-
+        .you{
+            width: 86%;
+            height: 199px;
+            display: inline-block;
+            float: right;
+            margin-top: -20px;
+        }
         .mingzi{
             position: relative;
             text-align:center;
@@ -210,6 +250,34 @@
             left: 20px;
             float: left;
 
+        }
+
+        .icon-good{
+            font-size: 30px;
+            display: inline-block;
+            float: left;
+        }
+        .biao1{
+            font-size: 30px;
+            display: inline-block;
+            float: left;
+            margin-top: -5px;
+        }
+        .img1{
+
+            height: 70px;
+            width:70px;
+            position: relative;
+            top: -204px;
+            left:813px;
+        }
+        .img1:hover{
+            height: 70px;
+            width:70px;
+            position: relative;
+            top: -204px;
+            left:813px;
+            background:url("img/remenpinglunbai.png");
         }
     </style>
 
@@ -308,7 +376,7 @@
             </div>
             <div id="tediantext">
                 <div id="tedianzhengwenneirong">
-                    <p>项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
+                    <p> 项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。<br>
                         项目文字版介绍正文内容，此处正文内容有字数限制，最多显示三百字。
                     </p>
@@ -397,10 +465,11 @@
                         data:data,
                         success:function(result) {
                             layui.each(result.faqList, function (i, faq) {
+
                                 lis.push(
                                     '<div class="div-FAQ">' +
                                     '<br>' +
-                                    '<p class="p-FAQ2">'+faq.answer+'</p> <br>' +
+                                    '<p class="p-FAQ2">'+faq.answer+'</p><br>' +
                                     '<p class="p-FAQ1">'+faq.question+'</p><br>'+
 
                                     '</div>'+
@@ -440,9 +509,6 @@
                         success:function(result) {
                             layui.each(result.commentList, function (i, comment) {
                                 lis.push(
-
-
-
                                     '<div class="div-FAQ1" ><br><br>' +
                                     '<div class="daniu">' +
                                     '<div class="touxiang"> <img id="img1" src="'+comment.userImg+'" style="height: 70px;width: 70px;border-radius:50%;"></div>' +
@@ -467,15 +533,32 @@
                                     '</ul>'+
                                     '</div>'+
                                     '</div>'+
-                                    '<p class="p-FAQ3">'+comment.comments+'</p><br>'+
-                                    '<div class="p-FAQ5"><div>&nbsp;讲师回复</div></div>'+
+                                    '<div class="you">' +
+
+                                    '<p class="p-FAQ3">'+comment.comments+'</p>'+
+                                    '<div class="p-FAQ5"><span class="span-FAQ5">&nbsp;讲师回复</span>' +
                                     '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
+                                    '</div>'+
+
                                     '<div style="clear: both"></div>'+
                                     '<div class="sanjiao"></div>'+
                                     '</div>'+
+                                    '<div class="p-ZAN"><i class="iconfont icon-good"></i>' +
+                                        '<p class="p-FAQ6">&nbsp'+comment.like+'</p>'+
+                                    '</div>' +
+                                    '<div class="p-CAI"><i class="iconfont icon-good biao1"></i>' +
+                                    '<p class="p-FAQ7">&nbsp'+comment.dislike+'</p>'+
+                                    '</div>');
+                                if(comment.flag === "true"){
+                                    lis.push('<img class="img1" src="../img/remenpinglunbai.png">');
+                                }else{
+
+                                }
+                                lis.push(
+                                    '</div>'+
                                     '<div class="div1"></div>'
                                 );
-                            })
+                            });
                             next(lis.join(''), page < 3); //假设总页数为 6
                         }
                     });

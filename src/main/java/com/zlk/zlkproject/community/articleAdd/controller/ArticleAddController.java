@@ -1,19 +1,21 @@
 package com.zlk.zlkproject.community.articleAdd.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
-import com.zlk.zlkproject.community.util.UUIDUtils;
+import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -30,6 +32,8 @@ public class ArticleAddController {
 
     @Autowired
     private ArticleAddService articleAddService;
+    @Autowired
+    private ArticleAddTagService articleAddTagService;
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
@@ -44,63 +48,26 @@ public class ArticleAddController {
     }
 
     //发文编辑页面接口
-    @GetMapping(value = "/community/articleEdit")
-    public ModelAndView editArticle(HttpServletRequest request, Tag tag) {
+    @GetMapping(value = "/community/article-edit")
+    public ModelAndView articleInput(Tag tag) {
         ModelAndView mv=new ModelAndView();
-        List<Tag> tagsList=articleAddService.getTagsToAddArticle(tag);
-        mv.addObject("tagsList",tagsList);
+        List<Tag> tagsList=articleAddTagService.listTag();
+        mv.addObject("tags",tagsList);
         mv.setViewName("view/community/articleEdit");
         return mv;
     }
 
-    /**
-     * @description: 增加文章
-     * @param article
-     * @param setTags
-     * @return: org.springframework.web.servlet.ModelAndView
-     * @author: QianKeQin
-     * @date: 2019/11/28 12:11
-     */
-    @RequestMapping(value = "/community/article-add")
-    public ModelAndView insert(Article article, HttpServletRequest request/*, @RequestParam(value = "setTags")String setTags*/) {
-        ModelAndView mv=new ModelAndView();
-        //使用主键生成器给主键赋值
-        article.setArticleId(UUIDUtils.getId());
-        //发表文章时设置发文时间
-        article.setCreateTime(new Date());
-        //发表文章时默认审核状态为审核中
-        article.setApproval(0);
-        //发表文章时默认置顶状态为不置顶
-        article.setArticleSetTop(1);
-        //HttpSession session=request.getSession();
-        article.setUserId(UUIDUtils.getId());
-        Integer flag=articleAddService.createArticle(article);
-        if (flag==1/* && setTags!=null*/) {
-            /*//解析前台选择的类别
-            List<Tag> tagList= JSONArray.parseArray(setTags,Tag.class);
-            List<Integer> integerList=new ArrayList<>();
-            for (Tag tag : tagList) {
-                //文章选择类别
-                integerList.add(articleAddService.setArticleTags(article.getArticleId(), tag.getTagId()));
-            }
-            for (Integer integer : integerList) {
-                if (integer == 0) {
-                    mv.addObject("flag", "true");
-                    mv.addObject("msg", "遇到意外错误");
-                    mv.setViewName("view/community/articleEdit");
-                    return mv;
-                }
-            }*/
-            mv.addObject("flag","true");
-            mv.addObject("msg","添加成功");
-            mv.setViewName("view/community/articleGuide");
-            return mv;
-        }else {
-            mv.addObject("flag","true");
-            mv.addObject("msg","遇到意外错误");
-            mv.setViewName("view/community/articleEdit");
-            return mv;
+    @PostMapping(value = "/articles")
+    public String post(Article article, RedirectAttributes attributes, HttpSession session, User userId) {
+        //article.setUser((User) session.getAttribute("user"));
+        article.setTags(articleAddTagService.listTags(article.getTagIds()));
+        Article a=articleAddService.saveArticle(article,userId);
+        if (a == null) {
+            attributes.addFlashAttribute("message","操作失败");
+        } else {
+            attributes.addFlashAttribute("message","操作成功");
         }
+        return "redirect:/community/article-guide";
     }
 
     //文章编辑页面的图片上传方法
