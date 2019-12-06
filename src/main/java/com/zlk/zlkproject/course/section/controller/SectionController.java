@@ -4,6 +4,7 @@ import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Section;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +61,8 @@ public class SectionController {
     public Map<String, Object> findState(HttpServletRequest request,Integer sectionId) throws Exception{
 //        String userId = "1";
         //获取当前登录的用户id
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user=(User)request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         String state = sectionService.findStateById(userId,sectionId);
         if (state ==null){
             state = "未开始";
@@ -80,8 +82,9 @@ public class SectionController {
      */
     @RequestMapping(value = "/findVideoAddr")
     @ResponseBody
-    public Map<String,Object> findVideoAddr(Integer sectionId) throws Exception{
+    public Map<String,Object> findVideoAddr(HttpServletRequest request,Integer sectionId) throws Exception{
         String videoAddr = sectionService.findVideoAddrById(sectionId);
+        request.getSession().setAttribute("sectionId",sectionId);
         Map<String,Object> map = new HashMap<>();
         map.put("videoAddr",videoAddr);
         return map;
@@ -99,7 +102,8 @@ public class SectionController {
 
     public Map findSectionDetails(HttpServletRequest request,Integer coureseId,Integer page,Integer limit){
         //获取当前登录的用户id
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user=(User)request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         coureseId = (Integer) request.getSession().getAttribute("coursesId");
         return sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
     }

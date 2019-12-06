@@ -44,4 +44,14 @@ public interface SignMapper {
      */
     Integer findCountByName(String userRealname);
 
+    /**
+     *  根据用户id查找用户名和用户头像
+     *@method selectNameAndImg
+     *@params [userId]
+     *@return com.zlk.zlkproject.entity.User
+     *@author zhang
+     *@time 2019/12/6  17:08
+     */
+    User selectNameAndImg(String userId);
+
 }

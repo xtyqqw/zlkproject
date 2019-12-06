@@ -4,6 +4,8 @@ import com.alibaba.druid.sql.ast.SQLSetQuantifier;
 import com.zlk.zlkproject.course.stuQa.service.StuQaService;
 import com.zlk.zlkproject.entity.StuQa;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.signup.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,8 @@ public class StuQaController {
 
     @Autowired
     private StuQaService stuQaService;
+    @Autowired
+    private SignService signService;
 
     /**
      *  功能栏问答信息添加
@@ -40,7 +44,8 @@ public class StuQaController {
     public Map<String,Object> insertStuQa(HttpServletRequest request, @RequestParam String content,
                                           Integer[] tagIdArray) throws Exception{
         //获取session中的userid值
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user=(User)request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         //获取session中的sectionId值
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         StuQa stuQa = new StuQa();
@@ -65,7 +70,7 @@ public class StuQaController {
     /**
      *  流加载分页查询stuQa
      *@method findStuQaList
-     *@params [sectionId, page, limit]
+     *@params [request,sectionId, page, limit]
      *@return java.util.Map<java.lang.String,java.lang.Object>
      *@author zhang
      *@time 2019/11/29  11:22
@@ -156,7 +161,8 @@ public class StuQaController {
     @Transactional
     public Map<String,Object> insertAnswer(HttpServletRequest request,@RequestParam Integer sqaId,String content) throws Exception{
         //获取session中的userid值
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user=(User)request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         //获取session中的sectionId值
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         StuQa stuQa = new StuQa();

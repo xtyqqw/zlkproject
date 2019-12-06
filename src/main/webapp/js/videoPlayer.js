@@ -36,6 +36,9 @@ $(document).ready(function () {
                     url: "/chapter/findChapters",
                     success: function (data) {
                         $("#mulu_div").css("display", "block");
+                        $("#wenda_div").css("display", "none");
+                        $("#div_stuNote").css("display", "none");
+                        $("#div_stuCmt").css("display", "none");
                         var str = "";
                         var state = "";
                         var chapters = data.chapters;
@@ -95,7 +98,6 @@ $(document).ready(function () {
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
             var sectionId = $(this).find("input").val();
-            console.log(sectionId);
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
@@ -113,6 +115,8 @@ $(document).ready(function () {
         $("#icon-wenda").click(function () {
             $("#mulu_div").css("display", "none");
             $("#wenda_div").css("display", "block");
+            $("#div_stuNote").css("display", "none");
+            $("#div_stuCmt").css("display", "none");
             $.ajax({
                 type:"POST",
                 url:"/courseTag/findAll",
@@ -344,16 +348,26 @@ $(document).ready(function () {
                         data: data,
                         success: function (result) {
                             var str = "";
-                            /*var answers = new Array();*/
+                            var user = "";
                             layui.each(result.stuQaList, function (i, stuQa) {
                                 console.log("stuQa="+stuQa);
                                 editorflag++;
                                 str += "<div class=\"stuQa-box\">";
                                 str += "<div class=\"stuQa-user\">";
+                                $.ajax({
+                                    type:"POST",
+                                    url: '/users/selectNameAndImg',
+                                    async: false,
+                                    data:{"userId":stuQa.userId},
+                                    success:function (result1) {
+                                        user = result1.user;
+                                        return user;
+                                    }
+                                });
                                 str += "<div class=\"stuQa-userPhoto\">";
-                                str += "<img src='/img/1.jpg' class='userPhoto'>";
+                                str += "<img src='"+user.userImg+"' class='userPhoto'>";
                                 str += "</div>";
-                                str += "<div class=\"stuQa-userName\">用户名</div>";
+                                str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-content-box\">";
                                 str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
@@ -567,6 +581,7 @@ $(document).ready(function () {
 
         function answer(id, sqaId, sectionId) {
             var str = "";
+            var user = "";
             var data = {"sqaId":sqaId,"sectionId": sectionId};
             $.ajax({
                 type: "POST",
@@ -578,10 +593,20 @@ $(document).ready(function () {
                         editori++;
                         str += "<div class=\"stuQa-answer-box\">";
                         str += "<div class=\"stuQa-user\">";
+                        $.ajax({
+                            type:"POST",
+                            url: '/users/selectNameAndImg',
+                            async: false,
+                            data:{"userId":stuQa.userId},
+                            success:function (result1) {
+                                user = result1.user;
+                                return user;
+                            }
+                        });
                         str += "<div class=\"stuQa-userPhoto\">";
-                        str += "<img src='/img/1.jpg' class='userPhoto'>";
+                        str += "<img src='"+user.userImg+"' class='userPhoto'>";
                         str += "</div>";
-                        str += "<div class=\"stuQa-userName\">用户名</div>";
+                        str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
                         str += "</div>";
                         str += "<div class=\"stuQa-content-box\">";
                         str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
@@ -690,7 +715,10 @@ $(document).ready(function () {
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
         {
             $("#icon-biji").click(function () {
-                $("#div_stuNote").css("display","block");
+                $("#mulu_div").css("display", "none");
+                $("#wenda_div").css("display", "none");
+                $("#div_stuNote").css("display", "block");
+                $("#div_stuCmt").css("display", "none");
             });
             $("#stuNote_btn1").click(function () {
                 let isEmpty = true;
@@ -1163,7 +1191,10 @@ $(document).ready(function () {
 /*-----------------------------------------学生评论 begin--------------------------------------------------------------*/
         {
             $("#icon-pinglun").click(function () {
-                $("#div_stuCmt").css("display","block");
+                $("#mulu_div").css("display", "none");
+                $("#wenda_div").css("display", "none");
+                $("#div_stuNote").css("display", "none");
+                $("#div_stuCmt").css("display", "block");
             });
             $("#stuCmt_btn1").click(function () {
                 let isEmpty = true;

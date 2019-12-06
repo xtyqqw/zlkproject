@@ -7,7 +7,8 @@
         <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
         <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"></result>
         <result property="sectionName" column="section_name" javaType="java.lang.String"></result>
-        <result property="videoAddr" column="video_addr" javaType="java.lang.String"></result>
+        <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"></result>
+        <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"></result>
         <result property="sectionTime" column="section_time" javaType="java.lang.Integer"></result>
         <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
         <result property="sectionIntro" column="section_intro" javaType="java.lang.String"></result>
