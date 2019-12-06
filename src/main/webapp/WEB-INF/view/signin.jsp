@@ -194,7 +194,7 @@
     <div class="layui-tab-content" style="height: 100px;">
         <div class="layui-tab-item layui-show">
             <span>${spanmsg}</span>
-            <form action="/user/signupbycode" method="post">
+            <form action="/users/signupbycode" method="post">
                 <%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
                 <%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
                     <div class="lgD">
@@ -212,7 +212,7 @@
         </div>
         <div class="layui-tab-item">
             <span style="margin-left: 25px;color: red">${spanmsg}</span>
-            <form action="/user/signupbypwd" method="post">
+            <form action="/users/signupbypwd" method="post">
                 <%--                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><br>--%>
                 <%--                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <br>--%>
                     <div class="lgD">

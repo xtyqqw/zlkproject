@@ -26,7 +26,7 @@ import java.util.Map;
  * @create: 2019/11/19 10:06
  **/
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
     @Autowired
     SignService signService;
@@ -142,7 +142,7 @@ public class UserController {
         if(user1!=null){
             //将验证码放入session
             session.setAttribute("user",user1);
-            mv.addObject("userId",user1.getUserId());
+//            mv.addObject("userId",user1.getUserId());
             //跳转至首页
             mv.setViewName("redirect:/index/toIndex");
             return mv;

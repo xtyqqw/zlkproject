@@ -207,7 +207,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 470
+            , height: 460
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'articleId', title: '文章ID', width: 80, sort: true}
