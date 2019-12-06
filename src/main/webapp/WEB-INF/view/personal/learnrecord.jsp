@@ -154,7 +154,7 @@
                          style="width: 100px;margin: 10px 0 0 auto;">
                         <div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>
                     </div>
-                    <a href="javascript:;">
+                    <a href="<%=request.getContextPath()%>/toVideo">
                         <div class="continue-learn">继续学习</div>
                     </a>
                 </div>
