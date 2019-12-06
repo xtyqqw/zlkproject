@@ -30,7 +30,7 @@ public class ShrioConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean=new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        //修改拦截跳转页面
+     /*   //修改拦截跳转页面
         shiroFilterFactoryBean.setLoginUrl("/loginController/toLogin");
         shiroFilterFactoryBean.setSuccessUrl("/loginController/toSuccess");
         //添加Shiro内置过滤器
@@ -53,7 +53,7 @@ public class ShrioConfig {
         filterMap.put("/note/*","authc");
         filterMap.put("/chapter/*","authc");
         filterMap.put("/section/*","authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);*/
         return shiroFilterFactoryBean;
     }
 

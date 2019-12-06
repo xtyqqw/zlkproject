@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.QuestionHomeMapper">
+    <resultMap id="questionEntityMap" type="com.zlk.zlkproject.entity.Question">
+        <id column="question_id" property="questionId" javaType="java.lang.String"/>
+        <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
+        <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="solve" property="solve" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
+        <result column="user_id" property="userId" javaType="java.lang.Integer"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.String"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.String"/>
+        <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="check" property="check" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+        <result column="section_id" property="sectionId" javaType="java.lang.Integer"/>
+        <result column="response_count" property="responseCount" javaType="java.lang.String"/>
+        <result column="create_question_type" property="createQuestionType" javaType="java.lang.String"/>
+    </resultMap>
+    <resultMap type="com.zlk.zlkproject.entity.User" id="userEntityMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findQuestionByTime" resultMap="questionEntityMap">
+         select * from question order by create_time=#{createTime} desc
+    </select>
+    <select id="findQuestionById" resultMap="questionEntityMap">
+        select * from question where user_id=#{userId}
+    </select>
+    <select id="findUserById" resultMap="userEntityMap">
+        select * from  user where user_id=#{userId}
+    </select>
+
+
+</mapper>
+

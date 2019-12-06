@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="/img/zlk.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg" type="image/x-icon" />
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .editormd-html-preview {

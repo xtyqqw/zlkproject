@@ -135,7 +135,7 @@
     })
 </script>--%>
 <div class="learnrecord">
-    <%--<c:forEach items="${itemList}" var="item">
+    <c:forEach items="${itemList}" var="item">
         <div class="timeline">
             <div class="date">
                 <p class="year">${item.stuTime}</p>
@@ -167,11 +167,47 @@
                 </div>
             </div>
         </div>
-    </c:forEach>--%>
-    <div class="flow_div"></div>
+    </c:forEach>
+    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+    <%--<div class="flow_div"></div>--%>
 </div>
+<%--分页--%>
+<script>
+    function showRecord(page,limit) {
+        $.get("<%=request.getContextPath()%>/courses/tocourses",
+            {page:page,limit:limit},
+            function (data) {
+                for (var i = 0; i < data.length; i++){
+
+                }
+            },
+            "json"
+        );
+    }
+    var total = "${all}";
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage, layer = layui.layer;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            ,count: total //数据总数
+            ,theme: '#914FF1'
+            ,first: '首页'
+            ,last: '尾页'
+            , curr: 1  //起始页
+            , groups: 5 //连续页码个数
+            ,layout: ['prev', 'page', 'next', 'count']
+            ,jump: function(obj,first){
+                if(!first){
+                    showRecord(obj.curr,obj.limit);
+                }
+                console.log(obj)
+            }
+        });
+    });
+</script>
 <%--流加载--%>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -227,6 +263,6 @@
             }
         });
     });
-</script>
+</script>--%>
 </body>
 </html>

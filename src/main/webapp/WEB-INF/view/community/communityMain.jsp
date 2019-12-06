@@ -8,6 +8,10 @@
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body{
             overflow-x:hidden;
         }
@@ -22,7 +26,7 @@
             border: none 0;
         }
         .all-body-center .body-top{
-            width: 100%;
+            width: 1308px;
             height: 115px;
         }
         .all-body-center .body-left{
@@ -44,28 +48,30 @@
         }
         .add{
             position: relative;
-            top: 26px;
-            left: 942px;
+            top: 10px;
+            left: 518px;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
-            background-color: #1296db;
+            background-color: #914ff1;
             text-align:center;
             height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
+            border-radius: 5px;
         }
         /*横线样式*/
         .crossing{
-            width: 68%;
+            width: 69%;
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
             bottom: -15px;
             left: 12px;
+            z-index: -1;
         }
         /*中间有竖线导航栏样式*/
         .tab{
@@ -73,7 +79,7 @@
             width: 220px;
             position: relative;
             left: -2px;
-            bottom: -31px;
+            bottom: -37px;
         }
         .tab a{
             color:  #989898;
@@ -134,7 +140,6 @@
         .yueanniu{
             -webkit-border-top-left-radius: 5px;
             -webkit-border-bottom-left-radius: 5px;
-            margin-top: 0.3vw;
             margin-left: -0.8vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -219,6 +224,72 @@
             color: black;
             margin-right: 0.6vw;
         }
+        <%-----------------------------------文章标签卡 css start---------------------------------------%>
+        .show {
+            width: 69%;
+            height: 30px;
+            padding-top: 6px;
+            margin-top: 10px;
+            border-radius: 5px;
+            margin-left: 12px;
+            background-color: whitesmoke;
+        }
+        .show li {
+            float: left;
+            padding-left: 12px;
+            display: inline-block;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .show a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        .hide a:hover{
+            background-color: #AFEEEE;
+            color: #0a61ff;
+        }
+        .hide {
+            padding-top: 6px;
+            margin-top: 10px;
+            margin-left: 12px;
+            display: none;
+            width: 69%;
+            height: 60px;
+            background-color: whitesmoke;
+            border-radius: 5px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 0 7px 0 rgba(0,0,0,0.19);
+        }
+        .hide li{
+            float: left;
+            padding-left: 12px;
+        }
+        .hide a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        <%-----------------------------------文章标签卡 css end---------------------------------------%>
     </style>
 </head>
 <body>
@@ -227,44 +298,41 @@
     <%@include file="../../jsp/sidebar.jsp"%>
     <div class="all-body-center">
         <div class="body-top">
-            <div>
+            <div style="height: 0px; margin-bottom: -10px;">
                 <div class="show">
-                    <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
                     <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                         <div>
                             <ul>
-                                <li><a href="<%=request.getContextPath() %>/" type="button" class="">${tag.tagName}</a></li>
+                                <li><a href="javascript:void(0)" type="button" class="">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>
                 </div>
                 <div class="hide">
-                    <a href="javascript:void(0)" type="button" class="all">全部</a>
-                    <a style="display: none" id="a"></a>
                     <c:forEach items="${tagList}" var="tag">
                         <div>
                             <ul>
-                                <li><a href="javascript:void(0)" type="button" onclick="dj(this);">${tag.tagName}</a></li>
+                                <li><a href="<%=request.getContextPath() %>/" type="button" target="pageTarget" onclick="dj(this);">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>
                 </div>
             </div>
             <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
+                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">
-                <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
+                <a href="<%=request.getContextPath()%>/articles/toArticleAll" target="pageTarget">最新</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/article/findByBrowseCount" target="pageTarget">热门</a>
+                <a href="<%= request.getContextPath()%>/articles/toArticleHot" target="pageTarget">热门</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/article/findByUserId" target="pageTarget">我的文章</a>
+                <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
             </div>
         </div>
         <div class="body-left">
             <div class="body-context">
-                <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
+                <iframe name="pageTarget" frameborder="1" src="/articles/toArticleAll"> </iframe>
             </div>
         </div>
         <div class="wz_remenwenzhang">
@@ -374,6 +442,26 @@
         $('.wz_remen_zt2').css('display','block');
         $('.wz_remen_zt1').css('display','none');
     })
+    <%-----------------------------------文章标签卡 js start---------------------------------------%>
+    $(document).on('mouseenter','.show',function () {
+        $('.hide').css('display','block');
+        $(this).css('display','none');
+    });
+    $(document).on('mouseleave','.hide',function () {
+        $('.show').css('display','block');
+        $(this).css('display','none');
+    });
+    $(function() {
+        $(".hide li").click(function() {
+            if($(this).nextAll().is('#a')) {
+                $(".hide").append($(this));
+            }
+            else {
+                $(".hide").prepend($(this));
+            }
+        });
+    });
+    <%-----------------------------------文章标签卡 js end---------------------------------------%>
 </script>
 </body>
 </html>

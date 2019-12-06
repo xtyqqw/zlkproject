@@ -31,32 +31,6 @@ public class QuestionController {
     @Autowired
     private QuestionTagService questionTagService;
     /*
-     * @descrption 社区首页
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/12/5 10:19
-     */
-    @RequestMapping(value = "/main")
-    public String main(){
-
-        return "/view/community/main";
-    }
-    /*
-     * @descrption 提问首页
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/12/5 10:19
-     */
-    @RequestMapping(value = "/questionMain")
-    public String questionMain(){
-
-        return "/view/community/questionMain";
-    }
-
-
-    /*
      * @descrption 提问提示页面
      * @author gby
      * @param []
@@ -69,26 +43,13 @@ public class QuestionController {
         Object userId = request.getSession().getAttribute("userId");
         if (userId == null) {
             mv.addObject("msg","你还没有登录，请先登录");
-            mv.setViewName("redirect:/user/test");
+            mv.setViewName("redirect:/users/tosignin");
             return mv;
         } else {
             mv.addObject("msg","您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
             return mv;
         }
-    }
-
-    /*
-     * @descrption 提问提示页面
-     * @author gby
-     * @param
-     * @return
-     * @date 2019/11/26 20:58
-     */
-    @RequestMapping(value = "/hint")
-    public String hint() {
-
-        return "/view/community/questionGuide";
     }
 
     /*

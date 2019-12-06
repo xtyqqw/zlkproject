@@ -7,17 +7,17 @@
         <id column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
         <result column="question_content" property="questionContent" javaType="java.lang.String"/>
-        <result column="solve" property="solve" javaType="java.lang.Integer"/>
+        <result column="solve" property="solve" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
-        <result column="browse_count" property="browseCount" javaType="java.lang.Integer"/>
-    <!--    <result column="user_id" property="userId" javaType="java.lang.Integer"/>
-      -->  <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
-        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
+        <result column="user_id" property="userId" javaType="java.lang.Integer"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.String"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
-        <result column="check" property="check" javaType="java.lang.Integer"/>
+        <result column="check" property="check" javaType="java.lang.String"/>
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
         <result column="section_id" property="sectionId" javaType="java.lang.Integer"/>
-        <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
+        <result column="response_count" property="responseCount" javaType="java.lang.String"/>
         <result column="create_question_type" property="createQuestionType" javaType="java.lang.String"/>
     </resultMap>
 
