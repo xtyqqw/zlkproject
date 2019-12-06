@@ -81,7 +81,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-block">
-                <input type="text" name="userPhonenum" id="userPhonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">
+                <input type="text" name="phonenum" id="phonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">
                 <span class="error" id="phoneError"></span>
             </div>
         </div>
@@ -353,7 +353,7 @@
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
                 , {field: 'userRealname', title: '姓名', width: 80, sort: true}
                 , {field: 'userSex', title: '性别', width: 60}
-                , {field: 'userPhonenum', title: '手机号码', width: 120}
+                , {field: 'phonenum', title: '手机号码', width: 120}
                 , {field: 'userBirthday', title: '出生年月', width: 120}
                 , {field: 'userMarry', title: '婚否', width: 60}
                 , {field: 'userNative', title: '籍贯', width: 120}
@@ -450,7 +450,7 @@
                 //获取需要修改的变量
                 $("#userId").val(data.userId);
                 $("#userRealname").val(data.userRealname);
-                $("#userPhonenum").val(data.userPhonenum);
+                $("#phonenum").val(data.phonenum);
                 $("#userSex").val(data.userSex);
                 $("#userBirthday").val(data.userBirthday);
                 $("#userNative").val(data.userNative);

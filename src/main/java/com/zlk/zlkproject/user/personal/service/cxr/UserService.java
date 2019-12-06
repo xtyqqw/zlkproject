@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.cxr;
 
 import com.zlk.zlkproject.user.entity.CxrPaging;
-import com.zlk.zlkproject.user.entity.User;
+import com.zlk.zlkproject.entity.User;
 
 import java.util.List;
 

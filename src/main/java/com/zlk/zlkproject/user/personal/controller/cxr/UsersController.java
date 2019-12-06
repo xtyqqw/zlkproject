@@ -4,7 +4,7 @@ package com.zlk.zlkproject.user.personal.controller.cxr;
 import com.zlk.zlkproject.admin.util.LogUtil;
 
 import com.zlk.zlkproject.user.entity.CxrPaging;
-import com.zlk.zlkproject.user.entity.User;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.personal.service.cxr.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,124 +37,124 @@ public class UsersController {
     private UserService userService;
     @Autowired
     private LogUtil logUtil;
-                        //前台信息展示页面
-    /**
-    * 跳转页面
-     * @return
-     */
-    @RequestMapping("/toPersonInfo")
-    public String toPersonInfo(){
-            return "view/cxr/personInfo";
-    }
-
-    /**
-     * 修改方法
-     * @param user
-     * @return
-     */
-    @RequestMapping("/updateUser")
-    public ModelAndView updateUser(User user){
-
-        ModelAndView mv = new ModelAndView();
-        //调用修改方法
-         userService.updateUser(user);
-        //根据ID查询出user对象，
-        User user1=userService.selectUserById(user.getUserId());
-        mv.addObject("user", user1);
-            // 设置返回页面
-        mv.setViewName("view/cxr/personInfo");
-        return mv;
-    }
-
-    /**
-     * 根据userID查询对象，修改信息
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value = "/findUser")
-    public ModelAndView findUser( HttpServletRequest request,String userId){
-        ModelAndView mv = new ModelAndView();
-        //从session中获取ID，进行修改，userId="1";为模拟数据
-       // User user1 = (User) request.getSession().getAttribute("userId");
-            userId="1";
-        //调用查询单个对象的方法
-        User user=userService.selectUserById(userId);
-        mv.addObject("user",user);
-        mv.setViewName("view/cxr/personInfo");
-       // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");
-        return mv;
-
-    }
-
-    /**
-     * 根据ID查询单个对象方法
-     * @param userId
-     * @return
-     */
-    @RequestMapping("/selectUserById/{userId}")
-    public User selectUserById(@PathVariable("{userId}") String userId){
-                return userService.selectUserById(userId);
-    }
-
-    /**
-     * 文件上传
-     * @param file
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/upload/headImg", method = {RequestMethod.POST})
-    @ResponseBody
-    public Object headImg(@RequestParam(value="file",required=false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String prefix="";
-        String dateStr="";
-        String uploadDir="uploadDir";//这个文件夹是创建在uploadDir,
-        //保存上传
-        OutputStream out = null;
-        InputStream fileInput=null;
-        try{
-            if(file!=null){
-                String originalName = file.getOriginalFilename();
-                prefix=originalName.substring(originalName.lastIndexOf(".")+1);
-
-                SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-                // 将文件名以日期戳的形式保存
-                dateStr = format.format(new Date());
-                //文件路径：
-                String filepath = request.getServletContext().getRealPath("/"+ uploadDir+"/" + dateStr + "." + prefix) ;
-                filepath = filepath.replace("/", "\\");//java中路径转码
-                System.out.println(filepath);
-                File files=new File(filepath);
-                //打印查看上传路径
-                System.out.println(filepath);
-                // 如果没有文件夹，就创建文件夹
-                if(!files.getParentFile().exists()){
-                    files.getParentFile().mkdirs();
-                }
-                file.transferTo(files);
-            }
-        }catch (Exception e){
-        }finally{
-            try {
-                if(out!=null){
-                    out.close();
-                }
-                if(fileInput!=null){
-                    fileInput.close();
-                }
-            } catch (IOException e) {
-            }
-        }
-        Map<String,Object> map2=new HashMap<>();
-        Map<String,Object> map=new HashMap<>();
-        map.put("code",0);
-        map.put("msg","");
-        map.put("data",map2);
-        map2.put("src","../../../"+uploadDir +"/"+ dateStr + "." + prefix);
-
-        return map;
-    }
+//                        //前台信息展示页面
+//    /**
+//    * 跳转页面
+//     * @return
+//     */
+//    @RequestMapping("/toPersonInfo")
+//    public String toPersonInfo(){
+//            return "view/cxr/personInfo";
+//    }
+//
+//    /**
+//     * 修改方法
+//     * @param user
+//     * @return
+//     */
+//    @RequestMapping("/updateUser")
+//    public ModelAndView updateUser(User user){
+//
+//        ModelAndView mv = new ModelAndView();
+//        //调用修改方法
+//         userService.updateUser(user);
+//        //根据ID查询出user对象，
+//        User user1=userService.selectUserById(user.getUserId());
+//        mv.addObject("user", user1);
+//            // 设置返回页面
+//        mv.setViewName("view/cxr/personInfo");
+//        return mv;
+//    }
+//
+//    /**
+//     * 根据userID查询对象，修改信息
+//     * @param userId
+//     * @return
+//     */
+//    @RequestMapping(value = "/findUser")
+//    public ModelAndView findUser( HttpServletRequest request,String userId){
+//        ModelAndView mv = new ModelAndView();
+//        //从session中获取ID，进行修改，userId="1";为模拟数据
+//       // User user1 = (User) request.getSession().getAttribute("userId");
+//            userId="1";
+//        //调用查询单个对象的方法
+//        User user=userService.selectUserById(userId);
+//        mv.addObject("user",user);
+//        mv.setViewName("view/cxr/personInfo");
+//       // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");
+//        return mv;
+//
+//    }
+//
+//    /**
+//     * 根据ID查询单个对象方法
+//     * @param userId
+//     * @return
+//     */
+//    @RequestMapping("/selectUserById/{userId}")
+//    public User selectUserById(@PathVariable("{userId}") String userId){
+//                return userService.selectUserById(userId);
+//    }
+//
+//    /**
+//     * 文件上传
+//     * @param file
+//     * @param request
+//     * @param response
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping(value = "/upload/headImg", method = {RequestMethod.POST})
+//    @ResponseBody
+//    public Object headImg(@RequestParam(value="file",required=false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        String prefix="";
+//        String dateStr="";
+//        String uploadDir="uploadDir";//这个文件夹是创建在uploadDir,
+//        //保存上传
+//        OutputStream out = null;
+//        InputStream fileInput=null;
+//        try{
+//            if(file!=null){
+//                String originalName = file.getOriginalFilename();
+//                prefix=originalName.substring(originalName.lastIndexOf(".")+1);
+//
+//                SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+//                // 将文件名以日期戳的形式保存
+//                dateStr = format.format(new Date());
+//                //文件路径：
+//                String filepath = request.getServletContext().getRealPath("/"+ uploadDir+"/" + dateStr + "." + prefix) ;
+//                filepath = filepath.replace("/", "\\");//java中路径转码
+//                System.out.println(filepath);
+//                File files=new File(filepath);
+//                //打印查看上传路径
+//                System.out.println(filepath);
+//                // 如果没有文件夹，就创建文件夹
+//                if(!files.getParentFile().exists()){
+//                    files.getParentFile().mkdirs();
+//                }
+//                file.transferTo(files);
+//            }
+//        }catch (Exception e){
+//        }finally{
+//            try {
+//                if(out!=null){
+//                    out.close();
+//                }
+//                if(fileInput!=null){
+//                    fileInput.close();
+//                }
+//            } catch (IOException e) {
+//            }
+//        }
+//        Map<String,Object> map2=new HashMap<>();
+//        Map<String,Object> map=new HashMap<>();
+//        map.put("code",0);
+//        map.put("msg","");
+//        map.put("data",map2);
+//        map2.put("src","../../../"+uploadDir +"/"+ dateStr + "." + prefix);
+//
+//        return map;
+//    }
 
                         //后台信息管理
         /**
