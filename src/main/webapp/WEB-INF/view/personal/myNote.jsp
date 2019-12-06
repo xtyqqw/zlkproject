@@ -149,5 +149,19 @@
             }
         })
      })
+    // $(function(){
+    //     showReocrd(1,5);
+    //     function showReocrd(startPage,limit){
+    //         $.get("/myNote/toPage",
+    //             {
+    //                 startPage:startPage,
+    //                 limit:limit
+    //             },
+    //             function (data) {
+    //                 console.log(data);
+    //             }
+    //         );
+    //     }
+    // })
 </script>
 </html>

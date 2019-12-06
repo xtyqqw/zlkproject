@@ -76,7 +76,7 @@
     .main .tag {
         width: 50px;
         height: 18px;
-        background: gainsboro;
+        background: #914ff1;
         display: inline-block;
         border-radius: 5px;
         text-align: center;
@@ -147,7 +147,7 @@
         <c:forEach items="${list}" var="list">
         <li>
             <div class="img">
-                <img src="${list.figuresReal}" style="height: 70px;width: 70px;border-radius: 3px;">
+                <img src="${list.figures}" style="height: 70px;width: 70px;border-radius: 3px;">
             </div>
             <div class="main">
                 <p>
@@ -158,7 +158,7 @@
                     </li>
                     </c:forEach>
                 </ul>
-                <span class="time">2019-12-02 10:55</span>
+                <span class="time">${list.createDate}</span>
                 </p>
                 <p class="title">${list.title}</p>
                 <p class="type">${list.typeName}</p>

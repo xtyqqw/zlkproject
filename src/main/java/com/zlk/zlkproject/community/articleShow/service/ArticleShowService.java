@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.articleShow.service;
 
-import com.zlk.zlkproject.community.entity.Article;
+import com.zlk.zlkproject.entity.Article;
 
 /**
  * @program: ArticleShowService
@@ -10,7 +10,7 @@ import com.zlk.zlkproject.community.entity.Article;
  */
 public interface ArticleShowService {
 
-    Article getArticle(String id);
+    Article getArticle(String articleId);
 
-    Article getAndConvert(String id);
+    Article getAndConvert(String articleId);
 }

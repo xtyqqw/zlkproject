@@ -8,6 +8,10 @@
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body{
             overflow-x:hidden;
         }
@@ -22,7 +26,7 @@
             border: none 0;
         }
         .all-body-center .body-top{
-            width: 100%;
+            width: 1308px;
             height: 115px;
         }
         .all-body-center .body-left{
@@ -51,16 +55,17 @@
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
-            background-color: #1296db;
+            background-color: #914ff1;
             text-align:center;
             height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
+            border-radius: 5px;
         }
         /*横线样式*/
         .crossing{
-            width: 68%;
+            width: 69%;
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
@@ -147,7 +152,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
             -webkit-border-bottom-right-radius: 5px;
-            margin-top: -2vw;
+            margin-top: -2.2vw;
             margin-left: 1.1vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -160,7 +165,7 @@
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -177,7 +182,7 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 63vw;
+            margin-left: 4vw;
             position: absolute;
             margin-top: 5vw;
         }
@@ -222,135 +227,135 @@
     </style>
 </head>
 <body>
-    <div class="all-body">
-        <%@include file="../../jsp/header.jsp"%>
-        <%@include file="../../jsp/sidebar.jsp"%>
-        <div class="all-body-center">
-            <div class="body-top">
-                <div class="add">
-                    <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
-                </div>
-                <div class="crossing"></div>
-                <div class="tab">
-                    <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
-                    <span>|</span>
-                    <a href="<%= request.getContextPath()%>/article/findByBrowseCount" target="pageTarget">热门</a>
-                    <span>|</span>
-                    <a href="<%= request.getContextPath()%>/article/findByUserId" target="pageTarget">我的文章</a>
-                </div>
+<div class="all-body">
+    <%@include file="../../jsp/header.jsp"%>
+    <%@include file="../../jsp/sidebar.jsp"%>
+    <div class="all-body-center">
+        <div class="body-top">
+            <div class="add">
+                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
             </div>
-            <div class="body-left">
-                <div class="body-context">
-                    <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
-                </div>
+            <div class="crossing"></div>
+            <div class="tab">
+                <a href="<%=request.getContextPath()%>/articles/toArticleAll" target="pageTarget">最新</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>/articles/toArticleHot" target="pageTarget">热门</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
             </div>
-                <div class="wz_remenwenzhang">
-                    <div class="wz_remen">
-                        <div class="wz_remen_wz">
-                            <span>热门文章</span>
-                        </div>
-                        <div class="anniu">
-                            <div class="yueanniu">月</div><div class="zonganniu">总</div>
-                        </div>
-                    </div>
-                    <div class="wz_remen_zt1">
-                        <ul>
-                            <c:forEach items="${alist}" var="article">
-                                <li>
-                                    <a href="/test/community">
-                                            <%--<div class="wz_remen_img">
-                                                <img src="<c:out value="${article.userImg}"></c:out>" >
-                                            </div>--%>
-                                        <div class="wz_remen_bt">
-                                            <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                            <div class="wz_bt_bq">
-                                                <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                                <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-
-                    <div class="wz_remen_zt2">
-                        <ul>
-                            <c:forEach items="${blist}" var="article">
-                                <li>
-                                    <a href="/test/community">
-                                            <%--<div class="wz_remen_img">
-                                                <img src="<c:out value="${article.userImg}"></c:out>" >
-                                            </div>--%>
-                                        <div class="wz_remen_bt">
-                                            <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                            <div class="wz_bt_bq">
-                                                <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                                <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </div>
         </div>
-        <%@include file="../../jsp/footer.jsp"%>
+        <div class="body-left">
+            <div class="body-context">
+                <iframe name="pageTarget" frameborder="1" src="/articles/toArticleAll"> </iframe>
+            </div>
+        </div>
+        <div class="wz_remenwenzhang">
+            <div class="wz_remen">
+                <div class="wz_remen_wz">
+                    <span>热门文章</span>
+                </div>
+                <div class="anniu">
+                    <div class="yueanniu">月</div><div class="zonganniu">总</div>
+                </div>
+            </div>
+            <div class="wz_remen_zt1">
+                <ul>
+                    <c:forEach items="${alist}" var="article">
+                        <li>
+                            <a href="/community/article-show/{articleId}">
+                                    <%--<div class="wz_remen_img">
+                                        <img src="<c:out value="${article.userImg}"></c:out>" >
+                                    </div>--%>
+                                <div class="wz_remen_bt">
+                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                    <div class="wz_bt_bq">
+                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
+            <div class="wz_remen_zt2">
+                <ul>
+                    <c:forEach items="${blist}" var="article">
+                        <li>
+                            <a href="/community/article-show/{articleId}">
+                                    <%--<div class="wz_remen_img">
+                                        <img src="<c:out value="${article.userImg}"></c:out>" >
+                                    </div>--%>
+                                <div class="wz_remen_bt">
+                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                    <div class="wz_bt_bq">
+                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
     </div>
+    <%@include file="../../jsp/footer.jsp"%>
+</div>
 
-    <script type="text/javascript">
-        $(document).on('mouseenter','.bt',function(){
-            $(this).css('color','blue');
-        })
-        $(document).on('mouseleave','.bt',function(){
-            $(this).css('color','black');
-        })
-        $(document).on('mouseenter','.wz_bt_bq>span',function(){
-            $(this).css('color','blue');
-        })
-        $(document).on('mouseleave','.wz_bt_bq>span',function(){
-            $(this).css('color','black');
-        })
+<script type="text/javascript">
+    $(document).on('mouseenter','.bt',function(){
+        $(this).css('color','blue');
+    })
+    $(document).on('mouseleave','.bt',function(){
+        $(this).css('color','black');
+    })
+    $(document).on('mouseenter','.wz_bt_bq>span',function(){
+        $(this).css('color','blue');
+    })
+    $(document).on('mouseleave','.wz_bt_bq>span',function(){
+        $(this).css('color','black');
+    })
 
-        $(document).on('mouseenter','.yueanniu',function(){
-            $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-            $(this).css('border','1px solid blue');
-        })
-        $(document).on('mouseleave','.yueanniu',function(){
-            $(this).css('box-shadow','none');
-            $(this).css('border','1px solid white');
-        })
+    $(document).on('mouseenter','.yueanniu',function(){
+        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
+        $(this).css('border','1px solid blue');
+    })
+    $(document).on('mouseleave','.yueanniu',function(){
+        $(this).css('box-shadow','none');
+        $(this).css('border','1px solid white');
+    })
 
-        $(document).on('mouseenter','.zonganniu',function(){
-            $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-            $(this).css('border','1px solid blue');
-        })
-        $(document).on('mouseleave','.zonganniu',function(){
-            $(this).css('box-shadow','none');
-            $(this).css('border','1px solid white');
-        })
+    $(document).on('mouseenter','.zonganniu',function(){
+        $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
+        $(this).css('border','1px solid blue');
+    })
+    $(document).on('mouseleave','.zonganniu',function(){
+        $(this).css('box-shadow','none');
+        $(this).css('border','1px solid white');
+    })
 
-        $(document).on('click','.yueanniu',function(){
-            $('.yueanniu').css('background-color','blue');
-            $('.yueanniu').css('color','white');
-            $('.zonganniu').css('background-color','white');
-            $('.zonganniu').css('color','black');
-        })
-        $(document).on('click','.zonganniu',function(){
-            $('.yueanniu').css('background-color','white');
-            $('.yueanniu').css('color','black');
-            $('.zonganniu').css('background-color','blue');
-            $('.zonganniu').css('color','white');
-        })
-        $(document).on('click','.yueanniu',function(){
-            $('.wz_remen_zt1').css('display','block');
-            $('.wz_remen_zt2').css('display','none');
-        })
-        $(document).on('click','.zonganniu',function(){
-            $('.wz_remen_zt2').css('display','block');
-            $('.wz_remen_zt1').css('display','none');
-        })
-    </script>
+    $(document).on('click','.yueanniu',function(){
+        $('.yueanniu').css('background-color','blue');
+        $('.yueanniu').css('color','white');
+        $('.zonganniu').css('background-color','white');
+        $('.zonganniu').css('color','black');
+    })
+    $(document).on('click','.zonganniu',function(){
+        $('.yueanniu').css('background-color','white');
+        $('.yueanniu').css('color','black');
+        $('.zonganniu').css('background-color','blue');
+        $('.zonganniu').css('color','white');
+    })
+    $(document).on('click','.yueanniu',function(){
+        $('.wz_remen_zt1').css('display','block');
+        $('.wz_remen_zt2').css('display','none');
+    })
+    $(document).on('click','.zonganniu',function(){
+        $('.wz_remen_zt2').css('display','block');
+        $('.wz_remen_zt1').css('display','none');
+    })
+</script>
 </body>
 </html>

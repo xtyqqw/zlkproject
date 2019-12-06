@@ -1,49 +1,40 @@
 <%--
   Created by IntelliJ IDEA.
   User: 上官螃蟹
-  Date: 2019/11/29
-  Time: 8:59
+  Date: 2019/12/2
+  Time: 14:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
 <html>
 <head>
-    <title>忘记密码</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="/css/sign.css" type="text/css">
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <title>login</title>
     <style type="text/css">
         *{
             margin: 0;
             padding: 0;
         }
+
         #wrap {
-            height: 719px;
-            width: 100;
+            height: 419px;
+            width: 100px;
             background-image: url(4.jpg);
             background-repeat: no-repeat;
             background-position: center center;
             position: relative;
         }
-        #head {
-            height: 120px;
-            width: 100;
-            background-color: #66CCCC;
-            text-align: center;
-            position: relative;
-        }
-        #foot {
-            width: 100;
-            height: 126px;
-            background-color: #CC9933;
-            position: relative;
-        }
+
         #wrap .logGet {
+            margin-left: 750px;
             height: 408px;
             width: 368px;
             position: absolute;
             background-color: #FFFFFF;
             top: 20%;
-            right: 15%;
         }
         .logC a button {
             width: 100%;
@@ -54,6 +45,7 @@
             font-size: 18px;
         }
         .logGet .logD.logDtip .p1 {
+            text-align:center;
             display: inline-block;
             font-size: 28px;
             margin-top: 30px;
@@ -106,67 +98,134 @@
             width: 30%;
         }
 
-        #title{
-            background-color: #2D93CA;
-            color: white;width: 400px;
-            height:35px;
-            margin-top: 20px;
+        .copyright {
+            font-family: "宋体";
+            color: #FFFFFF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  /* 使用css3的transform来实现 */
+            height: 60px;
+            width: 40%;
+            text-align:center;
+        }
+
+
+    </style>
+
+    <style type="text/css">
+        body{margin: 0;}
+        #footer{
+            background-color: #333C4D;
+            height: 130px;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 0;
+            position: absolute;
+        }
+        #footer ul{
+            padding-top: 30px;
+            width: 800px;
+            height: 30px;
+            margin: 0 auto;
+            border-bottom: 1px solid #999999;
+        }
+        #footer ul li{
+            float: left;
+            list-style: none;
+            padding-left: 30px;
+        }
+        #footer ul li a{
+            color: #989898;
+            text-decoration: none;
+            float: left;
+            padding-left: 20px;
+        }
+        #footer ul li a:hover{
+            color: #F2F2F2;
+        }
+        #footer hr{
+            width: 800px;
+            color: #989898;
+        }
+        #footer p{
+            color: #989898;
+            text-align: center;
             padding-top: 10px;
-        }
-        #form-pwd{
-            margin-left: 35%;
-            margin-top: 20px;
-            box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-            width: 30%;
-        }
-        .layui-form-item{
-            margin-left: 58px;
-        }
-        #sbtn{
-            border: none;
-            background-color: #2D93CA;
-            color: white;
-            width: 100px;
-            height:35px;
         }
     </style>
 </head>
-<body>
-<h2 class="title" id="title">重置密码</h2>
-<form id="form-pwd" action="changepwd" method="post">
-    <div class="layui-form-item">
-        <label class="layui-form-label">手机号</label>
-        <div class="layui-input-inline">
-            <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+
+<body >
+<jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
+
+<div class="wrap" id="wrap">
+    <div class="logGet">
+        <!-- 头部提示信息 -->
+        <div class="logD logDtip">
+            <p class="p1">重置密码</p>
         </div>
+        <span>${spanmsg}</span>
+        <form action="/user/changepwd" onsubmit="return check()" method="post">
+            <div class="lgD">
+                <img src="img/logName.png" width="20" height="20" alt=""/>
+                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+            </div>
+            <div class="lgD">
+                <img src="img/logName.png" width="20" height="20" alt=""/>
+                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input"><span class="error" id="checktext2"></span>
+            </div>
+            <!-- 输入框 -->
+            <div class="lgD">
+                <img src="img/logName.png" width="20" height="20" alt=""/>
+                <input id="pwd2" name="userpwd" type="password" value="" onchange="checkpwd2()" placeholder="请再次输入密码" lay-verify="required"  autocomplete="off" class="layui-input"><span class="error" id="checktext3"></span>
+            </div>
+            <div class="lgD">
+                <img src="img/logPwd.png" width="20" height="20" alt=""/>
+                <input id="code1" name="usercode" type="text" value="" onchange="checkcode()" placeholder="请输入验证码" lay-verify="required|phone" autocomplete="off" class="layui-input"><span class="error" id="codeError"></span><button type="button" id="getcod" onclick="openCheck(this);" style="border: none;background-color: #ee7700;color: #fff">获取验证码</button>
+            </div>
+            <div class="logC">
+                <a href="" target="_self"><button>修改密码</button></a>
+            </div>
+        </form>
     </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">新密码</label>
-        <div class="layui-input-inline">
-            <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input"><span class="error" id="checktext2"></span>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">确认密码</label>
-        <div class="layui-input-inline">
-            <input id="pwd2" name="userpwd" type="password" value="" onchange="checkpwd2()" placeholder="请再次输入密码" lay-verify="required"  autocomplete="off" class="layui-input"><span class="error" id="checktext3"></span>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">验证码</label>
-        <div class="layui-input-inline">
-            <input id="code1" name="usercode" type="text" value="" onchange="checkcode()" placeholder="请输入验证码" lay-verify="required|phone" autocomplete="off" class="layui-input"><span class="error" id="codeError"></span><button type="button" id="getcod" onclick="openCheck(this);" style="border: none">获取验证码</button>
-        </div>
-    </div><br>
-    <button id="sbtn" type="submit" style="border: none;width: 100px;height: 30px;">提交</button>
-</form>
+</div>
+
 <div id="box" onselectstart="return false;" style="visibility: hidden" >
     <div class="bgColor"></div>
-    <div class="txt" >拖动滑块进行验证</div>
+    <div class="txt" >滑动解锁</div>
     <!--给i标签添加上相应字体图标的类名即可-->
     <div class="slider"><i class="iconfont icon-double-right"></i></div>
 </div>
 
+<div id="footer" style="position:fixed;bottom: 0">
+    <ul>
+        <li>
+            <a href="javascript:;">关于我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">加入我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">联系我们</a>
+        </li>
+        <li>
+            <a href="javascript:;">讲师合作</a>
+        </li>
+        <li>
+            <a href="javascript:;">帮助中心</a>
+        </li>
+        <li>
+            <a href="javascript:;">友情链接</a>
+        </li>
+        <li>
+            <a href="javascript:;">合作企业</a>
+        </li>
+    </ul>
+    <p>
+        copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
+    </p>
+</div>
 </body>
 <script src="/js/jquery-1.12.4.js"></script>
 <script src="/layui/layui.js"></script>

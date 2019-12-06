@@ -111,7 +111,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/tag/tagManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 480
+            , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'tagId', title: '类别编号', width: 290, sort: true}

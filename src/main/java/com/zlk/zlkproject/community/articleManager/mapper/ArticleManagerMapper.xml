@@ -11,28 +11,28 @@
         <result property="createTime" column="create_time" javaType="java.util.Date"></result>
         <result property="updateTime" column="update_time" javaType="java.util.Date"></result>
         <result property="figures" column="figures" javaType="java.lang.String"></result>
-        <result property="figuresReal" column="figures_real" javaType="java.lang.String"></result>
+        <!--<result property="figuresReal" column="figures_real" javaType="java.lang.String"></result>-->
         <result property="articleDigest" column="article_digest" javaType="java.lang.String"></result>
         <result property="articleContent" column="article_content" javaType="java.lang.String"></result>
         <result property="zanCount" column="zan_count" javaType="java.lang.Integer"></result>
         <result property="caiCount" column="cai_count" javaType="java.lang.Integer"></result>
         <result property="inform" column="inform" javaType="java.lang.Integer"></result>
-        <result property="userId" column="user_id" javaType="java.lang.String"></result>
-        <result property="createArticleType" column="create_article_type" javaType="java.lang.Integer"></result>
+        <!--<result property="userId" column="user_id" javaType="java.lang.String"></result>-->
+        <result property="createArticleType" column="create_article_type" javaType="java.lang.String"></result>
         <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"></result>
         <result property="approval" column="approval" javaType="java.lang.Integer"></result>
         <result property="typeName" column="type_name" javaType="java.lang.String"></result>
-        <result property="tagName" column="tag_name" javaType="java.lang.String"></result>
+        <!--<result property="tagName" column="tag_name" javaType="java.lang.String"></result>-->
     </resultMap>
 
     <insert id="addArticle" parameterType="com.zlk.zlkproject.entity.Article">
         insert into article
         <trim prefix="(" suffix=") " suffixOverrides=",">
-            article_id,title,browse_count,comment_count,create_time,figures,figures_real,article_digest,article_content,zan_count,cai_count,inform,user_id,create_article_type,article_set_top,approval,type_name,tag_name
+            article_id,title,browse_count,comment_count,create_time,figures,article_digest,article_content,zan_count,cai_count,inform,create_article_type,article_set_top,approval,type_name,
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            #{articleId},#{title},#{browseCount},#{commentCount},#{createTime},#{figures},#{figuresReal},#{articleDigest},#{articleContent},#{zanCount},#{caiCount},#{inform},#{userId},#{createArticleType},#{articleSetTop},#{approval},#{typeName},#{tagName},
+            #{articleId},#{title},#{browseCount},#{commentCount},#{createTime},#{figures},#{articleDigest},#{articleContent},#{zanCount},#{caiCount},#{inform},#{createArticleType},#{articleSetTop},#{approval},#{typeName},
         </trim>
     </insert>
     <delete id="deleteArticleByArticleId" parameterType="java.lang.String">
@@ -59,9 +59,9 @@
             <if test="figures!=null and figures!='' ">
                 figures=#{figures},
             </if>
-            <if test="figuresReal!=null and figuresReal!='' ">
+            <!--<if test="figuresReal!=null and figuresReal!='' ">
                 figures_real=#{figuresReal},
-            </if>
+            </if>-->
             <if test="articleDigest!=null and articleDigest!='' ">
                 article_digest=#{articleDigest},
             </if>
@@ -77,9 +77,9 @@
             <if test="inform!=null and inform!='' ">
                 inform=#{inform},
             </if>
-            <if test="userId!=null and userId!='' ">
+            <!--<if test="userId!=null and userId!='' ">
                 user_id=#{userId},
-            </if>
+            </if>-->
             <if test="createArticleType!=null and createArticleType!='' ">
                 create_article_type=#{createArticleType},
             </if>
@@ -92,9 +92,9 @@
             <if test="typeName!=null and typeName!='' ">
                 type_name=#{typeName},
             </if>
-            <if test="tagName!=null and tagName!='' ">
+            <!--<if test="tagName!=null and tagName!='' ">
                 tag_name=#{tagName},
-            </if>
+            </if>-->
          </set>
         where article_id=#{articleId}
     </update>
