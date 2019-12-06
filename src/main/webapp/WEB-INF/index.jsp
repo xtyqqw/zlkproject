@@ -488,7 +488,7 @@
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <c:forEach items="${courses}" var="courses">
+                                    <c:forEach items="${courses}" var="courses"  begin="0" end="3">
                                         <li>
                                             <div>
                                                 <a href="javascript:;">
@@ -526,7 +526,7 @@
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <c:forEach items="${courses2}" var="courses">
+                                    <c:forEach items="${courses2}" var="courses"  begin="0" end="3">
                                         <li>
                                             <div>
                                                 <a href="javascript:;">
@@ -564,7 +564,7 @@
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <c:forEach items="${courses3}" var="courses">
+                                    <c:forEach items="${courses3}" var="courses" begin="0" end="3">
                                         <li>
                                             <div>
                                                 <a href="javascript:;">
@@ -602,7 +602,7 @@
                             </div>
                             <div class="li_none_box_class">
                                 <ul>
-                                    <c:forEach items="${courses4}" var="courses">
+                                    <c:forEach items="${courses4}" var="courses" begin="0" end="3">
                                         <li>
                                             <div>
                                                 <a href="javascript:;">
@@ -647,7 +647,7 @@
             <i class="layui-icon layui-icon-up"></i>
         </div>
         <div class="clear"></div>
-        <c:if test="true">
+        <c:if test="${userId!= null and userId!=''}">
             <!--我的任务-->
             <div class="mission">
                 <div class="title">
@@ -849,10 +849,12 @@
             success: function (data) {
                 if (data.result == "true") {
                     layer.msg("今天你还没有签到");
-                } else {
+                } else if(data.result == "false"){
                     $(".s_btn").attr("disabled","disabled");
                     $(".s_btn").css("background", "grey");
                     $(".s_btn").val("已签到");
+                }else{
+
                 }
             }, error: function () {
                 layer.msg("连接超时，请检查网络");
@@ -946,7 +948,7 @@
                                     '</li>' +
                                     '</ul>')
                             })
-                            next(lis.join(''), page < 3);
+                            next(lis.join(''), page < 2);
                         }
                     });
                 }, 500);
@@ -992,7 +994,7 @@
                                     '</li>' +
                                     '</ul>')
                             })
-                            next(lis.join(''), page < 3);
+                            next(lis.join(''), page < 2);
                         }
                     });
                 }, 500);
@@ -1038,7 +1040,7 @@
                                     '</li>' +
                                     '</ul>')
                             })
-                            next(lis.join(''), page < 3);
+                            next(lis.join(''), page < 2);
                         }
                     });
                 }, 500);
@@ -1084,7 +1086,7 @@
                                     '</li>' +
                                     '</ul>')
                             })
-                            next(lis.join(''), page < 3);
+                            next(lis.join(''), page < 2);
                         }
                     });
                 }, 500);

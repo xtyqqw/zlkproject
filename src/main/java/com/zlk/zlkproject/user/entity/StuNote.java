@@ -5,7 +5,9 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * @ClassName： StuNote
@@ -32,13 +34,13 @@ public class StuNote {
     /**举报*/
     private String report;
     /**笔记时间*/
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date snDate;
-
+    private String stuTime;
     public StuNote() {
     }
 
-    public StuNote(Integer snId, Integer snSectionId, String snUserId, String content, Integer up, Integer down, String report, Date snDate) {
+    public StuNote(Integer snId, Integer snSectionId, String snUserId, String content, Integer up, Integer down, String report, Date snDate, String stuTime) {
         this.snId = snId;
         this.snSectionId = snSectionId;
         this.snUserId = snUserId;
@@ -47,5 +49,6 @@ public class StuNote {
         this.down = down;
         this.report = report;
         this.snDate = snDate;
+        this.stuTime = stuTime;
     }
 }

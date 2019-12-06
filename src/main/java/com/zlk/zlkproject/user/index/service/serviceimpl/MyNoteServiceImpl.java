@@ -4,6 +4,7 @@ import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.StuNote;
 import com.zlk.zlkproject.user.index.mapper.MyNoteMapper;
 import com.zlk.zlkproject.user.index.service.MyNoteService;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class MyNoteServiceImpl implements MyNoteService {
-    @Autowired
+    @Autowired(required = false)
     private MyNoteMapper myNoteMapper;
     /**
      * 根据ID查询个人笔记
@@ -26,7 +27,15 @@ public class MyNoteServiceImpl implements MyNoteService {
      */
     @Override
     public List<StuNote> findNotesBySnId(String snUserId) {
-        return myNoteMapper.findNotesBySnId(snUserId);
+        List<StuNote> list=myNoteMapper.findNotesBySnId(snUserId);
+        int s=list.size();
+        for(int i=0;i<s;i++){
+            StuNote stuNote=list.get(i);
+            stuNote.setStuTime(LeaveTime.formatDate(stuNote.getSnDate()));
+            list.set(i,stuNote);
+        }
+        return list;
+        /*return myNoteMapper.findNotesBySnId(snUserId);*/
     }
     /**
      * 根据ID查询个人笔记个数
@@ -57,7 +66,7 @@ public class MyNoteServiceImpl implements MyNoteService {
         return myNoteMapper.deleteNoteBySnId(snId);
     }
     /**
-     *流加载查询个人笔记
+     *分页查询个人笔记
      * @param pagination
      * @return List<StuNote>
      */
@@ -67,6 +76,13 @@ public class MyNoteServiceImpl implements MyNoteService {
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return myNoteMapper.findNotesList(pagination);
+        List<StuNote> list =  myNoteMapper.findNotesList(pagination);
+        int s=list.size();
+        for(int i=0;i<s;i++){
+            StuNote stuNote=list.get(i);
+            stuNote.setStuTime(LeaveTime.formatDate(stuNote.getSnDate()));
+            list.set(i,stuNote);
+        }
+        return list;
     }
 }

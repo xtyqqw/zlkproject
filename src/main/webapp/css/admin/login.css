@@ -2,10 +2,11 @@ html, body { width: 100%; height: 100%; overflow: hidden; margin: 0; font-family
 html { _height: auto; _padding: 50px 0 0px; }
 
 .login { width:640px; height:400px; position:absolute; left:50%; top:50%; margin-left:-320px; margin-top:-200px;}
-.logo { background-image:url(../../img/admin/admin_logo.png); background-repeat:no-repeat; background-position: 30px center; height:150px;}
-.login_form { height:80px; margin-left:auto; margin-right:auto; width:600px;}
+.logo { background-image:url(../../img/admin/admin_logo.png); background-repeat:no-repeat; background-position: 60px center; height:180px;}
+.login_form { height:80px; margin-left:auto; margin-right:auto; width:630px;}
 .login_form .user{ background-image:url(../../img/admin/login_name_bg.jpg); width:540px; height:80px; float:left;}
-.login_form .button { background:url(../../img/admin/login_button.jpg); width:50px; background-repeat:no-repeat; background-position:left center; height:54px; float:left; display:block; text-indent: -9999px; border:none; margin-top:10px; position:relative}
-.login_form .text_value { float:left; margin-left:17px; padding-left:10px; padding-right:10px; margin-top:15px; width:245px; height:50px; line-height:50px; font-size:16px; color:#666; font-weight:bold; border:none; background-color:#f5f6f7}
+.buttonOuter{float:left;width:57px;margin-left: 8px;margin-top:9px;height: 57px;overflow: hidden;border-bottom-left-radius:8px;border-top-left-radius: 8px;border-bottom-right-radius: 5px;border-top-right-radius: 5px; }
+.login_form .button { background:url(../../img/admin/login_button2.jpg); width:100%;height: 100%;margin-left: 2px; background-repeat:no-repeat; background-position: center; display:block; text-indent: -9999px; border:none; margin-top:0; position:relative}
+.login_form .text_value { float:left; margin-left:17px; padding-left:10px;overflow: auto; padding-right:10px; margin-top:15px; width:245px; height:50px; line-height:50px; font-size:16px; color:#666; font-weight:bold; border:none; background-color:#f5f6f7}
 .foot { padding-top:30px; text-align:center; color:#FFF; padding-right:80px;}
 #tip { padding-top:10px; color:#FFF;   background-image:none; text-align:center; padding-right:80px; font-size:14px;}

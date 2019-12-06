@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>学习网站后台管理系统</title>
     <link href="<%=request.getContextPath()%>/css/admin/base.css" rel="stylesheet" type="text/css">
     <link href="<%=request.getContextPath()%>/css/admin/login.css" rel="stylesheet" type="text/css">
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -31,7 +31,9 @@
                 <input class="text_value" value="" placeholder="请输入用户名" required name="adminName" type="text" id="username">
                 <input class="text_value" value="" placeholder="请输入密码" required name="adminPassword" type="password" id="password">
             </div>
-            <button class="button" id="submit" type="submit">登录</button>
+            <div class="buttonOuter">
+                <button class="button" id="submit" type="submit">登录</button>
+            </div>
         </div>
 
         <div id="tip"></div>
@@ -40,6 +42,8 @@
 <input type="hidden" value="${error}" id="msg">
 <script>
     layui.use(['layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
         <c:if test="${flag}">
         $(function () {
             layer.alert($("#msg").val());

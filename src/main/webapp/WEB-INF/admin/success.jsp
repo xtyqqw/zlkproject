@@ -24,7 +24,8 @@
 
     <style type="text/css">
         .outer{
-            background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);
+            background-color: #393D49;
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
 
         .top {
@@ -40,6 +41,7 @@
             margin-top: 25px;
             right: 40px;
             float: right;
+            color: white;
         }
 
         .main {
@@ -56,7 +58,7 @@
         }
 
         #logout{
-            color: black;
+            color: white;
             position: relative;
             margin-top: 25px;
             right: -178px;
@@ -64,14 +66,15 @@
         }
 
         #logout:hover {
-            color: white;
+            color: black;
         }
 
         .left {
-
+            overflow: auto;
             width: 100%;
             height: 100%;
-            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+            background-color: #23262E;
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);*/
         }
 
         /* 设置滚动条的样式 */
@@ -102,25 +105,25 @@
 
         #tree {
             padding-left: 40px;
-            padding-top: 35px;
+            padding-top: 28px;
             font-size: 25px;
         }
 
         .bottom {
             width: 100%;
-            height: 500px;
+            height: 523px;
         }
 
         .bottom div {
             float: left;
-            height: 500px;
+            height: 100%;
         }
 
         .leftOuter{
             overflow: auto;
             width: 14.9%;
-            height: 500px;
-            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+            height: 100%;
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
     </style>
 </head>
@@ -141,50 +144,6 @@
         <iframe src="<%=request.getContextPath()%>/loginController/toMain" id="maintarget" name="maintarget" frameborder="0"></iframe>
     </div>
 </div>
-
-<%--<script type="text/javascript">
-    $(function () {
-        $.ajax({
-            type: "post",
-            url: "/function/findFunction",
-            dataType: "json",
-            success: function (data) {
-                console.info(data);
-                layui.tree.render({
-                    elem: '#tree',// 传入元素选择器
-                    nodes: data,
-		     	    spread:true,
-                    click: function (node) {// 点击tree菜单项的时候
-                        var element = layui.element;
-                        var exist = $("li[lay-id='" + node.id + "']").length;//判断是不是用重复的选项卡
-                        if (exist > 0) {
-                            element.tabChange('tabs', node.id);// 切换到已有的选项卡
-                        } else {
-                            if (node.attributes.menuURL != null && node.attributes.menuURL != "") {// 判断是否需要新增选项卡
-                                element.tabAdd(
-                                    'tabs',
-                                    {
-                                        title: node.name,
-                                        content: '<iframe   scrolling="yes" frameborder="0" src=" '
-                                            + node.attributes.menuURL
-                                            + ' " width="100%" height="100%"></iframe>'// 支持传入html
-                                        ,
-                                        // width="99%" height="99%"
-                                        id: node.id
-                                    });
-                                element.tabChange('tabs', node.id);
-                            }
-                        }
-
-                    }
-
-                });
-
-            }
-
-        });
-    })
-</script>--%>
 
 <script type="text/javascript">
     var setting = {

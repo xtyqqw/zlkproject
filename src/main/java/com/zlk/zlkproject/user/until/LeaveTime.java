@@ -1,7 +1,10 @@
 package com.zlk.zlkproject.user.until;
 
+import com.zlk.zlkproject.user.entity.MyQuestions;
+import com.zlk.zlkproject.user.entity.MyResponse;
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @program: LeaveTime
@@ -31,6 +34,40 @@ public class LeaveTime {
         String n = sdf.format(date);
         return n;
     }
+
+    public static List byTime(List list){
+        Collections.sort(list, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                java.util.Date dt1;
+                java.util.Date dt2;
+                try {
+                    if(MyQuestions.class.isInstance(o1)){
+                        dt1 = ((MyQuestions)o1).getCreateTime();
+                    }else {
+                        dt1 = ((MyResponse)o1).getCreateTime();
+                    }
+                    if(MyQuestions.class.isInstance(o2)){
+                        dt2 = ((MyQuestions)o2).getCreateTime();
+                    }else {
+                        dt2 = ((MyResponse)o2).getCreateTime();
+                    }
+
+                    if (dt1.getTime() < dt2.getTime()) {
+                        return 1;
+                    } else if (dt1.getTime() > dt2.getTime()) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        });
+        return list;
+    }
     public static void main(String[] args){
         Date date = new Date();
         long l = date.getTime()/1000;
@@ -42,5 +79,10 @@ public class LeaveTime {
         String n = sdf.format(date);
         System.out.println("123");
         System.out.println(n);
+        List list = new ArrayList();
+        Date d1 = new Date();
+        Date d2 = new Date();
+
+
     }
 }

@@ -26,7 +26,7 @@ public class UserSectionServiceImpl implements UserSectionService {
      * @return 实例对象
      */
     @Override
-    public UserSection queryById(Integer userId) {
+    public UserSection queryById(String userId) {
         return this.userSectionMapper.queryById(userId);
     }
 
@@ -73,7 +73,7 @@ public class UserSectionServiceImpl implements UserSectionService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer userId) {
+    public boolean deleteById(String userId) {
         return this.userSectionMapper.deleteById(userId) > 0;
     }
 }

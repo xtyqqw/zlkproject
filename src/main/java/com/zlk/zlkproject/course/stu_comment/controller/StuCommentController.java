@@ -2,7 +2,7 @@ package com.zlk.zlkproject.course.stu_comment.controller;
 
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
 import com.zlk.zlkproject.entity.StuComment;
-import com.zlk.zlkproject.utils.CommonFileUtil;
+
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +19,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("stuComment")
 public class StuCommentController {
-    @Autowired
-    private CommonFileUtil commonFileUtil;
+
     @Autowired
     private FdfsConfig fdfsConfig;
     @Autowired

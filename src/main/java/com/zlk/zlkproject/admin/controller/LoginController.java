@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.admin.controller;
 
 import com.zlk.zlkproject.admin.service.LogService;
+import com.zlk.zlkproject.admin.service.LoginService;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.MD5Util;
 import com.zlk.zlkproject.entity.Admin;
@@ -28,6 +29,8 @@ import java.util.Date;
 @RequestMapping(value = "/loginController")
 public class LoginController {
 
+    @Autowired
+    private LoginService loginService;
     @Autowired
     private LogUtil logUtil;
 
@@ -67,6 +70,7 @@ public class LoginController {
         try {
             subject.login(token);
             request.getSession().setAttribute("loginName",admin.getAdminName());
+            loginService.updateVisitNumber();
             logUtil.setLog(request,"登陆了管理系统");
             mv.setViewName("admin/success");
             return mv;
@@ -105,8 +109,12 @@ public class LoginController {
      * @return java.lang.String
      **/
     @RequestMapping(value = "/toMain")
-    public String toMain(){
-        return "admin/main";
+    public ModelAndView toMain(){
+        ModelAndView mv=new ModelAndView();
+        Integer visitNumber = loginService.findVisitNumber();
+        mv.addObject("visitNumber",visitNumber);
+        mv.setViewName("admin/main");
+        return mv;
     }
 
 }

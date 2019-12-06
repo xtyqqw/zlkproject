@@ -15,16 +15,18 @@ layui.use('flow', function(){
                 var data = {"page":page,"limit":limit};
                 $.ajax({
                     type :"POST",
-                    url:"/section/findSectionDetails?coureseId=1",
+                    url:"/section/findSectionDetails",
                     dataType:"json",
                     data:data,
                     success:function(result) {
                         console.log(result);
                         number=result.yeishu;
+                        /*循环遍历数据*/
                         layui.each(result.sectionDetailsList, function (index, courses) {
                             lis.push('<li  class="xiangqingneirong_li">'+
                                 '<div class="tishi">'+
                                 '<div class="shuxian"></div>');
+                            /*判断观看状态*/
                             if (courses.state==="已看完") {
                                 lis.push('<div class="yikanguo"><i class="iconfont icon-check-circle "></i></div>');
                                 color="#FFBb00";
@@ -32,7 +34,7 @@ layui.use('flow', function(){
                                 lis.push('<div class="zhengzaikan" ><i class="iconfont icon-play-circle"></i></div>');
                                 color="#FFBb00";
                             }else{
-                                lis.push('<div class="haimeikan"><i class="iconfont icon-md-lock "></i></div>');
+                                lis.push('<div class="haimeikan"><i class="iconfont icon-suoguanbi "></i></div>');
                                 color="rgb(100,100,100)";
                             }
 
@@ -46,6 +48,7 @@ layui.use('flow', function(){
                                 '<div class="kechengxiaojeijeishao">'+courses.sectionIntro+'</div>'+
                                 '<div class="kechengxiaojeipingfen">'+
                                 '<ul class="kechengxiaojeipingfen_ul">');
+                            /*判断评分数*/
                             if (courses.state==="已看完") {
                                 if(courses.xiaojeiPinfen==="3"){
                                     lis.push(
@@ -170,5 +173,27 @@ layui.use('flow', function(){
     });
 });
 $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function(){
-    alert($(this).children().first().val());
+    var sectionId = $(this).children().first().val();
+    $.ajax({
+        type : "POST",
+        url :"/kecheng/seleUserCoursesByUserCourses",
+        data:"",
+        success: function (bool) {
+            if (bool){
+                $.ajax({
+                    type : "POST",
+                    url :"/toVideo",
+                    data:{"sectionId":sectionId},
+                    success: function (data) {
+                        window.location.href = "/toVideo";
+                    }
+                });
+            }else {
+                alert("您还未参加项目")
+            }
+        }
+
+    });
+
 });
+

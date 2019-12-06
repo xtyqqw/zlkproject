@@ -4,18 +4,19 @@ $(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/courseHomePage/selectCoursesByCoursesId?coursesId=1",
+        url :"/courseHomePage/selectCoursesByCoursesId",
         data:"",
         success: function (data) {
             console.log(data);
+            /*判断是否已参加项目*/
             $.ajax({
                 type : "POST",
                 async: false,
                 url :"/kecheng/seleUserCoursesByUserCourses",
                 data:"",
                 success: function (bool) {
-                    var canjia=JSON.stringify(bool);
-                    if (canjia){
+                    /*当有记录时把 “参加项目”变为“已参加”*/
+                    if (bool){
                         $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
                     }
                 }
@@ -26,6 +27,7 @@ $(function () {
                 +"您的浏览器不支持 HTML5 video 标签。"
                 +" </video>");
             $("#rensu").text(data.courses.studentNum+"人");
+            /*判断课程的评分*/
             if(data.courses.studentNum<10){
                 xingsu=0;
             }else if (data.courses.studentNum>=10&&data.courses.studentNum<50){
@@ -70,14 +72,14 @@ layui.use(['rate'], function(){
 layui.use('element', function(){
     var $ = layui.jquery
         ,element = layui.element;
-    element.progress('demo', "80%")
+    element.progress('demo', "80%");
 });
 $(".xinxi").mouseenter(function () {
     $(this).css("background-color","#fff");
     $(this).css("height","7vw");
     $(this).css("width","7vw");
     $(this).css("margin-top","-1vw");
-    $(this).css("box-shadow","0.1px 0.1px 0.1px 0.1px rgb(150,150,150)");
+    $(this).css("box-shadow","0.1px 0.1px 0.1px 0.1px rgb(200,200,200)");
     $("#kechengshipin").css("z-index","-1");
     $(this).css("border-radius","3px");
     $(this).children().children().first().css("margin-top","1vw");
@@ -101,8 +103,8 @@ $("#jiaru").click(function () {
         data: {"coursesId":kechengId},
         success: function (data) {
             console.log(data);
+            alert(data);
+            $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
         }
     });
-    alert("加入成功");
-    $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
 });

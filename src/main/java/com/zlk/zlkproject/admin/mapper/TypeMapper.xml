@@ -6,6 +6,7 @@
     <resultMap id="typeEntityMap" type="com.zlk.zlkproject.entity.Type">
         <id property="typeId" column="type_id" javaType="java.lang.Integer"/>
         <result property="typeName" column="type_name" javaType="java.lang.String"/>
+        <result property="tagNumber" column="tag_number" javaType="java.lang.Integer"/>
     </resultMap>
     <select id="findTypeByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="typeEntityMap">
         select * from type
@@ -43,5 +44,9 @@
     </delete>
     <select id="findAllTypeName" resultMap="typeEntityMap">
         select * from type
+    </select>
+    <select id="findTypeContainsTag" resultMap="typeEntityMap">
+        select type_name,count(type_name) tag_number from tag t1,type t2
+        where t1.tag_type_id =t2.type_id group by type_name
     </select>
 </mapper>

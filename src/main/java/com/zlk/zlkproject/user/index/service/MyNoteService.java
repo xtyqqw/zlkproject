@@ -35,7 +35,7 @@ public interface MyNoteService {
      */
     Integer deleteNoteBySnId(Integer snId);
     /**
-     *流加载查询个人笔记
+     *分页查询个人笔记
      * @param pagination
      * @return List<StuNote>
      */

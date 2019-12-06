@@ -4,13 +4,13 @@ import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Section;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -94,7 +94,8 @@ public class SectionController {
      */
     @RequestMapping(value ="/findSectionDetails")
     @ResponseBody
-    public Map findSectionDetails(Integer coureseId,Integer page,Integer limit){
+    public Map findSectionDetails(HttpServletRequest request, Integer coureseId, Integer page, Integer limit){
+        coureseId = (Integer) request.getSession().getAttribute("coursesId");
         return sectionService.findSectionByCourseIdLimit(coureseId,page,limit);
     }
 }

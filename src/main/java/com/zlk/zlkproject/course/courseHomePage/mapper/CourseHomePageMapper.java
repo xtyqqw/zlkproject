@@ -59,5 +59,36 @@ public interface CourseHomePageMapper {
      * @return 影响行数
      */
     int updateByCoursesId(Courses courses);
+
+    /**
+     * 根据coursesId删除数据
+     *
+     * @param coursesId
+     * @return
+     */
+    int deleteByCoursesId(Integer coursesId);
+
+    /**
+     * 查询全部并分页
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
+    List<Courses> selectCoursesByLimit(Integer page,Integer limit);
+
+    /**
+     * 新增数据
+     *
+     * @param courses 实例对象
+     * @return 影响行数
+     */
+    int insertByCourses(Courses courses);
+
+    /**
+     * 查询课程数量
+     * @return 课程数量
+     */
+    Integer selectCount();
 }
 

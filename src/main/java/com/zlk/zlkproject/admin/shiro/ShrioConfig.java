@@ -45,6 +45,14 @@ public class ShrioConfig {
         filterMap.put("/function/*","authc");
         filterMap.put("/tag/*","authc");
         filterMap.put("/type/*","authc");
+        filterMap.put("/user/*","authc");
+        filterMap.put("/article/*","authc");
+        filterMap.put("/course/*","authc");
+        filterMap.put("/video/*","authc");
+        filterMap.put("/qaa/*","authc");
+        filterMap.put("/note/*","authc");
+        filterMap.put("/chapter/*","authc");
+        filterMap.put("/sections/*","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
