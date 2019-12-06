@@ -2,8 +2,10 @@ package com.zlk.zlkproject.community.articleAdd.controller;
 
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
+import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +38,33 @@ public class ArticleAddController {
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
-    public String articleGuide(){
-        return "view/community/articleGuide";
+    public ModelAndView articleGuide(Article article, HttpServletRequest httpServletRequest) throws Exception{
+        ModelAndView mv=new ModelAndView();
+        //进入发文提示页面前先判断当前用户的登录状态
+        article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
+        if (httpServletRequest.getSession().getAttribute("user") == null){
+            mv.addObject("flag", "true");
+            mv.addObject("msg","想发文，请先进行登录");
+            mv.setViewName("view/");
+        }
+        //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
+        Article approval=articleAddService.getArticleInApproval(article.getApproval());
+        if (approval != null) {
+            if (article.getApproval()==1) {
+                mv.addObject("flag", "true");
+                mv.addObject("msg","可以发文");
+                mv.setViewName("view/community/articleGuide");
+            }else if (article.getApproval()==0){
+                mv.addObject("flag", "true");
+                mv.addObject("msg","你的文章正在审核中，通过以后才能继续发表文章，我们会尽快处理，给您反馈");
+                mv.setViewName("view/");
+            }else {
+                mv.addObject("flag", "true");
+                mv.addObject("msg","你之前的文章审核失败，以后发表文章请注意撰文规则，感谢您的配合");
+                mv.setViewName("view/");
+            }
+        }
+        return mv;
     }
 
     //给暂无更多文章提示页面提供接口
@@ -57,8 +84,8 @@ public class ArticleAddController {
     }
 
     @PostMapping(value = "/articles")
-    public String post(Article article, RedirectAttributes attributes, HttpSession session) {
-        //article.setUser((User) session.getAttribute("user"));
+    public String post(Article article, RedirectAttributes attributes, HttpServletRequest httpServletRequest) throws Exception {
+        article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
         if (a == null) {

@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="required field">
                             <div class="ui left labeled action input">
                                 <label class="ui compact teal basic label">标签</label>
                                 <div class="ui fluid selection multiple search dropdown">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
 
-                    <div class="required field">
+                    <div class="field">
                         <div class="ui left labeled input">
                             <label class="ui teal basic label">首图</label>
                             <input type="text" name="figures" placeholder="首图引用地址">
@@ -218,10 +218,10 @@
                 },
                 figures : {
                     identifier: 'figures',
-                    rules: [{
+                    rules: [/*{
                         type : 'empty',
                         prompt: '请注意文章首图地址不能为空'
-                    },{
+                    },*/{
                         type : 'regExp',
                         value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
                         prompt: '请输入正确的图片URL格式'

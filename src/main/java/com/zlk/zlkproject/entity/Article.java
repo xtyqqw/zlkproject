@@ -69,7 +69,7 @@ public class Article {
     /**文章和标签多对多关系*/
     @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(name = "article_tag",joinColumns = {@JoinColumn(name = "article_id",referencedColumnName = "articleId")},
-    inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
+            inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
     private List<Tag> tags=new ArrayList<>();
 
     /**文章和用户多对一关系*/
