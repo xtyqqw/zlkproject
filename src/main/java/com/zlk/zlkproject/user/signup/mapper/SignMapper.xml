@@ -41,5 +41,17 @@
     <update id="changePwd" parameterType="com.zlk.zlkproject.entity.User">
         update user set user_pwd = #{userPwd} where user_phonenum = #{phonenum}
     </update>
+    <!--根据用户名模糊查询用户id-->
+    <select id="findIdByName" resultType="java.lang.String">
+        select user_id from user where user_realname like CONCAT('%',#{userRealname},'%') limit #{startPage},#{limit};
+    </select>
+    <!--根据用户名模糊查询用户id数量-->
+    <select id="findCountByName" resultType="java.lang.String">
+        select count(1) from user where user_realname like CONCAT('%',#{userRealname},'%');
+    </select>
 
+    <!--根据userId查找用户名和用户头像-->
+    <select id="selectNameAndImg" parameterType="java.lang.String" resultMap="durstionMap">
+        select user_realname,user_img from user where user_id = #{userId};
+    </select>
 </mapper>

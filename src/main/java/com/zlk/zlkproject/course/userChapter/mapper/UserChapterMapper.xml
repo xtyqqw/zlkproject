@@ -29,7 +29,7 @@
         user_id, chapter_id
         from user_chapter
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId != ''">
                 and user_id = #{userId}
             </if>
             <if test="chapterId != null">

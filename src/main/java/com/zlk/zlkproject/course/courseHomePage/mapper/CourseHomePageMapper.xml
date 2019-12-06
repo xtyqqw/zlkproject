@@ -16,21 +16,13 @@
         <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
-
-        <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
+        <result property="userId" column="user_id" javaType="java.lang.String"></result>
         <result property="userCoursesId" column="user_courses_id" javaType="java.lang.Integer"></result>
         <result property="lastStudyTime" column="last_study_time" javaType="java.sql.Date"></result>
         <result property="tagId" column="tag_id" javaType="java.lang.Integer"></result>
         <result property="tagName" column="tag_name" javaType="java.lang.String"></result>
         <result property="tagTypeId" column="tag_type_id" javaType="java.lang.String"></result>
 
-
-
-        <!--<collection property="UserCoursesList" ofType="com.zlk.zlkproject.entity.UserCourses">
-        <result property="userId" column="user_id" javaType="java.lang.Integer"></result>
-        <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
-        <result property="lastStudyTime" column="last_study_time" javaType="java.util.Date"></result>
-        </collection>-->
         <collection property="chapterList" ofType="com.zlk.zlkproject.entity.Chapter">
             <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"></id>
             <result property="coursesId" column="courses_id" javaType="java.lang.Integer"></result>
@@ -66,7 +58,7 @@
 
     <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
         select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
-        introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{page},#{limit};
+        introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{offset},#{limit};
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
@@ -123,4 +115,20 @@
     <delete id="deleteByCoursesId">
         delete from courses where courses_id=#{coursesId}
     </delete>
+
+    <select id="findByCoursesNameLimit" resultMap="CourseHomePageEntityMap">
+        select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
+        introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses
+        <if test="coursesName!=null and coursesName !=''">
+            where courses_name like CONCAT('%',#{coursesName},'%')
+        </if>
+        limit #{startPage},#{limit}
+    </select>
+
+    <select id="findCountsByCoursesName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from courses
+        <if test="coursesName!=null and coursesName !=''">
+            where courses_name like CONCAT('%',#{coursesName},'%')
+        </if>
+    </select>
 </mapper>

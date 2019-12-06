@@ -79,10 +79,16 @@ public class ArticlesController {
     /*流加载*/
     @RequestMapping(value = "/flow")
     @ResponseBody
-    public Map<String,Object> findArticlesAll(Pagination pagination){
+    public Map<String,Object> findArticlesAll(HttpServletRequest request,Pagination pagination){
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUser(user);
+        pagination.setUserId(userId);
         List<Articles> articlesList=articlesService.findArticlesAll(pagination);
+        Integer all=articlesService.findArticlesId(userId);
         Map<String,Object> map=new HashMap<>();
-        map.put("articlesList",articlesList);
+        map.put("count",all);
+        map.put("data",articlesList);
         return map;
     }
 

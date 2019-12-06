@@ -43,7 +43,7 @@ public interface ArticlesService {
     Integer deleteArticles(String articleId);
 
     /**
-     * 流加载查询
+     * 分页查询我的文章
      * @param pagination
      * @return
      */
