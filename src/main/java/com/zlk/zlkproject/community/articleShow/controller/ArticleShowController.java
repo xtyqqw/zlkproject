@@ -24,7 +24,7 @@ public class ArticleShowController {
     @GetMapping(value = "/community/article-show")
     public ModelAndView articleShow(String id) {
         ModelAndView mv=new ModelAndView();
-        id="439621923";
+        id="1";
         mv.addObject("article", articleShowService.getAndConvert(id));
         mv.setViewName("view/community/articleShow");
         return mv;

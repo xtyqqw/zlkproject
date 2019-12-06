@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +31,18 @@ public class QuestionController {
     @Autowired
     private QuestionTagService questionTagService;
     /*
+     * @descrption 社区首页
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/5 10:19
+     */
+    @RequestMapping(value = "/main")
+    public String main(){
+
+        return "/view/community/main";
+    }
+    /*
      * @descrption 提问首页
      * @author gby
      * @param []
@@ -39,19 +50,20 @@ public class QuestionController {
      * @date 2019/12/5 10:19
      */
     @RequestMapping(value = "/questionMain")
-    public String question(){
+    public String questionMain(){
 
-        return "/view/community/main";
+        return "/view/community/questionMain";
     }
 
+
     /*
-     * @descrption 社区首页按钮
+     * @descrption 提问提示页面
      * @author gby
      * @param []
      * @return java.lang.String
      * @date 2019/11/27 16:43
      */
-    @RequestMapping(value = "/main")
+    @RequestMapping(value = "/questionGuide")
     public ModelAndView main(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
         Object userId = request.getSession().getAttribute("userId");
@@ -61,7 +73,7 @@ public class QuestionController {
             return mv;
         } else {
             mv.addObject("msg","您已登录成功，请进行操作");
-            mv.setViewName("/view/community/questionMain");
+            mv.setViewName("/view/community/questionGuide");
             return mv;
         }
     }
@@ -109,7 +121,7 @@ public class QuestionController {
         if (qu != null){
             mv.addObject("flag","true");
             mv.addObject("error","正在审核,请耐心等待");
-            mv.setViewName("view/community/questioinMain    ");
+            mv.setViewName("view/community/questioinMain");
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -125,7 +137,7 @@ public class QuestionController {
         try {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
-            String rootPath = request.getSession().getServletContext().getRealPath("community/upload1");
+            String rootPath = request.getSession().getServletContext().getRealPath("upload1");
             /**
              * 文件路径不存在则需要创建文件路径
              */
@@ -137,7 +149,7 @@ public class QuestionController {
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
             //下面response返回的json格式是editor.md所限制的，规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/community/upload1/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload1/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {
                 response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );

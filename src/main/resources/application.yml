@@ -87,5 +87,7 @@ fdfs:
     width: 150
   #获取连接池最大数量
   pool:
+
     max-total: 200
 comment.avatar: /community/img/matt.jpg
+

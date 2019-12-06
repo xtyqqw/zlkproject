@@ -89,11 +89,11 @@
         </div>
     </div>
     <div class="add">
-        <a  href="<%= request.getContextPath()%>/question/main">我要提问</a>
+        <a  href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
     </div>
     <div class="crossing"></div>
     <div class="frame">
-        <iframe class="if" name="pageTarget" frameborder="1" src="/question/question"></iframe>
+        <iframe class="if" name="pageTarget" frameborder="1" src="/question/questionMain"></iframe>
     </div>
     <%@include file="../../jsp/footer.jsp" %>
 </div>

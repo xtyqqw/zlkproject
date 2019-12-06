@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>Zlk提问知道</title>
+
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/img/zlk.png" type="image/x-icon" />
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <style>
