@@ -16,7 +16,7 @@ $(function () {
                 data:"",
                 success: function (bool) {
                     /*当有记录时把 “参加项目”变为“已参加”*/
-                    if (bool){
+                    if (bool=="已参加"){
                         $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
                     }
                 }
@@ -103,8 +103,11 @@ $("#jiaru").click(function () {
         data: {"coursesId":kechengId},
         success: function (data) {
             console.log(data);
-            alert(data);
-            $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+            if(data=="未登录"){
+                alert("请先登录")
+            }else{
+                $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+            }
         }
     });
 });

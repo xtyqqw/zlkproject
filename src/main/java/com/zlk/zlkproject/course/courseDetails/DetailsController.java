@@ -65,8 +65,13 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
-    public String insertCourses(Integer coursesId){
-        String userId="1";
+    public String insertCourses(HttpServletRequest request,Integer coursesId){
+        User user=(User) request.getSession().getAttribute("user");
+        if(user.getUserId()==null|user.getUserId()==""){
+            return "未登录";
+        }
+        String userId = user.getUserId();
+
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -99,14 +104,20 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public boolean seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
-        userCourses.setUserId("1");
+    public String seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
+        User user=(User) request.getSession().getAttribute("user");
+        if(user==null){
+            return "未登录";
+        }
+        String userId = user.getUserId();
+
+        userCourses.setUserId(userId);
         userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
-            return true;
+            return "已参加";
         }
-        return false;
+        return "未参加";
     }
 
     /**
