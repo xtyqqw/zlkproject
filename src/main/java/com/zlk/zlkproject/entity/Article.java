@@ -33,11 +33,13 @@ public class Article {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
-    @JsonFormat(timezone="GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**更新时间*/
-    @JsonFormat(timezone="GMT+8",pattern="yyyy-MM-dd HH:mm:ss")
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /**插图相对路径*/

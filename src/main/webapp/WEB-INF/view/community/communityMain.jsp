@@ -232,16 +232,16 @@
             </div>
             <div class="crossing"></div>
             <div class="tab">
-                <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
+                <a href="<%=request.getContextPath()%>/articles/findByCreateTime" target="pageTarget">最新</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/article/findByBrowseCount" target="pageTarget">热门</a>
+                <a href="<%= request.getContextPath()%>/articles/findByBrowseCount" target="pageTarget">热门</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/article/findByUserId" target="pageTarget">我的文章</a>
+                <a href="<%= request.getContextPath()%>/articles/findByUserId" target="pageTarget">我的文章</a>
             </div>
         </div>
         <div class="body-left">
             <div class="body-context">
-                <iframe name="pageTarget" frameborder="1" src="/article/toArticleAll"> </iframe>
+                <iframe name="pageTarget" frameborder="1" src="/articles/toArticleAll"> </iframe>
             </div>
         </div>
         <div class="wz_remenwenzhang">
@@ -257,7 +257,7 @@
                 <ul>
                     <c:forEach items="${alist}" var="article">
                         <li>
-                            <a href="/test/community">
+                            <a href="/community/article-show/{articleId}">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>
@@ -278,7 +278,7 @@
                 <ul>
                     <c:forEach items="${blist}" var="article">
                         <li>
-                            <a href="/test/community">
+                            <a href="/community/article-show/{articleId}">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>

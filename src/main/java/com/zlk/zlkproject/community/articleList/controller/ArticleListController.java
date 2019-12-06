@@ -23,7 +23,7 @@ import java.util.Map;
  * @date:2019/11/19 10:29
  */
 @Controller
-@RequestMapping(value = "/article")
+@RequestMapping(value = "/articles")
 public class ArticleListController {
     @Autowired
     private ArticleListService articleListService;
