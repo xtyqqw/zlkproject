@@ -144,44 +144,45 @@
 </div>
 <div class="context">
     <ul>
-        <c:forEach items="${list}" var="list">
-        <li>
-            <div class="img">
-                <img src="${list.figures}" style="height: 70px;width: 70px;border-radius: 3px;">
-            </div>
-            <div class="main">
-                <p>
-                <ul>
-                    <c:forEach items="${list.tagList}" var="tagList">
-                    <li>
-                        <span class="tag">${tagList.tagName}</span>
-                    </li>
-                    </c:forEach>
-                </ul>
-                <span class="time">${list.createDate}</span>
-                </p>
-                <p class="title">${list.title}</p>
-                <p class="type">${list.typeName}</p>
-                <p class="con con_p">${list.articleContent}</p>
-                <div class="bom">
-                    <i class="layui-icon layui-icon-praise"></i>
-                    <span class="span_w">${list.zanCount}</span>
-                    <i class="layui-icon layui-icon-tread"></i>
-                    <span class="span_w">${list.caiCount}</span>
-                    <span>浏览</span>
-                    <span class="span_w">${list.browseCount}</span>
-                    <span>评论</span>
-                    <span class="span_w">${list.commentCount}</span>
-                    <span class="lookall">查看全文</span>
-                    <span class="delete cur" onclick="deleteArt('${list.articleId}')">删除</span>
-                    <span class="edit cur" onclick="editArt('${list.articleContent}','${list.articleId}')">编辑</span>
-                    <span class="cur">分享</span>
-                </div>
-            </div>
-        </li>
-        </c:forEach>
+<%--        <c:forEach items="${list}" var="list">--%>
+<%--        <li>--%>
+<%--            <div class="img">--%>
+<%--                <img src="${list.figures}" style="height: 70px;width: 70px;border-radius: 3px;">--%>
+<%--            </div>--%>
+<%--            <div class="main">--%>
+<%--                <p>--%>
+<%--                <ul>--%>
+<%--                    <c:forEach items="${list.tagList}" var="tagList">--%>
+<%--                    <li>--%>
+<%--                        <span class="tag">${tagList.tagName}</span>--%>
+<%--                    </li>--%>
+<%--                    </c:forEach>--%>
+<%--                </ul>--%>
+<%--                <span class="time">${list.createDate}</span>--%>
+<%--                </p>--%>
+<%--                <p class="title">${list.title}</p>--%>
+<%--                <p class="type">${list.typeName}</p>--%>
+<%--                <p class="con con_p">${list.articleContent}</p>--%>
+<%--                <div class="bom">--%>
+<%--                    <i class="layui-icon layui-icon-praise"></i>--%>
+<%--                    <span class="span_w">${list.zanCount}</span>--%>
+<%--                    <i class="layui-icon layui-icon-tread"></i>--%>
+<%--                    <span class="span_w">${list.caiCount}</span>--%>
+<%--                    <span>浏览</span>--%>
+<%--                    <span class="span_w">${list.browseCount}</span>--%>
+<%--                    <span>评论</span>--%>
+<%--                    <span class="span_w">${list.commentCount}</span>--%>
+<%--                    <span class="lookall">查看全文</span>--%>
+<%--                    <span class="delete cur" onclick="deleteArt('${list.articleId}')">删除</span>--%>
+<%--                    <span class="edit cur" onclick="editArt('${list.articleContent}','${list.articleId}')">编辑</span>--%>
+<%--                    <span class="cur">分享</span>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </li>--%>
+<%--        </c:forEach>--%>
     </ul>
 </div>
+<div id="test1"></div>
 <div hidden="hidden" id="demo" style="padding: 25px">
     <form action="<%=request.getContextPath()%>/articles/update" method="post">
         <textarea id="articleContent" name="articleContent"></textarea>
@@ -204,17 +205,6 @@
         var form = layui.form;
         form.render();
     });
-    $(function(){
-        $(".lookall").click(function(){
-            if(($(this).html())==="查看全文"){
-                $(this).parent().siblings('.con').removeClass("con_p");
-                $(this).html("收起");
-            }else{
-                $(this).parent().siblings('.con').addClass("con_p");
-                $(this).html("查看全文");
-            }
-        })
-    })
     function deleteArt(articleId){
         var layer = layui.layer;
         layer.confirm('确定删除？',{offset:"200px"},function(index){
@@ -255,14 +245,85 @@
             ]
         });
     });
-    // $(function(){
-    //     var layer = layui.layer;
-    //     $(".check_all").click(function(){
-    //         var temp =new Array();
-    //         $("input[name='checkbox']:checked").each(function(i){
-    //             temp[i] = $(this).val();
-    //         });
-    //     })
-    // })
+    $(function () {
+        loadData()
+        getPage()
+        $(".lookall").click(function(){
+            if(($(this).html())==="查看全文"){
+                $(this).parent().siblings('.con').removeClass("con_p");
+                $(this).html("收起");
+            }else{
+                $(this).parent().siblings('.con').addClass("con_p");
+                $(this).html("查看全文");
+            }
+        })
+    })
+    var page = 1; //设置首页页码
+    var limit = 5;  //设置一页显示的条数
+    var total;    //总条数
+    function loadData() {
+        $.ajax({
+            type: "post",
+            url: "/articles/flow",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (ret) {
+                total = ret.count;  //设置总条数
+                var data1 = ret.data;
+                var html = '';
+                for (var i = 0; i < data1.length; i++) {
+                    var tagList = data1[i].tagList;
+                    var htmlTag = "";
+                    html += '<li>';
+                    html += '<div class="img">';
+                    html += '<img src="'+data1[i].figures+'" style="height: 70px;width: 70px;border-radius: 3px;">';
+                    html += '</div>';
+                    html += '<div class="main">';
+                    html += '<p><ul>';
+                    html += '<li class="tag_li">';
+                    for (var j = 0;j<tagList.length;j++){
+                        htmlTag +='<span class="tag">'+tagList[j].tagName+'</span>';
+                    }
+                    html += htmlTag;
+                    html += '</li>';
+                    html += '</ul>';
+                    html += '<span class="time">'+data1[i].createDate+'</span></p>';
+                    html += '<p class="title">'+data1[i].title+'</p>';
+                    html += '<p class="type">'+data1[i].typeName+'</p>';
+                    html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
+                    html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
+                    html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
+                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览</span>';
+                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论</span>';
+                    html += '<span class="span_w">'+data1[i].commentCount+'</span><span class="lookall">查看全文</span>';
+                    html += '<span class="delete cur" onclick="deleteArt('+ data1[i].articleId+')">删除</span>';
+                    html += '<span class="edit cur" onclick="editArt(\''+data1[i].articleContent+'\','+data1[i].articleId +')">编辑</span>';
+                    html += '<span class="cur">分享</span></div></div></li>';
+                }
+                $(".context ul").empty().append(html);
+            }
+        });
+    }
+    function getPage(){
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'test1'
+                ,count: total,
+                limit:limit,
+                jump: function(obj, first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        loadData()
+                    }
+                }
+            });
+        });
+    }
 </script>
 </html>
