@@ -176,12 +176,18 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
     var sectionId = $(this).children().first().val();
     $.ajax({
         type : "POST",
-        async: false,
         url :"/kecheng/seleUserCoursesByUserCourses",
         data:"",
         success: function (bool) {
             if (bool){
-                alert(sectionId);
+                $.ajax({
+                    type : "POST",
+                    url :"/toVideo",
+                    data:{"sectionId":sectionId},
+                    success: function (data) {
+                        window.location.href = "/toVideo";
+                    }
+                });
             }else {
                 alert("您还未参加项目")
             }

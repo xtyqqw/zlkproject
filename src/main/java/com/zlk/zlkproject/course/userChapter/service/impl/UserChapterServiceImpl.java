@@ -26,7 +26,7 @@ public class UserChapterServiceImpl implements UserChapterService {
      * @return 实例对象
      */
     @Override
-    public UserChapter queryById(Integer userId) {
+    public UserChapter queryById(String userId) {
         return this.userChapterMapper.queryById(userId);
     }
 
@@ -73,7 +73,7 @@ public class UserChapterServiceImpl implements UserChapterService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer userId) {
+    public boolean deleteById(String userId) {
         return this.userChapterMapper.deleteById(userId) > 0;
     }
 }
