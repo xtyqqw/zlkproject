@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class MyNoteServiceImpl implements MyNoteService {
-    @Autowired
+    @Autowired(required = false)
     private MyNoteMapper myNoteMapper;
     /**
      * 根据ID查询个人笔记

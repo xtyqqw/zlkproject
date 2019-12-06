@@ -276,7 +276,7 @@
         <div class="layui-tab-item layui-show">
 
             <%--<!-- 信息完善 -->--%>
-            <form class="layui-form" action="/user/updateUser" method="post" >
+            <form class="layui-form" action="/personal/updateUser" method="post" >
                 <%--隐藏 的userid--%>
                 <div class="layui-form-item" style="display: none">
                     <label class="layui-form-label">用户编号</label>
@@ -658,7 +658,7 @@
         var uploadInst = upload.render({
             elem: '#headImg'
             //文件上传地址
-            , url: '<%=request.getContextPath()%>/user/upload/headImg'
+            , url: '<%=request.getContextPath()%>/personal/upload/headImg'
             , size: 500
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8

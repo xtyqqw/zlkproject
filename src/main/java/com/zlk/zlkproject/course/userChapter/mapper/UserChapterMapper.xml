@@ -3,7 +3,7 @@
 <mapper namespace="com.zlk.zlkproject.course.userChapter.mapper.UserChapterMapper">
 
     <resultMap type="com.zlk.zlkproject.entity.UserChapter" id="UserChapterMap">
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="chapterId" column="chapter_id" jdbcType="INTEGER"/>
     </resultMap>
 
