@@ -48,8 +48,8 @@
         }
         .add{
             position: relative;
-            top: 26px;
-            left: 942px;
+            top: 10px;
+            left: 518px;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
@@ -71,6 +71,7 @@
             position: relative;
             bottom: -15px;
             left: 12px;
+            z-index: -1;
         }
         /*中间有竖线导航栏样式*/
         .tab{
@@ -78,7 +79,7 @@
             width: 220px;
             position: relative;
             left: -2px;
-            bottom: -31px;
+            bottom: -37px;
         }
         .tab a{
             color:  #989898;
@@ -139,7 +140,6 @@
         .yueanniu{
             -webkit-border-top-left-radius: 5px;
             -webkit-border-bottom-left-radius: 5px;
-            margin-top: 0.3vw;
             margin-left: -0.8vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -224,6 +224,72 @@
             color: black;
             margin-right: 0.6vw;
         }
+        <%-----------------------------------文章标签卡 css start---------------------------------------%>
+        .show {
+            width: 69%;
+            height: 30px;
+            padding-top: 6px;
+            margin-top: 10px;
+            border-radius: 5px;
+            margin-left: 12px;
+            background-color: whitesmoke;
+        }
+        .show li {
+            float: left;
+            padding-left: 12px;
+            display: inline-block;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+        .show a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        .hide a:hover{
+            background-color: #AFEEEE;
+            color: #0a61ff;
+        }
+        .hide {
+            padding-top: 6px;
+            margin-top: 10px;
+            margin-left: 12px;
+            display: none;
+            width: 69%;
+            height: 60px;
+            background-color: whitesmoke;
+            border-radius: 5px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 0 7px 0 rgba(0,0,0,0.19);
+        }
+        .hide li{
+            float: left;
+            padding-left: 12px;
+        }
+        .hide a{
+            float: left;
+            padding: 5px;
+            display: inline;
+            line-height: 15px;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: #e7e7e7;
+            color: black;
+            font-size: 15px;
+            border-radius: 4px;
+            border: none;
+            transition-duration: 0.4s;
+        }
+        <%-----------------------------------文章标签卡 css end---------------------------------------%>
     </style>
 </head>
 <body>
@@ -232,6 +298,26 @@
     <%@include file="../../jsp/sidebar.jsp"%>
     <div class="all-body-center">
         <div class="body-top">
+            <div style="height: 0px; margin-bottom: -10px;">
+                <div class="show">
+                    <c:forEach items="${tagList}" var="tag" begin="0" end="10">
+                        <div>
+                            <ul>
+                                <li><a href="javascript:void(0)" type="button" class="">${tag.tagName}</a></li>
+                            </ul>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="hide">
+                    <c:forEach items="${tagList}" var="tag">
+                        <div>
+                            <ul>
+                                <li><a href="<%=request.getContextPath() %>/" type="button" target="pageTarget" onclick="dj(this);">${tag.tagName}</a></li>
+                            </ul>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
             <div class="add">
                 <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
             </div>
@@ -356,6 +442,26 @@
         $('.wz_remen_zt2').css('display','block');
         $('.wz_remen_zt1').css('display','none');
     })
+    <%-----------------------------------文章标签卡 js start---------------------------------------%>
+    $(document).on('mouseenter','.show',function () {
+        $('.hide').css('display','block');
+        $(this).css('display','none');
+    });
+    $(document).on('mouseleave','.hide',function () {
+        $('.show').css('display','block');
+        $(this).css('display','none');
+    });
+    $(function() {
+        $(".hide li").click(function() {
+            if($(this).nextAll().is('#a')) {
+                $(".hide").append($(this));
+            }
+            else {
+                $(".hide").prepend($(this));
+            }
+        });
+    });
+    <%-----------------------------------文章标签卡 js end---------------------------------------%>
 </script>
 </body>
 </html>
