@@ -48,8 +48,8 @@
         }
         .add{
             position: relative;
-            top: 26px;
-            left: 942px;
+            top: 10px;
+            left: 518px;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
@@ -78,8 +78,8 @@
             border: none;
             width: 282px;
             position: relative;
-            left: 1px;
-            bottom: -34px;
+            left: -2px;
+            bottom: -37px;
         }
         .tab a{
             color:  #989898;
@@ -140,7 +140,6 @@
         .yueanniu{
             -webkit-border-top-left-radius: 5px;
             -webkit-border-bottom-left-radius: 5px;
-            margin-top: 0.3vw;
             margin-left: -0.8vw;
             border: 1px solid white;
             line-height: 2vw;

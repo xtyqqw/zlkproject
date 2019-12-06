@@ -2,7 +2,6 @@ package com.zlk.zlkproject.community.articleAdd.controller;
 
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -83,9 +81,10 @@ public class ArticleAddController {
         return mv;
     }
 
+    //创建文章的请求方法
     @PostMapping(value = "/articles")
     public String post(Article article, RedirectAttributes attributes, HttpServletRequest httpServletRequest) throws Exception {
-        article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
+        //article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
         if (a == null) {
@@ -103,9 +102,7 @@ public class ArticleAddController {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
             String rootPath = request.getSession().getServletContext().getRealPath("upload");
-            /**
-             * 文件路径不存在则需要创建文件路径
-             */
+            //文件路径不存在则需要创建文件路径
             File filePath=new File(rootPath);
             if(!filePath.exists()){
                 filePath.mkdirs();
@@ -113,7 +110,7 @@ public class ArticleAddController {
             //最终文件名
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
-            //下面response返回的json格式是editor.md所限制的，规范输出就OK
+            //下面response返回的json格式是editor.md所限制的,规范输出就OK
             response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {

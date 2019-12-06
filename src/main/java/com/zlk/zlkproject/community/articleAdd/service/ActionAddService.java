@@ -11,7 +11,7 @@ import com.zlk.zlkproject.user.entity.Action;
 public interface ActionAddService {
 
     /**
-     * @description: 文章发布成功时自动增加一个发文动态
+     * @description: 文章发布后审核成功时自动增加一个发文动态
      * @param action
      * @return: com.zlk.zlkproject.user.entity.Action
      * @author: QianKeQin

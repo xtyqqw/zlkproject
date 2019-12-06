@@ -51,7 +51,7 @@ public class Courses {
     /**中间表Id*/
     private  int  userCoursesId;
     /**最后学习时间*/
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yy-MM-dd ")
     private Date  lastStudyTime;
     /**标签 Id*/
     private int tagId;

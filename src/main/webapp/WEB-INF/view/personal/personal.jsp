@@ -175,7 +175,7 @@
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="<%=request.getContextPath()%>/user/findUser" name="dian"
+            <a href="<%=request.getContextPath()%>/personal/findUser" name="dian"
                target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-dialogue" style="font-size: 25px;color: #D4D4D4;"></i>

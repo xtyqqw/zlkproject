@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.user.personal.mapper.cxr.UserMapper">
-    <resultMap id="userEntityMap" type="com.zlk.zlkproject.user.entity.User">
+    <resultMap id="userEntityMap" type="com.zlk.zlkproject.entity.User">
         <id property="userId" column="user_id" javaType="java.lang.String"></id>
-        <result property="userPhonenum" column="user_phonenum" javaType="java.lang.String"></result>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"></result>
         <result property="userPwd" column="user_pwd" javaType="java.lang.String"></result>
         <result property="userRealname" column="user_realname" javaType="java.lang.String"></result>
         <result property="userSex" column="user_sex" javaType="java.lang.String"></result>
@@ -28,16 +28,16 @@
     </resultMap>
 
     <!--根据ID查询单个信息-->
-    <select id="selectUserById" parameterType="com.zlk.zlkproject.user.entity.User" resultMap="userEntityMap">
+    <select id="selectUserById" parameterType="com.zlk.zlkproject.entity.User" resultMap="userEntityMap">
       select * from user where user_id=#{userId}
     </select>
 
     <!--通过主键修改数据-->
-    <update id="updateUser" parameterType="com.zlk.zlkproject.user.entity.User">
+    <update id="updateUser" parameterType="com.zlk.zlkproject.entity.User">
         update user
         <set>
-            <if test="userPhonenum != null and userPhonenum != ''">
-                user_phonenum = #{userPhonenum},
+            <if test="phonenum != null and phonenum != ''">
+                user_phonenum = #{phonenum},
             </if>
             <if test="userPwd != null and userPwd != ''">
                 user_pwd = #{userPwd},
@@ -118,12 +118,12 @@
     </select>
 
     <!--根据ID查询单条数据-->
-    <select id="selectByUserId" parameterType="com.zlk.zlkproject.user.entity.User" resultMap="userEntityMap">
+    <select id="selectByUserId" parameterType="com.zlk.zlkproject.entity.User" resultMap="userEntityMap">
         select * from user where user_id=#{userId}
     </select>
 
     <!--根据ID进行删除-->
-    <delete id="deleteByUserId" parameterType="com.zlk.zlkproject.user.entity.User">
+    <delete id="deleteByUserId" parameterType="com.zlk.zlkproject.entity.User">
         delete from user where user_id=#{userId}
     </delete>
 

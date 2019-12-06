@@ -55,11 +55,16 @@ public class FaqqController {
      * */
     @RequestMapping(value = "removeResponse")
     @ResponseBody
-    public Map<String,Object> removeResponse(Integer responseId){
+    public String removeResponse(Integer responseId){
         Map<String,Object> map = new HashMap<>();
         Integer code = faqqService.deleteResponse(responseId);
-        map.put("code",code);
-        return map;
+        if(code==1){
+            return "删除成功";
+        } else {
+            return "删除失败";
+        }
+        /*map.put("code",code);
+        return map;*/
     }
 
     /**
@@ -82,7 +87,7 @@ public class FaqqController {
         Map<String,Object> map = new HashMap<>();
         Integer code = faqqService.updateResponse(myResponse);
         if(code == 1){
-            mv.setViewName("/view/personal/myquestion");
+            mv.setViewName("redirect:/myfaqq/faqtest");
             return mv;
         }else {
             return null;

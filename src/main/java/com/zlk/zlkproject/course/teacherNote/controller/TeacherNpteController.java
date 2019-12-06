@@ -2,16 +2,13 @@ package com.zlk.zlkproject.course.teacherNote.controller;
 
 import com.zlk.zlkproject.course.teacherNote.service.TeacherNoteService;
 import com.zlk.zlkproject.entity.TeacherNote;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.rsocket.context.LocalRSocketServerPort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jnlp.IntegrationService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,5 +49,55 @@ public class TeacherNpteController {
         map.put("notes",notes);
         map.put("pages",pages);
         return map;
+    }
+
+    /**
+     * 查询所有并分页
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("/selectTNAllByLimit")
+    @ResponseBody
+    public Map selectTNAllByLimit(int page, int limit){
+        Map map = new HashMap();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",teacherNoteService.selectTNByCount());
+        map.put("data",teacherNoteService.selectTNByLimit(page,limit));
+        return map;
+    }
+
+    /**
+     * 根据讲师笔记ID删除记录
+     * @param tnId
+     * @return
+     */
+    @RequestMapping("/deleteByTNId")
+    @ResponseBody
+    public Integer deleteByTNId(Integer tnId){
+        return teacherNoteService.deleteByTNId(tnId);
+    }
+
+    /**
+     * 添加数据
+     * @param teacherNote
+     * @return
+     */
+    @RequestMapping("/insertTNByTeacherNote")
+    @ResponseBody
+    public Integer insertTNByTeacherNote(TeacherNote teacherNote){
+        return teacherNoteService.insertTNByTeacherNote(teacherNote);
+    }
+
+    /**
+     * 根据讲师笔记对象修改数据
+     * @param teacherNote
+     * @return
+     */
+    @RequestMapping("/updateTNByTeacherNote")
+    @ResponseBody
+    public Integer updateTNByTeacherNote(TeacherNote teacherNote){
+        return teacherNoteService.updateTNByTeacherNote(teacherNote);
     }
 }

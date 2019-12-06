@@ -166,7 +166,6 @@
         }
         /*取消关注弹窗*/
         .att_tan{
-            position: absolute;
             left: 330px;
             top: 200px;
         }
@@ -175,7 +174,7 @@
             height: 70px;
             text-align: center;
             position: fixed;
-            margin: -100px auto;
+            margin: -200px 300px;
             box-shadow: 1px 1px 5px 1px #D4D4D4;
             background-color: #FFFFFF;
             border-radius: 3px;
@@ -184,19 +183,19 @@
             font-size: 18px;
             position: fixed;
         }
-        .main .att_success_zi1{
+        .att_tan .att_success_zi1{
             margin: 23px 160px;
         }
-        .main .att_success_zi2{
+        .att_tan .att_success_zi2{
             margin: 23px 100px;
         }
-        .main .att_success_zi3{
+        .att_tan .att_success_zi3{
             margin: 23px 120px;
         }
-        .main .att_success_zi4{
+        .att_tan .att_success_zi4{
             margin: 23px 170px;
         }
-        .main .att_success_zi5{
+        .att_tan .att_success_zi5{
             margin: 23px 130px;
         }
         .att_success_ok1,.att_success_ok2,.att_success_no1,.att_success_no2,.att_success_noo{
@@ -437,32 +436,32 @@
                            style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
                     </div>
                 </c:if>
+                <div class="att_tan">
+                    <div class="att_success1">
+                        <p class="att_success_ok1">√</p>
+                        <p class="att_success_zi1">取消关注成功!</p>
+                    </div>
+                    <div class="att_success2">
+                        <p class="att_success_no1">X</p>
+                        <p class="att_success_zi2">取消关注失败，请重新操作！</p>
+                    </div>
+                    <div class="att_success3">
+                        <p class="att_success_noo">!</p>
+                        <p class="att_success_zi3">加载超时，请稍后再试！</p>
+                    </div>
+                    <div class="att_success4">
+                        <p class="att_success_ok2">√</p>
+                        <p class="att_success_zi4">关注成功!</p>
+                    </div>
+                    <div class="att_success5">
+                        <p class="att_success_no2">X</p>
+                        <p class="att_success_zi5">关注失败，请重新操作！</p>
+                    </div>
+                </div>
             </div>
         </c:forEach>
+    </div>
 
-    </div>
-    <div class="att_tan">
-        <div class="att_success1">
-            <p class="att_success_ok1">√</p>
-            <p class="att_success_zi1">取消关注成功!</p>
-        </div>
-        <div class="att_success2">
-            <p class="att_success_no1">X</p>
-            <p class="att_success_zi2">取消关注失败，请重新操作！</p>
-        </div>
-        <div class="att_success3">
-            <p class="att_success_noo">!</p>
-            <p class="att_success_zi3">加载超时，请稍后再试！</p>
-        </div>
-        <div class="att_success4">
-            <p class="att_success_ok2">√</p>
-            <p class="att_success_zi4">关注成功!</p>
-        </div>
-        <div class="att_success5">
-            <p class="att_success_no2">X</p>
-            <p class="att_success_zi5">关注失败，请重新操作！</p>
-        </div>
-    </div>
     <%--<div class="flow_div"></div>--%>
 
 </c:if>
@@ -677,9 +676,9 @@
         }
     });*/
     /*点击已关注 取消关注*/
-    $(".att_tan").hide();
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     function nofollow(userId){
-        /*var mythis = $(this);*/
+        var mythis = $(this);
         $.ajax({
             url:"/follow/defollow?userId="+userId,
             type:"GET",
@@ -687,16 +686,18 @@
             context: userId,
             success:function (data) {
                 if (data.code==1){
-                    $(".ok,.ok_zi").hide();
+                    /*$(".ok,.ok_zi").hide();
                     $(".jia,.no_zi").show();
-                    $(".att_success1").show().delay(2000).hide(300);
-                    /*mythis.hide();
+                    $(".att_success1").show().delay(2000).hide(300);*/
+                    /*alert($(this).index()+"  "+$(this)+"  "+$(mythis)+"  "+$(mythis).index());*/
+                    mythis.hide();
                     mythis.siblings(".ok").hide();
-                    mythis.siblings(".jia,.no_zi").show();*/
+                    mythis.siblings(".jia,.no_zi").show();
+                    mythis.parents(".att_success1").show().delay(2000).hide(300);
                 } else {
                     $(".att_success2").show().delay(2000).hide(300);
                 }
-            },
+            }.bind(this),
             error:function () {
                 $(".att_success3").show().delay(2000).hide(300);
             }

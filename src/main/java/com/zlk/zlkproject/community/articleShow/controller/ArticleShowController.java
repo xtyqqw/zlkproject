@@ -21,6 +21,7 @@ public class ArticleShowController {
     @Autowired
     private ArticleShowService articleShowService;
 
+    //给文章详情页提供接口
     @GetMapping(value = "/community/article-show")
     public ModelAndView articleShow(String articleId) {
         ModelAndView mv=new ModelAndView();

@@ -26,7 +26,7 @@ public interface UserCoursesService {
      * @param userId 主键
      * @return 实例对象
      */
-    UserCourses queryById(Integer userId);
+    UserCourses queryById(String userId);
 
     /**
      * 查询多条数据
@@ -59,6 +59,6 @@ public interface UserCoursesService {
      * @param userId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer userId);
+    boolean deleteById(String userId);
 
 }

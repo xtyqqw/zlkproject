@@ -55,9 +55,9 @@
                                 <i class="dropdown icon"></i>
                                 <div class="text">原创</div>
                                 <div class="menu">
-                                    <div class="item" data-value="原创">原创</div>
-                                    <div class="item" data-value="转载">转载</div>
-                                    <div class="item" data-value="翻译">翻译</div>
+                                    <div class="item" data-value="0">原创</div>
+                                    <div class="item" data-value="1">转载</div>
+                                    <div class="item" data-value="2">翻译</div>
                                 </div>
                             </div>
                             <input type="text" name="title" placeholder="简明扼要的描述你的标题">
@@ -66,7 +66,9 @@
 
                     <div class="required field">
                         <div id="md-content" style="z-index: 1 !important;">
-                            <textarea placeholder="开始编辑..." name="articleContent" style="display: none"></textarea>
+                            <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none"></textarea>
+                            <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
+                            <textarea class="editormd-html-textarea" name="articleContentHtml" style="display: none"></textarea>
                         </div>
                     </div>
 
@@ -147,7 +149,9 @@
                 path : "../editormd/lib/",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/uploadfile"
+                imageUploadURL : "/uploadfile",
+                //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
+                saveHTMLToTextarea : true
             });
         });
 
