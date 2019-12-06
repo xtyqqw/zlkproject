@@ -10,6 +10,7 @@
         <result property="content" column="content" javaType="java.lang.String"></result>
         <result property="date" column="date" javaType="java.util.Date"></result>
     </resultMap>
+
     <select id="findNotesBySectionId" parameterType="java.lang.Integer" resultMap="teacherNoteEntityMap">
         select * from teacher_note
         <if test="sectionId !=null and sectionId != ''">
@@ -23,4 +24,44 @@
             where section_id = #{sectionId}
         </if>
     </select>
+
+    <!--查询教师笔记并分页-->
+    <select id="selectTNByLimit" resultMap="teacherNoteEntityMap">
+        select tn_id,section_id,title,content,date from teacher_note
+        limit #{offset},#{limit}
+    </select>
+
+    <!--查询记录条数-->
+    <select id="selectTNByCount" resultType="java.lang.Integer">
+        select count(1) from teacher_note
+    </select>
+
+    <insert id="insertTNByTeacherNote" keyProperty="tnId" useGeneratedKeys="true">
+        insert into teacher_note(section_id,title,content,date)
+        values(#{sectionId},#{title},#{content},#{date})
+    </insert>
+
+    <update id="updateTNByTeacherNote">
+        update teacher_note
+        <set>
+            <if test="sectionId != null and sectionId != ''">
+                section_id = #{sectionId},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="date != null and date != ''">
+                date = #{date},
+            </if>
+        </set>
+        where tn_id = #{tnId}
+    </update>
+
+    <!--根据id删除数据-->
+    <delete id="deleteByTNId">
+        delete from teacher_note where tn_id = #{tnId}
+    </delete>
 </mapper>

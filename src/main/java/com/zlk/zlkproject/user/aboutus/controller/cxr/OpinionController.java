@@ -1,8 +1,8 @@
 package com.zlk.zlkproject.user.aboutus.controller.cxr;
 
-import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.aboutus.service.cxr.OpinionService;
 import com.zlk.zlkproject.user.entity.Opinion;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -28,12 +28,15 @@ public class OpinionController {
     @RequestMapping("/addOpinion")
     public ModelAndView addOpinion(HttpServletRequest request, Opinion opinion){
         ModelAndView mv=new ModelAndView();
-       // String userId = (String) request.getSession().getAttribute("userId");
+
+        //userId="1";
+       opinion.setOpinionUserId("1");
 
 
-
-        //获取用户id
-        opinion.setOpinionUserId("1");
+//        //从session中获取ID，进行修改，userId="1";为模拟数据
+//        User user1 = (User) request.getSession().getAttribute("userId");
+//        //获取用户id
+//        opinion.setOpinionUserId(user1.getUserId());
 
 
         int i=opinionService.addOpinion(opinion);

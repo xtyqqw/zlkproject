@@ -36,7 +36,7 @@ public class StuNote {
     /**笔记时间*/
     @Temporal(TemporalType.TIMESTAMP)
     private Date snDate;
-    private String StuTime;
+    private String stuTime;
     public StuNote() {
     }
 
@@ -49,6 +49,6 @@ public class StuNote {
         this.down = down;
         this.report = report;
         this.snDate = snDate;
-        this.StuTime = stuTime;
+        this.stuTime = stuTime;
     }
 }

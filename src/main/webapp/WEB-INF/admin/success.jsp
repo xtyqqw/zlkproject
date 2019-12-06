@@ -24,7 +24,8 @@
 
     <style type="text/css">
         .outer{
-            background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);
+            background-color: #393D49;
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
 
         .top {
@@ -40,6 +41,7 @@
             margin-top: 25px;
             right: 40px;
             float: right;
+            color: white;
         }
 
         .main {
@@ -56,7 +58,7 @@
         }
 
         #logout{
-            color: black;
+            color: white;
             position: relative;
             margin-top: 25px;
             right: -178px;
@@ -64,13 +66,15 @@
         }
 
         #logout:hover {
-            color: white;
+            color: black;
         }
 
         .left {
+            overflow: auto;
             width: 100%;
             height: 100%;
-            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+            background-color: #23262E;
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);*/
         }
 
         /* 设置滚动条的样式 */
@@ -101,7 +105,7 @@
 
         #tree {
             padding-left: 40px;
-            padding-top: 35px;
+            padding-top: 28px;
             font-size: 25px;
         }
 
@@ -119,7 +123,7 @@
             overflow: auto;
             width: 14.9%;
             height: 100%;
-            background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);
+            /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
     </style>
 </head>

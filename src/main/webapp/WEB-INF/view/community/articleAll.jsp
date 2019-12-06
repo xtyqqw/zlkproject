@@ -3,7 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>最新</title>
+    <%--<link rel="stylesheet" type="text/css" href="../timeago/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../timeago/css/htmleaf-demo.css">--%>
     <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
     <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
@@ -12,8 +17,8 @@
             overflow-x:hidden;
             position: absolute;
             margin: auto 0;
-            width: 98%;
-            height: 98%;
+            width: 100%;
+            height: 100%;
         }
         /*高宽分别对应横竖滚动条的尺寸*/
         .context-div ::-webkit-scrollbar{
@@ -190,7 +195,7 @@
             top: 44px;
             display: inline;
         }
-        .createTime{
+        #createTime{
             font-size: 16px;
             color: #989898;
             font-family: Arial;
@@ -207,47 +212,10 @@
     </style>
 </head>
 <body>
-    <div class="context-div" id="context-div"></div>
-    <!--日期转换-->
-    <script>
-        $(document).ready(function()
-        {
-                var str = "";
-                var timestamp = 0;
-                var pass = 0;
-                str = $("#time").text();
-                timestamp = (new Date()).valueOf();
-                pass = (timestamp - str) / 1000;
-                $("#time").text(pass);
-                if (pass < 60) {
-                    $("#time").text(pass + "秒前");
-                }
-                else
-                {
-                    if (pass < (60 * 60))
-                    {
-                        pass = Math.floor(pass / 60);
-                        $("#time").text(pass + "分钟前");
-                    }
-                    else
-                    {
-                        if (pass < (60 * 60 * 72))
-                        {
-                            pass = Math.floor(pass / 60 / 60);
-                            $("#time").text(pass + "小时前");
-                        }
-                        else
-                        {
-                            if (pass >= (60 * 60 * 72) )
-                            {
-                                pass = Math.floor(pass / 60 / 60 / 24);
-                                $("#time").text(pass + "天前");
-                            }
-                        }
-                    }
-                }
-            });
-    </script>
+    <div class="context-div" id="context-div">
+        <%--<p>转换前的时间：2016-09-10 09:20:00</p>
+        <p>转换后：<span class=" time need_to_be_rendered2" data-timeago="2016-09-10 09:20:00"></span></p>--%>
+    </div>
     <!--没插图就隐藏-->
     <script>
         $(function () {
@@ -257,6 +225,7 @@
             }
         })
     </script>
+    <!--瀑布流-->
     <script>
         layui.use('flow', function(){
             var flow = layui.flow;
@@ -271,26 +240,26 @@
                         var lis = [];
                         var limit = "5";
                         $.ajax({
-                            url:"/article/findByCreateTime?page="+page+"&limit="+limit,
+                            url:"/articles/findByCreateTime?page="+page+"&limit="+limit,
                             type: 'post',
                             dataType: "json",
                             success: function (result) {
                                 layui.each(result.articleList, function (i, article) {
                                     lis.push(
                                         '<div class="all" >' +
-                                        '<div class="title"><a href="<%=request.getContextPath() %>/draft/find/${articleId}">'+article.title+'</a></div>'+
+                                        '<div class="title"><a href="#">'+article.title+'</a></div>'+
                                         '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>' +
-                                        '<div class="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
+                                        '<div class="articleSetTop" id="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
                                         '<div class="kuang">'+
                                         '<div class="figures" id="figures">'+'<img class="imgtest" src="http://localhost:8080//upload//6f8e3206-fd7e-4ff9-a1eb-fc07de81435f.jpg">'+'</div>'+
                                         '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
                                         '</div>'+
                                         '<div>'+
-                                        '<div class="userRealname"><a href="#">'+article.userList.userRealname+'</a></div>'+
+                                        '<div class="userRealname"><a href="#">'+article.user.userRealname+'</a></div>'+
                                         '<div class="little"></div>'+
-                                        '<div class="createTime" id="createTime"><span id="time">'+article.createTime+'</span></div>'+
+                                        '<div class="createTime" id="createTime"><span class="">'+article.createTime+'</span></div>'+
                                         '</div>'+
-                                        '<div class="userImg">'+article.userList.userImg+'</div>'+
+                                        '<div class="userImg">'+article.user.userImg+'</div>'+
                                         '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
                                         '<div class="browseCount"><a href="#">'+article.browseCount+'阅读'+'</a></div>'+
                                         '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
@@ -306,9 +275,10 @@
             });
         });
     </script>
-    <!--置顶和标签-->
-    <script>
-
+    <!--日期转换-->
+    <script src="../timeago/dist/timeago.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        timeago().render(document.querySelectorAll('.need_to_be_rendered2'), 'zh_CN');
     </script>
 </body>
 </html>
