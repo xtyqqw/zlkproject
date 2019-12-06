@@ -67,10 +67,10 @@
                 <td style="width: 100px;" valign="bottom">插图相对路径</td>
                 <td><input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures"></td>
             </tr>
-            <tr>
+            <%--<tr>
                 <td style="width: 100px;" valign="bottom">插图绝对路径</td>
                 <td><input type="text" required id="figuresReal" placeholder="请输入插图绝对路径" name="figuresReal"></td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td style="width: 100px;" valign="bottom">赞数</td>
                 <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"></td>
@@ -207,7 +207,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 450
+            , height: 460
             , cols: [[ //表头
                 {type: 'checkbox'}
                 , {field: 'articleId', title: '文章ID', width: 80, sort: true}
@@ -217,7 +217,7 @@
                 , {field: 'createTime',title: '发布时间',width: 90}
                 , {field: 'updateTime',title: '更新时间',width: 90}
                 , {field: 'figures', title: '插图相对路径', width: 80}
-                , {field: 'figuresReal', title: '插图绝对路径', width: 80}
+                /*, {field: 'figuresReal', title: '插图绝对路径', width: 80}*/
                 , {field: 'articleDigest', title: '文章摘要', width: 90}
                 , {field: 'articleContent', title: '文章内容', width: 90}
                 , {field: 'zanCount', title: '赞数', width: 60}
@@ -308,7 +308,7 @@
                 $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
-                $("#figuresReal").val(data.figuresReal);
+                /*$("#figuresReal").val(data.figuresReal);*/
                 $("#articleDigest").val(data.articleDigest);
                 $("#articleContent").html(marked(data.articleContent));// 将数据库中存储的.md文件转换成html文件
                 $("#zanCount").val(data.zanCount);

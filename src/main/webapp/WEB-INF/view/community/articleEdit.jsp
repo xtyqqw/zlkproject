@@ -47,9 +47,7 @@
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="add">
-                    <%--<input type="hidden" name="approval">
-                    <input type="hidden" name="articleSetTop">--%>
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="layerDemo">
                     <div class="required field">
                         <div class="ui left labeled input">
                             <div class="ui selection compact teal basic dropdown label">
@@ -123,8 +121,8 @@
                     <%--<div class="ui error message"></div>--%>
 
                     <div class="ui right aligned container">
-                        <button <%--id="save-btn"--%> type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" id="publish-btn" class="ui teal button" onclick="add()">发布</button>
+                        <button type="reset" class="ui reset secondary button">重置</button>
+                        <button type="submit" id="publish-btn" class="ui teal button" <%--onclick="add()"--%>>发布</button>
                     </div>
 
                 </form>
@@ -143,7 +141,7 @@
             testEditor = editormd("md-content", {
                 width : "100%",
                 height : 640,
-                placeholder : "开始编辑...",
+                placeholder : "开始撰写...",
                 syncScrolling : "single",
                 //你的lib目录的路径
                 path : "../editormd/lib/",
@@ -161,7 +159,7 @@
             on : 'hover'
         });
 
-        function add() {
+        /*function add() {
             $.ajax({
                 type: 'POST',
                 url: '/articles',
@@ -177,14 +175,7 @@
                     }
                 }
             })
-        }
-
-        /*初始化审核，置顶状态*/
-        /*$('#publish-btn').click(function () {
-            $('[name="approval"]').val(0);
-            $('[name="articleSetTop"]').val(1);
-            $('#blog-form').submit();
-        });*/
+        }*/
 
         /*表单验证开启*/
         $('.ui.form').form({
@@ -197,8 +188,8 @@
                         type : 'empty',
                         prompt: '请注意文章标题不能为空'
                     },{
-                        type : 'maxLength[50]',
-                        prompt: '请注意文章标题最大长度不能超过50'
+                        type : 'maxLength[10]',
+                        prompt: '请注意文章标题最大长度不能超过10'
                     }]
                 },
                 articleContent : {
@@ -218,8 +209,11 @@
                 tagIds : {
                     identifier: 'tagIds',
                     rules: [{
-                        type : 'empty',
+                        type : 'minCount[1]',
                         prompt: '请至少选择一个文章标签'
+                    },{
+                        type : 'maxCount[3]',
+                        prompt: '请最多选择三个文章标签'
                     }]
                 },
                 figures : {
@@ -228,8 +222,9 @@
                         type : 'empty',
                         prompt: '请注意文章首图地址不能为空'
                     },{
-                        type : 'url',
-                        prompt: '请输入正确的URL格式'
+                        type : 'regExp',
+                        value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
+                        prompt: '请输入正确的图片URL格式'
                     }]
                 },
                 articleDigest : {
@@ -244,6 +239,9 @@
                 }
             }
         });
+    </script>
+    <script>
+
     </script>
 </body>
 </html>

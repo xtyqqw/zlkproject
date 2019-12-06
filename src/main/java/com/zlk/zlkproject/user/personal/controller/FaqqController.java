@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.controller;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.MyQuestions;
 import com.zlk.zlkproject.user.entity.MyResponse;
 import com.zlk.zlkproject.user.personal.service.FaqqService;
@@ -66,12 +67,25 @@ public class FaqqController {
      * 参数类型：MyResponse 用途 获取对应的回答和修改的结果
      * 返回值类型：Map 返回方法执行结果
      * */
+//    @RequestMapping(value = "updateResponse")
+//    @ResponseBody
+//    public Map<String,Object> updateResponse(MyResponse myResponse){
+//        Map<String,Object> map = new HashMap<>();
+//        Integer code = faqqService.updateResponse(myResponse);
+//        map.put("code",code);
+//        return map;
+//    }
+
     @RequestMapping(value = "updateResponse")
-    @ResponseBody
-    public Map<String,Object> updateResponse(MyResponse myResponse){
+    public ModelAndView updateResponse(MyResponse myResponse){
+        ModelAndView mv = new ModelAndView();
         Map<String,Object> map = new HashMap<>();
         Integer code = faqqService.updateResponse(myResponse);
-        map.put("code",code);
-        return map;
+        if(code == 1){
+            mv.setViewName("/view/personal/myquestion");
+            return mv;
+        }else {
+            return null;
+        }
     }
 }
