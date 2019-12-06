@@ -26,7 +26,7 @@ public class ArticleHotController {
      * 根据条件倒序查询文章标题
      * 用ModelAndView查询数据库数据返回到jsp页面对应位置显示
      * @param article
-     * @return
+     * @returnModelAndView
      */
     @RequestMapping("/toArticleHot")
     public ModelAndView selectTitleByArticle(Article article) {
