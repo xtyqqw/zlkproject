@@ -13,7 +13,7 @@
     <select id="queryById" resultMap="UserSectionMap">
         select
           user_id, section_id, state, time
-        from kaohe.user_section
+        from user_section
         where user_id = #{userId}
     </select>
 
@@ -21,7 +21,7 @@
     <select id="queryAllByLimit" resultMap="UserSectionMap">
         select
           user_id, section_id, state, time
-        from kaohe.user_section
+        from user_section
         limit #{offset}, #{limit}
     </select>
 
@@ -29,7 +29,7 @@
     <select id="queryAll" resultMap="UserSectionMap">
         select
         user_id, section_id, state, time
-        from kaohe.user_section
+        from user_section
         <where>
             <if test="userId != null">
                 and user_id = #{userId}
@@ -48,13 +48,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into kaohe.user_section(user_id,section_id,state, time)
+        insert into user_section(user_id,section_id,state, time)
         values (#{userId},#{sectionId},#{state}, #{time})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update kaohe.user_section
+        update user_section
         <set>
             <if test="state != null and state != ''">
                 state = #{state},
@@ -68,7 +68,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from kaohe.user_section where user_id = #{userId}
+        delete from user_section where user_id = #{userId}
     </delete>
 
 </mapper>

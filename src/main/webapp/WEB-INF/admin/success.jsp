@@ -70,6 +70,7 @@
         }
 
         .left {
+            overflow: auto;
             width: 100%;
             height: 100%;
             background-color: #23262E;
@@ -104,7 +105,7 @@
 
         #tree {
             padding-left: 40px;
-            padding-top: 35px;
+            padding-top: 28px;
             font-size: 25px;
         }
 
