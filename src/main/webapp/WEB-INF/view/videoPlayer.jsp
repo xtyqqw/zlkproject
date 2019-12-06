@@ -54,7 +54,7 @@
                         <div id="div_all">
                             <div id="div_video">
                                 <video id="video1" width="100%" height="100%">
-                                    <source id="video_src" src="http://47.98.183.4:8888/group1/M00/00/00/rBBUH13XjVyAVYH-AxDnTtIGlSU552.mp4" type="video/mp4" />
+                                    <source id="video_src" src="http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nSyGAdhzWAxDnTtIGlSU984.mp4" type="video/mp4" />
                                 </video>
                             </div>
                             <div id="div_controller">
@@ -177,7 +177,7 @@
                     <li class="li_hide"></li>
                     <li id="selection_stuNote" class="li_show">学生笔记</li>
                     <li class="li_hide"></li>
-                    <li class="li_show">学生评论</li>
+                    <li id="selection_stuCmt" class="li_show">学生评论</li>
                     <li class="li_hide"></li>
                     <li class="li_show" id="stuQa-tab">学生问答</li>
                 </div>
@@ -202,11 +202,16 @@
                             <div id="SNS_contentBox">
                                 <ul id="SNS_ul_stream"></ul>
                             </div>
-                            <div></div>
                         </div>
                     </div>
                     <div class="layui-tab-item"></div>
-                    <div class="layui-tab-item">内容三</div>
+                    <div class="layui-tab-item" style="border: 0px solid white !important;">
+                        <div id="SCS_allBox">
+                            <div id="SCS_contentBox">
+                                <ul id="SCS_ul_stream"></ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="layui-tab-item"></div>
                     <div class="layui-tab-item">
                         <div class="layui-tab layui-tab-brief" id="stuQatab" lay-filter="docDemoTabBrief">
@@ -236,5 +241,24 @@
         <div id="answer-editor"></div>
         <button class="layui-btn" id="answer-submit" style="display: none">提交</button>
     </div>
+
+    <%------------------------------------------------------------------------%>
+    <%--<div class="SCS_content" style="width: 96%">
+        <div class="SCS_c_lbox" style="height: 200px">
+            <div class="SCS_userBox">
+                <div class="SCS_headPhoto_box" style="width: 7vw;height: 7vw">
+                    <img style="width: 100%;height: 100%">
+                </div>
+                <div class="SCS_userName_box" style="width: 7vw;height: 20px"></div>
+            </div>
+        </div>
+        <div class="SCS_c_rbox">
+            <div class="SCS_toolBar" style="display: none"></div>
+            <div class="SCS_textEditor" style="height: 150px;display: block"></div>
+            <div class="SCS_replyEditor" style="height: 100px;display: none"></div>
+            <div class="SCS_cmt_toolBox"></div>
+        </div>
+    </div>--%>
+    <%------------------------------------------------------------------------%>
 </body>
 </html>
