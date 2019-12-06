@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/articles")
 public class TestController {
     @RequestMapping(value = "toLogin")
     public String toLogin(){
