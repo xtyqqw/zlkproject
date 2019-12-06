@@ -184,19 +184,19 @@
             font-size: 18px;
             position: fixed;
         }
-        .main .att_success_zi1{
+        .att_tan .att_success_zi1{
             margin: 23px 160px;
         }
-        .main .att_success_zi2{
+        .att_tan .att_success_zi2{
             margin: 23px 100px;
         }
-        .main .att_success_zi3{
+        .att_tan .att_success_zi3{
             margin: 23px 120px;
         }
-        .main .att_success_zi4{
+        .att_tan .att_success_zi4{
             margin: 23px 170px;
         }
-        .main .att_success_zi5{
+        .att_tan .att_success_zi5{
             margin: 23px 130px;
         }
         .att_success_ok1,.att_success_ok2,.att_success_no1,.att_success_no2,.att_success_noo{
@@ -677,7 +677,7 @@
         }
     });*/
     /*点击已关注 取消关注*/
-    $(".att_tan").hide();
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     function nofollow(userId){
         /*var mythis = $(this);*/
         $.ajax({

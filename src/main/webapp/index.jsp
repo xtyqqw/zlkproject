@@ -11,10 +11,6 @@
     <title>首页</title>
 </head>
 <body>
-
-<script>
-    location.href="<%=request.getContextPath() %>/test/toLogin";
-</script>
 <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 <script>
     //JavaScript代码区域

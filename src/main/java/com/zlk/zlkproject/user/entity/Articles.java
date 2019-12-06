@@ -5,6 +5,7 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,7 +32,8 @@ public class Articles {
     /**评论数*/
     private Integer commentCount;
     /**发布时间*/
-    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     private String createDate;
     /**更新时间*/
