@@ -15,7 +15,7 @@ layui.use('flow', function(){
                 var data = {"page":page,"limit":limit};
                 $.ajax({
                     type :"POST",
-                    url:"/section/findSectionDetails?coureseId=1",
+                    url:"/section/findSectionDetails",
                     dataType:"json",
                     data:data,
                     success:function(result) {
@@ -95,7 +95,7 @@ layui.use('flow', function(){
                                         '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>' +
                                         '<li class="kechengxiaojeipingfen_li">' +
-                                        '<i class="iconfont icon-star-fill xingxing" style="color: ' + color + ';"></i>' +
+                                        '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>');
                                 }
                             }else if (courses.state==="正在看") {
@@ -176,12 +176,18 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
     var sectionId = $(this).children().first().val();
     $.ajax({
         type : "POST",
-        async: false,
         url :"/kecheng/seleUserCoursesByUserCourses",
         data:"",
         success: function (bool) {
             if (bool){
-                alert(sectionId);
+                $.ajax({
+                    type : "POST",
+                    url :"/toVideo",
+                    data:{"sectionId":sectionId},
+                    success: function (data) {
+                        window.location.href = "/toVideo";
+                    }
+                });
             }else {
                 alert("您还未参加项目")
             }

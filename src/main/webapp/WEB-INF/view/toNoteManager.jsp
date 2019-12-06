@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Title</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
+<div class="layedit-tool-view">
     <form class="layui-form"  id="updateStuNote" action="/stuNote/updateStuNoteByStuNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">笔记ID</label>
@@ -30,6 +31,7 @@
             </div>
         </div>
     </form>
+</div>
     <table class="layui-hide" id="StuNote" lay-filter="test"></table>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">

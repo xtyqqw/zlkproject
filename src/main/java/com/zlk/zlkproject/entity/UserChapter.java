@@ -16,14 +16,14 @@ public class UserChapter {
     /**
      * 用户id 对应数据库的 user_id 字段
      */
-    private Integer userId;
+    private String userId;
 
     /**
      * 章节id 对应数据库的 chapter_id 字段
      */
     private Integer chapterId;
 
-    public UserChapter(int userId, int chapterId) {
+    public UserChapter(String userId, int chapterId) {
         this.userId = userId;
         this.chapterId = chapterId;
     }

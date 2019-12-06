@@ -31,7 +31,9 @@
                 <input class="text_value" value="" placeholder="请输入用户名" required name="adminName" type="text" id="username">
                 <input class="text_value" value="" placeholder="请输入密码" required name="adminPassword" type="password" id="password">
             </div>
-            <button class="button" id="submit" type="submit">登录</button>
+            <div class="buttonOuter">
+                <button class="button" id="submit" type="submit">登录</button>
+            </div>
         </div>
 
         <div id="tip"></div>
