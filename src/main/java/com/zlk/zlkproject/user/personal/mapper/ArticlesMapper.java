@@ -47,7 +47,7 @@ public interface ArticlesMapper {
     Integer deleteArticles(String articleId);
 
     /**
-     * 流加载查询我的文章
+     * 分页查询我的文章
      * @param pagination
      * @return
      */
