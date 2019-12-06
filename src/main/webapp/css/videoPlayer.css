@@ -224,7 +224,7 @@ button{
     background-color: blue;
 }
 /*功能栏问答end*/
-/*-----stuNote begin-----*/
+/*-----stuNote begin--------------------------------------------------------------------------------------------------*/
 #div_stuNote{
     width: 50%;
     height: 100%;
@@ -314,9 +314,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
-/*-----stuNote end-----*/
+/*-----stuNote end----------------------------------------------------------------------------------------------------*/
 
-/*-----stuCmt begin-----*/
+/*-----stuCmt begin---------------------------------------------------------------------------------------------------*/
 #div_stuCmt{
     width: 50%;
     height: 100%;
@@ -406,9 +406,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
-/*-----stuCmt end-----*/
+/*-----stuCmt end-----------------------------------------------------------------------------------------------------*/
 
-/*-----stuNoteSelection begin-----*/
+/*-----stuNoteSelection begin-----------------------------------------------------------------------------------------*/
 #SNS_allBox{
     background-color: rgb(255,255,255);
     width: 100%;
@@ -494,6 +494,7 @@ button{
     border-radius: 50%;
     margin: 0 auto;
     top: 11%;
+    overflow: hidden;
 }
 .SNS_userName_box{
     position: relative;
@@ -551,7 +552,165 @@ button{
 .collectBtn{
     cursor: pointer;
 }
-/*-----stuNoteSelection end-----*/
+/*-----stuNoteSelection end-------------------------------------------------------------------------------------------*/
+
+/*-----stuCmtSelection begin------------------------------------------------------------------------------------------*/
+#SCS_contentBox{
+    width: 100%;
+    height: auto;
+    padding: 10px 0 0 0;
+}
+.SCS_content{
+    background-color: rgb(245,245,245);
+    width: 90%;
+    height: auto;
+    margin: 0 auto 10px auto;
+    font-size: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.SCS_c_lbox{
+    width: 20%;
+    height: 300px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 10px;
+}
+.SCS_c_rbox{
+    width: 80%;
+    height: auto;
+    padding: 5px 0;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+}
+.SCS_userBox{
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    top: 25px;
+}
+.SCS_headPhoto_box{
+    width: 9vw;
+    height: 9vw;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.SCS_userName_box{
+    width: 9vw;
+    height: 30px;
+    margin: 10px auto;
+    font-size: 24px;
+    text-align: center;
+}
+.SCS_textEditor{
+    width: 98%;
+    height: 220px;
+    margin: 0 auto 5px auto !important;
+    display: block;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 5px;
+}
+.SCS_textEditor div{
+    height: auto !important;
+    overflow-y: hidden;
+    word-wrap: break-word;
+}
+.SCS_c_replyBox{
+    width: 98%;
+    height: auto;
+    margin: 0 auto 5px auto;
+    display: none;
+}
+.SCS_replyToolBar{
+    background-color: white;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #8D8D8D;
+    border-bottom: none;
+}
+.SCS_replyEditor{
+    background-color: white;
+    width: 100%;
+    height: 100px;
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #8D8D8D;
+    margin: 0 auto 5px auto;
+    display: block;
+}
+.SCS_replyEditor .w-e-panel-container{
+    height: 150px !important;
+    overflow-y: auto !important;
+}
+.SCS_replyEditor .w-e-panel-tab-content{
+    height: 100px !important;
+}
+.w-e-panel-tab-content textarea{
+    height: 69px !important;
+}
+.SCS_replyEditor .w-e-text{
+    overflow-y: auto !important;
+    word-wrap: break-word;
+}
+.SCS_replyBtn{
+    background-color: #5FB878;
+    width: 40px;
+    height: 22px;
+    position: relative;
+    top: 0;
+    left: 646px;
+    border-radius: 3px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+.SCS_cmt_toolBox{
+    width: 98%;
+    height: 30px;
+    margin: 0 auto 5px auto;
+    border-radius: 4px;
+    background-color: white;
+}
+.SCS_reply_toolBox{
+    width: 98%;
+    height: 30px;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: white;
+}
+.SCS_replyBox{
+    width: 98%;
+    height: auto;
+    padding: 5px 0;
+    margin: 0 auto;
+    display: none;
+}
+.SCS_c_t_box{
+    width: 100px;
+    height: 27px;
+    padding: 3px 0 0 0;
+    font-size: 17px;
+}
+.SCS_r_t_box{
+    width: 100px;
+    height: 27px;
+    padding: 3px 0 0 0;
+    font-size: 17px;
+}
+.SCS_spaceDiv{
+    width: 10px;
+    height: 100%;
+}
+.SCS_UDbtn{
+    cursor: pointer;
+}
+.SCS_reportBtn{
+    cursor: pointer;
+}
+/*-----stuCmtSelection end--------------------------------------------------------------------------------------------*/
 
 /*播放器 begin*/
 #div_all{

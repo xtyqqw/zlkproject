@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -56,5 +57,62 @@ public class StuCommentController {
         return map;
     }
 
+    @RequestMapping("replySubmit")
+    @ResponseBody
+    public Map replySubmit(StuComment stuComment){
+        HashMap map = new HashMap<>();
+        stuComment.setDate(new Date());
+        Integer res = stuCommentService.addStuCmt(stuComment);
+        String retmsg;
+        if (res == 1){
+            retmsg = "回复成功";
+        }else{
+            retmsg = "回复失败";
+        }
+        map.put("retmsg",retmsg);
+        return map;
+    }
+
+    @RequestMapping("findStuCmt")
+    @ResponseBody
+    public Map findStuCmt(@RequestParam("sectionId") Integer sectionId,
+                           @RequestParam("page") Integer page,@RequestParam("size") Integer size){
+        Map map = new HashMap();
+        List<StuComment> stuCmtList = stuCommentService.findStuCmt(sectionId, page, size);
+        Integer pages = stuCommentService.findCount(sectionId);
+        if (pages % 3 != 0){
+            pages = pages /3 +1;
+        }else{
+            pages = pages / 3;
+        }
+        map.put("comments",stuCmtList);
+        map.put("pages",pages);
+        return map;
+    }
+
+    @RequestMapping("updateUD")
+    @ResponseBody
+    public Map updateUD(@RequestParam("userId") String userId,
+                          @RequestParam("smId") Integer smId,@RequestParam("type") String type){
+        Map map = new HashMap();
+        Integer res = stuCommentService.updateUD(userId, smId, type);
+        Integer error = 1;
+        if (res == 1)
+            error = 0;
+        map.put("error",error);
+        return map;
+    }
+
+    @RequestMapping("updateReport")
+    @ResponseBody
+    public Map updateReport(@RequestParam("smId") Integer smId,@RequestParam("report") String report){
+        Map map = new HashMap();
+        Integer res = stuCommentService.updateReport(smId,report);
+        Integer error = 1;
+        if (res == 1)
+            error = 0;
+        map.put("error",error);
+        return map;
+    }
 
 }
