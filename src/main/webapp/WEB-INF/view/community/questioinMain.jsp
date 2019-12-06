@@ -17,7 +17,7 @@
             border: none 0;
         }
         .all-body-center{
-            width: autopx;
+            width: auto;
             height: auto;
             margin:0 auto;
             border: none 0;
@@ -32,8 +32,6 @@
             height: 1500px;
             border: none 0;
         }
-
-
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
@@ -191,10 +189,8 @@
 </head>
 <body>
 <div class="all-body">
-
     <div class="all-body-center">
         <div class="body-top">
-
             <div class="tab">
               <%--  <a href="<%=request.getContextPath()%>/article/findByCreateTime" target="pageTarget">最新</a>
                 <span>|</span>

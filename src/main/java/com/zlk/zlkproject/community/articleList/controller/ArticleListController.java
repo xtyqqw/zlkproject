@@ -27,12 +27,11 @@ import java.util.Map;
 public class ArticleListController {
     @Autowired
     private ArticleListService articleListService;
-
     /**
      * 登录接口
      * @return
      */
-    @RequestMapping(value = "toLogin")
+    @RequestMapping(value = "/toLogin")
     public String toLogin(){
         return "view/community/communityMain";
     }
@@ -109,10 +108,10 @@ public class ArticleListController {
     }*/
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
-    public Map<String,Object> findByUserId(String userId,Integer page,Integer limit)throws Exception{
+    public Map<String,Object> findByUserId(String userId,Pagination pagination)throws Exception{
         User user=new User();
         user.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
-        List<Article> articleList=articleListService.findByUserId(userId,page,limit);
+        List<Article> articleList=articleListService.findByUserId(userId,pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
         return map;

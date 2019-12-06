@@ -44,12 +44,12 @@
         </association>
     </resultMap>
     <resultMap id="paginationEntityMap" type="com.zlk.zlkproject.entity.Pagination">
-        <result column="limit" property="limit" javaType="java.lang.Integer"></result>
-        <result column="page" property="page" javaType="java.lang.Integer"></result>
-        <result column="startPage" property="startPage" javaType="java.lang.Integer"></result>
-        <result column="totalCount" property="totalCount" javaType="java.lang.Integer"></result>
-        <result column="totalPage" property="totalPage" javaType="java.lang.Integer"></result>
-        <association property="user" javaType="com.zlk.zlkproject.entity.User">
+            <result column="limit" property="limit" javaType="java.lang.Integer"></result>
+            <result column="page" property="page" javaType="java.lang.Integer"></result>
+            <result column="startPage" property="startPage" javaType="java.lang.Integer"></result>
+            <result column="totalCount" property="totalCount" javaType="java.lang.Integer"></result>
+            <result column="totalPage" property="totalPage" javaType="java.lang.Integer"></result>
+        <association property="user" resultMap="com.zlk.zlkproject.entity.User">
             <id column="user_id" property="userId" javaType="java.lang.String"></id>
             <result column="user_phonenum" property="phonenum" javaType="java.lang.String"></result>
             <result column="user_pwd" property="userPwd" javaType="java.lang.String"></result>
@@ -90,7 +90,7 @@
     <select id="findByUserId" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
         select a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a
-        join user u on a.user_id=u.user_id
+        left join user u on a.user_id=u.user_id
         where a.user_id=#{userId} limit #{startPage},#{limit}
     </select>
 </mapper>

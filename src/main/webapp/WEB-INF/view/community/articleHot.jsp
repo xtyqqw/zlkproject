@@ -118,11 +118,11 @@
             border: none 0;
         }
         .imgtest {
-            width: 100%;
+            /*width: 100%;
             height: 100%;
             object-fit:cover;
             border-radius: 5px;
-            border: none 0;
+            border: none 0;*/
         }
         .icon{
             position: absolute;
@@ -210,53 +210,17 @@
 <div class="context-div" id="context-div"></div>
 <!--日期转换-->
 <script>
-    /*$(document).ready(function()
-    {
-            var str = "";
-            var timestamp = 0;
-            var pass = 0;
-            str = $("#time").text();
-            timestamp = (new Date()).valueOf();
-            pass = (timestamp - str) / 1000;
-            $("#time").text(pass);
-            if (pass < 60) {
-                $("#time").text(pass + "秒前");
-            }
-            else
-            {
-                if (pass < (60 * 60))
-                {
-                    pass = Math.floor(pass / 60);
-                    $("#time").text(pass + "分钟前");
-                }
-                else
-                {
-                    if (pass < (60 * 60 * 72))
-                    {
-                        pass = Math.floor(pass / 60 / 60);
-                        $("#time").text(pass + "小时前");
-                    }
-                    else
-                    {
-                        if (pass >= (60 * 60 * 72) )
-                        {
-                            pass = Math.floor(pass / 60 / 60 / 24);
-                            $("#time").text(pass + "天前");
-                        }
-                    }
-                }
-            }
-        });*/
+
 </script>
 <!--没插图就隐藏-->
-<script>
+<%--<script>
     $(function () {
         var img = $("#figures").find("img");
         if(img.length<=0){
             $("#figures").hide()
         }
     })
-</script>
+</script>--%>
 <script>
     layui.use('flow', function(){
         var flow = layui.flow;
