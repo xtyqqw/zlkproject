@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * @ClassName Function
  * @Description: 左侧导航栏实体类
@@ -28,4 +30,6 @@ public class Function {
     private String target="maintarget";
     //备注
     private String comment;
+    //子级菜单数量
+    private Integer childrenNumber;
 }

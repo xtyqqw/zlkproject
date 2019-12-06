@@ -405,8 +405,28 @@
                 </div>--%>
             </div>
         </ul>
+        <%--<div id="demo7" style="float: right;margin: 50px 20px auto"></div>--%>
     </div>
 </div>
+<%--分页--%>
+<%--<script>
+    var total = "${all}";
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage, layer = layui.layer;
+        //完整功能
+        laypage.render({
+            elem: 'demo7'
+            ,count: total //数据总数
+            ,theme: '#914FF1'
+            ,first: '首页'
+            ,last: '尾页'
+            ,layout: ['prev', 'page', 'next', 'count']
+            ,jump: function(obj){
+                console.log(obj)
+            }
+        });
+    });
+</script>--%>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
