@@ -18,16 +18,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
-    <style>
-        .avatar1 {
-            float: left;
-            width: auto;
-            height: auto;
-            border-radius: 3px;
-            margin-right: 20px;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
     <!--中间内容-->
@@ -36,17 +26,15 @@
             <%--顶部--%>
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
-                    <div class="ui horizontal link list">
-                        <div class="item">
-                            <img src="https://1.semantic-ui.com/images/avatar/small/matt.jpg" alt="" class="ui avatar image">
-                            <div class="content"><a href="#" class="header">老钱</a></div>
-                        </div>
-                        <div class="item">
-                            <i class="calendar icon"></i> <span>2019-10-01</span>
-                        </div>
-                        <div class="item">
-                            <i class="eye icon"></i> <span>2342</span>
-                        </div>
+                    <div class="item">
+                        <%--<img src="${article.user.userImg}" alt="" class="ui avatar image">--%>
+                        <%--<div class="content"><a href="#" class="header">${article.user.userRealname}</a></div>--%>
+                    </div>
+                    <div class="item">
+                        <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                    </div>
+                    <div class="item">
+                        <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
                 </div>
             </div>
@@ -147,7 +135,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>

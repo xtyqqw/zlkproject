@@ -97,6 +97,16 @@
         .header .header-login a:hover{
             color: #914EF3;
         }
+        .name{
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:1;
+        }
     </style>
 </head>
 <body>
@@ -123,23 +133,23 @@
         <c:if test="${user==null}">
             <!-- 注册登录 -->
             <div class="header-login">
-                <a href="/user/tosignup">注册</a>
+                <a href="/users/tosignup">注册</a>
                 <a style="color: #000000;">/</a>
-                <a href="/user/tosignin">登录</a>
+                <a href="/users/tosignin">登录</a>
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
         <c:if test="${user!=null}">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
-                    <li class="layui-nav-item" lay-unselect="">
+                    <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
                         <a href="javascript:;">
-                            <img src="//t.cn/RCzsdCq" class="layui-nav-img">
-                            ${user.userRealname}
+                            <img src="//t.cn/RCzsdCq" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
+                            <p class="name" style="">${user.userRealname}</p>
                         </a>
                         <dl class="layui-nav-child">
                             <a href="/personal/person">个人中心</a>
-                            <a href="/user/logout;">退了</a>
+                            <a href="/users/logout;">退了</a>
                         </dl>
                     </li>
                 </ul>
