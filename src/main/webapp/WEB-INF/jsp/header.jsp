@@ -117,7 +117,7 @@
         </div>
         <!-- 导航 -->
         <div class="header-nav">
-                <a href="javascript:;" name="nav" class="nav">首页</a>
+                <a href="/index/toIndex" name="nav" class="nav">首页</a>
                 <a href="javascript:;" name="nav" class="nav">项目</a>
                 <a href="javascript:;" name="nav" class="nav">社区</a>
         </div>
@@ -149,7 +149,7 @@
                         </a>
                         <dl class="layui-nav-child">
                             <a href="/personal/person">个人中心</a>
-                            <a href="/users/logout;">退了</a>
+                            <a href="/users/logout;">退出</a>
                         </dl>
                     </li>
                 </ul>

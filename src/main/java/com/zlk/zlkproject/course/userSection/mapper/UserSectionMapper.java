@@ -22,7 +22,7 @@ public interface UserSectionMapper {
      * @param userId 主键
      * @return 实例对象
      */
-    UserSection queryById(Integer userId);
+    UserSection queryById(String userId);
 
     /**
      * 查询指定行数据
@@ -64,5 +64,5 @@ public interface UserSectionMapper {
      * @param userId 主键
      * @return 影响行数
      */
-    int deleteById(Integer userId);
+    int deleteById(String userId);
 }
