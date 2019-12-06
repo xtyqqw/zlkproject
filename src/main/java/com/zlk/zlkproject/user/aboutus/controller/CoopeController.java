@@ -49,7 +49,9 @@ public class CoopeController {
         mv.addObject("help",help);
         return mv;
     }
-
+    /**
+     * 跳转至友情链接
+     * */
     @RequestMapping(value = "tofriends")
     public ModelAndView toFriends(){
         ModelAndView mv = new ModelAndView();
@@ -58,4 +60,10 @@ public class CoopeController {
         mv.addObject("list",list);
         return mv;
     }
+
+    @RequestMapping(value = "/toCoo")
+    public String toCoo(){
+        return "view/aboutus/cooperative";
+    }
+
 }
