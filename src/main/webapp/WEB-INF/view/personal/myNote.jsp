@@ -179,7 +179,7 @@
     //                                 '<i class="layui-icon layui-icon-tread"></i>' +
     //                                 '<span class="down">'+stuNote.down +'</span>' +
     //                                 '<span class="lookall">查看全文</span>' +
-    //                                 '<span class="edit" onclick="editNote('+ stuNote.content,stuNote.snId +')">编辑</span>\n' +
+    //                                 '<span class="edit" onclick="editNote(\''+data1[i].content+'\','+data1[i].snId+')">编辑</span>' +
     //                                 '<span class="delete" onclick="delNote('+ stuNote.snId +')">删除</span>\n' +
     //                                 '<span class="time">'+ stuNote.snDate +'</span>' +
     //                                 '</div>' +
