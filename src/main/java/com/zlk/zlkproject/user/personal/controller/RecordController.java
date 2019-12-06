@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.controller;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.service.RecordService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,10 +62,13 @@ public class RecordController {
         return map;
     }*/
     @RequestMapping(value = "/tocourses")
-    public ModelAndView selectItem(FollowerPage followerPage) {
+    /*HttpServletRequest request,*/
+    public ModelAndView selectItem( FollowerPage followerPage) {
         followerPage.setUserId("1");
-        followerPage.setPage(1);
         followerPage.setLimit(3);
+        followerPage.setPage(1);
+        /*User user = (User) request.getSession().getAttribute("user");
+        followerPage.setUserId(user.getUserId());*/
         List<Item> itemList = recordService.selectCourses(followerPage);
         Integer sum = recordService.selectUserSection("1");
         Integer done = recordService.selectUser("1");
