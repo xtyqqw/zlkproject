@@ -66,7 +66,7 @@ public class MyNoteServiceImpl implements MyNoteService {
         return myNoteMapper.deleteNoteBySnId(snId);
     }
     /**
-     *流加载查询个人笔记
+     *分页查询个人笔记
      * @param pagination
      * @return List<StuNote>
      */
@@ -76,6 +76,13 @@ public class MyNoteServiceImpl implements MyNoteService {
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return myNoteMapper.findNotesList(pagination);
+        List<StuNote> list =  myNoteMapper.findNotesList(pagination);
+        int s=list.size();
+        for(int i=0;i<s;i++){
+            StuNote stuNote=list.get(i);
+            stuNote.setStuTime(LeaveTime.formatDate(stuNote.getSnDate()));
+            list.set(i,stuNote);
+        }
+        return list;
     }
 }

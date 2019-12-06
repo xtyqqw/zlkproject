@@ -117,7 +117,7 @@
          top:39px;
          left: 0px;
          border: 2px solid #0a61ff;
-         border-top: none;
+         border-radius: 3px;
      }
 
      .badge{
@@ -141,16 +141,16 @@
      #new1{
          position: relative;
          top:-14px;
-         left: 115px;
-         background-color: orange;
+         left: 165px;
+         background-color: #ff565d;
          font-weight:bold;
      }
      #hot1{
+         background-color: #ffc628;
+         font-weight:bold;
          position: relative;
          top:-14px;
-         left: 115px;
-         background-color: red;
-         font-weight:bold;
+         left: 75px;
      }
      .xingxing {
          position: absolute;
@@ -187,7 +187,7 @@
          height: 80px;
          position: relative;
          top: -75px;
-         width:215px;
+         width:212px;
      }
 
      .layui-this{
@@ -230,25 +230,64 @@
      .a1{
          position: relative;
          font-size:15px;
-         font-weight:bold
+         font-weight:bold;
+         cursor: pointer;
         }
      .a2{
          position: relative;
          top: 23px;
          font-size:15px;
          font-weight:bold;
+         cursor: pointer;
      }
      .a3{
          position: relative;
          top: 43px;
          font-size:15px;
          font-weight:bold;
+         cursor: pointer;
      }
      .a4{
          position: relative;
          top: 63px;
          font-size:15px;
          font-weight:bold;
+         cursor: pointer;
+     }
+     .a1:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         border-radius: 3px;
+     }
+     .a2:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
+         position: relative;
+         top: 23px;
+         font-size:15px;
+         font-weight:bold;
+         border-radius: 3px;
+     }
+     .a3:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
+         position: relative;
+         top: 43px;
+         font-size:15px;
+         font-weight:bold;
+         border-radius: 3px;
+     }
+     .a4:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
+         position: relative;
+         top: 63px;
+         font-size:15px;
+         font-weight:bold;
+         border-radius: 3px;
      }
 
     </style>
@@ -307,7 +346,7 @@
     <div class="layui-tab-content" >
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
-                <a class="a1">JAVA</a><br>
+                <br><a class="a1">JAVA</a><br>
                 <a class="a2">HTML</a><br>
                 <a class="a3">CSS</a><br>
                 <a class="a4">JS</a><br>
@@ -318,7 +357,7 @@
 
         </div>
 
-        <div id="LAY_demo2"></div>
+        <ul id="LAY_demo2"></ul>
     </div>
 </div>
 
@@ -401,36 +440,96 @@ $.ajax({
         layui.each(result.allList, function (i, courses) {
                 lis.push(
 
-                    '<ul>' +
+                    '<div>' +
                     '<li class="li1">' +
                     '<dl class="dl1">' +
                     '<dt class="dt1">' +
                     '<img id="img1" src="'+courses.introducePic+'" style="height: 90px;width: 213px ">' +
                     '</dt>' +
                     '<dd class="dd2">' +
-                    '<h5 class="h51">玩转数据结构，从入门到精通</h5>' +
-                    ' <span class="badge badge-warning" contenteditable="true" id="new1">NEW</span> ' +
-                    ' <span class="badge badge-important" contenteditable="true" id="hot1">HOT</span>  ' +
+                    '<h5 class="h51">'+courses.coursesName+'</h5>' +
+                    ' <span class="badge badge-warning" contenteditable="true" id="new1">NEW</span> ' );
+                     if(courses.studentNum>=5000){
+                         lis.push(
+                             ' <span class="badge badge-important" contenteditable="true" id="hot1">HOT</span>  '
+                         );
+                     }
+                    lis.push(
                     '<p><span class="badge" contenteditable="true" id="badge9">'+courses.tagName+'</span></p>' +
                     '<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +
-                    '<div class="xingxing">' +
-                    '<ul class="kechengxiaojeipingfen_ul">'+
-                        '<li id="xing1">'+
-                        '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
-                        '</li>'+
-                        '<li id="xing2">'+
-                        '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
-                        '</li>'+
-                        '<li id="xing3">'+
-                        '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
-                        '</li>'+
-                        '<li id="xing4">'+
-                        '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
-                        '</li>'+
-                        '<li id="xing5">'+
-                        '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
-                        '</li>'+
-                        '</ul>'+
+                    '<div class="xingxing">');
+
+                    if(courses.studentNum>=5000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing2">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing3">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing4">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing5">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }else if(courses.studentNum<5000&&courses.studentNum>=4000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing2">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing3">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing4">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }else if(courses.studentNum<4000&&courses.studentNum>=3000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing2">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing3">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }else if(courses.studentNum<3000&&courses.studentNum>=2000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing2">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }else if(courses.studentNum<2000&&courses.studentNum>=1000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '<li id="xing2">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }else if(courses.studentNum<1000){
+                        lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                            '<li id="xing1">'+
+                            '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                            '</li>'+
+                            '</ul>');
+                    }
+                    lis.push(
                     '</div>'+
                     '</dd>' +
                     '<dd class="dd3">' +
@@ -450,11 +549,11 @@ $.ajax({
                     '</dd>' +
                     '</dl>' +
                     '</li>' +
-                        '</ul>'
-
-
+                        '</div>'
                 );
+
         });
+
                 next(lis.join(''), page < 2); //假设总页数为 6
     }
 });
