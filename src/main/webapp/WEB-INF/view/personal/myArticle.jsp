@@ -276,23 +276,30 @@
                 var data1 = ret.data;
                 var html = '';
                 for (var i = 0; i < data1.length; i++) {
+                    var tagList = data1[i].tagList;
+                    var htmlTag = "";
                     html += '<li>';
                     html += '<div class="img">';
                     html += '<img src="'+data1[i].figures+'" style="height: 70px;width: 70px;border-radius: 3px;">';
                     html += '</div>';
                     html += '<div class="main">';
-                    html += '<p><ul><li>';
-                    html += '<span class="tag">'+data1[i].tagName+'</span>';
-                    html += '</li></ul>';
+                    html += '<p><ul>';
+                    html += '<li class="tag_li">';
+                    for (var j = 0;j<tagList.length;j++){
+                        htmlTag +='<span class="tag">'+tagList[j].tagName+'</span>';
+                    }
+                    html += htmlTag;
+                    html += '</li>';
+                    html += '</ul>';
                     html += '<span class="time">'+data1[i].createDate+'</span></p>';
                     html += '<p class="title">'+data1[i].title+'</p>';
                     html += '<p class="type">'+data1[i].typeName+'</p>';
                     html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
                     html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
-                    html += '<span class="span_w">'+data1[i].list.zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
-                    html += '<span class="span_w">'+data1[i].list.caiCount+'</span><span>浏览</span>';
-                    html += '<span class="span_w">'+data1[i].list.browseCount+'</span><span>评论</span>';
-                    html += '<span class="span_w">'+data1[i].list.commentCount+'</span><span class="lookall">查看全文</span>';
+                    html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
+                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览</span>';
+                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论</span>';
+                    html += '<span class="span_w">'+data1[i].commentCount+'</span><span class="lookall">查看全文</span>';
                     html += '<span class="delete cur" onclick="deleteArt('+ data1[i].articleId+')">删除</span>';
                     html += '<span class="edit cur" onclick="editArt(\''+data1[i].articleContent+'\','+data1[i].articleId +')">编辑</span>';
                     html += '<span class="cur">分享</span></div></div></li>';
