@@ -37,7 +37,7 @@ public interface ArticleManagerMapper {
      * @param title
      * @return
      */
-    Article selectArticleByTitle(String title);
+    List<Article> selectArticleByTitle(String title);
     /**
      * 根据文章标题模糊查询,查询文章总数
      * @param pagination

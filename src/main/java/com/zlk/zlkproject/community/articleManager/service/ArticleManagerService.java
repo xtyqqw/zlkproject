@@ -35,7 +35,7 @@ public interface ArticleManagerService {
      * @param title
      * @return
      */
-    Article selectArticleByTitle(String title);
+    List<Article> selectArticleByTitle(String title);
     /**
      * 根据文章标题模糊查询
      * @param pagination
