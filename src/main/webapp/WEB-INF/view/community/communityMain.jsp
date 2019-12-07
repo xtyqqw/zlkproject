@@ -27,7 +27,7 @@
         }
         .all-body-center .body-top{
             width: 1308px;
-            height: 115px;
+            height: 114px;
         }
         .all-body-center .body-left{
             float: left;
@@ -76,7 +76,7 @@
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
-            width: 220px;
+            width: 282px;
             position: relative;
             left: -2px;
             bottom: -37px;
@@ -121,7 +121,7 @@
             line-height: 4vw;
             border-bottom: 0.1vw solid blue;
             margin-left: 4vw;
-            margin-top: 1vw;
+            margin-top: 0vw;
         }
         .wz_remen_wz{
             margin-left: 1vw;
@@ -184,7 +184,7 @@
             width: 20vw;
             margin-left: 4vw;
             position: absolute;
-            margin-top: 5vw;
+            margin-top: 4vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -328,6 +328,8 @@
                 <a href="<%= request.getContextPath()%>/articles/toArticleHot" target="pageTarget">热门</a>
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>" target="pageTarget">问答</a>
             </div>
         </div>
         <div class="body-left">

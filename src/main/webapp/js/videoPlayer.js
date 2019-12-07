@@ -2,13 +2,17 @@ var replyEditorArr = [];
 
 $(document).ready(function () {
 
-    layui.use(['element', 'flow'], function () {
+    layui.use(['element', 'flow','layer'], function () {
         var element = layui.element,
             $ = layui.jquery,
             flow = layui.flow,
+            layer = layui.layer,
             sectionId = "";
         var tagIdArray = new Array();
+        var editorflag = 0;
+        var editori = 0;
 
+        /*讲师笔记初加载*/
         note_flow(sectionId);
 
         // $(".w_e_text").attr("placeholder","字数不超过200字");
@@ -34,6 +38,9 @@ $(document).ready(function () {
                     url: "/chapter/findChapters",
                     success: function (data) {
                         $("#mulu_div").css("display", "block");
+                        $("#wenda_div").css("display", "none");
+                        $("#div_stuNote").css("display", "none");
+                        $("#div_stuCmt").css("display", "none");
                         var str = "";
                         var state = "";
                         var chapters = data.chapters;
@@ -45,7 +52,7 @@ $(document).ready(function () {
                                 console.log(time);
                                 var time1 = format(time);
                                 var sectionId = section.sectionId;
-                                str += "<li>";
+                                str += "<li class='section'>";
                                 str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
                                 $.ajax({
                                     type: "POST",
@@ -53,11 +60,9 @@ $(document).ready(function () {
                                     async: false,
                                     success: function (data) {
                                         state = data.state;
-                                        console.log(state);
                                         return state;
                                     }
                                 });
-                                console.log(state);
                                 if (state === "播放中") {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
                                 } else if (state === "已播放") {
@@ -93,9 +98,8 @@ $(document).ready(function () {
         });
 
         /*小节视频点击更换*/
-        $(document).on("click", "ul li", function () {
+        $(document).on("click", ".section", function () {
             var sectionId = $(this).find("input").val();
-            console.log(sectionId);
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
@@ -106,12 +110,15 @@ $(document).ready(function () {
                 }
             });
             note_flow(sectionId);
+            stu_qa_flow(sectionId);
         });
 
         /*功能栏问答点击*/
         $("#icon-wenda").click(function () {
             $("#mulu_div").css("display", "none");
             $("#wenda_div").css("display", "block");
+            $("#div_stuNote").css("display", "none");
+            $("#div_stuCmt").css("display", "none");
             $.ajax({
                 type:"POST",
                 url:"/courseTag/findAll",
@@ -119,7 +126,7 @@ $(document).ready(function () {
                     var str = "";
                     var tagList = result.tagList;
                     str += "<div id='wenda_bottom_div' style='width: 100%'>";
-                    str += "<span>*至少选择1个，最多选择3个</span>";
+                    str += "<span id='wenda_bottom_div_span'>*至少选择1个，最多选择3个</span>";
                     str += "<div style='width: 100%'>";
                     $.each(tagList,function (i,tag) {
                         str += "<div class='tagName' isselect='false'>";
@@ -137,16 +144,12 @@ $(document).ready(function () {
         /*问答功能中标签点击事件*/
         $(document).on("click", ".tagName", function () {
             var isselect = $(this).attr("isselect");
-            console.log(isselect);
             if (isselect==="false"){
                 if (tagIdArray.length<3){
                     $(this).css("background-color","blue");
                     $(this).attr("isselect","true");
                     var tagId = $(this).find("input").val();
-                    console.log("tagId="+tagId);
                     tagIdArray.push(tagId);
-                    console.log(tagIdArray);
-                    console.log(tagIdArray.length);
                 }else {
                     alert("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
@@ -155,8 +158,6 @@ $(document).ready(function () {
                 $(this).attr("isselect","false");
                 var tagId = $(this).find("input").val();
                 tagIdArray.remove(tagId);
-                console.log(tagIdArray);
-                console.log(tagIdArray.length);
             }
         });
 
@@ -180,17 +181,47 @@ $(document).ready(function () {
 
         /*提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
-            var content = $(".w-e-text").val();
-            console.log(content);
-            var data = {"content":content,"tagIdArray":tagIdArray}
-            $.ajax({
-                type:"POST",
-                url:"",
-                data:data,
-                success:function (result) {
-                    alert(result.message);
-                }
-            })
+            if (tagIdArray.length==0){
+                alert("至少选择1个标签");
+            }else {
+                var content = editor.txt.html();
+                var data = {"content":content,"tagIdArray":tagIdArray};
+                $.ajax({
+                    type:"POST",
+                    url:"/stuQa/insertStuQa",
+                    data:data,
+                    dataType: "json",
+                    traditional:true,
+                    success:function (result) {
+                        alert(result.message);
+                        if(result.message==="添加成功"){
+                            editor.txt.clear();
+                            $(".tagName").css("background-color","grey");
+                            $(".tagName").attr("isselect","false");
+                            $("#wenda_div").css("display", "none");
+                            tagIdArray.splice(0);
+                        }
+                    }
+                })
+            }
+        });
+
+        /*取消按钮点击提交事件*/
+        $(document).on("click", "#btn_reset_wenda", function () {
+            editor.txt.clear();
+            $(".tagName").css("background-color","grey");
+            $(".tagName").attr("isselect","false");
+            // $("#wenda_div").css("display", "none");
+            tagIdArray.splice(0);
+        });
+
+        /*关闭按钮点击提交事件*/
+        $(document).on("click", "#stu_qa_close_btn", function () {
+            editor.txt.clear();
+            $(".tagName").css("background-color","grey");
+            $(".tagName").attr("isselect","false");
+            $("#wenda_div").css("display", "none");
+            tagIdArray.splice(0);
         });
 
         /*富文本编辑器生成*/
@@ -204,19 +235,35 @@ $(document).ready(function () {
             'image',
             'code'
         ];
+        // 隐藏"网络图片"tab
+        editor.customConfig.showLinkImg = false;
+        editor.customConfig.uploadFileName = 'file';
+        editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+        editor.customConfig.uploadImgTimeout = 1000*20;
+        editor.customConfig.uploadImgMaxLength = 1;
+        editor.customConfig.uploadImgHooks = {
+            customInsert: function (insertImg, result, editor) {
+                var url = result.data;
+                insertImg(url)
+            }
+        };
         editor.create();
 
         /*限制字数判断方法*/
-        checkLength = function(dom, maxLength) {
+        checkLength = function(maxLength) {
+            var text = editor.txt.html();
+            var reTag = /<(?:.|\s)*?>/g;
+            var reText = text.replace(reTag,"");
             var l = 0;
-            for (var i = 0; i < dom.value.length; i++) {
-                if (/[\u4e00-\u9fa5]/.test(dom.value[i])) {
+            for (var i = 0; i < reText.length; i++) {
+                if (/[\u4e00-\u9fa5]/.test(reText[i])) {
                     l += 2;
                 } else {
                     l++;
                 }
                 if (l > maxLength) {
-                    dom.value = dom.value.substr(0, i);
+                    reText = reText.substr(0, maxLength);
+
                 }
             }
         };
@@ -246,7 +293,7 @@ $(document).ready(function () {
             return hour + ':' + minute + ':' + second;
         }
 
-        /*选项卡bigin*/
+        /*选项卡教师笔记加载bigin*/
         function note_flow(sectionId) {
             $("#lay_flow1").empty();
             flow.load({
@@ -254,7 +301,7 @@ $(document).ready(function () {
                 isAuto: false,
                 done: function (page, next) { //加载下一页
                     var lis = [];
-                    var limit = 5;
+                    var limit = 3;
                     var data = {"sectionId": sectionId, "page": page, "limit": limit};
                     console.log(data);
                     $.ajax({
@@ -278,11 +325,402 @@ $(document).ready(function () {
             })
         }
 
+        /*-----------------------------------------学生问答选项卡 begin---------------------------------------------------------*/
+
+        /*学生问答选项卡切换加载*/
+        $("#stuQa-tab").click(function () {
+            stu_qa_flow("#stuQaall","/stuQa/findStuQaList",sectionId);
+        });
+
+        /*学生问答流加载*/
+        function stu_qa_flow(id,url,sectionId) {
+            $(".stuQa-item").empty();
+            flow.load({
+                elem: ''+id,//流加载容器
+                isAuto: false,
+                done: function (page, next) { //加载下一页
+                    var lis = [];
+                    var limit = 5;
+                    var data = {"sectionId": sectionId, "page": page, "limit": limit};
+                    console.log(data);
+                    $.ajax({
+                        type: "POST",
+                        url: ""+url,
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            var str = "";
+                            var user = "";
+                            layui.each(result.stuQaList, function (i, stuQa) {
+                                console.log("stuQa="+stuQa);
+                                editorflag++;
+                                str += "<div class=\"stuQa-box\">";
+                                str += "<div class=\"stuQa-user\">";
+                                $.ajax({
+                                    type:"POST",
+                                    url: '/users/selectNameAndImg',
+                                    async: false,
+                                    data:{"userId":stuQa.userId},
+                                    success:function (result1) {
+                                        user = result1.user;
+                                        return user;
+                                    }
+                                });
+                                str += "<div class=\"stuQa-userPhoto\">";
+                                str += "<img src='"+user.userImg+"' class='userPhoto'>";
+                                str += "</div>";
+                                str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
+                                str += "</div>";
+                                str += "<div class=\"stuQa-content-box\">";
+                                str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
+                                /*str += "<input name='pId' value='"+stuQa.pId+"' hidden='hidden'>";*/
+                                str += "<div class=\"stuQa-tag-box\">";
+                                layui.each(stuQa.tagList,function (i, tag) {
+                                    console.log(tag);
+                                    str += "<div class=\"stuQa-tag\">"+tag.tagName+"</div>";
+                                });
+                                str += "</div>";
+                                str += "<div class=\"stuQa-content\">";
+                                str += "<div class=\"stuQa-toolbar\" id='stuQa-toolbar"+editorflag+"'></div>";
+                                str += "<div class=\"stuQa-textEditor\" id='stuQa-textEditor"+editorflag+"'>"+stuQa.content+"</div>";
+                                str += "</div>";
+                                editorCreate(editorflag);
+                                str += "<div class=\"stuQa-function-box\">";
+                                str += "<div class=\"stuQa-function-div\">";
+                                str += "<div class=\"stuQa-func-tag stuQa-answer\" id='stuQa-answer"+editorflag+"'>回答</div>";
+                                str += "<div class=\"stuQa-func-tag\" id='stuQa-answerNum"+editorflag+"'>"+stuQa.answerNum+"</div>";
+                                str += "<div class=\"stuQa-func-tag\" id='stuQa-view"+editorflag+"'>浏览</div>";
+                                str += "<div class=\"stuQa-func-tag\" id='stuQa-viewNum"+editorflag+"'>"+stuQa.viewNum+"</div>";
+                                str += "<div class=\"stuQa-func-tag stuQa-readMore\" id='stuQa-readMore"+editorflag+"'>查看全文</div>";
+                                if (stuQa.share === "已分享"){
+                                    str += "<div class=\"stuQa-func-tag stuQa-share\" style='color: #9ea2ea' id='stuQa-share"+editorflag+"'>"+stuQa.share+"</div>";
+                                }else {
+                                    str += "<div class=\"stuQa-func-tag stuQa-share\" id='stuQa-share"+editorflag+"'>"+stuQa.share+"</div>";
+                                }
+                                if (stuQa.report === "已举报"){
+                                    str += "<div class=\"stuQa-func-tag stuQa-report\" style='color: #9ea2ea' id='stuQa-report"+editorflag+"'>"+stuQa.report+"</div>";
+                                }else {
+                                    str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editorflag+"'>"+stuQa.report+"</div>";
+                                }
+                                str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editorflag+"'>回复</div>";
+                                str += "<div class=\"stuQa-date\" id='stuQa-date"+editorflag+"'>"+stuQa.date+"</div>";
+                                str += "</div>";
+                                str += "<div class=\"stuQa-answer-div\" id='sqaId"+stuQa.sqaId+"' style='display: none'>";
+                                str += "</div>";
+                                str += "</div>";
+                                str += "</div>";
+                                str += "</div>";
+                            });
+                            lis.push(str);
+                            next(lis.join(''), page < result.pages);
+                        }
+                    })
+                }
+            })
+        }
+
+        /*富文本编辑器生成*/
+        function editorCreate(editorflag) {
+            var E = window.wangEditor;
+            var editor = "editor" + editorflag;
+            console.log(editor);
+            editor = new E('#stuQa-toolbar'+editorflag, '#stuQa-textEditor'+editorflag);
+            editor.create();
+        }
+
+
+        //全部选项卡点击事件
+        $("#stuQaall-tab").click(function () {
+            stu_qa_flow("#stuQaall","/stuQa/findStuQaList",sectionId);
+        });
+
+        //精华选项卡点击事件
+        $("#stuQaelite-tab").click(function () {
+            stu_qa_flow("#stuQaelite","/stuQa/findStuQaListElite",sectionId);
+        });
+
+        /*查看全文按钮点击提交事件*/
+        $(document).on("click", ".stuQa-readMore", function () {
+            if ($(this).text() === "查看全文"){
+                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height1 = $(this).parent().parent().height(); //功能按钮框的高度
+                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
+                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                if (height <= 200){
+                    $(this).text("收起");
+                }else {
+                    $(this).parent().parent().prev().css("height","auto");
+                    $(this).parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
+                    $(this).parent().parent().css("height",height1);
+                    $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                    $(this).text("收起");
+                }
+            }else if($(this).text() === "收起"){
+                $(this).parent().parent().prev().css("height","60%");
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().parent().css("height",height3);
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
+                $(this).parent().parent().css("height","20%");
+                $(this).parent().parent().parent().find("div").eq(0).css("height","20%");
+                $(this).text("查看全文");
+            }
+
+
+        });
+
+        /*div鼠标移入事件*/
+        $(document).on("mouseover", ".stuQa-box", function () {
+            $(this).css("background-color","rgb(255,255,255)");
+            $(this).css("box-shadow","0 0 15px rgb(181,179,181)");
+        });
+
+        /*div鼠标移出事件*/
+        $(document).on("mouseleave", ".stuQa-box", function () {
+            $(this).css("background-color","rgb(250,250,250)");
+            $(this).css("box-shadow","0 0 0 rgb(200,255,255)");
+        });
+
+        //功能标签鼠标移入事件
+        $(document).on("mouseover", ".stuQa-func-tag", function () {
+            $(this).css("color","#9ea2ea");
+            $(this).css("box-shadow","0 0 15px rgb(181,179,181)");
+        });
+
+        /*div鼠标移出事件*/
+        $(document).on("mouseleave", ".stuQa-func-tag", function () {
+            $(this).css("color","#000000");
+            $(this).css("box-shadow","0 0 0 rgb(200,255,255)");
+        });
+
+        /*分享按钮点击提交事件*/
+        $(document).on("click", ".stuQa-share", function () {
+            var share = $(this).text();
+            if (share === "分享"){
+                var sqaId = $(this).parent().parent().parent().find("input").val();
+                share = "已分享";
+                var stuQa = {"sqaId":sqaId,"share":share};
+                $.ajax({
+                    type:"POST",
+                    url:"/stuQa/updateShareOrReport",
+                    contentType:'application/json',
+                    data:JSON.stringify(stuQa),
+                    success:function (result) {
+                        share = result.stuQa.share;
+                    }
+                });
+                $(this).text(""+share);
+                $(this).css("color","#9ea2ea");
+                $(this).css("pointer-events","none");
+            }
+        });
+
+        /*举报按钮点击提交事件*/
+        $(document).on("click", ".stuQa-report", function () {
+            var report = $(this).text();
+            if (report === "举报"){
+                var sqaId = $(this).parent().parent().parent().find("input").val();
+                report = "已举报";
+                var stuQa = {"sqaId":sqaId,"report":report};
+                $.ajax({
+                    type:"POST",
+                    url:"/stuQa/updateShareOrReport",
+                    contentType:'application/json',
+                    data:JSON.stringify(stuQa),
+                    success:function (result) {
+                        report = result.stuQa.report;
+                    }
+                });
+                $(this).text(""+report);
+                $(this).css("color","#9ea2ea");
+                $(this).css("pointer-events","none");
+            }
+        });
+
+        var height;
+        var height1;
+        var height2;
+        var height3;
+        var height4;
+
+        /*回答按钮点击事件*/
+        $(document).on("click", ".stuQa-answer", function () {
+            if ($(this).text() === "回答"){
+
+                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height1 = $(this).parent().parent().height(); //功能按钮框的高度
+                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
+                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                height4 = $(this).parent().parent().prev().height();//内容部分高度
+                var sqaId = $(this).parent().parent().parent().find("input").val();
+                var id = $(this).parent().next().attr("id");
+                answer(id,sqaId,sectionId);
+                if (height <= 200){
+                    $(this).parent().parent().prev().css("height",height4);
+                }else {
+                    $(this).parent().parent().prev().css("height","auto");
+                }
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
+                $(this).parent().parent().css("height","auto");
+                $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                $(this).parent().next().css("display","block");
+                $(this).text("收起回复");
+            }else if ($(this).text() === "收起回复"){
+                $(this).parent().next().css("display","none");
+                $(this).text("回答");
+                $(this).parent().parent().prev().css("height","60%");
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().parent().css("height",height3);
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
+                $(this).parent().parent().css("height",height1);
+                $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+            }
+
+        });
+
+        function answer(id, sqaId, sectionId) {
+            var str = "";
+            var user = "";
+            var data = {"sqaId":sqaId,"sectionId": sectionId};
+            $.ajax({
+                type: "POST",
+                url: "/stuQa/findAnswersByPId",
+                dataType: "json",
+                data: data,
+                success: function (result) {
+                    layui.each(result.stuQaAnswerList, function (i, stuQa) {
+                        editori++;
+                        str += "<div class=\"stuQa-answer-box\">";
+                        str += "<div class=\"stuQa-user\">";
+                        $.ajax({
+                            type:"POST",
+                            url: '/users/selectNameAndImg',
+                            async: false,
+                            data:{"userId":stuQa.userId},
+                            success:function (result1) {
+                                user = result1.user;
+                                return user;
+                            }
+                        });
+                        str += "<div class=\"stuQa-userPhoto\">";
+                        str += "<img src='"+user.userImg+"' class='userPhoto'>";
+                        str += "</div>";
+                        str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
+                        str += "</div>";
+                        str += "<div class=\"stuQa-content-box\">";
+                        str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
+                        str += "<div class=\"stuQa-tag-box\">";
+                        layui.each(stuQa.tagList,function (i, tag) {
+                            str += "<div class=\"stuQa-tag\">"+tag.tagName+"</div>";
+                        });
+                        str += "</div>";
+                        str += "<div class=\"stuQa-content\">";
+                        str += "<div class=\"stuQa-toolbar\" id='stuQa-answer-toolbar"+editori+"'></div>";
+                        str += "<div class=\"stuQa-textEditor\" id='stuQa-answer-textEditor"+editori+"'>"+stuQa.content+"</div>";
+                        str += "</div>";
+                        answerEditorCreate(editori);
+                        str += "<div class=\"stuQa-function-box\">";
+                        str += "<div class=\"stuQa-function-div\">";
+                        str += "<div class=\"stuQa-func-tag stuQa-answer\" id='stuQa-answer-answer"+editori+"'>回答</div>";
+                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-answerNum"+editori+"'>"+stuQa.answerNum+"</div>";
+                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-view"+editori+"'>浏览</div>";
+                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-viewNum"+editori+"'>"+stuQa.viewNum+"</div>";
+                        str += "<div class=\"stuQa-func-tag stuQa-readMore\" id='stuQa-answer-readMore"+editori+"'>查看全文</div>";
+                        str += "<div class=\"stuQa-func-tag stuQa-share\" id='stuQa-answer-share"+editori+"'>"+stuQa.share+"</div>";
+                        str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-answer-report"+editori+"'>"+stuQa.report+"</div>";
+                        str += "<div class=\"stuQa-date\" id='stuQa-answer-date"+editori+"'>"+stuQa.date+"</div>";
+                        str += "</div>";
+                        str += "</div>";
+                        str += "</div>";
+                        str += "</div>";
+
+                    });
+                    $('#'+id).html(str);
+                }
+            });
+        }
+
+
+
+        /*回答列表富文本编辑器生成*/
+        function answerEditorCreate(editori) {
+            var E = window.wangEditor;
+            var editor = "answerEditor" + editori;
+            console.log(editor);
+            editor = new E('#stuQa-answer-toolbar'+editori, '#stuQa-answer-textEditor'+editori);
+            editor.create();
+        }
+
+
+        //回复评论的富文本编辑器
+        var ansE = window.wangEditor;
+        var ans_editor = new ansE('#answer-editor');
+        ans_editor.customConfig.menus = [
+            'bold',
+            'italic',
+            'underline',
+            'image',
+            'code'
+        ];
+        // 隐藏"网络图片"tab
+        ans_editor.customConfig.showLinkImg = false;
+        ans_editor.customConfig.uploadFileName = 'file';
+        ans_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+        ans_editor.customConfig.uploadImgTimeout = 1000*20;
+        ans_editor.customConfig.uploadImgMaxLength = 1;
+        ans_editor.customConfig.uploadImgHooks = {
+            customInsert: function (insertImg, result, ans_editor) {
+                var url = result.data;
+                insertImg(url)
+            }
+        };
+        ans_editor.create();
+
+        //回复点击事件
+        $(document).on("click", ".stuQa-reply", function () {
+            var sqaId = $(this).parent().parent().parent().find("input").val();
+            var answerId = $(this).parent().find("div").attr("id");
+            var answerNumId= $(this).parent().find("div").eq(1).attr("id");
+            layer.open({
+                title: '回复',
+                type: 1,
+                content: $("#answer-div"),
+                area:['500px','300px'],
+                offset:'t',
+                btn: ['提交'],
+                yes: function (index, layero) {
+                    layer.close(index);
+                    var content = ans_editor.txt.html();
+                    var data = {"sqaId":sqaId,"content":content};
+                    $.ajax({
+                        type:"POST",
+                        url:"/stuQa/insertAnswer",
+                        dataType: "json",
+                        data: data,
+                        success:function (result) {
+                            layer.alert(result.message);
+                            $('#'+answerId).click();
+                            $('#'+answerNumId).text(result.stuQa.answerNum);
+                        }
+                    })
+                }
+            });
+        });
+
+        /*-----------------------------------------学生问答选项卡 end-----------------------------------------------------------*/
+
+    });
 
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
         {
             $("#icon-biji").click(function () {
-                $("#div_stuNote").css("display","block");
+                $("#mulu_div").css("display", "none");
+                $("#wenda_div").css("display", "none");
+                $("#div_stuNote").css("display", "block");
+                $("#div_stuCmt").css("display", "none");
             });
             $("#stuNote_btn1").click(function () {
                 let isEmpty = true;
@@ -757,7 +1195,10 @@ $(document).ready(function () {
 /*-----------------------------------------学生评论 begin--------------------------------------------------------------*/
         {
             $("#icon-pinglun").click(function () {
-                $("#div_stuCmt").css("display","block");
+                $("#mulu_div").css("display", "none");
+                $("#wenda_div").css("display", "none");
+                $("#div_stuNote").css("display", "none");
+                $("#div_stuCmt").css("display", "block");
             });
             $("#stuCmt_btn1").click(function () {
                 let isEmpty = true;
@@ -1271,6 +1712,7 @@ $(document).ready(function () {
                                     num ++;
                                     thisObj.parent().next().text(num);
 
+
                                     thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
                                     thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
                                     thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
@@ -1407,7 +1849,4 @@ $(document).ready(function () {
             });
         }
 /*-----------------------------------------学生评论选项卡 end-----------------------------------------------------------*/
-    });
-
-
-});
+    })
