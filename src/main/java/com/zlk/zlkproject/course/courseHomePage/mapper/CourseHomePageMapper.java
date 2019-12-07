@@ -50,6 +50,14 @@ public interface CourseHomePageMapper {
      *@return java.util.List<com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper>
     **/
     List<Courses> findAll(Courses courses,Integer startPage,Integer limit);
+    /**
+     *@Author luanke
+     *@Description //按标签名字查询项目首页所有内容
+     *@Date 17:00 2019/11/28
+     *@Param [courseHomePageMapper, startPage, limit, commentUserId]
+     *@return java.util.List<com.zlk.zlkproject.course.courseHomePage.mapper.CourseHomePageMapper>
+     **/
+    List<Courses> findAllByTag(Courses courses,String tagName,Integer startPage,Integer limit);
 
 
     /**
