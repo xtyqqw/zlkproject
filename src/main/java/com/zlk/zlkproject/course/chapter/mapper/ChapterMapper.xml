@@ -9,18 +9,124 @@
         <result property="chapterName" column="chapter_name" javaType="java.lang.String"></result>
         <result property="chapterTime" column="chapter_time" javaType="java.lang.Integer"></result>
         <result property="chapterNum" column="chapter_num" javaType="java.lang.Integer"></result>
+        <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
         <collection property="sectionList" ofType="com.zlk.zlkproject.entity.Section">
             <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
             <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"></result>
             <result property="sectionName" column="section_name" javaType="java.lang.String"></result>
-            <result property="videoAddr" column="video_addr" javaType="java.lang.String"></result>
+            <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"></result>
+            <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"></result>
             <result property="sectionTime" column="section_time" javaType="java.lang.Integer"></result>
             <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
+            <result property="sectionIntro" column="section_intro" javaType="java.lang.String"></result>
         </collection>
     </resultMap>
+    <!--通过课程id查找章节信息-->
     <select id="findChapterByCoursesId" parameterType="java.lang.Integer" resultMap="chapterEntityMap">
-        select c.chapter_id,c.courses_id,c.chapter_name,c.chapter_time,c.chapter_num,
-        s.section_id,s.section_name,s.video_addr,s.section_time,s.section_num
+        select c.chapter_id,c.courses_id,c.chapter_name,c.chapter_time,c.chapter_num,c.section_num
+        s.section_id,s.section_name,s.section_intro,s.video_addr1,s.video_addr2,s.section_time,s.section_num
         from chapter c LEFT JOIN section s on c.chapter_id=s.chapter_id and courses_id = #{coursesId};
+    </select>
+    <!--添加新的章节信息-->
+    <insert id="insertChapter" useGeneratedKeys="true" keyProperty="chapterId" parameterType="com.zlk.zlkproject.entity.Chapter">
+        insert into chapter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coursesId != null">
+                courses_id,
+            </if>
+            <if test="chapterName != null and chapterName != ''">
+                chapter_name,
+            </if>
+            <if test="chapterTime != null">
+                chapter_time,
+            </if>
+            <if test="chapterNum != null">
+                chapter_num,
+            </if>
+            <if test="sectionNum != null">
+                section_num,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="coursesId != null">
+                #{coursesId},
+            </if>
+            <if test="chapterName != null and chapterName != ''">
+                #{chapterName},
+            </if>
+            <if test="chapterTime != null">
+                #{chapterTime},
+            </if>
+            <if test="chapterNum != null">
+                #{chapterNum},
+            </if>
+            <if test="sectionNum != null">
+                #{sectionNum},
+            </if>
+        </trim>
+    </insert>
+    <!--根据chapterId修改章节信息-->
+    <update id="updateChapterByChapterId" parameterType="com.zlk.zlkproject.entity.Chapter">
+        update chapter
+        <set>
+            <if test="coursesId != null">
+                courses_id = #{coursesId},
+            </if>
+            <if test="chapterName != null and chapterName != ''">
+                chapter_name = #{chapterName},
+            </if>
+            <if test="chapterTime != null">
+                chapter_time = #{chapterTime},
+            </if>
+            <if test="chapterNum != null">
+                chapter_num = #{chapterNum},
+            </if>
+            <if test="sectionNum != null">
+                section_num = #{sectionNum},
+            </if>
+        </set>
+        where chapter_id = #{chapterId};
+    </update>
+    <!--根据id删除章节-->
+    <delete id="deleteByChapterId" parameterType="com.zlk.zlkproject.entity.Chapter">
+        delete from chapter where chapter_id = #{chapterId};
+    </delete>
+    <!--查询全部信息并分页显示-->
+    <select id="selectAllAndLimit" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="chapterEntityMap">
+        select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
+        from chapter limit #{startPage},#{limit};
+    </select>
+    <!--根据课程id查找全部章节并分页显示-->
+    <select id="selectChapterByCoursesIdAndLimit" parameterType="java.lang.Integer" resultMap="chapterEntityMap">
+        select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
+        from chapter where courses_id = #{coursesId} limit #{startPage},#{limit};
+    </select>
+    <!--查询全部章节数量-->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        select count(1) from chapter;
+    </select>
+    <!--根据课程id查找当前课程全部章节数量-->
+    <select id="selectCountByCoursesId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from chapter
+        <if test="coursesId != null">
+            where courses_id = #{coursesId};
+        </if>
+    </select>
+    <!--根据章节名称模糊查询-->
+    <select id="selectByChapterName" resultMap="chapterEntityMap">
+        select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
+        from chapter
+        <if test="chapterName!=null and chapterName !=''">
+            where chapter_name like CONCAT('%',#{chapterName},'%')
+        </if>
+        limit #{startPage},#{limit}
+    </select>
+    <!--根据章节名字模糊查询数量-->
+    <select id="selectCountsByChapterName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from chapter
+        <if test="chapterName!=null and chapterName !=''">
+            where chapter_name like CONCAT('%',#{chapterName},'%')
+        </if>
     </select>
 </mapper>

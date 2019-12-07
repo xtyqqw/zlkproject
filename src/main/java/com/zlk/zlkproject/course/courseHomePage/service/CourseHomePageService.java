@@ -70,11 +70,11 @@ public interface CourseHomePageService {
     /**
      * 查询全部并分页
      *
-     * @param page
+     * @param offset
      * @param limit
      * @return
      */
-    List<Courses> selectCoursesByLimit(Integer page,Integer limit);
+    List<Courses> selectCoursesByLimit(Integer offset,Integer limit);
 
     /**
      * 查询课程数量
@@ -97,4 +97,24 @@ public interface CourseHomePageService {
      * @return 影响行数
      */
     int insertByCourses(Courses courses);
+
+    /**
+     *  根据课程名称模糊查询并分页
+     *@method findByCoursesNameLimit
+     *@params [coursesName,page,limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.Courses>
+     *@author zhang
+     *@time 2019/12/4  11:10
+     */
+    List<Courses> findByCoursesNameLimit(String coursesName,Integer page,Integer limit);
+
+    /**
+     *  根据课程名称模糊查询总数量
+     *@method findCountsByCoursesName
+     *@params [coursesName]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/4  11:19
+     */
+    Integer findCountsByCoursesName(String coursesName);
 }
