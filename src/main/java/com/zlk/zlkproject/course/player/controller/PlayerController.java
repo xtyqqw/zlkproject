@@ -26,7 +26,7 @@ public class PlayerController {
     @ResponseBody
     public void recordTime(@RequestParam("time") Double time){
         UserSection userSection = new UserSection();
-        userSection.setUserId(1);
+        userSection.setUserId("1");
         userSection.setSectionId(1);
         userSection.setTime(time);
         playerService.recordTime(userSection);
@@ -36,7 +36,7 @@ public class PlayerController {
     @ResponseBody
     public Double readRecord(){
         UserSection userSection = new UserSection();
-        userSection.setUserId(1);
+        userSection.setUserId("1");
         userSection.setSectionId(1);
         Double res = playerService.readRecord(userSection);
         return res;

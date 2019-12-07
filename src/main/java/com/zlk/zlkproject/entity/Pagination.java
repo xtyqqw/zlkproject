@@ -16,7 +16,17 @@ public class Pagination {
     /**起始页*/
     private Integer startPage;
 
-    private User    user;
+    private User user;
+
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public User getUser() {
         return user;
@@ -75,7 +85,7 @@ public class Pagination {
     }
 
 
-    public Pagination(List<?> list, Integer page, Integer limit, Integer totalCount, Integer totalPage, Integer startPage, User user) {
+    public Pagination(List<?> list, Integer page, Integer limit, Integer totalCount, Integer totalPage, Integer startPage, User user, String userId) {
         this.list = list;
         this.page = page;
         this.limit = limit;
@@ -83,6 +93,7 @@ public class Pagination {
         this.totalPage = totalPage;
         this.startPage = startPage;
         this.user = user;
+        this.userId = userId;
     }
 
     public Pagination() {

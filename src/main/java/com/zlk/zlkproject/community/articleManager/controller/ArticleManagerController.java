@@ -84,7 +84,7 @@ public class ArticleManagerController {
     public ModelAndView insert(Article article){
         ModelAndView mv=new ModelAndView();
         /**判断文章标题是否重复*/
-        Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
+        List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         if(articleByTitle != null){
             mv.addObject("flag","true");
             mv.addObject("msg","文章标题已存在");
@@ -117,7 +117,7 @@ public class ArticleManagerController {
     public ModelAndView update(Article article, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         /**判断文章是否更改，更改后判断更改后的文章是否存在*/
-        Article articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
+        List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
         if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
             mv.addObject("flag","true");
@@ -149,7 +149,7 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/delete")
-    @ResponseBody
+
     public String deleteArticleByArticleId(String articleId,HttpServletRequest request){
         /**获取删除文章id*/
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(articleId);

@@ -26,12 +26,12 @@ public class UserChapterController {
     /**
      * 通过主键查询单条数据
      *
-     * @param id 主键
+     * @param userId 主键
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public UserChapter selectOne(Integer id) {
-        return this.userChapterService.queryById(id);
+    public UserChapter selectOne(String userId) {
+        return this.userChapterService.queryById(userId);
     }
 
 }

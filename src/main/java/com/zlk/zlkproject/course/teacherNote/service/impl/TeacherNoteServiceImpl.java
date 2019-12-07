@@ -29,4 +29,30 @@ public class TeacherNoteServiceImpl implements TeacherNoteService {
     public Integer findCountBySectionId(Integer sectionId) {
         return teacherNoteMapper.findCountBySectionId(sectionId);
     }
+
+    @Override
+    public List<TeacherNote> selectTNByLimit(Integer offset, Integer limit) {
+        offset = (offset-1)*limit;
+        return teacherNoteMapper.selectTNByLimit(offset,limit);
+    }
+
+    @Override
+    public Integer selectTNByCount() {
+        return teacherNoteMapper.selectTNByCount();
+    }
+
+    @Override
+    public Integer deleteByTNId(Integer tnId) {
+        return teacherNoteMapper.deleteByTNId(tnId);
+    }
+
+    @Override
+    public Integer insertTNByTeacherNote(TeacherNote teacherNote) {
+        return teacherNoteMapper.insertTNByTeacherNote(teacherNote);
+    }
+
+    @Override
+    public Integer updateTNByTeacherNote(TeacherNote teacherNote) {
+        return teacherNoteMapper.updateTNByTeacherNote(teacherNote);
+    }
 }

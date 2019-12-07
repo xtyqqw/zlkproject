@@ -96,10 +96,6 @@
             margin-right: 45px;
         }
 
-        .a {
-            text-decoration: none;
-            color: black;
-        }
 
     </style>
 </head>
@@ -107,43 +103,57 @@
 
 <div style="margin-left: -40px">
     <input type="hidden" value="${error}" id="msg">
-    <div>
-        <c:forEach items="${allQuestion}" var="all" begin="0" end="10">
+    <div class="tar">
+        <a href="<%=request.getContextPath()%>/questionUser/questionSkip" style="color: black;" id="sss"
+           onmouseover="over()" onmouseout="out()" name="aaa" target="pageTarget">全部问答</a>
+        <span>&nbsp;|&nbsp;</span>
+        <a href="<%=request.getContextPath()%>/questionUser/questionSkip" style="color: black;" id="ssss"
+           onmouseover="over1()" onmouseout="out1()" name="bbb" target="pageTarget">我的问题</a>
+    </div>
+    <div class="frame">
+        <iframe class="if" name="pageTarget"    frameborder="1">
             <div>
-                <ul>
-                    <a href="<%=request.getContextPath() %>/questionUser/myQuestion" type="button" id="aa"  onmouseover="over1()" onmouseout="out1()" class="a">
-                        <li>
-                                ${all.questionTitle}
+                <c:forEach items="${allQuestion}" var="all" begin="0" end="10">
+                    <ul>
+                        <li style="margin: 50px 0;">
+                            <a href="<%=request.getContextPath() %>/questionUser/myQuestion" type="button"
+                               style="text-decoration: none;">
+                                    ${all.questionTitle}
+                            </a><br>
+                            <i>${all.questionContent}</i>
                         </li>
+                    </ul>
+                </c:forEach>
+            </div>
+            <div class="quiz">
+                <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
+            </div>
+            <div class="user">
+                <div class="hint">
+                    <i>提问者</i>
+                </div>
+                <div class="userData">
+                    <div class="userLogo">
+                        <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank">
+                            <img class="img" src="userImg"></a>
+                    </div>
+                </div>
+                <div class="userName">
+                    <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank"
+                       style="text-decoration: none; color: black; " id="or" onmouseover="over()" onmouseout="out()">
+                        <i id="size" name="userRealname"></i>
                     </a>
-                </ul>
+                    <p name="acreateTime">发布</p>
+                </div>
+                <div class="vip">
+                    <img src="/img/V.png"></svg>
+                </div>
             </div>
-        </c:forEach>
-    </div>
-    <div class="quiz">
-        <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
-    </div>
-    <div class="user">
-        <div class="hint">
-            <i>提问者</i>
-        </div>
-        <div class="userData">
-            <div class="userLogo">
-                <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank">
-                    <img class="img" src="userImg"></a>
-            </div>
-        </div>
-        <div class="userName">
-            <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank"
-               style="text-decoration: none; color: black; " id="or" onmouseover="over()" onmouseout="out()">
-                <i id="size" name="userRealname"></i>
-            </a>
-            <p name="acreateTime">发布</p>
-        </div>
-        <div class="vip">
-            <img src="/img/V.png"></svg>
-        </div>
+        </iframe>
+        <iframe class="if" name="bbb" frameborder="1">
 
+            111
+        </iframe>
     </div>
 </div>
 <script>

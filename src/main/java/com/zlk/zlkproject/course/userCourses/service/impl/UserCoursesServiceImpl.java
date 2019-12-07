@@ -31,7 +31,7 @@ public class UserCoursesServiceImpl implements UserCoursesService {
      * @return 实例对象
      */
     @Override
-    public UserCourses queryById(Integer userId) {
+    public UserCourses queryById(String userId) {
         return this.userCoursesMapper.queryById(userId);
     }
 
@@ -78,7 +78,7 @@ public class UserCoursesServiceImpl implements UserCoursesService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer userId) {
+    public boolean deleteById(String userId) {
         return this.userCoursesMapper.deleteById(userId) > 0;
     }
 }

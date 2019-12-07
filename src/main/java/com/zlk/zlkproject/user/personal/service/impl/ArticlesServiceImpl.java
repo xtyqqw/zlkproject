@@ -75,7 +75,7 @@ public class ArticlesServiceImpl implements ArticlesService {
     }
 
     /**
-     * 流加载
+     * 分页查询我的文章
      * @param pagination
      * @return
      */
@@ -85,7 +85,14 @@ public class ArticlesServiceImpl implements ArticlesService {
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return articlesMapper.findArticlesAll(pagination);
+        List<Articles> list=articlesMapper.findArticlesAll(pagination);
+        int a=list.size();
+        for(int i=0;i<a;i++){
+            Articles articles=list.get(i);
+            articles.setCreateDate(LeaveTime.formatDate(articles.getCreateTime()));
+            list.set(i,articles);
+        }
+        return list;
     }
 
     /**

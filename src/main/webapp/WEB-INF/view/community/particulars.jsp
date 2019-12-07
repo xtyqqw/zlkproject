@@ -101,14 +101,14 @@
             </div><br><br>
             <div style="float: left; margin-top: 10px;">
                 <div style="width: 40px;height:20px;background-color:#E8E8E8;border-radius: 5%;">
-                    <p class="tag"><%--${article.tagName}--%>JAVA</p>
+                    <p class="tag">${article.tagName}</p>
                 </div>
             </div>
             <div class="span">
                 <small>
                     <span><%=application.getAttribute("counter") %>${arcitle.browseCount}浏览</span>
                     <i>|</i>
-                    <span>分类：${article.typeName}</span>
+                        <span>分类：${article.typeName}</span>
                 </small>
             </div>
         </div>

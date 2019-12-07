@@ -28,6 +28,7 @@ public class MyResponse {
     /**是否已采纳*/
     private Integer accept;
     /**回答时间*/
+    @JsonFormat(timezone = "GMT+8")
     private Date createTime;
     /**格式化后的时间*/
     private String formatDate;
