@@ -103,5 +103,5 @@ public interface ArticleCommentsMapper {
      * @author: QianKeQin
      * @date: 2019/12/8 9:45
      */
-    Integer updateArtCmtInform(Integer articleCommentId, Integer inform);
+    Integer updateArtCmtInform(Integer articleCommentId, String inform);
 }
