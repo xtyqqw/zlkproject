@@ -213,4 +213,21 @@ public class UserController {
     public String toForget(){
         return "view/forgetpwd";
     }
+
+    /**
+     *  根据id查找名字和头像
+     *@method selectNameAndImg
+     *@params [userId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/6  17:26
+     */
+    @RequestMapping(value = "/selectNameAndImg")
+    @ResponseBody
+    public Map<String,Object> selectNameAndImg(String userId) throws Exception{
+        User user = signService.selectNameAndImg(userId);
+        Map<String,Object> map= new HashMap<>();
+        map.put("user",user);
+        return map;
+    }
 }

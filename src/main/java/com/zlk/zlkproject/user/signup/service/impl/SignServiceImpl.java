@@ -56,4 +56,9 @@ public class SignServiceImpl implements SignService {
         user.setUserPwd(userPwd);
         return signMapper.changePwd(user);
     }
+
+    @Override
+    public User selectNameAndImg(String userId) {
+        return signMapper.selectNameAndImg(userId);
+    }
 }

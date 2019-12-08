@@ -323,9 +323,8 @@
                 layer.open({
                     title: "编辑",
                     type: 1,
-                    shadeClose: true,
                     shade: 0.8,
-                    area: ['80%', '90%'],
+                    area: ['100%', '100%'],
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {

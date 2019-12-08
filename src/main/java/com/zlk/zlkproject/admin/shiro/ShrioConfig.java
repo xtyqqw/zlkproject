@@ -52,7 +52,8 @@ public class ShrioConfig {
         filterMap.put("/qaa/*","authc");
         filterMap.put("/note/*","authc");
         filterMap.put("/chapter/*","authc");
-        filterMap.put("/section/*","authc");
+        filterMap.put("/section/*","authc");;
+        filterMap.put("/sections/*","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

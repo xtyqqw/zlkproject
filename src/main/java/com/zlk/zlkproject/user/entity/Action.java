@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -15,8 +18,11 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Entity
+@Table(name = "actions")
 public class Action {
     /**id表格主键*/
+    @Id
     private String actionId;
     /**用户操作类型
      * 包括：1.发布文章 2.评论文章 3.回复评论

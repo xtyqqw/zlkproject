@@ -65,8 +65,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
-    public String insertCourses(Integer coursesId){
-        String userId="1";
+    public String insertCourses(HttpServletRequest request,Integer coursesId){
+        //获取当前登录的用户id
+        String userId = (String) request.getSession().getAttribute("userId");
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -124,7 +125,7 @@ public class DetailsController {
      */
     @RequestMapping("/course/toCourseManager")
     public String toCourseManager(){
-        return "/view/toCourseManager";
+        return "view/CourseManager";
     }
 
     /**
