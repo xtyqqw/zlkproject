@@ -192,55 +192,15 @@
 </head>
 <body>
     <div class="context-div" id="context-div"></div>
-    <!--日期转换-->
-    <script>
-        $(document).ready(function()
-        {
-            var str = "";
-            var timestamp = 0;
-            var pass = 0;
-            str = $("#time").text();
-            timestamp = (new Date()).valueOf();
-            pass = (timestamp - str) / 1000;
-            $("#time").text(pass);
-            if (pass < 60) {
-                $("#time").text(pass + "秒前");
-            }
-            else
-            {
-                if (pass < (60 * 60))
-                {
-                    pass = Math.floor(pass / 60);
-                    $("#time").text(pass + "分钟前");
-                }
-                else
-                {
-                    if (pass < (60 * 60 * 72))
-                    {
-                        pass = Math.floor(pass / 60 / 60);
-                        $("#time").text(pass + "小时前");
-                    }
-                    else
-                    {
-                        if (pass >= (60 * 60 * 72) )
-                        {
-                            pass = Math.floor(pass / 60 / 60 / 24);
-                            $("#time").text(pass + "天前");
-                        }
-                    }
-                }
-            }
-        });
-    </script>
     <!--没插图就隐藏-->
-    <script>
+    <%--<script>
         $(function () {
             var img = $("#figures").find("img");
             if(img.length<=0){
                 $("#figures").hide();
             }
         })
-    </script>
+    </script>--%>
     <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
     <!--瀑布流-->
     <script>
@@ -269,7 +229,7 @@
                                         '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>' +
                                         '<div class="articleSetTop" id="articleSetTop"><p id="p">'+article.articleSetTop+'</p></div>'+
                                         '<div class="kuang">'+
-                                        '<div class="figures" id="figures">'+'<img class="imgtest" src="http://localhost:8080//upload//6f8e3206-fd7e-4ff9-a1eb-fc07de81435f.jpg">'+'</div>'+
+                                        '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
                                         '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
                                         '</div>'+
                                         '<div>'+

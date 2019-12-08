@@ -38,11 +38,11 @@ public class ArticleListServiceImpl implements ArticleListService {
         return articleListMapper.findByBrowseCount(pagination);
     }
     @Override
-    public List<Article> findByUserId(String userId,Pagination pagination) {
+    public List<Article> findByUserId(Pagination pagination) {
         Integer page = pagination.getPage();
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return articleListMapper.findByUserId(userId,pagination);
+        return articleListMapper.findByUserId(pagination);
     }
 }

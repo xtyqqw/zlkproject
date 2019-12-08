@@ -111,7 +111,8 @@ public class ArticleListController {
     public Map<String,Object> findByUserId(String userId,Pagination pagination)throws Exception{
         User user=new User();
         user.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
-        List<Article> articleList=articleListService.findByUserId(userId,pagination);
+        pagination.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
+        List<Article> articleList=articleListService.findByUserId(pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
         return map;

@@ -18,7 +18,6 @@
             <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
             <result property="inform" column="inform" javaType="java.lang.Integer"/>
             <result property="userId" column="user_id" javaType="java.lang.String"/>
-            <result property="createArticleType" column="create_article_type" javaType="java.lang.Integer"/>
             <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"/>
             <result property="approval" column="approval" javaType="java.lang.Integer"/>
             <result property="typeName" column="type_name" javaType="java.lang.String"/>
@@ -50,9 +49,9 @@
     <delete id="deleteArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">
         delete from article where article_id=#{articleId}
     </delete>
-    <!--流加载-->
+    <!--分页查询文章-->
     <select id="findArticlesAll" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="articlesMap">
-        select * from article order by update_time desc limit #{startPage},#{limit}
+        select * from article where user_Id=#{userId} order by update_time desc limit #{startPage},#{limit}
     </select>
     <!--删除标签-->
     <update id="updateTag" parameterType="com.zlk.zlkproject.entity.Tag">

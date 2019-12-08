@@ -76,7 +76,7 @@
     .main .tag {
         width: 50px;
         height: 18px;
-        background: gainsboro;
+        background: #914ff1;
         display: inline-block;
         border-radius: 5px;
         text-align: center;

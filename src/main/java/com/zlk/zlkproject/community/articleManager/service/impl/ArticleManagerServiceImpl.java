@@ -56,7 +56,7 @@ public class ArticleManagerServiceImpl implements ArticleManagerService {
      * @return
      */
     @Override
-    public Article selectArticleByTitle(String title) {
+    public List<Article> selectArticleByTitle(String title) {
         return articleManagerMapperMapper.selectArticleByTitle(title);
     }
 

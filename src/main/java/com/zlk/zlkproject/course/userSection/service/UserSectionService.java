@@ -18,7 +18,7 @@ public interface UserSectionService {
      * @param userId 主键
      * @return 实例对象
      */
-    UserSection queryById(Integer userId);
+    UserSection queryById(String userId);
 
     /**
      * 查询多条数据
@@ -51,6 +51,6 @@ public interface UserSectionService {
      * @param userId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer userId);
+    boolean deleteById(String userId);
 
 }

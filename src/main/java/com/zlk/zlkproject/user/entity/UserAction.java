@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -54,6 +55,7 @@ public class UserAction {
      * */
     private String articleName;
     /**动态创建时间*/
+    @JsonFormat(timezone = "GMT+8")
     private Date createTime;
     /**格式化后的时间*/
     private String dateFormat;

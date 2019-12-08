@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.impl.cxr;
 
 import com.zlk.zlkproject.user.entity.CxrPaging;
-import com.zlk.zlkproject.user.entity.User;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.personal.mapper.cxr.UserMapper;
 import com.zlk.zlkproject.user.personal.service.cxr.UserService;
 import org.springframework.stereotype.Service;

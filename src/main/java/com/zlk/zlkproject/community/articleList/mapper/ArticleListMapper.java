@@ -22,5 +22,5 @@ public interface ArticleListMapper {
     /**查询最高浏览量（浏览次数）*/
     List<Article> findByBrowseCount(Pagination pagination);
     /**查询我的文章*/
-    List<Article> findByUserId(@Param("userId") String userId,Pagination pagination);
+    List<Article> findByUserId(Pagination pagination);
 }
