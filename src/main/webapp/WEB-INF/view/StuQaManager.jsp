@@ -19,13 +19,16 @@
     </script>
 
     <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container layui-inline">
+            <button class="layui-btn" lay-event="report">举报优先</button>
+        </div>
         <div class="layui-input-inline">
             <form class="layui-inline layui-form">
                 <div class="layui-inline">
 <%--                    <input name="coursesName" id="coursesNameInput" class="layui-input" autocomplete="off" onkeyup="search()">--%>
                     <select class="layui-btn-checked" name="selectName" id="select" lay-filter="select" onchange="selectChange()">
                         <option></option>
-                        <option value="userName">用户名</option>
+                        <option value="userRealname">用户名</option>
                         <option value="sectionName">小节名</option>
                     </select>
                 </div>
@@ -68,6 +71,22 @@
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:120}
                 ]]
                 ,page: true
+            });
+
+
+            //头工具栏事件
+            table.on('toolbar(stuQa)', function(obj){
+                var evend = obj.event;
+                if (evend==="report"){
+                    table.reload('stuQa', {
+                        url: '/stuQa/reportDesc'
+                        , method:'post'
+                        , page:{
+                            curr:1
+                        }
+                        , toolbar: '#toolbarDemo'
+                    });
+                }
             });
 
             //监听select选择事件

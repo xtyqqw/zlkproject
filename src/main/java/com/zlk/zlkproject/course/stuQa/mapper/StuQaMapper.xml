@@ -228,4 +228,40 @@
     <delete id="deleteBySqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
         DELETE FROM stu_qa WHERE sqa_id = #{sqaId}
     </delete>
+    <!--按照已举报进行排列-->
+    <select id="selectByReportDesc" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa ORDER BY report DESC limit #{startPage},#{limit}
+    </select>
+    <!--根据用户名或小节名模糊查询-->
+    <select id="fuzzySearchByUserName" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN user u ON sq.user_id = u.user_id
+            WHERE u.user_realname LIKE CONCAT('%',#{userRealname},'%')
+        </if>
+        LIMIT #{startPage},#{limit}
+    </select>
+    <select id="fuzzySearchBySectionName" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa sq
+        <if test="sectionName != null and sectionName != ''">
+            LEFT JOIN section s ON sq.section_id = s.section_id
+            WHERE s.section_name LIKE CONCAT('%',#{sectionName},'%')
+        </if>
+        LIMIT #{startPage},#{limit}
+    </select>
+    <select id="selectCountByUserNameFuzzySelect" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN user u ON sq.user_id = u.user_id
+            WHERE u.user_realname LIKE CONCAT('%',#{userRealname},'%')
+        </if>
+    </select>
+    <select id="selectCountBySectionNameFuzzySelect" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN section s ON sq.section_id = s.section_id
+            WHERE s.section_name LIKE CONCAT('%',#{sectionName},'%')
+        </if>
+    </select>
+
 </mapper>

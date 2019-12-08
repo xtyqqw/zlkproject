@@ -150,4 +150,54 @@ public interface StuQaMapper {
      *@time 2019/12/6  10:33
      */
     Integer deleteBySqaId(StuQa stuQa);
+
+    /**
+     *  已举报优先排列
+     *@method selectByReportDesc
+     *@params [startPage, limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuQa>
+     *@author zhang
+     *@time 2019/12/7  14:24
+     */
+    List<StuQa> selectByReportDesc(Integer startPage,Integer limit);
+
+    /**
+     *  根据用户名模糊查询
+     *@method fuzzySearchByUserName
+     *@params [userRealname, startPage, limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuQa>
+     *@author zhang
+     *@time 2019/12/7  14:58
+     */
+    List<StuQa> fuzzySearchByUserName(String userRealname,Integer startPage,Integer limit);
+
+    /**
+     *  根据小节名模糊查询
+     *@method fuzzySearchBySectionName
+     *@params [sectionName, startPage, limit]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuQa>
+     *@author zhang
+     *@time 2019/12/7  14:58
+     */
+    List<StuQa> fuzzySearchBySectionName(String sectionName,Integer startPage,Integer limit);
+
+    /**
+     * 根据用户名模糊查询数量
+     *@method selectCountByUserNameFuzzySelect
+     *@params [userRealname]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/7  15:45
+     */
+    Integer selectCountByUserNameFuzzySelect(String userRealname);
+
+    /**
+     *  根据小节名模糊查询数量
+     *@method selectCountBySectionNameFuzzySelect
+     *@params [sectionName]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/7  15:46
+     */
+    Integer selectCountBySectionNameFuzzySelect(String sectionName);
 }

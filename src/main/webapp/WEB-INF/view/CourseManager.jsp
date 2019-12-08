@@ -226,10 +226,20 @@
                             layero.find('form').find('button[lay-submit]').click();
                         }
                     });
+                } else if (evend==="submit"){
+                    let coursesName = $("#coursesNameInput").val();
+                    table.reload('course', {
+                        method: "post"
+                        , url: '/courseHomePage/findByCoursesNameLimit?coursesName='+coursesName
+                        , page:{
+                            curr:1
+                        }
+                        , toolbar: '#toolbarDemo'
+                    });
                 }
             });
 
-            $("#seek").click(function () {
+            /*$("#seek").click(function () {
                 let coursesName = $("#coursesNameInput").val();
                 table.reload('course', {
                     method: "post"
@@ -239,7 +249,7 @@
                     }
                     , toolbar: '#toolbarDemo'
                 });
-            });
+            });*/
 
 
 
@@ -322,7 +332,6 @@
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
-                        $('#introduceVideo').css("display","none");
                         $('#videoDiv').css("display","inline");
                         $('#introduceVideo1').attr('src', result); //图片链接（base64）
                     });
@@ -347,7 +356,6 @@
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
-                        // $('#coverPic').css("display","none");
                         $('#coverPicImg').attr('src', result); //图片链接（base64）
                     });
                 }
@@ -371,7 +379,6 @@
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
-                        $('#introducePic').css("display","none");
                         $('#introducePicImg').attr('src', result); //图片链接（base64）
                     });
                 }
@@ -395,7 +402,6 @@
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
-                        $('#featurePic').css("display","none");
                         $('#featurePicImg').attr('src', result); //图片链接（base64）
                     });
                 }

@@ -104,10 +104,6 @@
         </div>
     </script>
 
-
-
-
-
     <script type="text/javascript" >
         layui.use(['table','layer','form'], function(){
             var table = layui.table;//表格
@@ -124,11 +120,37 @@
                     ,{field:'chapterName', title: '章节名'}
                     ,{field:'chapterNum', width:100, title: '章节序号'}
                     ,{field:'sectionNum', width:100, title: '小节数量'}
-                    ,{field:'chapterTime', title: '章节视频时长', sort: true}
+                    ,{field:'chapterTime', title: '章节视频时长', templet:function (d) {
+                            return format(d.chapterTime);
+                        },sort: true}
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
                 ]]
                 ,page: true
             });
+
+            //视频时长格式转换函数  hh:mm:ss
+            function format(num) {
+                num = Math.round(num);
+                var hour = parseInt((num / 3600) + '');
+                var minute = parseInt(((num % 3600) / 60) + '');
+                var second = (num % 3600) % 60;
+                if (hour === 0) {
+                    hour = '00';
+                } else if (hour > 0 && hour < 10) {
+                    hour = '0' + hour;
+                }
+                if (minute === 0) {
+                    minute = '00';
+                } else if (minute > 0 && minute < 10) {
+                    minute = '0' + minute;
+                }
+                if (second === 0) {
+                    second = '00';
+                } else if (second > 0 && second < 10) {
+                    second = '0' + second;
+                }
+                return hour + ':' + minute + ':' + second;
+            }
 
             //头工具栏事件
             table.on('toolbar(chapter)', function(obj){
@@ -167,21 +189,18 @@
                             layero.find('form').find('button[lay-submit]').click();
                         }
                     });
+                } else if (evend==="submit"){
+                    let chapterName = $("#chapterNameInput").val();
+                    table.reload('chapter', {
+                        height: 480
+                        , url: '/chapter/selectByChapterName?chapterName='+chapterName
+                        ,method:'POST'
+                        , page:{
+                            curr:1
+                        }
+                        , toolbar: '#toolbarDemo'
+                    });
                 }
-            });
-
-            //根据章节内容模糊查询
-            $("#seek").click(function () {
-                let chapterName = $("#chapterNameInput").val();
-                table.reload('chapter', {
-                    height: 480
-                    , url: '/chapter/selectByChapterName?chapterName='+chapterName
-                    ,method:'POST'
-                    , page:{
-                        curr:1
-                    }
-                    , toolbar: '#toolbarDemo'
-                });
             });
 
             //监听行工具事件
