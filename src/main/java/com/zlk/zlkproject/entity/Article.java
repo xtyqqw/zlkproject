@@ -46,8 +46,10 @@ public class Article {
     private String figures;
     /**文章摘要*/
     private String articleDigest;
-    /**文章内容*/
+    /**文章内容,仅供内容修改用,修改时要处理查询用的字段同步更新*/
     private String articleContent;
+    /**HTML格式文章内容,仅供列表查询用*/
+    private String articleContentHtml;
     /**赞数*/
     private Integer zanCount;
     /**踩数*/
@@ -55,7 +57,7 @@ public class Article {
     /**举报：0 是，1 否*/
     private Integer inform;
     /**发文类型：0 原创，1 转载，2 翻译*/
-    private String createArticleType;
+    private Integer createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/
     private Integer articleSetTop;
     /**审核：0 审核中，1 审核过，2 审核未过*/

@@ -422,9 +422,9 @@ window.onload=function () {
         clearInterval(delay_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
-            document.getElementById("video_src").src = "http://47.98.183.4:8888/group1/M00/00/00/rBBUH13Xo7GAK6HTCnvSt70QyI4511.mp4";
+            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nS6yAQKMICnvSt70QyI4435.mp4";
         }else if('普清'===$(this).text()){
-            document.getElementById("video_src").src = "http://47.98.183.4:8888/group1/M00/00/00/rBBUH13XjVyAVYH-AxDnTtIGlSU552.mp4";
+            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nSyGAdhzWAxDnTtIGlSU984.mp4";
         }
         elem_video1.load();
         elem_video1.currentTime = currentTime;

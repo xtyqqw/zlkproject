@@ -51,7 +51,11 @@
     </delete>
     <!--分页查询文章-->
     <select id="findArticlesAll" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="articlesMap">
-        select * from article where user_Id=#{userId} order by update_time desc limit #{startPage},#{limit}
+        SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
+        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
+        FROM article a
+        LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
+        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc limit #{startPage},#{limit}
     </select>
     <!--删除标签-->
     <update id="updateTag" parameterType="com.zlk.zlkproject.entity.Tag">
