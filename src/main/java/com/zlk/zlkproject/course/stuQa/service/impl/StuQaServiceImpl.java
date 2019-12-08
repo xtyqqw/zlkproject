@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,6 +135,34 @@ public class StuQaServiceImpl implements StuQaService {
     @Override
     public Integer deleteBySqaId(StuQa stuQa) {
         return stuQaMapper.deleteBySqaId(stuQa);
+    }
+
+    @Override
+    public List<StuQa> selectByReportDesc(Integer page, Integer limit) {
+        Integer startPage = (page-1)*limit;
+        return stuQaMapper.selectByReportDesc(startPage,limit);
+    }
+
+    @Override
+    public List<StuQa> fuzzySearchByUserName(String userRealname, Integer page, Integer limit) {
+        Integer startPage = (page-1)*limit;
+        return stuQaMapper.fuzzySearchByUserName(userRealname, startPage, limit);
+    }
+
+    @Override
+    public List<StuQa> fuzzySearchBySectionName(String sectionName, Integer page, Integer limit) {
+        Integer startPage = (page-1)*limit;
+        return stuQaMapper.fuzzySearchBySectionName(sectionName, startPage, limit);
+    }
+
+    @Override
+    public Integer selectCountByUserNameFuzzySelect(String userRealname) {
+        return stuQaMapper.selectCountByUserNameFuzzySelect(userRealname);
+    }
+
+    @Override
+    public Integer selectCountBySectionNameFuzzySelect(String sectionName) {
+        return stuQaMapper.selectCountBySectionNameFuzzySelect(sectionName);
     }
 
 

@@ -109,6 +109,22 @@
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
+                            <label class="ui compact teal basic label" placeholder="">标签</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="tagName">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择问答标签</div>
+                                <div class="menu">
+                                    <div class="item" data-value="java">java</div>
+                                    <div class="item" data-value="linux">linux</div>
+                                    <div class="item" data-value="html">html</div>
+                                    <div class="item" data-value="mysql">mysql</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               <%--     <div class="required field">
+                        <div class="ui left labeled action input">
                             <label class="ui compact teal basic label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
                                 <input type="hidden" name="tagName">
@@ -121,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="ui error message"></div>
                     <div class="ui right aligned container">
                         <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>

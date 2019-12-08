@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.QuestionTagMapper">
+    <resultMap id="tagEntityMap" type="com.zlk.zlkproject.entity.Tag">
+        <id column="tag_id" property="tagId" javaType="java.lang.Integer"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+        <result column="tag_type_id" property="tagTypeId" javaType="java.lang.Integer"/>
+        <result column="tag_type_name" property="tagTypeName" javaType="java.lang.String"/>
+    </resultMap>
+
+
+    <select id="listByTag" resultMap="tagEntityMap" parameterType="java.lang.String">
+      select * from tag
+    </select>
+</mapper>

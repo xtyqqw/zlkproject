@@ -40,7 +40,6 @@ public class CourseHomePageController {
     public Map<String,Object> selectCoursesByCoursesId(HttpServletRequest request,Integer coursesId) {
         coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
-        System.out.println(courses);
         Map<String,Object> map=new HashMap<>();
         map.put("courses",courses);
         return map;
@@ -82,8 +81,25 @@ public class CourseHomePageController {
     public Map<String,Object> findAll(Courses courses,Integer page,Integer limit)throws Exception{
         List<Courses> allList=courseHomePageService.findAll(courses,page,limit);
         Map<String,Object> map=new HashMap<>();
-
         map.put("allList",allList);
+        return map;
+    }
+
+    /**
+     * 根据课程对象为条件查询并分页
+     * @param courses
+     * @param page
+     * @param limit
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findAllByTag")
+    @ResponseBody
+    public Map<String,Object> findAllByTag(Courses courses,String tagName,Integer page,Integer limit,HttpServletRequest request)throws Exception{
+        tagName = (String) request.getSession().getAttribute("tagName");
+        List<Courses> allListTag=courseHomePageService.findAllByTag(courses,tagName,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("allListTag",allListTag);
         return map;
     }
 

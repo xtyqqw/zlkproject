@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.comment.mapper.ArticleCommentsMapper">
+    <resultMap id="artCmtEntityMap" type="com.zlk.zlkproject.entity.ArticleComment">
+        <id property="articleCommentId" column="article_comment_id" javaType="java.lang.Integer"/>
+        <result property="pId" column="pid" javaType="java.lang.Integer"/>
+        <result property="articleId" column="article_id" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="replyPerson" column="reply_person" javaType="java.lang.String"/>
+        <result property="content" column="content" javaType="java.lang.String"/>
+        <result property="zan" column="zan" javaType="java.lang.Integer"/>
+        <result property="cai" column="cai" javaType="java.lang.Integer"/>
+        <result property="inform" column="inform" javaType="java.lang.Integer"/>
+        <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+
+        <collection property="articleCommentList" ofType="com.zlk.zlkproject.entity.ArticleComment">
+            <result property="articleCommentId" column="article_comment_id1" javaType="java.lang.Integer"/>
+            <result property="pId" column="pid1" javaType="java.lang.Integer"/>
+            <result property="articleId" column="article_id1" javaType="java.lang.String"/>
+            <result property="userId" column="user_id1" javaType="java.lang.String"/>
+            <result property="replyPerson" column="reply_person1" javaType="java.lang.String"/>
+            <result property="content" column="content1" javaType="java.lang.String"/>
+            <result property="zan" column="zan1" javaType="java.lang.Integer"/>
+            <result property="cai" column="cai1" javaType="java.lang.Integer"/>
+            <result property="inform" column="inform1" javaType="java.lang.Integer"/>
+            <result property="date" column="date1" javaType="java.util.Date"/>
+            <result property="userRealName" column="user_realname1" javaType="java.lang.String"/>
+            <result property="userImg" column="user_img1" javaType="java.lang.String"/>
+
+            <collection property="articleCommentZanCaiList" ofType="com.zlk.zlkproject.entity.ArticleCommentZanCai">
+                <result property="userId" column="user_id3" javaType="java.lang.String"/>
+                <result property="zanCai" column="zan_cai3" javaType="java.lang.String"/>
+            </collection>
+        </collection>
+
+        <collection property="articleCommentZanCaiList" ofType="com.zlk.zlkproject.entity.ArticleCommentZanCai">
+            <result property="userId" column="user_id2" javaType="java.lang.String"/>
+            <result property="zanCai" column="zan_cai2" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <insert id="addArtCmt" parameterType="com.zlk.zlkproject.entity.ArticleComment">
+        INSERT INTO article_comment (pid,article_id,user_id,reply_person,content,date)
+        VALUES (#{pId},#{articleId},#{userId},#{replyPerson},#{content},#{date})
+    </insert>
+
+    <select id="findArtCmt" resultMap="artCmtEntityMap">
+        SELECT a.*,b.article_comment_id article_comment_id1,b.pid pid1,b.article_id article_id1,b.user_id user_id1,b.reply_person reply_person1
+               ,b.content content1,b.zan zan1,b.cai cai1,b.inform inform1,b.date date1,b.user_realname user_realname1
+               ,b.user_img user_img1,b.user_id3,b.zan_cai3,c.user_id user_id2,c.zan_cai zan_cai2
+        FROM (
+                SELECT am.*,s.user_realname,s.user_img
+		        FROM article_comment am
+				     ,(SELECT user_id,user_realname,user_img FROM user) s
+			    WHERE am.user_id = s.user_id AND am.article_id = #{articleId} AND am.pid = 0 ORDER BY date DESC
+			          LIMIT #{page}, #{size}
+			 ) a
+        LEFT JOIN (
+                    SELECT q.*,auz.user_id user_id3,auz.zan_cai zan_cai3
+				    FROM (
+				            SELECT am.*,s.user_realname,s.user_img
+						    FROM article_comment am
+							     ,(SELECT user_id,user_realname,user_img FROM user) s
+						    WHERE am.user_id = s.user_id AND am.article_id = #{articleId} AND am.pid != 0 ORDER BY date
+						 ) q
+					LEFT JOIN artcmt_user_zc auz
+					ON q.article_comment_id = auz.article_comment_id
+				  ) b
+        ON a.article_comment_id = b.pid
+        LEFT JOIN artcmt_user_zc c
+        ON a.article_comment_id = c.article_comment_id
+    </select>
+
+    <select id="findArtCmtCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM article_comment WHERE article_id = #{articleId} AND pid = 0
+    </select>
+
+    <select id="findZanCaiNumByArticleCommentId" resultMap="artCmtEntityMap">
+        SELECT zan,cai FROM article_comment WHERE article_comment_id = #{articleCommentId}
+    </select>
+
+    <update id="updateZanCaiNumByArticleCommentId">
+        <if test="type == 'ZanAdd'">
+            UPDATE article_comment SET zan = zan + 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+        <if test="type == 'ZanMinus'">
+            UPDATE article_comment SET zan = zan - 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+        <if test="type == 'CaiAdd'">
+            UPDATE article_comment SET cai = cai + 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+        <if test="type == 'CaiMinus'">
+            UPDATE article_comment SET cai = cai - 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+        <if test="type == 'ZanAddCaiMinus'">
+            UPDATE article_comment SET zan = zan + 1, cai = cai - 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+        <if test="type == 'ZanMinusCaiAdd'">
+            UPDATE article_comment SET zan = zan - 1, cai = cai + 1 WHERE article_comment_id = #{articleCommentId}
+        </if>
+    </update>
+
+    <insert id="addArtCmtUserZC">
+        INSERT INTO artcmt_user_zc (article_comment_id,user_id,zan_cai)
+        VALUES (#{articleCommentId},#{userId},#{zanOrCai})
+    </insert>
+
+    <delete id="deleteArtCmtUserZC">
+        DELETE FROM artcmt_user_zc WHERE article_comment_id = #{articleCommentId} AND user_id = #{userId}
+    </delete>
+
+    <update id="updateArtCmtUserZC">
+        UPDATE artcmt_user_zc SET zan_cai = #{zanOrCai} WHERE article_comment_id = #{articleCommentId} AND user_id = #{userId}
+    </update>
+
+    <update id="updateArtCmtInform">
+        UPDATE article_comment SET inform = #{inform} WHERE article_comment_id = #{articleCommentId}
+    </update>
+</mapper>

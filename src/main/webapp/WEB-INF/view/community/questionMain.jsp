@@ -104,7 +104,12 @@
 <body>
 
 <div style="margin-left: -20px;width: 100%;height: 600px;">
-    <div style="width:850px;height: auto;margin-top: -20px;float: left;">
+    <div style="margin-top: 110px;margin-left: -140px;">
+        <div class="quiz">
+            <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
+        </div>
+    </div>
+    <div style="width:850px;height: auto;margin-top: -180px;float: left;">
         <c:forEach items="${allQuestion}" var="all" begin="0" end="100">
             <ul>
                 <li style="margin: 50px 0;">
@@ -117,10 +122,8 @@
             </ul>
         </c:forEach>
     </div>
-    <div style="float: right;margin-right: -20px">
-        <div class="quiz">
-            <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
-        </div>
+<%--    <div style="float: left;">
+
         <div class="user">
             <div class="hint">
                 <i>提问者</i>
@@ -142,7 +145,8 @@
                 <img src="/img/V.png"></svg>
             </div>
         </div>
-    </div>
+    </div>--%>
+
 </div>
 <script type="text/javascript">
     var oBox = document.getElementById('size');
