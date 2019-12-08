@@ -21,7 +21,7 @@ public class QuestionTagServiceImpl implements QuestionTagService {
     private QuestionTagMapper questionTagMapper;
 
     @Override
-    public List<Tag> listTagAll() {
-        return questionTagMapper.listTagAll();
+    public List<Tag> listByTag(Tag tag) {
+        return questionTagMapper.listByTag(tag);
     }
 }
