@@ -78,8 +78,8 @@
             border: none;
             width: 282px;
             position: relative;
-            left: -2px;
-            bottom: -37px;
+            left: 1px;
+            bottom: -34px;
         }
         .tab a{
             color:  #989898;

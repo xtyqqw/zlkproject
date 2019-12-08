@@ -129,4 +129,11 @@
             where chapter_name like CONCAT('%',#{chapterName},'%')
         </if>
     </select>
+    <!--根据课程id查找全部小节的数量-->
+    <select id="selectSumSectionByCoursesId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select sum(section_num) from chapter
+        <if test="coursesId != null">
+            where courses_id = #{coursesId};
+        </if>
+    </select>
 </mapper>
