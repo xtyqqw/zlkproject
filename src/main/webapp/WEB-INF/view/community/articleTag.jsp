@@ -14,12 +14,13 @@
     <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
     <style>
         .show {
-            border: #8D8D8D 2px solid;
-            width: 750px;
-            height: 25px;
-            padding: 12px;
-            margin: 20px;
+            width: 875px;
+            height: 30px;
+            padding-top: 6px;
+            margin-top: 10px;
             border-radius: 5px;
+            margin-left: 10px;
+            background-color: whitesmoke;
         }
         .show li {
             float: left;
@@ -48,24 +49,19 @@
             color: #0a61ff;
         }
         .hide {
-            margin: 20px;
+            padding-top: 6px;
+            margin-top: 10px;
+            margin-left: 10px;
             display: none;
-            border: #1E9FFF 2px solid;
-            width: 750px;
-            height: 100px;
-            /*padding: 12px;*/
+            width: 875px;
+            height: 60px;
+            background-color: whitesmoke;
             border-radius: 5px;
-            box-shadow: 0 3px 11px 0 rgba(0,0,0,0.2), 0 0 11px 0 rgba(0,0,0,0.19);
-        }
-        .hide .all {
-            float: left;
-            margin-left: 12px;
-            margin-top: 12px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 0 7px 0 rgba(0,0,0,0.19);
         }
         .hide li{
             float: left;
             padding-left: 12px;
-            padding-top: 12px;
         }
         .hide a{
             float: left;
@@ -81,21 +77,11 @@
             border: none;
             transition-duration: 0.4s;
         }
-        .start {
-            cursor: pointer;
-        }
-        .end {
-            cursor: pointer;
-            background-color: #AFEEEE;
-            color: #0a61ff;
-            border: none;
-        }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="show">
-            <a href="<%=request.getContextPath() %>/" type="button" class="">全部</a>
             <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                 <div>
                     <ul>
@@ -105,8 +91,6 @@
             </c:forEach>
         </div>
         <div class="hide">
-            <a href="javascript:void(0)" type="button" class="all">全部</a>
-            <a style="display: none" id="a"></a>
             <c:forEach items="${tagList}" var="tag">
                 <div>
                     <ul>
