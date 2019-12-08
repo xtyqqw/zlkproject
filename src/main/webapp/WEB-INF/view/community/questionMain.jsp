@@ -95,78 +95,55 @@
             float: right;
             margin-right: 45px;
         }
-
+        ul li{
+            list-style: none;
+        }
 
     </style>
 </head>
 <body>
 
-<div style="margin-left: -40px">
-    <input type="hidden" value="${error}" id="msg">
-    <div class="tar">
-        <a href="<%=request.getContextPath()%>/questionUser/questionSkip" style="color: black;" id="sss"
-           onmouseover="over()" onmouseout="out()" name="aaa" target="pageTarget">全部问答</a>
-        <span>&nbsp;|&nbsp;</span>
-        <a href="<%=request.getContextPath()%>/questionUser/questionSkip" style="color: black;" id="ssss"
-           onmouseover="over1()" onmouseout="out1()" name="bbb" target="pageTarget">我的问题</a>
-    </div>
-    <div class="frame">
-        <iframe class="if" name="pageTarget"    frameborder="1">
-            <div>
-                <c:forEach items="${allQuestion}" var="all" begin="0" end="10">
-                    <ul>
-                        <li style="margin: 50px 0;">
-                            <a href="<%=request.getContextPath() %>/questionUser/myQuestion" type="button"
-                               style="text-decoration: none;">
-                                    ${all.questionTitle}
-                            </a><br>
-                            <i>${all.questionContent}</i>
-                        </li>
-                    </ul>
-                </c:forEach>
-            </div>
-            <div class="quiz">
-                <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
-            </div>
-            <div class="user">
-                <div class="hint">
-                    <i>提问者</i>
-                </div>
-                <div class="userData">
-                    <div class="userLogo">
-                        <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank">
-                            <img class="img" src="userImg"></a>
-                    </div>
-                </div>
-                <div class="userName">
-                    <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank"
-                       style="text-decoration: none; color: black; " id="or" onmouseover="over()" onmouseout="out()">
-                        <i id="size" name="userRealname"></i>
+<div style="margin-left: -20px;width: 100%;height: 600px;">
+    <div style="width:850px;height: auto;margin-top: -20px;float: left;">
+        <c:forEach items="${allQuestion}" var="all" begin="0" end="100">
+            <ul>
+                <li style="margin: 50px 0;">
+                    <a href="<%=request.getContextPath() %>/questionUser/find/{quesitonId}" target="_blank" type="button"
+                       style="text-decoration: none;width: auto;" data-value="" >
+                            ${all.questionId}
+                          <h3>${all.questionTitle}</h3>
                     </a>
-                    <p name="acreateTime">发布</p>
-                </div>
-                <div class="vip">
-                    <img src="/img/V.png"></svg>
+                </li>
+            </ul>
+        </c:forEach>
+    </div>
+    <div style="float: right;margin-right: -20px">
+        <div class="quiz">
+            <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
+        </div>
+        <div class="user">
+            <div class="hint">
+                <i>提问者</i>
+            </div>
+            <div class="userData">
+                <div class="userLogo">
+                    <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank">
+                        <img class="img" src="${user.userImg}"></a>
                 </div>
             </div>
-        </iframe>
-        <iframe class="if" name="bbb" frameborder="1">
-
-            111
-        </iframe>
+            <div class="userName">
+                <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank"
+                   style="text-decoration: none; color: black; " id="or" onmouseover="over()" onmouseout="out()">
+                    <i id="size" name="">${user.userRealname}</i>
+                </a>
+                <p name="acreateTime">发布</p>
+            </div>
+            <div class="vip">
+                <img src="/img/V.png"></svg>
+            </div>
+        </div>
     </div>
 </div>
-<script>
-    layui.use(['layer'], function () {
-        var $ = layui.jquery;
-        var layer = layui.layer;
-        <c:if test="${flag}">
-        $(function () {
-            layer.alert($("#msg").val());
-        })
-        </c:if>
-    })
-</script>
 <script type="text/javascript">
     var oBox = document.getElementById('size');
     var demoHtml = oBox.innerHTML.slice(0, 5) + '...';

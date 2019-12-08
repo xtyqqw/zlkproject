@@ -64,7 +64,7 @@
         .if {
             height: 600px;
             width: 100%;
-            border: 0px;
+            border: none;
         }
 
         .frame {
@@ -80,6 +80,7 @@
 <div class="all-body">
     <%@include file="../../jsp/header.jsp" %>
     <%@include file="../../jsp/sidebar.jsp" %>
+    <input type="hidden" value="${error}" id="msg">
     <div>
         <div class="tar">
             <a href="<%=request.getContextPath()%>/question/communityMain" style="color: black;" id="sss"
@@ -116,6 +117,17 @@
     function over1() {
         var x = document.getElementById("ssss").style.color = "blue";
     }
+</script>
+<script>
+    layui.use(['layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        <c:if test="${flag}">
+        $(function () {
+            layer.alert($("#msg").val());
+        })
+        </c:if>
+    })
 </script>
 </body>
 </html>
