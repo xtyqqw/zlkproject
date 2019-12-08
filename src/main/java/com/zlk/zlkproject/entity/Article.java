@@ -79,10 +79,6 @@ public class Article {
     @JoinColumn(name = "user_id")
     private User user;
 
-    /**文章和评论一对多关系*/
-    @OneToMany(mappedBy = "article")
-    private List<ArticleComment> comments=new ArrayList<>();
-
     public Article() {
     }
 
