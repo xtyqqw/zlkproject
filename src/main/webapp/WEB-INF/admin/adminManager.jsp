@@ -117,7 +117,7 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            layer.msg($("#msg").val());
         })
         </c:if>
         laydate.render({
@@ -201,10 +201,10 @@
                         type: "POST",
                         url: "<%=request.getContextPath()%>/admin/delete?adminId=" + id,
                         success: function (msg) {
-                            layer.alert("删除成功");
+                            layer.msg("删除成功");
                         },
                         error: function (msg) {
-                            layer.alert("遇到意外错误");
+                            layer.msg("遇到意外错误");
                         }
                     });
                     layer.close(index);

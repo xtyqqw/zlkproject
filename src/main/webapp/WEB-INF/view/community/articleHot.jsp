@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -200,7 +198,7 @@
             font-family: Arial;
             position: relative;
             left: 92px;
-            top: 36px;
+            top: 35px;
             float: left;
             display: inline;
         }
@@ -246,8 +244,14 @@
                             layui.each(result.articleList, function (i, article) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="#">'+article.title+'</a></div>'+
-                                    '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>';
+                                    '<div class="title"><a href="#">'+article.title+'</a></div>';
+                                if (article.createArticleType == 0){
+                                    html += '<div class="createArticleType">原创</div>';
+                                } else if (article.createArticleType == 1){
+                                    html += '<div class="createArticleType">转载</div>';
+                                }else if (article.createArticleType == 2){
+                                    html += '<div class="createArticleType">翻译</div>';
+                                }
                                 if (article.articleSetTop == 0) {
                                     html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
                                 } else {
