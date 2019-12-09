@@ -44,6 +44,7 @@
         #yijianzhuti #zhuti_zhong{
             margin: 0 6vw;
             height: 25vw;
+            margin-top: 1vw;
         }
         #yijianzhuti #zhuti_zhong #jianje{
             font-size: 1.5vw;
@@ -59,6 +60,7 @@
         #yijianzhuti #zhuti_zhong #shuru{
             margin: 1vw 0;
             height: 18vw;
+            margin-top: 2vw;
         }
         #yijianzhuti #zhuti_zhong #shuru textarea{
             font-size: 1.8vw;
