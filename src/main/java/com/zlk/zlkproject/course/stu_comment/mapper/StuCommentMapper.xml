@@ -8,15 +8,112 @@
         <result property="pId" column="pid" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
         <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="replyPerson" column="reply_person" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
         <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <collection property="stuCommentList" ofType="com.zlk.zlkproject.entity.StuComment">
+            <result property="smId" column="sm_id1" javaType="java.lang.Integer"/>
+            <result property="pId" column="pid1" javaType="java.lang.Integer"/>
+            <result property="sectionId" column="section_id1" javaType="java.lang.Integer"/>
+            <result property="userId" column="user_id1" javaType="java.lang.String"/>
+            <result property="replyPerson" column="reply_person1" javaType="java.lang.String"/>
+            <result property="content" column="content1" javaType="java.lang.String"/>
+            <result property="up" column="up1" javaType="java.lang.Integer"/>
+            <result property="down" column="down1" javaType="java.lang.Integer"/>
+            <result property="report" column="report1" javaType="java.lang.String"/>
+            <result property="date" column="date1" javaType="java.util.Date"/>
+            <result property="userRealName" column="user_realname1" javaType="java.lang.String"/>
+            <result property="userImg" column="user_img1" javaType="java.lang.String"/>
+            <collection property="stuUpDownList" ofType="com.zlk.zlkproject.entity.StuNoteUpDown">
+                <result property="userId" column="user_id3" javaType="java.lang.String"/>
+                <result property="upDown" column="up_down3" javaType="java.lang.String"/>
+            </collection>
+        </collection>
+        <collection property="stuUpDownList" ofType="com.zlk.zlkproject.entity.StuNoteUpDown">
+            <result property="userId" column="user_id2" javaType="java.lang.String"/>
+            <result property="upDown" column="up_down2" javaType="java.lang.String"/>
+        </collection>
     </resultMap>
 
     <insert id="addStuCmt" parameterType="com.zlk.zlkproject.entity.StuComment">
-        INSERT INTO stu_comment (pid,section_id,user_id,content,date) VALUES (#{pId},#{sectionId},#{userId},#{content},#{date})
+        INSERT INTO stu_comment (pid,section_id,user_id,reply_person,content,date) VALUES (#{pId},#{sectionId},#{userId},#{replyPerson},#{content},#{date})
     </insert>
+
+    <select id="findStuCmt" resultMap="stuCmtEntityMap">
+        SELECT a.*,b.sm_id sm_id1,b.pid pid1,b.section_id section_id1,b.user_id user_id1,b.reply_person reply_person1
+               ,b.content content1,b.up up1,b.down down1,b.report report1,b.date date1,b.user_realname user_realname1
+               ,b.user_img user_img1,b.user_id3,b.up_down3,c.user_id user_id2,c.up_down up_down2
+        FROM (
+                SELECT sm.*,s.user_realname,s.user_img
+		        FROM stu_comment sm
+				     ,(SELECT user_id,user_realname,user_img FROM user) s
+			    WHERE sm.user_id = s.user_id AND sm.section_id = #{sectionId} AND sm.pid = 0 ORDER BY date DESC
+			          LIMIT #{page}, #{size}
+			 ) a
+        LEFT JOIN (
+                    SELECT q.*,suu.user_id user_id3,suu.up_down up_down3
+				    FROM (
+				            SELECT sm.*,s.user_realname,s.user_img
+						    FROM stu_comment sm
+							     ,(SELECT user_id,user_realname,user_img FROM user) s
+						    WHERE sm.user_id = s.user_id AND sm.section_id = #{sectionId} AND sm.pid != 0 ORDER BY date
+						 ) q
+					LEFT JOIN stucmt_user_updown suu
+					ON q.sm_id = suu.sm_id
+				  ) b
+        ON a.sm_id = b.pid
+        LEFT JOIN stucmt_user_updown c
+        ON a.sm_id = c.sm_id
+    </select>
+
+    <select id="findCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM stu_comment WHERE section_id = #{sectionId} AND pid = 0
+    </select>
+
+    <select id="findUpDownNumBySmId" resultMap="stuCmtEntityMap">
+        SELECT up,down FROM stu_comment WHERE sm_id = #{smId}
+    </select>
+
+    <update id="updateUpDownNumBySmId">
+        <if test="type == 'UpAdd'">
+            UPDATE stu_comment SET up = up + 1 WHERE sm_id = #{smId}
+        </if>
+        <if test="type == 'UpMinus'">
+            UPDATE stu_comment SET up = up - 1 WHERE sm_id = #{smId}
+        </if>
+        <if test="type == 'DownAdd'">
+            UPDATE stu_comment SET down = down + 1 WHERE sm_id = #{smId}
+        </if>
+        <if test="type == 'DownMinus'">
+            UPDATE stu_comment SET down = down - 1 WHERE sm_id = #{smId}
+        </if>
+        <if test="type == 'UpAddDownMinus'">
+            UPDATE stu_comment SET up = up + 1, down = down - 1 WHERE sm_id = #{smId}
+        </if>
+        <if test="type == 'UpMinusDownAdd'">
+            UPDATE stu_comment SET up = up - 1, down = down + 1 WHERE sm_id = #{smId}
+        </if>
+    </update>
+
+    <insert id="addSuu">
+        INSERT INTO stucmt_user_updown (sm_id,user_id,up_down) VALUES (#{smId},#{userId},#{upOrDown})
+    </insert>
+
+    <delete id="deleteSuu">
+        DELETE FROM stucmt_user_updown WHERE sm_id = #{smId} AND user_id = #{userId}
+    </delete>
+
+    <update id="updateSuu">
+        UPDATE stucmt_user_updown SET up_down = #{upOrDown} WHERE sm_id = #{smId} AND user_id = #{userId}
+    </update>
+
+    <update id="updateReport">
+        UPDATE stu_comment SET report = #{report} WHERE sm_id = #{smId}
+    </update>
 
 </mapper>

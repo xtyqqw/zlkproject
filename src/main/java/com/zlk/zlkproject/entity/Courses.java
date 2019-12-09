@@ -47,11 +47,11 @@ public class Courses {
     /**章节列表*/
     private List<Chapter> chapterList;
     /**用户Id*/
-    private  int  userId;
+    private  String  userId;
     /**中间表Id*/
     private  int  userCoursesId;
     /**最后学习时间*/
-    @DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yy-MM-dd ")
     private Date  lastStudyTime;
     /**标签 Id*/
     private int tagId;
@@ -60,7 +60,7 @@ public class Courses {
     /**标签属性Id*/
     private String tagTypeId;
 
-    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic, List<Chapter> chapterList, int userId, int userCoursesId, Date lastStudyTime, int tagId, String tagName, String tagTypeId) {
+    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic, List<Chapter> chapterList, String userId, int userCoursesId, Date lastStudyTime, int tagId, String tagName, String tagTypeId) {
         this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.studentNum = studentNum;

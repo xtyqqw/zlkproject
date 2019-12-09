@@ -30,7 +30,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public String findStateById(Integer userId,Integer sectionId) {
+    public String findStateById(String userId,Integer sectionId) {
         return sectionMapper.findStateById(userId,sectionId);
     }
 
@@ -41,9 +41,8 @@ public class SectionServiceImpl implements SectionService {
 
 
     @Override
-    public Map findSectionByCourseIdLimit(Integer courseId,Integer page, Integer limit) {
+    public Map findSectionByCourseIdLimit(String userId,Integer courseId,Integer page, Integer limit) {
         Map map=new HashMap();
-        Integer userId=1;
         List<SectionDetails> sectionDetailsList=new ArrayList<>();
         int yeishu = sectionMapper.findCountByCourseId(courseId)/3;
         if(sectionMapper.findCountByCourseId(courseId)%limit!=0){ yeishu++; }
@@ -71,7 +70,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public Section findSectionBySectionIdAndUserId(Integer sectionId, Integer userId) {
+    public Section findSectionBySectionIdAndUserId(Integer sectionId, String userId) {
         return sectionMapper.findSectionBySectionIdAndUserId(sectionId, userId);
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.QuestionHomeMapper">
+    <resultMap id="questionEntityMap" type="com.zlk.zlkproject.entity.Question">
+        <id column="question_id" property="questionId" javaType="java.lang.String"/>
+        <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
+        <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="solve" property="solve" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
+        <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
+        <result column="user_id" property="userId" javaType="java.lang.String"/>
+        <result column="figures" property="figures" javaType="java.lang.String"/>
+        <result column="figures_real" property="figuresReal" javaType="java.lang.String"/>
+        <result column="user_realname" property="userRealname" javaType="java.lang.String"/>
+        <result column="user_img" property="userImg" javaType="java.lang.String"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.String"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.String"/>
+        <result column="check" property="check" javaType="java.lang.String"/>
+        <result column="response_count" property="responseCount" javaType="java.lang.String"/>
+        <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="findQuestionByTime" resultMap="questionEntityMap">
+         select * from question order by create_time=#{createTime} desc
+    </select>
+
+    <select id="findByQuestionId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
+        select * from question where question_id=#{questionId}
+    </select>
+
+</mapper>
+

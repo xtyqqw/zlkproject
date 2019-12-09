@@ -3,7 +3,7 @@
 <mapper namespace="com.zlk.zlkproject.course.userChapter.mapper.UserChapterMapper">
 
     <resultMap type="com.zlk.zlkproject.entity.UserChapter" id="UserChapterMap">
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="chapterId" column="chapter_id" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -11,7 +11,7 @@
     <select id="queryById" resultMap="UserChapterMap">
         select
           user_id, chapter_id
-        from kaohe.user_chapter
+        from user_chapter
         where user_id = #{userId}
     </select>
 
@@ -19,7 +19,7 @@
     <select id="queryAllByLimit" resultMap="UserChapterMap">
         select
           user_id, chapter_id
-        from kaohe.user_chapter
+        from user_chapter
         limit #{offset}, #{limit}
     </select>
 
@@ -27,9 +27,9 @@
     <select id="queryAll" resultMap="UserChapterMap">
         select
         user_id, chapter_id
-        from kaohe.user_chapter
+        from user_chapter
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId != ''">
                 and user_id = #{userId}
             </if>
             <if test="chapterId != null">
@@ -40,13 +40,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into kaohe.user_chapter(user_id,chapter_id)
+        insert into user_chapter(user_id,chapter_id)
         values (#{userId},#{chapterId})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update kaohe.user_chapter
+        update user_chapter
         <set>
         </set>
         where user_id = #{userId}
@@ -54,7 +54,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from kaohe.user_chapter where user_id = #{userId}
+        delete from user_chapter where user_id = #{userId}
     </delete>
 
 </mapper>

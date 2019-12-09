@@ -2,12 +2,16 @@ package com.zlk.zlkproject.course.chapter.controller;
 
 import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +40,15 @@ public class ChapterController {
      */
     @RequestMapping(value = "/findChapters")
     @ResponseBody
-    public Map<String,Object> findChapters(Integer coursesId)throws Exception{
-        coursesId = 1;
+    public Map<String,Object> findChapters(HttpServletRequest request)throws Exception{
+        Integer coursesId = 3;
+//        request.getSession().getAttribute("coursesId");
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         Map<String,Object> map = new HashMap<>();
+        map.put("msg","查找成功");
         map.put("chapters",chapters);
         return map;
     }
+
+
 }

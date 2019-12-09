@@ -76,7 +76,7 @@
         }
     </style>
 </head>
-<body>
+<body style="width: 99%">
 <div class="about-main">
     <div class="tiao"></div>
     <!-- 关于我们标题 -->

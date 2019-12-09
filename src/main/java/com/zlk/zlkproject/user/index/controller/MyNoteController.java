@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.StuNote;
 import com.zlk.zlkproject.user.index.service.MyNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +24,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/myNote")
 public class MyNoteController {
-    @Autowired
+    @Autowired(required = false)
     private MyNoteService myNoteService;
 
     @RequestMapping("/toMyNote")
-    public ModelAndView toMyNote()throws Exception{
+    public ModelAndView toMyNote(HttpServletRequest request)throws Exception{
         ModelAndView mv = new ModelAndView();
-        String userId = "1";
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
         List<StuNote> stuNoteList = myNoteService.findNotesBySnId(userId);
         Integer noteNum = myNoteService.findNoteNumBySnId(userId);
         mv.addObject("stuNoteList",stuNoteList);
@@ -47,6 +50,12 @@ public class MyNoteController {
         }
     }
 
+    /**
+     * 修改正文
+     * @param stuNote
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/edit")
     public String editNote(StuNote stuNote)throws Exception{
         Integer flag = myNoteService.editNoteBySnId(stuNote);
@@ -56,12 +65,44 @@ public class MyNoteController {
             return null;
         }
     }
+
+    /**
+     * 流加载查询
+     * @param pagination
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/toFlow")
     @ResponseBody
-    public Map<String, Object> findCoursesList(Pagination pagination) throws Exception {
+    public Map<String, Object> findCoursesList(Pagination pagination,HttpServletRequest request) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUserId(userId);
         List<StuNote> stuNoteList = myNoteService.findNotesList(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("stuNoteList", stuNoteList);
+        return map;
+    }
+
+    /**
+     * 分页查询
+     * @param pagination
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/toPage")
+    @ResponseBody
+    public Map<String, Object> toPage(Pagination pagination,HttpServletRequest request) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUserId(userId);
+        List<StuNote> stuNoteList = myNoteService.findNotesList(pagination);
+        Integer num = myNoteService.findNoteNumBySnId(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("count",num);
+        map.put("data", stuNoteList);
         return map;
     }
 }

@@ -12,7 +12,20 @@ import java.util.List;
  */
 public interface ArticleAddTagService {
 
+    /**
+     * @description: 发文页面标签下拉框查询所有标签
+     * @return: java.util.List<com.zlk.zlkproject.entity.Tag>
+     * @author: QianKeQin
+     * @date: 2019/12/6 19:17
+     */
     List<Tag> listTag();
 
+    /**
+     * @description: 一个文章下可以添加多个标签
+     * @param ids
+     * @return: java.util.List<com.zlk.zlkproject.entity.Tag>
+     * @author: QianKeQin
+     * @date: 2019/12/6 19:18
+     */
     List<Tag> listTags(String ids);
 }

@@ -3,6 +3,7 @@ package com.zlk.zlkproject.user.personal.controller;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Articles;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +36,10 @@ public class ArticlesController {
      * @return
      */
     @RequestMapping(value = "/toarticles")
-    public ModelAndView selectArticles(String userId)throws Exception{
-        /*HttpServletRequest request
-        String userId1 = (String) request.getSession().getAttribute("userId");*/
-        List<Articles> list=articlesService.selectArticles("1");
-        Integer articles=articlesService.findArticlesId("1");
+    public ModelAndView selectArticles(HttpServletRequest request, String userId)throws Exception{
+        User user = (User) request.getSession().getAttribute("user");
+        List<Articles> list=articlesService.selectArticles(user.getUserId());
+        Integer articles=articlesService.findArticlesId(user.getUserId());
         ModelAndView mv=new ModelAndView();
         mv.addObject("list",list);
         mv.addObject("articles",articles);
@@ -78,10 +79,16 @@ public class ArticlesController {
     /*流加载*/
     @RequestMapping(value = "/flow")
     @ResponseBody
-    public Map<String,Object> findArticlesAll(Pagination pagination){
+    public Map<String,Object> findArticlesAll(HttpServletRequest request,Pagination pagination){
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUser(user);
+        pagination.setUserId(userId);
         List<Articles> articlesList=articlesService.findArticlesAll(pagination);
+        Integer all=articlesService.findArticlesId(userId);
         Map<String,Object> map=new HashMap<>();
-        map.put("articlesList",articlesList);
+        map.put("count",all);
+        map.put("data",articlesList);
         return map;
     }
 

@@ -379,8 +379,10 @@
             <%--富文本编辑框--%>
             <div hidden="hidden" id="demo" style="padding: 25px">
                 <form action="<%=request.getContextPath()%>/myfaqq/updateResponse" method="post">
-                    <textarea id="content" name="responseContent"></textarea>
+                    <textarea id="content" name="responseContent" maxlength="120"
+                              onkeydown="checknum()" onkeyup="checknum()"></textarea>
                     <input type="text" id="input_hid" hidden="hidden" name="responseId">
+                    <input type="text" id="in" style="margin-top: 10px;color: #999;border: #fff;width: 200px">
                     <input type="submit" class="layui-btn" style="float: right;" value="提交">
                 </form>
                 <%--<div>
@@ -408,6 +410,19 @@
         <%--<div id="demo7" style="float: right;margin: 50px 20px auto"></div>--%>
     </div>
 </div>
+<%--富文本文字长度--%>
+<script type="text/javascript">
+    function checknum(){
+        var textDom =  document.getElementById("content");
+        var len = textDom.value.length;
+        if(len > 120){
+            textDom.value = textDom.value.substring(0,120);
+            return;
+        }
+        document.getElementById("in").value="还可以输入"+ (120-len) +"/120个字";
+    }
+    checknum();
+</script>
 <%--分页--%>
 <%--<script>
     var total = "${all}";
@@ -436,14 +451,17 @@
                 type: "POST",
                 url: "/myfaqq/removeResponse?responseId="+responseId,
                 success: function(data){
-                    if(data.code==1){
-                        /*alert("删除成功！");*/
+                    /*if(data.code===1){
+                        alert("删除成功！");
                         layer.msg(data);
-                        window.location.href = location.href;//删除后刷新当前页面
+                        /!*window.location.href = location.href;*!///删除后刷新当前页面
+                        location.reload();
                     } else {
-                        /*alert("删除失败，请重新操作！");*/
+                        /!*alert("删除失败，请重新操作！");*!/
                         layer.msg(data);
-                    }
+                    }*/
+                    layer.msg(data);
+                    window.location.href = location.href;
                 }
             });
             layer.close(index);

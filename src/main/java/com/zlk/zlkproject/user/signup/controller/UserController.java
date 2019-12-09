@@ -34,7 +34,7 @@ public class UserController {
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
-        return "redirect:/index/toIndex";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/test")
@@ -59,6 +59,7 @@ public class UserController {
       GetCode getCode = new GetCode();
       //获取session
       HttpSession session = request.getSession();
+        System.out.println("");
       //获取前台传输的手机号
       String userPhonenu = request.getParameter("userPhonenum");
 //      Sys.out.println(userPhonenu);
@@ -140,11 +141,11 @@ public class UserController {
         user.setUserPwd(MD5Pwd);
         User user1 = signService.findUserByPhonenumAndPwd(user);
         if(user1!=null){
-            //将验证码放入session
+            //将user对象放入session
             session.setAttribute("user",user1);
 //            mv.addObject("userId",user1.getUserId());
             //跳转至首页
-            mv.setViewName("redirect:/index/toIndex");
+            mv.setViewName("redirect:/");
             return mv;
         }else {
             mv.setViewName("view/signin");
@@ -169,7 +170,7 @@ public class UserController {
                 session.setAttribute("user",user1);
                 mv.addObject("userId",user1.getUserId());
                 //跳转至首页
-                mv.setViewName("redirect:/index/toIndex");
+                mv.setViewName("redirect:/");
                 return mv;
             }else {
                 mv.setViewName("/view/signin");
@@ -212,5 +213,22 @@ public class UserController {
     @RequestMapping(value = "/toforget")
     public String toForget(){
         return "view/forgetpwd";
+    }
+
+    /**
+     *  根据id查找名字和头像
+     *@method selectNameAndImg
+     *@params [userId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/6  17:26
+     */
+    @RequestMapping(value = "/selectNameAndImg")
+    @ResponseBody
+    public Map<String,Object> selectNameAndImg(String userId) throws Exception{
+        User user = signService.selectNameAndImg(userId);
+        Map<String,Object> map= new HashMap<>();
+        map.put("user",user);
+        return map;
     }
 }

@@ -25,12 +25,11 @@ import java.util.*;
  * @Date： 2019/11/21 19:30
  */
 @Controller
-@RequestMapping("/index")
 public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    @RequestMapping("/toIndex")
+    @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<User> userList = indexService.findUsersByAllTime();
@@ -52,7 +51,12 @@ public class IndexController {
             Integer signNum;
             if(sign != null){
                 String lastDay = indexService.findDayByUserId(userId);
-                Integer lastDayInt = Integer.valueOf(lastDay);
+                Integer lastDayInt;
+                if(lastDay!=null){
+                    lastDayInt = Integer.valueOf(lastDay);
+                }else{
+                    lastDayInt = 0;
+                }
                 if ((todayInt-lastDayInt) ==1 || (todayInt-lastDayInt) == 0){
                     signNum = sign.getSigninNum();
                 }else {
@@ -98,7 +102,7 @@ public class IndexController {
         return mv;
     }
 
-    @RequestMapping("/toFlow")
+    @RequestMapping("/index/toFlow")
     @ResponseBody
     public Map<String, Object> findCoursesList(Pagination pagination) throws Exception {
         List<Courses> coursesList = indexService.findCoursesList(pagination);
@@ -112,7 +116,7 @@ public class IndexController {
      * @param
      * @return Map
      */
-    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/index/signIn", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> signIn(HttpServletRequest httpServletRequest)throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -137,7 +141,7 @@ public class IndexController {
      * @param
      * @return Map
      */
-    @RequestMapping(value = "/toSignIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/index/toSignIn", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> toSignIn(HttpServletRequest httpServletRequest)throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -147,11 +151,16 @@ public class IndexController {
         String today = indexService.findDayByDate(new Date());
         Integer todayInt = Integer.valueOf(today);
         String lastDay = indexService.findDayByUserId(userId);
-        Integer lastDayInt = Integer.valueOf(lastDay);
+        Integer lastDayInt;
+        if(lastDay!=null){
+            lastDayInt = Integer.valueOf(lastDay);
+        }else{
+            lastDayInt = 0;
+        }
         if (signin != null) {
             signin.setSigninLastTime(new Date());
             Integer newNum;
-            if((todayInt-lastDayInt)== 1){
+            if((todayInt-lastDayInt)== 1 && todayInt != 1){
                 Integer num = signin.getSigninNum();
                 newNum = num+1;
             }else {

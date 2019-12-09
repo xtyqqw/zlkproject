@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.mapper.RecordMapper;
@@ -26,13 +27,17 @@ public class RecordServiceImpl implements RecordService {
 
     /**
      * 根据userId查询学习记录
-     * @param userId
+     * @param pagination
      * @return
      */
     @Override
-    public List<Item> selectCourses(FollowerPage followerPage){
-        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
-        List<Item> list=recordMapper.selectCourses(followerPage);
+    public List<Item> selectCourses(Pagination pagination){
+        /*followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());*/
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        List<Item> list=recordMapper.selectCourses(pagination);
         int s=list.size();
         for(int i=0;i<s;i++){
             Item item=list.get(i);
@@ -41,16 +46,38 @@ public class RecordServiceImpl implements RecordService {
         }
         return list;
     }
+
+    /**
+     * 查询小结状态总数
+     * @param userId
+     * @return
+     */
     @Override
     public Integer selectUserSection(String userId){
         return recordMapper.selectUserSection(userId);
     }
+
+    /**
+     * 查询小结已完成数量
+     * @param userId
+     * @return
+     */
     @Override
     public Integer selectUser(String userId){
         return recordMapper.selectUser(userId);
     }
+
+    /**
+     * 查询课程数量
+     * @param pagination
+     * @return
+     */
     @Override
-    public Integer findCourses(String userId){
-        return recordMapper.findCourses(userId);
+    public List<Courses> findCourses(Pagination pagination){
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return recordMapper.findCourses(pagination);
     }
 }

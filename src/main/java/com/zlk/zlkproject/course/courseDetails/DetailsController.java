@@ -65,8 +65,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
-    public String insertCourses(Integer coursesId){
-        int userId=1;
+    public String insertCourses(HttpServletRequest request,Integer coursesId){
+        //获取当前登录的用户id
+        String userId = (String) request.getSession().getAttribute("userId");
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -99,9 +100,9 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public boolean seleUserCoursesByUserCourses(UserCourses userCourses){
-        userCourses.setUserId(1);
-        userCourses.setCoursesId(1);
+    public boolean seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
+        userCourses.setUserId("1");
+        userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
             return true;
@@ -124,7 +125,16 @@ public class DetailsController {
      */
     @RequestMapping("/course/toCourseManager")
     public String toCourseManager(){
-        return "/view/toCourseManager";
+        return "view/CourseManager";
+    }
+
+    /**
+     * 跳转到笔记管理页面
+     * @return
+     */
+    @RequestMapping("/note/toTeacherNoteManager")
+    public String toTeacherNoteManager(){
+        return "/view/toTeacherNoteManager";
     }
 
 }

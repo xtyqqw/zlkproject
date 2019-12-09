@@ -27,18 +27,17 @@ public class ArticleTagController {
 
     /**
      * @description: 提供社区页面展示标签接口
-     * @param request
      * @param tag
      * @return: org.springframework.web.servlet.ModelAndView
      * @author: QianKeQin
      * @date: 2019/11/23 11:42
      */
     @RequestMapping(value = "/community/tag")
-    public ModelAndView getAllTag(HttpServletRequest request, Tag tag){
+    public ModelAndView getAllTag(Tag tag){
         ModelAndView mv=new ModelAndView();
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/articleTag");
+        mv.setViewName("view/community/communityMain");
         return mv;
     }
 
