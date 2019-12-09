@@ -34,34 +34,11 @@ public class RecordController {
     private RecordService recordService;
 
     /**
-     * 跳转页面
-     * @return
-     *//*
-    @RequestMapping(value = "/tocourses")
-    public String to(){
-        return "view/personal/learnrecord";
-    }*/
-
-    /**
-     * 根据userId查询学习记录
-     * @param
+     * 查询学习记录
+     * @param request
+     * @param pagination
      * @return
      */
-    /*@RequestMapping(value = "/icourses")
-    @ResponseBody
-    public Map<String,Object> selectItem(FollowerPage followerPage){
-        followerPage.setUserId("1");
-        followerPage.setPage(1);
-        followerPage.setLimit(3);
-        List<Item> itemList=recordService.selectCourses(followerPage);
-        Integer sum=recordService.selectUserSection("1");
-        Integer done=recordService.selectUser("1");
-        long per=Math.round((100*done)/sum);
-        Map<String,Object> map=new HashMap<>();
-        map.put("itemList",itemList);
-        map.put("per",per);
-        return map;
-    }*/
     @RequestMapping(value = "/tocourses")
     public Map<String,Object> selectItem(HttpServletRequest request, Pagination pagination) {
         User user = (User) request.getSession().getAttribute("user");
@@ -72,9 +49,9 @@ public class RecordController {
         Integer sum = recordService.selectUserSection(userId);
         Integer done = recordService.selectUser(userId);
         long per = Math.round((100 * done) / sum);
-        Integer all=recordService.findCourses(userId);
+        List<Courses> allList=recordService.findCourses(pagination);
         Map<String,Object> map=new HashMap<>();
-        map.put("count",all);
+        map.put("count",allList);
         map.put("data",itemList);
         map.put("per",per);
         return map;

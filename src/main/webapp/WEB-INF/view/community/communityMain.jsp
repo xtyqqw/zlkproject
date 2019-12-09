@@ -107,7 +107,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 55vw;
+            margin-left: 63vw;
             margin-top: 0vw;
         }
         .wz_remen{
@@ -119,7 +119,7 @@
             font-weight:bold;
             height: 4vw;
             line-height: 4vw;
-            border-bottom: 0.1vw solid blue;
+            border-bottom: 0.1vw solid #914ff1;
             margin-left: 4vw;
             margin-top: 0vw;
         }
@@ -147,7 +147,7 @@
             width: 2vw;
             height: 2vw;
             color: white;
-            background-color: blue;
+            background-color: #914ff1;
         }
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
@@ -167,7 +167,7 @@
             width: 20vw;
             margin-left: 4vw;
             position: absolute;
-            margin-top: 5vw;
+            margin-top: 4vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -394,13 +394,13 @@
 
 <script type="text/javascript">
     $(document).on('mouseenter','.bt',function(){
-        $(this).css('color','blue');
+        $(this).css('color','#914ff1');
     })
     $(document).on('mouseleave','.bt',function(){
         $(this).css('color','black');
     })
     $(document).on('mouseenter','.wz_bt_bq>span',function(){
-        $(this).css('color','blue');
+        $(this).css('color','#914ff1');
     })
     $(document).on('mouseleave','.wz_bt_bq>span',function(){
         $(this).css('color','black');
@@ -408,7 +408,7 @@
 
     $(document).on('mouseenter','.yueanniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
+        $(this).css('border','1px solid #914ff1');
     })
     $(document).on('mouseleave','.yueanniu',function(){
         $(this).css('box-shadow','none');
@@ -417,7 +417,7 @@
 
     $(document).on('mouseenter','.zonganniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
+        $(this).css('border','1px solid #914ff1');
     })
     $(document).on('mouseleave','.zonganniu',function(){
         $(this).css('box-shadow','none');
@@ -425,7 +425,7 @@
     })
 
     $(document).on('click','.yueanniu',function(){
-        $('.yueanniu').css('background-color','blue');
+        $('.yueanniu').css('background-color','#914ff1');
         $('.yueanniu').css('color','white');
         $('.zonganniu').css('background-color','white');
         $('.zonganniu').css('color','black');
@@ -433,7 +433,7 @@
     $(document).on('click','.zonganniu',function(){
         $('.yueanniu').css('background-color','white');
         $('.yueanniu').css('color','black');
-        $('.zonganniu').css('background-color','blue');
+        $('.zonganniu').css('background-color','#914ff1');
         $('.zonganniu').css('color','white');
     })
     $(document).on('click','.yueanniu',function(){

@@ -19,7 +19,7 @@ import java.util.List;
 public interface RecordMapper {
     /**
      * 查询学习课程
-     * @param userId
+     * @param pagination
      * @return
      */
     List<Item> selectCourses(Pagination pagination);
@@ -40,15 +40,15 @@ public interface RecordMapper {
 
     /**
      * 查询课程数量
-     * @param userId
+     * @param pagination
      * @return
      */
-    Integer findCourses(String userId);
+    List<Courses> findCourses(Pagination pagination);
 
     /**
      * 分页查询我的学习记录
      * @param pagination
      * @return
-     */
-    List<Courses> findCoursesAll(Pagination pagination);
+     *//*
+    List<Courses> findCoursesAll(Pagination pagination);*/
 }
