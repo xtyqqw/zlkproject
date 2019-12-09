@@ -34,8 +34,7 @@ public class SectionController {
     @RequestMapping(value = "/findSections")
     @ResponseBody
     public ModelAndView findSections(HttpServletRequest request)throws Exception{
-        int coursesId = 1;
-//        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
+        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         List<Section> sections = new ArrayList<>();
         for (Chapter chapter : chapters) {
@@ -104,8 +103,15 @@ public class SectionController {
     public Map findSectionDetails(HttpServletRequest request,Integer coureseId,Integer page,Integer limit){
         //获取当前登录的用户id
         User user=(User)request.getSession().getAttribute("user");
-        String userId = user.getUserId();
+        String userId;
+        if(user!=null){
+            userId = user.getUserId();
+        }else {
+            userId="";
+        }
+
         coureseId = (Integer) request.getSession().getAttribute("coursesId");
+        sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
         return sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
     }
 }
