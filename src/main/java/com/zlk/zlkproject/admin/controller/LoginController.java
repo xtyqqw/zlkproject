@@ -4,8 +4,13 @@ import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.service.LoginService;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.MD5Util;
+import com.zlk.zlkproject.admin.util.Pagination;
+import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService;
+import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Admin;
 import com.zlk.zlkproject.entity.Log;
+import com.zlk.zlkproject.user.entity.CxrPaging;
+import com.zlk.zlkproject.user.personal.service.cxr.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -33,6 +38,12 @@ public class LoginController {
     private LoginService loginService;
     @Autowired
     private LogUtil logUtil;
+    @Autowired
+    private ArticleManagerService articleManagerService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CourseHomePageService courseHomePageService;
 
     /**
      * @Author lufengxiang
@@ -113,6 +124,12 @@ public class LoginController {
         ModelAndView mv=new ModelAndView();
         Integer visitNumber = loginService.findVisitNumber();
         mv.addObject("visitNumber",visitNumber);
+        Integer articleNumber = articleManagerService.selectCountByTitle(new Pagination());
+        mv.addObject("articleNumber",articleNumber);
+        Integer userNumber = userService.findTotalCountByName(new CxrPaging());
+        mv.addObject("userNumber",userNumber);
+        Integer courseNumber = courseHomePageService.selectCount();
+        mv.addObject("courseNumber",courseNumber);
         mv.setViewName("admin/main");
         return mv;
     }
