@@ -38,10 +38,8 @@ public class ArticlesController {
     @RequestMapping(value = "/toarticles")
     public ModelAndView selectArticles(HttpServletRequest request, String userId)throws Exception{
         User user = (User) request.getSession().getAttribute("user");
-        List<Articles> list=articlesService.selectArticles(user.getUserId());
         Integer articles=articlesService.findArticlesId(user.getUserId());
         ModelAndView mv=new ModelAndView();
-        mv.addObject("list",list);
         mv.addObject("articles",articles);
         mv.setViewName("view/personal/myArticle");
         return mv;
@@ -97,7 +95,7 @@ public class ArticlesController {
      *
      * @param articleId
      * @return
-     */
+     *//*
     @RequestMapping(value = "/updates")
     public ModelAndView updateTag(String articleId){
         ModelAndView mv=new ModelAndView();
@@ -107,11 +105,11 @@ public class ArticlesController {
         return mv;
     }
 
-    /**
+    *//**
      * 添加标签
      * @param articleId
      * @return
-     */
+     *//*
     @RequestMapping(value = "/insert")
     public ModelAndView insertTag(String articleId){
         ModelAndView mv=new ModelAndView();
@@ -123,6 +121,6 @@ public class ArticlesController {
             mv.setViewName("");
             return mv;
         }
-    }
+    }*/
 
 }
