@@ -6,10 +6,7 @@ import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -90,13 +87,14 @@ public class ChapterManagerController {
      */
     @RequestMapping(value = "/deleteChapter",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> deleteChapter(HttpServletRequest request,Chapter chapter) throws Exception{
+    public Map<String,Object> deleteChapter(HttpServletRequest request, Chapter chapter) throws Exception{
         Integer integer = chapterService.deleteByChapterId(chapter);
         String message = "";
         if (integer >0){
             message = "删除成功";
+            logUtil.setLog(request,"删除了章节id为"+chapter.getChapterId()+"的信息");
         }
-        logUtil.setLog(request,"删除了章节名为"+chapter.getChapterName()+"的信息");
+
         Map<String,Object> map = new HashMap<>();
         map.put("msg",message);
         return map;

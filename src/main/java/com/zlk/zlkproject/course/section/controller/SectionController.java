@@ -33,8 +33,9 @@ public class SectionController {
 
     @RequestMapping(value = "/findSections")
     @ResponseBody
-    public ModelAndView findSections()throws Exception{
+    public ModelAndView findSections(HttpServletRequest request)throws Exception{
         int coursesId = 1;
+//        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         List<Section> sections = new ArrayList<>();
         for (Chapter chapter : chapters) {

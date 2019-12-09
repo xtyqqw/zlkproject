@@ -41,8 +41,8 @@ public class ChapterController {
     @RequestMapping(value = "/findChapters")
     @ResponseBody
     public Map<String,Object> findChapters(HttpServletRequest request)throws Exception{
-//        Integer coursesId = 3;
-        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
+        Integer coursesId = 3;
+//        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         Map<String,Object> map = new HashMap<>();
         map.put("msg","查找成功");

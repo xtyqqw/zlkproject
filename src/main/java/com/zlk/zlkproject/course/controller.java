@@ -34,6 +34,8 @@ public class controller {
             mv.addObject("addr1",section.getVideoAddr1());
             mv.addObject("addr2",section.getVideoAddr2());
             mv.setViewName("/view/videoPlayer");
+        }else {
+            mv.setViewName("/view/videoPlayer");
         }
         return mv;
     }

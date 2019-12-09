@@ -144,11 +144,12 @@ public class CoursesManagerController {
 
     @RequestMapping(value = "/updateCourses",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> updateCourses(Courses courses) throws Exception{
+    public Map<String,Object> updateCourses(HttpServletRequest request,Courses courses) throws Exception{
         int i = courseHomePageService.updateByCoursesId(courses);
         String message ="";
         if (i>0){
             message = "修改成功";
+            logUtil.setLog(request,"修改了课程名为"+courses.getCoursesName()+"的信息");
         }
         Map<String,Object> map=new HashMap<>();
         map.put("mmm",message);

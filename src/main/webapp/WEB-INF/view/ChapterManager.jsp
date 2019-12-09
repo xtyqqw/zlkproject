@@ -212,9 +212,9 @@
                             async: false,
                             url :"/chapterManager/deleteChapter",
                             data: {"chapterId":data.chapterId},
-                            success: function (data) {
-                                console.log(data);
-                                layer.alert(data.msg);
+                            success: function (result) {
+                                console.log(result);
+                                layer.alert(result.msg);
                                 table.reload('chapter',{
                                     url: '/chapterManager/selectAll',
                                     method: 'POST',
