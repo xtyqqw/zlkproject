@@ -5,7 +5,7 @@
 <mapper namespace="com.zlk.zlkproject.course.comment.mapper.CommentMapper">
     <resultMap id="commentEntityMap" type="com.zlk.zlkproject.entity.Comment">
         <id property="commentId" column="comment_id" javaType="java.lang.Integer"></id>
-        <result property="commentUserId" column="comment_user_id" javaType="java.lang.Integer"></result>
+        <result property="commentUserId" column="comment_user_id" javaType="java.lang.String"></result>
         <result property="comments" column="comments" javaType="java.lang.String"></result>
         <result property="teacherAnswer" column="teacher_answer" javaType="java.lang.String"></result>
         <result property="like" column="like" javaType="java.lang.Integer"></result>
