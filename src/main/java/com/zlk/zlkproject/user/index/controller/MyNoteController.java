@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/myNote")
 public class MyNoteController {
-    @Autowired
+    @Autowired(required = false)
     private MyNoteService myNoteService;
 
     @RequestMapping("/toMyNote")
@@ -97,7 +97,6 @@ public class MyNoteController {
     public Map<String, Object> toPage(Pagination pagination,HttpServletRequest request) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         String userId = user.getUserId();
-        pagination.setUser(user);
         pagination.setUserId(userId);
         List<StuNote> stuNoteList = myNoteService.findNotesList(pagination);
         Integer num = myNoteService.findNoteNumBySnId(userId);

@@ -91,6 +91,13 @@ spring:
     allow-bean-definition-overriding: true
   jmx:
     enabled: false
+
+  #上传文件大小限制
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 2048MB
+
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
