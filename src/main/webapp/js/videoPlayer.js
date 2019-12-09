@@ -67,7 +67,7 @@ $(document).ready(function () {
                                 });
                                 if (state === "播放中") {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
-                                } else if (state === "已播放") {
+                                } else if (state === "已完成") {
                                     str += "<i class=\"iconfont icon-wancheng state\"></i>";
                                 } else if (state === "未开始") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
@@ -2161,6 +2161,16 @@ $(document).ready(function () {
                 elem_currentTime.innerText = format(elem_video1.currentTime);
                 CTrecord = elem_video1.currentTime;
                 if(elem_video1.ended) {
+                    let data = {'state':'已完成'};
+                    $.ajax({
+                        type: 'POST',
+                        url: '/player/recordState',
+                        data: data,
+                        dataType: 'json',
+                        success: function () {
+
+                        }
+                    });
                     elem_btnPlay.innerHTML = "&#xe652;";
                     clearInterval(interval1);
                     elem_pgBtn.style.left = 0 + 'px';
