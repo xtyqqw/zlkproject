@@ -77,14 +77,16 @@
                            onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" maxlength="5">
             </div>
         </div>
-        <%--手机号码--%>
-        <div class="layui-form-item">
-            <label class="layui-form-label">手机号码</label>
-            <div class="layui-input-block">
-                <input type="text" name="phonenum" id="phonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">
-                <span class="error" id="phoneError"></span>
-            </div>
-        </div>
+
+        <%--手机号码,在页面中回显。不可修改--%>
+        <%--<div class="layui-form-item">--%>
+            <%--<label class="layui-form-label">手机号码</label>--%>
+            <%--<div class="layui-input-block">--%>
+                <%--<input type="text" name="phonenum" id="phonenum"  placeholder="请输入你的手机" autocomplete="off" class="layui-input" readonly="readonly"  onchange="phone()" maxlength="11">--%>
+                <%--<span class="error" id="phoneError"></span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
         <%--性别--%>
         <div class="layui-form-item">
             <label class="layui-form-label">性别</label>

@@ -124,7 +124,7 @@
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/addOpinion" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/toOpinion" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>
