@@ -22,6 +22,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public void recordState(String userId, Integer sectionId, String state) {
+        playerMapper.recordState(userId,sectionId,state);
+    }
+
+    @Override
     public Double readRecord(UserSection userSection) {
         return playerMapper.readRecord(userSection);
     }

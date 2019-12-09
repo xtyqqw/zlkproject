@@ -2,10 +2,13 @@ package com.zlk.zlkproject.admin.service.impl;
 
 import com.zlk.zlkproject.admin.mapper.AdminMapper;
 import com.zlk.zlkproject.admin.service.AdminService;
+import com.zlk.zlkproject.admin.service.RoleService;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Admin;
+import com.zlk.zlkproject.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +23,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private AdminService adminService;
 
     /**
      * @Author lufengxiang
@@ -84,8 +91,18 @@ public class AdminServiceImpl implements AdminService {
      * @return java.lang.Integer
      **/
     @Override
+    @Transactional
     public Integer addAdmin(Admin admin) {
-        return adminMapper.addAdmin(admin);
+        //添加用户
+        Integer flag = adminMapper.addAdmin(admin);
+        //添加用户角色中间表记录
+        Role roleByRoleName = roleService.findRoleByRoleName(admin.getAdminRole());
+        Integer flag1 = adminService.addAdminAndRole(admin.getAdminId(), roleByRoleName.getRoleId());
+        if(flag>0&&flag1>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     /**

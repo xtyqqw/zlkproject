@@ -22,7 +22,7 @@
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 90%;
+            width: 1000px;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -53,12 +53,13 @@
         }
         #guanyuwomenzhuti #wen_da .wen{
             color: rgb(70,70,70);
-            font-size: 1.2vw;
+            font-size: 1.5vw;
         }
         #guanyuwomenzhuti #wen_da .da{
             color: rgb(150,150,150);
-            font-size: 1vw;
+            font-size: 1.2vw;
         }
+
 
 
     </style>

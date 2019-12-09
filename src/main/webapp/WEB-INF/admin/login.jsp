@@ -46,7 +46,10 @@
         var layer = layui.layer;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            var index= layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto'
+            });
         })
         </c:if>
     })
