@@ -49,7 +49,7 @@ public class RecordController {
         /*pagination.setLimit(3);
         pagination.setPage(1);*/
         List<Item> itemList = recordService.selectCourses(pagination);
-        List<Courses> allList=recordService.findCourses(pagination);
+        Integer allList=recordService.findCourses(pagination);
         Integer sum = recordService.selectUserSection(userId);
         Integer done = recordService.selectUser(userId);
         long per = Math.round((100 * done) / sum);
