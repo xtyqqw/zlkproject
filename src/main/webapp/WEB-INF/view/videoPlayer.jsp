@@ -21,7 +21,7 @@
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="/js/wangEditor.js"></script>
 
-    <script type="text/javascript" src="/js/player.js"></script>
+    <%--<script type="text/javascript" src="/js/player.js"></script>--%>
     <script type="text/javascript" src="/js/videoPlayer.js"></script>
 </head>
 <body>
@@ -76,6 +76,8 @@
                                     <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
                                 </div>
                                 <div id="div_sharpness" class="div_btn float_right">
+                                    <span id="nv" style="display: none"></span>
+                                    <span id="sv" style="display: none"></span>
                                     <div id="sharpness_btn" class="enableClk">普清</div>
                                     <div id="sharpness_option_box">
                                         <div class="sharpness_option enableClk">超清</div>
