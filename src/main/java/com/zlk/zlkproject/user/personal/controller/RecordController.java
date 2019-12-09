@@ -41,14 +41,17 @@ public class RecordController {
         String userId = user.getUserId();
         pagination.setUser(user);
         pagination.setUserId(userId);
+        /*pagination.setLimit(3);
+        pagination.setPage(1);*/
         List<Item> itemList = recordService.selectCourses(pagination);
+        List<Courses> allList=recordService.findCourses(pagination);
         Integer sum = recordService.selectUserSection(userId);
         Integer done = recordService.selectUser(userId);
         long per = Math.round((100 * done) / sum);
-        List<Courses> allList=recordService.findCourses(pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("count",allList);
         map.put("data",itemList);
+        /*学习进度*/
         map.put("per",per);
         return map;
     }
