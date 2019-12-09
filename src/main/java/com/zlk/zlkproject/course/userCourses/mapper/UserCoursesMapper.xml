@@ -30,7 +30,7 @@
         user_id, courses_id, last_study_time
         from user_courses
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId !=''">
                 and user_id = #{userId}
             </if>
             <if test="coursesId != null">

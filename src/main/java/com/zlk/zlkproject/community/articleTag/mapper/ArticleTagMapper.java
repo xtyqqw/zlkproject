@@ -16,5 +16,5 @@ import java.util.List;
 @Mapper
 public interface ArticleTagMapper {
 
-    List<Article> getArticleByTagId(Integer tagId);
+
 }
