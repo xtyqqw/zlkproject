@@ -190,6 +190,7 @@
                 total = data.count;
                 var per = data.per;
                 var data1 = data.data;
+                console.log(total+per+data1);
                 var html = '';
                 for (var i = 0;i<data1.length;i++){
                     html += '<div class="timeline">';
