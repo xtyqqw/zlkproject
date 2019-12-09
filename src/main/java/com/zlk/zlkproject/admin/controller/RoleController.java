@@ -40,8 +40,6 @@ public class RoleController {
     private AdminService adminService;
     @Autowired
     private LogUtil logUtil;
-    @Autowired
-    private FunctionService functionService;
 
     /**
      * @Author lufengxiang
@@ -98,32 +96,31 @@ public class RoleController {
             return mv;
         }
 
-        //放UUID并添加
-        role.setRoleId(IDUtil.getUUID());
-        Integer flag = roleService.addRole(role);
+        //解析前台勾选权限
+        List<Function> functionList = JSONArray.parseArray(addFunction,Function.class);
 
-        if(flag==1&&addFunction!=null){
-            //解析前台勾选权限
-            List<Function> functionList = JSONArray.parseArray(addFunction,Function.class);
+        if(functionList.size()!=0){
             List<Integer> functionId=new ArrayList<>();
             for(Function fun:functionList){
                 functionId.add(fun.getId());
             }
-            Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
-            if(flag2==0){
-                mv.addObject("flag","true");
-                mv.addObject("msg","遇到意外错误");
+            //放UUID并添加
+            role.setRoleId(IDUtil.getUUID());
+            Integer flag = roleService.addRole(role,functionId);
+            if(flag==1){
+                mv.addObject("flag", "true");
+                mv.addObject("msg", "添加成功");
                 mv.setViewName("admin/roleManager");
                 return mv;
             }else {
-                mv.addObject("flag", "true");
-                mv.addObject("msg", "添加成功");
+                mv.addObject("flag","true");
+                mv.addObject("msg","遇到意外错误");
                 mv.setViewName("admin/roleManager");
                 return mv;
             }
         }else {
             mv.addObject("flag","true");
-            mv.addObject("msg","遇到意外错误");
+            mv.addObject("msg","请给角色勾选权限");
             mv.setViewName("admin/roleManager");
             return mv;
         }
@@ -154,39 +151,29 @@ public class RoleController {
             return mv;
         }
 
-        //修改角色信息
-        Integer flag = roleService.updateRoleByRoleId(role);
         //解析前台勾选权限
         List<Function> functionList = JSONArray.parseArray(updateFunction,Function.class);
-        List<Integer> functionId=new ArrayList<>();
-        for(Function fun:functionList){
-            functionId.add(fun.getId());
-        }
-
-        //修改角色权限中间表
-        Integer flag1 = roleService.deleteRoleAndFunctionByRoleId(role.getRoleId());
-        List<Integer> integerList=new ArrayList<>();
-
-        //角色授权
-        Integer flag2=roleService.addRoleAndFunction(role.getRoleId(), functionId);
-        if(flag2==0){
-            mv.addObject("flag","true");
-            mv.addObject("msg","遇到意外错误");
-            mv.setViewName("admin/roleManager");
-            return mv;
-        }
-
-        //判断是否成功
-        if(flag==1){
-            mv.addObject("flag","true");
-            mv.addObject("msg","修改成功");
-            mv.setViewName("admin/roleManager");
-            //记录角色修改日志
-            logUtil.setLog(request,"将角色名"+roleByRoleId.getRoleName()+"，角色代码。"+roleByRoleId.getRoleCode()+"修改成角色名"+role.getRoleName()+"，角色代码"+role.getRoleCode());
-            return mv;
+        if (functionList.size()!=0){
+            List<Integer> functionId=new ArrayList<>();
+            for(Function fun:functionList){
+                functionId.add(fun.getId());
+            }
+            //修改角色信息
+            Integer flag = roleService.updateRoleByRoleId(role,functionId);
+            if(flag==1){
+                mv.addObject("flag", "true");
+                mv.addObject("msg", "修改成功");
+                mv.setViewName("admin/roleManager");
+                return mv;
+            }else {
+                mv.addObject("flag","true");
+                mv.addObject("msg","遇到意外错误");
+                mv.setViewName("admin/roleManager");
+                return mv;
+            }
         }else {
             mv.addObject("flag","true");
-            mv.addObject("msg","遇到意外错误");
+            mv.addObject("msg","请给角色勾选权限");
             mv.setViewName("admin/roleManager");
             return mv;
         }
@@ -212,11 +199,14 @@ public class RoleController {
         if(adminByRoleName.size()!=0){
             return false;
         }else {
-            Integer flag = roleService.deleteRoleAndFunctionByRoleId(roleId);
-            Integer flag1 = roleService.deleteRoleByRoleId(roleId);
-            //记录删除角色日志
-            logUtil.setLog(request,"将角色名为"+roleByRoleId.getRoleName()+"的角色删除了");
-            return true;
+            Integer flag = roleService.deleteRoleByRoleId(roleId);
+            if(flag==1){
+                //记录删除角色日志
+                logUtil.setLog(request,"将角色名为"+roleByRoleId.getRoleName()+"的角色删除了");
+                return true;
+            }else {
+                return false;
+            }
         }
     }
 }

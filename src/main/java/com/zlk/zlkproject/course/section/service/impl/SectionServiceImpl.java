@@ -35,7 +35,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public String findVideoAddrById(Integer sectionId) {
+    public Section findVideoAddrById(Integer sectionId) {
         return sectionMapper.findVideoAddrById(sectionId);
     }
 
