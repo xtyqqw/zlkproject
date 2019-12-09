@@ -16,14 +16,14 @@ $(function () {
                 data:"",
                 success: function (bool) {
                     /*当有记录时把 “参加项目”变为“已参加”*/
-                    if (bool){
+                    if (bool=="已参加"){
                         $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
                     }
                 }
             });
             $("#kechengId").val(data.courses.coursesId);
             $("#kechengshipin").html("<video width='100%' height='100%' controls style='border-radius: 5px;' >"
-                +"<source src="+data.courses.introduceVideo+" type='video/mp4'>"
+                +"<source src="+data.courses.introduceVideo+" type='video/mp4' style='width:100%;height:100%;'>"
                 +"您的浏览器不支持 HTML5 video 标签。"
                 +" </video>");
             $("#rensu").text(data.courses.studentNum+"人");
@@ -103,8 +103,11 @@ $("#jiaru").click(function () {
         data: {"coursesId":kechengId},
         success: function (data) {
             console.log(data);
-            alert(data);
-            $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+            if(data=="未登录"){
+                alert("请先登录")
+            }else{
+                $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+            }
         }
     });
 });

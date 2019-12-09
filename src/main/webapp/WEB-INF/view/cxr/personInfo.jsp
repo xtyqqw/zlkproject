@@ -257,7 +257,9 @@
               font-size: 0.8vw;
           }
 
-
+    .xxzt{
+        height: 600px;
+    }
     </style>
 
 </head>
@@ -265,7 +267,7 @@
 
 
 <!-- 信息完善/账号绑定 -->
-
+<div class="xxzt">
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
     <ul class="layui-tab-title">
         <li class="layui-this">信息完善</li>
@@ -494,7 +496,7 @@
 
                     <%--手机信息--%>
                 <div class="sjxx">
-                    <span>你还没绑定手机，快去绑定吧</span>
+                    <span>${user.phonenum}</span>
                 </div>
 
                 <%--手机修改信息--%>
@@ -592,6 +594,8 @@
         </div>
     </div>
 </div>
+</div>
+
 
 <%--js事件--%>
 <script type="text/javascript">
@@ -638,6 +642,7 @@
             elem: '#bri1'
           // , value: new Date()
               ,  format: 'yyyy-MM-dd' //日期格式
+
             ,choose: function(dates){ //选择好日期的回调
             }
         });

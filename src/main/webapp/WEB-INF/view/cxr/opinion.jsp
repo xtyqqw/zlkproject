@@ -22,7 +22,7 @@
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 90%;
+            width: 1000px;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -44,9 +44,10 @@
         #yijianzhuti #zhuti_zhong{
             margin: 0 6vw;
             height: 25vw;
+            margin-top: 1vw;
         }
         #yijianzhuti #zhuti_zhong #jianje{
-            font-size: 1vw;
+            font-size: 1.5vw;
             color: rgb(150,150,150);
         }
         #yijianzhuti #zhuti_zhong #jianje #dian{
@@ -59,9 +60,10 @@
         #yijianzhuti #zhuti_zhong #shuru{
             margin: 1vw 0;
             height: 18vw;
+            margin-top: 2vw;
         }
         #yijianzhuti #zhuti_zhong #shuru textarea{
-            font-size: 1.5vw;
+            font-size: 1.8vw;
             resize: none;
             padding: 1vw;
             width: 100%;
@@ -133,6 +135,8 @@
             line-height: 3.5vw;
             text-align: center;
         }
+
+
     </style>
 </head>
 <body>
@@ -148,7 +152,7 @@
         </div>
         <form action="<%=request.getContextPath()%>/opinion/addOpinion" method="post">
             <div id="shuru">
-                <textarea id="shurukuang" name="opinionContext" placeholder="请输入20-100字的反馈内容"></textarea>
+                <textarea id="shurukuang" name="opinionContext" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
             </div>
 
     <div id="zhuti_wei">

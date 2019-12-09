@@ -34,7 +34,7 @@ public class UserController {
     @RequestMapping(value = "/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
-        return "redirect:/index/toIndex";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/test")
@@ -145,7 +145,7 @@ public class UserController {
             session.setAttribute("user",user1);
 //            mv.addObject("userId",user1.getUserId());
             //跳转至首页
-            mv.setViewName("redirect:/index/toIndex");
+            mv.setViewName("redirect:/");
             return mv;
         }else {
             mv.setViewName("view/signin");
@@ -170,7 +170,7 @@ public class UserController {
                 session.setAttribute("user",user1);
                 mv.addObject("userId",user1.getUserId());
                 //跳转至首页
-                mv.setViewName("redirect:/index/toIndex");
+                mv.setViewName("redirect:/");
                 return mv;
             }else {
                 mv.setViewName("/view/signin");
