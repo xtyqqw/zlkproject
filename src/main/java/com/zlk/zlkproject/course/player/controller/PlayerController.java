@@ -38,6 +38,15 @@ public class PlayerController {
         playerService.recordTime(userSection);
     }
 
+    @RequestMapping("recordState")
+    @ResponseBody
+    public void recordState(HttpServletRequest request,@RequestParam("state") String state){
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
+        playerService.recordState(userId,sectionId,state);
+    }
+
     @RequestMapping("readRecord")
     @ResponseBody
     public Double readRecord(HttpServletRequest request){

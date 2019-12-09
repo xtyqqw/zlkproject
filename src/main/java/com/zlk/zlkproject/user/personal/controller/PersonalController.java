@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.user.personal.controller;
 
+import com.alibaba.druid.sql.visitor.functions.Now;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.personal.service.cxr.UserService;
@@ -81,14 +82,17 @@ public class PersonalController {
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
 
-         userId="1";
-        User user=userService.selectUserById(userId);
+//         userId="1";
+//
+//        User user=userService.selectUserById(userId);
 
 
-//        //从session中获取ID，进行修改，userId="1";为模拟数据
-//       User user1 = (User) request.getSession().getAttribute("userId");
-//       //调用查询单个对象的方法
-//        User user=userService.selectUserById(user1.getUserId());
+
+        //从session中获取ID，进行修改，userId="1";为模拟数据
+       User user1 = (User) request.getSession().getAttribute("user");
+
+       //调用查询单个对象的方法
+        User user=userService.selectUserById(user1.getUserId());
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");
         // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");

@@ -14,6 +14,6 @@ public interface CommentService {
      *@Param [pagination]
      *@return java.util.List<com.zlk.zlkproject.entity.Courses>
      **/
-    List<Comment> findCommentListByUserId(Comment comment ,Integer page,Integer limit,Integer commentUserId);
+    List<Comment> findCommentListByUserId(Comment comment ,Integer page,Integer limit,String commentUserId);
 
 }
