@@ -2273,9 +2273,9 @@ $(document).ready(function () {
         clearInterval(delay_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
-            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nS6yAQKMICnvSt70QyI4435.mp4";
+            document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
-            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nSyGAdhzWAxDnTtIGlSU984.mp4";
+            document.getElementById("video_src").src = '' + $("#nv").text();
         }
         elem_video1.load();
         elem_video1.currentTime = currentTime;
