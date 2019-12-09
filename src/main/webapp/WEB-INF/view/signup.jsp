@@ -92,6 +92,9 @@
         .layui-tab-title li {
             width: 172px;
         }
+        .error{
+            color: red;
+        }
     </style>
 </head>
 <body style="background-color: #ecf5f4">
@@ -102,7 +105,6 @@
         <div class="logD logDtip">
             <p class="p1">账号注册</p>
         </div>
-        <span>${spanmsg}</span>
         <center><span style="color:red;">${spanmsg}</span></center>
         <form action="/users/signup" method="post" onsubmit="return check()">
 
@@ -120,30 +122,30 @@
                 <i class="layui-icon layui-icon-cellphone"
                    style="position:relative;bottom: -33px;left: 10px;font-size: 20px"></i>
                 <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()" lay-verify="required"
-                       placeholder="请输入手机号" autocomplete="off" class="layui-input"><span class="error"
-                                                                                         id="phoneError"></span>
+                       placeholder="请输入手机号" autocomplete="off" class="layui-input">
+                <span class="error" id="phoneError"></span>
             </div>
             <div class="lgD">
                 <i class="layui-icon layui-icon-password"
                    style="position:relative;bottom: -33px;left: 10px;font-size: 20px"></i>
                 <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" lay-verify="required"
-                       placeholder="请输入新密码" autocomplete="off" class="layui-input"><span class="error"
-                                                                                         id="checktext2"></span>
+                       placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                <span class="error" id="checktext2"></span>
             </div>
             <!-- 输入框 -->
             <div class="lgD">
                 <i class="layui-icon layui-icon-password"
                    style="position:relative;bottom: -33px;left: 10px;font-size: 20px"></i>
                 <input id="pwd2" name="userpwd" type="password" value="" onchange="checkpwd2()" placeholder="请再次输入密码"
-                       lay-verify="required" autocomplete="off" class="layui-input"><span class="error"
-                                                                                          id="checktext3"></span>
+                       lay-verify="required" autocomplete="off" class="layui-input">
+                <span class="error" id="checktext3"></span>
             </div>
             <div class="lgD">
                 <i class="layui-icon layui-icon-vercode"
                    style="position:relative;bottom: -33px;left: 10px;font-size: 20px"></i>
                 <input id="code1" name="usercode" type="text" value="" onchange="checkcode()" placeholder="请输入验证码"
-                       lay-verify="required|phone" autocomplete="off" class="layui-input"><span class="error"
-                                                                                                id="codeError"></span>
+                       lay-verify="required|phone" autocomplete="off" class="layui-input">
+                <span class="error" id="codeError"></span>
                 <button type="button" id="getcod" onclick="openCheck(this);"
                         style="border: none;background-color: #ee7700;color: #fff;padding: 10px;margin-top: 10px">获取验证码
                 </button>

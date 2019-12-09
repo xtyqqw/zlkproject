@@ -187,6 +187,7 @@
         .main_ul a{
             text-decoration: none;
         }
+        /*提交答案弹窗*/
         .answer_succ1,.answer_succ2,.answer_succ3{
             width: 400px;
             height: 70px;
@@ -390,8 +391,8 @@
                     <input type="text" id="input_hid" style="display: none"  name="responseId">
                     <input type="submit" class="layui-btn" style="float: right;"
                            onclick="submit()" value="提交">
-                </div>--%>
-                <%--<div class="answer_tan">
+                </div>
+                <div class="answer_tan">
                     <div class="answer_succ1">
                         <p class="att_succ_ok">√</p>
                         <p class="att_succ_zi1">答案提交已成功！</p>
@@ -410,7 +411,7 @@
         <%--<div id="demo7" style="float: right;margin: 50px 20px auto"></div>--%>
     </div>
 </div>
-<%--富文本文字长度--%>
+<%--富文本文字长度 并没有什么用--%>
 <script type="text/javascript">
     function checknum(){
         var textDom =  document.getElementById("content");
@@ -424,24 +425,62 @@
     checknum();
 </script>
 <%--分页--%>
-<%--<script>
-    var total = "${all}";
-    layui.use(['laypage', 'layer'], function() {
-        var laypage = layui.laypage, layer = layui.layer;
-        //完整功能
-        laypage.render({
-            elem: 'demo7'
-            ,count: total //数据总数
-            ,theme: '#914FF1'
-            ,first: '首页'
-            ,last: '尾页'
-            ,layout: ['prev', 'page', 'next', 'count']
-            ,jump: function(obj){
-                console.log(obj)
+<script>
+    var page = 1;
+    var limit = 5;
+    var total;
+    function showAll() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtest",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (data){
+                total = data.count;
+                var data1 = data.data;
+                var html = '';
+                for (var i = 0;i < data1.length;i++){
+                    if (data1.tepe==0){
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                        html += '';
+                    }
+
+                }
             }
+        })
+    }
+
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,first: '首页'
+                ,last: '尾页'
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj){
+                    console.log(obj)
+                }
+            });
         });
-    });
-</script>--%>
+    }
+
+</script>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
