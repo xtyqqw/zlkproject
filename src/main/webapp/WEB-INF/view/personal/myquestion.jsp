@@ -424,11 +424,10 @@
     }
     checknum();
 </script>
-<%--分页--%>
+<%--全部 分页--%>
 <script>
     var page = 1;
     var limit = 5;
-    var total;
     function showAll() {
         $.ajax({
             type: "post",
@@ -439,30 +438,69 @@
                 "page": page,
                 "limit": limit,
             },
-            success: function (data){
-                total = data.count;
-                var data1 = data.data;
+            success: function (all){
+                var data1 = all.list;
                 var html = '';
                 for (var i = 0;i < data1.length;i++){
-                    if (data1.tepe==0){
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
-                        html += '';
+                    /*我的提问*/
+                    if (data1.type==0){
+                        html += '<div class="question_waik">';
+                        html += '<ul class="head_lebel">';
+                        for (var j = 0;j<data1.tagList;j++){
+                            html += '<li class="lebel_li">'+ data1[i].tagName+'</li>';
+                        }
+                        html += '</ul><br />';
+                        html += '<p class="title">';
+                        html += '<a href="javascript:;">'+ data1[i].questionTitle+'</a>';
+                        html += '</p>';
+                        html += '<p class="from">来自：'+ data1[i].typeName+'</p>';
+                        html += '<p class="question_num">回答 '+ data1[i].responseCount+'</p>';
+                        html += '<p class="look_num">浏览 '+ data1[i].browseCount+'</p>';
+                        html += '<p class="question_share">分享</p>';
+                        html += '<p class="question_date">'+ data1[i].formatDate+'</p>';
+                        html += '</div>';
                     }
-
+                    /*我的回答 已采纳*/
+                    if (data1.type == 1&&data1.accept ==1){
+                        html += '<div class="reply_waik_adopted">';
+                        html += '<p class="reply_date">'+ data1[i].formatDate+'</p>';
+                        html += '<p class="adopted">已采纳</p>';
+                        html += '<p class="reply_adopted_msg">';
+                        html += '<a href="javascript:;">'+ data1[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"\n' +
+                            'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
+                        html += '<p class="reply_adopted_share">分享</p>';
+                        html += '</div>';
+                    }
+                    /*我的回答 未采纳*/
+                    if (data1.type==1&&data1.accept==0){
+                        html += '<div class="reply_waik">';
+                        html += '<p class="reply_date">'+data1[i].formatDate+'</p>';
+                        html += '<p class="reply_msg">';
+                        html += '<a href="javascript:;">'+data1[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
+                        html += '<p class="reply_dian">...</p>';
+                        html += '<p class="reply_delete" onclick="delNote('+ data1[i].responseId+')">删除</p>';
+                        html += '<p class="reply_edit" onclick="editNote('+ data1[i].responseContent+','+ data1[i].responseId+')">编辑</p>';
+                        html += '<p class="reply_share">分享</p>';
+                        html += '</div>';
+                    }
                 }
+                $(".main_li_show").empty().append(html);
             }
         })
     }
-
     function getPage(){
         layui.use('laypage', function() {
             var laypage = layui.laypage;
@@ -470,16 +508,161 @@
                 elem: 'demo7'
                 ,count: total //数据总数
                 ,theme: '#914FF1'
-                ,first: '首页'
-                ,last: '尾页'
-                ,layout: ['prev', 'page', 'next', 'count']
-                ,jump: function(obj){
-                    console.log(obj)
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showAll();
+                    }
                 }
             });
         });
     }
-
+    $(function () {
+        showAll();
+        getPage()
+    })
+</script>
+<%--我的提问 分页--%>
+<script>
+    var page = 1;
+    var limit = 5;
+    function showQuestion() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtest",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (question){
+                var ques = question.qList;
+                var html = '';
+                for (var i = 0;i < ques.length;i++){
+                    html += '<div class="question_waik">';
+                    html += '<ul class="head_lebel">';
+                    for (var j = 0;j<ques.tagList;j++){
+                        html += '<li class="lebel_li">'+ ques[i].tagName+'</li>';
+                    }
+                    html += '</ul><br />';
+                    html += '<p class="title">';
+                    html += '<a href="javascript:;">'+ ques[i].questionTitle+'</a>';
+                    html += '</p>';
+                    html += '<p class="from">来自：'+ ques[i].typeName+'</p>';
+                    html += '<p class="question_num">回答 '+ ques[i].responseCount+'</p>';
+                    html += '<p class="look_num">浏览 '+ ques[i].browseCount+'</p>';
+                    html += '<p class="question_share">分享</p>';
+                    html += '<p class="question_date">'+ ques[i].formatDate+'</p>';
+                    html += '</div>';
+                }
+                $(".main_li2").empty().append(html);
+            }
+        })
+    }
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showQuestion();
+                    }
+                }
+            });
+        });
+    }
+    $(function () {
+        showQuestion();
+        getPage()
+    })
+</script>
+<%--我的问答 分页--%>
+<script>
+    var page = 1;
+    var limit = 5;
+    function showReply() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtest",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (reply){
+                var reply = reply.rList;
+                var html = '';
+                for (var i = 0;i < reply.length;i++){
+                    /*我的回答 已采纳*/
+                    if (reply.accept ==1){
+                        html += '<div class="reply_waik_adopted">';
+                        html += '<p class="reply_date">'+ reply[i].formatDate+'</p>';
+                        html += '<p class="adopted">已采纳</p>';
+                        html += '<p class="reply_adopted_msg">';
+                        html += '<a href="javascript:;">'+ reply[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ reply[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"\n' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].replyCount+'</i>';
+                        html += '<p class="reply_adopted_share">分享</p>';
+                        html += '</div>';
+                    }
+                    /*我的回答 未采纳*/
+                    if (reply.accept==0){
+                        html += '<div class="reply_waik">';
+                        html += '<p class="reply_date">'+reply[i].formatDate+'</p>';
+                        html += '<p class="reply_msg">';
+                        html += '<a href="javascript:;">'+reply[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ reply[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].replyCount+'</i>';
+                        html += '<p class="reply_dian">...</p>';
+                        html += '<p class="reply_delete" onclick="delNote('+ reply[i].responseId+')">删除</p>';
+                        html += '<p class="reply_edit" onclick="editNote('+ reply[i].responseContent+','+ data1[i].responseId+')">编辑</p>';
+                        html += '<p class="reply_share">分享</p>';
+                        html += '</div>';
+                    }
+                }
+                $(".main_li3").empty().append(html);
+            }
+        })
+    }
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showReply();
+                    }
+                }
+            });
+        });
+    }
+    $(function () {
+        showReply();
+        getPage()
+    })
 </script>
 <script type="text/javascript">
     /*点击删除*/
