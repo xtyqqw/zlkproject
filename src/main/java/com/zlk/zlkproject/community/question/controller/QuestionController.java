@@ -31,6 +31,7 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private QuestionTagService questionTagService;
+
     /*
      * @descrption 提问提示页面
      * @author gby
@@ -41,8 +42,8 @@ public class QuestionController {
     @RequestMapping(value = "/questionGuide")
     public ModelAndView main(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-        String userId = (String) request.getSession().getAttribute("user");
-        if (userId != null) {
+      /*  String userId = (String) request.getSession().getAttribute("user");
+       if (userId != null) {
             mv.addObject("msg","您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
             return mv;
@@ -50,7 +51,10 @@ public class QuestionController {
             mv.addObject("msg","你还没有登录，请先登录");
             mv.setViewName("redirect:/users/tosignin");
             return mv;
-        }
+        }*/
+        mv.addObject("msg", "您已登录成功，请进行操作");
+        mv.setViewName("/view/community/questionGuide");
+        return mv;
     }
 
     /*
@@ -61,9 +65,9 @@ public class QuestionController {
      * @date 2019/12/3 14:20
      */
     @RequestMapping(value = "/editQuestion")
-    public String edit(Model model,Tag tag) throws Exception {
+    public String edit(Model model, Tag tag) throws Exception {
         List<Tag> tagList = questionTagService.listByTag(tag);
-        model.addAttribute("tagList",tagList);
+        model.addAttribute("tagList", tagList);
         return "/view/community/questionEdit";
     }
 
@@ -75,43 +79,48 @@ public class QuestionController {
      * @date 2019/11/27 16:46
      */
     @PostMapping(value = "/addQuestion")
-    public String addQuestion(Model model,Question question) throws Exception {
-        Integer qu = questionService.addQuestion(question);
-        if (qu != null){
-            model.addAttribute("qu",qu);
-            model.addAttribute("flag","true");
-            model.addAttribute("error", "正在审核,请耐心等待");
-            return "redirect:/questionUser/questionSkip";
-        }else {
-            model.addAttribute("qu",qu);
-            model.addAttribute("flag","true");
-            model.addAttribute("error","发表失败");
-            return "redirect:/question/editQuestion";
-        }
+    public ModelAndView addQuestion(Question question) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        questionService.addQuestion(question);
+    /*    if (qu != null) {
+            mv.addObject("flag", "true");
+            mv.addObject("error", "发表成功");
+            mv.setViewName("redirect:/articleList/toArticleHot");
+            return mv;
+        } else {
+            mv.addObject("flag", "true");
+            mv.addObject("error", "发表失败");
+            mv.setViewName("redirect:/question/editQuestion");
+            return mv;
+        }*/
+        mv.addObject("发表成功");
+        mv.setViewName("/view/community/communityMain");
+        return mv;
+
     }
 
     //文章编辑页面的图片上传方法
-    @RequestMapping(value="/uploadImg",method= RequestMethod.POST)
-    public void hello(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
+    @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
+    public void hello(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach) {
         try {
-            request.setCharacterEncoding( "utf-8" );
-            response.setHeader( "Content-Type" , "text/html" );
+            request.setCharacterEncoding("utf-8");
+            response.setHeader("Content-Type", "text/html");
             String rootPath = request.getSession().getServletContext().getRealPath("upload");
             /**
              * 文件路径不存在则需要创建文件路径
              */
-            File filePath=new File(rootPath);
-            if(!filePath.exists()){
+            File filePath = new File(rootPath);
+            if (!filePath.exists()) {
                 filePath.mkdirs();
             }
             //最终文件名
-            File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
+            File realFile = new File(rootPath + File.separator + attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
             //下面response返回的json格式是editor.md所限制的，规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write("{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}");
         } catch (Exception e) {
             try {
-                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+                response.getWriter().write("{\"success\":0, \"message\":\"上传失败\"}");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

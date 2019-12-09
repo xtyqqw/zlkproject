@@ -23,6 +23,7 @@
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
     </resultMap>
+
     <select id="findQuestionByTime" resultMap="questionEntityMap">
          select * from question  order by create_time DESC
     </select>

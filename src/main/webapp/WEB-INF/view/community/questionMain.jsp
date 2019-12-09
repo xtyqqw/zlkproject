@@ -12,7 +12,11 @@
     <title>问答首页</title>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-    <link rel="shortcut icon" href="/img/zlk.png" type="image/x-icon"/>
+    <script src="<%=request.getContextPath()%>/layui/css/layui.css"></script>
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
+          type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <style type="text/css">
         body {
             overflow-x: hidden;
@@ -46,157 +50,79 @@
             vertical-align: middle;
             border-radius: 8%;
         }
-        ul li{
+
+        ul li {
             list-style: none;
         }
-        .user {
-            background-color: #F2F2F2;
-            height: 250px;
-            width: 250px;
-            float: right;
-            margin-top: -100px;
-        }
-
-        .hint {
-            float: left;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        .userData {
-            margin-top: 50px;
-            margin-left: 10px;
-
-        }
-
-        .userLogo {
-            display: inline-block;
-            margin: 5px auto;
-            width: 50px;
-            height: 50px;
-            -webkit-border-radius: 100px;
-            border: 2px solid #fff;
-            box-shadow: 0 0 4px #ccc;
-            overflow: hidden;
-
-        }
-
-        .img {
-            width: 100%;
-            min-height: 100%;
-        }
-
-        .userName {
-            margin-top: -60px;
-            margin-left: 80px;
-
-        }
-
-        .vip {
-            margin-top: -70px;
-            float: right;
-            margin-right: 45px;
-        }
-
 
     </style>
 </head>
 <body>
+<!--中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn">
+    <div style="margin-top: 15px;">
+        <a href="<%=request.getContextPath()%>/question/questionGuide" target="_blank"
+           class="ui mini right floated teal basic button">我要提问</a>
+    </div>
+    <div class="ui container" style="width: 100%;margin-left: -120px;margin-top: -12px;">
+        <div class="ui stackable grid">
+            <!--左边博客列表-->
+            <div class="eleven wide column">
+                <!--header-->
+                  <div class="ui top attached segment">
+                      <div class="ui middle aligned two column grid">
+                          <div class="column">
+                              <h3 class="ui teal header">我的问答</h3>
+                          </div>
+                      </div>
+                  </div>
+                <c:forEach items="${allQuestion}" var="all" begin="0" end="8">
+                    <div class="ui padded vertical segment m-padded-tb-large">
+                        <div class="ui middle aligned mobile reversed stackable grid">
+                            <div class="eleven wide column">
+                                <div class="right aligned five wide column">
+                                        <span class="ui teal basic label m-padded-tiny m-text-thin"
+                                              style="float: left;">
+                                                ${all.solve}未解决
+                                        </span>
 
-<div style="margin-left: -20px;width: 100%;height: 600px;">
-    <div style="margin-top: 110px;margin-left: -140px;">
-        <div class="quiz">
-            <a role="button" href="<%=request.getContextPath()%>/question/questionGuide" target="_blank">我要提问</a>
+                                    <h3 class="ui header">
+                                        <a href="<%=request.getContextPath()%>/questionUser/find/{questionId}"
+                                           name="all.quesitonId"
+                                           target="_blank">
+                                                ${all.questionTitle}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div class="ui grid" style="float: left;margin-top: 10px;height: 80px">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img src="https://unsplash.it/100/100?image=1005"
+                                                     th:src="@{${all.userId}}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <span>${user.userName}管理员</span>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>
+                                                <span>${all.browseCount}</span>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>
+                                                <span>${all.createTime}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
-    <div style="width:850px;height: auto;margin-top: -180px;float: left;">
-        <c:forEach items="${allQuestion}" var="all" begin="0" end="100">
-            <ul>
-                <li style="margin: 50px 0;">
-                    <a href="<%=request.getContextPath() %>/questionUser/find/{quesitonId}" target="_blank" type="button"
-                       style="text-decoration: none;width: auto;">
-                          <h3>${all.questionTitle}</h3>
-                    </a>
-                </li>
-            </ul>
-        </c:forEach>
-    </div>
-<%--    <div style="float: left;">
-
-        <div class="user">
-            <div class="hint">
-                <i>提问者</i>
-            </div>
-            <div class="userData">
-                <div class="userLogo">
-                    <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank">
-                        <img class="img" src="${user.userImg}"></a>
-                </div>
-            </div>
-            <div class="userName">
-                <a href="<%=request.getContextPath() %>/questionUser/skipUser" target="_blank"
-                   style="text-decoration: none; color: black; " id="or" onmouseover="over()" onmouseout="out()">
-                    <i id="size" name="">${user.userRealname}</i>
-                </a>
-                <p name="acreateTime">发布</p>
-            </div>
-            <div class="vip">
-                <img src="/img/V.png"></svg>
-            </div>
-        </div>
-    </div>--%>
-
 </div>
-<script type="text/javascript">
-    var oBox = document.getElementById('size');
-    var demoHtml = oBox.innerHTML.slice(0, 5) + '...';
-    oBox.innerHTML = demoHtml;
-</script>
-<script type="text/javascript">
-    function out() {
-        var x = document.getElementById("or").style.color = "black";
-    }
-
-    function over() {
-        var x = document.getElementById("or").style.color = "blue";
-    }
-
-</script>
-<script type="text/javascript">
-    function handlePublishTimeDesc(createTime) {
-        // 拿到当前时间戳和发布时的时间戳，然后得出时间戳差
-        var curTime = new Date();
-        var postTime = new Date(createTime);
-        var timeDiff = curTime.getTime() - postTime.getTime();
-
-        // 单位换算
-        var min = 60 * 1000;
-        var hour = min * 60;
-        var day = hour * 24;
-        var week = day * 7;
-
-        // 计算发布时间距离当前时间的周、天、时、分
-        var exceedWeek = Math.floor(timeDiff / week);
-        var exceedDay = Math.floor(timeDiff / day);
-        var exceedHour = Math.floor(timeDiff / hour);
-        var exceedMin = Math.floor(timeDiff / min);
-
-        // 最后判断时间差到底是属于哪个区间，然后return
-        if (exceedWeek > 0) {
-            return createTime;
-        } else {
-            if (exceedDay < 7 && exceedDay > 0) {
-                return exceedDay + '天前';
-            } else {
-                if (exceedHour < 24 && exceedHour > 0) {
-                    return exceedHour + '小時前';
-                } else {
-                    return exceedMin + '分鐘前';
-                }
-            }
-        }
-    };
-
-</script>
 </body>
 </html>

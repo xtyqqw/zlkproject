@@ -76,7 +76,7 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
     }
 
     @Override
-    public Integer updateArtCmtInform(Integer articleCommentId, Integer inform) {
+    public Integer updateArtCmtInform(Integer articleCommentId, String inform) {
         return articleCommentsMapper.updateArtCmtInform(articleCommentId,inform);
     }
 }

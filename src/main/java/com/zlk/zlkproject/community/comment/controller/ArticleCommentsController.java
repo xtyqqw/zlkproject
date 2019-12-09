@@ -94,7 +94,7 @@ public class ArticleCommentsController {
     @RequestMapping(value = "/updateInform")
     @ResponseBody
     public Map updateInform(@RequestParam("articleCommentId") Integer articleCommentId,
-                            @RequestParam("inform") Integer inform) {
+                            @RequestParam("inform") String inform) {
         Map map = new HashMap();
         Integer res = articleCommentsService.updateArtCmtInform(articleCommentId, inform);
         Integer error = 1;

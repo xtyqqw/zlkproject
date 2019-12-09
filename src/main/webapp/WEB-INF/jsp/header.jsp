@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <style type="text/css">
-        body {
+        *{
             margin: 0;
+            padding: 0;
         }
         .header{
             background-color: #FFFFFF;
@@ -22,6 +23,8 @@
             width: 100%;
             border-bottom: 1px #989898;
             box-shadow: 1px 1px 5px 3px #D4D4D4;
+            margin-top: 0px;
+            margin-left: 0px;
         }
         /* 头部logo样式 */
         .header .header-logo{
@@ -58,7 +61,7 @@
         .header .header-search{
             float: left;
             display: inline;
-            margin-left: 400px;
+            margin-left: 300px;
             margin-top: 18px;
         }
         /* 头部搜索框样式 */
@@ -118,8 +121,8 @@
         <!-- 导航 -->
         <div class="header-nav">
                 <a href="/index/toIndex" name="nav" class="nav">首页</a>
-                <a href="javascript:;" name="nav" class="nav">项目</a>
-                <a href="/articles/toLogin" name="nav" class="nav">社区</a>
+                <a href="/HomePage" name="nav" class="nav">项目</a>
+                <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
         </div>
         <!-- 搜索 -->
         <div class="header-search">

@@ -27,19 +27,6 @@ import java.util.List;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-
-    /*
-     * @descrption 社区首页
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/12/5 10:19
-     */
-    @RequestMapping(value = "/main")
-    public String main() {
-
-        return "/view/community/communityMain";
-    }
     /*
      * @descrption 问答首页
      * @author gby
@@ -55,29 +42,6 @@ public class QuestionHomeController {
         mv.setViewName("/view/community/questionMain");
         return mv;
     }
-
-/*
-     * @descrption 展示提问者用户信息
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/12/6 15:49
-     *//*
-    @RequestMapping(value = "/skipUser")
-    public ModelAndView skip(HttpServletRequest request) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        String userId1 = (String) request.getSession().getAttribute("userId");
-        Question list = questionHomeService.findQuestionById(userId1);
-        mv.addObject("list", list);
-        mv.setViewName("/view/community/questionMainUser");
-        return mv;
-    }*/
-
-/*    @RequestMapping(value = "/myQuestion")
-    public String myQuestion() throws Exception {
-
-        return "view/community/questionMainUser";
-    }*/
     /*
      * @descrption 通过问题id查询文章
      * @author gby
@@ -86,7 +50,7 @@ public class QuestionHomeController {
      * @date 2019/11/26 10:07
      */
     @RequestMapping(value = "/find/{questionId}")
-    public String find(@PathVariable(value = "questionId") String questionId,Model model) throws Exception {
+    public String find(@PathVariable String questionId,Model model) throws Exception {
         model.addAttribute("question", questionHomeService.findByQuestionId(questionId));
         return "/view/community/questionParticulars";
     }

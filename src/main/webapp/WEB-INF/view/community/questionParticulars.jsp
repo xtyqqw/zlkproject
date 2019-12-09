@@ -1,166 +1,97 @@
 <%--
   Created by IntelliJ IDEA.
   User: gby
-  Date: 2019/11/21
-  Time: 9:31
+  Date: 2019/12/2
+  Time: 11:09
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <title>问题详情</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
+    <title>文章详情</title>
+    <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/css/layui.css"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
           type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
     <style type="text/css">
-        .editormd-html-preview {
+        .label {
+            display: inline-block;
+            padding: 0 4px;
+            height: 18px;
+            line-height: 18px;
+            background: #6294b5;
+            font-size: 12px;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 2px;
+        }
+        .tt {
+            float: left;
+        }
+        .time {
+            margin-right: 26px;
+        }
+        .question {
+            text-align: center;
+            float: left;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: auto;
+        }
+        .test-editormd-view {
             width: 90%;
             margin: 0 auto;
         }
     </style>
-    <style type="text/css">
-        .top {
-            height: auto;
-            width: 100%;
-            left: 0;
-            top: 0; /*离顶部的距离为0*/
-        }
 
-        /*导航栏变异部分*/
-        .nav2 {
-            font-size: 20px;
-            top: 0px;
-            height: 60px;
-            width: 100%;
-            background-color: white;
-        }
-
-        .nav3 {
-            float: left;
-            margin-left: 200px;
-            margin-top: 15px;
-        }
-
-        .fixnav {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-        }
-
-        .div1 {
-            margin-left: 175px;
-            width: 920px;
-        }
-
-        .div2 {
-            margin-top: -27px;
-            float: left;
-            margin-left: 50px;
-        }
-
-        .span {
-            float: right;
-            margin-top: 10px;
-        }
-    </style>
 </head>
-
 <body>
-<div class="top">
-    <%@include file="../../jsp/header.jsp" %>
-    <%@include file="../../jsp/sidebar.jsp" %>
-    <div class="nav2">
-        <div class="nav3">
-            <h2>${question.questionTitle}</h2>
+<%@include file="../../jsp/header.jsp" %>
+<%@include file="../../jsp/sidebar.jsp" %>
+<div class="layui-row" style="margin-top:30px;width: 1000px;margin-left: 230px;border: 1px solid #ccc;height: 50px">
+    <div class="title">
+        <i class="label" style="float: left;">未解决</i>&nbsp;&nbsp;&nbsp;
+        <h3>${question.questionTitle}标题</h3>
+        <div class="tt">
+            <a class="label">标签</a>
+            <span style="margin-right: 26px;">
+                            <i class="layui-icon layui-icon-radio"></i>
+                            <b>0</b>浏览
+                        </span>
+            <sapn class="time">
+                <i class="layui-icon layui-icon-log">2019.12.09</i>
+            </sapn>
         </div>
     </div>
-    <div class="div1">
-        <%--文章标题及特征--%>
-        <div style="margin-top: 50px;height: 100px;width: auto;">
-            <div class="title" style="font-size: 10px;float: left">
-                <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px;border-radius: 5%; ">
-                    <i style="color: white">${question.questionSetTop}</i>
-                </div>
-                <div class="div2">
-                    <h2> ${question.questionTitle}</h2>
-                </div>
-            </div>
-            <br><br>
-            <div style="float: left; margin-top: 10px;">
-                <div style="width: 40px;height:20px;background-color:#E8E8E8;border-radius: 5%;">
-                    <p class="tag"><%--${tag.tagName}--%>标签</p>
-                </div>
-            </div>
-            <div class="span">
-                <small>
-                    <span>${question.browseCount}浏览</span>
-                    <i>|</i>
-                    <span>分类：<%--${article.typeName}--%></span>
-                </small>
-            </div>
+    <!--中间内容-->
+    <div class="question">
+        <div id="test-editormd-view">
+            <textarea id="articleContent" style="display:none;">${question.questionContent}</textarea>
         </div>
-        <%--文章--%>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;"></fieldset>
-        <div id="layout" style="margin-left: -60px;height: auto">
-            <div id="test-editormd-view">
-                <textarea id="articleContent" style="display:none;">${question.questionContent}</textarea>
-            </div>
-        </div>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
-        <%--评论--%>
-        <div>
-            <label class="layui-form-label" style="margin-left: -30px">评论</label><br><br>
-            <div class="layui-input-block" style="margin-left: 1px">
-                    <textarea name="articleDigest" placeholder="开始编辑..."
-                              style="text-decoration-top: 300px;" maxlength="150"
-                              class="layui-textarea" lay-verify="required"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="submit" style="float:right;background-color: #1296db;" class="layui-btn"
-                        lay-submit="sub" lay-filter="demo2">提交评论
-                </button>
-            </div>
-            <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
-            <div style="float: left;">
-                评论数：<%--${title.responseCount}--%>
-            </div>
-        </div>
+        　　联播+党的十八大以来，法治成为以习近平同志为核心的党中央治国理政的基本方式，全面依法治国纳入“四个全面”战略布局，法治建设宏伟蓝图徐徐展开。
+
+        　　习近平总书记在一系列重要讲话中，常用俗文俚语揭示全面依法治国的要义，平实中蕴含着大智慧，更有一种透彻、直指人心的力量。央视网《联播+》特梳理，与读者一起学习。
     </div>
 </div>
 
-<script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
-
-<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
-<script type="text/javascript">
-    document.title = "${question.questionTitle}"
-    $(function () {
-        $(".nav2").hide();
-        $(window).scroll(function () {
-            if ($(document).scrollTop() > 50) {
-                $(".nav2").addClass("fixnav").slideDown();
-            } else {
-                $(".nav2").hide();
-            }
-        })
-
-    })
-</script>
+<script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
+<script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
+<script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var testEditormdView;
@@ -174,5 +105,6 @@
         });
     });
 </script>
+
 </body>
 </html>

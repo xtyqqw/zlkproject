@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +40,7 @@ public class ArticleComment {
     /**踩数 对应字段cai*/
     private Integer cai;
     /**举报 对应字段inform*/
-    private Integer inform;
+    private String inform;
     /**创建时间 对应字段date*/
     private Date date;
     /**创建时间的字符串*/

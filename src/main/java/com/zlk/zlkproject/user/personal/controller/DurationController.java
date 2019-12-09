@@ -21,6 +21,12 @@ public class DurationController {
     @Autowired
     private DurationService durationService;
 
+    /**
+     * 查询个人学习看板
+     * @param request
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/select")
     @ResponseBody
     /*用视图和模型的方法查询最新的一条数据*/
@@ -36,9 +42,7 @@ public class DurationController {
         mv.addObject("rankall",rankall);
         mv.addObject("ad",ad);
         mv.addObject("addd",addd);
-        /*添加一个对象*/
         mv.addObject("lists",lists);
-        /*添加一个地址*/
         mv.setViewName("view/personal/learnlook");
         return mv;
     }
