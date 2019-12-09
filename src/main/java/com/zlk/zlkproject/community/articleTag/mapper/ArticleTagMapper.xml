@@ -21,7 +21,5 @@
         <result column="tag_id" property="tagId"/>
     </resultMap>
 
-    <select id="getArticleByTagId" resultMap="getArticleByTagId" parameterType="java.lang.Integer">
-        select A.article_id,A.title,A.article_digest from article A where tag_id=#{tagId}
-    </select>
+
 </mapper>

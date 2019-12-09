@@ -7,21 +7,26 @@
         <id property="sqaId" column="sqa_id" javaType="java.lang.Integer"/>
         <result property="pId" column="pid" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="user_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="answerNum" column="answer_num" javaType="java.lang.Integer"/>
         <result property="viewNum" column="view_num" javaType="java.lang.Integer"/>
         <result property="share" column="share" javaType="java.lang.String"/>
-        <result property="report" column="report" javaType="java.lang.Integer"/>
+        <result property="report" column="report" javaType="java.lang.String"/>
         <result property="date" column="date" javaType="java.util.Date"/>
+        <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
+            <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+            <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+        </collection>
     </resultMap>
 
     <!--添加问答-->
-    <insert id="insertStuQa" parameterType="com.zlk.zlkproject.entity.StuQa">
+    <insert id="insertStuQa" useGeneratedKeys="true" keyProperty="sqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
         INSERT INTO stu_qa
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sqaId != null">
-                squ_id,
+                sqa_id,
             </if>
             <if test="pId != null">
                 pid,
@@ -51,5 +56,212 @@
                 date,
             </if>
         </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sqaId != null">
+                #{sqaId},
+            </if>
+            <if test="pId != null">
+                #{pId},
+            </if>
+            <if test="sectionId != null">
+                #{sectionId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="content != null and content !=''">
+                #{content},
+            </if>
+            <if test="answerNum != null">
+                #{answerNum},
+            </if>
+            <if test="viewNum != null">
+                #{viewNum},
+            </if>
+            <if test="share != null and share !='' ">
+                #{share},
+            </if>
+            <if test="report != null and report !=''">
+                #{report},
+            </if>
+            <if test="date != null">
+                #{date},
+            </if>
+        </trim>
     </insert>
+    <!--添加问答标签关联信息-->
+    <insert id="insertStuQaTag" parameterType="java.lang.Integer">
+        INSERT INTO stu_qa_tag(sqa_id,tag_id) VALUES (#{sqaId},#{tagId})
+    </insert>
+    <!--依据sectionId分页查找全部问答-->
+    <select id="findStuQaBySectionId" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT *
+        FROM (SELECT * FROM stu_qa
+        <where>
+            <if test="sectionId !=null and sectionId != ''">
+                section_id = #{sectionId}
+            </if>
+            and pId = 0
+        </where>
+        limit #{offset},#{limit}) s
+        LEFT JOIN stu_qa_tag sqt ON sqt.sqa_id = s.sqa_id
+        LEFT JOIN tag t ON t.tag_id = sqt.tag_id
+    </select>
+    <!--依据sectionId统计问答数量-->
+    <select id="findCountBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa
+        <where>
+            <if test="sectionId !=null and sectionId != ''">
+                section_id = #{sectionId}
+            </if>
+            and pId = 0
+        </where>
+    </select>
+    <!--依据sectionId分页查找全部问答并根据回答数量排序-->
+    <select id="findStuQaBySectionIdElite" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT *
+        FROM (SELECT * FROM stu_qa
+        <where>
+            <if test="sectionId !=null and sectionId != ''">
+                section_id = #{sectionId}
+            </if>
+            and pId = 0
+        </where>
+        ORDER BY answer_num DESC
+        limit #{offset},#{limit}) s
+        LEFT JOIN stu_qa_tag sqt ON sqt.sqa_id = s.sqa_id
+        LEFT JOIN tag t ON t.tag_id = sqt.tag_id
+    </select>
+    <!--根据sqaId修改共享和举报信息-->
+    <update id="updateShareOrReportBySqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
+        UPDATE stu_qa
+        <set>
+            <if test="share !=null and share != ''">
+                share = #{share}
+            </if>
+            <if test="report != null and report != ''">
+                report = #{report}
+            </if>
+        </set>
+        WHERE sqa_id = #{sqaId}
+    </update>
+    <!--根据sqaId查找所有信息-->
+    <select id="findStuQaBySqaId" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa WHERE sqa_id = #{sqaId}
+    </select>
+    <!--依据sectionId和pid分页查找当前问题的所有回答-->
+    <select id="findStuQaBySectionIdAndPId" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT *
+        FROM (SELECT * FROM stu_qa
+        <where>
+            <if test="sectionId !=null and sectionId != ''">
+                AND section_id = #{sectionId}
+            </if>
+            <if test="pId != null and pId != ''">
+                AND pid = #{pId}
+            </if>
+        </where> ORDER BY date DESC
+        ) s
+        LEFT JOIN stu_qa_tag sqt ON sqt.sqa_id = s.sqa_id
+        LEFT JOIN tag t ON t.tag_id = sqt.tag_id
+    </select>
+    <!--依据sectionId统计问答数量-->
+    <select id="findCountBySectionIdAndPId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa
+        <where>
+            <if test="sectionId !=null">
+                AND section_id = #{sectionId}
+            </if>
+            <if test="pId != null">
+                AND pid = #{pId}
+            </if>
+        </where>
+    </select>
+    <!--根据sqaId查找tagId-->
+    <select id="findTagIdBySqaId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT tag_id FROM stu_qa_tag WHERE sqa_id = #{sqaId}
+    </select>
+    <!--根据sqaId修改字段信息-->
+    <update id="updateStuQaBySqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
+        UPDATE stu_qa
+        <set>
+            <if test="pId != null">
+                pid = #{pId},
+            </if>
+            <if test="sectionId != null">
+                section_id = #{sectionId},
+            </if>
+            <if test="userId != null and userId !=''">
+                user_id = #{userId},
+            </if>
+            <if test="content != null and content !=''">
+                content = #{content},
+            </if>
+            <if test="answerNum != null">
+                answer_num = #{answerNum},
+            </if>
+            <if test="viewNum != null">
+                view_num = #{viewNum},
+            </if>
+            <if test="share != null and share !='' ">
+                share = #{share},
+            </if>
+            <if test="report != null and report !=''">
+                report = #{report},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+        </set>
+            WHERE sqa_id = #{sqaId}
+    </update>
+    <!--全部查询并分页-->
+    <select id="selectAllLimit" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa limit #{startPage},#{limit}
+    </select>
+    <!--查找全部数量-->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa
+    </select>
+    <!--根据id删除问答信息-->
+    <delete id="deleteBySqaId" parameterType="com.zlk.zlkproject.entity.StuQa">
+        DELETE FROM stu_qa WHERE sqa_id = #{sqaId}
+    </delete>
+    <!--按照已举报进行排列-->
+    <select id="selectByReportDesc" parameterType="java.lang.Integer" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa ORDER BY report DESC limit #{startPage},#{limit}
+    </select>
+    <!--根据用户名或小节名模糊查询-->
+    <select id="fuzzySearchByUserName" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN user u ON sq.user_id = u.user_id
+            WHERE u.user_realname LIKE CONCAT('%',#{userRealname},'%')
+        </if>
+        LIMIT #{startPage},#{limit}
+    </select>
+    <select id="fuzzySearchBySectionName" resultMap="stuQaEntityMap">
+        SELECT * FROM stu_qa sq
+        <if test="sectionName != null and sectionName != ''">
+            LEFT JOIN section s ON sq.section_id = s.section_id
+            WHERE s.section_name LIKE CONCAT('%',#{sectionName},'%')
+        </if>
+        LIMIT #{startPage},#{limit}
+    </select>
+    <select id="selectCountByUserNameFuzzySelect" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN user u ON sq.user_id = u.user_id
+            WHERE u.user_realname LIKE CONCAT('%',#{userRealname},'%')
+        </if>
+    </select>
+    <select id="selectCountBySectionNameFuzzySelect" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM stu_qa sq
+        <if test="userRealname != null and userRealname != ''">
+            LEFT JOIN section s ON sq.section_id = s.section_id
+            WHERE s.section_name LIKE CONCAT('%',#{sectionName},'%')
+        </if>
+    </select>
+
 </mapper>

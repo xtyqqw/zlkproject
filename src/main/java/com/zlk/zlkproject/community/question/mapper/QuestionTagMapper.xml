@@ -11,7 +11,7 @@
     </resultMap>
 
 
-    <select id="listTagAll" resultMap="tagEntityMap" parameterType="java.lang.String">
+    <select id="listByTag" resultMap="tagEntityMap" parameterType="java.lang.String">
       select * from tag
     </select>
 </mapper>

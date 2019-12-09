@@ -2,6 +2,7 @@ package com.zlk.zlkproject.user.personal.service;
 
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.entity.Users;
@@ -20,7 +21,7 @@ public interface RecordService {
      * @param userId
      * @return
      */
-    List<Item> selectCourses(FollowerPage followerPage);
+    List<Item> selectCourses(Pagination pagination);
     /**
      * 查询小结状态总数
      * @param userId
@@ -36,8 +37,8 @@ public interface RecordService {
     Integer selectUser(String userId);
     /**
      * 查询课程数量
-     * @param userId
+     * @param pagination
      * @return
      */
-    Integer findCourses(String userId);
+    List<Courses> findCourses(Pagination pagination);
 }

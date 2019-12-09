@@ -2,6 +2,7 @@ package com.zlk.zlkproject.user.personal.mapper;
 
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,10 +19,10 @@ import java.util.List;
 public interface RecordMapper {
     /**
      * 查询学习课程
-     * @param userId
+     * @param pagination
      * @return
      */
-    List<Item> selectCourses(FollowerPage followerPage);
+    List<Item> selectCourses(Pagination pagination);
 
     /**
      * 查询小结状态总数
@@ -39,8 +40,15 @@ public interface RecordMapper {
 
     /**
      * 查询课程数量
-     * @param userId
+     * @param pagination
      * @return
      */
-    Integer findCourses(String userId);
+    List<Courses> findCourses(Pagination pagination);
+
+    /**
+     * 分页查询我的学习记录
+     * @param pagination
+     * @return
+     *//*
+    List<Courses> findCoursesAll(Pagination pagination);*/
 }
