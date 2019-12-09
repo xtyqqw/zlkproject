@@ -5,8 +5,10 @@ import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +59,13 @@ public class CourseHomePageServiceImpl implements CourseHomePageService{
         return courseHomePageMapper.findAll(courses, startPage, limit);
     }
     @Override
+    public List<Courses> findAllByTag(Courses courses,String tagName, Integer page, Integer limit) {
+        courses.getLastStudyTime();
+        Integer startPage = (page - 1) * limit;
+        return courseHomePageMapper.findAllByTag(courses,tagName,startPage,limit);
+    }
+
+    @Override
     public int updateByCoursesId(Courses courses) {
         return courseHomePageMapper.updateByCoursesId(courses);
 
@@ -64,8 +73,8 @@ public class CourseHomePageServiceImpl implements CourseHomePageService{
 
     @Override
     public List<Courses> selectCoursesByLimit(Integer page, Integer limit) {
-        page = (page-1)*limit;
-        return courseHomePageMapper.selectCoursesByLimit(page, limit);
+        Integer offset = (page-1)*limit;
+        return courseHomePageMapper.selectCoursesByLimit(offset, limit);
     }
 
     @Override
@@ -81,5 +90,16 @@ public class CourseHomePageServiceImpl implements CourseHomePageService{
     @Override
     public int insertByCourses(Courses courses) {
         return courseHomePageMapper.insertByCourses(courses);
+    }
+
+    @Override
+    public List<Courses> findByCoursesNameLimit(String coursesName,Integer page,Integer limit) {
+        Integer startPage = (page-1)*limit;
+        return courseHomePageMapper.findByCoursesNameLimit(coursesName,startPage,limit);
+    }
+
+    @Override
+    public Integer findCountsByCoursesName(String coursesName) {
+        return courseHomePageMapper.findCountsByCoursesName(coursesName);
     }
 }

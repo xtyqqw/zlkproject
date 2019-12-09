@@ -45,7 +45,6 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public User findUserByPhonenumAndPwd(User user) {
-        System.out.println(user.getUserPwd());
         User user1 = signMapper.findUserByPhonenumAndPwd(user);
         return user1;
     }
@@ -56,5 +55,10 @@ public class SignServiceImpl implements SignService {
         String userPwd = MD5Util.md5Encrypt32Lower(user.getUserPwd());
         user.setUserPwd(userPwd);
         return signMapper.changePwd(user);
+    }
+
+    @Override
+    public User selectNameAndImg(String userId) {
+        return signMapper.selectNameAndImg(userId);
     }
 }

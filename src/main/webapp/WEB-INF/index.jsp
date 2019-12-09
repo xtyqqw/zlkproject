@@ -497,7 +497,7 @@
                                                 </a>
                                             </div>
                                             <dl>
-                                                <dt>${courses.introduceText}</dt>
+                                                <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
                                                     <span>${courses.chapterNum}节</span>
@@ -535,7 +535,7 @@
                                                 </a>
                                             </div>
                                             <dl>
-                                                <dt>${courses.introduceText}</dt>
+                                                <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
                                                     <span>${courses.chapterNum}节</span>
@@ -573,7 +573,7 @@
                                                 </a>
                                             </div>
                                             <dl>
-                                                <dt>${courses.introduceText}</dt>
+                                                <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
                                                     <span>${courses.chapterNum}节</span>
@@ -611,7 +611,7 @@
                                                 </a>
                                             </div>
                                             <dl>
-                                                <dt>${courses.introduceText}</dt>
+                                                <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
                                                     <span>${courses.chapterNum}节</span>

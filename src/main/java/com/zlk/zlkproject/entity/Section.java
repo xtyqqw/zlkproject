@@ -23,10 +23,10 @@ public class Section {
     private Integer courseId;
     /**章节id 对应字段section_name*/
     private String sectionName;
+    /**视频地址 普清 对应字段video_addr1*/
+    private String videoAddr1;
     /**视频地址 对应字段video_addr*/
-    private String videoAddr;
-    /**视频地址 对应字段video_addr*/
-    private String videoPath;
+    private String videoPath1;
     /**视频地址 对应字段video_addr*/
     private String videoAddr2;
     /**视频地址 对应字段video_addr*/
@@ -43,14 +43,15 @@ public class Section {
     public Section() {
     }
 
-    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr, Integer sectionTime
-            , Integer sectionNum,String sectionIntro) {
+    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr1, String videoAddr2, Integer sectionTime, Integer sectionNum, String sectionIntro, List<UserSection> userSectionList) {
         this.sectionId = sectionId;
         this.chapterId = chapterId;
         this.sectionName = sectionName;
-        this.videoAddr = videoAddr;
+        this.videoAddr1 = videoAddr1;
+        this.videoAddr2 = videoAddr2;
         this.sectionTime = sectionTime;
         this.sectionNum = sectionNum;
         this.sectionIntro = sectionIntro;
+        this.userSectionList = userSectionList;
     }
 }

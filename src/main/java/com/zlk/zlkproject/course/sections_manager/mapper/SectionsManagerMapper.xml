@@ -9,7 +9,7 @@
         <result property="courseId" column="courses_id" javaType="java.lang.Integer"/>
         <result property="sectionName" column="section_name" javaType="java.lang.String"/>
         <result property="sectionIntro" column="section_intro" javaType="java.lang.String"/>
-        <result property="videoAddr" column="video_addr1" javaType="java.lang.String"/>
+        <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"/>
         <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"/>
         <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
         <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
@@ -75,12 +75,12 @@
 
     <insert id="addData" parameterType="com.zlk.zlkproject.entity.Section">
         INSERT INTO section (chapter_id,section_name,section_intro,video_addr1,video_path1,video_addr2,video_path2,section_time,section_num)
-        VALUES (#{chapterId},#{sectionName},#{sectionIntro},#{videoAddr},#{videoPath},#{videoAddr2},#{videoPath2},#{sectionTime},#{sectionNum})
+        VALUES (#{chapterId},#{sectionName},#{sectionIntro},#{videoAddr1},#{videoPath1},#{videoAddr2},#{videoPath2},#{sectionTime},#{sectionNum})
     </insert>
 
     <update id="updateData" parameterType="com.zlk.zlkproject.entity.Section">
         UPDATE section SET chapter_id = #{chapterId}, section_name = #{sectionName}, section_intro = #{sectionIntro},
-        video_addr1 = #{videoAddr}, video_path1 = #{videoPath}, video_addr2 = #{videoAddr2}, video_path2 = #{videoPath2}
+        video_addr1 = #{videoAddr1}, video_path1 = #{videoPath1}, video_addr2 = #{videoAddr2}, video_path2 = #{videoPath2}
         , section_time = #{sectionTime}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
     </update>
 

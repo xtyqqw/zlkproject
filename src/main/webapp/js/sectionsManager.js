@@ -152,7 +152,7 @@ window.onload = function () {
                 ,{field: 'courseId', title: '课程标识号', width:100}
                 ,{field: 'sectionName', title: '小节名', width:100}
                 ,{field: 'sectionIntro', title: '小节介绍', width: 177}
-                ,{field: 'videoAddr', title: '普清地址', width: 100}
+                ,{field: 'videoAddr1', title: '普清地址', width: 100}
                 ,{field: 'videoAddr2', title: '超清地址', width: 100}
                 ,{field: 'sectionTime', title: '小节时长', width: 100}
                 ,{fixed: 'right', width:175, align:'center', toolbar: '' +
@@ -341,8 +341,8 @@ window.onload = function () {
                     'sectionName':sectionName,
                     'sectionIntro':sectionIntro,
                     'sectionTime':parseInt($("#video_time").text()),
-                    'videoPath':$("#nv_path").val(),
-                    'videoAddr':$("#nv_url").val(),
+                    'videoPath1':$("#nv_path").val(),
+                    'videoAddr1':$("#nv_url").val(),
                     'videoPath2':$("#sv_path").val(),
                     'videoAddr2':$("#sv_url").val()
                 };
@@ -404,8 +404,8 @@ window.onload = function () {
                     'sectionName':sectionName,
                     'sectionIntro':sectionIntro,
                     'sectionTime':parseInt($("#video_time_edit").text()),
-                    'videoPath':$("#nv_path_edit").val(),
-                    'videoAddr':$("#nv_url_edit").val(),
+                    'videoPath1':$("#nv_path_edit").val(),
+                    'videoAddr1':$("#nv_url_edit").val(),
                     'videoPath2':$("#sv_path_edit").val(),
                     'videoAddr2':$("#sv_url_edit").val()
                 };
@@ -455,7 +455,7 @@ window.onload = function () {
             $("#sectionNameEdit").val(data.sectionName);
             $("#sectionIntroEdit").val(data.sectionIntro);
 
-            if(data.videoAddr !== '' && data.videoAddr !== null)
+            if(data.videoAddr1 !== '' && data.videoAddr1 !== null)
                 $("#nv_retmsg_edit").text('已上传');
             if(data.videoAddr2 !== '' && data.videoAddr2 !== null)
                 $("#sv_retmsg_edit").text('已上传');

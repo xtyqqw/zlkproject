@@ -33,9 +33,10 @@ public class controller {
     public String toLogin() throws Exception {//跳转项目页
         return "view/courseHomePage";
     }
-    @RequestMapping(value = "/FAQ")
-    public String toFAQ() throws Exception {//跳转登录页页面的方法
-        return "view/FAQ";
+    @RequestMapping(value = "/HomePageTag")
+    public String toHomePageTag(HttpServletRequest request,String tagName) throws Exception {//跳转登录页页面的方法
+        request.getSession().setAttribute("tagName",tagName);
+        return "view/courseHomePageTag";
     }
 
 
