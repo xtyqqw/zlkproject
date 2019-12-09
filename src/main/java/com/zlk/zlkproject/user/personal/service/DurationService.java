@@ -7,7 +7,7 @@ import java.util.List;
 public interface DurationService {
     /**
      * 查询每日和总学习时长
-     * @param user
+     * @param userId
      * @return
      */
     User selectDuration(String userId);

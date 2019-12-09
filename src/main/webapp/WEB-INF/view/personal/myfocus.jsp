@@ -328,7 +328,7 @@
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">上传了一篇文章：</span>
                                         <span class="article">
-                                        <a href="javascript:;">${snum.articleName}</a>
+                                        <a href="/community/article-show?articleId="+${snum.articleId}>${snum.articleName}</a>
                                     </span>
                                     </div>
                                     <span class="date">${snum.dateFormat}</span>
@@ -342,7 +342,7 @@
                                         <span class="time">${snum.leaveTime}</span>
                                         <span class="action">评论了</span>
                                         <span class="reply_user">
-                                        <a href="javascript:;">${snum.problemUser}</a>
+                                        <a href="/community/article-show?articleId="+${snum.articleId}>${snum.problemUser}</a>
                                     </span>
                                         <span class="action">的文章</span>
                                         <span class="article">
@@ -368,7 +368,7 @@
                                     </span>
                                         <span class="action">的文章</span>
                                         <span class="article">
-                                        <a href="javascript:;">${snum.articleName}</a>
+                                        <a href="/community/article-show?articleId="+${snum.articleId}>${snum.articleName}</a>
                                     </span>
                                     </div>
                                     <span class="date">${snum.dateFormat}</span>

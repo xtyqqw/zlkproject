@@ -107,6 +107,7 @@
          font-weight:bold;
          border: none;
      }
+
      .conceal{
          width: 950px;
          height: 200px;
@@ -186,7 +187,7 @@
          2px 0 3px -1px  #ebebeb;
          height: 80px;
          position: relative;
-         top: -75px;
+         top: -55px;
          width:212px;
      }
 
@@ -227,51 +228,103 @@
          float: left;
 
      }
-     .a1{
+     #biao1{
+         width: 100px;
+         height: 25px;
          position: relative;
          font-size:15px;
          font-weight:bold;
          cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
         }
-     .a2{
+     #biao2{
+         width: 100px;
+         height: 25px;
+         position: relative;
+
+         font-size:15px;
+         font-weight:bold;
+         cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
+     }
+     #biao3{
+         width: 100px;
+         height: 25px;
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
+     }
+     #biao4{
+         width: 100px;
+         height: 25px;
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
+     }
+     #biao5{
+         width: 100px;
+         height: 25px;
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
+     }
+     #biao6{
+         width: 100px;
+         height: 25px;
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         cursor: pointer;
+         background-color: #1E9FFF;
+         color: white;
+         border-radius: 3px;
+         font-weight:bold;
+         border: none;
+     }
+     /*#biao1:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
+         position: relative;
+         font-size:15px;
+         font-weight:bold;
+         border-radius: 3px;
+     }
+     #biao2:hover{
+         text-decoration:none;
+         background-color: rgb(208, 209, 255);
          position: relative;
          top: 23px;
          font-size:15px;
          font-weight:bold;
-         cursor: pointer;
-     }
-     .a3{
-         position: relative;
-         top: 43px;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-     }
-     .a4{
-         position: relative;
-         top: 63px;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-     }
-     .a1:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
          border-radius: 3px;
      }
-     .a2:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         top: 23px;
-         font-size:15px;
-         font-weight:bold;
-         border-radius: 3px;
-     }
-     .a3:hover{
+     .biao3:hover{
          text-decoration:none;
          background-color: rgb(208, 209, 255);
          position: relative;
@@ -280,7 +333,7 @@
          font-weight:bold;
          border-radius: 3px;
      }
-     .a4:hover{
+     .biao4:hover{
          text-decoration:none;
          background-color: rgb(208, 209, 255);
          position: relative;
@@ -288,7 +341,7 @@
          font-size:15px;
          font-weight:bold;
          border-radius: 3px;
-     }
+     }*/
 
     </style>
 
@@ -334,9 +387,173 @@
         }
     </style>
 
+
+    <%--头部工具栏css样式--%>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        .header{
+            background-color: #FFFFFF;
+            height: 80px;
+            width: 100%;
+            border-bottom: 1px #989898;
+            box-shadow: 1px 1px 5px 3px #D4D4D4;
+        }
+        /* 头部logo样式 */
+        .header .header-logo{
+            display: inline;
+            margin-left: 30px;
+            padding-top: 10px;
+            float: left;
+        }
+        .header .header-nav{
+            display: inline;
+        }
+        /* 头部导航 */
+        .header .header-nav .nav{
+            color: #000000;
+            text-decoration: none;
+            font-size: 20px;
+            float: left;
+            margin: 26px 30px;
+            padding: 1px;
+        }
+        .header .nav:hover{
+            color: #914EF3;
+        }
+        /*点击事件样式*/
+        .header .active{
+            color: #914EF3 !important;
+            text-decoration: none;
+            font-size: 20px;
+            float: left;
+            margin: 26px 30px;
+            padding: 1px;
+        }
+        /* 头部搜索 */
+        .header .header-search{
+            float: left;
+            display: inline;
+            margin-left: 300px;
+            margin-top: 18px;
+        }
+        /* 头部搜索框样式 */
+        .header .header-search .text{
+            height: 40px;
+            background-color: #FAFAFA;
+            border: 1px #FAFAFA;
+            border-radius: 3px;/* 边框圆角 */
+            text-indent: 1em;/* 首行缩进 */
+            font-size: 16px;
+            font-weight: bold;/* 粗体 */
+            color: #989898;
+        }
+        /* 头部搜索按钮样式 */
+        .header .header-search .submit{
+            background-color: #914FF1;
+            border: none;
+            color: #FFFFFF;
+            height: 40px;
+            width: 70px;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        .header .header-login{
+            display: inline;
+            float: left;
+            margin-top: 18px;
+            padding: 10px 50px;
+        }
+        /* 头部注册登录样式 */
+        .header .header-login a{
+            text-decoration: none;
+            color: #000000;
+            font-size: 20px;
+        }
+        .header .header-login a:hover{
+            color: #914EF3;
+        }
+        .name{
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:1;
+        }
+    </style>
 </head>
 <body>
-<jsp:include page="../jsp/header.jsp"></jsp:include>
+<%--头部工具栏--%>
+<div class="header">
+    <!-- logo -->
+    <div class="header-logo">
+        <img src="/img/logo.png" />
+    </div>
+    <!-- 导航 -->
+    <div class="header-nav">
+        <a href="/index/toIndex" name="nav" class="nav">首页</a>
+        <a href="/HomePage" name="nav" class="nav">项目</a>
+        <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
+    </div>
+    <!-- 搜索 -->
+    <div class="header-search">
+        <form action="">
+            <input class="text" type="text" placeholder="请输入关键词" />
+            <input class="submit" type="submit" value="搜索" />
+        </form>
+    </div>
+
+    <%--未登录显示注册登录--%>
+    <c:if test="${user==null}">
+        <!-- 注册登录 -->
+        <div class="header-login">
+            <a href="/users/tosignup">注册</a>
+            <a style="color: #000000;">/</a>
+            <a href="/users/tosignin">登录</a>
+        </div>
+    </c:if>
+    <%--已登录显示登录信息--%>
+    <c:if test="${user!=null}">
+        <div>
+            <ul class="layui-nav" style="margin: 0 330px 0 1150px">
+                <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
+                    <a href="javascript:;">
+                        <img src="//t.cn/RCzsdCq" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
+                        <p class="name" style="">${user.userRealname}</p>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <a href="/personal/person">个人中心</a>
+                        <a href="/users/logout;">退出</a>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </c:if>
+
+</div>
+<%--鼠标移入移出头像事件--%>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+<%--头部导航点击事件--%>
+<script type="text/javascript">
+    $(function(){
+        $("a[name='nav']").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+    });
+</script>
 <div class="layui-tab layui-tab-brief" >
     <ul class="layui-tab-title">
         <li class="layui-this" >全部内容</li>
@@ -346,12 +563,15 @@
     <div class="layui-tab-content" >
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
-                <br><a class="a1">JAVA</a><br>
-                <a class="a2">HTML</a><br>
-                <a class="a3">CSS</a><br>
-                <a class="a4">JS</a><br>
-                <p class="xingxing"></p>
-
+                <div id="biaoqian">
+                    <br><input id="biao1" type="button" onclick=window.open("HomePageTag?tagName=java") value="java"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao2" type="button" onclick=window.open("HomePageTag?tagName=html") value="html"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao3" type="button" onclick=window.open("HomePageTag?tagName=HTML5") value="HTML5"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao4" type="button" onclick=window.open("HomePageTag?tagName=C++") value="C++"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao5" type="button" onclick=window.open("HomePageTag?tagName=Python") value="Python"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao6" type="button" onclick=window.open("HomePageTag?tagName=PHP") value="PHP"/>
+                </div>
+                </div>
             </div>
             <div style="clear: both"></div>
 
@@ -414,12 +634,47 @@
 <script>
 
 </script>
+<%--瀑布流--%>
+<%--<script>
+    layui.use(['flow'], function() {
+            var flow = layui.flow;
+            flow.load({
+                elem: '#biaoqian' //流加载容器
+                , isAuto: false
+                , end: "<p>没有更多了</p>"
+                , done: function (page, next) { //加载下一页
+//模拟插入
+                    setTimeout(function () {
+                        var lis = [];
+                        var limit = 4;
+                        var data = {"page": page, "limit": limit};
+                        console.log(data);
+                        $.ajax({
+                            type: "POST",
+                            url: "/tagKe/findTagList",
+                            dataType: "json",
+                            data: data,
+                            success: function (result) {
+                                layui.each(result.tagList, function (i, tag) {
+                                    lis.push(
+                                        '<br><a class="a1">' + tag.tagName + '</a>'
+                                    );
 
+
+                                    next(lis.join(''), page < 1); //假设总页数为 6
+                                }, 500);
+                            }
+
+                        });
+                    });
+                }
+            });
+        });
+</script>--%>
  <%--瀑布流--%>
 <script>
     layui.use(['flow'], function(){
         var flow = layui.flow;
-
   flow.load({
 elem: '#LAY_demo2' //流加载容器
 ,isAuto: false
@@ -456,7 +711,7 @@ $.ajax({
                      }
                     lis.push(
                     '<p><span class="badge" contenteditable="true" id="badge9">'+courses.tagName+'</span></p>' +
-                    '<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +
+                    /*'<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +*/
                     '<div class="xingxing">');
 
                     if(courses.studentNum>=5000){
@@ -539,7 +794,7 @@ $.ajax({
                     '<h6 class="h64" id="jin">￥'+courses.price+'</h6>' );
                     if(courses.lastStudyTime==null){
                         lis.push(
-                            '<h6 class="h65">上次学习时间：'+"未学习"+'</h6>' );
+                            '<h6 class="h65"></h6>' );
                         }else{ lis.push(
                         '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
                     }

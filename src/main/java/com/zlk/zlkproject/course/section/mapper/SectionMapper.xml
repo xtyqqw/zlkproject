@@ -7,12 +7,13 @@
         <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
         <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"></result>
         <result property="sectionName" column="section_name" javaType="java.lang.String"></result>
-        <result property="videoAddr" column="video_addr" javaType="java.lang.String"></result>
+        <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"></result>
+        <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"></result>
         <result property="sectionTime" column="section_time" javaType="java.lang.Integer"></result>
         <result property="sectionNum" column="section_num" javaType="java.lang.Integer"></result>
         <result property="sectionIntro" column="section_intro" javaType="java.lang.String"></result>
         <collection property="userSectionList" ofType="com.zlk.zlkproject.entity.UserSection">
-            <id property="userId" column="user_id" javaType="java.lang.Integer"></id>
+            <id property="userId" column="user_id" javaType="java.lang.String"></id>
             <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
             <result property="state" column="state" javaType="java.lang.String"></result>
             <result property="time" column="time" javaType="java.lang.Integer"></result>
@@ -39,7 +40,7 @@
     <select id="findSectionByChapterId" parameterType="java.lang.Integer" resultMap="sectionEntityMap">
         select section_id,chapter_id,section_name,video_addr,section_time,section_num from section where chapter_id = #{chapterId};
     </select>
-    <select id="findStateById" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="findStateById" resultType="java.lang.String">
         select state from user_section where section_id = #{sectionId} and user_id = #{userId}
     </select>
     <select id="findVideoAddrById" parameterType="java.lang.Integer" resultType="java.lang.String">
@@ -47,11 +48,11 @@
     </select>
 
     <!--根据小节id和用户id查询状态-->
-    <select id="findStateByIdAndChapterId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="findStateByIdAndChapterId" resultType="java.lang.String">
         select state from user_section where section_id = #{sectionId} and user_id=#{userId}
     </select>
 
-    <select id="findSectionBySectionIdAndUserId" parameterType="java.lang.Integer" resultMap="sectionEntityMap">
+    <select id="findSectionBySectionIdAndUserId" resultMap="sectionEntityMap">
         select s.section_id,s.chapter_id,s.section_name,s.video_addr,s.section_time,s.section_num,
                 us.user_id,us.section_id,us.state,us.time
          from section s left join user_section us on us.section_id=s.section_id

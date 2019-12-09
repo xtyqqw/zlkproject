@@ -27,7 +27,7 @@
         }
         .all-body-center .body-top{
             width: 1308px;
-            height: 115px;
+            height: 114px;
         }
         .all-body-center .body-left{
             float: left;
@@ -76,10 +76,10 @@
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
-            width: 220px;
+            width: 282px;
             position: relative;
-            left: -2px;
-            bottom: -37px;
+            left: 1px;
+            bottom: -34px;
         }
         .tab a{
             color:  #989898;
@@ -107,7 +107,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 55vw;
+            margin-left: 63vw;
             margin-top: 0vw;
         }
         .wz_remen{
@@ -119,9 +119,9 @@
             font-weight:bold;
             height: 4vw;
             line-height: 4vw;
-            border-bottom: 0.1vw solid blue;
+            border-bottom: 0.1vw solid #914ff1;
             margin-left: 4vw;
-            margin-top: 1vw;
+            margin-top: 0vw;
         }
         .wz_remen_wz{
             margin-left: 1vw;
@@ -147,7 +147,7 @@
             width: 2vw;
             height: 2vw;
             color: white;
-            background-color: blue;
+            background-color: #914ff1;
         }
         .zonganniu{
             -webkit-border-top-right-radius: 5px;
@@ -167,7 +167,7 @@
             width: 20vw;
             margin-left: 4vw;
             position: absolute;
-            margin-top: 5vw;
+            margin-top: 4vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -184,7 +184,7 @@
             width: 20vw;
             margin-left: 4vw;
             position: absolute;
-            margin-top: 5vw;
+            margin-top: 4vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -328,6 +328,8 @@
                 <a href="<%= request.getContextPath()%>/articles/toArticleHot" target="pageTarget">热门</a>
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>/questionUser/questionSkip" target="pageTarget">问答</a>
             </div>
         </div>
         <div class="body-left">
@@ -392,13 +394,13 @@
 
 <script type="text/javascript">
     $(document).on('mouseenter','.bt',function(){
-        $(this).css('color','blue');
+        $(this).css('color','#914ff1');
     })
     $(document).on('mouseleave','.bt',function(){
         $(this).css('color','black');
     })
     $(document).on('mouseenter','.wz_bt_bq>span',function(){
-        $(this).css('color','blue');
+        $(this).css('color','#914ff1');
     })
     $(document).on('mouseleave','.wz_bt_bq>span',function(){
         $(this).css('color','black');
@@ -406,7 +408,7 @@
 
     $(document).on('mouseenter','.yueanniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
+        $(this).css('border','1px solid #914ff1');
     })
     $(document).on('mouseleave','.yueanniu',function(){
         $(this).css('box-shadow','none');
@@ -415,7 +417,7 @@
 
     $(document).on('mouseenter','.zonganniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
-        $(this).css('border','1px solid blue');
+        $(this).css('border','1px solid #914ff1');
     })
     $(document).on('mouseleave','.zonganniu',function(){
         $(this).css('box-shadow','none');
@@ -423,7 +425,7 @@
     })
 
     $(document).on('click','.yueanniu',function(){
-        $('.yueanniu').css('background-color','blue');
+        $('.yueanniu').css('background-color','#914ff1');
         $('.yueanniu').css('color','white');
         $('.zonganniu').css('background-color','white');
         $('.zonganniu').css('color','black');
@@ -431,7 +433,7 @@
     $(document).on('click','.zonganniu',function(){
         $('.yueanniu').css('background-color','white');
         $('.yueanniu').css('color','black');
-        $('.zonganniu').css('background-color','blue');
+        $('.zonganniu').css('background-color','#914ff1');
         $('.zonganniu').css('color','white');
     })
     $(document).on('click','.yueanniu',function(){

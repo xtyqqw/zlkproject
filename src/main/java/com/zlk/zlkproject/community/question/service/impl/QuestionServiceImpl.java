@@ -4,14 +4,10 @@ import com.zlk.zlkproject.community.question.mapper.QuestionMapper;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.user.until.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * @author gby
