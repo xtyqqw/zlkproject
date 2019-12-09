@@ -106,9 +106,11 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
-                    var src = data.videoAddr;
+                    var src = data.section.videoAddr1;
                     switchVideo(src);
                     $("#mulu_div").css("display", "none");
+                    $("#nv").text(data.section.videoAddr1);
+                    $("#sv").text(data.section.videoAddr2);
                 }
             });
             note_flow(sectionId);

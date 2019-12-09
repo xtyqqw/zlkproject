@@ -43,8 +43,8 @@
     <select id="findStateById" resultType="java.lang.String">
         select state from user_section where section_id = #{sectionId} and user_id = #{userId}
     </select>
-    <select id="findVideoAddrById" parameterType="java.lang.Integer" resultType="java.lang.String">
-        select video_addr from section where section_id = #{sectionId}
+    <select id="findVideoAddrById" parameterType="java.lang.Integer" resultMap="sectionEntityMap">
+        select video_addr1,video_addr2 from section where section_id = #{sectionId}
     </select>
 
     <!--根据小节id和用户id查询状态-->

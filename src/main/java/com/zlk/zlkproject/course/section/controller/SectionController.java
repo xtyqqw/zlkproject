@@ -83,10 +83,10 @@ public class SectionController {
     @RequestMapping(value = "/findVideoAddr")
     @ResponseBody
     public Map<String,Object> findVideoAddr(HttpServletRequest request,Integer sectionId) throws Exception{
-        String videoAddr = sectionService.findVideoAddrById(sectionId);
+        Section section = sectionService.findVideoAddrById(sectionId);
         request.getSession().setAttribute("sectionId",sectionId);
         Map<String,Object> map = new HashMap<>();
-        map.put("videoAddr",videoAddr);
+        map.put("section",section);
         return map;
     }
 
