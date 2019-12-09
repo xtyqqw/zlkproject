@@ -10,19 +10,19 @@
 <div class="layedit-tool-view">
     <form class="layui-form"  id="insertTeacherNote" action="/teacherNote/insertTNByTeacherNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item">
-            <label class="layui-form-label">所对应小节的序号</label>
+            <label class="layui-form-label">所对应的<br/>小节序号</label>
             <div class="layui-input-block">
                 <input type="text" name="sectionId" id="sectionId" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">讲师笔记标题</label>
+            <label class="layui-form-label">讲师笔记<br/>标题</label>
             <div class="layui-input-block">
                 <input type="text" name="title" id="title" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">讲师笔记内容</label>
+            <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
                 <input type="text" name="content" id="content" class="layui-input">
             </div>
@@ -35,27 +35,27 @@
     </form>
 </div>
 <div class="layedit-tool-view">
-    <form class="layui-form"  id="updateTeacherNote" action="/teacherNote/insertTNByTeacherNote" method="post" style="width: 400px;display: none;">
+    <form class="layui-form"  id="updateTeacherNote" action="/teacherNote/updateTNByTeacherNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item" style="display: none;">
-            <label class="layui-form-label">讲师笔记序号</label>
+            <label class="layui-form-label">讲师笔记<br/>序号</label>
             <div class="layui-input-block">
                 <input type="text" name="tnId" id="uptnId" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">所对应小节的序号</label>
+            <label class="layui-form-label">所对应的<br/>小节序号</label>
             <div class="layui-input-block">
                 <input type="text" name="sectionId" id="upsectionId" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">讲师笔记标题</label>
+            <label class="layui-form-label">讲师笔记<br/>标题</label>
             <div class="layui-input-block">
                 <input type="text" name="title" id="uptitle" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">讲师笔记内容</label>
+            <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
                 <input type="text" name="content" id="upcontent" class="layui-input">
             </div>
@@ -109,7 +109,7 @@
                 layer.open({
                     title: "新增",
                     type: 1,
-                    area: ['30%', '50%'],
+                    area: ['40%', '50%'],
                     content: $("#insertTeacherNote")
                 });
             }
@@ -147,6 +147,11 @@
             }
             else if(obj.event === 'edit'){
                 console.log(obj.data);
+                var data = obj.data;
+                $("#uptnId").val(data.tnId);
+                $("#upsectionId").val(data.sectionId);
+                $("#uptitle").val(data.title);
+                $("#upcontent").val(data.content);
                 layer.open({
                     title: "修改",
                     type: 1,

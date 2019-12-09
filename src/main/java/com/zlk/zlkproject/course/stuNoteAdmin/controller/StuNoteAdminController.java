@@ -32,7 +32,7 @@ public class StuNoteAdminController {
      * @param limit
      * @return
      */
-    @RequestMapping("/stuNote/selectStuNoteAllByLimit")
+    @RequestMapping("/note/selectStuNoteAllByLimit")
     @ResponseBody
     public Map selectStuNoteAllByLimit(int page, int limit){
         Map map = new HashMap();
@@ -49,7 +49,7 @@ public class StuNoteAdminController {
      * @param request
      * @return
      */
-    @RequestMapping("/stuNote/updateStuNoteByStuNote")
+    @RequestMapping("/note/updateStuNoteByStuNote")
     public String updateStuNoteByStuNote(StuNote stuNote, HttpServletRequest request){
         int i = stuNoteAdminService.updateStuNoteByStuNote(stuNote);
         if(i>0){
@@ -64,7 +64,7 @@ public class StuNoteAdminController {
      * @param snId
      * @return
      */
-    @RequestMapping("/stuNote/deleteStuNoteBySnId")
+    @RequestMapping("/note/deleteStuNoteBySnId")
     @ResponseBody
     public String deleteStuNoteBySnId(Integer snId, HttpServletRequest request){
         int tiaoshu = stuNoteAdminService.deleteStuNoteBySnId(snId);
