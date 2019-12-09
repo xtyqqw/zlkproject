@@ -31,7 +31,7 @@ public class ShrioConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //修改拦截跳转页面
-        shiroFilterFactoryBean.setLoginUrl("/loginController/toLogin");
+       /* shiroFilterFactoryBean.setLoginUrl("/loginController/toLogin");
         shiroFilterFactoryBean.setSuccessUrl("/loginController/toSuccess");
         //添加Shiro内置过滤器
         Map<String,String> filterMap=new LinkedHashMap<String, String>();
@@ -54,7 +54,7 @@ public class ShrioConfig {
         filterMap.put("/chapter/*","authc");
         filterMap.put("/section/*","authc");;
         filterMap.put("/sections/*","authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);*/
         return shiroFilterFactoryBean;
     }
 

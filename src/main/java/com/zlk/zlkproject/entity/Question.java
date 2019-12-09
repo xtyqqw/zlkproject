@@ -57,10 +57,10 @@ public class Question {
     private String typeName;
     /*小节表主键*/
     private String sectionId;
+    /*用户id*/
+    private String userId;
     /*标签*/
     private String tagName;
-    /*用户*/
-    private String userId;
 
     public Question() {
     }

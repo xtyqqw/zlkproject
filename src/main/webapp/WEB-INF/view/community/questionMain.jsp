@@ -32,7 +32,7 @@
 
         .quiz {
             position: relative;
-            top: -120px;
+            top: -100px;
             left: 924px;
             width: 100px;
             height: 40px;
@@ -44,9 +44,11 @@
             line-height: 45px;
             overflow: hidden;
             vertical-align: middle;
-            border-radius: 6%;
+            border-radius: 8%;
         }
-
+        ul li{
+            list-style: none;
+        }
         .user {
             background-color: #F2F2F2;
             height: 250px;
@@ -95,9 +97,7 @@
             float: right;
             margin-right: 45px;
         }
-        ul li{
-            list-style: none;
-        }
+
 
     </style>
 </head>
@@ -114,8 +114,7 @@
             <ul>
                 <li style="margin: 50px 0;">
                     <a href="<%=request.getContextPath() %>/questionUser/find/{quesitonId}" target="_blank" type="button"
-                       style="text-decoration: none;width: auto;" data-value="" >
-                            ${all.questionId}
+                       style="text-decoration: none;width: auto;">
                           <h3>${all.questionTitle}</h3>
                     </a>
                 </li>

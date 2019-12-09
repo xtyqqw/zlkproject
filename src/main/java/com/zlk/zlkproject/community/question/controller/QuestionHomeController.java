@@ -40,7 +40,6 @@ public class QuestionHomeController {
 
         return "/view/community/communityMain";
     }
-
     /*
      * @descrption 问答首页
      * @author gby
@@ -49,9 +48,8 @@ public class QuestionHomeController {
      * @date 2019/12/5 10:19
      */
     @RequestMapping(value = "/questionSkip")
-    public ModelAndView questionMain(String createTime, HttpServletRequest request,String userId) throws Exception {
+    public ModelAndView questionMain(String createTime, HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-       /* String uId = (String) request.getSession().getAttribute("userId");*/
         List<Question> allQuestion = questionHomeService.findQuestionByTime(createTime);
         mv.addObject("allQuestion", allQuestion);
         mv.setViewName("/view/community/questionMain");
@@ -80,8 +78,6 @@ public class QuestionHomeController {
 
         return "view/community/questionMainUser";
     }*/
-
-
     /*
      * @descrption 通过问题id查询文章
      * @author gby
@@ -89,8 +85,8 @@ public class QuestionHomeController {
      * @return org.springframework.web.servlet.ModelAndView
      * @date 2019/11/26 10:07
      */
-    @GetMapping(value = "/find/{questionId}")
-    public String find(@PathVariable String questionId,Model model) throws Exception {
+    @RequestMapping(value = "/find/{questionId}")
+    public String find(@PathVariable(value = "questionId") String questionId,Model model) throws Exception {
         model.addAttribute("question", questionHomeService.findByQuestionId(questionId));
         return "/view/community/questionParticulars";
     }

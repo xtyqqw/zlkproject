@@ -21,7 +21,6 @@
         <result column="check" property="check" javaType="java.lang.String"/>
         <result column="response_count" property="responseCount" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
-        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
     </resultMap>
 
     <insert id="addQuestion"  parameterType="com.zlk.zlkproject.entity.Question" >

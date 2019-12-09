@@ -41,14 +41,14 @@ public class QuestionController {
     @RequestMapping(value = "/questionGuide")
     public ModelAndView main(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-        Object userId = request.getSession().getAttribute("userId");
-        if (userId == null) {
-            mv.addObject("msg","你还没有登录，请先登录");
-            mv.setViewName("redirect:/users/tosignin");
-            return mv;
-        } else {
+        String userId = (String) request.getSession().getAttribute("user");
+        if (userId != null) {
             mv.addObject("msg","您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
+            return mv;
+        } else {
+            mv.addObject("msg","你还没有登录，请先登录");
+            mv.setViewName("redirect:/users/tosignin");
             return mv;
         }
     }
@@ -62,8 +62,8 @@ public class QuestionController {
      */
     @RequestMapping(value = "/editQuestion")
     public String edit(Model model,Tag tag) throws Exception {
-     /*   List<Tag> tagList = questionTagService.listByTag(tag);
-        model.addAttribute("tagList",tagList);*/
+        List<Tag> tagList = questionTagService.listByTag(tag);
+        model.addAttribute("tagList",tagList);
         return "/view/community/questionEdit";
     }
 

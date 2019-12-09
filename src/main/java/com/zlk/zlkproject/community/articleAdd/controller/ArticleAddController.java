@@ -38,8 +38,8 @@ public class ArticleAddController {
     @RequestMapping(value = "/community/article-guide")
     public ModelAndView articleGuide(Article article, HttpServletRequest httpServletRequest) throws Exception{
         ModelAndView mv=new ModelAndView();
-        //进入发文提示页面前先判断当前用户的登录状态
-        /*article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
+    /*    //进入发文提示页面前先判断当前用户的登录状态
+        *//*article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
         if (httpServletRequest.getSession().getAttribute("user") == null){
             mv.addObject("flag", "true");
             mv.addObject("msg","想发文，请先进行登录");
