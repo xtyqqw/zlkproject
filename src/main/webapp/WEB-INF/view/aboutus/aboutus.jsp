@@ -65,7 +65,7 @@
             padding: 5px;
         }
         #aboutus-iframe{
-            width: 900px;
+            width: 99%;
             margin-top: -518px;
             margin-left: 250px;
             float: left;
@@ -124,7 +124,7 @@
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/addOpinion" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/toOpinion" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>
