@@ -15,6 +15,6 @@ public interface CommentMapper {
      *@Param [pagination]
      *@return java.util.List<com.zlk.zlkproject.entity.Comment>
      **/
-    List<Comment> findCommentListByUserId(Comment comment,Integer startPage,Integer limit,Integer commentUserId);
+    List<Comment> findCommentListByUserId(Comment comment,Integer startPage,Integer limit,String commentUserId);
 
 }
