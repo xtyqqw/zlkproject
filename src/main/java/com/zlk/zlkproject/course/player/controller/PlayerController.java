@@ -2,12 +2,15 @@ package com.zlk.zlkproject.course.player.controller;
 
 
 import com.zlk.zlkproject.course.player.service.PlayerService;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.entity.UserSection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  <<<<<<< HEAD
@@ -24,20 +27,26 @@ public class PlayerController {
 
     @RequestMapping("recordTime")
     @ResponseBody
-    public void recordTime(@RequestParam("time") Double time){
+    public void recordTime(@RequestParam("time") Double time, HttpServletRequest request){
         UserSection userSection = new UserSection();
-        userSection.setUserId("1");
-        userSection.setSectionId(1);
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
+        userSection.setUserId(userId);
+        userSection.setSectionId(sectionId);
         userSection.setTime(time);
         playerService.recordTime(userSection);
     }
 
     @RequestMapping("readRecord")
     @ResponseBody
-    public Double readRecord(){
+    public Double readRecord(HttpServletRequest request){
         UserSection userSection = new UserSection();
-        userSection.setUserId("1");
-        userSection.setSectionId(1);
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
+        userSection.setUserId(userId);
+        userSection.setSectionId(sectionId);
         Double res = playerService.readRecord(userSection);
         return res;
     }
