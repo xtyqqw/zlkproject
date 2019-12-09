@@ -400,13 +400,12 @@
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
                 <div id="biaoqian">
-                    <br><input id="biao1" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="java"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao2" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="html"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao3" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="HTML5"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao4" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="C++"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao5" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="Python"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao6" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="PHP"/>
-                </div>
+                    <br><input id="biao1" type="button" onclick=window.open("HomePageTag?tagName=java") value="java"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao2" type="button" onclick=window.open("HomePageTag?tagName=html") value="html"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao3" type="button" onclick=window.open("HomePageTag?tagName=HTML5") value="HTML5"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao4" type="button" onclick=window.open("HomePageTag?tagName=C++") value="C++"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao5" type="button" onclick=window.open("HomePageTag?tagName=Python") value="Python"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="biao6" type="button" onclick=window.open("HomePageTag?tagName=PHP") value="PHP"/> </div>
                 </div>
             </div>
             <div style="clear: both"></div>
@@ -428,6 +427,7 @@
     });
 </script>
 
+<%--点击事件和鼠标移入移出事件--%>
 <script>
     $(".layui-this").mouseenter(function () {
         $(this).css("background-color","#6872ff");
@@ -460,7 +460,8 @@
         $(this).siblings().css("color","#4ea9cd");
 
     });
-    
+
+
 </script>
 <%--<script src="/js/courseHomePage.js" charset="UTF-8"></script>--%>
 
@@ -645,7 +646,7 @@ $.ajax({
 
         });
 
-                next(lis.join(''), page < 2); //假设总页数为 6
+                next(lis.join(''), page < 1); //假设总页数为 6
     }
 });
 }, 500);

@@ -163,7 +163,7 @@
         </form>
     </div>
 </div>
-<div id="box" onselectstart="return false;" style="display: none">
+<div id="box" onselectstart="return false;" style="visibility: hidden">
     <div class="bgColor"></div>
     <div class="txt">滑动解锁</div>
     <!--给i标签添加上相应字体图标的类名即可-->
