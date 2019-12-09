@@ -111,4 +111,14 @@ public interface ChapterMapper {
      *@time 2019/12/5  14:08
      */
     Integer selectCountsByChapterName(String chapterName);
+
+    /**
+     *  根据课程id查找当前课程下的小节数目
+     *@method selectSumSectionByCoursesId
+     *@params [coursesId]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/8  11:46
+     */
+    Integer selectSumSectionByCoursesId(Integer coursesId);
 }

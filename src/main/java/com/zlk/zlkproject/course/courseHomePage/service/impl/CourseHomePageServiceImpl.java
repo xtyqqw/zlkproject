@@ -59,6 +59,13 @@ public class CourseHomePageServiceImpl implements CourseHomePageService{
         return courseHomePageMapper.findAll(courses, startPage, limit);
     }
     @Override
+    public List<Courses> findAllByTag(Courses courses,String tagName, Integer page, Integer limit) {
+        courses.getLastStudyTime();
+        Integer startPage = (page - 1) * limit;
+        return courseHomePageMapper.findAllByTag(courses,tagName,startPage,limit);
+    }
+
+    @Override
     public int updateByCoursesId(Courses courses) {
         return courseHomePageMapper.updateByCoursesId(courses);
 

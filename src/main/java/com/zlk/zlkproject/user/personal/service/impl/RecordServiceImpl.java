@@ -27,7 +27,7 @@ public class RecordServiceImpl implements RecordService {
 
     /**
      * 根据userId查询学习记录
-     * @param userId
+     * @param pagination
      * @return
      */
     @Override
@@ -42,16 +42,38 @@ public class RecordServiceImpl implements RecordService {
         }
         return list;
     }
+
+    /**
+     * 查询小结状态总数
+     * @param userId
+     * @return
+     */
     @Override
     public Integer selectUserSection(String userId){
         return recordMapper.selectUserSection(userId);
     }
+
+    /**
+     * 查询小结已完成数量
+     * @param userId
+     * @return
+     */
     @Override
     public Integer selectUser(String userId){
         return recordMapper.selectUser(userId);
     }
+
+    /**
+     * 查询课程数量
+     * @param pagination
+     * @return
+     */
     @Override
-    public Integer findCourses(String userId){
-        return recordMapper.findCourses(userId);
+    public List<Courses> findCourses(Pagination pagination){
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return recordMapper.findCourses(pagination);
     }
 }

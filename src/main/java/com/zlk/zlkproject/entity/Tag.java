@@ -36,4 +36,5 @@ public class Tag {
     /**标签和文章多对多关系*/
     @ManyToMany(mappedBy = "tags")
     private List<Article> articles=new ArrayList<>();
+
 }

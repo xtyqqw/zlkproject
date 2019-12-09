@@ -217,7 +217,6 @@ public class StuQaController {
         List<StuQa> stuQaList = stuQaService.selectAllLimit(page, limit);
         //获得全部数量
         Integer count = stuQaService.selectAllCount();
-        System.out.println(count);
         Map<String,Object> map= new HashMap<>();
         map.put("code",0);
         map.put("msg","");
@@ -250,15 +249,21 @@ public class StuQaController {
     @RequestMapping(value = "/fuzzySelect",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> fuzzySelect(String name,String val,Integer page,Integer limit) throws Exception{
+        List<StuQa> stuQaList = new ArrayList<>();
+        Integer count = 0;
+        if ("userRealname".equals(name)){
+            stuQaList = stuQaService.fuzzySearchByUserName(val, page, limit);
+            count = stuQaService.selectCountByUserNameFuzzySelect(val);
+        }else if ("sectionName".equals(name)){
+            stuQaList = stuQaService.fuzzySearchBySectionName(val,page,limit);
+            count = stuQaService.selectCountBySectionNameFuzzySelect(val);
+        }
 
-//        if ("userName".equals(name)){
-//
-//        }
         Map<String,Object> map= new HashMap<>();
         map.put("code",0);
         map.put("msg","");
-        map.put("count",1);
-        map.put("data","");
+        map.put("count",count);
+        map.put("data",stuQaList);
         return map;
     }
 
@@ -280,6 +285,21 @@ public class StuQaController {
         }else {
             map.put("msg","修改失败");
         }
+        return map;
+    }
+
+    @RequestMapping(value = "reportDesc")
+    @ResponseBody
+    public Map<String,Object> reportDesc(Integer page,Integer limit) throws Exception {
+        //按照已举报优先排列
+        List<StuQa> stuQaList = stuQaService.selectByReportDesc(page, limit);
+        //获得全部数量
+        Integer count = stuQaService.selectAllCount();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", count);
+        map.put("data", stuQaList);
         return map;
     }
 }

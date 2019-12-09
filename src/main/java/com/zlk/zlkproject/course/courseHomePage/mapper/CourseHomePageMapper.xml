@@ -55,6 +55,13 @@
        ,tag_courses tc,tag t
        WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
     </select>
+    <select id="findAllByTag" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
+       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
+       FROM courses c
+       LEFT JOIN user_courses uc ON c.courses_id=uc.courses_id
+       ,tag_courses tc,tag t
+       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id AND t.tag_name=#{tagName} ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
+    </select>
 
     <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
         select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
