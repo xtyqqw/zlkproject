@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -200,7 +198,7 @@
             font-family: Arial;
             position: relative;
             left: 92px;
-            top: 36px;
+            top: 35px;
             float: left;
             display: inline;
         }
