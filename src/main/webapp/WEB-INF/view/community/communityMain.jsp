@@ -21,7 +21,7 @@
         }
         .all-body-center{
             width: 1340px;
-            height: 1600px;
+            height: 1480px;
             margin:0 auto;
             border: none 0;
         }
@@ -32,7 +32,7 @@
         .all-body-center .body-left{
             float: left;
             width: 930px;
-            height: 1500px;
+            height: 1350px;
             border: none 0;
         }
         /*发表按钮样式*/
@@ -320,7 +320,7 @@
                 </div>
             </div>
             <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
+                <a role="button" href="<%= request.getContextPath()%>">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">
