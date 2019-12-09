@@ -89,7 +89,8 @@ public class PersonalController {
 
 
         //从session中获取ID，进行修改，userId="1";为模拟数据
-       User user1 = (User) request.getSession().getAttribute("userId");
+       User user1 = (User) request.getSession().getAttribute("user");
+
        //调用查询单个对象的方法
         User user=userService.selectUserById(user1.getUserId());
         mv.addObject("user",user);
