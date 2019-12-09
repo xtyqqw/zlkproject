@@ -65,7 +65,7 @@
             padding: 5px;
         }
         #aboutus-iframe{
-            width: 900px;
+            width: 99%;
             margin-top: -518px;
             margin-left: 250px;
             float: left;
