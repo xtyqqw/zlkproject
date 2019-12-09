@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,5 +93,65 @@ public class FaqqController {
         }else {
             return null;
         }
+    }
+
+    @RequestMapping(value = "faqtest1")
+    @ResponseBody
+    public Map<String,Object> faqTestAll(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap<>();
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        List list = faqqService.findAll(userId);
+        List list1 = new ArrayList();
+        Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
+        Integer end = sta + followerPage.getLimit();
+        if(list.size()>=sta){
+            list1 = list.subList(sta,end);
+        }else{
+            list1 = list.subList(sta,list.size());
+        }
+        map.put("countAll",list.size());
+        map.put("list",list1);
+        return map;
+    }
+
+    @RequestMapping(value = "faqtestq")
+    @ResponseBody
+    public Map<String,Object> faqTestQ(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap<>();
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        List<MyQuestions> qList = faqqService.findQuestion(userId);
+        List list1 = new ArrayList();
+        Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
+        Integer end = sta + followerPage.getLimit();
+        if(qList.size()>=sta){
+            list1 = qList.subList(sta,end);
+        }else{
+            list1 = qList.subList(sta,qList.size());
+        }
+        map.put("countq",qList.size());
+        map.put("qlist",list1);
+        return map;
+    }
+
+    @RequestMapping(value = "faqtestr")
+    @ResponseBody
+    public Map<String,Object> faqTestF(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap<>();
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        List<MyResponse> rList = faqqService.findResponse(userId);
+        List list1 = new ArrayList();
+        Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
+        Integer end = sta + followerPage.getLimit();
+        if(rList.size()>=sta){
+            list1 = rList.subList(sta,end);
+        }else{
+            list1 = rList.subList(sta,rList.size());
+        }
+        map.put("countr",rList.size());
+        map.put("rlist",list1);
+        return map;
     }
 }
