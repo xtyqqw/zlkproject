@@ -13,7 +13,7 @@
             <result property="figures" column="figures" javaType="java.lang.String"/>
             <result property="figuresReal" column="figures_real" javaType="java.lang.String"/>
             <result property="articleDigest" column="article_digest" javaType="java.lang.String"/>
-            <result property="articleContent" column="article_content_html" javaType="java.lang.String"/>
+            <result property="articleContent" column="article_content" javaType="java.lang.String"/>
             <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
             <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
             <result property="inform" column="inform" javaType="java.lang.Integer"/>
@@ -21,7 +21,6 @@
             <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"/>
             <result property="approval" column="approval" javaType="java.lang.Integer"/>
             <result property="typeName" column="type_name" javaType="java.lang.String"/>
-            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
             <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
                 <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
                 <result property="tagName" column="tag_name" javaType="java.lang.String"/>
@@ -31,7 +30,7 @@
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
         SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
-        a.figures,a.article_digest,a.article_content_html,a.zan_count,a.cai_count,a.type_name,t.*
+        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
         where t.tag_id=az.tag_id AND a.user_id=#{userId} order by create_time desc
@@ -42,7 +41,7 @@
     </select>
     <!--根据文章ID修改我的文章-->
     <update id="updateArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">
-        update article set article_content_html=#{articleContent}
+        update article set article_content=#{articleContent}
         where article_id=#{articleId}
     </update>
     <!--根据文章ID删除文章-->
@@ -52,7 +51,7 @@
     <!--分页查询文章-->
     <select id="findArticlesAll" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="articlesMap">
         SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
-        a.figures,a.article_digest,a.article_content_html,a.zan_count,a.cai_count,a.type_name,t.*
+        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
         where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc limit #{startPage},#{limit}
