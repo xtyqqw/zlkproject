@@ -12,18 +12,18 @@
     <title>提问编辑页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
-    <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-select/1.9.1/css/bootstrap-select.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
+          type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css"
           rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
-       body{
+        body {
             background: url("/img/12949615.jpg");
         }
+
         .top {
             height: auto;
             width: auto;
@@ -46,7 +46,7 @@
         }
 
         #h4 {
-           color: #778899;
+            color: #778899;
             font-size: 20px;
             text-align: center;
         }
@@ -57,8 +57,7 @@
 <body>
 <div class="top">
     <div class="header">
-        <%-- <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>--%>
-        <a class="btn btn-default" id="a1" href="<%=request.getContextPath() %>/question/hint" role="button">
+        <a class="btn btn-default" id="a1" href="<%=request.getContextPath() %>/question/questionGuide" role="button">
             &lsaquo;&nbsp;&nbsp;返回</a>
     </div>
     <div style="margin-top: -45px;margin-left: 730px;float: left;">
@@ -67,19 +66,21 @@
 
     <div class="m-container m-padded-tb-big">
         <div class="ui container">
-            <form action="<%=request.getContextPath() %>/question/addQuestion" method="post" class="ui form">
+            <form action="<%=request.getContextPath() %>/question/addQuestion" method="post" class="ui form"
+                  id="publish">
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact teal basic dropdown label">
-                            <input type="hidden" value="原创" name="createQuestionType">
+                            <input type="hidden" value="待解决" name="solve">
                             <i class="dropdown icon"></i>
-                            <div class="text">原创</div>
+                            <div class="text">待解决</div>
                             <div class="menu">
-                                <div class="item" data-value="原创">原创</div>
-                                <div class="item" data-value="转载">转载</div>
+                                <div class="item" data-value="待解决">待解决</div>
+                                <div class="item" data-value="已解决">已解决</div>
+                                <div class="item" data-value="未解决">未解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题" maxlength="50">
+                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题,最多只能输入50字" maxlength="50">
                     </div>
                 </div>
 
@@ -92,11 +93,11 @@
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label">方向</label>
+                            <label class="ui compact teal basic label" placeholder="">分类</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">请选择方向</div>
+                                <div class="default text">请选择问答分类</div>
                                 <div class="menu">
                                     <div class="item" data-value="java">java</div>
                                     <div class="item" data-value="linux">linux</div>
@@ -106,27 +107,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="field">
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact teal basic label" placeholder="">标签</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="tagName">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择问答标签</div>
+                                <div class="menu">
+                                    <div class="item" data-value="java">java</div>
+                                    <div class="item" data-value="linux">linux</div>
+                                    <div class="item" data-value="html">html</div>
+                                    <div class="item" data-value="mysql">mysql</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               <%--     <div class="required field">
                         <div class="ui left labeled action input">
                             <label class="ui compact teal basic label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
-                                <input type="hidden" name="tagName" maxlength="3">
+                                <input type="hidden" name="tagName">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">请选择标签</div>
                                 <div class="menu">
-                                    <div class="item" data-value="java">java</div>
-                                    <div class="item" data-value="linux">linux</div>
-                                    <div class="item" data-value="html">html</div>
-                                    <div class="item" data-value="mysql">mysql</div>
+                                    <c:forEach items="${tagList}" var="tag">
+                                        <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
+                    </div>--%>
+                    <div class="ui error message"></div>
+                    <div class="ui right aligned container">
+                        <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>
                     </div>
-                </div>
-                <div class="ui error message"></div>
-                <div class="ui right aligned container">
-                    <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>
-                </div>
             </form>
         </div>
     </div>
@@ -145,11 +160,12 @@
             syncScrolling: "single",
             //你的lib目录的路径
             path: "../editormd/lib/",
+            image: "添加图片",
             imageUpload: true,
+            uploadButton: "本地上传",
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/uploadfile"
-            //这个配置是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单
-            //saveHTMLToTextarea : true
+            imageUploadURL: "/question/uploadImg"
+
         });
     });
 
@@ -160,39 +176,68 @@
     $('.ui.dropdown').dropdown({
         on: 'hover'
     });
+
+    /*编辑完后审核*/
+    function publish() {
+        $.ajax({
+            type: 'POST',
+            url: '/question/addQuestion',
+            data: $('#publish'),
+            success: function (res) {
+                if (res.data()) {
+                    alert("正在审核,请耐心等待");
+                }
+            },
+            error: function (res) {
+                if (res.data() == null) {
+                    alert("文章不符合要求");
+                }
+            }
+        });
+    }
+
     /*表单验证开启*/
     $('.ui.form').form({
+        inline: true,
+        on: 'blur',
         fields: {
             questionTitle: {
                 identifier: 'questionTitle',
                 rules: [{
                     type: 'empty',
-                    prompt: '提示：请输入文章标题'
+                    prompt: '文章不能为空呦'
+                }, {
+                    type: 'maxLength[10]',
+                    prompt: '请注意文章标题最大长度不能超过50'
                 }]
             },
             questionContent: {
                 identifier: 'questionContent',
                 rules: [{
                     type: 'empty',
-                    prompt: '提示：请输入文章内容'
+                    prompt: '文章内容不能为空哟'
                 }]
             },
             typeName: {
                 identifier: 'typeName',
                 rules: [{
                     type: 'empty',
-                    prompt: '提示：请选择文章分类'
+                    prompt: '选择一个文章分类吧'
                 }]
             },
-            tagName : {
+            tagName: {
                 identifier: 'tagName',
                 rules: [{
-                    type : 'empty',
-                    prompt: '提示：请选择文章标签'
+                    type: 'minCount[1]',
+                    prompt: '选择一个文章标签吧'
+                }, {
+                    type: 'maxCount[3]',
+                    prompt: '最多只能选择三个文章标签呦'
                 }]
             },
         }
     });
 </script>
+
 </body>
 </html>

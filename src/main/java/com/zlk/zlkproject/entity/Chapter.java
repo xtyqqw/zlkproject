@@ -25,18 +25,21 @@ public class Chapter {
     private Integer chapterTime;
     /**章节序号 对应字段chapter_num*/
     private Integer chapterNum;
+    /**小节数目 对应字段section_num*/
+    private Integer sectionNum;
     /**小节列表*/
     private List<Section> sectionList;
 
     public Chapter() {
     }
 
-    public Chapter(Integer chapterId, Integer coursesId, String chapterName, Integer chapterTime, Integer chapterNum, List<Section> sectionList) {
+    public Chapter(Integer chapterId, Integer coursesId, String chapterName, Integer chapterTime, Integer chapterNum, Integer sectionNum, List<Section> sectionList) {
         this.chapterId = chapterId;
         this.coursesId = coursesId;
         this.chapterName = chapterName;
         this.chapterTime = chapterTime;
         this.chapterNum = chapterNum;
+        this.sectionNum = sectionNum;
         this.sectionList = sectionList;
     }
 }

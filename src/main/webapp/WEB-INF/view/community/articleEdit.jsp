@@ -18,6 +18,7 @@
         .header {
             width: auto;
             height: 60px;
+
             background-color: #F5F5F5;
         }
         .header #a1 {
@@ -47,17 +48,17 @@
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="layerDemo">
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <div class="ui selection compact teal basic dropdown label">
+                            <div class="ui selection compact basic dropdown label" style="background-color: #FFFFFF; color: #5A5CAD;">
                                 <input type="hidden" value="原创" name="createArticleType">
                                 <i class="dropdown icon"></i>
                                 <div class="text">原创</div>
                                 <div class="menu">
-                                    <div class="item" data-value="原创">原创</div>
-                                    <div class="item" data-value="转载">转载</div>
-                                    <div class="item" data-value="翻译">翻译</div>
+                                    <div class="item" data-value="0">原创</div>
+                                    <div class="item" data-value="1">转载</div>
+                                    <div class="item" data-value="2">翻译</div>
                                 </div>
                             </div>
                             <input type="text" name="title" placeholder="简明扼要的描述你的标题">
@@ -66,14 +67,16 @@
 
                     <div class="required field">
                         <div id="md-content" style="z-index: 1 !important;">
-                            <textarea placeholder="开始编辑..." name="articleContent" style="display: none"></textarea>
+                            <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none"></textarea>
+                            <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
+                            <textarea class="editormd-html-textarea" name="articleContentHtml" style="display: none"></textarea>
                         </div>
                     </div>
 
                     <div class="two fields">
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact teal basic label">方向</label>
+                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">方向</label>
                                 <div class="ui fluid selection dropdown">
                                     <input type="hidden" name="typeName">
                                     <i class="dropdown icon"></i>
@@ -87,9 +90,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact teal basic label">标签</label>
+                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">标签</label>
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
@@ -106,14 +109,14 @@
 
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui teal basic label">摘要</label>
+                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">摘要</label>
                             <input type="text" name="articleDigest" placeholder="请输入文章摘要">
                         </div>
                     </div>
 
-                    <div class="required field">
+                    <div class="field">
                         <div class="ui left labeled input">
-                            <label class="ui teal basic label">首图</label>
+                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">首图</label>
                             <input type="text" name="figures" placeholder="首图引用地址">
                         </div>
                     </div>
@@ -122,7 +125,7 @@
 
                     <div class="ui right aligned container">
                         <button type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" id="publish-btn" class="ui teal button" <%--onclick="add()"--%>>发布</button>
+                        <button type="submit" id="publish-btn" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
                     </div>
 
                 </form>
@@ -147,7 +150,9 @@
                 path : "../editormd/lib/",
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/uploadfile"
+                imageUploadURL : "/uploadfile",
+                //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
+                saveHTMLToTextarea : true
             });
         });
 
@@ -218,10 +223,10 @@
                 },
                 figures : {
                     identifier: 'figures',
-                    rules: [{
+                    rules: [/*{
                         type : 'empty',
                         prompt: '请注意文章首图地址不能为空'
-                    },{
+                    },*/{
                         type : 'regExp',
                         value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
                         prompt: '请输入正确的图片URL格式'
