@@ -168,9 +168,9 @@
             </div>
         </div>
     </c:forEach>--%>
-    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+
     <%--<div class="flow_div"></div>--%>
-</div>
+</div> <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 <%--分页--%>
 <script>
     var page = 1;
@@ -190,6 +190,9 @@
                 total = data.count;
                 var per = data.per;
                 var data1 = data.data;
+                console.log("page"+page);
+                console.log("limit"+limit);
+                console.log("total"+total);
                 console.log(total+per+data1);
                 var html = '';
                 for (var i = 0;i<data1.length;i++){
