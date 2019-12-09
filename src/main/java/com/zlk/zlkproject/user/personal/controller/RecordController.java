@@ -3,15 +3,11 @@ package com.zlk.zlkproject.user.personal.controller;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.User;
-import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
