@@ -95,8 +95,8 @@ spring:
   #文件上传大小限制
   servlet:
     multipart:
-      max-file-size: 512MB
-      max-request-size: 512MB
+      max-file-size: 2048MB
+      max-request-size: 2048MB
 
 #FastDfs的配置
 fdfs:
