@@ -3,7 +3,6 @@ package com.zlk.zlkproject.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,10 +19,18 @@ public class Section {
     private Integer sectionId;
     /**章节id 对应字段chapter_id*/
     private Integer chapterId;
+    /**课程id*/
+    private Integer courseId;
     /**章节id 对应字段section_name*/
     private String sectionName;
     /**视频地址 对应字段video_addr*/
     private String videoAddr;
+    /**视频地址 对应字段video_addr*/
+    private String videoPath;
+    /**视频地址 对应字段video_addr*/
+    private String videoAddr2;
+    /**视频地址 对应字段video_addr*/
+    private String videoPath2;
     /**小节视频时长 对应字段section_time*/
     private Integer sectionTime;
     /**小节序号 对应字段section_num*/
