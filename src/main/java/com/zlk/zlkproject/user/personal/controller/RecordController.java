@@ -28,7 +28,10 @@ public class RecordController {
      */
     @Autowired
     private RecordService recordService;
-
+    @RequestMapping(value = "gocourses")
+    public String to(){
+        return "view/personal/learnrecord";
+    }
     /**
      * 查询学习记录
      * @param request
@@ -41,8 +44,8 @@ public class RecordController {
         String userId = user.getUserId();
         pagination.setUser(user);
         pagination.setUserId(userId);
-        /*pagination.setLimit(3);
-        pagination.setPage(1);*/
+        pagination.setLimit(3);
+        pagination.setPage(1);
         List<Item> itemList = recordService.selectCourses(pagination);
         List<Courses> allList=recordService.findCourses(pagination);
         Integer sum = recordService.selectUserSection(userId);
