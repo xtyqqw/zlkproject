@@ -36,7 +36,10 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: "/chapter/findChapters",
+                    data: "",
+                    dataType: "json",
                     success: function (data) {
+                        alert(data.msg);
                         $("#mulu_div").css("display", "block");
                         $("#wenda_div").css("display", "none");
                         $("#div_stuNote").css("display", "none");
@@ -49,7 +52,6 @@ $(document).ready(function () {
                             str += "<span class=\"headline\">" + chapter.chapterName + "</span>";
                             $.each(chapter.sectionList, function (i, section) {
                                 var time = section.sectionTime;
-                                console.log(time);
                                 var time1 = format(time);
                                 var sectionId = section.sectionId;
                                 str += "<li class='section'>";
@@ -2295,4 +2297,4 @@ $(document).ready(function () {
     /*--------清晰度 end-----------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------播放器 end------------------------------------------------------------------*/
-    })
+})
