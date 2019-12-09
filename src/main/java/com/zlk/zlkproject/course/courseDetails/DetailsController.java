@@ -72,7 +72,7 @@ public class DetailsController {
         }
         String userId = user.getUserId();
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
-        List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
+        List<Chapter> chapterList = chapterService.selectChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         courses.setStudentNum(courses.getStudentNum()+1);
         courseHomePageService.updateByCoursesId(courses);

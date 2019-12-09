@@ -8,6 +8,13 @@ import java.util.List;
 public interface ChapterService {
 
     /**
+     * 根据课程id查找对应章节信息
+     * @param coursesId
+     * @return
+     */
+    List<Chapter> selectChapterByCoursesId(Integer coursesId);
+
+    /**
      *  根据课程id查找章节信息
      *@method findChapterByCoursesId
      *@params [coursesId]

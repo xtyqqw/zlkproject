@@ -22,6 +22,11 @@
         </collection>
     </resultMap>
     <!--通过课程id查找章节信息-->
+    <select id="selectChapterByCoursesId" resultMap="chapterEntityMap">
+        select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
+        from chapter where courses_id = #{coursesId};
+    </select>
+    <!--通过课程id查找章节信息-->
     <select id="findChapterByCoursesId" parameterType="java.lang.Integer" resultMap="chapterEntityMap">
         select c.chapter_id,c.courses_id,c.chapter_name,c.chapter_time,c.chapter_num,c.section_num
         s.section_id,s.section_name,s.section_intro,s.video_addr1,s.video_addr2,s.section_time,s.section_num

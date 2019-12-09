@@ -25,7 +25,7 @@
     </select>
 
     <update id="updateStuNoteByStuNote" >
-        update kaohe.stu_note
+        update stu_note
         <set>
             <if test="snSectionId != null and snSectionId != ''">
                 sn_section_id = #{snSectionId},
