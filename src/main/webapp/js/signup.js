@@ -23,7 +23,7 @@ function getcode(e) {
                 userPhonenum:userPhonenum
             }
             $.ajax({
-                url:'/user/jsontest',
+                url:'/users/jsontest',
                 type:'post',
                 // contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -54,7 +54,7 @@ function countdown(e){
         //这里时设置当时间到0的时候重新设置点击事件，并且默认time修改为60
         a.setAttribute("onclick","openCheck(this)");
         document.getElementById("getcod").innerText="获取验证码";
-        location.reload();
+        // location.reload();
         time = 60;
         clearInterval(t);
     }else{
