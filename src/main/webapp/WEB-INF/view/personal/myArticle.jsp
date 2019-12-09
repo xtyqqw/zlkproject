@@ -82,6 +82,7 @@
         text-align: center;
         line-height: 18px;
         color: white;
+        margin-right: 3px;
     }
 
     .main .time {
