@@ -160,17 +160,20 @@ public class AdminController {
             return mv;
         }
 
-        //密码加密并修改
+        /**
+         * 判断是否修改过密码密码加密并修改
+         * 如果修改过密码则进行加密，否则不加密
+         **/
         if(!adminByAdminId.getAdminPassword().equals(admin.getAdminPassword())){
             admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         }
         Integer flag = adminService.updateAdminByAdminId(admin);
 
-        //修改用户角色中间表信息
+        /*//修改用户角色中间表信息
         Role roleByRoleName = roleService.findRoleByRoleName(admin.getAdminRole());
-        Integer flag1 = adminService.updateAdminAndRoleByAdminId(admin.getAdminId(), roleByRoleName.getRoleId());
+        Integer flag1 = adminService.updateAdminAndRoleByAdminId(admin.getAdminId(), roleByRoleName.getRoleId());*/
 
-        if(flag==1&&flag1==1){
+        if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
             mv.setViewName("admin/adminManager");
@@ -204,7 +207,7 @@ public class AdminController {
         Admin adminByAdminId = adminService.findAdminByAdminId(adminId);
         //删除用户及用户角色中间表记录
         Integer flag = adminService.deleteAdminByAdminId(adminId);
-        Integer flag1 = adminService.deleteAdminAndRoleByAdminId(adminId);
+        /*Integer flag = adminService.deleteAdminAndRoleByAdminId(adminId);*/
         if(flag==1){
             //记录删除用户日志
             logUtil.setLog(request,"删除了后台用户"+adminByAdminId.getAdminName()+"的信息");

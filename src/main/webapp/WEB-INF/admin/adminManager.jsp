@@ -120,7 +120,7 @@
             var index=layer.msg($("#msg").val());
             layer.style(index, {
                 width: 'auto',
-                height:'auto'
+                height:'1px'
             });
         })
         </c:if>
