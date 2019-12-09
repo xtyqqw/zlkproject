@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -37,8 +36,34 @@ public class ArticleAddController {
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
-    public String articleGuide(){
-        return "view/community/articleGuide";
+    public ModelAndView articleGuide(Article article, HttpServletRequest httpServletRequest) throws Exception{
+        ModelAndView mv=new ModelAndView();
+        //进入发文提示页面前先判断当前用户的登录状态
+        /*article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
+        if (httpServletRequest.getSession().getAttribute("user") == null){
+            mv.addObject("flag", "true");
+            mv.addObject("msg","想发文，请先进行登录");
+            mv.setViewName("view/");
+        }*/
+        //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
+        Article approval=articleAddService.getArticleInApproval(article.getApproval());
+        if (approval != null) {
+            if (article.getApproval()==1) {
+                article.setApproval(1);
+                mv.addObject("flag", "true");
+                mv.addObject("msg","可以发文");
+                mv.setViewName("view/community/articleGuide");
+            }else if (article.getApproval()==0){
+                mv.addObject("flag", "true");
+                mv.addObject("msg","你的文章正在审核中，通过以后才能继续发表文章，我们会尽快处理，给您反馈");
+                mv.setViewName("view/");
+            }else {
+                mv.addObject("flag", "true");
+                mv.addObject("msg","你之前的文章审核失败，以后发表文章请注意撰文规则，感谢您的配合");
+                mv.setViewName("view/");
+            }
+        }
+        return mv;
     }
 
     //给暂无更多文章提示页面提供接口
@@ -57,11 +82,12 @@ public class ArticleAddController {
         return mv;
     }
 
+    //创建文章的请求方法
     @PostMapping(value = "/articles")
-    public String post(Article article, RedirectAttributes attributes, HttpSession session, User userId) {
-        //article.setUser((User) session.getAttribute("user"));
+    public String post(Article article, RedirectAttributes attributes, HttpServletRequest httpServletRequest) throws Exception {
+        //article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
-        Article a=articleAddService.saveArticle(article,userId);
+        Article a=articleAddService.saveArticle(article);
         if (a == null) {
             attributes.addFlashAttribute("message","操作失败");
         } else {
@@ -77,9 +103,7 @@ public class ArticleAddController {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
             String rootPath = request.getSession().getServletContext().getRealPath("upload");
-            /**
-             * 文件路径不存在则需要创建文件路径
-             */
+            //文件路径不存在则需要创建文件路径
             File filePath=new File(rootPath);
             if(!filePath.exists()){
                 filePath.mkdirs();
@@ -87,7 +111,7 @@ public class ArticleAddController {
             //最终文件名
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
-            //下面response返回的json格式是editor.md所限制的，规范输出就OK
+            //下面response返回的json格式是editor.md所限制的,规范输出就OK
             response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {

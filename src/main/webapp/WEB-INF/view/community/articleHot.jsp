@@ -246,8 +246,14 @@
                             layui.each(result.articleList, function (i, article) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="#">'+article.title+'</a></div>'+
-                                    '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>';
+                                    '<div class="title"><a href="#">'+article.title+'</a></div>';
+                                if (article.createArticleType == 0){
+                                    html += '<div class="createArticleType">原创</div>';
+                                } else if (article.createArticleType == 1){
+                                    html += '<div class="createArticleType">转载</div>';
+                                }else if (article.createArticleType == 2){
+                                    html += '<div class="createArticleType">翻译</div>';
+                                }
                                 if (article.articleSetTop == 0) {
                                     html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
                                 } else {

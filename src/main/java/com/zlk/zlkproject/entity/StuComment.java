@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: zlkproject
@@ -24,6 +25,8 @@ public class StuComment {
     private Integer sectionId;
     /**用户id 对应字段user_id*/
     private String userId;
+    /**回复对象 对应字段reply_person*/
+    private String replyPerson;
     /**评论内容 对应字段content*/
     private String content;
     /**赞数 对应字段up*/
@@ -34,4 +37,14 @@ public class StuComment {
     private String report;
     /**创建时间 对应字段date*/
     private Date date;
+    /**创建时间的字符串*/
+    private String dateString;
+    /**用户名 对应字段user_realname*/
+    private String userRealName;
+    /**用户头像 对应字段user_img*/
+    private String userImg;
+    /**子评论集合*/
+    private List<StuComment> stuCommentList;
+    /**赞踩集合*/
+    private List<StuNoteUpDown> stuUpDownList;
 }

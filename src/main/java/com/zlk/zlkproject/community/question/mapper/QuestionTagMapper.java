@@ -9,11 +9,11 @@ import java.util.List;
 @Mapper
 public interface QuestionTagMapper {
     /*
-     * @descrption 通过分类名查询所属标签
+     * @descrption 通过查询所有标签
      * @author gby
      * @param
      * @return
      * @date 2019/12/3 11:42
      */
-    List<Tag> listTagAll();
+    List<Tag> listByTag(Tag tag);
 }

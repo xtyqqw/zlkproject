@@ -330,7 +330,7 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTarget">我的文章</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>" target="pageTarget">问答</a>
+                <a href="<%= request.getContextPath()%>" target="">问答</a>
             </div>
         </div>
         <div class="body-left">

@@ -1,23 +1,17 @@
 package com.zlk.zlkproject.community.comment.service.impl;
 
-import com.zlk.zlkproject.community.comment.dao.ArticleCommentsRepository;
+import com.zlk.zlkproject.community.comment.mapper.ArticleCommentsMapper;
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
 import com.zlk.zlkproject.entity.ArticleComment;
-import com.zlk.zlkproject.community.util.UUIDUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @program: CommentServiceImpl
- * @description:
+ * @description: 文章评论业务实现类
  * @author: QianKeQin
  * @date: 2019/12/2 14:49
  */
@@ -25,85 +19,64 @@ import java.util.Optional;
 public class ArticleCommentsServiceImpl implements ArticleCommentsService {
 
     @Autowired
-    private ArticleCommentsRepository articleCommentsRepository;
+    private ArticleCommentsMapper articleCommentsMapper;
 
     @Override
-    public List<ArticleComment> listCommentByArticleId(String articleId) {
-        Sort.Order order=Sort.Order.desc("createTime");
-        Sort sort=Sort.by(order);
-        List<ArticleComment> articleComments=articleCommentsRepository.findByArticleArticleIdAndParentCommentNull(articleId,sort);
-        return eachComment(articleComments);
+    public Integer addArtCmt(ArticleComment articleComment) {
+        return articleCommentsMapper.addArtCmt(articleComment);
     }
 
-    @Transactional
     @Override
-    public ArticleComment saveComment(ArticleComment articleComment) {
-        String parentCommentId=articleComment.getParentComment().getId();
-        if (!parentCommentId.equals("-1")) {
-            Optional<ArticleComment> comment1=articleCommentsRepository.findById(parentCommentId);
-            articleComment.setParentComment(comment1.orElse(null));
-        } else {
-            articleComment.setParentComment(null);
-        }
-        articleComment.setId(UUIDUtils.getId());
-        articleComment.setCreateTime(new Date());
-        return articleCommentsRepository.save(articleComment);
-    }
-
-    /**
-     * 循环每个顶级的评论节点
-     * @param articleComments
-     * @return
-     */
-    private List<ArticleComment> eachComment(List<ArticleComment> articleComments) {
-        List<ArticleComment> commentsView = new ArrayList<>();
-        for (ArticleComment comment : articleComments) {
-            ArticleComment c = new ArticleComment();
-            BeanUtils.copyProperties(comment,c);
-            commentsView.add(c);
-        }
-        //合并评论的各层子代到第一级子代集合中
-        combineChildren(commentsView);
-        return commentsView;
-    }
-
-    /**
-     * @param articleComments root根节点，article不为空的对象集合
-     * @return
-     */
-    private void combineChildren(List<ArticleComment> articleComments) {
-
-        for (ArticleComment comment : articleComments) {
-            List<ArticleComment> replys1 = comment.getReplyComments();
-            for(ArticleComment reply1 : replys1) {
-                //循环迭代，找出子代，存放在tempReplys中
-                recursively(reply1);
-            }
-            //修改顶级节点的reply集合为迭代处理后的集合
-            comment.setReplyComments(tempReplys);
-            //清除临时存放区
-            tempReplys = new ArrayList<>();
-        }
-    }
-
-    //存放迭代找出的所有子代的集合
-    private List<ArticleComment> tempReplys = new ArrayList<>();
-
-    /**
-     * 递归迭代，剥洋葱
-     * @param articleComment 被迭代的对象
-     * @return
-     */
-    private void recursively(ArticleComment articleComment) {
-        tempReplys.add(articleComment);//顶节点添加到临时存放集合
-        if (articleComment.getReplyComments().size()>0) {
-            List<ArticleComment> replys = articleComment.getReplyComments();
-            for (ArticleComment reply : replys) {
-                tempReplys.add(reply);
-                if (reply.getReplyComments().size()>0) {
-                    recursively(reply);
-                }
+    public List<ArticleComment> findArtCmt(String articleId, Integer page, Integer size) {
+        page = (page - 1) * size;
+        List<ArticleComment> list = articleCommentsMapper.findArtCmt(articleId, page, size);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        for (ArticleComment a : list) {
+            a.setDateString(sdf.format(a.getDate()));
+            for (ArticleComment aa : a.getArticleCommentList()) {
+                aa.setDateString(sdf.format(aa.getDate()));
             }
         }
+        return list;
+    }
+
+    @Override
+    public Integer findArtCmtCount(String articleId) {
+        return articleCommentsMapper.findArtCmtCount(articleId);
+    }
+
+    @Override
+    public Integer updateZC(String userId, Integer articleCommentId, String type) {
+        if("ZanAdd".equals(type)){
+            Integer res = articleCommentsMapper.addArtCmtUserZC(articleCommentId, userId, "zan");
+            if(res != 1)
+                return 0;
+        }else if ("ZanMinus".equals(type)){
+            Integer res = articleCommentsMapper.deleteArtCmtUserZC(articleCommentId, userId);
+            if(res != 1)
+                return 0;
+        }else if ("CaiAdd".equals(type)){
+            Integer res = articleCommentsMapper.addArtCmtUserZC(articleCommentId, userId, "cai");
+            if(res != 1)
+                return 0;
+        }else if ("CaiMinus".equals(type)){
+            Integer res = articleCommentsMapper.deleteArtCmtUserZC(articleCommentId, userId);
+            if(res != 1)
+                return 0;
+        }else if ("ZanAddCaiMinus".equals(type)){
+            Integer res = articleCommentsMapper.updateArtCmtUserZC(articleCommentId, userId, "zan");
+            if(res != 1)
+                return 0;
+        }else if ("ZanMinusCaiAdd".equals(type)){
+            Integer res = articleCommentsMapper.updateArtCmtUserZC(articleCommentId, userId, "cai");
+            if(res != 1)
+                return 0;
+        }
+        return articleCommentsMapper.updateZanCaiNumByArticleCommentId(articleCommentId,type);
+    }
+
+    @Override
+    public Integer updateArtCmtInform(Integer articleCommentId, String inform) {
+        return articleCommentsMapper.updateArtCmtInform(articleCommentId,inform);
     }
 }
