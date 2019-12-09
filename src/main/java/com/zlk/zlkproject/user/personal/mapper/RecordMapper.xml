@@ -76,7 +76,7 @@
     <!--查询课程数量-->
     <select id="findCourses" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="userEntityMap">
         select count(*) from courses ,user_courses
-        WHERE user_id=#{userId} AND courses.courses_id=user_courses.courses_id
+        WHERE user_id=#{userId} AND courses.courses_id=user_courses.courses_id limit #{startPage},#{limit}
     </select>
     <!--<select id="findCoursesAll" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from (select
