@@ -37,8 +37,8 @@ public interface RecordService {
     Integer selectUser(String userId);
     /**
      * 查询课程数量
-     * @param userId
+     * @param pagination
      * @return
      */
-    Integer findCourses(String userId);
+    List<Courses> findCourses(Pagination pagination);
 }
