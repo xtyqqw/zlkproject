@@ -279,7 +279,7 @@
 
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            layer.msg($("#msg").val());
         })
         </c:if>
 
@@ -383,15 +383,15 @@
                             url: "<%=request.getContextPath()%>/function/delete?functionId=" + id,
                             success: function (msg) {
                                 if(msg){
-                                    layer.alert("删除成功");
+                                    layer.msg("删除成功");
                                     obj.del();
                                 }
                                 if(!msg){
-                                    layer.alert("该目录下仍有目录或菜单,无法删除");
+                                    layer.msg("该目录下仍有目录或菜单,无法删除");
                                 }
                             },
                             error: function (msg) {
-                                layer.alert("遇到意外错误");
+                                layer.msg("遇到意外错误");
                             }
                         });
                         layer.close(index);
