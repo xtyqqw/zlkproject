@@ -34,7 +34,7 @@ public class OpinionController {
 
 
         //从session中获取ID，进行修改，userId="1";为模拟数据
-        User user1 = (User) request.getSession().getAttribute("userId");
+        User user1 = (User) request.getSession().getAttribute("user");
         //获取用户id
         opinion.setOpinionUserId(user1.getUserId());
 
