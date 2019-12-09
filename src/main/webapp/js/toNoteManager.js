@@ -18,7 +18,7 @@ layui.use(['table','form','layer'], function(){
     var layer = layui.layer;
     table.render({
         elem: '#StuNote'
-        ,url:'/stuNote/selectStuNoteAllByLimit'
+        ,url:'/note/selectStuNoteAllByLimit'
         ,height: 480
         ,cols: [[
             {field:'snId', title: '用户笔记序号', width:120}
@@ -51,7 +51,7 @@ layui.use(['table','form','layer'], function(){
                 ,yes:function () {
                     $.ajax({
                         type: "GET",
-                        url: "/stuNote/deleteStuNoteBySnId?snId="+snId,
+                        url: "/note/deleteStuNoteBySnId?snId="+snId,
                         data: "",
                         success: function (result) {
                             //flag = false;

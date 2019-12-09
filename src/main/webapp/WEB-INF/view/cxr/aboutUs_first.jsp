@@ -53,11 +53,12 @@
         }
         #guanyuwomenzhuti #wen_da .wen{
             color: rgb(70,70,70);
-            font-size: 2vw;
+            font-size: 1.5vw;
         }
         #guanyuwomenzhuti #wen_da .da{
             color: rgb(150,150,150);
-            font-size: 1.5vw;
+            font-size: 1.2vw;
+            margin-top: 1vw;
         }
 
 

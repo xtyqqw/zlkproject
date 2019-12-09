@@ -31,8 +31,11 @@ public class CommentController {
     @ResponseBody
     public Map<String,Object> findCommentListByUserId(HttpServletRequest request,Comment comment, Integer page, Integer limit, String commentUserId)throws Exception{
         User user=(User) request.getSession().getAttribute("user");
-
+        String userId=user.getUserId();
         List<Comment> commentList=commentService.findCommentListByUserId(comment,page,limit,commentUserId);
+        for(Comment comment1:commentList){
+            comment1.setCommentUserId(userId);
+        }
         if (page==1){
         for(Comment comment1:commentList){
              comment1.setFlag("true");

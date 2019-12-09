@@ -179,7 +179,7 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
         url :"/kecheng/seleUserCoursesByUserCourses",
         data:"",
         success: function (bool) {
-            if (bool){
+            if (bool=="已参加"){
                 $.ajax({
                     type : "POST",
                     url :"/toVideo",
