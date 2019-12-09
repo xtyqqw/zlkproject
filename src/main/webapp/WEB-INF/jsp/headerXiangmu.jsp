@@ -142,7 +142,7 @@
         <c:if test="${user!=null}">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
-                    <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
+                    <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
                         <a href="javascript:;">
                             <img src="//t.cn/RCzsdCq" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
                             <p class="name" style="">${user.userRealname}</p>

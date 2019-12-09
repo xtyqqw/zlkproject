@@ -67,7 +67,7 @@ $(document).ready(function () {
                                 });
                                 if (state === "播放中") {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
-                                } else if (state === "已播放") {
+                                } else if (state === "已完成") {
                                     str += "<i class=\"iconfont icon-wancheng state\"></i>";
                                 } else if (state === "未开始") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
@@ -2163,6 +2163,16 @@ $(document).ready(function () {
                 elem_currentTime.innerText = format(elem_video1.currentTime);
                 CTrecord = elem_video1.currentTime;
                 if(elem_video1.ended) {
+                    let data = {'state':'已完成'};
+                    $.ajax({
+                        type: 'POST',
+                        url: '/player/recordState',
+                        data: data,
+                        dataType: 'json',
+                        success: function () {
+
+                        }
+                    });
                     elem_btnPlay.innerHTML = "&#xe652;";
                     clearInterval(interval1);
                     elem_pgBtn.style.left = 0 + 'px';
@@ -2277,9 +2287,9 @@ $(document).ready(function () {
         clearInterval(delay_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
-            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nS6yAQKMICnvSt70QyI4435.mp4";
+            document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
-            document.getElementById("video_src").src = "http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nSyGAdhzWAxDnTtIGlSU984.mp4";
+            document.getElementById("video_src").src = '' + $("#nv").text();
         }
         elem_video1.load();
         elem_video1.currentTime = currentTime;

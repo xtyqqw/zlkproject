@@ -91,22 +91,15 @@ spring:
     allow-bean-definition-overriding: true
   jmx:
     enabled: false
-
-  #上传文件大小限制
-  servlet:
-    multipart:
-      max-file-size: 2048MB
-      max-request-size: 2048MB
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: localhost
+  tracker-list:
   #通过nginx 访问地址
-  resHost: localhost
+  resHost:
   storagePort: 8888/
   #缩略图配置
   thumb-image:
@@ -115,4 +108,3 @@ fdfs:
   #获取连接池最大数量
   pool:
     max-total: 200
-
