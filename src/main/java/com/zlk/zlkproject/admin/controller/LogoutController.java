@@ -1,7 +1,12 @@
 package com.zlk.zlkproject.admin.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @ClassName LogoutController
@@ -18,8 +23,10 @@ public class LogoutController {
      * @Param []
      * @return java.lang.String
      **/
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/logout")
     public String logout(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         return "admin/login";
     }
 }

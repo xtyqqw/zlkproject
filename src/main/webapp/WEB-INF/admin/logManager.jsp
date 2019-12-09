@@ -157,10 +157,10 @@
                         type: "POST",
                         url: "<%=request.getContextPath()%>/log/delete?logId=" + id,
                         success: function (msg) {
-                            layer.alert("删除成功");
+                            layer.msg("删除成功");
                         },
                         error: function (msg) {
-                            layer.alert("遇到意外错误");
+                            layer.msg("遇到意外错误");
                         }
                     });
                     layer.close(index);

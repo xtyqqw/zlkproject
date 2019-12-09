@@ -498,8 +498,7 @@
                 setTimeout(function(){
                     var lis = [];
                     var limit =2;
-                    var commentUserId=1;
-                    var data={"page":page,"limit":limit,"commentUserId":commentUserId};
+                    var data={"page":page,"limit":limit};
                     console.log(data);
                     $.ajax({
                         type :"POST",
