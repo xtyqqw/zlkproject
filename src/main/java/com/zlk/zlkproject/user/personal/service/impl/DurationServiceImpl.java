@@ -15,16 +15,32 @@ public class DurationServiceImpl implements DurationService {
     /*加载外部资源*/
     @Autowired(required = false)
     private DurationMapper durationMapper;
-    /*重写方法*/
+
+    /**
+     * 查询每日和总学习时长
+     * @param userId
+     * @return
+     */
     @Override
     public User selectDuration(String userId){
         return durationMapper.selectDuration(userId);
 
     }
+
+    /**
+     * 查询用户总数
+     * @return
+     */
     @Override
     public Integer findUser(){
         return durationMapper.findUser();
     }
+
+    /**
+     * 根据查询排名
+     * @param userId
+     * @return
+     */
     @Override
     public Integer findUserById(String userId){
         return durationMapper.findUserById(userId);

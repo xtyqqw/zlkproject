@@ -9,8 +9,9 @@
 <html>
 <head>
     <title>Zlk提问知道</title>
+
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <style>
@@ -185,7 +186,7 @@
         </div>
             <a href="<%=request.getContextPath() %>/question/editQuestion" role="button" class="btn btn-info col-md-3">知道了，开始提问</a>
     </div>
-    <%--<%@include file="../../jsp/footer.jsp"%>--%>
+
 </div>
 <%--鼠标移入移出头像事件--%>
 <script>

@@ -18,6 +18,7 @@
         .header {
             width: auto;
             height: 60px;
+
             background-color: #F5F5F5;
         }
         .header #a1 {
@@ -47,10 +48,10 @@
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
             <div class="ui container">
-                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form" id="layerDemo">
+                <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <div class="ui selection compact teal basic dropdown label">
+                            <div class="ui selection compact basic dropdown label" style="background-color: #FFFFFF; color: #5A5CAD;">
                                 <input type="hidden" value="原创" name="createArticleType">
                                 <i class="dropdown icon"></i>
                                 <div class="text">原创</div>
@@ -75,7 +76,7 @@
                     <div class="two fields">
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact teal basic label">方向</label>
+                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">方向</label>
                                 <div class="ui fluid selection dropdown">
                                     <input type="hidden" name="typeName">
                                     <i class="dropdown icon"></i>
@@ -91,7 +92,7 @@
                         </div>
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact teal basic label">标签</label>
+                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">标签</label>
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
@@ -108,14 +109,14 @@
 
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui teal basic label">摘要</label>
+                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">摘要</label>
                             <input type="text" name="articleDigest" placeholder="请输入文章摘要">
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui left labeled input">
-                            <label class="ui teal basic label">首图</label>
+                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">首图</label>
                             <input type="text" name="figures" placeholder="首图引用地址">
                         </div>
                     </div>
@@ -124,7 +125,7 @@
 
                     <div class="ui right aligned container">
                         <button type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" id="publish-btn" class="ui teal button" <%--onclick="add()"--%>>发布</button>
+                        <button type="submit" id="publish-btn" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
                     </div>
 
                 </form>
