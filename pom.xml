@@ -19,6 +19,15 @@
     </properties>
 
     <dependencies>
+        <!--视频文件处理依赖-->
+        <dependency>
+            <groupId>it.sauronsoftware</groupId>
+            <artifactId>jave</artifactId>
+            <version>1.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/jave-1.0.2.jar</systemPath>
+        </dependency>
+
         <!--log4j依赖-->
         <dependency>
             <groupId>log4j</groupId>
@@ -165,6 +174,7 @@
             <artifactId>commonmark-ext-gfm-tables</artifactId>
             <version>0.10.0</version>
         </dependency>
+
     </dependencies>
 
     <build>
