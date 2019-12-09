@@ -279,7 +279,11 @@
 
         <c:if test="${flag}">
         $(function () {
-            layer.msg($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'23px'
+            });
         })
         </c:if>
 

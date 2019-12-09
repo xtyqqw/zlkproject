@@ -1,4 +1,4 @@
-<%--
+﻿<%--
   Created by IntelliJ IDEA.
   User: wy
   Date: 2019/11/25
@@ -135,7 +135,7 @@
     })
 </script>--%>
 <div class="learnrecord">
-    <c:forEach items="${itemList}" var="item">
+    <%--<c:forEach items="${itemList}" var="item">
         <div class="timeline">
             <div class="date">
                 <p class="year">${item.stuTime}</p>
@@ -167,44 +167,89 @@
                 </div>
             </div>
         </div>
-    </c:forEach>
+    </c:forEach>--%>
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
     <%--<div class="flow_div"></div>--%>
 </div>
 <%--分页--%>
 <script>
-    function showRecord(page,limit) {
-        $.get("<%=request.getContextPath()%>/courses/tocourses",
-            {page:page,limit:limit},
-            function (data) {
-                for (var i = 0; i < data.length; i++){
-
-                }
+    var page = 1;
+    var limit = 5;
+    var total;
+    function showRecord() {
+        $.ajax({
+            type: "post",
+            url: "/courses/tocourses",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
             },
-            "json"
-        );
-    }
-    var total = "${all}";
-    layui.use(['laypage', 'layer'], function() {
-        var laypage = layui.laypage, layer = layui.layer;
-        //完整功能
-        laypage.render({
-            elem: 'demo7'
-            ,count: total //数据总数
-            ,theme: '#914FF1'
-            ,first: '首页'
-            ,last: '尾页'
-            , curr: 1  //起始页
-            , groups: 5 //连续页码个数
-            ,layout: ['prev', 'page', 'next', 'count']
-            ,jump: function(obj,first){
-                if(!first){
-                    showRecord(obj.curr,obj.limit);
+            success: function (data) {
+                total = data.count;
+                var per = data.per;
+                var data1 = data.data;
+                var html = '';
+                for (var i = 0;i<data1.length;i++){
+                    html += '<div class="timeline">';
+                    html += '<div class="date">';
+                    html += '<p class="year">'+ data1[i].stuTime +'</p>';
+                    html += '</div>';
+                    html += '<div class="yuan"></div>';
+                    html += '<div class="learn-main mainname main">';
+                    html += '<div class="learn-title">';
+                    html += '<h2>'+ data1[i].coursesName+'</h2>';
+                    html += '<p>解锁任务：'+ data1[i].coursesName+' — '+ data1[i].chapterName+' — '+ data1[i].sectionName+'</p>';
+                    html += '<img src="'+ data1[i].coverPic+'">';
+                    html += '</div>';
+                    html += '<div class="learn-main-getstar">';
+                    html += '<p>获星数量</p>';
+                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
+                        'style="width: 100px;margin: 10px 0 0 auto;">';
+                    html += '<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>';
+                    html += '</div>';
+                    html += '<a href="/toVideo">';
+                    html += '<div class="continue-learn">继续学习</div>';
+                    html += '</a>';
+                    html += '</div>';
+                    html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
+                        'style="width: 520px;height: 20px;background-color: #dfd9fd;' +
+                        'margin: 230px 30px auto 350px;float: right;position: fixed;">';
+                    html += '<div class="layui-progress-bar" lay-percent="'+per+'\%'+'" ' +
+                        'style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
                 }
-                console.log(obj)
+                $(".learnrecord").empty().append(html);
             }
+        })
+    }
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showRecord();
+                    }
+                }
+            });
         });
-    });
+    }
+    $(function () {
+        showRecord();
+        getPage()
+    })
 </script>
 <%--流加载--%>
 <%--<script type="text/javascript">

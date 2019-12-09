@@ -110,4 +110,3 @@ fdfs:
   #获取连接池最大数量
   pool:
     max-total: 200
-

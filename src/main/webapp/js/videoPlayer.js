@@ -101,19 +101,24 @@ $(document).ready(function () {
 
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
-            var sectionId = $(this).find("input").val();
+            let sectionId = $(this).find("input").val();
+            let state =
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
-                    var src = data.videoAddr;
+                    var src = data.section.videoAddr1;
                     switchVideo(src);
                     $("#mulu_div").css("display", "none");
+                    $("#nv").text(data.section.videoAddr1);
+                    $("#sv").text(data.section.videoAddr2);
                 }
             });
             note_flow(sectionId);
             stu_qa_flow(sectionId);
         });
+
+        /*视频播放按钮点击事件*/
 
         /*功能栏问答点击*/
         $("#icon-wenda").click(function () {
@@ -2150,6 +2155,16 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
+            let data = {"state":"播放中"};
+            $.ajax({
+                type:"POST",
+                url:'/player/recordState',
+                data: data,
+                dataType: 'json',
+                success: function () {
+
+                }
+            });
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);

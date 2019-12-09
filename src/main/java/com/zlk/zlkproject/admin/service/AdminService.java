@@ -53,30 +53,12 @@ public interface AdminService {
 
     /**
      * @Author lufengxiang
-     * @Description //TODO 新增用户关联对应的角色
-     * @Date 16:47 2019/11/19
-     * @Param [adminsId, rolesId]
-     * @return java.lang.Integer
-     **/
-    Integer addAdminAndRole(String adminsId,String rolesId);
-
-    /**
-     * @Author lufengxiang
      * @Description //TODO 通过用户ID修改用户信息
      * @Date 13:23 2019/11/19
      * @Param [admin]
      * @return java.lang.Integer
      **/
     Integer updateAdminByAdminId(Admin admin);
-
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 通过用户ID修改其关联角色
-     * @Date 17:07 2019/11/19
-     * @Param [adminsId, rolesId]
-     * @return java.lang.Integer
-     **/
-    Integer updateAdminAndRoleByAdminId(String adminsId,String rolesId);
 
     /**
      * @Author lufengxiang
@@ -87,12 +69,4 @@ public interface AdminService {
      **/
     Integer deleteAdminByAdminId(String adminId);
 
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 通过用户ID删除与其角色关联
-     * @Date 17:03 2019/11/19
-     * @Param [adminsId]
-     * @return java.lang.Integer
-     **/
-    Integer deleteAdminAndRoleByAdminId(String adminsId);
 }

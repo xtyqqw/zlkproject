@@ -104,6 +104,7 @@
     .main .con {
         margin: 10px 0 15px 0;
         line-height: 20px;
+        word-break: break-all;
     }
 
     .main .bom .span_w {
@@ -260,7 +261,7 @@
         })
     })
     var page = 1; //设置首页页码
-    var limit = 5;  //设置一页显示的条数
+    var limit = 8;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({
