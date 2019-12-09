@@ -243,7 +243,7 @@
                 <div class="layui-tab-item" style="border: 0px solid white !important;">
                     <div id="SCS_allBox">
                         <div id="SCS_contentBox">
-                            <ul id="SCS_ul_stream"></ul>
+                            <ul id="ACS_ul_stream"></ul>
                         </div>
                     </div>
                 </div>
