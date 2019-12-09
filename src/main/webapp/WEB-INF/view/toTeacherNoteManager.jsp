@@ -147,6 +147,11 @@
             }
             else if(obj.event === 'edit'){
                 console.log(obj.data);
+                var data = obj.data;
+                $("#uptnId").val(data.tnId);
+                $("#upsectionId").val(data.sectionId);
+                $("#uptitle").val(data.title);
+                $("#upContent").val(data.content);
                 layer.open({
                     title: "修改",
                     type: 1,

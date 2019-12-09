@@ -67,7 +67,7 @@ public class DetailsController {
     @ResponseBody
     public String insertCourses(HttpServletRequest request,Integer coursesId){
         User user=(User) request.getSession().getAttribute("user");
-        if(user.getUserId()==null|user.getUserId()==""){
+        if(user==null){
             return "未登录";
         }
         String userId = user.getUserId();

@@ -23,7 +23,7 @@ $(function () {
             });
             $("#kechengId").val(data.courses.coursesId);
             $("#kechengshipin").html("<video width='100%' height='100%' controls style='border-radius: 5px;' >"
-                +"<source src="+data.courses.introduceVideo+" type='video/mp4'>"
+                +"<source src="+data.courses.introduceVideo+" type='video/mp4' style='width:100%;height:100%;'>"
                 +"您的浏览器不支持 HTML5 video 标签。"
                 +" </video>");
             $("#rensu").text(data.courses.studentNum+"人");
