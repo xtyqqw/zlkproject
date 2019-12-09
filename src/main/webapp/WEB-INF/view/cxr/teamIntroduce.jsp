@@ -25,7 +25,7 @@
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 90%;
+            width: 1000px;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
