@@ -70,7 +70,10 @@
         }
 
         .left {
-            overflow: auto;
+            overflow-y: scroll;
+            scrollbar-color: transparent transparent;
+            scrollbar-track-color: transparent;
+            -ms-scrollbar-track-color: transparent;
             width: 100%;
             height: 100%;
             background-color: #23262E;
@@ -79,7 +82,7 @@
 
         /* 设置滚动条的样式 */
         ::-webkit-scrollbar {
-            width:12px;
+            width:6px;
             background-color: aqua;
         }
 
@@ -120,7 +123,6 @@
         }
 
         .leftOuter{
-            overflow: auto;
             width: 14.9%;
             height: 100%;
             /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/

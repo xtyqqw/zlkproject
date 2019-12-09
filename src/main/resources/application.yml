@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  messages:
+    basename: message/msg
   jpa:
     #是否显示sql
     show-sql: true
@@ -16,8 +18,6 @@ spring:
     properties:
       hibernate:
         format-sql: true
-  messages:
-    basename: message/msg
   datasource:
     druid:
       # 连接池的配置信息
