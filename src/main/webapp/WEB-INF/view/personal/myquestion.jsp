@@ -425,7 +425,7 @@
     checknum();
 </script>
 <%--全部 分页--%>
-<script>
+<%--<script>
     var page = 1;
     var limit = 5;
     var total;
@@ -525,7 +525,7 @@
         getPage()
     })
 </script>
-<%--我的提问 分页--%>
+&lt;%&ndash;我的提问 分页&ndash;%&gt;
 <script>
     var page = 1;
     var limit = 5;
@@ -587,7 +587,7 @@
         getPage()
     })
 </script>
-<%--我的问答 分页--%>
+&lt;%&ndash;我的问答 分页&ndash;%&gt;
 <script>
     var page = 1;
     var limit = 5;
@@ -669,7 +669,7 @@
         showReply();
         getPage()
     })
-</script>
+</script>--%>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
