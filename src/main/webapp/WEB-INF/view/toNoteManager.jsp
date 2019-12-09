@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="layedit-tool-view">
-    <form class="layui-form"  id="updateStuNote" action="/stuNote/updateStuNoteByStuNote" method="post" style="width: 400px;display: none;">
+    <form class="layui-form"  id="updateStuNote" action="/note/updateStuNoteByStuNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">笔记ID</label>
             <div class="layui-input-block">
