@@ -28,19 +28,10 @@ public interface RoleService {
      * @Author lufengxiang
      * @Description //TODO 新增角色
      * @Date 16:20 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
-    Integer addRole(Role role);
-
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 角色授权
-     * @Date 18:04 2019/12/2
-     * @Param [roleId, functionId]
-     * @return java.lang.Integer
-     **/
-    Integer addRoleAndFunction(String roleId,List<Integer> functionId);
+    Integer addRole(Role role,List<Integer> functionId);
 
     /**
      * @Author lufengxiang
@@ -64,10 +55,10 @@ public interface RoleService {
      * @Author lufengxiang
      * @Description //TODO 通过角色ID修改角色信息
      * @Date 16:26 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
-    Integer updateRoleByRoleId(Role role);
+    Integer updateRoleByRoleId(Role role,List<Integer> functionId);
 
     /**
      * @Author lufengxiang
@@ -77,15 +68,6 @@ public interface RoleService {
      * @return java.lang.Integer
      **/
     Integer deleteRoleByRoleId(String roleId);
-    
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 删除角色一并删除其授权
-     * @Date 11:45 2019/11/27
-     * @Param [roleId]
-     * @return java.lang.Integer
-     **/
-    Integer deleteRoleAndFunctionByRoleId(String roleId);
     
     /**
      * @Author lufengxiang
