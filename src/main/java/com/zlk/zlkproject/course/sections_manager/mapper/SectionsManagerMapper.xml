@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.sections_manager.mapper.SectionsManagerMapper">
+    <resultMap id="sectionEntityMap" type="com.zlk.zlkproject.entity.Section">
+        <id property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+        <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
+        <result property="courseId" column="courses_id" javaType="java.lang.Integer"/>
+        <result property="sectionName" column="section_name" javaType="java.lang.String"/>
+        <result property="sectionIntro" column="section_intro" javaType="java.lang.String"/>
+        <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"/>
+        <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"/>
+        <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
+        <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <resultMap id="courseEntityMap" type="com.zlk.zlkproject.entity.Courses">
+        <id property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
+        <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
+        <collection property="chapterList" ofType="com.zlk.zlkproject.entity.Chapter">
+            <id property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
+            <result property="chapterName" column="chapter_name" javaType="java.lang.String"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAllData" resultMap="sectionEntityMap">
+        SELECT s.*,c.courses_id FROM section s LEFT JOIN chapter c ON s.chapter_id = c.chapter_id LIMIT #{page},#{size}
+    </select>
+
+    <!--<select id="findDataByCourseId" resultMap="sectionEntityMap">
+        SELECT * FROM section
+        WHERE chapter_id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        LIMIT #{page},#{size}
+    </select>-->
+
+    <select id="findDataByCourseId" resultMap="sectionEntityMap">
+        SELECT s.*,c.courses_id FROM section s LEFT JOIN chapter c ON s.chapter_id = c.chapter_id WHERE c.courses_id = #{courseId} LIMIT #{page},#{size}
+    </select>
+
+    <select id="findDataByChapterId" resultMap="sectionEntityMap">
+        SELECT s.*,c.courses_id FROM section s LEFT JOIN chapter c ON s.chapter_id = c.chapter_id WHERE s.chapter_id = #{chapterId} LIMIT #{page},#{size}
+    </select>
+
+    <select id="findAllCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM section
+    </select>
+
+    <select id="findCountByCourseId" resultType="java.lang.Integer">
+        SELECT count(1) FROM section
+        WHERE chapter_id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findCountByChapterId" resultType="java.lang.Integer">
+        SELECT count(1) FROM section WHERE chapter_id = #{chapterId}
+    </select>
+
+    <select id="findAllCourseAndChapter" resultMap="courseEntityMap">
+        SELECT co.courses_id,co.courses_name,ch.chapter_id,ch.chapter_name
+        FROM courses co LEFT JOIN chapter ch
+        ON co.courses_id = ch.courses_id
+    </select>
+
+    <select id="findCourseAndChapterById" resultMap="courseEntityMap">
+        SELECT co.courses_id,co.courses_name,ch.chapter_id,ch.chapter_name
+        FROM courses co LEFT JOIN chapter ch
+        ON co.courses_id = ch.courses_id WHERE co.courses_id = #{courseId}
+    </select>
+
+    <insert id="addData" parameterType="com.zlk.zlkproject.entity.Section">
+        INSERT INTO section (chapter_id,section_name,section_intro,video_addr1,video_path1,video_addr2,video_path2,section_time,section_num)
+        VALUES (#{chapterId},#{sectionName},#{sectionIntro},#{videoAddr1},#{videoPath1},#{videoAddr2},#{videoPath2},#{sectionTime},#{sectionNum})
+    </insert>
+
+    <update id="updateData" parameterType="com.zlk.zlkproject.entity.Section">
+        UPDATE section SET chapter_id = #{chapterId}, section_name = #{sectionName}, section_intro = #{sectionIntro},
+        video_addr1 = #{videoAddr1}, video_path1 = #{videoPath1}, video_addr2 = #{videoAddr2}, video_path2 = #{videoPath2}
+        , section_time = #{sectionTime}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
+    </update>
+
+    <delete id="deleteData" parameterType="com.zlk.zlkproject.entity.Section">
+        DELETE FROM section WHERE section_id = #{sectionId}
+    </delete>
+</mapper>
