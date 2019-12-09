@@ -59,6 +59,7 @@ public class UserController {
       GetCode getCode = new GetCode();
       //获取session
       HttpSession session = request.getSession();
+        System.out.println("");
       //获取前台传输的手机号
       String userPhonenu = request.getParameter("userPhonenum");
 //      Sys.out.println(userPhonenu);
