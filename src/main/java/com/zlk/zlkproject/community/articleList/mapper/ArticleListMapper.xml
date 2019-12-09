@@ -16,7 +16,7 @@
         <result column="cai_count" property="caiCount" javaType="java.lang.Integer"></result>
         <result column="inform" property="inform" javaType="java.lang.String"></result>
         <result column="user_id" property="userId" javaType="java.lang.String"></result>
-        <result column="create_article_type" property="createArticleType" javaType="java.lang.String"></result>
+        <result column="create_article_type" property="createArticleType" javaType="java.lang.Integer"></result>
         <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"></result>
         <!--association 是一对一的关键字，collection是一对多的关键字-->
         <association property="user" javaType="com.zlk.zlkproject.entity.User">
