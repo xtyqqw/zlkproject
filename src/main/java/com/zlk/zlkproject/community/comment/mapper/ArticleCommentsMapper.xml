@@ -12,7 +12,7 @@
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="zan" column="zan" javaType="java.lang.Integer"/>
         <result property="cai" column="cai" javaType="java.lang.Integer"/>
-        <result property="inform" column="inform" javaType="java.lang.Integer"/>
+        <result property="inform" column="inform" javaType="java.lang.String"/>
         <result property="date" column="date" javaType="java.util.Date"/>
         <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
@@ -26,7 +26,7 @@
             <result property="content" column="content1" javaType="java.lang.String"/>
             <result property="zan" column="zan1" javaType="java.lang.Integer"/>
             <result property="cai" column="cai1" javaType="java.lang.Integer"/>
-            <result property="inform" column="inform1" javaType="java.lang.Integer"/>
+            <result property="inform" column="inform1" javaType="java.lang.String"/>
             <result property="date" column="date1" javaType="java.util.Date"/>
             <result property="userRealName" column="user_realname1" javaType="java.lang.String"/>
             <result property="userImg" column="user_img1" javaType="java.lang.String"/>
