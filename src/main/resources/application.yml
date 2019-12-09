@@ -60,51 +60,50 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-      username: root
-      password:
-      url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      #  thymeleaf:
-      #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
-      #    mode: HTML5
-      #    #编码 可不用配置
-      #    encoding: UTF-8
-      #    #开发配置为false,避免修改模板还要重启服务器
-      #    cache: false
-      #    #配置模板路径，默认是templates，可以不用配置
-      #    prefix: classpath:/templates/
-      #    servlet:
-      #      #内容类别,可不用配置
-      #      content-type: text/html
-      #    suffix: .html
-      #  resources:
-      #    chain:
-      #      strategy:
-      #        content:
-      #          enabled: true
-      #          paths: /**
-      mvc:
-        view:
-          prefix: /WEB-INF/
-          suffix: .jsp
-      main:
-        allow-bean-definition-overriding: true
-      jmx:
-        enabled: false
-    #FastDfs的配置
-    fdfs:
-      #读取inputsream阻塞时间
-      connect-timeout: 600
-      so-timeout: 1500
-      #tracker地址
-      tracker-list: localhost
-      #通过nginx 访问地址
-      resHost: localhost
-      storagePort: 8888/
-      #缩略图配置
-      thumb-image:
-        height: 150
-        width: 150
-      #获取连接池最大数量
-      pool:
-        max-total: 200
+    username: user1
+    password: xianglongshibazhang666
+    url: jdbc:mysql://47.98.183.4/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+  #  thymeleaf:
+  #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
+  #    mode: HTML5
+  #    #编码 可不用配置
+  #    encoding: UTF-8
+  #    #开发配置为false,避免修改模板还要重启服务器
+  #    cache: false
+  #    #配置模板路径，默认是templates，可以不用配置
+  #    prefix: classpath:/templates/
+  #    servlet:
+  #      #内容类别,可不用配置
+  #      content-type: text/html
+  #    suffix: .html
+  #  resources:
+  #    chain:
+  #      strategy:
+  #        content:
+  #          enabled: true
+  #          paths: /**
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  main:
+    allow-bean-definition-overriding: true
+  jmx:
+    enabled: false
+#FastDfs的配置
+fdfs:
+  #读取inputsream阻塞时间
+  connect-timeout: 600
+  so-timeout: 1500
+  #tracker地址
+  tracker-list: 47.98.183.4:22122
+  #通过nginx 访问地址
+  resHost: http://47.98.183.4
+  storagePort: 8888/
+  #缩略图配置
+  thumb-image:
+    height: 150
+    width: 150
+  #获取连接池最大数量
+  pool:
+    max-total: 200
