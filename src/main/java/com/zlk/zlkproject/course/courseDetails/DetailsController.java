@@ -71,7 +71,6 @@ public class DetailsController {
             return "未登录";
         }
         String userId = user.getUserId();
-
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
         List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
@@ -135,7 +134,7 @@ public class DetailsController {
      */
     @RequestMapping("/course/toCourseManager")
     public String toCourseManager(){
-        return "/view/toCourseManager";
+        return "view/CourseManager";
     }
 
     /**

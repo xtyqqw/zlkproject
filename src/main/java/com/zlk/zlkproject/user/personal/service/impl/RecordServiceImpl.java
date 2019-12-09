@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.mapper.RecordMapper;
@@ -30,9 +31,9 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public List<Item> selectCourses(FollowerPage followerPage){
-        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
-        List<Item> list=recordMapper.selectCourses(followerPage);
+    public List<Item> selectCourses(Pagination pagination){
+        /*followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());*/
+        List<Item> list=recordMapper.selectCourses(pagination);
         int s=list.size();
         for(int i=0;i<s;i++){
             Item item=list.get(i);

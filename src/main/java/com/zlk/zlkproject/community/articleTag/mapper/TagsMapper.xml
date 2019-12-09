@@ -11,6 +11,6 @@
     </resultMap>
 
     <select id="getAllTagByTagId" resultMap="tagEntityMap" parameterType="java.lang.Integer">
-        select T.tag_id,T.tag_name,T.tag_type_id,T.tag_type_name from tag T
+        select T.tag_id,T.tag_name from tag T
     </select>
 </mapper>

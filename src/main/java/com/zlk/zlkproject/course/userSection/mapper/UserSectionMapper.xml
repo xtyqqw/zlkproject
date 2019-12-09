@@ -31,7 +31,7 @@
         user_id, section_id, state, time
         from user_section
         <where>
-            <if test="userId != null">
+            <if test="userId != null and userId !=''">
                 and user_id = #{userId}
             </if>
             <if test="sectionId != null">

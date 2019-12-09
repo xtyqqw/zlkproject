@@ -12,11 +12,12 @@
     <title>发文须知</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
+    <style type="text/css">
         .main {
             width: auto;
             height: 700px;
-            /*border: #8D8D8D 2px solid;*/
         }
         header {
             margin-left: 510px;
@@ -56,7 +57,7 @@
     </style>
 </head>
 <body>
-    <%--<%@include file="../../jsp/header.jsp"%>--%>
+    <%@include file="../../jsp/header.jsp"%>
     <div class="main">
         <header>
             <%--从阿里矢量图标库获取--%>
@@ -88,6 +89,7 @@
         <%--javascript:void(0)--%>
         <a href="<%=request.getContextPath() %>/community/article-edit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
     </div>
+    <%@include file="../../jsp/footer.jsp"%>
     <%--<div class="ui success message">
         <c:if test="${not empty message}">
             <i class="close icon"></i>
@@ -97,7 +99,6 @@
     </div>--%>
 
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-
     <script>
         //消息提示关闭初始化
         /*$('.message .close')
@@ -107,6 +108,5 @@
                     .transition('fade');
             });*/
     </script>
-    <%--<%@include file="../../jsp/footer.jsp"%>--%>
 </body>
 </html>

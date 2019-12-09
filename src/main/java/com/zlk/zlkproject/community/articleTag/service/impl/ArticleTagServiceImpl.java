@@ -17,11 +17,5 @@ import java.util.List;
 @Service
 public class ArticleTagServiceImpl implements ArticleTagService {
 
-    @Autowired
-    private ArticleTagMapper articleTagMapper;
 
-    @Override
-    public List<Article> getArticleByTagId(Integer tagId) {
-        return articleTagMapper.getArticleByTagId(tagId);
-    }
 }
