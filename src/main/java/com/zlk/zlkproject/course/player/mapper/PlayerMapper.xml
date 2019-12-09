@@ -13,6 +13,10 @@
         update user_section SET time = #{time} WHERE user_id = #{userId} AND section_id = #{sectionId}
     </update>
 
+    <update id="recordState">
+        update user_section SET state = #{state} WHERE user_id = #{userId} AND section_id = #{sectionId}
+    </update>
+
     <select id="readRecord" parameterType="com.zlk.zlkproject.entity.UserSection" resultType="java.lang.Double">
         SELECT time FROM user_section WHERE user_id = #{userId} AND section_id = #{sectionId}
     </select>

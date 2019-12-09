@@ -104,16 +104,16 @@ public class AdminController {
             return mv;
         }
 
-        //放UUID和密码加密
+        //放UUID和密码加密并添加
         admin.setAdminId(IDUtil.getUUID());
         admin.setAdminPassword(MD5Util.md5Encrypt32Lower(admin.getAdminPassword()));
         Integer flag = adminService.addAdmin(admin);
 
-        //添加用户角色中间表记录
+        /*//添加用户角色中间表记录
         Role roleByRoleName = roleService.findRoleByRoleName(admin.getAdminRole());
-        Integer flag1 = adminService.addAdminAndRole(admin.getAdminId(), roleByRoleName.getRoleId());
+        Integer flag1 = adminService.addAdminAndRole(admin.getAdminId(), roleByRoleName.getRoleId());*/
 
-        if(flag==1&&flag1==1){
+        if(flag==1){
             mv.addObject("flag","true");
             mv.addObject("msg","添加成功");
             mv.setViewName("admin/adminManager");
