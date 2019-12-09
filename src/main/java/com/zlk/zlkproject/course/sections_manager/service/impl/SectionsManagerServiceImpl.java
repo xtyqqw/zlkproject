@@ -53,6 +53,11 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
     }
 
     @Override
+    public Section findDataBySectionId(Integer sectionId) {
+        return sectionsManagerMapper.findDataBySectionId(sectionId);
+    }
+
+    @Override
     public Integer findAllCount() {
         return sectionsManagerMapper.findAllCount();
     }
