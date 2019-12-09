@@ -125,7 +125,7 @@
 
                     <div class="ui right aligned container">
                         <button type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" id="publish-btn" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
+                        <button type="submit" onclick="publish()" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
                     </div>
 
                 </form>
@@ -164,89 +164,73 @@
             on : 'hover'
         });
 
-        /*function add() {
-            $.ajax({
-                type: 'POST',
-                url: '/articles',
-                data: $('#add'),
-                success: function (res) {
-                    if(res.data()) {
-                        alert("发布成功");
-                    }
-                },
-                error: function (res) {
-                    if (res.data() == null){
-                        alert("发布失败");
-                    }
-                }
-            })
-        }*/
-
         /*表单验证开启*/
-        $('.ui.form').form({
-            inline: true,
-            on: 'blur',
-            fields : {
-                title : {
-                    identifier: 'title',
-                    rules: [{
-                        type : 'empty',
-                        prompt: '请注意文章标题不能为空'
-                    },{
-                        type : 'maxLength[10]',
-                        prompt: '请注意文章标题最大长度不能超过10'
-                    }]
+        function publish() {
+            $('.ui.form').form({
+                inline: true,
+                on: 'blur',
+                fields: {
+                    title: {
+                        identifier: 'title',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '请注意文章标题不能为空'
+                        }, {
+                            type: 'maxLength[30]',
+                            prompt: '请注意文章标题最大长度不能超过30'
+                        }]
+                    },
+                    articleContent: {
+                        identifier: 'articleContent',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '请注意文章内容不能为空'
+                        }]
+                    },
+                    typeName: {
+                        identifier: 'typeName',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '请选择一个文章方向'
+                        }]
+                    },
+                    tagIds: {
+                        identifier: 'tagIds',
+                        rules: [{
+                            type: 'minCount[1]',
+                            prompt: '请至少选择一个文章标签'
+                        }, {
+                            type: 'maxCount[3]',
+                            prompt: '请最多选择三个文章标签'
+                        }]
+                    },
+                    figures: {
+                        identifier: 'figures',
+                        rules: [{
+                            type: 'regExp',
+                            value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
+                            prompt: '如需要添加首图,请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址'
+                        }]
+                    },
+                    articleDigest: {
+                        identifier: 'articleDigest',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '请注意文章摘要不能为空'
+                        }, {
+                            type: 'maxLength[150]',
+                            prompt: '请注意文章摘要最大长度不能超过150'
+                        }]
+                    }
                 },
-                articleContent : {
-                    identifier: 'articleContent',
-                    rules: [{
-                        type : 'empty',
-                        prompt: '请注意文章内容不能为空'
-                    }]
+                onSuccess: function () {
+                    alert("发布成功,请等待审核通过");
                 },
-                typeName : {
-                    identifier: 'typeName',
-                    rules: [{
-                        type : 'empty',
-                        prompt: '请选择一个文章方向'
-                    }]
-                },
-                tagIds : {
-                    identifier: 'tagIds',
-                    rules: [{
-                        type : 'minCount[1]',
-                        prompt: '请至少选择一个文章标签'
-                    },{
-                        type : 'maxCount[3]',
-                        prompt: '请最多选择三个文章标签'
-                    }]
-                },
-                figures : {
-                    identifier: 'figures',
-                    rules: [/*{
-                        type : 'empty',
-                        prompt: '请注意文章首图地址不能为空'
-                    },*/{
-                        type : 'regExp',
-                        value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
-                        prompt: '请输入正确的图片URL格式'
-                    }]
-                },
-                articleDigest : {
-                    identifier: 'articleDigest',
-                    rules: [{
-                        type : 'empty',
-                        prompt: '请注意文章摘要不能为空'
-                    },{
-                        type : 'maxLength[150]',
-                        prompt: '请注意文章摘要最大长度不能超过150'
-                    }]
-                }
-            }
-        });
-    </script>
-    <script>
-
+                /*onFailure: function() {
+                    alert("发布失败,请确认发布内容");
+                }*/
+            });
+        }
     </script>
 </body>
 </html>

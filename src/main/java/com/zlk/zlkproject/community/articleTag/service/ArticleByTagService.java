@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.community.articleTag.service;
 
 import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
+import com.zlk.zlkproject.entity.Pagination;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author: QianKeQin
  * @date: 2019/11/22 15:32
  */
-public interface ArticleTagService {
+public interface ArticleByTagService {
 
-
+    List<Article> findArticleByTag(Integer tagId,Pagination pagination);
 }

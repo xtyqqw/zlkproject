@@ -312,7 +312,7 @@
                     <c:forEach items="${tagList}" var="tag">
                         <div>
                             <ul>
-                                <li><a href="<%=request.getContextPath() %>/" type="button" target="pageTarget" onclick="dj(this);">${tag.tagName}</a></li>
+                                <li><a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>
