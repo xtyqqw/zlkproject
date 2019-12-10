@@ -58,7 +58,7 @@ public class RoleServiceImpl implements RoleService {
      * @Author lufengxiang
      * @Description //TODO 新增角色
      * @Date 16:24 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
     @Override
@@ -103,7 +103,7 @@ public class RoleServiceImpl implements RoleService {
      * @Author lufengxiang
      * @Description //TODO 通过角色ID修改角色信息
      * @Date 16:27 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
     @Override

@@ -7,7 +7,7 @@ $(document).ready(function () {
             $ = layui.jquery,
             flow = layui.flow,
             layer = layui.layer,
-            sectionId = "";
+            sectionId = parseInt($("#sectionId").text());
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
@@ -69,9 +69,10 @@ $(document).ready(function () {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
                                 } else if (state === "已完成") {
                                     str += "<i class=\"iconfont icon-wancheng state\"></i>";
-                                } else if (state === "未开始") {
+                                } else if (state === "未观看") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
                                 }
+                                str += "<input hidden name=\"sectionState\" value=\"" + state + "\">";
                                 str += section.sectionName;
                                 str += "<span class=\"duration\">" + time1 + "</span>";
                                 str += "</li>";
@@ -102,13 +103,14 @@ $(document).ready(function () {
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
             let sectionId = $(this).find("input").val();
+            let currentSectionId = parseInt($("#sectionId").text());
             let state =
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
                     var src = data.section.videoAddr1;
-                    switchVideo(src);
+                    switchVideo(src,currentSectionId);
                     $("#mulu_div").css("display", "none");
                     $("#nv").text(data.section.videoAddr1);
                     $("#sv").text(data.section.videoAddr2);
@@ -116,6 +118,7 @@ $(document).ready(function () {
             });
             note_flow(sectionId);
             stu_qa_flow(sectionId);
+            $("#sectionId").text(sectionId);
         });
 
         /*视频播放按钮点击事件*/
@@ -719,7 +722,6 @@ $(document).ready(function () {
 
         /*-----------------------------------------学生问答选项卡 end-----------------------------------------------------------*/
 
-    });
 
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
         {
@@ -749,7 +751,7 @@ $(document).ready(function () {
                 let sectionId = 1;
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
-                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                let data = {'snSectionId':sectionId, 'snUserId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
                     alert("内容超出最大长度限制！");
                     lengthState = false;
@@ -1116,7 +1118,7 @@ $(document).ready(function () {
                             var str = "";
                             layui.each(result.notes, function (i, note) {
                                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                var uId = '1';
+                                var uId = '' + $("#userId").text();
                                 var upStr = '<i class="iconfont icon-qinziAPPtubiao-1 UDBtn" style="font-size: 20px !important;color: rgb(121,121,121) !important;"></i>';
                                 var downStr = '<i class="iconfont icon-qinziAPPtubiao- UDBtn" style="font-size: 17px !important;color: rgb(121,121,121) !important;"></i>';
                                 var upDownState = "none";
@@ -1326,7 +1328,7 @@ $(document).ready(function () {
                                         upStr = '<i class="iconfont icon-qinziAPPtubiao-1 SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                         downStr = '<i class="iconfont icon-qinziAPPtubiao- SCS_UDbtn" data_name="down" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                         for (let l=0;l<comment.stuCommentList[i].stuUpDownList.length;l++){
-                                            if(comment.stuCommentList[i].stuUpDownList[l].userId === userId){
+                                            if(comment.stuCommentList[i].stuUpDownList[l].userId === $("#userId").text() + ''){
                                                 upDownState = comment.stuCommentList[i].stuUpDownList[l].upDown;
                                                 if (upDownState === 'up')
                                                     upStr = '<i class="iconfont icon-dianzan SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -1434,7 +1436,7 @@ $(document).ready(function () {
                                     upStr = '<i class="iconfont icon-qinziAPPtubiao-1 SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                     downStr = '<i class="iconfont icon-qinziAPPtubiao- SCS_UDbtn" data_name="down" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                     for (let i=0;i<comment.stuUpDownList.length;i++){
-                                        if(comment.stuUpDownList[i].userId === userId){
+                                        if(comment.stuUpDownList[i].userId === $("#userId").text() + ''){
                                             upDownState = comment.stuUpDownList[i].upDown;
                                             if (upDownState === 'up')
                                                 upStr = '<i class="iconfont icon-dianzan SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -1891,16 +1893,25 @@ $(document).ready(function () {
     var sharpState = false;
 
     //切换视频函数
-    function switchVideo (src) {
-        document.getElementById("video_src").src = src;
-        elem_video1.load();
-        clearInterval(interval1);
-        elem_btnPlay.innerHTML = "&#xe652;";
-        elem_pgBtn.style.left = 0 + 'px';
-        elem_pgBar.style.width = 0 + 'px';
-        elem_currentTime.innerText = '00:00:00';
-        clearInterval(interval_cache);
-        document.getElementById("pg_cache").style.width = 0 + 'px';
+    function switchVideo (src,sectionId) {
+        var data = {'time':elem_video1.currentTime,'sectionId':sectionId};
+        $.ajax({
+            type : "POST",
+            async: false,
+            url : "/player/recordTimeSwitch",
+            data : data,
+            success: function () {
+                document.getElementById("video_src").src = src;
+                elem_video1.load();
+                clearInterval(interval1);
+                elem_btnPlay.innerHTML = "&#xe652;";
+                elem_pgBtn.style.left = 0 + 'px';
+                elem_pgBar.style.width = 0 + 'px';
+                elem_currentTime.innerText = '00:00:00';
+                clearInterval(interval_cache);
+                document.getElementById("pg_cache").style.width = 0 + 'px';
+            }
+        });
     }
 
     //在浏览器控制台输出缓冲信息函数
@@ -2155,16 +2166,18 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-            let data = {"state":"播放中"};
-            $.ajax({
-                type:"POST",
-                url:'/player/recordState',
-                data: data,
-                dataType: 'json',
-                success: function () {
+            if ($("#sectionState").val()==="未观看"){
+                let data = {"state":"播放中"};
+                $.ajax({
+                    type:"POST",
+                    url:'/player/recordState',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
 
-                }
-            });
+                    }
+                });
+            }
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);
@@ -2322,4 +2335,5 @@ $(document).ready(function () {
     /*--------清晰度 end-----------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------播放器 end------------------------------------------------------------------*/
+});
 })
