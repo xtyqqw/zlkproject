@@ -7,7 +7,7 @@ $(document).ready(function () {
             $ = layui.jquery,
             flow = layui.flow,
             layer = layui.layer,
-            sectionId = "";
+            sectionId = parseInt($("#sectionId").text());
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
@@ -714,7 +714,6 @@ $(document).ready(function () {
 
         /*-----------------------------------------学生问答选项卡 end-----------------------------------------------------------*/
 
-    });
 
 /*-----------------------------------------学生笔记 begin--------------------------------------------------------------*/
         {
@@ -744,7 +743,7 @@ $(document).ready(function () {
                 let sectionId = 1;
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
-                let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
+                let data = {'snSectionId':sectionId, 'snUserId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
                     alert("内容超出最大长度限制！");
                     lengthState = false;
@@ -1111,7 +1110,7 @@ $(document).ready(function () {
                             var str = "";
                             layui.each(result.notes, function (i, note) {
                                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                var uId = '1';
+                                var uId = '' + $("#userId").text();
                                 var upStr = '<i class="iconfont icon-qinziAPPtubiao-1 UDBtn" style="font-size: 20px !important;color: rgb(121,121,121) !important;"></i>';
                                 var downStr = '<i class="iconfont icon-qinziAPPtubiao- UDBtn" style="font-size: 17px !important;color: rgb(121,121,121) !important;"></i>';
                                 var upDownState = "none";
@@ -1321,7 +1320,7 @@ $(document).ready(function () {
                                         upStr = '<i class="iconfont icon-qinziAPPtubiao-1 SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                         downStr = '<i class="iconfont icon-qinziAPPtubiao- SCS_UDbtn" data_name="down" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                         for (let l=0;l<comment.stuCommentList[i].stuUpDownList.length;l++){
-                                            if(comment.stuCommentList[i].stuUpDownList[l].userId === userId){
+                                            if(comment.stuCommentList[i].stuUpDownList[l].userId === $("#userId").text() + ''){
                                                 upDownState = comment.stuCommentList[i].stuUpDownList[l].upDown;
                                                 if (upDownState === 'up')
                                                     upStr = '<i class="iconfont icon-dianzan SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -1429,7 +1428,7 @@ $(document).ready(function () {
                                     upStr = '<i class="iconfont icon-qinziAPPtubiao-1 SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                     downStr = '<i class="iconfont icon-qinziAPPtubiao- SCS_UDbtn" data_name="down" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                     for (let i=0;i<comment.stuUpDownList.length;i++){
-                                        if(comment.stuUpDownList[i].userId === userId){
+                                        if(comment.stuUpDownList[i].userId === $("#userId").text() + ''){
                                             upDownState = comment.stuUpDownList[i].upDown;
                                             if (upDownState === 'up')
                                                 upStr = '<i class="iconfont icon-dianzan SCS_UDbtn" data_name="up" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -2307,4 +2306,5 @@ $(document).ready(function () {
     /*--------清晰度 end-----------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------播放器 end------------------------------------------------------------------*/
+});
 })
