@@ -40,4 +40,9 @@
       FROM user,comment WHERE user.user_id = comment.comment_user_id
       and comment.comment_user_id=#{commentUserId}  ORDER BY comment.like DESC limit #{startPage},#{limit}
     </select>
+
+    <select id="findCommentCountByUserId" resultType="java.lang.Integer">
+        select count(1) from user,comment  where user.user_id = comment.comment_user_id
+       and comment.comment_user_id  = #{commentUserId}
+    </select>
 </mapper>
