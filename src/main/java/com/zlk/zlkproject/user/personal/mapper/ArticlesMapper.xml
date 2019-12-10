@@ -14,6 +14,7 @@
             <result property="figuresReal" column="figures_real" javaType="java.lang.String"/>
             <result property="articleDigest" column="article_digest" javaType="java.lang.String"/>
             <result property="articleContent" column="article_content" javaType="java.lang.String"/>
+            <result property="articleContentHtml" column="article_content_html" javaType="java.lang.String"/>
             <result property="zanCount" column="zan_count" javaType="java.lang.Integer"/>
             <result property="caiCount" column="cai_count" javaType="java.lang.Integer"/>
             <result property="inform" column="inform" javaType="java.lang.Integer"/>
@@ -30,7 +31,8 @@
     <!--根据用户ID查询我的文章-->
     <select id="selectArticles" resultMap="articlesMap" parameterType="java.lang.String">
         SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
-        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
+        a.figures,a.article_digest,a.article_content,a.article_content_html,a.zan_count,a.cai_count,
+        a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
         where t.tag_id=az.tag_id AND a.user_id=#{userId} order by create_time desc
@@ -51,7 +53,7 @@
     <!--分页查询文章-->
     <select id="findArticlesAll" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="articlesMap">
         SELECT a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,
-        a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
+        a.figures,a.article_digest,a.article_content,a.article_content_html,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
         where t.tag_id=az.tag_id AND a.user_id=#{userId} GROUP BY article_id order by update_time desc limit #{startPage},#{limit}
@@ -64,4 +66,8 @@
     <insert id="insertTag" parameterType="com.zlk.zlkproject.entity.Tag">
         insert into article_tag (tag_id,article_id) values (#{tagId},#{articleId})
     </insert>
+    <!--根据ID查询文章-->
+    <select id="findArtById" parameterType="java.lang.String" resultMap="articlesMap">
+        select * from article where article_id=#{articleId}
+    </select>
 </mapper>

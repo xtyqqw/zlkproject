@@ -6,6 +6,7 @@ import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,14 +30,14 @@ public interface RecordMapper {
      * @param userId
      * @return
      */
-    Integer selectUserSection(String userId);
+    Integer selectUserSection(@Param("userId") String userId,@Param("coursesId") Integer coursesId);
 
     /**
      * 查询小结已完成数量
      * @param userId
      * @return
      */
-    Integer selectUser(String userId);
+    Integer selectUser(@Param("userId") String userId,@Param("coursesId") Integer coursesId);
 
     /**
      * 查询课程数量
