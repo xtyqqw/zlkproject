@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_am32levhe7.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_1nuc1djggf7.css">
-    <link rel="stylesheet" href="http:////at.alicdn.com/t/font_1355944_am32levhe7.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_zfigtx3pcpa.css">
 
 
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
@@ -570,8 +569,12 @@
         });
     });
     $("#liu").on("click",".p-FAQ1",function() {
+        if($(this).css("-webkit-line-clamp","3")){
+            $(this).css("-webkit-line-clamp","8");
+        }else{
+            $(this).css("-webkit-line-clamp","3");
+        }
 
-        $(this).css("-webkit-line-clamp","8");
     });
 </script>
 </body>
