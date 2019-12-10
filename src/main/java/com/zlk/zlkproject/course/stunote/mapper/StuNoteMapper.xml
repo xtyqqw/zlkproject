@@ -5,8 +5,8 @@
 <mapper namespace="com.zlk.zlkproject.course.stuNote.mapper.StuNoteMapper">
     <resultMap id="stuNoteEntityMap" type="com.zlk.zlkproject.entity.StuNote">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
-        <result property="sectionId" column="sn_section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="sn_user_id" javaType="java.lang.String"/>
+        <result property="snSectionId" column="sn_section_id" javaType="java.lang.Integer"/>
+        <result property="snUserId" column="sn_user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
@@ -37,13 +37,13 @@
 
 
     <insert id="addStuNote" parameterType="com.zlk.zlkproject.entity.StuNote">
-        INSERT INTO stu_note (sn_section_id,sn_user_id,content,sn_date) VALUES (#{sectionId},#{userId},#{content},#{date})
+        INSERT INTO stu_note (sn_section_id,sn_user_id,content,sn_date) VALUES (#{snSectionId},#{snUserId},#{content},#{date})
     </insert>
 
     <select id="findStuNote" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.sn_user_id sn_user_id1,suu.up_down,suc.sn_user_id sn_user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT sn_user_id,user_realname,user_img FROM user) s
-        WHERE sn.sn_user_id = s.sn_user_id AND sn.sn_section_id = #{sectionId}
+        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2 FROM
+        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
+        WHERE sn.sn_user_id = s.user_id AND sn.sn_section_id = #{sectionId}
         <if test="userId != '-1'">
             AND sn.sn_user_id = #{userId}
         </if>
@@ -53,9 +53,9 @@
     </select>
 
     <select id="findStuNoteUp" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.sn_user_id sn_user_id1,suu.up_down,suc.sn_user_id sn_user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT sn_user_id,user_realname,user_img FROM user) s
-        WHERE sn.sn_user_id = s.sn_user_id AND sn.sn_section_id = #{sectionId}
+        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2 FROM
+        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
+        WHERE sn.sn_user_id = s.user_id AND sn.sn_section_id = #{sectionId}
         <if test="userId != '-1'">
             AND sn.sn_user_id = #{userId}
         </if>
@@ -72,11 +72,11 @@
     </select>
 
     <insert id="upOrDownAdd">
-        INSERT INTO stunote_user_updown (sn_id,sn_user_id,up_down) VALUES (#{snId},#{userId},#{upOrDown})
+        INSERT INTO stunote_user_updown (sn_id,user_id,up_down) VALUES (#{snId},#{userId},#{upOrDown})
     </insert>
 
     <delete id="upOrDownDelete">
-        DELETE FROM stunote_user_updown WHERE sn_id = #{snId} AND sn_user_id = #{userId}
+        DELETE FROM stunote_user_updown WHERE sn_id = #{snId} AND user_id = #{userId}
     </delete>
 
     <select id="findStuNoteBySnId" resultMap="stuNoteResEntityMap">
@@ -92,7 +92,7 @@
     </update>
 
     <update id="updateDownOrUp">
-        UPDATE stunote_user_updown SET up_down = #{upOrDown} WHERE sn_id = #{snId} AND sn_user_id = #{userId}
+        UPDATE stunote_user_updown SET up_down = #{upOrDown} WHERE sn_id = #{snId} AND user_id = #{userId}
     </update>
 
     <update id="updateReport">
@@ -104,10 +104,10 @@
     </update>
 
     <insert id="addCollect">
-        INSERT INTO stunote_user_collect (sn_id,sn_user_id) VALUES (#{snId},#{userId})
+        INSERT INTO stunote_user_collect (sn_id,user_id) VALUES (#{snId},#{userId})
     </insert>
 
     <delete id="deleteCollect">
-        DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND sn_user_id = #{userId}
+        DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND user_id = #{userId}
     </delete>
 </mapper>

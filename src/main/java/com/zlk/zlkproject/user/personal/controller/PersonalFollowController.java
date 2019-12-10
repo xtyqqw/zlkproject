@@ -125,11 +125,12 @@ public class PersonalFollowController {
         userId = "1";
 
         ModelAndView mv = new ModelAndView();
-        MyFollower m = new MyFollower();
+
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
+            MyFollower m = new MyFollower();
             User user = followerList.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
@@ -141,7 +142,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(i,m);
+            list.add(m);
         }
         map.put("list",list);
         mv.setViewName("view/personal/followhim");
@@ -158,7 +159,7 @@ public class PersonalFollowController {
     public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
         ModelAndView mv = new ModelAndView();
-        MyFollower m = new MyFollower();
+
         String userId = (String) request.getSession().getAttribute("userId");
         //模拟数据
         followerPage.setLimit(10);
@@ -169,6 +170,7 @@ public class PersonalFollowController {
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
+            MyFollower m = new MyFollower();
             User user = followerList.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());

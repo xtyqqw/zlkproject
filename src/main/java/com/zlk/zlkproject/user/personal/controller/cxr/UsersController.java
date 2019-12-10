@@ -7,6 +7,8 @@ import com.zlk.zlkproject.user.entity.CxrPaging;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.personal.service.cxr.UserService;
 
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -38,6 +40,11 @@ public class UsersController {
     private UserService userService;
     @Autowired
     private LogUtil logUtil;
+        //文件上传工具类
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
 
                         //后台信息管理
@@ -126,64 +133,87 @@ public class UsersController {
 
     }
 
-
-
     /**
-     * 文件上传
+     * 头像文件上传到服务器方法
      * @param file
-     * @param request
-     * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/upload/uploadImg", method = {RequestMethod.POST})
+    @RequestMapping("/uploadImg")
     @ResponseBody
-    public Object uploadImg(@RequestParam(value="file",required=false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String prefix="";
-        String dateStr="";
-        String uploadDir="uploadDir";//这个文件夹是创建在:helloworld/target/helloworld/statics/uploadDir,以及helloworld/statics/uploadDir处
-        //保存上传
-        OutputStream out = null;
-        InputStream fileInput=null;
-        try{
-            if(file!=null){
-                String originalName = file.getOriginalFilename();
-                prefix=originalName.substring(originalName.lastIndexOf(".")+1);
-                SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-                dateStr = format.format(new Date());
-                String filepath = request.getServletContext().getRealPath("/"+ uploadDir+"/" + dateStr + "." + prefix) ;
-                filepath = filepath.replace("/", "\\");//java中路径转码
-                System.out.println(filepath);
-                File files=new File(filepath);
-                //打印查看上传路径
-                System.out.println(filepath);
-                    //如果没有该文件夹，就创建
-                if(!files.getParentFile().exists()){
-                    files.getParentFile().mkdirs();
-                }
-                file.transferTo(files);
-            }
-        }catch (Exception e){
-        }finally{
-            try {
-                if(out!=null){
-                    out.close();
-                }
-                if(fileInput!=null){
-                    fileInput.close();
-                }
-            } catch (IOException e) {
-            }
-        }
-        Map<String,Object> map2=new HashMap<>();
+    public Map uploadImg(@RequestParam(name = "file") MultipartFile file) throws Exception{
         Map<String,Object> map=new HashMap<>();
-        map.put("code",0);
-        map.put("msg","");
-        map.put("data",map2);
-        map2.put("src","../../../"+uploadDir +"/"+ dateStr + "." + prefix);
-
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        // url是最终访问文件资源的地址，
+        // fdfsConfig.getResHost()是获取服务器ip，
+        // fdfsConfig.getStoragePort()获取服务器端口
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        System.out.println(path);
+        System.out.println(url);
+        map.put("url",url);
+        map.put("message","上传成功");
         return map;
+
     }
+}
+
+//    /**
+//     * 文件上传
+//     * @param file
+//     * @param request
+//     * @param response
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping(value = "/upload/uploadImg", method = {RequestMethod.POST})
+//    @ResponseBody
+//    public Object uploadImg(@RequestParam(value="file",required=false) MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        String prefix="";
+//        String dateStr="";
+//        String uploadDir="uploadDir";//这个文件夹是创建在:helloworld/target/helloworld/statics/uploadDir,以及helloworld/statics/uploadDir处
+//        //保存上传
+//        OutputStream out = null;
+//        InputStream fileInput=null;
+//        try{
+//            if(file!=null){
+//                String originalName = file.getOriginalFilename();
+//                prefix=originalName.substring(originalName.lastIndexOf(".")+1);
+//                SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+//                dateStr = format.format(new Date());
+//                String filepath = request.getServletContext().getRealPath("/"+ uploadDir+"/" + dateStr + "." + prefix) ;
+//                filepath = filepath.replace("/", "\\");//java中路径转码
+//                System.out.println(filepath);
+//                File files=new File(filepath);
+//                //打印查看上传路径
+//                System.out.println(filepath);
+//                    //如果没有该文件夹，就创建
+//                if(!files.getParentFile().exists()){
+//                    files.getParentFile().mkdirs();
+//                }
+//                file.transferTo(files);
+//            }
+//        }catch (Exception e){
+//        }finally{
+//            try {
+//                if(out!=null){
+//                    out.close();
+//                }
+//                if(fileInput!=null){
+//                    fileInput.close();
+//                }
+//            } catch (IOException e) {
+//            }
+//        }
+//        Map<String,Object> map2=new HashMap<>();
+//        Map<String,Object> map=new HashMap<>();
+//        map.put("code",0);
+//        map.put("msg","");
+//        map.put("data",map2);
+//        map2.put("src","../../../"+uploadDir +"/"+ dateStr + "." + prefix);
+//
+//        return map;
+//    }
 
 
 
@@ -343,4 +373,4 @@ public class UsersController {
 //        return map;
 //    }
 
-}
+
