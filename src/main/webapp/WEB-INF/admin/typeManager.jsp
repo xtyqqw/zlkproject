@@ -96,8 +96,7 @@
             , page: true //开启分页
             , height: 503
             , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'typeId', title: '方向编号', width: 180, sort: true}
+                 {field: 'typeId', title: '方向编号', width: 180, sort: true}
                 , {field: 'typeName', title: '方向名称', width: 180, sort: true}
                 , {
                     title: '操作', width: 180, align: 'center', toolbar: '' +

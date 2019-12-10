@@ -223,6 +223,9 @@
                 chkboxType: {"Y": "ps", "N": "ps"}
             },
             data: {
+                key: {
+                    url: "href"
+                },
                 simpleData: {
                     enable: true,
                     idKey: "id",
@@ -274,13 +277,13 @@
                     }
                 },
                 onClick: function (e, treeId, treeNode, clickFlag) {
-                    zTreeContent.checkNode(treeNode, !treeNode.checked, true);
+                    tree.checkNode(treeNode, !treeNode.checked, true);
                 }
             }
         };
 
         $(document).ready(function () {
-            $.fn.zTree.init($("#tree"), setting);
+            tree = $.fn.zTree.init($("#tree"), setting);
         });
 
         //创建一个对象
@@ -351,8 +354,7 @@
             , page: true //开启分页
             , height: 503
             , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'roleId', title: '角色编号', width: 290, sort: true}
+                {field: 'roleId', title: '角色编号', width: 290, sort: true}
                 , {field: 'roleName', title: '角色名称', width: 130, sort: true}
                 , {field: 'roleCode', title: '角色代码', width: 290}
                 , {

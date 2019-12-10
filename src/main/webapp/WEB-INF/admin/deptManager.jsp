@@ -80,7 +80,7 @@
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
 <script>
-    layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
+    layui.use(['table', 'laydate', 'form', 'util', 'layer','jquery'], function () {
         var $ = layui.jquery;
         var table = layui.table;
         var laydate = layui.laydate;
@@ -109,8 +109,7 @@
             , page: true //开启分页
             , height: 503
             , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'deptId', title: '部门编号', width: 290, sort: true}
+                 {field: 'deptId', title: '部门编号', width: 290, sort: true}
                 , {field: 'deptName', title: '部门名称', width: 130, sort: true}
                 , {field: 'deptCode', title: '部门代码', width: 290}
                 , {
@@ -171,11 +170,11 @@
             var id = data.deptId;
             if (obj.event === 'del') {
                 layer.confirm('是否确认删除', function (index) {
-                    obj.del();
                     $.ajax({
                         type: "POST",
                         url: "<%=request.getContextPath()%>/dept/delete?deptId=" + id,
                         success: function (msg) {
+                            obj.del();
                             layer.msg("删除成功");
                         },
                         error: function (msg) {
