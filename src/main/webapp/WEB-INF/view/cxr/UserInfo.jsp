@@ -61,7 +61,7 @@
 
     <!-- 修改信息 -->
 <div class="layui-table-view">
-    <form class="layui-form"  id="updateUser" style="width: 30vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
+    <form class="layui-form"  id="updateUser" style="width: 35vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
         <%--用户编号--%>
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">编号</label>
@@ -104,7 +104,7 @@
                 <label class="layui-form-label">出生年月</label>
                 <div class="layui-input-block">
                     <input type="text" name="userBirthday" value="${user.userBirthday}" id="userBirthday" autocomplete="off" class="layui-input"
-                           style="width: 22vw;">
+                           style="width: 25.5vw;">
                 </div>
             </div>
         </div>
@@ -485,7 +485,7 @@
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['40%', '80%'],
+                    area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
                     yes: function (index, layero) {
@@ -554,7 +554,7 @@
                 //服务器上传成功
                 layer.msg(res.message);
                 //获取图片路径URL
-                $("#userImg1").val(res.url)
+                $("#userImg1").val(res.url);
             }
             , error: function () {
                 //演示失败状态，并实现重传
