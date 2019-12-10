@@ -45,7 +45,7 @@
         }
 
         .layui-form{
-            width: 32.5vw;
+            width: 35vw;
 
             float: left;
             margin-top: 3vw;
@@ -311,7 +311,7 @@
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-block">
                                 <input type="text" name="userBirthday" value="${user.userBirthday}" id="bri1" autocomplete="off" class="layui-input"
-                                       style="width: 22vw;">
+                                       style="width: 24.5vw;">
                             </div>
                         </div>
                     </div>
