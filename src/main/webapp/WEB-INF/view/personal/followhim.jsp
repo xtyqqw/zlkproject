@@ -13,6 +13,7 @@
     <script src="/js/jquery-1.12.4.js"></script>
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <script src="../../../js/follows.js"></script>
     <style type="text/css">
         .followhim{margin: 0;padding: 0;background-color: #FAFAFA;padding-bottom: 10px}
         .followhim_top{
@@ -311,7 +312,7 @@
             dataType:"json",
             context: userId,
             success:function (data) {
-                if (data.code === "1"){
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".ok").hide();
                     mythis.siblings(".jia,.no_zi").show();
@@ -336,7 +337,7 @@
             type:"GET",
             dataType:"json",
             success:function (data) {
-                if (data.code === "1"){
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".jia").hide();
                     mythis.siblings(".ok,.ok_zi").show();
@@ -345,7 +346,7 @@
                     mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
                 }
             },
-            error:function (data) {
+            error:function () {
                 mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
             }
         });

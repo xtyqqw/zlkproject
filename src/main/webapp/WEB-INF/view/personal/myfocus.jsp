@@ -13,6 +13,7 @@
     <script src="/js/jquery-1.12.4.js"></script>
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <script src="../../../js/follows.js"></script>
     <style type="text/css">
         /*没有关注信息*/
         .nomain {margin: 50px auto;text-align: center;}
@@ -243,11 +244,11 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $(".attention_him").click(function(){
-            $(".main").css("display","none")
+            $(".main").css("display","none");
             $("iframe").css("display","block");
         });
         $(".he_attention").click(function(){
-            $(".main").css("display","none")
+            $(".main").css("display","none");
             $("iframe").css("display","block");
         });
     });
@@ -255,7 +256,7 @@
 <iframe name="attention" style="border: 1px solid #fff;width: 1000px;margin: 50px 22px;
 			float: left;display: none;height: 800px;"></iframe>
 <%--没有关注信息--%>
-<c:if test="${list.size()} == 0">
+<c:if test="${list.size() == 0}">
     <div class="nomain">
         <h2>对不起，你当前暂无任何关注信息</h2>
     </div>
@@ -309,10 +310,10 @@
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
                         <!-- 关注人情况 -->
                         <div class="attention_person">
-                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId=${bignum.userId}"
-                               name="attention" class="attention_him">${bignum.followerNum}人关注了ta</a>
                             <a href="<%=request.getContextPath()%>/follow/userfollowed?userId=${bignum.userId}"
-                               name="attention" class="he_attention">ta关注了${bignum.followedNum}人</a>
+                               name="attention" class="attention_him">${bignum.followedNum}人关注了ta</a>
+                            <a href="<%=request.getContextPath()%>/follow/userfollower?userId=${bignum.userId}"
+                               name="attention" class="he_attention">ta关注了${bignum.followerNum}人</a>
                         </div>
                     </div>
                     <!-- 上半部分的右边部分 -->
@@ -667,12 +668,12 @@
 </script>--%>
 <%--点击关注事件--%>
 <script type="text/javascript">
+    /*点击已关注 取消关注*/
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     $(".ok_zi").click(function () {
         let str = $(this).prev().prev().text() + '';
         nofollow(str,$(this));
     });
-    /*点击已关注 取消关注*/
-    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     function nofollow(userId,mythis){
         $.ajax({
             url:"/follow/defollow?userId="+userId,
@@ -705,7 +706,7 @@
             type:"GET",
             dataType:"json",
             success:function (data) {
-                if (data.code === "1"){
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".jia").hide();
                     mythis.siblings(".ok,.ok_zi").show();
