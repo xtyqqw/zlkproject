@@ -88,7 +88,7 @@ public class PersonalController {
     @RequestMapping(value = "/findUser")
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
-//         userId="5";
+//         userId="1";
 //
 //        User user=userService.selectUserById(userId);
 
@@ -97,6 +97,7 @@ public class PersonalController {
 
        //调用查询单个对象的方法
         User user=userService.selectUserById(user1.getUserId());
+
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");
         // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");
