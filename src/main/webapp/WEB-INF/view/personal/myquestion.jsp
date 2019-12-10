@@ -688,15 +688,6 @@
                 type: "POST",
                 url: "/myfaqq/removeResponse?responseId="+responseId,
                 success: function(data){
-                    /*if(data.code===1){
-                        alert("删除成功！");
-                        layer.msg(data);
-                        /!*window.location.href = location.href;*!///删除后刷新当前页面
-                        location.reload();
-                    } else {
-                        /!*alert("删除失败，请重新操作！");*!/
-                        layer.msg(data);
-                    }*/
                     layer.msg(data);
                     window.location.href = location.href;
                 }

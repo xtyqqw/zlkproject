@@ -45,7 +45,7 @@
         }
 
         .layui-form{
-            width: 32.5vw;
+            width: 35vw;
 
             float: left;
             margin-top: 3vw;
@@ -311,7 +311,7 @@
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-block">
                                 <input type="text" name="userBirthday" value="${user.userBirthday}" id="bri1" autocomplete="off" class="layui-input"
-                                       style="width: 22vw;">
+                                       style="width: 24.5vw;">
                             </div>
                         </div>
                     </div>
@@ -405,14 +405,14 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">兴趣爱好</label>
                     <div class="layui-input-block">
-                        <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过100字)" class="layui-textarea" maxlength="100" >${user.userHobby}</textarea>
+                        <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50" >${user.userHobby}</textarea>
                     </div>
                 </div>
                 <%--自我评价--%>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">自我评价</label>
                     <div class="layui-input-block">
-                        <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过200字)" class="layui-textarea" maxlength="200" >${user.userSelfappraise}</textarea>
+                        <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100" >${user.userSelfappraise}</textarea>
                     </div>
                 </div>
                 <%--最高学历--%>
@@ -640,13 +640,35 @@
 
         laydate.render({
             elem: '#bri1'
-          // , value: new Date()
+
+          //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
               ,  format: 'yyyy-MM-dd' //日期格式
 
             ,choose: function(dates){ //选择好日期的回调
             }
         });
     });
+
+    //  设置选择日期不能超过当前日期
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month
+            + seperator1 + strDate + " " + date.getHours() + seperator2
+            + date.getMinutes() + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
 
 
 
