@@ -13,6 +13,7 @@ public interface SectionsManagerMapper {
     public List<Section> findAllData(Integer page,Integer size);
     public List<Section> findDataByCourseId(Integer page,Integer size,Integer courseId);
     public List<Section> findDataByChapterId(Integer page,Integer size,Integer chapterId);
+    public Section findDataBySectionId(Integer sectionId);
     public Integer findAllCount();
     public Integer findCountByCourseId(List list);
     public Integer findCountByChapterId(Integer chapterId);

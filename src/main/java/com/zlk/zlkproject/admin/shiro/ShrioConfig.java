@@ -35,7 +35,6 @@ public class ShrioConfig {
         shiroFilterFactoryBean.setSuccessUrl("/loginController/toSuccess");
         //添加Shiro内置过滤器
         Map<String,String> filterMap=new LinkedHashMap<String, String>();
-        filterMap.put("/logout","logout");
         filterMap.put("/loginController/login","anon");
         filterMap.put("/loginController/*","authc");
         filterMap.put("/admin/*","authc");
@@ -47,11 +46,10 @@ public class ShrioConfig {
         filterMap.put("/type/*","authc");
         filterMap.put("/user/*","authc");
         filterMap.put("/article/*","authc");
-        filterMap.put("/course/*","authc");
-        filterMap.put("/video/*","authc");
-        filterMap.put("/qaa/*","authc");
+        filterMap.put("/courseManager/*","authc");
+        filterMap.put("/stuQaManager/*","authc");
         filterMap.put("/note/*","authc");
-        filterMap.put("/chapter/*","authc");
+        filterMap.put("/chapterManager/*","authc");
         filterMap.put("/SMC/*","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;

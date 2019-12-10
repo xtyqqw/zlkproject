@@ -27,6 +27,8 @@
 <body>
 <jsp:include page="../jsp/header.jsp"></jsp:include>
     <div class="layui-container">
+        <span id="sectionId" style="display: none">${sectionId}</span>
+        <span id="userId" style="display: none">${userId}</span>
         <div class="layui-row" id="video_row">
             <div class="layui-col-md2"></div>
             <div class="layui-col-md8">
@@ -54,7 +56,7 @@
                         <div id="div_all">
                             <div id="div_video">
                                 <video id="video1" width="100%" height="100%">
-                                    <source id="video_src" src="http://193.112.82.60:8888/group1/M00/00/00/rBAAB13nSyGAdhzWAxDnTtIGlSU984.mp4" type="video/mp4" />
+                                    <source id="video_src" src="${addr1}" type="video/mp4" />
                                 </video>
                             </div>
                             <div id="div_controller">
@@ -76,8 +78,8 @@
                                     <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
                                 </div>
                                 <div id="div_sharpness" class="div_btn float_right">
-                                    <span id="nv" style="display: none"></span>
-                                    <span id="sv" style="display: none"></span>
+                                    <span id="nv" style="display: none">${addr1}</span>
+                                    <span id="sv" style="display: none">${addr2}</span>
                                     <div id="sharpness_btn" class="enableClk">普清</div>
                                     <div id="sharpness_option_box">
                                         <div class="sharpness_option enableClk">超清</div>

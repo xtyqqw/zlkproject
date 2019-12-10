@@ -76,7 +76,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'23px'
+            });
         })
         </c:if>
         laydate.render({
@@ -93,8 +97,8 @@
             , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'typeId', title: '类别编号', width: 180, sort: true}
-                , {field: 'typeName', title: '类别名称', width: 180, sort: true}
+                , {field: 'typeId', title: '方向编号', width: 180, sort: true}
+                , {field: 'typeName', title: '方向名称', width: 180, sort: true}
                 , {
                     title: '操作', width: 180, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +
@@ -158,15 +162,15 @@
                         url: "<%=request.getContextPath()%>/type/delete?typeId=" + id,
                         success: function (msg) {
                             if(msg){
-                                layer.alert("删除成功");
+                                layer.msg("删除成功");
                                 obj.del();
                             }
                             if(!msg){
-                                layer.alert("仍有类别属于该方向,无法删除");
+                                layer.msg("仍有类别属于该方向,无法删除");
                             }
                         },
                         error: function (msg) {
-                            layer.alert("遇到意外错误");
+                            layer.msg("遇到意外错误");
                         }
                     });
                     layer.close(index);

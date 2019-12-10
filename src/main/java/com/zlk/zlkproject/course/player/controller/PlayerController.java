@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- <<<<<<< HEAD
  * @program: zlkproject
  * @description: 播放器controller
  * @author: hry
@@ -36,6 +35,15 @@ public class PlayerController {
         userSection.setSectionId(sectionId);
         userSection.setTime(time);
         playerService.recordTime(userSection);
+    }
+
+    @RequestMapping("recordState")
+    @ResponseBody
+    public void recordState(HttpServletRequest request,@RequestParam("state") String state){
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
+        playerService.recordState(userId,sectionId,state);
     }
 
     @RequestMapping("readRecord")

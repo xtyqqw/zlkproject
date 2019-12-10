@@ -113,7 +113,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 63vw;
+            margin-left: 76vw;
             margin-top: 0vw;
         }
         .wz_remen{
@@ -144,9 +144,8 @@
             margin-left: 16vw;
         }
         .yueanniu{
-            -webkit-border-top-left-radius: 5px;
-            -webkit-border-bottom-left-radius: 5px;
-            margin-top: 0.3vw;
+            -webkit-border-top-left-radius: 0.4vw;
+            -webkit-border-bottom-left-radius: 0.4vw;
             margin-left: -0.8vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -157,10 +156,10 @@
             background-color: #914ff1;
         }
         .zonganniu{
-            -webkit-border-top-right-radius: 5px;
-            -webkit-border-bottom-right-radius: 5px;
+            -webkit-border-top-right-radius: 0.4vw;
+            -webkit-border-bottom-right-radius: 0.4vw;
             margin-top: -2.2vw;
-            margin-left: 1.1vw;
+            margin-left: 1.2vw;
             border: 1px solid white;
             line-height: 2vw;
             text-align: center;
@@ -355,7 +354,7 @@
                 <ul>
                     <c:forEach items="${alist}" var="article">
                         <li>
-                            <a href="/community/article-show/{articleId}">
+                            <a href="/community/article-show">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>
@@ -376,7 +375,7 @@
                 <ul>
                     <c:forEach items="${blist}" var="article">
                         <li>
-                            <a href="/community/article-show/{articleId}">
+                            <a href="/community/article-show">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>

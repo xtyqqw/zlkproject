@@ -158,7 +158,7 @@
 
             table.render({
                 elem: '#course'
-                ,url:'/courseHomePage/findAllByLimit'
+                ,url:'/courseManager/findAllByLimit'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
                     {field:'coursesId', width:100, title: '课程ID', edit: 'text', sort: true}
@@ -205,7 +205,7 @@
                                 layer.alert(data.field.coursesName);
                                 $.ajax({
                                     type: "POST",
-                                    url:"/courseHomePage/insertByCourse",
+                                    url:"/courseManager/insertByCourse",
                                     data:data.field,
                                     dataType:"json",
                                     success:function (result) {
@@ -230,7 +230,7 @@
                     let coursesName = $("#coursesNameInput").val();
                     table.reload('course', {
                         method: "post"
-                        , url: '/courseHomePage/findByCoursesNameLimit?coursesName='+coursesName
+                        , url: '/courseManager/findByCoursesNameLimit?coursesName='+coursesName
                         , page:{
                             curr:1
                         }
@@ -262,15 +262,14 @@
                         $.ajax({
                             type : "POST",
                             async: false,
-                            url :"/courseHomePage/deleteByCourseId",
+                            url :"/courseManager/deleteByCourseId",
                             data: {"courseId":data.coursesId},
                             success: function (result) {
                                 // layer.msg("删除成功");
                                 layer.alert(result.message);
                                 table.reload('course',{
-                                    url: '/courseHomePage/findAllByLimit',
+                                    url: '/courseManager/findAllByLimit',
                                     method: 'post',
-                                    height: 500,
                                     toolbar: '#toolbarDemo',
                                     page:{
                                         curr:1
@@ -305,7 +304,7 @@
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
-                                    url:"/courseHomePage/updateCourses",
+                                    url:"/courseManager/updateCourses",
                                     // contentType: "application/json;charset=UTF-8",
                                     data:data.field,
                                     dataType:"json",
@@ -327,7 +326,7 @@
             //拖拽上传
             let uploadInst1 = upload.render({
                 elem: '#introduceVideo'
-                ,url: '/courseHomePage/uploadPic'
+                ,url: '/courseManager/uploadPic'
                 ,accept: 'file'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
