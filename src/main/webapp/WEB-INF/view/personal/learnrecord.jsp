@@ -115,10 +115,6 @@
     </style>
 </head>
 <body>
-<!-- 进度条js -->
-<script>
-    layui.use('element', function(){});
-</script>
 <!-- 鼠标移入移出显示隐藏继续学习 -->
 <%--<script type="text/javascript">
     $(function(){
@@ -168,9 +164,9 @@
             </div>
         </div>
     </c:forEach>--%>
-    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
     <%--<div class="flow_div"></div>--%>
 </div>
+<div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 <%--分页--%>
 <script>
     var page = 1;
@@ -209,7 +205,7 @@
                         'style="width: 100px;margin: 10px 0 0 auto;">';
                     html += '<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>';
                     html += '</div>';
-                    html += '<a href="/toVideo">';
+                    html += '<a href="/toVideo" target="_blank">';
                     html += '<div class="continue-learn">继续学习</div>';
                     html += '</a>';
                     html += '</div>';
@@ -226,6 +222,17 @@
             }
         })
     }
+    /*进度条*/
+    /*layui.use('element', function(){
+        var element = layui.element;
+        element.render('progress');
+    });*/
+    function percent() {
+        layui.use('element', function(){
+            var element = layui.element;
+            element.render('progress');
+        });
+    }
     function getPage(){
         layui.use('laypage', function() {
             var laypage = layui.laypage;
@@ -241,6 +248,7 @@
                     limit=obj.limit;
                     if(!first){
                         showRecord();
+                        percent();
                     }
                 }
             });
@@ -248,7 +256,8 @@
     }
     $(function () {
         showRecord();
-        getPage()
+        getPage();
+        percent();
     })
 </script>
 <%--流加载--%>

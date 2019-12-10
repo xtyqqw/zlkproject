@@ -40,5 +40,5 @@ public interface RecordService {
      * @param pagination
      * @return
      */
-    List<Courses> findCourses(Pagination pagination);
+    Integer findCourses(Pagination pagination);
 }
