@@ -50,12 +50,12 @@
         /*图片在表格里完整显示*/
         .layui-table-cell{
             text-align:center;
-            height: 25px;
+            height: 30px;
             white-space: normal;
         }
         /*图片在表格里完整显示*/
         .layui-table img{
-            max-width:25px;
+            max-width:30px;
         }
 
 
