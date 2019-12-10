@@ -5,7 +5,7 @@ $('body').on('mouseenter','.layui-table-view td[data-field = "content"]',functio
     //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
     if(msg!=null&msg!=""){
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
+            tips: [3, '#96c8c8'],
             time: 2000
         });
     }
@@ -57,7 +57,7 @@ layui.use(['table','form','layer'], function(){
                             //flag = false;
                             layer.msg("删除成功");
                             table.reload('StuNote',{
-                                url: '/stuNote/selectStuNoteAllByLimit',
+                                url: '/note/selectStuNoteAllByLimit',
                                 height: 480,
                                 page:{
                                     curr:1

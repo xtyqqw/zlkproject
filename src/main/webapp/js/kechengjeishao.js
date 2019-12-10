@@ -107,6 +107,15 @@ $("#jiaru").click(function () {
                 alert("请先登录")
             }else{
                 $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
+                $.ajax({
+                    type : "POST",
+                    //async: false,
+                    url :"/courseHomePage/selectCoursesByCoursesId",
+                    data:"",
+                    success: function (data) {
+                        $("#rensu").text(data.courses.studentNum+"人");
+                    }
+                });
             }
         }
     });

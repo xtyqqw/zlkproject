@@ -53,8 +53,8 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public Integer selectUserSection(String userId){
-        return recordMapper.selectUserSection(userId);
+    public Integer selectUserSection(String userId,Integer coursesId){
+        return recordMapper.selectUserSection(userId,coursesId);
     }
 
     /**
@@ -63,8 +63,9 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public Integer selectUser(String userId){
-        return recordMapper.selectUser(userId);
+    public Integer selectUser(String userId,Integer coursesId){
+
+        return recordMapper.selectUser(userId,coursesId);
     }
 
     /**
