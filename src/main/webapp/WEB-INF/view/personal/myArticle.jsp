@@ -94,6 +94,10 @@
     .main .title {
         margin-top: 7px;
         font-weight: bold;
+        max-width: 50em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .main .type {
@@ -138,6 +142,7 @@
         display: none;
     }
     .check_all{width: 40px;height: 20px;background: #009688;color: white;display: inline-block;text-align: center;line-height: 20px;cursor: pointer;}
+    .context ul li:hover{background: white;}
 </style>
 <body>
 <div>
@@ -146,7 +151,6 @@
 </div>
 <div class="context">
     <ul>
-        <a href=""></a>
 <%--        <c:forEach items="${list}" var="list">--%>
 <%--        <li>--%>
 <%--            <div class="img">--%>
@@ -291,8 +295,8 @@
                     html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
                     html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
                     html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
-                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览</span>';
-                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论</span>';
+                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览量</span>';
+                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论数</span>';
                     html += '<span class="span_w">'+data1[i].commentCount+'</span><a href="/articles/toArt?articleId='+data1[i].articleId+'" class="lookall">查看修改</a>';
                     html += '<span class="delete cur" onclick="deleteArt('+ data1[i].articleId+')">删除</span>';
                     html += '<span class="cur">分享</span></div></div></li>';
