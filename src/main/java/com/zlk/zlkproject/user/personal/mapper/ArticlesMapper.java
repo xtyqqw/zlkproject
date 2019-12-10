@@ -67,4 +67,10 @@ public interface ArticlesMapper {
      * @return
      */
     List<Tag> insertTag(String articleId);
+    /**
+     * 根据ID查询文章
+     * @param articleId
+     * @return
+     */
+    Articles findArtById(String articleId);
 }

@@ -52,8 +52,8 @@
         }
         .add{
             position: relative;
-            top: -1422px;
-            left: -31px;
+            top: -101px;
+            left: -32px;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;

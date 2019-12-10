@@ -45,7 +45,7 @@
         }
 
         .layui-form{
-            width: 32.5vw;
+            width: 35vw;
 
             float: left;
             margin-top: 3vw;
@@ -311,7 +311,7 @@
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-block">
                                 <input type="text" name="userBirthday" value="${user.userBirthday}" id="bri1" autocomplete="off" class="layui-input"
-                                       style="width: 22vw;">
+                                       style="width: 24.5vw;">
                             </div>
                         </div>
                     </div>
@@ -405,14 +405,14 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">兴趣爱好</label>
                     <div class="layui-input-block">
-                        <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过100字)" class="layui-textarea" maxlength="100" >${user.userHobby}</textarea>
+                        <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50" >${user.userHobby}</textarea>
                     </div>
                 </div>
                 <%--自我评价--%>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">自我评价</label>
                     <div class="layui-input-block">
-                        <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过200字)" class="layui-textarea" maxlength="200" >${user.userSelfappraise}</textarea>
+                        <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100" >${user.userSelfappraise}</textarea>
                     </div>
                 </div>
                 <%--最高学历--%>
@@ -622,14 +622,14 @@
     });
     //保存成功后提示信息js
     $("#chenggong").hide();
+    // $('#baocun').click(function () {
+    //     layer.msg("保存成功");
+    //     setTimeout(function () {
+    //         $("#chenggong").hide();
+    //     },5500)
+    // });
     $('#baocun').click(function () {
-        layer.msg("保存成功");
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },5500)
-    });
-    $('#baocun').click(function () {
-       //alert("保存成功");
+       alert("保存成功");
     });
 
 
@@ -640,13 +640,35 @@
 
         laydate.render({
             elem: '#bri1'
-          // , value: new Date()
+
+          //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
               ,  format: 'yyyy-MM-dd' //日期格式
 
             ,choose: function(dates){ //选择好日期的回调
             }
         });
     });
+
+    //  设置选择日期不能超过当前日期
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month
+            + seperator1 + strDate + " " + date.getHours() + seperator2
+            + date.getMinutes() + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
 
 
 
@@ -663,7 +685,7 @@
         var uploadInst = upload.render({
             elem: '#headImg'
             //文件上传地址
-            , url: '<%=request.getContextPath()%>/personal/upload/headImg'
+            , url: '<%=request.getContextPath()%>/personal/uploadHeadPic'
             , size: 500
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -672,20 +694,27 @@
                 });
             }
             , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
-                /*   console.log(res.data.src);*/
-                //window.parent.uploadHeadImage(res.data.src);
+                //本地上传回调
+                // //如果上传失败
+                // if (res.code > 0) {
+                //     return layer.msg('上传失败');
+                // }
+                // //上传成功
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                // /*   console.log(res.data.src);*/
+                // //window.parent.uploadHeadImage(res.data.src);
+                //
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
+                // $("#userImg").val(res.data.src);
+                // //上传成功后提示信息
+                // var demoText = $('#demoText');
+                // demoText.html('<span style="color: red;">上传成功!!!</span>');
 
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
-                $("#userImg").val(res.data.src);
-                //上传成功后提示信息
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: red;">上传成功!!!</span>');
+
+                //服务器上传成功
+                layer.msg(res.message);
+                //获取图片路径URL
+                $("#userImg").val(res.url)
             }
             //错误重新上传
             , error: function () {

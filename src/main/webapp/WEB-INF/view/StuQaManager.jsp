@@ -14,7 +14,6 @@
 
 
     <script type="text/html" id="barDemo">
-        <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</button>
     </script>
 
@@ -42,6 +41,9 @@
         </div>
     </script>
 
+    <script type="text/html" id="switchTpl">
+        <input type="checkbox" name="report" value="{{d.sqaId}}" lay-skin="switch" lay-text="已举报|举报" lay-filter="reportDemo" {{ d.report === "已举报" ? 'checked' : '' }}>
+    </script>
 
 
 
@@ -54,7 +56,7 @@
 
             table.render({
                 elem: '#stuQa'
-                ,url:'/stuQa/selectAllLimit'
+                ,url:'/stuQaManager/selectAllLimit'
                 ,method:'POST'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
@@ -66,9 +68,9 @@
                     ,{field:'answerNum', width:110, title: '回答数量', sort: true}
                     ,{field:'viewNum', width:110, title: '浏览数量', sort: true}
                     ,{field:'share', width:110, title: '共享状态', sort: true}
-                    ,{field:'report', width:110, title: '举报状态', edit:'text',sort: true}
+                    ,{field:'report', width:110, title: '举报状态', templet:'#switchTpl',sort: true}
                     ,{field:'date', width:200,title: '问答添加日期', sort: true}
-                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:120}
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:80,align:"center"}
                 ]]
                 ,page: true
             });
@@ -79,7 +81,7 @@
                 var evend = obj.event;
                 if (evend==="report"){
                     table.reload('stuQa', {
-                        url: '/stuQa/reportDesc'
+                        url: '/stuQaManager/reportDesc'
                         , method:'post'
                         , page:{
                             curr:1
@@ -101,7 +103,7 @@
                 let name = $("#selectInput").attr("name");
                 let val = $("#selectInput").val();
                 table.reload('stuQa', {
-                    url: '/stuQa/fuzzySelect'
+                    url: '/stuQaManager/fuzzySelect'
                     , method:'post'
                     , where:{
                         name:name,
@@ -122,32 +124,12 @@
                         $.ajax({
                             type : "POST",
                             async: false,
-                            url :"/stuQa/deleteStuQa",
+                            url :"/stuQaManager/deleteStuQa",
                             data: {"sqaId":data.sqaId},
                             success: function (data) {
                                 layer.alert(data.msg);
                                 table.reload('stuQa',{
-                                    url: '/stuQa/selectAllLimit',
-                                    method: 'post',
-                                    toolbar: '#toolbarDemo',
-                                    page:{
-                                        curr:1
-                                    }
-                                });
-                            }
-                        });
-                    });
-                }else if (obj.event === 'edit'){
-                    layer.confirm('是否保存修改信息', function(index){
-                        $.ajax({
-                            type : "POST",
-                            async: false,
-                            url :"/stuQa/updateReport",
-                            data: {"sqaId":data.sqaId,"report":data.report},
-                            success: function (data) {
-                                layer.alert(data.msg);
-                                table.reload('stuQa',{
-                                    url: '/stuQa/selectAllLimit',
+                                    url: '/stuQaManager/selectAllLimit',
                                     method: 'post',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -158,6 +140,35 @@
                         });
                     });
                 }
+            });
+
+            //监听举报操作
+            form.on('switch(reportDemo)', function(data){
+                layer.alert(data.value);
+                let report = "";
+                if (data.elem.checked){
+                    report = "已举报";
+                }else {
+                    report = "举报";
+                }
+                $.ajax({
+                    type : "POST",
+                    async: false,
+                    url :"/stuQaManager/updateReport",
+                    data: {"sqaId":data.value,"report":report},
+                    success: function (data) {
+                        layer.alert(data.msg);
+                        table.reload('stuQa',{
+                            url: '/stuQaManager/selectAllLimit',
+                            method: 'post',
+                            toolbar: '#toolbarDemo',
+                            page:{
+                                curr:1
+                            }
+                        });
+                    }
+
+                })
             });
         })
 

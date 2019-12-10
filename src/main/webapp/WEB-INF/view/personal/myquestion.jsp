@@ -71,8 +71,8 @@
         }
         .lebel_li{
             float: left;
-            border: 1px solid #bec3d9;
-            background-color: #bec3d9;
+            border: 1px solid #914FF1;
+            background-color: #914FF1;
             border-radius: 50px;
             padding: 0 10px;
             margin: 0 10px;
@@ -88,6 +88,7 @@
             font-size: 14px;
             margin-top: 30px;
             margin-left: 30px;
+            color: #494949;
         }
         .question_waik .question_num,.look_num,.question_share{
             margin-top: 10px;
@@ -135,6 +136,7 @@
             margin-left: 30px;
             float: left;
             font-size: 10px;
+            font-weight: bold;
         }
         .reply_waik_adopted .reply_adopted_msg{
             margin: 45px 90px 30px 80px;
@@ -186,18 +188,19 @@
         }
         .main_ul a{
             text-decoration: none;
+            color: #494949;
         }
         .question_waik .title a:hover{
-            color: #8c24dd;
+            color: #000;
         }
         .reply_waik_adopted .reply_adopted_msg a:hover{
-            color: #8c24dd;
+            color: #000;
         }
         .reply_waik .reply_msg a:hover{
-            color: #8c24dd;
+            color: #000;
         }
         /*提交答案弹窗*/
-        .answer_succ1,.answer_succ2,.answer_succ3{
+        /*.answer_succ1,.answer_succ2,.answer_succ3{
             width: 400px;
             height: 70px;
             border: 1px solid #fff;
@@ -250,7 +253,7 @@
             font-size: 17px;
             float: left;
             margin-top: 25px;
-        }
+        }*/
     </style>
 </head>
 <body>
@@ -688,15 +691,6 @@
                 type: "POST",
                 url: "/myfaqq/removeResponse?responseId="+responseId,
                 success: function(data){
-                    /*if(data.code===1){
-                        alert("删除成功！");
-                        layer.msg(data);
-                        /!*window.location.href = location.href;*!///删除后刷新当前页面
-                        location.reload();
-                    } else {
-                        /!*alert("删除失败，请重新操作！");*!/
-                        layer.msg(data);
-                    }*/
                     layer.msg(data);
                     window.location.href = location.href;
                 }
