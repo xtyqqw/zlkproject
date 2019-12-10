@@ -115,4 +115,9 @@ public class ArticlesServiceImpl implements ArticlesService {
     public List<Tag> insertTag(String articleId){
         return articlesMapper.insertTag(articleId);
     }
+
+    @Override
+    public Articles findArtById(String articleId) {
+        return articlesMapper.findArtById(articleId);
+    }
 }

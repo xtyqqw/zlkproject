@@ -15,6 +15,8 @@ import java.util.Date;
 @Setter
 @Getter
 public class Item {
+    /*项目ID*/
+    private Integer coursesId;
     /**课程名称*/
     private String coursesName;
     /**封面图片*/
@@ -28,12 +30,17 @@ public class Item {
     private Date studyTime;
     /*格式化时间*/
     private String StuTime;
-    public Item(String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime) {
+    private long per;
+
+    public Item(Integer coursesId, String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime, String stuTime, long per) {
+        this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.coverPic = coverPic;
         this.chapterName = chapterName;
         this.sectionName = sectionName;
         this.studyTime = studyTime;
+        StuTime = stuTime;
+        this.per = per;
     }
 
     public Item() {
