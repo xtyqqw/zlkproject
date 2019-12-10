@@ -69,9 +69,10 @@ $(document).ready(function () {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
                                 } else if (state === "已完成") {
                                     str += "<i class=\"iconfont icon-wancheng state\"></i>";
-                                } else if (state === "未开始") {
+                                } else if (state === "未观看") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
                                 }
+                                str += "<input hidden name=\"sectionState\" value=\"" + state + "\">";
                                 str += section.sectionName;
                                 str += "<span class=\"duration\">" + time1 + "</span>";
                                 str += "</li>";
@@ -2155,16 +2156,18 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-            let data = {"state":"播放中"};
-            $.ajax({
-                type:"POST",
-                url:'/player/recordState',
-                data: data,
-                dataType: 'json',
-                success: function () {
+            if ($("#sectionState").val()==="未观看"){
+                let data = {"state":"播放中"};
+                $.ajax({
+                    type:"POST",
+                    url:'/player/recordState',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
 
-                }
-            });
+                    }
+                });
+            }
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);
