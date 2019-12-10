@@ -39,6 +39,8 @@ public class controller {
             mv.addObject("sectionId",sectionId);
             mv.addObject("userId",userId);
             mv.setViewName("/view/videoPlayer");
+        }else {
+            mv.setViewName("/view/videoPlayer");
         }
         return mv;
     }

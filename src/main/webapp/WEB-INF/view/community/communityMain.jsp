@@ -355,7 +355,7 @@
                 <ul>
                     <c:forEach items="${alist}" var="article">
                         <li>
-                            <a href="/community/article-show/{articleId}">
+                            <a href="/community/article-show">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>
@@ -376,7 +376,7 @@
                 <ul>
                     <c:forEach items="${blist}" var="article">
                         <li>
-                            <a href="/community/article-show/{articleId}">
+                            <a href="/community/article-show">
                                     <%--<div class="wz_remen_img">
                                         <img src="<c:out value="${article.userImg}"></c:out>" >
                                     </div>--%>

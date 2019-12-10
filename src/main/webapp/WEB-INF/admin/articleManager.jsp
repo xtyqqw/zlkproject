@@ -192,7 +192,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'auto'
+            });
         })
         </c:if>
         laydate.render({

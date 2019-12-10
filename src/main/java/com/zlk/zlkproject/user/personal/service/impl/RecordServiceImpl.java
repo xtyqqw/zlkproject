@@ -73,11 +73,8 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public List<Courses> findCourses(Pagination pagination){
-        Integer page = pagination.getPage();
-        Integer limit = pagination.getLimit();
-        Integer startPage = (page-1)*limit;
-        pagination.setStartPage(startPage);
+    public Integer findCourses(Pagination pagination){
+
         return recordMapper.findCourses(pagination);
     }
 }
