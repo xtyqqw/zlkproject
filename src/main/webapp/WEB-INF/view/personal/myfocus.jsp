@@ -174,7 +174,7 @@
             height: 70px;
             text-align: center;
             position: fixed;
-            margin: -200px 300px;
+            margin: 100px 300px;
             box-shadow: 1px 1px 5px 1px #D4D4D4;
             background-color: #FFFFFF;
             border-radius: 3px;
@@ -274,11 +274,36 @@
                         <!-- 关注状态 -->
                         <div class="attention_type">
                             <!-- 已关注 -->
+                            <span style="display: none">${bignum.userId}</span>
                             <p class="ok">√</p>
-                            <p class="ok_zi" onclick="nofollow('${bignum.userId}')">已关注</p>
+                            <p class="ok_zi">已关注</p>
                             <!-- 加关注 -->
+                            <span style="display: none">${bignum.userId}</span>
                             <p class="jia">+</p>
-                            <p class="no_zi" onclick="jiafollow('${bignum.userId}')">加关注</p>
+                            <p class="no_zi">加关注</p>
+                        </div>
+                        <%--已关注未关注的弹窗--%>
+                        <div class="att_tan">
+                            <div class="att_success1">
+                                <p class="att_success_ok1">√</p>
+                                <p class="att_success_zi1">取消关注成功!</p>
+                            </div>
+                            <div class="att_success2">
+                                <p class="att_success_no1">X</p>
+                                <p class="att_success_zi2">取消关注失败，请重新操作！</p>
+                            </div>
+                            <div class="att_success3">
+                                <p class="att_success_noo">!</p>
+                                <p class="att_success_zi3">加载超时，请稍后再试！</p>
+                            </div>
+                            <div class="att_success4">
+                                <p class="att_success_ok2">√</p>
+                                <p class="att_success_zi4">关注成功!</p>
+                            </div>
+                            <div class="att_success5">
+                                <p class="att_success_no2">X</p>
+                                <p class="att_success_zi5">关注失败，请重新操作！</p>
+                            </div>
                         </div>
                         <!-- 个性签名 -->
                         <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
@@ -436,28 +461,7 @@
                            style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
                     </div>
                 </c:if>
-                <div class="att_tan">
-                    <div class="att_success1">
-                        <p class="att_success_ok1">√</p>
-                        <p class="att_success_zi1">取消关注成功!</p>
-                    </div>
-                    <div class="att_success2">
-                        <p class="att_success_no1">X</p>
-                        <p class="att_success_zi2">取消关注失败，请重新操作！</p>
-                    </div>
-                    <div class="att_success3">
-                        <p class="att_success_noo">!</p>
-                        <p class="att_success_zi3">加载超时，请稍后再试！</p>
-                    </div>
-                    <div class="att_success4">
-                        <p class="att_success_ok2">√</p>
-                        <p class="att_success_zi4">关注成功!</p>
-                    </div>
-                    <div class="att_success5">
-                        <p class="att_success_no2">X</p>
-                        <p class="att_success_zi5">关注失败，请重新操作！</p>
-                    </div>
-                </div>
+
             </div>
         </c:forEach>
     </div>
@@ -663,66 +667,55 @@
 </script>--%>
 <%--点击关注事件--%>
 <script type="text/javascript">
-        /*layui.use('layer', function(){
-        var $ = layui.jquery, layer = layui.layer;
-        window.nofollow = function(userId){
-            $(".ok_zi").val(userId);
-            layer.open({
-                type: 1,
-                btn: false,
-                area: ['70%','50%'],
-                offset: '30px'
-            })
-        }
-    });*/
+    $(".ok_zi").click(function () {
+        let str = $(this).prev().prev().text() + '';
+        nofollow(str,$(this));
+    });
     /*点击已关注 取消关注*/
     $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-    function nofollow(userId){
-        /*var mythis = $(this);*/
+    function nofollow(userId,mythis){
         $.ajax({
             url:"/follow/defollow?userId="+userId,
             type:"GET",
             dataType:"json",
             context: userId,
             success:function (data) {
-                if (data.code==1){
-                    $(".ok,.ok_zi").hide();
-                    $(".jia,.no_zi").show();
-                    $(".att_success1").show().delay(2000).hide(300);
-                    /*alert($(this).index()+"  "+$(this)+"  "+$(mythis)+"  "+$(mythis).index());
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".ok").hide();
                     mythis.siblings(".jia,.no_zi").show();
-                    mythis.parents(".att_success1").show().delay(2000).hide(300);*/
+                    mythis.parents().siblings(".att_tan").children(".att_success1").show().delay(2000).hide(300);
                 } else {
-                    $(".att_success2").show().delay(2000).hide(300);
+                    mythis.parents().siblings(".att_tan").children(".att_success2").show().delay(2000).hide(300);
                 }
-            }.bind(this),
+            },
             error:function () {
-                $(".att_success3").show().delay(2000).hide(300);
+                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
             }
         });
     }
     /*点击加关注*/
-    function jiafollow(userId){
+    $(".no_zi").click(function () {
+        let str = $(this).prev().prev().text() + '';
+        jiafollow(str,$(this));
+    });
+    function jiafollow(userId,mythis){
         $.ajax({
             url:"/follow/follow?userId="+userId,
             type:"GET",
             dataType:"json",
             success:function (data) {
-                if (data.code == 1){
-                    $(".ok,.ok_zi").show();
-                    $(".jia,.no_zi").hide();
-                    $(".att_success4").show().delay(2000).hide(300);
-                    /*$(this).hide();
-                    $(this).siblings(".jia").hide();
-                    $(this).siblings(".ok,.ok_zi").show();*/
+                if (data.code === "1"){
+                    mythis.hide();
+                    mythis.siblings(".jia").hide();
+                    mythis.siblings(".ok,.ok_zi").show();
+                    mythis.parents().siblings(".att_tan").children(".att_success4").show().delay(2000).hide(300);
                 } else {
-                    $(".att_success5").show().delay(2000).hide(300);
+                    mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
                 }
             },
             error:function () {
-                $(".att_success3").show().delay(2000).hide(300);
+                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
             }
         });
     }
