@@ -230,20 +230,19 @@
                     <p class="name">${list.userRealname}</p>
                     <!-- 关注状态 -->
                     <div class="attention_type">
-                        <!-- 已关注 -->
-                        <c:if test="${list.followType==1}">
-                            <span style="display: none">${list.userId}</span>
-                            <p class="ok">√</p>
-                            <p class="ok_zi">已关注</p>
-                        </c:if>
-                        <!-- 加关注 -->
-                        <c:if test="${list.followType==0}">
-                            <span style="display: none">${list.userId}</span>
-                            <p class="jia">+</p>
-                            <p class="no_zi">加关注</p>
-                        </c:if>
-                        <c:if test="${list.followType==0 && list.userId == 1}">
-                            <div style="display: none"></div>
+                        <c:if test="${list.userId!=userId}">
+                            <!-- 已关注 -->
+                            <c:if test="${list.followType==1}">
+                                <span style="display: none">${list.userId}</span>
+                                <p class="ok">√</p>
+                                <p class="ok_zi">已关注</p>
+                            </c:if>
+                            <!-- 加关注 -->
+                            <c:if test="${list.followType==0}">
+                                <span style="display: none">${list.userId}</span>
+                                <p class="jia">+</p>
+                                <p class="no_zi">加关注</p>
+                            </c:if>
                         </c:if>
                         <div class="att_tan">
                             <div class="att_success1">
