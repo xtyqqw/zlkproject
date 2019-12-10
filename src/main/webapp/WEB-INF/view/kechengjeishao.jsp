@@ -108,7 +108,10 @@
             font-size:11px;
             letter-spacing:3px;
             color: #4f5256;
-
+        }
+        .all{
+            position: relative;
+            top: ;
         }
         .div-FAQ:hover{
             box-shadow:-2px 0 3px -1px #ebebeb,-2px 0 3px -1px #ebebeb,2px 0 3px -1px  #ebebeb;
@@ -471,7 +474,7 @@
                                     '<div class="div-FAQ">' +
                                     '<br>' +
                                     '<p class="p-FAQ2">'+faq.answer+'</p><br>' +
-                                    '<p class="p-FAQ1">'+faq.question+'</p><br>'+
+                                    '<p class="p-FAQ1" >'+faq.question+' <p class="all">查看全文</p></p><br>'+
 
                                     '</div>'+
                                     '<div class="div1"></div>'
@@ -571,8 +574,12 @@
     $("#liu").on("click",".p-FAQ1",function() {
         if($(this).css("-webkit-line-clamp","3")){
             $(this).css("-webkit-line-clamp","8");
-        }else{
-            $(this).css("-webkit-line-clamp","3");
+        }
+
+    });
+    $("#liu .p-FAQ1").on("click",".p-FAQ1",function() {
+        if($(this).css("-webkit-line-clamp","8")){
+            $(this).css("-webkit-line-clamp","");
         }
 
     });
