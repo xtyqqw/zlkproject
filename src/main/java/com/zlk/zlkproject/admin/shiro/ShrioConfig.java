@@ -47,7 +47,6 @@ public class ShrioConfig {
         filterMap.put("/user/*","authc");
         filterMap.put("/article/*","authc");
         filterMap.put("/courseManager/*","authc");
-        filterMap.put("/video/*","authc");
         filterMap.put("/stuQaManager/*","authc");
         filterMap.put("/note/*","authc");
         filterMap.put("/chapterManager/*","authc");
