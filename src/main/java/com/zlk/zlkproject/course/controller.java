@@ -2,6 +2,7 @@ package com.zlk.zlkproject.course;
 
 import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.entity.Section;
+import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,13 @@ public class controller {
         ModelAndView mv = new ModelAndView();
         if (sectionId != null){
             Section section = sectionsManagerService.findDataBySectionId(sectionId);
+            User user = (User) request.getSession().getAttribute("user");
+            String userId = "" + user.getUserId();
             request.getSession().setAttribute("sectionId",sectionId);
             mv.addObject("addr1",section.getVideoAddr1());
             mv.addObject("addr2",section.getVideoAddr2());
+            mv.addObject("sectionId",sectionId);
+            mv.addObject("userId",userId);
             mv.setViewName("/view/videoPlayer");
         }else {
             mv.setViewName("/view/videoPlayer");

@@ -526,7 +526,7 @@
         var uploadInst = upload.render({
             elem: '#headImg'
             //文件上传地址
-            , url: '<%=request.getContextPath()%>/user/upload/uploadImg'
+            , url: '<%=request.getContextPath()%>/user/uploadImg'
             , size: 500
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -535,20 +535,26 @@
                 });
             }
             , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
-                /*   console.log(res.data.src);*/
-                //window.parent.uploadHeadImage(res.data.src);
+                //本地上传回调
+                // //如果上传失败
+                // if (res.code > 0) {
+                //     return layer.msg('上传失败');
+                // }
+                // //上传成功
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                // /*   console.log(res.data.src);*/
+                // //window.parent.uploadHeadImage(res.data.src);
+                //
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
+                // $("#userImg1").val(res.data.src);
+                // //反显图片，并显示上传成功信息
+                // var demoText = $('#demoText');
+                // demoText.html('<span style="color: red;">上传成功!!!</span>');
 
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
-                $("#userImg1").val(res.data.src);
-                //反显图片，并显示上传成功信息
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: red;">上传成功!!!</span>');
+                //服务器上传成功
+                layer.msg(res.message);
+                //获取图片路径URL
+                $("#userImg1").val(res.url)
             }
             , error: function () {
                 //演示失败状态，并实现重传
