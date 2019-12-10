@@ -131,6 +131,7 @@
           top:40px;
           left: 5px;
                opacity: 0.8;
+          pointer-events: none;
       }
      #badge10{
          position: relative;

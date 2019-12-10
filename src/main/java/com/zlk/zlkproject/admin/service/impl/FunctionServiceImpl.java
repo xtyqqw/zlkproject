@@ -5,6 +5,7 @@ import com.zlk.zlkproject.admin.service.FunctionService;
 import com.zlk.zlkproject.entity.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -88,20 +89,15 @@ public class FunctionServiceImpl implements FunctionService {
      * @return java.lang.Integer
      **/
     @Override
+    @Transactional
     public Integer deleteFunction(Integer functionId) {
-        return functionMapper.deleteFunction(functionId);
-    }
-
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 通过菜单ID删除角色权限中间表信息
-     * @Date 15:17 2019/11/27
-     * @Param [functionId]
-     * @return java.lang.Integer
-     **/
-    @Override
-    public Integer deleteFunctionAndRoleByFunctionId(Integer functionId) {
-        return functionMapper.deleteFunctionAndRoleByFunctionId(functionId);
+        Integer flag = functionMapper.deleteFunction(functionId);
+        Integer flag1 = functionMapper.deleteFunctionAndRoleByFunctionId(functionId);
+        if(flag>0&&flag1>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     /**
