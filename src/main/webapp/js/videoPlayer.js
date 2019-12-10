@@ -102,13 +102,14 @@ $(document).ready(function () {
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
             let sectionId = $(this).find("input").val();
+            let currentSectionId = parseInt($("#sectionId").text());
             let state =
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
                     var src = data.section.videoAddr1;
-                    switchVideo(src);
+                    switchVideo(src,currentSectionId);
                     $("#mulu_div").css("display", "none");
                     $("#nv").text(data.section.videoAddr1);
                     $("#sv").text(data.section.videoAddr2);
@@ -116,6 +117,7 @@ $(document).ready(function () {
             });
             note_flow(sectionId);
             stu_qa_flow(sectionId);
+            $("#sectionId").text(sectionId);
         });
 
         /*视频播放按钮点击事件*/
@@ -1890,16 +1892,25 @@ $(document).ready(function () {
     var sharpState = false;
 
     //切换视频函数
-    function switchVideo (src) {
-        document.getElementById("video_src").src = src;
-        elem_video1.load();
-        clearInterval(interval1);
-        elem_btnPlay.innerHTML = "&#xe652;";
-        elem_pgBtn.style.left = 0 + 'px';
-        elem_pgBar.style.width = 0 + 'px';
-        elem_currentTime.innerText = '00:00:00';
-        clearInterval(interval_cache);
-        document.getElementById("pg_cache").style.width = 0 + 'px';
+    function switchVideo (src,sectionId) {
+        var data = {'time':elem_video1.currentTime,'sectionId':sectionId};
+        $.ajax({
+            type : "POST",
+            async: false,
+            url : "/player/recordTimeSwitch",
+            data : data,
+            success: function () {
+                document.getElementById("video_src").src = src;
+                elem_video1.load();
+                clearInterval(interval1);
+                elem_btnPlay.innerHTML = "&#xe652;";
+                elem_pgBtn.style.left = 0 + 'px';
+                elem_pgBar.style.width = 0 + 'px';
+                elem_currentTime.innerText = '00:00:00';
+                clearInterval(interval_cache);
+                document.getElementById("pg_cache").style.width = 0 + 'px';
+            }
+        });
     }
 
     //在浏览器控制台输出缓冲信息函数
