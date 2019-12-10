@@ -187,6 +187,15 @@
         .main_ul a{
             text-decoration: none;
         }
+        .question_waik .title a:hover{
+            color: #8c24dd;
+        }
+        .reply_waik_adopted .reply_adopted_msg a:hover{
+            color: #8c24dd;
+        }
+        .reply_waik .reply_msg a:hover{
+            color: #8c24dd;
+        }
         /*提交答案弹窗*/
         .answer_succ1,.answer_succ2,.answer_succ3{
             width: 400px;

@@ -346,32 +346,15 @@
             $("#editForm").hide();
             $(".xm").hide();
             $("#addForm").show();
-            /*layer.open({
-                title: "添加",
-                type: 1,
-                area: ['30%', '70%'],
-                content: $("#addForm"),
-                btn: ['提交'],
-                yes: function (index, layero) {
-                    layero.find("form").find("#insertSubmit").click();
-                }
-            });*/
         });
 
         function complain(d){//操作中显示的内容
-            /*if(d.childrenNumber==0){*/
-                return [
-                    '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
-                    '<i class="layui-icon layui-icon-edit"></i></a>',
-                    '<a class="operation" lay-event="del" href="javascript:void(0)" onclick="delDepartment(\''+ d.permissionId + '\')" title="删除">',
-                    '<i class="layui-icon layui-icon-delete" ></i></a>',
-                ].join('');
-            /*}else{
-                return [
-                    '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
-                    '<i class="layui-icon layui-icon-edit"></i></a>',
-                ].join('');
-            }*/
+            return [
+                '<a class="operation" lay-event="edit" href="javascript:void(0)" onclick="editDepartment(\''+ d.permissionId + '\')" title="编辑">',
+                '<i class="layui-icon layui-icon-edit"></i></a>',
+                '<a class="operation" lay-event="del" href="javascript:void(0)" onclick="delDepartment(\''+ d.permissionId + '\')" title="删除">',
+                '<i class="layui-icon layui-icon-delete" ></i></a>',
+            ].join('');
         }
 
         //监听工具条
