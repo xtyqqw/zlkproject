@@ -24,7 +24,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
-                <input type="text" name="content" id="content" class="layui-input">
+                <textarea name="content" id="content" placeholder="请输入介绍内容" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -57,7 +57,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
-                <input type="text" name="content" id="upcontent" class="layui-input">
+                <textarea name="content" id="upcontent" placeholder="请输入介绍内容" class="layui-textarea"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -133,7 +133,7 @@
                 layer.open({
                     title: "新增",
                     type: 1,
-                    area: ['40%', '50%'],
+                    area: ['35%', '65%'],
                     content: $("#insertTeacherNote")
                 });
             }
@@ -175,11 +175,11 @@
                 $("#uptnId").val(data.tnId);
                 $("#upsectionId").val(data.sectionId);
                 $("#uptitle").val(data.title);
-                $("#upcontent").val(data.content);
+                $("#upcontent").text(data.content);
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['30%', '50%'],
+                    area: ['35%', '65%'],
                     content: $("#updateTeacherNote")
                 });
             }
