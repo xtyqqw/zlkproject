@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_am32levhe7.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_1nuc1djggf7.css">
+    <link rel="stylesheet" href="http:////at.alicdn.com/t/font_1355944_am32levhe7.css">
+
 
     <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
     <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
@@ -547,7 +549,7 @@
                                     '<div class="p-ZAN"><i class="iconfont icon-good"></i>' +
                                         '<p class="p-FAQ6">&nbsp'+comment.like+'</p>'+
                                     '</div>' +
-                                    '<div class="p-CAI"><i class="iconfont icon-good biao1"></i>' +
+                                    '<div class="p-CAI"><i class="iconfont icon-bad biao1"></i>' +
                                     '<p class="p-FAQ7">&nbsp'+comment.dislike+'</p>'+
                                     '</div>');
                                 if(comment.flag === "true"){
