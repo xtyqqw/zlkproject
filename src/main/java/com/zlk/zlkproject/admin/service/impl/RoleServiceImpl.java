@@ -6,7 +6,9 @@ import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,24 +58,21 @@ public class RoleServiceImpl implements RoleService {
      * @Author lufengxiang
      * @Description //TODO 新增角色
      * @Date 16:24 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
     @Override
-    public Integer addRole(Role role) {
-        return roleMapper.addRole(role);
-    }
-
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 角色授权
-     * @Date 11:18 2019/11/27
-     * @Param [roleId, functionId]
-     * @return java.lang.Integer
-     **/
-    @Override
-    public Integer addRoleAndFunction(String roleId, List<Integer> functionId) {
-        return roleMapper.addRoleAndFunction(roleId,functionId);
+    @Transactional
+    public Integer addRole(Role role,List<Integer> functionId) {
+        //新增角色
+        Integer flag = roleMapper.addRole(role);
+        //角色授权
+        Integer flag1 = roleMapper.addRoleAndFunction(role.getRoleId(), functionId);
+        if(flag>0&&flag1>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     /**
@@ -104,12 +103,22 @@ public class RoleServiceImpl implements RoleService {
      * @Author lufengxiang
      * @Description //TODO 通过角色ID修改角色信息
      * @Date 16:27 2019/11/19
-     * @Param [role]
+     * @Param [role,functionId]
      * @return java.lang.Integer
      **/
     @Override
-    public Integer updateRoleByRoleId(Role role) {
-        return roleMapper.updateRoleByRoleId(role);
+    @Transactional
+    public Integer updateRoleByRoleId(Role role,List<Integer> functionId) {
+        //修改角色信息
+        Integer flag1 = roleMapper.updateRoleByRoleId(role);
+        //修改角色权限中间表
+        Integer flag2 = roleMapper.deleteRoleAndFunctionByRoleId(role.getRoleId());
+        Integer flag3=roleMapper.addRoleAndFunction(role.getRoleId(), functionId);
+        if(flag1>0&&flag2>0&&flag3>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     /**
@@ -120,20 +129,17 @@ public class RoleServiceImpl implements RoleService {
      * @return java.lang.Integer
      **/
     @Override
+    @Transactional
     public Integer deleteRoleByRoleId(String roleId) {
-        return roleMapper.deleteRoleByRoleId(roleId);
-    }
-
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 删除角色一并删除其授权
-     * @Date 11:45 2019/11/27
-     * @Param [roleId]
-     * @return java.lang.Integer
-     **/
-    @Override
-    public Integer deleteRoleAndFunctionByRoleId(String roleId) {
-        return roleMapper.deleteRoleAndFunctionByRoleId(roleId);
+        //删除角色信息
+        Integer flag = roleMapper.deleteRoleByRoleId(roleId);
+        //删除角色权限
+        Integer flag1 = roleMapper.deleteRoleAndFunctionByRoleId(roleId);
+        if(flag>0&&flag1>0){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     /**

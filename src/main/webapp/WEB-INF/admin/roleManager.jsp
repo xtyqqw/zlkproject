@@ -331,7 +331,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.msg($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'23px'
+            });
         })
         </c:if>
         laydate.render({
@@ -388,16 +392,6 @@
             var checkStatus = table.checkStatus(obj.config.id);
             switch (obj.event) {
                 case 'add':
-                    /*layer.open({
-                        title: "添加",
-                        type: 1,
-                        area: ['30%', '90%'],
-                        content: $("#addForm"),
-                        btn: ['提交'],
-                        yes: function (index, layero) {
-                            layero.find("form").find("#insertSubmit").click();
-                        }
-                    });*/
                     getzTreeContent();
                     $("#editForm").css("display","none");
                     $("#table").css("display","none");
@@ -440,16 +434,6 @@
                 $("#editForm").css("display","block");
                 $("#table").css("display","none");
                 $("#addForm").css("display","none");
-                /*layer.open({
-                    title: "修改",
-                    type: 1,
-                    area: ['30%', '90%'],
-                    content: $("#editForm"),
-                    btn: ['提交'],
-                    yes: function (index, layero) {
-                        layero.find("form").find("#updateSubmit").click();
-                    }
-                });*/
             }
         });
     });

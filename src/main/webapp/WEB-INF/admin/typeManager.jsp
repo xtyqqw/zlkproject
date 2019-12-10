@@ -76,7 +76,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.msg($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'23px'
+            });
         })
         </c:if>
         laydate.render({
@@ -93,8 +97,8 @@
             , height: 503
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'typeId', title: '类别编号', width: 180, sort: true}
-                , {field: 'typeName', title: '类别名称', width: 180, sort: true}
+                , {field: 'typeId', title: '方向编号', width: 180, sort: true}
+                , {field: 'typeName', title: '方向名称', width: 180, sort: true}
                 , {
                     title: '操作', width: 180, align: 'center', toolbar: '' +
                         '<div class="layui-btn-group">' +

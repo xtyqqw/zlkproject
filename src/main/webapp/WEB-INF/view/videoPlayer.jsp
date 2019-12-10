@@ -27,6 +27,8 @@
 <body>
 <jsp:include page="../jsp/header.jsp"></jsp:include>
     <div class="layui-container">
+        <span id="sectionId" style="display: none">${sectionId}</span>
+        <span id="userId" style="display: none">${userId}</span>
         <div class="layui-row" id="video_row">
             <div class="layui-col-md2"></div>
             <div class="layui-col-md8">

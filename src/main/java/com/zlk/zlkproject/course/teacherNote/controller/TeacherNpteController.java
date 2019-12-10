@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,9 +86,13 @@ public class TeacherNpteController {
      * @return
      */
     @RequestMapping("/insertTNByTeacherNote")
-    @ResponseBody
-    public Integer insertTNByTeacherNote(TeacherNote teacherNote){
-        return teacherNoteService.insertTNByTeacherNote(teacherNote);
+    public String insertTNByTeacherNote(TeacherNote teacherNote){
+        teacherNote.setDate(new Date());
+        int i = teacherNoteService.insertTNByTeacherNote(teacherNote);
+        if (i>0){
+            return "/view/toTeacherNoteManager";
+        }
+        return "添加失败";
     }
 
     /**
@@ -96,8 +101,11 @@ public class TeacherNpteController {
      * @return
      */
     @RequestMapping("/updateTNByTeacherNote")
-    @ResponseBody
-    public Integer updateTNByTeacherNote(TeacherNote teacherNote){
-        return teacherNoteService.updateTNByTeacherNote(teacherNote);
+    public String updateTNByTeacherNote(TeacherNote teacherNote){
+        int i = teacherNoteService.updateTNByTeacherNote(teacherNote);
+        if (i>0){
+            return "/view/toTeacherNoteManager";
+        }
+        return "修改失败";
     }
 }

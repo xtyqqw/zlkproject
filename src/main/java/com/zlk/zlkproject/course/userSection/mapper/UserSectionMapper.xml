@@ -63,8 +63,8 @@
                 time = #{time},
             </if>
         </set>
-        where user_id = #{userId}
-    </update>
+        where user_id = #{userId} and section_id=#{sectionId}
+     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">

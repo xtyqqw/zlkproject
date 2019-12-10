@@ -66,10 +66,13 @@ public class DetailsController {
     @RequestMapping("/kecheng/insertCourses")
     @ResponseBody
     public String insertCourses(HttpServletRequest request,Integer coursesId){
-        //获取当前登录的用户id
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user=(User) request.getSession().getAttribute("user");
+        if(user==null){
+            return "未登录";
+        }
+        String userId = user.getUserId();
         List<Section> sectionList = sectionService.findSectionByCourseId(coursesId);
-        List<Chapter> chapterList = chapterService.findChapterByCoursesId(coursesId);
+        List<Chapter> chapterList = chapterService.selectChapterByCoursesId(coursesId);
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         courses.setStudentNum(courses.getStudentNum()+1);
         courseHomePageService.updateByCoursesId(courses);
@@ -100,14 +103,20 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public boolean seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
-        userCourses.setUserId("1");
+    public String seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
+        User user=(User) request.getSession().getAttribute("user");
+        if(user==null){
+            return "未登录";
+        }
+        String userId = user.getUserId();
+
+        userCourses.setUserId(userId);
         userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
-            return true;
+            return "已参加";
         }
-        return false;
+        return "未参加";
     }
 
     /**
@@ -119,14 +128,6 @@ public class DetailsController {
         return "/view/toNoteManager";
     }
 
-    /**
-     * 跳转到课程管理页面
-     * @return
-     */
-    @RequestMapping("/course/toCourseManager")
-    public String toCourseManager(){
-        return "view/CourseManager";
-    }
 
     /**
      * 跳转到笔记管理页面

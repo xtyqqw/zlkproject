@@ -41,10 +41,6 @@
         .form{
             margin-top: 15px;
         }
-
-        /*.form input, .form select {
-            margin-top: 15px;
-        }*/
     </style>
 </head>
 <body>
@@ -117,7 +113,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.msg($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'1px'
+            });
         })
         </c:if>
         laydate.render({
