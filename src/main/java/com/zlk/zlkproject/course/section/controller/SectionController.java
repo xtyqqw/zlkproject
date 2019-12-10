@@ -34,7 +34,7 @@ public class SectionController {
     @RequestMapping(value = "/findSections")
     @ResponseBody
     public ModelAndView findSections(HttpServletRequest request)throws Exception{
-        int coursesId = (Integer) request.getSession().getAttribute("coursesId");
+        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
         List<Section> sections = new ArrayList<>();
         for (Chapter chapter : chapters) {
@@ -83,10 +83,10 @@ public class SectionController {
     @RequestMapping(value = "/findVideoAddr")
     @ResponseBody
     public Map<String,Object> findVideoAddr(HttpServletRequest request,Integer sectionId) throws Exception{
-        String videoAddr = sectionService.findVideoAddrById(sectionId);
+        Section section = sectionService.findVideoAddrById(sectionId);
         request.getSession().setAttribute("sectionId",sectionId);
         Map<String,Object> map = new HashMap<>();
-        map.put("videoAddr",videoAddr);
+        map.put("section",section);
         return map;
     }
 

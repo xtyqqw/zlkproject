@@ -133,7 +133,9 @@
 </div>
 
 <!-- 主体内容 -->
+<div>
 <iframe id="aboutus-iframe" name="aboutus-main"  frameborder="0" scrolling="no"></iframe>
+</div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#aboutus-iframe").load(function(){

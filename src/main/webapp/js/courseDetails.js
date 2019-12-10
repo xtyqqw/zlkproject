@@ -185,7 +185,7 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
                     url :"/toVideo",
                     data:{"sectionId":sectionId},
                     success: function (data) {
-                        window.location.href = "/toVideo";
+                        window.location.href = "/toVideo?sectionId="+sectionId;
                     }
                 });
             }else {
