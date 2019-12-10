@@ -191,11 +191,14 @@ public class FunctionController {
         //删除权限一并删除角色拥有的该权限
         Integer childrenNumber = functionService.findChildrenNumber(functionId);
         if(childrenNumber==0) {
-            Integer flag1 = functionService.deleteFunctionAndRoleByFunctionId(functionId);
             Integer flag = functionService.deleteFunction(functionId);
-            //保存删除菜单日志
-            logUtil.setLog(request, "删除了菜单名称为" + functionByFunctionId.getName() + "的菜单");
-            return true;
+            if(flag==1) {
+                //保存删除菜单日志
+                logUtil.setLog(request, "删除了菜单名称为" + functionByFunctionId.getName() + "的菜单");
+                return true;
+            }else {
+                return false;
+            }
         }else {
             return false;
         }

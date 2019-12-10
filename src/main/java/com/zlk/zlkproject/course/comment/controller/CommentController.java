@@ -32,8 +32,8 @@ public class CommentController {
     public Map<String,Object> findCommentListByUserId(HttpServletRequest request,Comment comment, Integer page, Integer limit)throws Exception{
         User user=(User) request.getSession().getAttribute("user");
         String userId=user.getUserId();
+       /*判断前三热门详情*/
         List<Comment> commentList=commentService.findCommentListByUserId(comment,page,limit,userId);
-
         if (page==1){
             for(Comment comment1:commentList){
                 comment1.setFlag("true");
@@ -41,6 +41,7 @@ public class CommentController {
         }else if (page==2){
             commentList.get(0).setFlag("true");
         }
+
         Map<String,Object> map=new HashMap<>();
         map.put("commentList",commentList);
         return map;

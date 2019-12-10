@@ -37,6 +37,18 @@ public class PlayerController {
         playerService.recordTime(userSection);
     }
 
+    @RequestMapping("recordTimeSwitch")
+    @ResponseBody
+    public void recordTimeSwitch(@RequestParam("time") Double time, @RequestParam("sectionId") Integer sectionId,HttpServletRequest request){
+        UserSection userSection = new UserSection();
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        userSection.setUserId(userId);
+        userSection.setSectionId(sectionId);
+        userSection.setTime(time);
+        playerService.recordTime(userSection);
+    }
+
     @RequestMapping("recordState")
     @ResponseBody
     public void recordState(HttpServletRequest request,@RequestParam("state") String state){

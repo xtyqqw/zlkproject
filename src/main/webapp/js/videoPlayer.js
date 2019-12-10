@@ -69,9 +69,10 @@ $(document).ready(function () {
                                     str += "<i class=\"iconfont icon-bofang state\"></i>";
                                 } else if (state === "已完成") {
                                     str += "<i class=\"iconfont icon-wancheng state\"></i>";
-                                } else if (state === "未开始") {
+                                } else if (state === "未观看") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
                                 }
+                                str += "<input hidden name=\"sectionState\" value=\"" + state + "\">";
                                 str += section.sectionName;
                                 str += "<span class=\"duration\">" + time1 + "</span>";
                                 str += "</li>";
@@ -102,13 +103,14 @@ $(document).ready(function () {
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
             let sectionId = $(this).find("input").val();
+            let currentSectionId = parseInt($("#sectionId").text());
             let state =
             $.ajax({
                 type: "POST",
                 url: "/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
                     var src = data.section.videoAddr1;
-                    switchVideo(src);
+                    switchVideo(src,currentSectionId);
                     $("#mulu_div").css("display", "none");
                     $("#nv").text(data.section.videoAddr1);
                     $("#sv").text(data.section.videoAddr2);
@@ -116,6 +118,7 @@ $(document).ready(function () {
             });
             note_flow(sectionId);
             stu_qa_flow(sectionId);
+            $("#sectionId").text(sectionId);
         });
 
         /*视频播放按钮点击事件*/
@@ -1890,16 +1893,25 @@ $(document).ready(function () {
     var sharpState = false;
 
     //切换视频函数
-    function switchVideo (src) {
-        document.getElementById("video_src").src = src;
-        elem_video1.load();
-        clearInterval(interval1);
-        elem_btnPlay.innerHTML = "&#xe652;";
-        elem_pgBtn.style.left = 0 + 'px';
-        elem_pgBar.style.width = 0 + 'px';
-        elem_currentTime.innerText = '00:00:00';
-        clearInterval(interval_cache);
-        document.getElementById("pg_cache").style.width = 0 + 'px';
+    function switchVideo (src,sectionId) {
+        var data = {'time':elem_video1.currentTime,'sectionId':sectionId};
+        $.ajax({
+            type : "POST",
+            async: false,
+            url : "/player/recordTimeSwitch",
+            data : data,
+            success: function () {
+                document.getElementById("video_src").src = src;
+                elem_video1.load();
+                clearInterval(interval1);
+                elem_btnPlay.innerHTML = "&#xe652;";
+                elem_pgBtn.style.left = 0 + 'px';
+                elem_pgBar.style.width = 0 + 'px';
+                elem_currentTime.innerText = '00:00:00';
+                clearInterval(interval_cache);
+                document.getElementById("pg_cache").style.width = 0 + 'px';
+            }
+        });
     }
 
     //在浏览器控制台输出缓冲信息函数
@@ -2154,16 +2166,18 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-            let data = {"state":"播放中"};
-            $.ajax({
-                type:"POST",
-                url:'/player/recordState',
-                data: data,
-                dataType: 'json',
-                success: function () {
+            if ($("#sectionState").val()==="未观看"){
+                let data = {"state":"播放中"};
+                $.ajax({
+                    type:"POST",
+                    url:'/player/recordState',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
 
-                }
-            });
+                    }
+                });
+            }
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);

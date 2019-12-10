@@ -622,14 +622,14 @@
     });
     //保存成功后提示信息js
     $("#chenggong").hide();
+    // $('#baocun').click(function () {
+    //     layer.msg("保存成功");
+    //     setTimeout(function () {
+    //         $("#chenggong").hide();
+    //     },5500)
+    // });
     $('#baocun').click(function () {
-        layer.msg("保存成功");
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },5500)
-    });
-    $('#baocun').click(function () {
-       //alert("保存成功");
+       alert("保存成功");
     });
 
 
@@ -663,7 +663,7 @@
         var uploadInst = upload.render({
             elem: '#headImg'
             //文件上传地址
-            , url: '<%=request.getContextPath()%>/personal/upload/headImg'
+            , url: '<%=request.getContextPath()%>/personal/uploadHeadPic'
             , size: 500
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -672,20 +672,27 @@
                 });
             }
             , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
-                /*   console.log(res.data.src);*/
-                //window.parent.uploadHeadImage(res.data.src);
+                //本地上传回调
+                // //如果上传失败
+                // if (res.code > 0) {
+                //     return layer.msg('上传失败');
+                // }
+                // //上传成功
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                // /*   console.log(res.data.src);*/
+                // //window.parent.uploadHeadImage(res.data.src);
+                //
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
+                // $("#userImg").val(res.data.src);
+                // //上传成功后提示信息
+                // var demoText = $('#demoText');
+                // demoText.html('<span style="color: red;">上传成功!!!</span>');
 
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
-                $("#userImg").val(res.data.src);
-                //上传成功后提示信息
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: red;">上传成功!!!</span>');
+
+                //服务器上传成功
+                layer.msg(res.message);
+                //获取图片路径URL
+                $("#userImg").val(res.url)
             }
             //错误重新上传
             , error: function () {

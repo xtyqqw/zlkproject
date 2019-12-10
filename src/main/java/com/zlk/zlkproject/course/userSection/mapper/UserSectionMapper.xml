@@ -48,8 +48,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into user_section(user_id,section_id,state, time)
-        values (#{userId},#{sectionId},#{state}, #{time})
+        insert into user_section(user_id,section_id,time)
+        values (#{userId},#{sectionId},#{time})
     </insert>
 
     <!--通过主键修改数据-->
