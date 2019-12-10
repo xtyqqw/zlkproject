@@ -13,7 +13,6 @@
     <script src="/js/jquery-1.12.4.js"></script>
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="../../../js/follows.js"></script>
     <style type="text/css">
         /*没有关注信息*/
         .nomain {margin: 50px auto;text-align: center;}

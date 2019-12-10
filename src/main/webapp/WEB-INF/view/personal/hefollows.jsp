@@ -13,7 +13,6 @@
     <script src="/js/jquery-1.12.4.js"></script>
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="../../../js/follows.js"></script>
     <style type="text/css">
         .hefollows{margin: 0;padding: 0;background-color: #FAFAFA;padding-bottom: 10px}
         .hefollows_top{
