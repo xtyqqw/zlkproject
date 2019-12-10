@@ -55,6 +55,7 @@ public class ArticleListController {
         mv.setViewName("view/community/articleHot");
         return mv;
     }
+
     /**
      * 我的文章列表接口
      * @return

@@ -7,7 +7,7 @@
         <id column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
         <result column="question_content" property="questionContent" javaType="java.lang.String"/>
-        <result column="solve" property="solve" javaType="java.lang.String"/>
+        <result column="solve" property="solve" javaType="java.lang.Integer"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
         <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
@@ -16,14 +16,20 @@
         <result column="figures_real" property="figuresReal" javaType="java.lang.String"/>
         <result column="user_realname" property="userRealname" javaType="java.lang.String"/>
         <result column="user_img" property="userImg" javaType="java.lang.String"/>
-        <result column="zan_count" property="zanCount" javaType="java.lang.String"/>
-        <result column="cai_count" property="caiCount" javaType="java.lang.String"/>
-        <result column="check" property="check" javaType="java.lang.String"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="check" property="check" javaType="java.lang.Integer"/>
         <result column="response_count" property="responseCount" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
-        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
     </resultMap>
-
+    <select id="findByQuestionTime" resultMap="questionEntityMap" >
+        select * from  question order by create_time  DESC limit  #{startPage},#{limit}
+    </select>
+    <select id="findByUserId" resultMap="questionEntityMap">
+        select * from question a
+        left join user u on a.user_id=u.user_id
+        where a.user_id limit #{startPage},#{limit}
+    </select>
     <select id="findQuestionByTime" resultMap="questionEntityMap">
          select * from question  order by create_time DESC
     </select>

@@ -2,45 +2,81 @@ package com.zlk.zlkproject.community.question.controller;
 
 import com.zlk.zlkproject.community.question.service.QuestionHomeService;
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author gby
  * @ClassName QuestionUser
- * @description 用户信息
+ * @description 提问信息
  * @date 2019/12/6 13:59
  */
 @Controller
-@RequestMapping(value = "questionUser")
+@RequestMapping(value = "/question")
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    /*
-     * @descrption 问答首页
-     * @author gby
-     * @param []
-     * @return java.lang.String
-     * @date 2019/12/5 10:19
+    /**
+     * 全部提问列表接口
+     * @return
      */
-    @RequestMapping(value = "/questionSkip")
-    public ModelAndView questionMain(String createTime ) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        List<Question> allQuestion = questionHomeService.findQuestionByTime(createTime);
-        mv.addObject("allQuestion", allQuestion);
-        mv.setViewName("/view/community/questionMain");
+    @RequestMapping(value = "/allQuestion")
+    public ModelAndView all(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("/view/community/questionAll");
         return mv;
+    }
+    /**
+     * 我的提问列表接口
+     * @return
+     */
+    @RequestMapping(value = "/myQuestion")
+    public ModelAndView my(){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("/view/community/questionMy");
+        return mv;
+    }
+    /*
+     * @descrption 全部问答
+     * @author gby
+     * @param [pagination]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @date 2019/12/10 14:25
+     */
+    @RequestMapping(value = "/questionAll")
+    @ResponseBody
+    public Map<String, Object> questionAll(Pagination pagination) throws Exception {
+        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
+        Map<String, Object> map = new HashMap<>();
+        map.put("questionAllList", questionAllList);
+        return map;
+}
+
+    /*
+     * @descrption 我的问答
+     * @author gby
+     * @param [questionId]
+     * @return org.springframework.web.servlet.ModelAndView
+     * @date 2019/12/10 14:24
+     */
+    @RequestMapping(value = "/questionMy")
+    @ResponseBody
+    public Map<String, Object> questionMy(Pagination pagination) throws Exception {
+        List<Question> questionMyList = questionHomeService.findByUserId(pagination);
+        Map<String, Object> map = new HashMap<>();
+        map.put("questionMyList", questionMyList);
+        return map;
     }
     /*
      * @descrption 通过问题id查询问题详情
@@ -50,19 +86,10 @@ public class QuestionHomeController {
      * @date 2019/11/26 10:07
      */
     @GetMapping(value = "/findQuestion")
-    public ModelAndView findQuestion(String questionId,HttpServletRequest request){
+    public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-        String qId = (String) request.getSession().getAttribute("questionId");
-     /*   questionId="1047919253";*/
-        mv.addObject("question",questionHomeService.getAndConvert(qId));
+        mv.addObject("question", questionHomeService.getAndConvert(questionId));
         mv.setViewName("/view/community/questionParticulars");
         return mv;
     }
-
-   /* @RequestMapping(value = "/find/{questionId}")
-    public String find(@PathVariable String questionId,Model model) throws Exception {
-        model.addAttribute("question", questionHomeService.findByQuestionId(questionId));
-        return "/view/community/questionParticulars";
-    }
-*/
 }

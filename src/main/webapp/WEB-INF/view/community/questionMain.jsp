@@ -15,8 +15,6 @@
     <script src="<%=request.getContextPath()%>/layui/css/layui.css"></script>
     <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
           type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <style type="text/css">
         body {
             overflow-x: hidden;
@@ -60,10 +58,6 @@
 <body>
 <!--中间内容-->
 <div class="m-container m-padded-tb-big animated fadeIn">
-    <div style="margin-top: 15px;">
-        <a href="<%=request.getContextPath()%>/question/questionGuide" target="_blank"
-           class="ui mini right floated teal basic button">我要提问</a>
-    </div>
     <div class="ui container" style="width: 100%;margin-left: -120px;margin-top: -12px;">
         <div class="ui stackable grid">
             <!--左边博客列表-->
@@ -87,7 +81,7 @@
                                         </span>
 
                                     <h3 class="ui header">
-                                        <a href="<%=request.getContextPath()%>/questionUser/findQuestion?question=${all.questionId}"
+                                        <a href="<%=request.getContextPath()%>/questionUser/findQuestion?questionId=${all.questionId}"
                                            target="_blank">
                                                 ${all.questionTitle}
                                         </a>

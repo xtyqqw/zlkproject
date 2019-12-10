@@ -4,8 +4,8 @@ import com.zlk.zlkproject.community.question.dao.QuestionHomeDao;
 import com.zlk.zlkproject.community.question.mapper.QuestionHomeMapper;
 import com.zlk.zlkproject.community.question.service.QuestionHomeService;
 import com.zlk.zlkproject.community.util.MarkdownUtils;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
 import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,23 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
     private QuestionHomeDao questionHomeDao;
 
     @Override
-    public List<Question> findQuestionByTime(String createTime) {
-        return questionHomeMapper.findQuestionByTime(createTime);
+    public List<Question> findByQuestionTime(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return questionHomeMapper.findByQuestionTime(pagination);
     }
+
+    @Override
+    public List<Question> findByUserId(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return questionHomeMapper.findByUserId(pagination);
+    }
+
     @Override
     public Question getQuestion(String questionId) {
         Optional<Question> question = questionHomeDao.findById(questionId);

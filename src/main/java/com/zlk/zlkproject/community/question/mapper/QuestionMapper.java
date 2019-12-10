@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.question.mapper;
 
 import com.zlk.zlkproject.entity.Question;
+import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -13,6 +14,23 @@ import java.util.Date;
  */
 @Mapper
 public interface QuestionMapper {
+    /*
+     * @descrption 判断用户登录状态
+     * @author gby
+     * @param
+     * @return
+     * @date 2019/12/10 11:58
+     */
+
+    Integer selectUserId(User user);
+    /*
+     * @descrption 判断用户问题审核状态
+     * @author gby
+     * @param [check]
+     * @return java.lang.Integer
+     * @date 2019/12/10 11:33
+     */
+    Integer selectCheck(String userId);
 
     /*
      * @descrption 提交提问

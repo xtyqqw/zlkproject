@@ -131,6 +131,7 @@
           top:40px;
           left: 5px;
                opacity: 0.8;
+          pointer-events: none;
       }
      #badge10{
          position: relative;
@@ -443,7 +444,7 @@
     $(".layui-this").mouseleave(function () {
         $(this).css("background-color","#fff");
         $(this).css("height","3vw");
-        $(this).css("border-radius","5px");
+        $(this).css("bordeer-radius","5px");
         $(this).css("margin-top","0vw");
         $(this).css("border","none");
         $(this).css("color","#4ea9cd");

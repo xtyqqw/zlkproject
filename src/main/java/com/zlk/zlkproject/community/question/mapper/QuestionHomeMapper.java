@@ -1,8 +1,7 @@
 package com.zlk.zlkproject.community.question.mapper;
 
-import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,14 +10,21 @@ import java.util.List;
 @Mapper
 public interface QuestionHomeMapper {
     /*
-     * @descrption 根据最新时间查询排序所有的问题
+     * @descrption 按照最新发布日期排序（默认）
      * @author gby
      * @param
      * @return
-     * @date 2019/12/7 18:58
+     * @date 2019/12/10 14:15
      */
-    List<Question> findQuestionByTime(String createTime);
-
+    List<Question> findByQuestionTime(Pagination pagination);
+    /*
+     * @descrption 查询我的提问
+     * @author gby
+     * @param
+     * @return
+     * @date 2019/12/10 14:15
+     */
+    List<Question> findByUserId(Pagination pagination);
     /*
      * @descrption 根据问题id查询文章
      * @author gby

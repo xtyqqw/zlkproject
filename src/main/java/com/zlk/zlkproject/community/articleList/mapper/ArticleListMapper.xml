@@ -43,7 +43,7 @@
             <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
         </association>
     </resultMap>
-    <select id="findByCreateTime" resultMap="articleListEntityMap">
+    <select id="findByCreateTime" resultMap="articleListEntityMap" >
         select a.title,a.article_digest,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname,u.user_img
         from article a , user u
         where a.user_id=u.user_id
