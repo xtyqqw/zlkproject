@@ -86,10 +86,10 @@
         }
         .attention_person .attention_him,.he_attention{
             float: left;
-            border: 1px solid #bec3d9;
+            border: 1px solid #914FF1;
             border-radius: 50px;
             padding: 0 10px;
-            background-color: #bec3d9;
+            background-color: #914FF1;
             color: #fff;
         }
         .attention_person .attention_him{
