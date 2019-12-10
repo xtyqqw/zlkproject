@@ -78,13 +78,12 @@ public class PersonalFollowController {
         Map map = new HashMap();
         followerPage.setLimit(5);
         followerPage.setPage(1);
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user1 = (User) request.getSession().getAttribute("user");
         //测试用数据
-        userId = "1";
         //模拟数据
         followerPage.setLimit(10);
         followerPage.setPage(1);
-        followerPage.setUserId(userId);
+        followerPage.setUserId(user1.getUserId());
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
@@ -105,6 +104,8 @@ public class PersonalFollowController {
         }
         mv.setViewName("view/personal/myfocus");
         mv.addObject("list",list);
+        mv.addObject("userId",user1.getUserId());
+        map.put("userId", user1.getUserId());
         map.put("list",list);
         return mv;
     }
@@ -117,13 +118,10 @@ public class PersonalFollowController {
     @RequestMapping(value = "/userfollower")
     public ModelAndView userFollower(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user1 = (User) request.getSession().getAttribute("user");
         //模拟数据
         followerPage.setLimit(10);
         followerPage.setPage(1);
-
-        userId = "1";
-
         ModelAndView mv = new ModelAndView();
 
         List<User> followerList = personalFollowService.findFollower(followerPage);
@@ -140,12 +138,14 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
-            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(user1.getUserId(),user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(m);
         }
         map.put("list",list);
+        map.put("userId",user1.getUserId());
         mv.setViewName("view/personal/followhim");
+        mv.addObject("userId",user1.getUserId());
         mv.addObject("list",list);
         return mv;
     }
@@ -160,11 +160,10 @@ public class PersonalFollowController {
         Map map = new HashMap();
         ModelAndView mv = new ModelAndView();
 
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user1 = (User) request.getSession().getAttribute("user");
         //模拟数据
         followerPage.setLimit(10);
         followerPage.setPage(1);
-        userId = "1";
 
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
@@ -180,13 +179,14 @@ public class PersonalFollowController {
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
-            m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
+            m.setFollowType(personalFollowService.findAFollowedB(user1.getUserId(),user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
         }
         map.put("list",list);
         mv.addObject("list",list);
         mv.setViewName("/view/personal/hefollows");
+        mv.addObject("userId",user1.getUserId());
         return mv;
     }
 
