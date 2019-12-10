@@ -46,12 +46,15 @@ public class RecordController {
         String userId = user.getUserId();
         pagination.setUser(user);
         pagination.setUserId(userId);
-        /*pagination.setLimit(3);
-        pagination.setPage(1);*/
+        /*分页查询*/
         List<Item> itemList = recordService.selectCourses(pagination);
+        /*查询项目总数*/
         Integer allList=recordService.findCourses(pagination);
+        /*查询小节总数*/
         Integer sum = recordService.selectUserSection(userId);
+        /*查询小节已完成数量*/
         Integer done = recordService.selectUser(userId);
+        /*已完成多少百分比*/
         long per = Math.round((100 * done) / sum);
         Map<String,Object> map=new HashMap<>();
         map.put("count",allList);
