@@ -351,7 +351,7 @@
             });
             let uploadInst2 = upload.render({
                 elem: '#coverPic'
-                ,url: '/courseHomePage/uploadPic'
+                ,url: '/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -374,7 +374,7 @@
             });
             let uploadInst3 = upload.render({
                 elem: '#introducePic'
-                ,url: '/courseHomePage/uploadPic'
+                ,url: '/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -397,7 +397,7 @@
             });
             let uploadInst4 = upload.render({
                 elem: '#featurePic'
-                ,url: '/courseHomePage/uploadPic'
+                ,url: '/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
