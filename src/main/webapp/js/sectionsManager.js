@@ -146,10 +146,10 @@ window.onload = function () {
             ,page: true
             ,toolbar: '#topToolBar'
             ,cols: [[
-                {field: 'sectionId', title: '小节标识号', width:100}
+                {field: 'courseId', title: '课程识别号', width:100}
+                ,{field: 'chapterId', title: '章节识别号', width:100}
+                ,{field: 'sectionId', title: '小节识别号', width:100}
                 ,{field: 'sectionNum', title: '小节序号', width:100}
-                ,{field: 'chapterId', title: '章节标识号', width:100}
-                ,{field: 'courseId', title: '课程标识号', width:100}
                 ,{field: 'sectionName', title: '小节名', width:100}
                 ,{field: 'sectionIntro', title: '小节介绍', width: 177}
                 ,{field: 'videoAddr1', title: '普清地址', width: 100}
