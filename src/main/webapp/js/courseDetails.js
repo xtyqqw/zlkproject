@@ -27,10 +27,10 @@ layui.use('flow', function(){
                                 '<div class="tishi">'+
                                 '<div class="shuxian"></div>');
                             /*判断观看状态*/
-                            if (courses.state==="已看完") {
+                            if (courses.state==="已完成") {
                                 lis.push('<div class="yikanguo"><i class="iconfont icon-check-circle "></i></div>');
                                 color="#FFBb00";
-                            }else if (courses.state==="正在看") {
+                            }else if (courses.state==="播放中") {
                                 lis.push('<div class="zhengzaikan" ><i class="iconfont icon-play-circle"></i></div>');
                                 color="#FFBb00";
                             }else{
@@ -49,7 +49,7 @@ layui.use('flow', function(){
                                 '<div class="kechengxiaojeipingfen">'+
                                 '<ul class="kechengxiaojeipingfen_ul">');
                             /*判断评分数*/
-                            if (courses.state==="已看完") {
+                            if (courses.state==="已完成") {
                                 if(courses.xiaojeiPinfen==="3"){
                                     lis.push(
                                         '<li class="kechengxiaojeipingfen_li">' +
@@ -98,7 +98,7 @@ layui.use('flow', function(){
                                         '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>');
                                 }
-                            }else if (courses.state==="正在看") {
+                            }else if (courses.state==="播放中") {
                                 if(courses.xiaojeiPinfen==="3"){
                                     lis.push(
                                         '<li class="kechengxiaojeipingfen_li">' +
