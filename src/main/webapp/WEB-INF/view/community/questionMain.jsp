@@ -83,12 +83,11 @@
                                 <div class="right aligned five wide column">
                                         <span class="ui teal basic label m-padded-tiny m-text-thin"
                                               style="float: left;">
-                                                ${all.solve}未解决
+                                                ${all.solve}
                                         </span>
 
                                     <h3 class="ui header">
-                                        <a href="<%=request.getContextPath()%>/questionUser/find/{questionId}"
-                                           name="all.quesitonId"
+                                        <a href="<%=request.getContextPath()%>/questionUser/findQuestion?question=${all.questionId}"
                                            target="_blank">
                                                 ${all.questionTitle}
                                         </a>

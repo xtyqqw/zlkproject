@@ -331,7 +331,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'23px'
+            });
         })
         </c:if>
         laydate.render({
@@ -418,15 +422,15 @@
                         url: "<%=request.getContextPath()%>/role/delete?roleId=" + id,
                         success: function (msg) {
                             if(msg){
-                                layer.alert("删除成功");
+                                layer.msg("删除成功");
                                 obj.del();
                             }
                             if(!msg){
-                                layer.alert("仍有用户属于该角色,无法删除");
+                                layer.msg("仍有用户属于该角色,无法删除");
                             }
                         },
                         error: function (msg) {
-                            layer.alert("遇到意外错误");
+                            layer.msg("遇到意外错误");
 
                         }
                     });

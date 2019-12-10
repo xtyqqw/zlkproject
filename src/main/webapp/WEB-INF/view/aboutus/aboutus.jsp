@@ -65,7 +65,7 @@
             padding: 5px;
         }
         #aboutus-iframe{
-            width: 900px;
+            width: 99%;
             margin-top: -518px;
             margin-left: 250px;
             float: left;
@@ -124,7 +124,7 @@
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/addOpinion" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/toOpinion" name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>
@@ -133,7 +133,9 @@
 </div>
 
 <!-- 主体内容 -->
+<div>
 <iframe id="aboutus-iframe" name="aboutus-main"  frameborder="0" scrolling="no"></iframe>
+</div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#aboutus-iframe").load(function(){

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,16 @@ public class CommentController {
 
     @RequestMapping(value = "/findCommentListByUserId")
     @ResponseBody
-    public Map<String,Object> findCommentListByUserId(Comment comment,Integer page,Integer limit,Integer commentUserId)throws Exception{
-        List<Comment> commentList=commentService.findCommentListByUserId(comment,page,limit,commentUserId);
+    public Map<String,Object> findCommentListByUserId(HttpServletRequest request,Comment comment, Integer page, Integer limit)throws Exception{
+        User user=(User) request.getSession().getAttribute("user");
+        String userId=user.getUserId();
+        List<Comment> commentList=commentService.findCommentListByUserId(comment,page,limit,userId);
+
         if (page==1){
-        for(Comment comment1:commentList){
-             comment1.setFlag("true");
-        }}else if (page==2){
+            for(Comment comment1:commentList){
+                comment1.setFlag("true");
+            }
+        }else if (page==2){
             commentList.get(0).setFlag("true");
         }
         Map<String,Object> map=new HashMap<>();

@@ -5,59 +5,59 @@
 <mapper namespace="com.zlk.zlkproject.course.stuNote.mapper.StuNoteMapper">
     <resultMap id="stuNoteEntityMap" type="com.zlk.zlkproject.entity.StuNote">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
-        <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="sectionId" column="sn_section_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="sn_user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
-        <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="date" column="sn_date" javaType="java.util.Date"/>
     </resultMap>
 
     <resultMap id="stuNoteResEntityMap" type="com.zlk.zlkproject.entity.StuNoteRes">
         <id property="snId" column="sn_id" javaType="java.lang.Integer"/>
-        <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="sectionId" column="sn_section_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="sn_user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
         <result property="collect" column="collect" javaType="java.lang.Integer"/>
-        <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="date" column="sn_date" javaType="java.util.Date"/>
         <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
         <collection property="stuNoteUpDown" ofType="com.zlk.zlkproject.entity.StuNoteUpDown">
-            <result property="userId" column="user_id1" javaType="java.lang.String"/>
+            <result property="userId" column="sn_user_id1" javaType="java.lang.String"/>
             <result property="upDown" column="up_down" javaType="java.lang.String"/>
         </collection>
         <collection property="stuNoteCollect" ofType="com.zlk.zlkproject.entity.StuNoteCollect">
-            <result property="userId" column="user_id2" javaType="java.lang.String"/>
+            <result property="userId" column="sn_user_id2" javaType="java.lang.String"/>
         </collection>
     </resultMap>
 
 
     <insert id="addStuNote" parameterType="com.zlk.zlkproject.entity.StuNote">
-        INSERT INTO stu_note (section_id,user_id,content,date) VALUES (#{sectionId},#{userId},#{content},#{date})
+        INSERT INTO stu_note (sn_section_id,sn_user_id,content,sn_date) VALUES (#{sectionId},#{userId},#{content},#{date})
     </insert>
 
     <select id="findStuNote" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.user_id user_id1,suu.up_down,suc.user_id user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
-        WHERE sn.user_id = s.user_id AND sn.section_id = #{sectionId}
+        SELECT a.*,suu.sn_user_id sn_user_id1,suu.up_down,suc.sn_user_id sn_user_id2 FROM
+        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT sn_user_id,user_realname,user_img FROM user) s
+        WHERE sn.sn_user_id = s.sn_user_id AND sn.sn_section_id = #{sectionId}
         <if test="userId != '-1'">
-            AND sn.user_id = #{userId}
+            AND sn.sn_user_id = #{userId}
         </if>
-        ORDER BY date DESC) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
+        ORDER BY sn_date DESC) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
         LIMIT #{page} , #{size}
     </select>
 
     <select id="findStuNoteUp" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.user_id user_id1,suu.up_down,suc.user_id user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
-        WHERE sn.user_id = s.user_id AND sn.section_id = #{sectionId}
+        SELECT a.*,suu.sn_user_id sn_user_id1,suu.up_down,suc.sn_user_id sn_user_id2 FROM
+        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT sn_user_id,user_realname,user_img FROM user) s
+        WHERE sn.sn_user_id = s.sn_user_id AND sn.sn_section_id = #{sectionId}
         <if test="userId != '-1'">
-            AND sn.user_id = #{userId}
+            AND sn.sn_user_id = #{userId}
         </if>
         ORDER BY up DESC) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
@@ -65,18 +65,18 @@
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
-        SELECT count(1) FROM stu_note WHERE section_id = #{sectionId}
+        SELECT count(1) FROM stu_note WHERE sn_section_id = #{sectionId}
         <if test="userId != '-1'">
-            AND user_id = #{userId}
+            AND sn_user_id = #{userId}
         </if>
     </select>
 
     <insert id="upOrDownAdd">
-        INSERT INTO stunote_user_updown (sn_id,user_id,up_down) VALUES (#{snId},#{userId},#{upOrDown})
+        INSERT INTO stunote_user_updown (sn_id,sn_user_id,up_down) VALUES (#{snId},#{userId},#{upOrDown})
     </insert>
 
     <delete id="upOrDownDelete">
-        DELETE FROM stunote_user_updown WHERE sn_id = #{snId} AND user_id = #{userId}
+        DELETE FROM stunote_user_updown WHERE sn_id = #{snId} AND sn_user_id = #{userId}
     </delete>
 
     <select id="findStuNoteBySnId" resultMap="stuNoteResEntityMap">
@@ -92,7 +92,7 @@
     </update>
 
     <update id="updateDownOrUp">
-        UPDATE stunote_user_updown SET up_down = #{upOrDown} WHERE sn_id = #{snId} AND user_id = #{userId}
+        UPDATE stunote_user_updown SET up_down = #{upOrDown} WHERE sn_id = #{snId} AND sn_user_id = #{userId}
     </update>
 
     <update id="updateReport">
@@ -104,10 +104,10 @@
     </update>
 
     <insert id="addCollect">
-        INSERT INTO stunote_user_collect (sn_id,user_id) VALUES (#{snId},#{userId})
+        INSERT INTO stunote_user_collect (sn_id,sn_user_id) VALUES (#{snId},#{userId})
     </insert>
 
     <delete id="deleteCollect">
-        DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND user_id = #{userId}
+        DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND sn_user_id = #{userId}
     </delete>
 </mapper>

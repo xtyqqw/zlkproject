@@ -4,18 +4,18 @@
 
     <resultMap type="com.zlk.zlkproject.entity.StuNote" id="StuNoteMap">
         <result property="snId" column="sn_id" javaType="java.lang.Integer"/>
-        <result property="snSectionId" column="section_id" javaType="java.lang.Integer"/>
-        <result property="snUserId" column="user_id" javaType="java.lang.String"/>
+        <result property="snSectionId" column="sn_section_id" javaType="java.lang.Integer"/>
+        <result property="snUserId" column="sn_user_id" javaType="java.lang.String"/>
         <result property="content" column="content" javaType="java.lang.String"/>
         <result property="up" column="up" javaType="java.lang.Integer"/>
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
-        <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="date" column="sn_date" javaType="java.util.Date"/>
     </resultMap>
 
     <!--分页查询数据-->
     <select id="selectAllByLimit" resultMap="StuNoteMap">
-        select sn_id,section_id,user_id,content,up,down,report,date from stu_note
+        select sn_id,sn_section_id,sn_user_id,content,up,down,report,sn_date from stu_note
         limit #{offset}, #{limit}
     </select>
 
@@ -25,13 +25,13 @@
     </select>
 
     <update id="updateStuNoteByStuNote" >
-        update kaohe.stu_note
+        update stu_note
         <set>
             <if test="snSectionId != null and snSectionId != ''">
-                section_id = #{snSectionId},
+                sn_section_id = #{snSectionId},
             </if>
             <if test="snUserId != null and snUserId != ''">
-                user_id = #{snUserId},
+                sn_user_id = #{snUserId},
             </if>
             <if test="content != null and content != ''">
                 content = #{content},
@@ -46,7 +46,7 @@
                 report = #{report},
             </if>
             <if test="date != null and date != ''">
-                date = #{date},
+                sn_date = #{date},
             </if>
         </set>
         where sn_id = #{snId}

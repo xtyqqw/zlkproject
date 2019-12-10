@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -184,7 +182,7 @@
             font-family: Arial;
             position: relative;
             left: 92px;
-            top: 36px;
+            top: 35px;
             float: left;
             display: inline;
         }
@@ -195,72 +193,78 @@
     </style>
 </head>
 <body>
-    <div class="context-div" id="context-div"></div>
-    <!--没插图就隐藏-->
-    <%--<script>
-        $(function () {
-            var img = $("#figures").find("img");
-            if(img.length<=0){
-                $("#figures").hide();
+<div class="context-div" id="context-div"></div>
+<!--没插图就隐藏-->
+<%--<script>
+    $(function () {
+        var img = $("#figures").find("img");
+        if(img.length<=0){
+            $("#figures").hide();
+        }
+    })
+</script>--%>
+<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
+<!--瀑布流-->
+<script>
+    layui.use('flow', function(){
+        var flow = layui.flow;
+        var $ =layui.jquery;
+        flow.load({
+            elem: '#context-div' //流加载容器
+            ,isAuto: false
+            ,end: "<p>没有更多了</p>"
+            ,done: function(page, next){ //加载下一页
+                //模拟插入
+                setTimeout(function(){
+                    var lis = [];
+                    var limit = "5";
+                    var userId = "adfd95a4b3634b58b0cf3b8c67b18a26";
+                    $.ajax({
+                        url:"/articles/findByUserId?page="+page+"&limit="+limit+"&userId="+userId,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (result) {
+                            layui.each(result.articleList, function (i, article) {
+                                var html = '';
+                                html += '<div class="all" >' +
+                                    '<div class="title"><a href="#">'+article.title+'</a></div>';
+                                if (article.createArticleType == 0){
+                                    html += '<div class="createArticleType">原创</div>';
+                                } else if (article.createArticleType == 1){
+                                    html += '<div class="createArticleType">转载</div>';
+                                }else if (article.createArticleType == 2){
+                                    html += '<div class="createArticleType">翻译</div>';
+                                }
+                                if (article.articleSetTop == 0) {
+                                    html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
+                                } else {
+                                    html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">'+article.articleSetTop+'</p></div>';
+                                }
+                                html += '<div class="kuang">'+
+                                    '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
+                                    '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
+                                    '</div>'+
+                                    '<div>'+
+                                    '<div class="userRealname"><a href="#">'+article.user.userRealname+'</a></div>'+
+                                    '<div class="little"></div>'+
+                                    '<div class="createTime" id="createTime"><span class="timeago" title="'+article.createTime+'"></span></div>'+
+                                    '</div>'+
+                                    '<div class="userImg">'+article.user.userImg+'</div>'+
+                                    '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
+                                    '<div class="browseCount"><a href="#">'+article.browseCount+'阅读'+'</a></div>'+
+                                    '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
+                                    '<div class="commentCount"><a href="#">'+article.commentCount+'评论'+'</a></div>'+
+                                    '</div>';
+                                lis.push(html);
+                            });
+                            next(lis.join(''), page < 3);
+                            $(".timeago").timeago();
+                        }
+                    });
+                }, 500);
             }
-        })
-    </script>--%>
-    <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
-    <!--瀑布流-->
-    <script>
-        layui.use('flow', function(){
-            var flow = layui.flow;
-            var $ =layui.jquery;
-            flow.load({
-                elem: '#context-div' //流加载容器
-                ,isAuto: false
-                ,end: "<p>没有更多了</p>"
-                ,done: function(page, next){ //加载下一页
-                    //模拟插入
-                    setTimeout(function(){
-                        var lis = [];
-                        var limit = "5";
-                        var userId = "adfd95a4b3634b58b0cf3b8c67b18a26";
-                        $.ajax({
-                            url:"/articles/findByUserId?page="+page+"&limit="+limit+"&userId="+userId,
-                            type: 'post',
-                            dataType: "json",
-                            success: function (result) {
-                                layui.each(result.articleList, function (i, article) {
-                                    var html = '';
-                                    html += '<div class="all" >' +
-                                        '<div class="title"><a href="#">'+article.title+'</a></div>'+
-                                        '<div class="createArticleType" id="createArticleType">'+article.createArticleType+'</div>';
-                                    if (article.articleSetTop == 0) {
-                                        html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
-                                    } else {
-                                        html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">'+article.articleSetTop+'</p></div>';
-                                    }
-                                    html += '<div class="kuang">'+
-                                        '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
-                                        '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
-                                        '</div>'+
-                                        '<div>'+
-                                        '<div class="userRealname"><a href="#">'+article.user.userRealname+'</a></div>'+
-                                        '<div class="little"></div>'+
-                                        '<div class="createTime" id="createTime"><span class="timeago" title="'+article.createTime+'"></span></div>'+
-                                        '</div>'+
-                                        '<div class="userImg">'+article.user.userImg+'</div>'+
-                                        '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
-                                        '<div class="browseCount"><a href="#">'+article.browseCount+'阅读'+'</a></div>'+
-                                        '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
-                                        '<div class="commentCount"><a href="#">'+article.commentCount+'评论'+'</a></div>'+
-                                        '</div>';
-                                    lis.push(html);
-                                });
-                                next(lis.join(''), page < 3);
-                                $(".timeago").timeago();
-                            }
-                        });
-                    }, 500);
-                }
-            });
         });
-    </script>
+    });
+</script>
 </body>
 </html>

@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>社区</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
@@ -21,7 +23,7 @@
         }
         .all-body-center{
             width: 1340px;
-            height: 1600px;
+            height: 1480px;
             margin:0 auto;
             border: none 0;
         }
@@ -32,7 +34,7 @@
         .all-body-center .body-left{
             float: left;
             width: 930px;
-            height: 1500px;
+            height: 1350px;
             border: none 0;
         }
         /*发表按钮样式*/
@@ -49,7 +51,7 @@
         .add{
             position: relative;
             top: 10px;
-            left: 518px;
+            left: 73%;
             width: 320px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
@@ -105,9 +107,12 @@
             vertical-align: middle;
             border: none 0;
         }
+        ::-webkit-scrollbar{
+            display: none;
+        }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 63vw;
+            margin-left: 76vw;
             margin-top: 0vw;
         }
         .wz_remen{
@@ -120,8 +125,8 @@
             height: 4vw;
             line-height: 4vw;
             border-bottom: 0.1vw solid #914ff1;
-            margin-left: 4vw;
-            margin-top: 0vw;
+            margin-left: -3vw;
+            margin-top: -1vw;
         }
         .wz_remen_wz{
             margin-left: 1vw;
@@ -138,8 +143,8 @@
             margin-left: 16vw;
         }
         .yueanniu{
-            -webkit-border-top-left-radius: 5px;
-            -webkit-border-bottom-left-radius: 5px;
+            -webkit-border-top-left-radius: 0.4vw;
+            -webkit-border-bottom-left-radius: 0.4vw;
             margin-left: -0.8vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -150,10 +155,10 @@
             background-color: #914ff1;
         }
         .zonganniu{
-            -webkit-border-top-right-radius: 5px;
-            -webkit-border-bottom-right-radius: 5px;
+            -webkit-border-top-right-radius: 0.4vw;
+            -webkit-border-bottom-right-radius: 0.4vw;
             margin-top: -2.2vw;
-            margin-left: 1.1vw;
+            margin-left: 1.2vw;
             border: 1px solid white;
             line-height: 2vw;
             text-align: center;
@@ -165,9 +170,9 @@
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 4vw;
+            margin-left: -3vw;
             position: absolute;
-            margin-top: 4vw;
+            margin-top: 3vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -182,9 +187,9 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: 4vw;
+            margin-left: -3vw;
             position: absolute;
-            margin-top: 4vw;
+            margin-top: 3vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -319,7 +324,7 @@
                 </div>
             </div>
             <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>/articles/toArticleEdit">我要发文</a>
+                <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">

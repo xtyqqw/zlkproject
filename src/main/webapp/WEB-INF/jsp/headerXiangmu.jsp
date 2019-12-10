@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <style type="text/css">
-        *{
+        body {
             margin: 0;
-            padding: 0;
         }
         .header{
             background-color: #FFFFFF;
@@ -23,8 +22,6 @@
             width: 100%;
             border-bottom: 1px #989898;
             box-shadow: 1px 1px 5px 3px #D4D4D4;
-            margin-top: 0px;
-            margin-left: 0px;
         }
         /* 头部logo样式 */
         .header .header-logo{
@@ -145,7 +142,7 @@
         <c:if test="${user!=null}">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
-                    <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
+                    <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
                         <a href="javascript:;">
                             <img src="//t.cn/RCzsdCq" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
                             <p class="name" style="">${user.userRealname}</p>

@@ -678,7 +678,7 @@
     /*点击已关注 取消关注*/
     $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     function nofollow(userId){
-        var mythis = $(this);
+        /*var mythis = $(this);*/
         $.ajax({
             url:"/follow/defollow?userId="+userId,
             type:"GET",
@@ -686,14 +686,14 @@
             context: userId,
             success:function (data) {
                 if (data.code==1){
-                    /*$(".ok,.ok_zi").hide();
+                    $(".ok,.ok_zi").hide();
                     $(".jia,.no_zi").show();
-                    $(".att_success1").show().delay(2000).hide(300);*/
-                    /*alert($(this).index()+"  "+$(this)+"  "+$(mythis)+"  "+$(mythis).index());*/
+                    $(".att_success1").show().delay(2000).hide(300);
+                    /*alert($(this).index()+"  "+$(this)+"  "+$(mythis)+"  "+$(mythis).index());
                     mythis.hide();
                     mythis.siblings(".ok").hide();
                     mythis.siblings(".jia,.no_zi").show();
-                    mythis.parents(".att_success1").show().delay(2000).hide(300);
+                    mythis.parents(".att_success1").show().delay(2000).hide(300);*/
                 } else {
                     $(".att_success2").show().delay(2000).hide(300);
                 }

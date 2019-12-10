@@ -35,7 +35,7 @@ public class QuestionHomeController {
      * @date 2019/12/5 10:19
      */
     @RequestMapping(value = "/questionSkip")
-    public ModelAndView questionMain(String createTime, HttpServletRequest request) throws Exception {
+    public ModelAndView questionMain(String createTime ) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<Question> allQuestion = questionHomeService.findQuestionByTime(createTime);
         mv.addObject("allQuestion", allQuestion);
@@ -43,16 +43,26 @@ public class QuestionHomeController {
         return mv;
     }
     /*
-     * @descrption 通过问题id查询文章
+     * @descrption 通过问题id查询问题详情
      * @author gby
      * @param [questionId]
      * @return org.springframework.web.servlet.ModelAndView
      * @date 2019/11/26 10:07
      */
-    @RequestMapping(value = "/find/{questionId}")
+    @GetMapping(value = "/findQuestion")
+    public ModelAndView findQuestion(String questionId,HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        String qId = (String) request.getSession().getAttribute("questionId");
+     /*   questionId="1047919253";*/
+        mv.addObject("question",questionHomeService.getAndConvert(qId));
+        mv.setViewName("/view/community/questionParticulars");
+        return mv;
+    }
+
+   /* @RequestMapping(value = "/find/{questionId}")
     public String find(@PathVariable String questionId,Model model) throws Exception {
         model.addAttribute("question", questionHomeService.findByQuestionId(questionId));
         return "/view/community/questionParticulars";
     }
-
+*/
 }

@@ -20,7 +20,7 @@
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 90%;
+            width: 1000px;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -51,11 +51,12 @@
         }
         #lianxiwomenzhuti #wen_da .wen{
             color: rgb(70,70,70);
-            font-size: 1.2vw;
+            font-size: 1.5vw;
         }
         #lianxiwomenzhuti #wen_da .da{
             color: rgb(150,150,150);
-            font-size: 1vw;
+            font-size: 1.2vw;
+            margin-top: 1vw;
         }
         #lianxiwomenzhuti #wen_da .weixin{
             float: left;
@@ -73,6 +74,8 @@
             font-size: 1vw;
         }
 
+
+
     </style>
 
 </head>
@@ -85,11 +88,11 @@
     </div>
     <ul id="wen_da">
         <li style="display: none;"> <b class="wen">联系我们id</b> <p class="da">${contactUs.contactusId}</p> </li>
-        <li> <b class="wen">电子邮件</b> <p class="da">${contactUs.contactusEmail}</p> </li>
+        <li> <b class="wen">电子邮件</b><p class="da">${contactUs.contactusEmail}</p> </li>
         <li> <b class="wen">联系电话</b> <p class="da">${contactUs.contactusPhone}</p> </li>
-        <li> <b class="wen">工作时间</b> <p class="da">周一至周日09:00-22:00(节假日除外)</p> </li>
-        <li> <b class="wen">客服提醒</b> <p class="da">${contactUs.contactusRemind}</p> </li>
-        <li> <b class="wen">联系地址及邮编</b> <p class="da"> ${contactUs.contactusAddress} <br /> 邮政编码：${contactUs.contactusPostcode}</p> </li>
+        <li> <b class="wen">工作时间</b><p class="da">周一至周日09:00-22:00(节假日除外)</p> </li>
+        <li> <b class="wen">客服提醒</b><p class="da">${contactUs.contactusRemind}</p> </li>
+        <li> <b class="wen">联系地址及邮编</b><p class="da"> ${contactUs.contactusAddress} <br />邮政编码：${contactUs.contactusPostcode}</p> </li>
         <li> <b class="wen">微信</b> <p class="da"> </p>
             <div class="weixin">
                 <img src="/img/cxr/平台公众号.png" />

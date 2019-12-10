@@ -341,10 +341,10 @@ window.onload = function () {
                     'sectionName':sectionName,
                     'sectionIntro':sectionIntro,
                     'sectionTime':parseInt($("#video_time").text()),
-                    'videoPath1':$("#nv_path").val(),
-                    'videoAddr1':$("#nv_url").val(),
-                    'videoPath2':$("#sv_path").val(),
-                    'videoAddr2':$("#sv_url").val()
+                    'videoPath1':$("#nv_path").text(),
+                    'videoAddr1':$("#nv_url").text(),
+                    'videoPath2':$("#sv_path").text(),
+                    'videoAddr2':$("#sv_url").text()
                 };
                 $.ajax({
                     type: 'POST',
@@ -404,10 +404,10 @@ window.onload = function () {
                     'sectionName':sectionName,
                     'sectionIntro':sectionIntro,
                     'sectionTime':parseInt($("#video_time_edit").text()),
-                    'videoPath1':$("#nv_path_edit").val(),
-                    'videoAddr1':$("#nv_url_edit").val(),
-                    'videoPath2':$("#sv_path_edit").val(),
-                    'videoAddr2':$("#sv_url_edit").val()
+                    'videoPath1':$("#nv_path_edit").text(),
+                    'videoAddr1':$("#nv_url_edit").text(),
+                    'videoPath2':$("#sv_path_edit").text(),
+                    'videoAddr2':$("#sv_url_edit").text()
                 };
                 $.ajax({
                     type: 'POST',
@@ -454,11 +454,16 @@ window.onload = function () {
             $("#sectionNumEdit").val(data.sectionNum);
             $("#sectionNameEdit").val(data.sectionName);
             $("#sectionIntroEdit").val(data.sectionIntro);
+            $("#video_time_edit").text(data.sectionTime);
 
-            if(data.videoAddr1 !== '' && data.videoAddr1 !== null)
+            if(data.videoAddr1 !== '' && data.videoAddr1 !== null){
                 $("#nv_retmsg_edit").text('已上传');
-            if(data.videoAddr2 !== '' && data.videoAddr2 !== null)
+                $("#nv_url_edit").text(data.videoAddr1);
+            }
+            if(data.videoAddr2 !== '' && data.videoAddr2 !== null){
                 $("#sv_retmsg_edit").text('已上传');
+                $("#sv_url_edit").text(data.videoAddr2);
+            }
         }
 
         var sectionId;

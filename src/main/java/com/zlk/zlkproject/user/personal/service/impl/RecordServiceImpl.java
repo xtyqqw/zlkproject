@@ -33,6 +33,10 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public List<Item> selectCourses(Pagination pagination){
         /*followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());*/
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
         List<Item> list=recordMapper.selectCourses(pagination);
         int s=list.size();
         for(int i=0;i<s;i++){
@@ -69,11 +73,8 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public List<Courses> findCourses(Pagination pagination){
-        Integer page = pagination.getPage();
-        Integer limit = pagination.getLimit();
-        Integer startPage = (page-1)*limit;
-        pagination.setStartPage(startPage);
+    public Integer findCourses(Pagination pagination){
+
         return recordMapper.findCourses(pagination);
     }
 }

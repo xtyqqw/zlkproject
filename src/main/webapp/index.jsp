@@ -25,7 +25,7 @@
 <%--引入头部--%>
 
 <jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
-index
+
 <%--引入尾部--%>
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
 

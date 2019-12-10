@@ -58,11 +58,11 @@ public interface SectionMapper {
      *  根据小节id查找视频地址
      *@method findVideoAddrById
      *@params [sectionId]
-     *@return java.lang.String
+     *@return com.zlk.zlkproject.entity.Section
      *@author zhang
      *@time 2019/11/21  13:40
      */
-    String findVideoAddrById(Integer sectionId);
+    Section findVideoAddrById(Integer sectionId);
 
     /**
      * 根据小节id和用户id查询状态

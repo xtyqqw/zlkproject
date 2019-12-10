@@ -27,7 +27,12 @@ public interface QuestionHomeMapper {
      * @date 2019/12/7 18:56
      */
     Question findByQuestionId(@Param("questionId") String questionId);
-
-
-
+    /*
+     * @descrption 浏览量+1
+     * @author gby
+     * @param [questionId]
+     * @return java.lang.Integer
+     * @date 2019/12/10 9:16
+     */
+    Question editBrowseCount(String questionId);
 }

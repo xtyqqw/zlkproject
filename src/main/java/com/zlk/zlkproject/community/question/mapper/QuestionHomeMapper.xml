@@ -31,6 +31,8 @@
     <select id="findByQuestionId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
         select * from question where question_id=#{questionId}
     </select>
-
+    <update id="editBrowseCount" parameterType="com.zlk.zlkproject.entity.Question">
+        update question  set browse_count=${browseCount}+1 where question_id=${quesitonId}
+    </update>
 </mapper>
 
