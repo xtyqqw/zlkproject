@@ -498,6 +498,7 @@
                 setTimeout(function(){
                     var lis = [];
                     var limit =2;
+                    var number
                     var data={"page":page,"limit":limit};
                     console.log(data);
                     $.ajax({
@@ -506,6 +507,7 @@
                         dataType:"json",
                         data:data,
                         success:function(result) {
+                            number=result.yeishu;
                             layui.each(result.commentList, function (i, comment) {
                                 lis.push(
                                     '<div class="div-FAQ1" ><br><br>' +
@@ -558,7 +560,7 @@
                                     '<div class="div1"></div>'
                                 );
                             });
-                            next(lis.join(''), page < 3); //假设总页数为 6
+                            next(lis.join(''), page < number); //假设总页数为 6
                         }
                     });
                 }, 500);

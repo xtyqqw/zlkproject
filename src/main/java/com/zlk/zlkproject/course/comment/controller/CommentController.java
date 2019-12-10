@@ -36,12 +36,15 @@ public class CommentController {
         for(Comment comment1:commentList){
             comment1.setCommentUserId(userId);
         }
+
+       /*判断前三热门详情*/
         if (page==1){
         for(Comment comment1:commentList){
              comment1.setFlag("true");
         }}else if (page==2){
             commentList.get(0).setFlag("true");
         }
+
         Map<String,Object> map=new HashMap<>();
         map.put("commentList",commentList);
         return map;
