@@ -75,6 +75,16 @@ public class ArticleListController {
         mv.setViewName("view/community/articleGuide");
         return mv;
     }
+
+    /**
+     * 测试页面
+     * @return
+     */
+    @RequestMapping(value = "/toTest")
+    public String toTest(){
+        return "view/community/test";
+    }
+
     @RequestMapping(value = "/findByCreateTime")
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{

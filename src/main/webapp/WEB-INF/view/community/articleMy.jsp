@@ -143,19 +143,10 @@
             color: #989898;
             text-decoration:none;
         }
-        .userImg{
-            border: 1px crimson solid;
-            width: 20px;
-            height: 20px;
-            border-radius: 50px;
-            position: absolute;
-            margin-left: 23px;
-            margin-top: 35px;
-        }
         .userRealname{
             position: relative;
             float: left;
-            left: 66px;
+            left: 20px;
             top: 35px;
             display: inline;
         }
@@ -172,7 +163,7 @@
             border-radius: 50px;
             position: relative;
             float: left;
-            left: 79px;
+            left: 42px;
             top: 44px;
             display: inline;
         }
@@ -181,7 +172,7 @@
             color: #989898;
             font-family: Arial;
             position: relative;
-            left: 92px;
+            left: 69px;
             top: 35px;
             float: left;
             display: inline;
@@ -227,7 +218,7 @@
                             layui.each(result.articleList, function (i, article) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="#">'+article.title+'</a></div>';
+                                    '<div class="title"><a href="../articles/toTest">'+article.title+'</a></div>';
                                 if (article.createArticleType == 0){
                                     html += '<div class="createArticleType">原创</div>';
                                 } else if (article.createArticleType == 1){
@@ -241,19 +232,18 @@
                                     html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">'+article.articleSetTop+'</p></div>';
                                 }
                                 html += '<div class="kuang">'+
-                                    '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
+                                    '<div class="figures" id="figures">'+'<img src="'+article.figures+'">'+'</div>'+
                                     '<div class="articleDigest" id="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
                                     '</div>'+
                                     '<div>'+
-                                    '<div class="userRealname"><a href="#">'+article.user.userRealname+'</a></div>'+
+                                    '<div class="userRealname"><a href="../articles/toTest">'+article.user.userRealname+'</a></div>'+
                                     '<div class="little"></div>'+
                                     '<div class="createTime" id="createTime"><span class="timeago" title="'+article.createTime+'"></span></div>'+
                                     '</div>'+
-                                    '<div class="userImg">'+article.user.userImg+'</div>'+
                                     '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
-                                    '<div class="browseCount"><a href="#">'+article.browseCount+'阅读'+'</a></div>'+
+                                    '<div class="browseCount"><a href="../articles/toTest">'+article.browseCount+'阅读'+'</a></div>'+
                                     '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
-                                    '<div class="commentCount"><a href="#">'+article.commentCount+'评论'+'</a></div>'+
+                                    '<div class="commentCount"><a href="../articles/toTest">'+article.commentCount+'评论'+'</a></div>'+
                                     '</div>';
                                 lis.push(html);
                             });
