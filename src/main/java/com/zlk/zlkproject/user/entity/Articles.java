@@ -47,6 +47,8 @@ public class Articles {
     private String articleDigest;
     /**文章内容*/
     private String articleContent;
+    /**文章内容md*/
+    private String articleContentHtml;
     /**赞数*/
     private Integer zanCount;
     /**踩数*/

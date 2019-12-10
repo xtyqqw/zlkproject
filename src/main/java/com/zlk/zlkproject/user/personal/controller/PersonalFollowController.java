@@ -199,8 +199,8 @@ public class PersonalFollowController {
     @ResponseBody
     public Map<Object,String> follow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
-        String userId1 = (String) request.getSession().getAttribute("userId");
-        Integer result = personalFollowService.follow(userId1,userId);
+        User user = (User) request.getSession().getAttribute("user");
+        Integer result = personalFollowService.follow(user.getUserId(),userId);
         String code = result.toString();
         map.put("code",code);
         return map;
@@ -215,9 +215,8 @@ public class PersonalFollowController {
     @ResponseBody
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
-        String userId1 = (String) request.getSession().getAttribute("userId");
-        userId1 = "1";
-        Integer result = personalFollowService.deFollow(userId1,userId);
+        User user = (User) request.getSession().getAttribute("user");
+        Integer result = personalFollowService.deFollow(user.getUserId(),userId);
         String code = result.toString();
         map.put("code",code);
         return map;
