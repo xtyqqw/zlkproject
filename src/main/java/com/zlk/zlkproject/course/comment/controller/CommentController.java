@@ -34,7 +34,6 @@ public class CommentController {
         String userId=user.getUserId();
        /*判断前三热门详情*/
         List<Comment> commentList=commentService.findCommentListByUserId(comment,page,limit,userId);
-
         if (page==1){
             for(Comment comment1:commentList){
                 comment1.setFlag("true");
