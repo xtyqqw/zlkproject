@@ -33,7 +33,7 @@ public class ArticleListController {
      */
     @RequestMapping(value = "/toLogin")
     public String toLogin(){
-        return "view/community/communityMain";
+        return "view/community/newCommunityMain";
     }
     /**
      * 最新文章列表接口

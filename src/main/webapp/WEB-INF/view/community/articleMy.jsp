@@ -103,7 +103,7 @@
             border-radius: 5px;
             border: none 0;
         }
-        .imgtest {
+        img {
             width: 100%;
             height: 100%;
             object-fit:cover;

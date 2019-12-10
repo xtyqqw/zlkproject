@@ -50,7 +50,7 @@
         }
         .add{
             position: relative;
-            top: 2px;
+            top: -101px;
             left: -28px;
             width: 320px;
             height: 42px;
@@ -104,9 +104,9 @@
         /*选项卡内容框样式*/
         iframe{
             width: 100%;
-            height: 100%;
-            vertical-align: middle;
+            height: 98%;
             border: none 0;
+            display: inline;
         }
         ::-webkit-scrollbar{
             display: none;
@@ -126,7 +126,7 @@
             height: 4vw;
             line-height: 4vw;
             border-bottom: 0.1vw solid #914ff1;
-            margin-left: -3vw;
+            margin-left: -14vw;
             margin-top: -1vw;
         }
         .wz_remen_wz{
@@ -171,7 +171,7 @@
         .wz_remen_zt1{
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: -3vw;
+            margin-left: -14vw;
             position: absolute;
             margin-top: 3vw;
         }
@@ -188,7 +188,7 @@
             display: none;
             background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: -3vw;
+            margin-left: -14vw;
             position: absolute;
             margin-top: 3vw;
         }
@@ -322,9 +322,6 @@
                     </c:forEach>
                 </div>
             </div>
-            <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
-            </div>
             <div class="crossing"></div>
             <div class="tab">
                 <a href="<%=request.getContextPath()%>/articles/toArticleAll" target="pageTarget">最新</a>
@@ -337,9 +334,10 @@
             </div>
         </div>
         <div class="body-left">
-            <div class="body-context">
-                <iframe name="pageTarget" frameborder="1" scrolling="no" src="/articles/toArticleAll"> </iframe>
-            </div>
+                <iframe name="pageTarget" frameborder="0" scrolling="no" src="/articles/toArticleAll"> </iframe>
+        </div>
+        <div class="add">
+            <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
         </div>
         <div class="wz_remenwenzhang">
             <div class="wz_remen">
