@@ -45,7 +45,7 @@
         SELECT s.*,c.courses_id FROM section s LEFT JOIN chapter c ON s.chapter_id = c.chapter_id WHERE s.chapter_id = #{chapterId} LIMIT #{page},#{size}
     </select>
 
-    <select id="findDataBySectionId" resultType="com.zlk.zlkproject.entity.Section">
+    <select id="findDataBySectionId" resultMap="sectionEntityMap">
         SELECT * FROM section WHERE section_id = #{sectionId}
     </select>
 

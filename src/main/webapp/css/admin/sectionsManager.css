@@ -1,9 +1,9 @@
 #main_body{
     width: 90%;
-    height: 800px;
+    height: 670px;
     margin: 0 auto;
     position: relative;
-    top: 100px;
+    top: 50px;
 }
 #addBtn{
     width: 100px;
