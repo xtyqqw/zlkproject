@@ -43,7 +43,7 @@ public interface RecordMapper {
      * @param pagination
      * @return
      */
-    List<Courses> findCourses(Pagination pagination);
+    Integer findCourses(Pagination pagination);
 
     /**
      * 分页查询我的学习记录

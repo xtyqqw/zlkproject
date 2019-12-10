@@ -77,7 +77,6 @@
             width: 100%;
             height: 100%;
             background-color: #23262E;
-            /*background-image:url(<%=request.getContextPath()%>/img/admin/dao_hang_lan.jpg);*/
         }
 
         /* 设置滚动条的样式 */
@@ -125,7 +124,6 @@
         .leftOuter{
             width: 14.9%;
             height: 100%;
-            /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
     </style>
 </head>

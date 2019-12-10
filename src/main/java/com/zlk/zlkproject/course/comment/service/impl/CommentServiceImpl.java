@@ -30,6 +30,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> findCommentListByUserId(Comment comment,Integer page,Integer limit,String commentUserId) {
         comment.getUserRealname();
+        int yeishu = commentMapper.findCommentCountByUserId(commentUserId)/limit;
+        if(commentMapper.findCommentCountByUserId(commentUserId)%limit!=0){
+            yeishu++;
+        }
 
         Integer startPage = (page-1)*limit;
         return commentMapper.findCommentListByUserId(comment,startPage,limit,commentUserId);

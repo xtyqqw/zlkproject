@@ -34,10 +34,10 @@
             font-size: 1vw;
         }
 
-        .laytable-cell-1-userImg{
-            height: 100%;
-            max-width: 100%;
-        }
+        /*.laytable-cell-1-userImg{*/
+            /*height: 100%;*/
+            /*max-width: 100%;*/
+        /*}*/
 
         p{
             font-size: 1.5vw;
@@ -47,6 +47,17 @@
         h2{
             text-align: center;
         }
+        /*图片在表格里完整显示*/
+        .layui-table-cell{
+            text-align:center;
+            height: 30px;
+            white-space: normal;
+        }
+        /*图片在表格里完整显示*/
+        .layui-table img{
+            max-width:30px;
+        }
+
 
     </style>
 
@@ -61,7 +72,7 @@
 
     <!-- 修改信息 -->
 <div class="layui-table-view">
-    <form class="layui-form"  id="updateUser" style="width: 30vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
+    <form class="layui-form"  id="updateUser" style="width: 35vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
         <%--用户编号--%>
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">编号</label>
@@ -104,7 +115,7 @@
                 <label class="layui-form-label">出生年月</label>
                 <div class="layui-input-block">
                     <input type="text" name="userBirthday" value="${user.userBirthday}" id="userBirthday" autocomplete="off" class="layui-input"
-                           style="width: 22vw;">
+                           style="width: 25.5vw;">
                 </div>
             </div>
         </div>
@@ -260,7 +271,18 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
+                time: 2000
+            });
+        }
+    });
+    //后台用户管理页面中，姓名的移入事件，显示具体内容
+    $('body').on('mouseenter','.layui-table-view td[data-field = "userRealname"]',function () {
+        var msg = $(this).find('div').text();
+        //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
+        if(msg!=null&msg!=""){
+            tipsInx = layer.tips(msg, this,{
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -271,7 +293,7 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -282,7 +304,7 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -293,7 +315,7 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -304,7 +326,7 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -315,7 +337,7 @@
         //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
         if(msg!=null&msg!=""){
             tipsInx = layer.tips(msg, this,{
-                tips: [3, '#f00000'],
+                tips: [3, '#5c6cdb'],
                 time: 2000
             });
         }
@@ -350,13 +372,16 @@
             , height: 400
             , cols: [[ //表头
                 {type: 'checkbox'}
-                , {field: 'userId', title: '编号', width: 80, sort: true}
-                //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
+                                    //序号自动排序  type:'numbers'
+                ,{field:'zizeng',title:'序号',type:'numbers'}
+                // , {field: 'userId', title: '编号', width: 80, sort: true}
+                                    //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
                 , {field: 'userRealname', title: '姓名', width: 80, sort: true}
                 , {field: 'userSex', title: '性别', width: 60}
                 , {field: 'phonenum', title: '手机号码', width: 120}
-                , {field: 'userBirthday', title: '出生年月', width: 120}
+                                                 //日期格式：templet: '<div>{{ layui.util.toDateString(d.userBirthday,"yyyy-MM-dd") }}</div>'
+                , {field: 'userBirthday', title: '出生年月', templet: '<div>{{ layui.util.toDateString(d.userBirthday,"yyyy-MM-dd") }}</div>',width: 120}
                 , {field: 'userMarry', title: '婚否', width: 60}
                 , {field: 'userNative', title: '籍贯', width: 120}
                 , {field: 'userCity', title: '所在城市', width: 120}
@@ -387,9 +412,9 @@
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
                                 //模糊查询的表单
-                '               <form type="post" action="/user/toUserManager" style="margin-left:50vw;margin-top:-3vw;"> \n' +
+                '               <form type="post" action="/user/toUserManager" style="margin-top:-3vw;margin-left:-2vw;"> \n' +
                 '                <div class="layui-inline">\n' +
-                '                    <label class="layui-form-label hint" style="width:9vw;">姓名查询</label>\n' +
+                '                    <label class="layui-form-label hint">姓名查询</label>\n' +
 
                 '                    <div class="layui-input-block">\n' +
                 '                        <input type="text" id="condition" name="condition" value="${condition}"  placeholder="请输入要查询的用户名称" autocomplete="off" class="layui-input">\n' +
@@ -471,7 +496,7 @@
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['40%', '80%'],
+                    area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
                     yes: function (index, layero) {
@@ -512,7 +537,7 @@
         var uploadInst = upload.render({
             elem: '#headImg'
             //文件上传地址
-            , url: '<%=request.getContextPath()%>/user/upload/uploadImg'
+            , url: '<%=request.getContextPath()%>/user/uploadImg'
             , size: 500
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -521,20 +546,26 @@
                 });
             }
             , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
-                /*   console.log(res.data.src);*/
-                //window.parent.uploadHeadImage(res.data.src);
+                //本地上传回调
+                // //如果上传失败
+                // if (res.code > 0) {
+                //     return layer.msg('上传失败');
+                // }
+                // //上传成功
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台, 此处略..
+                // /*   console.log(res.data.src);*/
+                // //window.parent.uploadHeadImage(res.data.src);
+                //
+                // //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
+                // $("#userImg1").val(res.data.src);
+                // //反显图片，并显示上传成功信息
+                // var demoText = $('#demoText');
+                // demoText.html('<span style="color: red;">上传成功!!!</span>');
 
-                //打印后台传回的地址: 把地址放入一个隐藏的input中, 和表单一起提交到后台,
-                $("#userImg1").val(res.data.src);
-                //反显图片，并显示上传成功信息
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: red;">上传成功!!!</span>');
+                //服务器上传成功
+                layer.msg(res.message);
+                //获取图片路径URL
+                $("#userImg1").val(res.url);
             }
             , error: function () {
                 //演示失败状态，并实现重传

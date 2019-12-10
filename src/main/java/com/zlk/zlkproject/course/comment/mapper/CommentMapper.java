@@ -17,4 +17,13 @@ public interface CommentMapper {
      **/
     List<Comment> findCommentListByUserId(Comment comment,Integer startPage,Integer limit,String commentUserId);
 
+    /**
+     *@Author luanke
+     *@Description //查询总数
+     *@Date 10:35 2019/12/10
+     *@Param [comment, startPage, limit, commentUserId]
+     *@return java.util.List<com.zlk.zlkproject.entity.Comment>
+    **/
+    Integer findCommentCountByUserId(String commentUserId);
+
 }
