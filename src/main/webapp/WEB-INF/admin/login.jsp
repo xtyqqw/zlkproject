@@ -48,7 +48,8 @@
         $(function () {
             var index= layer.msg($("#msg").val());
             layer.style(index, {
-                width: 'auto'
+                width: 'auto',
+                height:'auto'
             });
         })
         </c:if>

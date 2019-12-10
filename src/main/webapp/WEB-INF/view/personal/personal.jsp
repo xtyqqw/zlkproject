@@ -8,12 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人中心-框架</title>
+    <title>个人中心</title>
     <script src="/js/jquery-1.12.4.js"></script>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{background-color: #FFFFFF;margin: 0;}
-
         #personal{
             height: 550px;
         }
@@ -135,7 +134,7 @@
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="<%=request.getContextPath()%>/courses/tocourses"
+            <a href="<%=request.getContextPath()%>/courses/gocourses"
                name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-form" style="font-size: 25px;color: #D4D4D4;"></i>
