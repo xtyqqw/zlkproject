@@ -130,9 +130,6 @@
                 var odata = [];
                 var typename=[];
                 for (var i = 0; i < jsonobj.length; i++) {
-                    //var obj = {};
-                    /*obj.name = '每种方向包含类别数量';
-                    obj.type = 'bar';*/
                     typename.push(jsonobj[i].typeName);
                     odata.push(jsonobj[i].tagNumber);
                 }

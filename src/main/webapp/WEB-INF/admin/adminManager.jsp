@@ -41,10 +41,6 @@
         .form{
             margin-top: 15px;
         }
-
-        /*.form input, .form select {
-            margin-top: 15px;
-        }*/
     </style>
 </head>
 <body>

@@ -166,21 +166,6 @@
                     layer.close(index);
                 });
             }
-            /*else if (obj.event === 'edit') {
-                $("#deptId").val(data.deptId);
-                $("#deptName").val(data.deptName);
-                $("#deptCode").val(data.deptCode);
-                layer.open({
-                    title: "修改",
-                    type: 1,
-                    area: ['30%', '70%'],
-                    content: $("#editForm"),
-                    btn: ['提交'],
-                    yes: function (index, layero) {
-                        layero.find("form").find("#updateSubmit").click();
-                    }
-                });
-            }*/
         });
     });
 </script>
