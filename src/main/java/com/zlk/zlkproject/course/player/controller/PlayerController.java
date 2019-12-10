@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- <<<<<<< HEAD
  * @program: zlkproject
  * @description: 播放器controller
  * @author: hry

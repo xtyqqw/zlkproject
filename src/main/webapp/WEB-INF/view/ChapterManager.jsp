@@ -173,8 +173,7 @@
                                     success:function (result) {
                                         layer.alert(result.msg);
                                         table.reload('chapter', {
-                                            height: 480
-                                            , url: '/chapterManager/selectAll'
+                                            url: '/chapterManager/selectAll'
                                             , method:"POST"
                                             , page:{
                                                 curr:1
@@ -192,8 +191,7 @@
                 } else if (evend==="submit"){
                     let chapterName = $("#chapterNameInput").val();
                     table.reload('chapter', {
-                        height: 480
-                        , url: '/chapterManager/selectByChapterName?chapterName='+chapterName
+                        url: '/chapterManager/selectByChapterName?chapterName='+chapterName
                         ,method:'POST'
                         , page:{
                             curr:1
@@ -214,13 +212,12 @@
                             async: false,
                             url :"/chapterManager/deleteChapter",
                             data: {"chapterId":data.chapterId},
-                            success: function (data) {
-                                console.log(data);
-                                layer.alert(data.msg);
+                            success: function (result) {
+                                console.log(result);
+                                layer.alert(result.msg);
                                 table.reload('chapter',{
-                                    url: '/chapter/selectAll',
+                                    url: '/chapterManager/selectAll',
                                     method: 'POST',
-                                    height: 480,
                                     toolbar: '#toolbarDemo',
                                     page:{
                                         curr:1
@@ -260,8 +257,7 @@
                                     success: function (result) {
                                         layer.message(result.msg);
                                         table.reload('chapter', {
-                                            height: 480
-                                            , url: '/chapter/selectAll'
+                                            url: '/chapterManager/selectAll'
                                             , method: "POST"
                                             , page: {
                                                 curr: 1
@@ -308,8 +304,7 @@
             $(document).on("click", ".coursesName", function () {
                 let coursesId = $(this).find("input").val();
                 table.reload('chapter', {
-                    height: 480
-                    , url: '/chapterManager/selectByCoursesId'
+                    url: '/chapterManager/selectByCoursesId'
                     , method: "POST"
                     ,where:{
                         coursesId:coursesId

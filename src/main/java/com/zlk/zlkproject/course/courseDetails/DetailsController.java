@@ -128,14 +128,6 @@ public class DetailsController {
         return "/view/toNoteManager";
     }
 
-    /**
-     * 跳转到课程管理页面
-     * @return
-     */
-    @RequestMapping("/course/toCourseManager")
-    public String toCourseManager(){
-        return "view/CourseManager";
-    }
 
     /**
      * 跳转到笔记管理页面
