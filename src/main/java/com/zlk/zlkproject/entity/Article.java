@@ -45,8 +45,10 @@ public class Article {
     /**文章摘要*/
     private String articleDigest;
     /**文章内容,仅供内容修改用,修改时要处理查询用的字段同步更新*/
+    @Basic(fetch = FetchType.LAZY)
     private String articleContent;
     /**HTML格式文章内容,仅供列表查询用*/
+    @Basic(fetch = FetchType.LAZY)
     private String articleContentHtml;
     /**赞数*/
     private Integer zanCount;

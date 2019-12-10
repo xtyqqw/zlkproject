@@ -92,7 +92,7 @@ public class ArticleAddController {
         } else {
             attributes.addFlashAttribute("message","操作成功");
         }*/
-        return "redirect:/articleHot/toArticleHot";
+        return "redirect:/toCommunity-page";
     }
 
     //文章编辑页面的图片上传方法

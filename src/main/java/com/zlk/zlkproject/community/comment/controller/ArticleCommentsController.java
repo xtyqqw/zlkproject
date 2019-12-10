@@ -2,12 +2,14 @@ package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
 import com.zlk.zlkproject.entity.ArticleComment;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +31,14 @@ public class ArticleCommentsController {
 
     @RequestMapping(value = "/submit")
     @ResponseBody
-    public Map submit(ArticleComment articleComment) {
+    public Map submit(ArticleComment articleComment, HttpServletRequest request) {
+        /*User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        String articleId = (String) request.getSession().getAttribute("articleId");*/
+
         HashMap map = new HashMap<>();
+        /*articleComment.setArticleId(articleId);
+        articleComment.setUserId(userId);*/
         articleComment.setPId(0);
         articleComment.setDate(new Date());
         Integer res = articleCommentsService.addArtCmt(articleComment);
@@ -46,8 +54,14 @@ public class ArticleCommentsController {
 
     @RequestMapping(value = "/replySubmit")
     @ResponseBody
-    public Map replySubmit(ArticleComment articleComment) {
+    public Map replySubmit(ArticleComment articleComment, HttpServletRequest request) {
+        /*User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        String articleId = (String) request.getSession().getAttribute("articleId");*/
+
         HashMap map = new HashMap<>();
+        /*articleComment.setArticleId(articleId);
+        articleComment.setUserId(userId);*/
         articleComment.setDate(new Date());
         Integer res = articleCommentsService.addArtCmt(articleComment);
         String retmsg;
@@ -63,7 +77,9 @@ public class ArticleCommentsController {
     @RequestMapping(value = "/findArtCmt")
     @ResponseBody
     public Map findArtCmt(@RequestParam("articleId") String articleId,
-                          @RequestParam("page") Integer page,@RequestParam("size") Integer size) {
+                          @RequestParam("page") Integer page,@RequestParam("size") Integer size, HttpServletRequest request) {
+        /*articleId = (String) request.getSession().getAttribute("articleId");*/
+
         Map map = new HashMap();
         List<ArticleComment> artCmtList = articleCommentsService.findArtCmt(articleId, page, size);
         Integer pages = articleCommentsService.findArtCmtCount(articleId);
@@ -81,7 +97,10 @@ public class ArticleCommentsController {
     @ResponseBody
     public Map updateZC(@RequestParam("userId") String userId,
                         @RequestParam("articleCommentId") Integer articleCommentId,
-                        @RequestParam("type") String type) {
+                        @RequestParam("type") String type, HttpServletRequest request) {
+        /*User user = (User) request.getSession().getAttribute("user");
+        userId = "" + user.getUserId();*/
+
         Map map = new HashMap();
         Integer res = articleCommentsService.updateZC(userId, articleCommentId, type);
         Integer error = 1;

@@ -32,11 +32,11 @@ public class ArticleHotController {
      * @param article
      * @returnModelAndView
      */
-    @RequestMapping("/toArticleHot")
+    /*@RequestMapping("/toArticleHot")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
-        /**根据时间倒序返回文章标题集合 月排序*/
+        *//**根据时间倒序返回文章标题集合 月排序*//*
         List<Article> alist = articleHotService.selectTitleByArticle(article);
-        /**根据浏览量倒序返回文章标题集合 总排序*/
+        *//**根据浏览量倒序返回文章标题集合 总排序*//*
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
         ModelAndView mv=new ModelAndView();
 
@@ -47,6 +47,6 @@ public class ArticleHotController {
         mv.setViewName("view/community/communityMain");
 
         return mv;
-    }
+    }*/
 
 }
