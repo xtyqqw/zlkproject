@@ -20,18 +20,22 @@
         <result column="create_article_type" property="createArticleType" javaType="java.lang.String"/>
         <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"/>
 
+        <association property="user" javaType="com.zlk.zlkproject.entity.User">
+            <id column="user_id" property="userId" javaType="java.lang.String"/>
+            <result column="user_realname" property="userRealname" javaType="java.lang.String"/>
+            <result column="user_img" property="userImg" javaType="java.lang.String"/>
+        </association>
+
         <collection property="tags" ofType="com.zlk.zlkproject.entity.Tag">
             <id column="tag_id" property="tagId"/>
             <result column="tag_name" property="tagName"/>
-            <result column="tag_type_id" property="tagTypeId"/>
-            <result column="tag_type_name" property="tagTypeName"/>
         </collection>
     </resultMap>
 
-    <select id="findArticleByTag" resultMap="articleByTag">
-        select a.*,t.tag_id,t.tag_name from article a
-        left outer join article_tag at on a.article_id = at.article_id
-        left outer join tag t on at.tag_id = t.tag_id
+    <select id="findArticleByTag" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="articleByTag">
+        select a.*,t.tag_id,t.tag_name,u.user_realname,u.user_img
+        from article a, article_tag ag, tag t, user u
+        where a.article_id = ag.article_id and t.tag_id = ag.tag_id and a.user_id = u.user_id
         order by a.article_set_top,a.create_time DESC
         limit #{startPage},#{limit}
     </select>

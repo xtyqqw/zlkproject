@@ -87,17 +87,17 @@
     </div>
     <div id="course">
         <i class="icon-xiangmuguanli iconfont liulan"></i>
-        <p>120</p><br/><br/>
+        <p>${courseNumber}</p><br/><br/>
         <p>项目数</p>
     </div>
     <div id="article">
         <i class="icon-ai-article iconfont liulan"></i>
-        <p>1320</p><br/><br/>
+        <p>${articleNumber}</p><br/><br/>
         <p>文章数</p>
     </div>
     <div id="user">
         <i class="icon-yonghu iconfont liulan"></i>
-        <p>580</p><br/><br/>
+        <p>${userNumber}</p><br/><br/>
         <p>用户数</p>
     </div>
 </div>

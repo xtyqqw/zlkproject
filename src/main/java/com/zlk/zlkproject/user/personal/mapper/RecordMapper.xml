@@ -42,7 +42,7 @@
             <result property="studyTime" column="study_time" javaType="java.util.Date"/>
     </resultMap>
     <!--查询学习记录-->
-    <select id="selectCourses" resultMap="ItemMap" parameterType="java.lang.String">
+    <select id="selectCourses" resultMap="ItemMap" parameterType="com.zlk.zlkproject.entity.Pagination">
         select * from (select
         u.user_id,
         c.courses_id,
@@ -57,25 +57,28 @@
         JOIN chapter ch on ch.courses_id=c.courses_id
 		JOIN section s on s.chapter_id=ch.chapter_id
 		JOIN user_section us on us.section_id=s.section_id
-        where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC limit #{index},#{limit}
+        where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name ORDER BY temp.study_time DESC limit #{startPage},#{limit}
     </select>
+    <!--查询小结状态总数-->
     <select id="selectUserSection"  parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(state) from user_section
         JOIN user on user.user_id=user_section.user_id
         JOIN section on section.section_id=user_section.section_id
         where user.user_id=#{userId}
     </select>
+    <!--查询小结已完成数量-->
     <select id="selectUser" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(state) from user_section
           JOIN user on user.user_id=user_section.user_id
           JOIN section on section.section_id=user_section.section_id
           where state='已完成' and user.user_id=#{userId}
     </select>
-    <select id="findCourses" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <!--查询课程数量-->
+    <select id="findCourses" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="ItemMap">
         select count(*) from courses ,user_courses
-        WHERE user_id=#{userId} AND courses.courses_id=user_courses.courses_id
+        WHERE user_id=#{userId} AND courses.courses_id=user_courses.courses_id limit #{startPage},#{limit}
     </select>
-    <select id="findCoursesAll" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <!--<select id="findCoursesAll" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from (select
         u.user_id,
         c.courses_id,
@@ -91,5 +94,5 @@
 		JOIN section s on s.chapter_id=ch.chapter_id
 		JOIN user_section us on us.section_id=s.section_id
         where u.user_id=#{userId} ORDER BY us.study_time DESC ) temp GROUP BY temp.courses_name
-    </select>
+    </select>-->
 </mapper>

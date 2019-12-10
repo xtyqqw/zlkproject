@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface ArticleByTagService {
 
-    List<Article> findArticleByTag(Integer tagId,Pagination pagination);
+    List<Article> findArticleByTag(Pagination pagination);
 }

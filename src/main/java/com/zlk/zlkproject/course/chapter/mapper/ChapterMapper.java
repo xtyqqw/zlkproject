@@ -3,7 +3,6 @@ package com.zlk.zlkproject.course.chapter.mapper;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Pagination;
 import org.apache.ibatis.annotations.Mapper;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +10,13 @@ import java.util.List;
 @Component
 @Mapper
 public interface ChapterMapper {
+
+    /**
+     * 根据课程id查找对应章节信息
+     * @param coursesId
+     * @return
+     */
+    List<Chapter> selectChapterByCoursesId(Integer coursesId);
 
     /**
      *  根据课程id查找章节信息

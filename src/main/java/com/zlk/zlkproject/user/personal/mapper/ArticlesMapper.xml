@@ -21,7 +21,6 @@
             <result property="articleSetTop" column="article_set_top" javaType="java.lang.Integer"/>
             <result property="approval" column="approval" javaType="java.lang.Integer"/>
             <result property="typeName" column="type_name" javaType="java.lang.String"/>
-            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
             <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
                 <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
                 <result property="tagName" column="tag_name" javaType="java.lang.String"/>
@@ -55,7 +54,7 @@
         a.figures,a.article_digest,a.article_content,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
-        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc limit #{startPage},#{limit}
+        where t.tag_id=az.tag_id AND a.user_id=#{userId} GROUP BY article_id order by update_time desc limit #{startPage},#{limit}
     </select>
     <!--删除标签-->
     <update id="updateTag" parameterType="com.zlk.zlkproject.entity.Tag">

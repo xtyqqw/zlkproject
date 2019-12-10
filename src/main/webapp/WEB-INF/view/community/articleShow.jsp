@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/articleShow.js"></script>
-    <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
+
     <style>
         #SCS_contentBox{
             width: 100%;
@@ -255,6 +253,10 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+
+    <script src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
+    <script src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
 
     <script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
     <script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>

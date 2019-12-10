@@ -15,5 +15,5 @@ import java.util.List;
 @Mapper
 public interface ArticleByTagMapper {
 
-    List<Article> findArticleByTag(Integer tagId, Pagination pagination);
+    List<Article> findArticleByTag(Pagination pagination);
 }

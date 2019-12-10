@@ -30,15 +30,15 @@ public class ArticleByTagController {
 
     @RequestMapping(value = "/getArticleByTag")
     @ResponseBody
-    public Map<String, Object> findArtTag(Integer tagId, Pagination pagination) throws Exception{
-        List<Article> articleList=articleByTagService.findArticleByTag(tagId,pagination);
+    public Map<String, Object> findArtTag(Pagination pagination) throws Exception{
+        List<Article> articleList=articleByTagService.findArticleByTag(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("articleList",articleList);
         return map;
     }
 
     @RequestMapping(value = "/toArticleByTag")
-    public ModelAndView toArtTag() {
+    public ModelAndView toArtTag(Integer tagId) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("view/community/articleByTag");
         return mv;

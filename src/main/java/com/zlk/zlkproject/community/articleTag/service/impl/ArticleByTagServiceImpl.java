@@ -22,12 +22,13 @@ public class ArticleByTagServiceImpl implements ArticleByTagService {
     private ArticleByTagMapper articleByTagMapper;
 
     @Override
-    public List<Article> findArticleByTag(Integer tagId, Pagination pagination) {
+    public List<Article> findArticleByTag(Pagination pagination) {
         Integer page = pagination.getPage();
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return articleByTagMapper.findArticleByTag(tagId,pagination);
+        System.out.println("startPage = "+startPage);
+        return articleByTagMapper.findArticleByTag(pagination);
     }
 
 }

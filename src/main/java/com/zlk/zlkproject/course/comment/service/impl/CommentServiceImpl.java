@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
      *@return java.util.List<com.zlk.zlkproject.entity.Comment>
     **/
     @Override
-    public List<Comment> findCommentListByUserId(Comment comment,Integer page,Integer limit,Integer commentUserId) {
+    public List<Comment> findCommentListByUserId(Comment comment,Integer page,Integer limit,String commentUserId) {
         comment.getUserRealname();
 
         Integer startPage = (page-1)*limit;

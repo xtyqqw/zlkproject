@@ -17,6 +17,7 @@
 
     <style type="text/css">
         .search {
+            margin-top: -2px;
             float: right;
             width: 410px;
         }
@@ -67,10 +68,6 @@
                 <td style="width: 100px;" valign="bottom">插图相对路径</td>
                 <td><input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures"></td>
             </tr>
-            <%--<tr>
-                <td style="width: 100px;" valign="bottom">插图绝对路径</td>
-                <td><input type="text" required id="figuresReal" placeholder="请输入插图绝对路径" name="figuresReal"></td>
-            </tr>--%>
             <tr>
                 <td style="width: 100px;" valign="bottom">赞数</td>
                 <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"></td>
@@ -109,7 +106,11 @@
             </tr>--%>
             <tr>
                 <td style="width: 100px;">文章摘要</td>
-                <td><textarea rows="5" cols="66" required id="articleDigest" name="articleDigest"></textarea><br></td>
+                <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
+            </tr>
+            <tr>
+                <td style="width: 100px;">HTML格式文章内容</td>
+                <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
             </tr>
             <tr>
                 <td style="width: 100px;">文章内容</td>
@@ -151,6 +152,14 @@
             time: 2000
         });
     });
+    //后台文章管理页面中，文章内容的移入事件，显示具体内容
+    $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this,{
+            tips: [3, '#000'],
+            time: 2000
+        });
+    });
     //后台文章管理页面中，文章摘要的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
         var msg = $(this).find('div').text();
@@ -183,7 +192,11 @@
         var form = layui.form;
         <c:if test="${flag}">
         $(function () {
-            layer.alert($("#msg").val());
+            var index=layer.msg($("#msg").val());
+            layer.style(index, {
+                width: 'auto',
+                height:'auto'
+            });
         })
         </c:if>
         laydate.render({
@@ -217,7 +230,7 @@
                 , {field: 'createTime',title: '发布时间',width: 90}
                 , {field: 'updateTime',title: '更新时间',width: 90}
                 , {field: 'figures', title: '插图相对路径', width: 80}
-                /*, {field: 'figuresReal', title: '插图绝对路径', width: 80}*/
+                , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
                 , {field: 'articleDigest', title: '文章摘要', width: 90}
                 , {field: 'articleContent', title: '文章内容', width: 90}
                 , {field: 'zanCount', title: '赞数', width: 60}
@@ -308,7 +321,7 @@
                 $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
-                /*$("#figuresReal").val(data.figuresReal);*/
+                $("#articleContentHtml").val(data.articleContentHtml);
                 $("#articleDigest").val(data.articleDigest);
                 $("#articleContent").html(marked(data.articleContent));// 将数据库中存储的.md文件转换成html文件
                 $("#zanCount").val(data.zanCount);

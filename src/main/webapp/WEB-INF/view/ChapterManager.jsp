@@ -111,7 +111,7 @@
             var form = layui.form;//表单
             table.render({
                 elem: '#chapter'
-                ,url:'/chapter/selectAll'
+                ,url:'/chapterManager/selectAll'
                 ,method:'POST'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
@@ -167,14 +167,13 @@
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
-                                    url:"/chapter/insertChapter",
+                                    url:"/chapterManager/insertChapter",
                                     data:$('#insertChapterForm').serialize(),
                                     dataType:"json",
                                     success:function (result) {
                                         layer.alert(result.msg);
                                         table.reload('chapter', {
-                                            height: 480
-                                            , url: '/chapter/selectAll'
+                                            url: '/chapterManager/selectAll'
                                             , method:"POST"
                                             , page:{
                                                 curr:1
@@ -192,8 +191,7 @@
                 } else if (evend==="submit"){
                     let chapterName = $("#chapterNameInput").val();
                     table.reload('chapter', {
-                        height: 480
-                        , url: '/chapter/selectByChapterName?chapterName='+chapterName
+                        url: '/chapterManager/selectByChapterName?chapterName='+chapterName
                         ,method:'POST'
                         , page:{
                             curr:1
@@ -212,15 +210,14 @@
                         $.ajax({
                             type : "POST",
                             async: false,
-                            url :"/chapter/deleteChapter",
+                            url :"/chapterManager/deleteChapter",
                             data: {"chapterId":data.chapterId},
-                            success: function (data) {
-                                console.log(data);
-                                layer.alert(data.msg);
+                            success: function (result) {
+                                console.log(result);
+                                layer.alert(result.msg);
                                 table.reload('chapter',{
-                                    url: '/chapter/selectAll',
+                                    url: '/chapterManager/selectAll',
                                     method: 'POST',
-                                    height: 480,
                                     toolbar: '#toolbarDemo',
                                     page:{
                                         curr:1
@@ -254,14 +251,13 @@
                                 $.ajax({
                                     type: "POST",
                                     async: false,
-                                    url: "/chapter/updateChapter",
+                                    url: "/chapterManager/updateChapter",
                                     data: data.field,
                                     dataType: "json",
                                     success: function (result) {
                                         layer.message(result.msg);
                                         table.reload('chapter', {
-                                            height: 480
-                                            , url: '/chapter/selectAll'
+                                            url: '/chapterManager/selectAll'
                                             , method: "POST"
                                             , page: {
                                                 curr: 1
@@ -308,8 +304,7 @@
             $(document).on("click", ".coursesName", function () {
                 let coursesId = $(this).find("input").val();
                 table.reload('chapter', {
-                    height: 480
-                    , url: '/chapter/selectByCoursesId'
+                    url: '/chapterManager/selectByCoursesId'
                     , method: "POST"
                     ,where:{
                         coursesId:coursesId

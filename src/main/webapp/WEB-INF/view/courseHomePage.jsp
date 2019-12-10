@@ -387,9 +387,12 @@
         }
     </style>
 
+
+
 </head>
 <body>
-<jsp:include page="../jsp/header.jsp"></jsp:include>
+
+<jsp:include page="../jsp/headerXiangmu.jsp"></jsp:include>
 <div class="layui-tab layui-tab-brief" >
     <ul class="layui-tab-title">
         <li class="layui-this" >全部内容</li>
@@ -632,7 +635,7 @@ $.ajax({
                         lis.push(
                             '<h6 class="h65"></h6>' );
                         }else{ lis.push(
-                        '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
+                        '<h6 class="h65"></h6>' );
                     }
             console.log(courses);
                     lis.push(

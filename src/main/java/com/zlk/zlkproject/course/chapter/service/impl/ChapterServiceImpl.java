@@ -5,7 +5,6 @@ import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +20,11 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Autowired
     private ChapterMapper chapterMapper;
+
+    @Override
+    public List<Chapter> selectChapterByCoursesId(Integer coursesId) {
+        return chapterMapper.selectChapterByCoursesId(coursesId);
+    }
 
     @Override
     public List<Chapter> findChapterByCoursesId(Integer coursesId) {
