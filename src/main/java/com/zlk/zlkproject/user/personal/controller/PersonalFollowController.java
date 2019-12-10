@@ -125,11 +125,12 @@ public class PersonalFollowController {
         userId = "1";
 
         ModelAndView mv = new ModelAndView();
-        MyFollower m = new MyFollower();
+
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
+            MyFollower m = new MyFollower();
             User user = followerList.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
@@ -141,7 +142,7 @@ public class PersonalFollowController {
             m.setFollowerNum(personalFollowService.findFollowerNum(followerPage.getUserId()));
             m.setFollowType(personalFollowService.findAFollowedB(userId,user.getUserId()));
             m = FiveMsg.userFiveMsg(m);
-            list.add(i,m);
+            list.add(m);
         }
         map.put("list",list);
         mv.setViewName("view/personal/followhim");
@@ -158,7 +159,7 @@ public class PersonalFollowController {
     public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
         ModelAndView mv = new ModelAndView();
-        MyFollower m = new MyFollower();
+
         String userId = (String) request.getSession().getAttribute("userId");
         //模拟数据
         followerPage.setLimit(10);
@@ -169,6 +170,7 @@ public class PersonalFollowController {
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
         for(int i = 0;i < followerList.size();i++){
+            MyFollower m = new MyFollower();
             User user = followerList.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
@@ -197,8 +199,8 @@ public class PersonalFollowController {
     @ResponseBody
     public Map<Object,String> follow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
-        String userId1 = (String) request.getSession().getAttribute("userId");
-        Integer result = personalFollowService.follow(userId1,userId);
+        User user = (User) request.getSession().getAttribute("user");
+        Integer result = personalFollowService.follow(user.getUserId(),userId);
         String code = result.toString();
         map.put("code",code);
         return map;
@@ -213,9 +215,8 @@ public class PersonalFollowController {
     @ResponseBody
     public Map<Object,String> deFollow(HttpServletRequest request,String userId){
         Map<Object,String> map = new HashMap<>();
-        String userId1 = (String) request.getSession().getAttribute("userId");
-        userId1 = "1";
-        Integer result = personalFollowService.deFollow(userId1,userId);
+        User user = (User) request.getSession().getAttribute("user");
+        Integer result = personalFollowService.deFollow(user.getUserId(),userId);
         String code = result.toString();
         map.put("code",code);
         return map;

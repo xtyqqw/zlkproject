@@ -241,13 +241,6 @@
                         btn: ['提交'],
                         success: function (index, layero) {
                             form.on('submit(submit)', function (data) {
-                                // $("#chapterId").val();
-                                // $("#coursesId").val();
-                                // $("#chapterName").val();
-                                // $("#chapterNum").val();
-                                // $("#chapterTime").val();
-                                // $("#sectionNum").val();
-                                console.log(data.field);
                                 $.ajax({
                                     type: "POST",
                                     async: false,
@@ -280,7 +273,7 @@
                 $('#coursesNameSelect').empty();
                 $.ajax({
                     type:"POST",
-                    url:"/courseHomePage/findByCoursesNameLimit",
+                    url:"/courseManager/findByCoursesNameLimit",
                     dataType:"json",
                     data:{"coursesName":coursesName,page:1,limit:10},
                     success:function (result) {
@@ -300,6 +293,10 @@
                 $("#coursesNameSelect").next().find("dl").css({ "display": "block" });
 
              };
+
+            $(document).on("click",function () {
+                $("#coursesNameSelect").next().find("dl").css({ "display": "none" });
+            });
 
             $(document).on("click", ".coursesName", function () {
                 let coursesId = $(this).find("input").val();
