@@ -8,10 +8,11 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>war</packaging>
     <groupId>com.zlk</groupId>
     <artifactId>zlkproject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>zlkproject</name>
+    <version>0.0.1</version>
+    <name>0.0.1-SNAPSHOT</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,13 +20,19 @@
     </properties>
 
     <dependencies>
+        <!-- 打包   -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
         <!--视频文件处理依赖-->
         <dependency>
             <groupId>it.sauronsoftware</groupId>
             <artifactId>jave</artifactId>
             <version>1.0.2</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/jave-1.0.2.jar</systemPath>
+            <systemPath>${pom.basedir}/src/main/resources/lib/jave-1.0.2.jar</systemPath>
         </dependency>
 
         <!--log4j依赖-->
@@ -62,11 +69,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <!--druid依赖包-->
         <dependency>
@@ -113,6 +115,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--fstdfs client-->
@@ -178,6 +186,7 @@
     </dependencies>
 
     <build>
+        <finalName>zlk</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -210,6 +219,30 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>web</directory>
+                        </resource>
+                    </webResources>
+                    <!-- 不指定单元测试 -->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--                <configuration>-->
+<!--                    <webXml>webapp\WEB-INF\web.xml</webXml>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
