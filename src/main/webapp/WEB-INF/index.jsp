@@ -1101,7 +1101,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span>上次学习时间：<span>2019-10-12</span></p>' +
+                                    '<p>￥<span>' + courses.price + '</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +
@@ -1147,7 +1147,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span>上次学习时间：<span>2019-10-12</span></p>' +
+                                    '<p>￥<span>' + courses.price + '</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +
