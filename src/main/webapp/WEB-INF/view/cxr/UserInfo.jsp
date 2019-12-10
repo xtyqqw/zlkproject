@@ -34,10 +34,10 @@
             font-size: 1vw;
         }
 
-        .laytable-cell-1-userImg{
-            height: 100%;
-            max-width: 100%;
-        }
+        /*.laytable-cell-1-userImg{*/
+            /*height: 100%;*/
+            /*max-width: 100%;*/
+        /*}*/
 
         p{
             font-size: 1.5vw;
@@ -47,6 +47,17 @@
         h2{
             text-align: center;
         }
+        /*图片在表格里完整显示*/
+        .layui-table-cell{
+            text-align:center;
+            height: 25px;
+            white-space: normal;
+        }
+        /*图片在表格里完整显示*/
+        .layui-table img{
+            max-width:25px;
+        }
+
 
     </style>
 
