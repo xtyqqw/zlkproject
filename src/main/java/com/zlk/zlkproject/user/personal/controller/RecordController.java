@@ -46,18 +46,25 @@ public class RecordController {
         String userId = user.getUserId();
         pagination.setUser(user);
         pagination.setUserId(userId);
-        /*pagination.setLimit(3);
-        pagination.setPage(1);*/
+        /*分页查询*/
         List<Item> itemList = recordService.selectCourses(pagination);
+        /*查询项目总数*/
         Integer allList=recordService.findCourses(pagination);
-        Integer sum = recordService.selectUserSection(userId);
-        Integer done = recordService.selectUser(userId);
-        long per = Math.round((100 * done) / sum);
+        for(int i=0;i<itemList.size();i++){
+            Integer coursesId=itemList.get(i).getCoursesId();
+            /*查询小节总数*/
+            Integer sum = recordService.selectUserSection(userId,coursesId);
+            /*查询小节已完成数量*/
+            Integer done = recordService.selectUser(userId,coursesId);
+            /*已完成多少百分比*/
+            long per = Math.round((100 * done) / sum);
+            itemList.get(i).setPer(per);
+        }
         Map<String,Object> map=new HashMap<>();
         map.put("count",allList);
         map.put("data",itemList);
         /*学习进度*/
-        map.put("per",per);
+        /*map.put("per",per);*/
         return map;
     }
 }

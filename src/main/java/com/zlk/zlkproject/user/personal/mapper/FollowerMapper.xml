@@ -38,7 +38,7 @@
 
     <!--根据id查询关注自己的用户-->
     <select id="findFollower" resultMap="durstionMap" parameterType="com.zlk.zlkproject.user.entity.FollowerPage">
-        select * from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id limit #{index},#{limit}
+        select * from user u,attention a where a.to_user_id = #{userId} and a.from_user_id = u.user_id
     </select>
     <!--查询关注自己的人数-->
     <select id="findFollowerNum" resultType="java.lang.Integer" parameterType="java.lang.String">
@@ -47,7 +47,7 @@
 
     <!--根据id查询自己关注的用户-->
     <select id="findFollowed" resultMap="durstionMap" parameterType="com.zlk.zlkproject.user.entity.FollowerPage">
-        select * from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId} limit #{index},#{limit}
+        select * from user u,attention a where a.to_user_id = u.user_id and a.from_user_id = #{userId}
     </select>
 
     <!--查询自己关注的人数-->

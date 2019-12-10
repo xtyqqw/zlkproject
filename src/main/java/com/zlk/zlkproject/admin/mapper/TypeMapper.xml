@@ -43,7 +43,7 @@
         delete from type where type_id = #{typeId}
     </delete>
     <select id="findAllTypeName" resultMap="typeEntityMap">
-        select * from type
+        select type_name from type
     </select>
     <select id="findTypeContainsTag" resultMap="typeEntityMap">
         select type_name,count(type_name) tag_number from tag t1,type t2

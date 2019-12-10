@@ -34,10 +34,13 @@ public class DurationController {
         User user = (User) request.getSession().getAttribute("user");
         User lists=durationService.selectDuration(user.getUserId());
         ModelAndView mv=new ModelAndView();
+        /*技能水平*/
         Integer addd= Arith.ride(lists.getUserDateTime());
+        /*学习成长量*/
         Integer ad = Arith.plus(lists.getUserDateTime());
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
+        /*超过多少学生，百分比*/
         Integer rankall=Arith.divide(rank,all);
         mv.addObject("rankall",rankall);
         mv.addObject("ad",ad);

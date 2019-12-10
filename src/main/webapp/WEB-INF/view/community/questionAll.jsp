@@ -9,6 +9,8 @@
     <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
+          type="image/x-icon"/>
     <style type="text/css">
         .context-div{
             overflow-x:hidden;

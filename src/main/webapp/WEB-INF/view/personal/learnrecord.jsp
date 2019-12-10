@@ -169,6 +169,10 @@
 <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 <%--分页--%>
 <script>
+    /*$(function () {
+        document.documentElement.scrollTop=document.body.scrollTop=0;
+        $(window).scrollTop(0);
+    });*/
     var page = 1;
     var limit = 5;
     var total;
@@ -212,7 +216,7 @@
                     html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
                         'style="width: 520px;height: 20px;background-color: #dfd9fd;' +
                         'margin: 230px 30px auto 350px;float: right;position: fixed;">';
-                    html += '<div class="layui-progress-bar" lay-percent="'+per+'\%'+'" ' +
+                    html += '<div class="layui-progress-bar" lay-percent="'+data1[i].per+'\%'+'" ' +
                         'style="height: 20px;background-color: #9e8dff;text-align: center;font-weight: bold"></div>';
                     html += '</div>';
                     html += '</div>';
@@ -222,11 +226,6 @@
             }
         })
     }
-    /*进度条*/
-    /*layui.use('element', function(){
-        var element = layui.element;
-        element.render('progress');
-    });*/
     function percent() {
         layui.use('element', function(){
             var element = layui.element;
@@ -258,6 +257,8 @@
         showRecord();
         getPage();
         percent();
+        /*$(window).scrollTop(0);*/
+        document.documentElement.scrollTop=document.body.scrollTop=0;
     })
 </script>
 <%--流加载--%>

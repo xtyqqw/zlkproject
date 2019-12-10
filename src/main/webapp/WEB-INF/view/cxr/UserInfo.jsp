@@ -34,10 +34,10 @@
             font-size: 1vw;
         }
 
-        .laytable-cell-1-userImg{
-            height: 100%;
-            max-width: 100%;
-        }
+        /*.laytable-cell-1-userImg{*/
+            /*height: 100%;*/
+            /*max-width: 100%;*/
+        /*}*/
 
         p{
             font-size: 1.5vw;
@@ -47,6 +47,18 @@
         h2{
             text-align: center;
         }
+        /*图片在表格里完整显示*/
+        .layui-table-cell{
+            text-align:center;
+            height: 30px;
+            white-space: normal;
+        }
+        /*图片在表格里完整显示*/
+        .layui-table img{
+            max-width:30px;
+        }
+
+
 
     </style>
 
@@ -61,7 +73,7 @@
 
     <!-- 修改信息 -->
 <div class="layui-table-view">
-    <form class="layui-form"  id="updateUser" style="width: 30vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
+    <form class="layui-form"  id="updateUser" style="width: 35vw; display: none;"action="<%=request.getContextPath()%>/user/updateUserInfo" method="post">
         <%--用户编号--%>
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">编号</label>
@@ -104,7 +116,7 @@
                 <label class="layui-form-label">出生年月</label>
                 <div class="layui-input-block">
                     <input type="text" name="userBirthday" value="${user.userBirthday}" id="userBirthday" autocomplete="off" class="layui-input"
-                           style="width: 22vw;">
+                           style="width: 25.5vw;">
                 </div>
             </div>
         </div>
@@ -198,14 +210,14 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">兴趣爱好</label>
             <div class="layui-input-block">
-                <textarea name="userHobby" value="${user.userHobby}" id="userHobby" placeholder="请输入你的兴趣爱好(不超过100字)" class="layui-textarea" maxlength="100"></textarea>
+                <textarea name="userHobby" value="${user.userHobby}" id="userHobby" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50"></textarea>
             </div>
         </div>
         <%--自我评价--%>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">自我评价</label>
             <div class="layui-input-block">
-                <textarea name="userSelfappraise" value="${user.userSelfappraise}" id="userSelfappraise" placeholder="请输入自我评价内容(不超过200字)" class="layui-textarea" maxlength="200"></textarea>
+                <textarea name="userSelfappraise" value="${user.userSelfappraise}" id="userSelfappraise" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100"></textarea>
             </div>
         </div>
         <%--最高学历--%>
@@ -485,7 +497,7 @@
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['40%', '80%'],
+                    area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
                     yes: function (index, layero) {
@@ -507,13 +519,38 @@
         var laydate=layui.laydate;
         laydate.render({
             elem: '#userBirthday'
-        });
-        laydate.render({
-            elem: '#userBirthday'
-            ,type: 'date'
+             //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
         });
 
+
+        // laydate.render({
+        //     elem: '#userBirthday'
+        //     ,type: 'date'
+        // });
+
     });
+
+
+    //  设置选择日期不能超过当前日期
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month
+            + seperator1 + strDate + " " + date.getHours() + seperator2
+            + date.getMinutes() + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
 
     // 图片上传js
     layui.use(["jquery", "upload", "form", "layer", "element"], function () {
@@ -554,7 +591,7 @@
                 //服务器上传成功
                 layer.msg(res.message);
                 //获取图片路径URL
-                $("#userImg1").val(res.url)
+                $("#userImg1").val(res.url);
             }
             , error: function () {
                 //演示失败状态，并实现重传

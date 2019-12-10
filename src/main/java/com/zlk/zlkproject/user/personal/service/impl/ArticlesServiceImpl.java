@@ -11,6 +11,7 @@ import com.zlk.zlkproject.user.until.LeaveTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,13 +87,23 @@ public class ArticlesServiceImpl implements ArticlesService {
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
         List<Articles> list=articlesMapper.findArticlesAll(pagination);
+
         int a=list.size();
         for(int i=0;i<a;i++){
+
             Articles articles=list.get(i);
             articles.setCreateDate(LeaveTime.formatDate(articles.getCreateTime()));
             list.set(i,articles);
         }
-        return list;
+        /*后台分页*/
+        List<Articles> list1 = new ArrayList();
+        Integer endIndex = (pagination.getPage()-1)*pagination.getLimit()+pagination.getLimit();
+        if(list.size()<=endIndex){
+            list1 = list.subList((pagination.getPage()-1)*pagination.getLimit(),list.size());
+        }else {
+            list1 = list.subList((pagination.getPage()-1)*pagination.getLimit(),endIndex);
+        }
+        return list1;
     }
 
     /**
@@ -114,5 +125,10 @@ public class ArticlesServiceImpl implements ArticlesService {
     @Override
     public List<Tag> insertTag(String articleId){
         return articlesMapper.insertTag(articleId);
+    }
+
+    @Override
+    public Articles findArtById(String articleId) {
+        return articlesMapper.findArtById(articleId);
     }
 }

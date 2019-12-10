@@ -26,17 +26,16 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/articles")
 public class ArticlesController {
-    /*注入外部资源*/
-    @Autowired
+    @Autowired(required = false)
     private ArticlesService articlesService;
 
     /**
      * 根据userid查询user文章的集合
-     * @param userId
+     * @param
      * @return
      */
     @RequestMapping(value = "/toarticles")
-    public ModelAndView selectArticles(HttpServletRequest request, String userId)throws Exception{
+    public ModelAndView selectArticles(HttpServletRequest request)throws Exception{
         User user = (User) request.getSession().getAttribute("user");
         Integer articles=articlesService.findArticlesId(user.getUserId());
         ModelAndView mv=new ModelAndView();
@@ -44,17 +43,32 @@ public class ArticlesController {
         mv.setViewName("view/personal/myArticle");
         return mv;
     }
-
+    /**
+     * 点击跳转展示markdown
+     * @param articles
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/toArt")
+    public ModelAndView toArt(Articles articles)throws Exception{
+        ModelAndView mv=new ModelAndView();
+        Articles articles1 = articlesService.findArtById(articles.getArticleId());
+        mv.addObject("articles",articles1);
+        mv.setViewName("view/personal/myArt");
+        return mv;
+    }
     /**
      * 修改
      * @param articles
      * @return
      */
     @RequestMapping(value = "update")
-    public String updateArticles(Articles articles)throws Exception{
+    public ModelAndView updateArticles(Articles articles)throws Exception{
+        ModelAndView mv = new ModelAndView();
         Integer flag=articlesService.updateArticles(articles);
+        mv.setViewName("redirect:/articles/toarticles");
         if(flag == 1){
-            return "redirect:/articles/toarticles";
+            return mv;
         }else {
             return null;
         }
@@ -74,7 +88,9 @@ public class ArticlesController {
             return null;
         }
     }
-    /*流加载*/
+    /**
+     * 流加载
+     * */
     @RequestMapping(value = "/flow")
     @ResponseBody
     public Map<String,Object> findArticlesAll(HttpServletRequest request,Pagination pagination){
@@ -89,38 +105,5 @@ public class ArticlesController {
         map.put("data",articlesList);
         return map;
     }
-
-    /**
-     * 插入标签
-     *
-     * @param articleId
-     * @return
-     *//*
-    @RequestMapping(value = "/updates")
-    public ModelAndView updateTag(String articleId){
-        ModelAndView mv=new ModelAndView();
-        Integer article=articlesService.updateTag(articleId);
-        mv.addObject("article",article);
-        mv.setViewName("");
-        return mv;
-    }
-
-    *//**
-     * 添加标签
-     * @param articleId
-     * @return
-     *//*
-    @RequestMapping(value = "/insert")
-    public ModelAndView insertTag(String articleId){
-        ModelAndView mv=new ModelAndView();
-        List<Tag> tagList=articlesService.insertTag(articleId);
-        if(tagList!=null && !tagList.isEmpty()){
-            mv.setViewName("");
-            return mv;
-        }else{
-            mv.setViewName("");
-            return mv;
-        }
-    }*/
 
 }
