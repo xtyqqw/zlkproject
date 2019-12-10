@@ -6,10 +6,10 @@
     <resultMap id="tagEntityMap" type="com.zlk.zlkproject.entity.Tag">
         <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
         <result property="tagName" column="tag_name" javaType="java.lang.String"/>
-        <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+        <result property="tagTypeName" column="type_name" javaType="java.lang.String"/>
     </resultMap>
     <select id="findTagByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="tagEntityMap">
-        select t.tag_id,t.tag_name,tt.type_name tag_type_name from tag t,type tt
+        select t.tag_id,t.tag_name,tt.type_name from tag t,type tt
         <where>
             t.tag_type_id= tt.type_id
         <if test="condition!='' and condition!=null">
