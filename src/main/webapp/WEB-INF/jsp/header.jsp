@@ -110,6 +110,10 @@
             -webkit-box-orient:vertical;
             -webkit-line-clamp:1;
         }
+        img{
+            width: 150px;
+            height: 66px;
+        }
     </style>
 </head>
 <body>

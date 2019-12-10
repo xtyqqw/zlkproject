@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * @author gby
  * @ClassName QuestionController
- * @description 问答
+ * @description 发表提问
  * @date 2019/11/26 20:52
  */
 @Controller
@@ -32,10 +32,7 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private QuestionTagService questionTagService;
-    @RequestMapping("/test")
-    public String test(){
-        return "/view/community/test";
-    }
+
 
     /*
      * @descrption 提问提示页面

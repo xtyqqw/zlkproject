@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * @author gby
  * @ClassName QuestionUser
- * @description 提问信息
+ * @description 问答首页
  * @date 2019/12/6 13:59
  */
 @Controller
@@ -27,25 +27,9 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    /**
-     * 全部提问列表接口
-     * @return
-     */
-    @RequestMapping(value = "/allQuestion")
-    public ModelAndView all(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("/view/community/questionAll");
-        return mv;
-    }
-    /**
-     * 我的提问列表接口
-     * @return
-     */
-    @RequestMapping(value = "/myQuestion")
-    public ModelAndView my(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("/view/community/questionMy");
-        return mv;
+    @RequestMapping("/test")
+    public String test(){
+        return "/view/community/newMain";
     }
     /*
      * @descrption 全部问答
@@ -61,7 +45,7 @@ public class QuestionHomeController {
         Map<String, Object> map = new HashMap<>();
         map.put("questionAllList", questionAllList);
         return map;
-}
+    }
 
     /*
      * @descrption 我的问答
@@ -78,6 +62,7 @@ public class QuestionHomeController {
         map.put("questionMyList", questionMyList);
         return map;
     }
+
     /*
      * @descrption 通过问题id查询问题详情
      * @author gby

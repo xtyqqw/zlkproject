@@ -16,9 +16,14 @@
             margin: 0;
             padding: 0;
         }
+<<<<<<< HEAD
 
         body {
             overflow-x: hidden;
+=======
+        body{
+            height: 100%;
+>>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
         }
 
         .all-body {
@@ -35,7 +40,7 @@
 
         .all-body-center .body-top {
             width: 1308px;
-            height: 114px;
+            height: 102px;
         }
 
         .all-body-center .body-left {
@@ -59,8 +64,8 @@
 
         .add {
             position: relative;
-            top: 10px;
-            left: 73%;
+            top: -101px;
+            left: -28px;
             width: 320px;
             height: 42px;
             -moz-box-shadow: 2px 2px 5px #D8D8D8;
@@ -73,6 +78,7 @@
             overflow: hidden;
             vertical-align: middle;
             border-radius: 5px;
+            float: right;
         }
 
         /*横线样式*/
@@ -81,7 +87,7 @@
             height: 1px;
             border-top: solid #D0D0D0 1px;
             position: relative;
-            bottom: -15px;
+            bottom: -79px;
             left: 12px;
             z-index: -1;
         }
@@ -91,8 +97,8 @@
             border: none;
             width: 410px;
             position: relative;
-            left: 1px;
-            bottom: -34px;
+            left: 6px;
+            bottom: -84px;
         }
 
         .tab a {
@@ -120,8 +126,8 @@
         iframe {
             width: 100%;
             height: 98%;
-            vertical-align: middle;
             border: none 0;
+            display: inline;
         }
 
         ::-webkit-scrollbar {
@@ -144,7 +150,7 @@
             height: 4vw;
             line-height: 4vw;
             border-bottom: 0.1vw solid #914ff1;
-            margin-left: -3vw;
+            margin-left: -14vw;
             margin-top: -1vw;
         }
 
@@ -195,7 +201,7 @@
         .wz_remen_zt1 {
             background-color: rgba(192, 192, 192, 0.1);
             width: 20vw;
-            margin-left: -3vw;
+            margin-left: -14vw;
             position: absolute;
             margin-top: 3vw;
         }
@@ -214,7 +220,7 @@
             display: none;
             background-color: rgba(192, 192, 192, 0.1);
             width: 20vw;
-            margin-left: -3vw;
+            margin-left: -14vw;
             position: absolute;
             margin-top: 3vw;
         }
@@ -228,9 +234,13 @@
         .wz_remen_zt2 ul li:nth-child(1) {
             margin-top: 0.5vw;
         }
+<<<<<<< HEAD
 
 
         .wz_remen_img img {
+=======
+        .wz_remen_img img{
+>>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
             width: 100%;
             height: 100%
         }
@@ -340,8 +350,13 @@
 </head>
 <body>
 <div class="all-body">
+<<<<<<< HEAD
     <%@include file="../../jsp/header.jsp" %>
     <%@include file="../../jsp/sidebar.jsp" %>
+=======
+    <%@include file="../../jsp/header.jsp"%>
+    <%--<%@include file="../../jsp/sidebar.jsp"%>--%>
+>>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
     <div class="all-body-center">
         <div class="body-top">
             <div style="height: 0px; margin-bottom: -10px;">
@@ -349,7 +364,7 @@
                     <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                         <div>
                             <ul>
-                                <li><a href="javascript:void(0)" type="button" class="">${tag.tagName}</a></li>
+                                <li>< a href=" " type="button" class="">${tag.tagName}</ a></li>
                             </ul>
                         </div>
                     </c:forEach>
@@ -358,15 +373,16 @@
                     <c:forEach items="${tagList}" var="tag">
                         <div>
                             <ul>
+<<<<<<< HEAD
                                 <li><a href="<%=request.getContextPath() %>/" type="button" target="pageTarget"
                                        onclick="dj(this);">${tag.tagName}</a></li>
+=======
+                                <li>< a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</ a></li>
+>>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
                             </ul>
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-            <div class="add">
-                <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
             </div>
             <div class="crossing"></div>
             <div class="tab">
@@ -386,9 +402,16 @@
             </div>
         </div>
         <div class="body-left">
+<<<<<<< HEAD
             <div class="body-context">
                 <iframe name="pageTarget" frameborder="1" src="/articles/toArticleAll"></iframe>
             </div>
+=======
+                <iframe name="pageTarget" frameborder="0" scrolling="no" src="/articles/toArticleAll"> </iframe>
+        </div>
+        <div class="add">
+            <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+>>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
         </div>
         <div class="wz_remenwenzhang">
             <div class="wz_remen">
