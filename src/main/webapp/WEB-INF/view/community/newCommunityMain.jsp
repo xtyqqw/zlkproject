@@ -17,7 +17,7 @@
             padding: 0;
         }
         body{
-            height: 100%;
+            height: auto;
         }
         .all-body{
             text-align:center;
@@ -25,7 +25,7 @@
         }
         .all-body-center{
             width: 1340px;
-            height: 1480px;
+            height: 2300px;
             margin:0 auto;
             border: none 0;
         }
@@ -41,31 +41,45 @@
         }
         /*发表按钮样式*/
         .add a {
-            /*background-color: #9933FF;*/
             font-family: "Arial";
             color: #F8F8F8;
             font-size: 18px;
-            /*border: solid #1296db 1px;*/
             text-decoration: none;
             display: block;
             text-align: center;
         }
-        .add{
+        .btn1{
             position: relative;
-            top: -101px;
-            left: -32px;
-            width: 320px;
+            top: -92px;
+            left: -35px;
+            width: 145px;
             height: 42px;
             -moz-box-shadow:2px 2px 5px #D8D8D8;
             -webkit-box-shadow:2px 2px 5px #D8D8D8;
             box-shadow:2px 2px 5px #D8D8D8;
             background-color: #914ff1;
             text-align:center;
-            height:45px;
             line-height:45px;
             overflow:hidden;
             vertical-align:middle;
-            border-radius: 5px;
+            border-radius: 3px;
+            float: right;
+        }
+        .btn2{
+            position: relative;
+            top: -92px;
+            left: -58px;
+            width: 145px;
+            height: 42px;
+            -moz-box-shadow:2px 2px 5px #D8D8D8;
+            -webkit-box-shadow:2px 2px 5px #D8D8D8;
+            box-shadow:2px 2px 5px #D8D8D8;
+            background-color: #914ff1;
+            text-align:center;
+            line-height:45px;
+            overflow:hidden;
+            vertical-align:middle;
+            border-radius: 3px;
             float: right;
         }
         /*横线样式*/
@@ -78,12 +92,12 @@
             left: 12px;
             z-index: -1;
         }
+        /*选项卡内容框样式*/
         .body-left{
             height: 100%;
             margin-left: 12px;
             margin-top: -32px;
         }
-        /*选项卡内容框样式*/
         .tab{
             width: 900px;
             z-index: 999;
@@ -118,6 +132,7 @@
             color: #8c24dd;
             border-bottom: 2px solid #8c24dd;
         }
+        <%--热门文章样式--%>
         ::-webkit-scrollbar{
             display: none;
         }
@@ -238,7 +253,7 @@
             color: black;
             margin-right: 0.6vw;
         }
-        <%-----------------------------------文章标签卡 css start---------------------------------------%>
+        <%--文章标签卡样式--%>
         .show {
             width: 69%;
             height: 30px;
@@ -303,7 +318,7 @@
             border: none;
             transition-duration: 0.4s;
         }
-        <%-----------------------------------文章标签卡 css end---------------------------------------%>
+        <%--流加载样式--%>
         .all{
             width: 100%;
             height: 182px;
@@ -329,7 +344,7 @@
             left: 33px;
             top: 6px;
             float: left;
-            width: 35px;
+            width: 50px;
             height: 20px;
             background-color: #1296db;
             border-radius: 8%;
@@ -525,7 +540,8 @@
             <iframe name="targer" frameborder="0" scrolling="no"></iframe>
         </div>
         <div class="add">
-            <a role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+            <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+            <a class="btn2" role="button" href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
         </div>
         <div class="wz_remenwenzhang">
             <div class="wz_remen">
@@ -579,7 +595,9 @@
             </div>
         </div>
     </div>
-    <%@include file="../../jsp/footer.jsp"%>
+    <div style="clear:both;bottom: 0">
+        <%@include file="../../jsp/footer.jsp"%>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -710,7 +728,7 @@
                             layui.each(result.articleList, function (i, article) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="../articles/toTest">'+article.title+'</a></div>';
+                                    '<div class="title"><a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}">'+article.title+'</a></div>';
                                 if (article.createArticleType == 0){
                                     html += '<div class="createArticleType">原创</div>';
                                 } else if (article.createArticleType == 1){
@@ -855,6 +873,66 @@
                                     '<div class="browseCount"><a href="../articles/toTest">'+article.browseCount+'阅读'+'</a></div>'+
                                     '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
                                     '<div class="commentCount"><a href="../articles/toTest">'+article.commentCount+'评论'+'</a></div>'+
+                                    '</div>';
+                                lis.push(html);
+                            });
+                            next(lis.join(''), page < 3);
+                            $(".timeago").timeago();
+                        }
+                    });
+                }, 500);
+            }
+        });
+    });
+</script>
+<script>
+    layui.use('flow', function(){
+        var flow = layui.flow;
+        var $ =layui.jquery;
+        flow.load({
+            elem: '.show_li4' //流加载容器
+            ,isAuto: false
+            ,end: "<p>没有更多了</p>"
+            ,done: function(page, next){ //加载下一页
+                //模拟插入
+                setTimeout(function(){
+                    var lis = [];
+                    var limit = "5";
+                    $.ajax({
+                        url:"/question/questionAll?page="+page+"&limit="+limit,
+                        type: 'post',
+                        dataType: "json",
+                        success: function (result) {
+                            layui.each(result.questionAllList, function (i, question) {
+                                var html = '';
+                                html += '<div class="all" >' +
+                                    '<div class="title"><a href="../questionUser/findQuestion?questionId=${all.questionId}">'+question.questionTitle+'</a></div>';
+                                if (question.solve == 0){
+                                    html += '<div class="">待解决</div>';
+                                } else if (question.solve == 1){
+                                    html += '<div class="createArticleType">未解决</div>';
+                                }else if (question.solve == 2){
+                                    html += '<div class="createArticleType">待解决</div>';
+                                }
+                                if (question.questionSetTop == 0) {
+                                    html += '<div class="SetTop" id="questionSetTop"><p id="p">置顶</p></div>';
+                                } else {
+                                    html += '<div class="SetTop" id="questionSetTop" style="display:none;"><p id="p">'+question.questionSetTop+'</p></div>';
+                                }
+                                html += '<div class="kuang">'+
+                                    '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
+                                    '<div class="Content" id="Content" style="width: 660px">'+question.questionTitle+'</div>'+
+                                    '</div>'+
+                                    '<div>'+
+                                    '<div class="userRealname"><a href="#">'+question.userRealname+'</a></div>'+
+                                    '<div class="little"></div>'+
+                                    '<div class="createTime" id="createTime"><span class="timeago" title="'+question.createTime+'"></span></div>'+
+                                    '</div>'+
+                                    '<div class="userImg">'+question.userImg+'</div>'+
+                                    '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
+                                    '<div class="browseCount"><a href="#">'+question.browseCount+'浏览'+'</a></div>'+
+                                    '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
+                                    '<div class="commentCount"><a href="#">'+question.responseCount+'评论'+'</a></div>'+
                                     '</div>';
                                 lis.push(html);
                             });
