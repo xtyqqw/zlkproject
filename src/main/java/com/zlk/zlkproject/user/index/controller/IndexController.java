@@ -6,16 +6,12 @@ import com.zlk.zlkproject.user.index.service.IndexService;
 import com.zlk.zlkproject.user.until.Arith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -98,7 +94,7 @@ public class IndexController {
         mv.addObject("tags2", tags2);
         mv.addObject("tags3", tags3);
         mv.addObject("tags4", tags4);
-        mv.setViewName("index");
+        mv.setViewName("firstpage");
         return mv;
     }
 
