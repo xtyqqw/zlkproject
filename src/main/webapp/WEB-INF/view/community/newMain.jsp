@@ -325,20 +325,20 @@
             text-decoration:none;
         }
         .createArticleType{
-            position: relative;
-            left: 33px;
-            top: 6px;
-            float: left;
-            width: 35px;
-            height: 20px;
-            background-color: #1296db;
-            border-radius: 8%;
-            font-size: 15px;
-            font-family: Arial;
-            color: #FFFFFF;
-            text-decoration:none;
-            text-align: center;
-        }
+             position: relative;
+             left: 33px;
+             top: 6px;
+             float: left;
+             width: 35px;
+             height: 20px;
+             background-color: #1296db;
+             border-radius: 8%;
+             font-size: 15px;
+             font-family: Arial;
+             color: #FFFFFF;
+             text-decoration:none;
+             text-align: center;
+         }
         .articleSetTop{
             position: relative;
             left: 44px;
@@ -428,7 +428,7 @@
             color: #989898;
             text-decoration:none;
         }
-        .userRealname{
+        . userRealname{
             position: relative;
             float: left;
             left: 9px;
@@ -883,31 +883,29 @@
                 setTimeout(function(){
                     var lis = [];
                     var limit = "5";
-                    var userId = "adfd95a4b3634b58b0cf3b8c67b18a26";
                     $.ajax({
-                        url:"/question/questionAll?page="+page+"&limit="+limit+"&userId="+userId,
+                        url:"/question/questionAll?page="+page+"&limit="+limit,
                         type: 'post',
                         dataType: "json",
                         success: function (result) {
-                            layui.each(result.questionList, function (i, question) {
+                            layui.each(result.questionAllList, function (i, question) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="#">'+question.questionTitle+'</a></div>';
+                                    '<div class="title"><a href="../questionUser/findQuestion?questionId=${question.questionId}">'+question.questionTitle+'</a></div>';
                                 if (question.solve == 0){
-                                    html += '<div class="">待解决</div>';
+                                    html += '<div class="createArticleType">待解决</div>';
                                 } else if (question.solve == 1){
                                     html += '<div class="createArticleType">未解决</div>';
                                 }else if (question.solve == 2){
                                     html += '<div class="createArticleType">待解决</div>';
                                 }
-                                if (question.questionSetTop == 0) {
-                                    html += '<div class="SetTop" id="questionSetTop"><p id="p">置顶</p></div>';
+                                if (question.articleSetTop == 0) {
+                                    html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
                                 } else {
-                                    html += '<div class="SetTop" id="questionSetTop" style="display:none;"><p id="p">'+question.questionSetTop+'</p></div>';
+                                    html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">'+question.questionSetTop+'</p></div>';
                                 }
                                 html += '<div class="kuang">'+
-                                    '<div class="figures" id="figures">'+'<img src="">'+'</div>'+
-                                    '<div class="Content" id="Content" style="width: 660px">'+question.questionContent+'</div>'+
+                                    '<div class="articleDigest" id="Content" style="width: 660px">'+question.questionTitle+'</div>'+
                                     '</div>'+
                                     '<div>'+
                                     '<div class="userRealname"><a href="#">'+question.userRealname+'</a></div>'+

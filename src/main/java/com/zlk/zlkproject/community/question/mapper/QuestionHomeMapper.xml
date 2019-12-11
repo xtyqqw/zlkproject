@@ -23,15 +23,12 @@
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
     </resultMap>
     <select id="findByQuestionTime" resultMap="questionEntityMap" >
-        select * from  question order by create_time  DESC limit  #{startPage},#{limit}
+        select * from  question order by create_time  DESC  limit  #{startPage},#{limit}
     </select>
     <select id="findByUserId" resultMap="questionEntityMap">
         select * from question a
         left join user u on a.user_id=u.user_id
         where a.user_id limit #{startPage},#{limit}
-    </select>
-    <select id="findQuestionByTime" resultMap="questionEntityMap">
-         select * from question  order by create_time DESC
     </select>
 
     <select id="findByQuestionId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">

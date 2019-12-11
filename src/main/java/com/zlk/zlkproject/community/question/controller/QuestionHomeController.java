@@ -27,9 +27,15 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    @RequestMapping("/test")
-    public String test(){
-        return "/view/community/newMain";
+    /**
+     * 提问列表接口
+     * @return
+     */
+    @RequestMapping(value = "/test")
+    public ModelAndView quizAll() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("view/community/particulars");
+        return mv;
     }
     /*
      * @descrption 全部问答
@@ -44,22 +50,6 @@ public class QuestionHomeController {
         List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("questionAllList", questionAllList);
-        return map;
-    }
-
-    /*
-     * @descrption 我的问答
-     * @author gby
-     * @param [questionId]
-     * @return org.springframework.web.servlet.ModelAndView
-     * @date 2019/12/10 14:24
-     */
-    @RequestMapping(value = "/questionMy")
-    @ResponseBody
-    public Map<String, Object> questionMy(Pagination pagination) throws Exception {
-        List<Question> questionMyList = questionHomeService.findByUserId(pagination);
-        Map<String, Object> map = new HashMap<>();
-        map.put("questionMyList", questionMyList);
         return map;
     }
 

@@ -76,8 +76,8 @@
                             <div class="text">待解决</div>
                             <div class="menu">
                                 <div class="item" data-value="0">待解决</div>
-                                <div class="item" data-value="1">未解决</div>
-                                <div class="item" data-value="2">已解决</div>
+                                <div class="item" data-value="1">已解决</div>
+                                <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
                         <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入50字" maxlength="50">
