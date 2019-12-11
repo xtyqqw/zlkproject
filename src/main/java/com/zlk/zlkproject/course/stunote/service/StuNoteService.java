@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.course.stuNote.service;
+package com.zlk.zlkproject.course.stunote.service;
 
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
