@@ -141,7 +141,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 76vw;
+            margin-left: 84vw;
             margin-top: -8vw;
         }
         .wz_remen{
@@ -186,7 +186,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 0.4vw;
             -webkit-border-bottom-right-radius: 0.4vw;
-            margin-top: -2.2vw;
+            margin-top: -2.14vw;
             margin-left: 1.2vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -201,7 +201,7 @@
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 3vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -218,7 +218,7 @@
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 3vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -616,7 +616,7 @@
         $('.wz_remen_zt2').css('display','block');
         $('.wz_remen_zt1').css('display','none');
     })
-    <!--文章标签-->
+    /*文章标签*/
     $(function() {
         $(".show li").click(function() {
             if($(this).nextAll().is('')) {

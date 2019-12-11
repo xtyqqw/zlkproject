@@ -1,10 +1,12 @@
+var localObj = window.location;
+var basePath = localObj.protocol+"//"+localObj.host;
 var xingsu ;
 var baifansu ;
 $(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/courseHomePage/selectCoursesByCoursesId",
+        url :basePath+"/courseHomePage/selectCoursesByCoursesId",
         data:"",
         success: function (data) {
             console.log(data);
@@ -12,7 +14,7 @@ $(function () {
             $.ajax({
                 type : "POST",
                 async: false,
-                url :"/kecheng/seleUserCoursesByUserCourses",
+                url :basePath+"/kecheng/seleUserCoursesByUserCourses",
                 data:"",
                 success: function (bool) {
                     /*当有记录时把 “参加项目”变为“已参加”*/
@@ -99,7 +101,7 @@ $("#jiaru").click(function () {
     $.ajax({
         type : "POST",
         async: false,
-        url :"/kecheng/insertCourses",
+        url :basePath+"/kecheng/insertCourses",
         data: {"coursesId":kechengId},
         success: function (data) {
             console.log(data);
@@ -110,7 +112,7 @@ $("#jiaru").click(function () {
                 $.ajax({
                     type : "POST",
                     //async: false,
-                    url :"/courseHomePage/selectCoursesByCoursesId",
+                    url :basePath+"/courseHomePage/selectCoursesByCoursesId",
                     data:"",
                     success: function (data) {
                         $("#rensu").text(data.courses.studentNum+"人");

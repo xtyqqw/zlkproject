@@ -11,7 +11,7 @@
 <head>
     <title>意见反馈</title>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="yijianfankui.css" />
+
     <style type="text/css">
         *{
             margin: 0;

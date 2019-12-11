@@ -183,8 +183,7 @@
                 </li>
             </a>
             <%--愿望清单--%>
-            <a href="javascript:;"
-               name="dian" target="personal-main">
+            <a href="javascript:;" name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-release" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>愿望清单</span>
@@ -216,7 +215,7 @@
 
 <!-- 主体内容 -->
 <iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
-<div><a href="#top" style="position: fixed;margin-left: 40px;z-index: 100;">
+<div><a href="#top" style="position: fixed;margin-left: 68px;z-index: 100;">
     <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
 </a></div>
 <%--iframe自适应高度--%>

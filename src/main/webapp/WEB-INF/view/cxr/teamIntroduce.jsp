@@ -11,8 +11,8 @@
     <title></title>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
     <style type="text/css">
 
@@ -120,7 +120,7 @@
 </div>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script src="/layui/layui.js"></script>
+<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
 <script>
 

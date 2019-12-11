@@ -2,6 +2,7 @@ package com.zlk.zlkproject.course.section.service.impl;
 
 import com.zlk.zlkproject.course.section.mapper.SectionMapper;
 import com.zlk.zlkproject.course.section.service.SectionService;
+import com.zlk.zlkproject.course.userSection.service.UserSectionService;
 import com.zlk.zlkproject.entity.Section;
 import com.zlk.zlkproject.entity.vo.SectionDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class SectionServiceImpl implements SectionService {
 
     @Autowired
     private SectionMapper sectionMapper;
+
+    /**
+     * 服务对象
+     */
+    @Autowired
+    private UserSectionService userSectionService;
 
     @Override
     public List<Section> findSectionByChapterId(Integer chapterId) {
@@ -54,9 +61,13 @@ public class SectionServiceImpl implements SectionService {
             sectionDetails.setSectionId(section.getSectionId());
             sectionDetails.setSectionIntro(section.getSectionIntro());
             sectionDetails.setSectionName(section.getSectionName());
-            sectionDetails.setSectionTime(section.getSectionTime());
+            sectionDetails.setSectionTime((Integer)section.getSectionTime()/60);
             //根据小节id和用户id查询用户的观看状态
             sectionDetails.setState(sectionMapper.findStateByIdAndChapterId(section.getSectionId(),userId));
+            double Sum = userSectionService.querySumBySectionId(section.getSectionId());
+            double Count = userSectionService.queryCountBySectionId(section.getSectionId())*3;
+            double SectionGrade = Sum/Count*100;
+            sectionDetails.setSectionGrade((int)SectionGrade);
             sectionDetailsList.add(sectionDetails);
         }
         map.put("yeishu",yeishu);

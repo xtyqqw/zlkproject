@@ -15,174 +15,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/articleShow.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/articleShow.js"></script>
-    <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
-    <style>
-        #SCS_contentBox{
-            width: 100%;
-            height: auto;
-            padding: 10px 0 0 0;
-        }
-        .SCS_content{
-            background-color: rgb(245,245,245);
-            width: 90%;
-            height: auto;
-            margin: 0 auto 10px auto;
-            font-size: 0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .SCS_c_lbox{
-            width: 20%;
-            height: 300px;
-            display: inline-block;
-            vertical-align: top;
-            font-size: 10px;
-        }
-        .SCS_c_rbox{
-            width: 80%;
-            height: auto;
-            padding: 5px 0;
-            display: inline-block;
-            vertical-align: top;
-            font-size: 14px;
-        }
-        .SCS_userBox{
-            position: relative;
-            width: auto;
-            height: auto;
-            margin: 0 auto;
-            top: 25px;
-        }
-        .SCS_headPhoto_box{
-            width: 9vw;
-            height: 9vw;
-            margin: 0 auto;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-        .SCS_userName_box{
-            width: 9vw;
-            height: 30px;
-            margin: 10px auto;
-            font-size: 24px;
-            text-align: center;
-        }
-        .SCS_textEditor{
-            width: 98%;
-            height: 220px;
-            margin: 0 auto 5px auto !important;
-            display: block;
-            overflow: hidden;
-            background-color: white;
-            border-radius: 5px;
-        }
-        .SCS_textEditor div{
-            height: auto !important;
-            overflow-y: hidden;
-            word-wrap: break-word;
-        }
-        .SCS_c_replyBox{
-            width: 98%;
-            height: auto;
-            margin: 0 auto 5px auto;
-            display: none;
-        }
-        .SCS_replyToolBar{
-            background-color: white;
-            border-radius: 3px 3px 0 0;
-            border: 1px solid #8D8D8D;
-            border-bottom: none;
-        }
-        .SCS_replyEditor{
-            background-color: white;
-            width: 100%;
-            height: 100px;
-            border-radius: 0 0 3px 3px;
-            border: 1px solid #8D8D8D;
-            margin: 0 auto 5px auto;
-            display: block;
-        }
-        .SCS_replyEditor .w-e-panel-container{
-            height: 150px !important;
-            overflow-y: auto !important;
-        }
-        .SCS_replyEditor .w-e-panel-tab-content{
-            height: 100px !important;
-        }
-        .w-e-panel-tab-content textarea{
-            height: 69px !important;
-        }
-        .SCS_replyEditor .w-e-text{
-            overflow-y: auto !important;
-            word-wrap: break-word;
-        }
-        .SCS_replyBtn{
-            background-color: #5FB878;
-            width: 40px;
-            height: 22px;
-            position: relative;
-            top: 0;
-            left: 646px;
-            border-radius: 3px;
-            color: white;
-            font-size: 16px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .SCS_cmt_toolBox{
-            width: 98%;
-            height: 30px;
-            margin: 0 auto 5px auto;
-            border-radius: 4px;
-            background-color: white;
-        }
-        .SCS_reply_toolBox{
-            width: 98%;
-            height: 30px;
-            margin: 0 auto;
-            border-radius: 4px;
-            background-color: white;
-        }
-        .SCS_replyBox{
-            width: 98%;
-            height: auto;
-            padding: 5px 0;
-            margin: 0 auto;
-            display: none;
-        }
-        .SCS_c_t_box{
-            width: 100px;
-            height: 27px;
-            padding: 3px 0 0 0;
-            font-size: 17px;
-        }
-        .SCS_r_t_box{
-            width: 100px;
-            height: 27px;
-            padding: 3px 0 0 0;
-            font-size: 17px;
-        }
-        .SCS_spaceDiv{
-            width: 10px;
-            height: 100%;
-        }
-        .SCS_UDbtn{
-            cursor: pointer;
-        }
-        .SCS_reportBtn{
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <%@include file="../../jsp/header.jsp"%>
-    <%@include file="../../jsp/sidebar.jsp"%>
     <!--中间内容-->
     <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
         <div class="ui container">
@@ -214,7 +54,7 @@
                         <div class="ui orange basic label">翻译</div>
                     </c:if>
                 </div>
-                <h2 class="ui center aligned header">
+                <h2 class="ui center aligned header" style="box-shadow: none;">
                     ${article.title}
                 </h2>
                 <br>
@@ -226,24 +66,25 @@
 
             <div class="ui bottom attached segment">
                 <!--留言区域列表-->
-                <div class="ui segment" id="div_stuCmt">
-                    <div class="ui threaded comments" id="stuCmt_titleBox" style="max-width: 100%;">
-                        <div id="stuCmt_title">评论</div>
-                        <div id="stuCmt_textBox">
-                            <div id="div_stuCmt_toolBar" class="toolbar"></div>
-                            <div id="div_stuCmt_text" class="text"></div>
-                        </div>
-                        <div id="stuCmt_btnBox">
-                            <div class="field m-margin-bottom-small m-mobile-wide">
-                                <button id="stuCmt_btn1" type="button" class="ui button m-mobile-wide" style="background-color: #5A5CAD; color: #ffffff"><i class="edit icon"></i>发布</button>
+                <div class="ui form" id="div_stuCmt">
+                    <div id="stuCmt_titleBox">
+                        <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
+                    </div>
+                    <div style="border: 0px solid white !important;">
+                        <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;">
+                            <div id="cmt-content-box">
+                                <ul id="art-cmt-ul-stream"></ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-tab-item" style="border: 0px solid white !important;">
-                    <div id="SCS_allBox">
-                        <div id="SCS_contentBox">
-                            <ul id="ACS_ul_stream"></ul>
+                    <div id="art-cmt-textBox" class="field" style="border: #5A5CAD 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                        <div id="div-artCmt-toolBar" class="toolbar" style="border-bottom: 1px #5A5CAD solid;"></div>
+                        <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
+                    </div>
+                    <div id="art-cmt-btnBox" class="fields">
+                        <div class="field m-margin-bottom-small m-mobile-wide">
+                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide" style="background-color: #5A5CAD; color: #ffffff"><i class="edit icon"></i>发布</button>
+                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide" style="background-color: #5A5CAD; color: #ffffff">测试</button>
                         </div>
                     </div>
                 </div>
@@ -256,9 +97,12 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
+    <script src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
+    <script src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
+
     <script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
     <script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
     <script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
-
 </body>
 </html>

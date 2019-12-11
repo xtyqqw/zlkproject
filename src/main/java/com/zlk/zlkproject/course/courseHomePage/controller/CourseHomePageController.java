@@ -2,14 +2,15 @@ package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.userSection.service.UserSectionService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -29,6 +30,9 @@ public class CourseHomePageController {
     private LogUtil logUtil;
 
     @Autowired
+    private UserSectionService userSectionService;
+
+    @Autowired
     private CourseHomePageService courseHomePageService;
     @Autowired
     private CommonFileUtil commonFileUtil;
@@ -42,6 +46,7 @@ public class CourseHomePageController {
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         Map<String,Object> map=new HashMap<>();
         map.put("courses",courses);
+        //map.put("")
         return map;
     }
     @RequestMapping(value = "/findCoursesList")
