@@ -113,7 +113,7 @@
             elem: '#teacherNote'
             ,url:'<%=request.getContextPath()%>/teacherNote/selectTNAllByLimit'
             ,toolbar: '#toolbarDemo'
-            ,height: 480
+            ,height: $(document).height()-$('#teacherNote').offset().top-10
             ,cols: [[
                 {field:'tnId', title: '讲师笔记序号', width:120}
                 ,{field:'sectionId', title: '讲师笔记所对应小节的序号', width:200}
@@ -156,7 +156,7 @@
                                 table.reload('teacherNote',{
                                     url:'<%=request.getContextPath()%>/teacherNote/selectTNAllByLimit',
                                     toolbar: '#toolbarDemo',
-                                    height: 480,
+                                    height: $(document).height()-$('#teacherNote').offset().top-10,
                                     page:{
                                         curr:1
                                     }

@@ -21,7 +21,7 @@ layui.use(['table','form','layer'], function(){
     table.render({
         elem: '#StuNote'
         ,url:basePath+'/note/selectStuNoteAllByLimit'
-        ,height: 480
+        ,height: $(document).height()-$('#StuNote').offset().top-20
         ,cols: [[
             {field:'snId', title: '用户笔记序号', width:120}
             ,{field:'snSectionId', title: '所对应小节的序号', width:150}
@@ -60,7 +60,7 @@ layui.use(['table','form','layer'], function(){
                             layer.msg("删除成功");
                             table.reload('StuNote',{
                                 url: basePath+'/note/selectStuNoteAllByLimit',
-                                height: 480,
+                                height: $(document).height()-$('#StuNote').offset().top-20,
                                 page:{
                                     curr:1
                                 }

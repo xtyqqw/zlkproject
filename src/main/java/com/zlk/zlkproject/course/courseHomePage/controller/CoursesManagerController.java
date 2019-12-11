@@ -109,8 +109,8 @@ public class CoursesManagerController {
      * @return 课程管理页面
      */
     @RequestMapping(value = "/insertByCourse" )
-    public Map<String,Object> insertByCourse(Courses courses,Integer typeId,List<Integer> tagId){
-        System.out.println(typeId);
+    public Map<String,Object> insertByCourse(Courses courses){
+        System.out.println(courses.getCoursesTagId());
         int i = courseHomePageService.insertByCourses(courses);
         String message = "";
         if (i>0){

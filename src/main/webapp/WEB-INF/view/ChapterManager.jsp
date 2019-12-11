@@ -215,6 +215,7 @@
                 } else if(obj.event === 'edit') {
                     $("#chapterId").val(data.chapterId);
                     $("#coursesNameInsertSelect").val(data.coursesId);
+                    form.render('select');
                     $("#chapterName").val(data.chapterName);
                     $("#chapterNum").val(data.chapterNum);
                     $("#chapterTime").val(data.chapterTime);

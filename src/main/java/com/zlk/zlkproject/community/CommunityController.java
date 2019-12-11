@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.community.articleHot.controller;
+package com.zlk.zlkproject.community;
 
 import com.zlk.zlkproject.community.articleHot.service.ArticleHotService;
 import com.zlk.zlkproject.community.articleTag.service.TagsService;
@@ -7,46 +7,47 @@ import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
- * @author 张照伟
- * @program: ArticleHotController
+ * @program: controller
  * @description:
- * @date 2019/11/19 20:29
+ * @author: QianKeQin
+ * @date: 2019/12/10 9:22
  */
+
 @Controller
-@RequestMapping(value = "/articleHot")
-public class ArticleHotController {
+public class CommunityController {
+
     @Autowired
     private ArticleHotService articleHotService;
 
     @Autowired
     private TagsService tagsService;
+
     /**
-     * 根据条件倒序查询文章标题
-     * 用ModelAndView查询数据库数据返回到jsp页面对应位置显示
+     * @description: 跳转社区页
      * @param article
-     * @returnModelAndView
+     * @param tag
+     * @return: org.springframework.web.servlet.ModelAndView
+     * @author: QianKeQin
+     * @date: 2019/12/10 9:26
      */
-    /*@RequestMapping("/toArticleHot")
+    @RequestMapping("/toCommunity-page")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
-        *//**根据时间倒序返回文章标题集合 月排序*//*
+        //根据时间倒序返回文章标题集合 月排序
         List<Article> alist = articleHotService.selectTitleByArticle(article);
-        *//**根据浏览量倒序返回文章标题集合 总排序*//*
+        //根据浏览量倒序返回文章标题集合 总排序
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
         ModelAndView mv=new ModelAndView();
-
         mv.addObject("alist",alist);
         mv.addObject("blist",blist);
+        //查询所有标签
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/communityMain");
-
+        mv.setViewName("view/community/newCommunityMain");
         return mv;
-    }*/
-
+    }
 }
