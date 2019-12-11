@@ -864,25 +864,25 @@
 <div id="footer">
     <ul>
         <li>
-            <a href="/aboutus/aboutus">关于我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">关于我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">加入我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">加入我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">联系我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">联系我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">讲师合作</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">讲师合作</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">帮助中心</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">帮助中心</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">友情链接</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">友情链接</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">合作企业</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">合作企业</a>
         </li>
     </ul>
     <p>
@@ -904,7 +904,7 @@
     $(function () {
         $.ajax({
             type: "POST",
-            url: "/index/signIn",
+            url: "<%=request.getContextPath()%>/index/signIn",
             dataType: "json",
             success: function (data) {
                 if (data.result == "true") {
@@ -925,7 +925,7 @@
         $(".s_btn").click(function () {
             $.ajax({
                 type: "POST",
-                url: "/index/toSignIn",
+                url: "<%=request.getContextPath()%>/index/toSignIn",
                 dataType: "json",
                 success: function (data) {
                     if (data.result == "true") {
@@ -986,7 +986,7 @@
                     var data = {"page": page, "limit": limit};
                     $.ajax({
                         type: "POST",
-                        url: "/index/toFlow",
+                        url: "<%=request.getContextPath()%>/index/toFlow",
                         dataType: "json",
                         data: data,
                         success: function (result) {
@@ -1034,7 +1034,7 @@
                     var data = {"page": page, "limit": limit};
                     $.ajax({
                         type: "POST",
-                        url: "/index/toFlow",
+                        url: "<%=request.getContextPath()%>/index/toFlow",
                         dataType: "json",
                         data: data,
                         success: function (result) {
@@ -1080,7 +1080,7 @@
                     var data = {"page": page, "limit": limit};
                     $.ajax({
                         type: "POST",
-                        url: "/index/toFlow",
+                        url: "<%=request.getContextPath()%>/index/toFlow",
                         dataType: "json",
                         data: data,
                         success: function (result) {
@@ -1126,7 +1126,7 @@
                     var data = {"page": page, "limit": limit};
                     $.ajax({
                         type: "POST",
-                        url: "/index/toFlow",
+                        url: "<%=request.getContextPath()%>/index/toFlow",
                         dataType: "json",
                         data: data,
                         success: function (result) {
