@@ -143,7 +143,7 @@
         var setting = {
             async: {
                 enable: true,
-                url: "/function/findFunctionByUrl",
+                url: "<%=request.getContextPath()%>/function/findFunctionByUrl",
                 dataType: JSON
             },
             check: {
@@ -300,7 +300,6 @@
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
                 page: false,
-                height: 423,
                 cols: [[
                     {field: 'id', title: '编号',width:80},
                     {field: 'name', title: '资源名称',width:200},

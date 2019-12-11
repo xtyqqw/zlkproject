@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
 
 </head>
 <body>
@@ -42,7 +42,7 @@
     </script>
 
     <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="report" value="{{d.sqaId}}" lay-skin="switch" lay-text="已举报|举报" lay-filter="reportDemo" {{ d.report === "已举报" ? 'checked' : '' }}>
+        <input type="checkbox" name="report" value="{{d.sqaId}}" lay-skin="switch" lay-text="已举报|举报" lay-filter="reportDemo" {{ d.report ==="已举报"?'checked':'' }}>
     </script>
 
 
@@ -56,7 +56,8 @@
 
             table.render({
                 elem: '#stuQa'
-                ,url:'/stuQaManager/selectAllLimit'
+                ,height:'full-50'
+                ,url:'<%=request.getContextPath()%>/stuQaManager/selectAllLimit'
                 ,method:'POST'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
@@ -81,7 +82,8 @@
                 var evend = obj.event;
                 if (evend==="report"){
                     table.reload('stuQa', {
-                        url: '/stuQaManager/reportDesc'
+                        url: '<%=request.getContextPath()%>/stuQaManager/reportDesc'
+                        , height:'full-50'
                         , method:'post'
                         , page:{
                             curr:1
@@ -103,7 +105,8 @@
                 let name = $("#selectInput").attr("name");
                 let val = $("#selectInput").val();
                 table.reload('stuQa', {
-                    url: '/stuQaManager/fuzzySelect'
+                    url: '<%=request.getContextPath()%>/stuQaManager/fuzzySelect'
+                    , height:'full-50'
                     , method:'post'
                     , where:{
                         name:name,
@@ -124,12 +127,13 @@
                         $.ajax({
                             type : "POST",
                             async: false,
-                            url :"/stuQaManager/deleteStuQa",
+                            url :"<%=request.getContextPath()%>/stuQaManager/deleteStuQa",
                             data: {"sqaId":data.sqaId},
                             success: function (data) {
                                 layer.alert(data.msg);
                                 table.reload('stuQa',{
-                                    url: '/stuQaManager/selectAllLimit',
+                                    url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
+                                    height:'full-50',
                                     method: 'post',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -154,12 +158,13 @@
                 $.ajax({
                     type : "POST",
                     async: false,
-                    url :"/stuQaManager/updateReport",
+                    url :"<%=request.getContextPath()%>/stuQaManager/updateReport",
                     data: {"sqaId":data.value,"report":report},
                     success: function (data) {
                         layer.alert(data.msg);
                         table.reload('stuQa',{
-                            url: '/stuQaManager/selectAllLimit',
+                            url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
+                            height:'full-50',
                             method: 'post',
                             toolbar: '#toolbarDemo',
                             page:{

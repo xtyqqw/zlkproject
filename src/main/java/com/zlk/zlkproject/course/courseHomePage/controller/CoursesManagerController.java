@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
+import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.utils.CommonFileUtil;
@@ -37,6 +38,8 @@ public class CoursesManagerController {
     private CommonFileUtil commonFileUtil;
     @Autowired
     private FdfsConfig fdfsConfig;
+    @Autowired
+    private ChapterService chapterService;
 
     /**
      * 跳转到课程管理页面
@@ -56,11 +59,19 @@ public class CoursesManagerController {
     @RequestMapping(value = "/findAllByLimit" )
     @ResponseBody
     public Map findAllByLimit(Integer page, Integer limit){
+        List<Courses> coursesList = courseHomePageService.selectCoursesByLimit(page, limit);
+        for (Courses courses : coursesList) {
+            Integer chapterNum = chapterService.selectCountByCoursesId(courses.getCoursesId());
+            Integer sectionNum = chapterService.selectSumSectionByCoursesId(courses.getCoursesId());
+            courses.setChapterNum(chapterNum);
+            courses.setSectionNum(sectionNum);
+            courseHomePageService.updateByCoursesId(courses);
+        }
         Map map = new HashMap();
         map.put("code",0);
         map.put("msg","");
         map.put("count",courseHomePageService.selectCount());
-        map.put("data",courseHomePageService.selectCoursesByLimit(page, limit));
+        map.put("data",coursesList);
         return map;
     }
 
@@ -153,6 +164,15 @@ public class CoursesManagerController {
         }
         Map<String,Object> map=new HashMap<>();
         map.put("mmm",message);
+        return map;
+    }
+
+    @RequestMapping(value = "/findAllCourses",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> findAllCourses() throws Exception{
+        List<Courses> coursesList = courseHomePageService.findAllCourses();
+        Map<String,Object> map=new HashMap<>();
+        map.put("coursesList",coursesList);
         return map;
     }
 

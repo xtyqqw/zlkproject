@@ -123,4 +123,5 @@ public interface ChapterService {
      *@time 2019/12/8  11:46
      */
     Integer selectSumSectionByCoursesId(Integer coursesId);
+
 }

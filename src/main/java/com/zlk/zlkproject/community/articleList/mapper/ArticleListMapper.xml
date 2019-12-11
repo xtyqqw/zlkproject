@@ -14,7 +14,7 @@
         <result column="article_content" property="articleContent" javaType="java.lang.String"></result>
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"></result>
         <result column="cai_count" property="caiCount" javaType="java.lang.Integer"></result>
-        <result column="inform" property="inform" javaType="java.lang.String"></result>
+        <result column="inform" property="inform" javaType="java.lang.Integer"></result>
         <result column="user_id" property="userId" javaType="java.lang.String"></result>
         <result column="create_article_type" property="createArticleType" javaType="java.lang.Integer"></result>
         <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"></result>

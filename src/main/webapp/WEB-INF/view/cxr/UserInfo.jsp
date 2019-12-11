@@ -372,9 +372,10 @@
             , page: true //开启分页
             , height: 400
             , cols: [[ //表头
-                {type: 'checkbox'}
+                //
+                // {type: 'checkbox'}
                                     //序号自动排序  type:'numbers'
-                ,{field:'zizeng',title:'序号',type:'numbers'}
+                {field:'zizeng',title:'序号',type:'numbers'}
                 // , {field: 'userId', title: '编号', width: 80, sort: true}
                                     //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
@@ -500,6 +501,10 @@
                     area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
+                    // 更新渲染,将下拉框的内容反显至页面
+                    success: function(){
+                       form.render('select');
+                    },
                     yes: function (index, layero) {
                                                 //修改按钮
                         layero.find("form").find("#updateSubmit").click();
