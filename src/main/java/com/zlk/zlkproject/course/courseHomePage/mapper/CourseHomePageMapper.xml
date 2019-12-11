@@ -56,6 +56,7 @@
        FROM courses c,tag t
        WHERE t.tag_id=c.courses_tag_id ORDER BY c.student_num DESC  LIMIT #{startPage},#{limit};
       </select>
+
     <select id="findAllByTag" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
         SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
        FROM courses c,tag t

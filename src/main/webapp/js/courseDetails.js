@@ -1,3 +1,5 @@
+var localObj = window.location;
+var basePath = localObj.protocol+"//"+localObj.host;
 layui.use('flow', function(){
     var flow = layui.flow;
 
@@ -15,7 +17,7 @@ layui.use('flow', function(){
                 var data = {"page":page,"limit":limit};
                 $.ajax({
                     type :"POST",
-                    url:"/section/findSectionDetails",
+                    url:basePath+"/section/findSectionDetails",
                     dataType:"json",
                     data:data,
                     success:function(result) {
@@ -99,7 +101,7 @@ layui.use('flow', function(){
                                         '</li>');
                                 }
                             }else if (courses.state==="播放中") {
-                                if(courses.xiaojeiPinfen==="3"){
+                                if(courses.sectionGrade>66){
                                     lis.push(
                                         '<li class="kechengxiaojeipingfen_li">' +
                                         '<i class="iconfont icon-star-fill xingxing" style="color: ' + color + ';"></i>' +
@@ -111,7 +113,7 @@ layui.use('flow', function(){
                                         '<i class="iconfont icon-star-fill xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>');
                                 }
-                                else if(courses.xiaojeiPinfen==="2"){
+                                else if(courses.sectionGrade>33&&courses.sectionGrade<66){
                                     lis.push(
                                         '<li class="kechengxiaojeipingfen_li">' +
                                         '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
@@ -123,7 +125,7 @@ layui.use('flow', function(){
                                         '<i class="iconfont icon-star-fill xingxing" style="color: ' + color + ';"></i>' +
                                         '</li>');
                                 }
-                                else if(courses.xiaojeiPinfen==="1"){
+                                else if(courses.sectionGrade>0&&courses.sectionGrade<33){
                                     lis.push(
                                         '<li class="kechengxiaojeipingfen_li">' +
                                         '<i class="iconfont icon-star1 xingxing" style="color: ' + color + ';"></i>' +
@@ -176,16 +178,16 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
     var sectionId = $(this).children().first().val();
     $.ajax({
         type : "POST",
-        url :"/kecheng/seleUserCoursesByUserCourses",
+        url :basePath+"/kecheng/seleUserCoursesByUserCourses",
         data:"",
         success: function (bool) {
             if (bool=="已参加"){
                 $.ajax({
                     type : "POST",
-                    url :"/toVideo",
+                    url :basePath+"/toVideo",
                     data:{"sectionId":sectionId},
                     success: function (data) {
-                        window.location.href = "/toVideo?sectionId="+sectionId;
+                        window.location.href = basePath+"/toVideo?sectionId="+sectionId;
                     }
                 });
             }else {

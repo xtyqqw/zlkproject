@@ -30,7 +30,7 @@
         /*信息完善css*/
 
         .layui-form{
-              margin-top: 3vw;
+              /*margin-top: 1vw;*/
             font-size: 1vw;
         }
 
@@ -44,9 +44,9 @@
             color: red;
             text-align: center;
         }
-        h2{
-            text-align: center;
-        }
+        /*h2{*/
+            /*text-align: center;*/
+        /*}*/
         /*图片在表格里完整显示*/
         .layui-table-cell{
             text-align:center;
@@ -58,14 +58,16 @@
             max-width:30px;
         }
 
-
+        .layui-table-view{
+            border-style:none;
+        }
 
     </style>
 
 </head>
 <body>
 
-<h2>用户信息管理</h2>
+<%--<h2>用户信息管理</h2>--%>
 <%--点击按钮后，提示框信息--%>
 <input type="hidden" value="${msg}" id="msg">
 
@@ -370,11 +372,12 @@
             //通过控制层返回查询所有信息，（包括分页和模糊查询）
             , url: '<%=request.getContextPath()%>/user/userInfo?condition=${condition}'
             , page: true //开启分页
-            , height: 400
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
-                {type: 'checkbox'}
+                //
+                // {type: 'checkbox'}
                                     //序号自动排序  type:'numbers'
-                ,{field:'zizeng',title:'序号',type:'numbers'}
+                {field:'zizeng',title:'序号',type:'numbers'}
                 // , {field: 'userId', title: '编号', width: 80, sort: true}
                                     //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
@@ -396,7 +399,7 @@
                 , {field: 'userSpecialty', title: '所属专业', width: 90}
 
                 , {
-                    title: '操作', width: 180, align: 'center', toolbar: '' +
+                    title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
@@ -413,7 +416,7 @@
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
                                 //模糊查询的表单
-                '               <form type="post" action="/user/toUserManager" style="margin-top:-3vw;margin-left:-2vw;"> \n' +
+                '               <form type="post" action="/user/toUserManager" style="margin-top:0vw;margin-left:-2vw;"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">姓名查询</label>\n' +
 
@@ -500,6 +503,10 @@
                     area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
+                    // 更新渲染,将下拉框的内容反显至页面
+                    success: function(){
+                       form.render('select');
+                    },
                     yes: function (index, layero) {
                                                 //修改按钮
                         layero.find("form").find("#updateSubmit").click();

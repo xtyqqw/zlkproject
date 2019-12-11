@@ -1,3 +1,5 @@
+var localObj = window.location;
+var basePath = localObj.protocol+"//"+localObj.host;
 
 $('body').on('mouseenter','.layui-table-view td[data-field = "content"]',function () {
     var msg = $(this).find('div').text();
@@ -18,8 +20,8 @@ layui.use(['table','form','layer'], function(){
     var layer = layui.layer;
     table.render({
         elem: '#StuNote'
-        ,url:'/note/selectStuNoteAllByLimit'
-        ,height: 480
+        ,url:basePath+'/note/selectStuNoteAllByLimit'
+        ,height: $(document).height()-$('#StuNote').offset().top-20
         ,cols: [[
             {field:'snId', title: '用户笔记序号', width:120}
             ,{field:'snSectionId', title: '所对应小节的序号', width:150}
@@ -51,14 +53,14 @@ layui.use(['table','form','layer'], function(){
                 ,yes:function () {
                     $.ajax({
                         type: "GET",
-                        url: "/note/deleteStuNoteBySnId?snId="+snId,
+                        url: basePath+"/note/deleteStuNoteBySnId?snId="+snId,
                         data: "",
                         success: function (result) {
                             //flag = false;
                             layer.msg("删除成功");
                             table.reload('StuNote',{
-                                url: '/note/selectStuNoteAllByLimit',
-                                height: 480,
+                                url: basePath+'/note/selectStuNoteAllByLimit',
+                                height: $(document).height()-$('#StuNote').offset().top-20,
                                 page:{
                                     curr:1
                                 }

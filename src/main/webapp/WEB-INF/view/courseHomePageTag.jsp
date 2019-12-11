@@ -229,7 +229,7 @@
          float: left;
 
      }
-     #biao1{
+     #biao7{
          width: 100px;
          height: 25px;
          position: relative;
@@ -241,108 +241,9 @@
          border-radius: 3px;
          font-weight:bold;
          border: none;
-        }
-     #biao2{
-         width: 100px;
-         height: 25px;
-         position: relative;
+         margin: 8px;
+     }
 
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao3{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao4{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao5{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao6{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     /*#biao1:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         border-radius: 3px;
-     }
-     #biao2:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         top: 23px;
-         font-size:15px;
-         font-weight:bold;
-         border-radius: 3px;
-     }
-     .biao3:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         top: 43px;
-         font-size:15px;
-         font-weight:bold;
-         border-radius: 3px;
-     }
-     .biao4:hover{
-         text-decoration:none;
-         background-color: rgb(208, 209, 255);
-         position: relative;
-         top: 63px;
-         font-size:15px;
-         font-weight:bold;
-         border-radius: 3px;
-     }*/
 
     </style>
 
@@ -386,6 +287,8 @@
             text-align: center;
             padding-top: 10px;
         }
+
+
     </style>
 
 </head>
@@ -402,12 +305,6 @@
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
                 <div id="biaoqian">
-                    <br><input id="biao1" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=java") value="java"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao2" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=html") value="html"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao3" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=HTML5") value="HTML5"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao4" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=C++") value="C++"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao5" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=Python") value="Python"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao6" type="button" onclick=window.open("<%=request.getContextPath()%>HomePageTag?tagName=PHP") value="PHP"/> </div>
                 </div>
             </div>
             <div style="clear: both"></div>
@@ -474,42 +371,42 @@
 
 </script>
 <%--瀑布流--%>
-<%--<script>
+<script>
     layui.use(['flow'], function() {
-            var flow = layui.flow;
-            flow.load({
-                elem: '#biaoqian' //流加载容器
-                , isAuto: false
-                , end: "<p>没有更多了</p>"
-                , done: function (page, next) { //加载下一页
+        var flow = layui.flow;
+        flow.load({
+            elem: '#biaoqian' //流加载容器
+            , isAuto: false
+            ,end: "<p></p>"
+            , done: function (page, next) { //加载下一页
 //模拟插入
-                    setTimeout(function () {
-                        var lis = [];
-                        var limit = 4;
-                        var data = {"page": page, "limit": limit};
-                        console.log(data);
-                        $.ajax({
-                            type: "POST",
-                            url: "/tagKe/findTagList",
-                            dataType: "json",
-                            data: data,
-                            success: function (result) {
-                                layui.each(result.tagList, function (i, tag) {
-                                    lis.push(
-                                        '<br><a class="a1">' + tag.tagName + '</a>'
-                                    );
+                setTimeout(function () {
+                    var lis = [];
+                    var limit = 10;
+                    var data = {"page": page, "limit": limit};
+                    console.log(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "/tagKe/findTagList",
+                        dataType: "json",
+                        data: data,
+                        success: function (result) {
+                            layui.each(result.tagList, function (i, tag) {
+                                lis.push(
+                                    /*'<br><a class="a1">' + tag.tagName + '</a>'*/
+                                    '<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName='+tag.tagName+'") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                                );
 
+                            });
+                            next(lis.join(''), page < 1); //假设总页数为 6
+                        }
 
-                                    next(lis.join(''), page < 1); //假设总页数为 6
-                                }, 500);
-                            }
-
-                        });
                     });
-                }
-            });
+                });
+            }
         });
-</script>--%>
+    });
+</script>
  <%--瀑布流--%>
 <script>
     layui.use(['flow'], function(){
