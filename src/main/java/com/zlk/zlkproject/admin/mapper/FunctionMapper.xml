@@ -9,13 +9,6 @@
         <result property="pid" column="parent_id" javaType="java.lang.Integer"/>
         <result property="url" column="url" javaType="java.lang.String"/>
         <result property="comment" column="comment" javaType="java.lang.String"/>
-        <!--<collection property="children" ofType="com.zlk.zlkproject.entity.Function">
-            <id property="id" column="a" javaType="java.lang.Integer"/>
-            <result property="name" column="b" javaType="java.lang.String"/>
-            <result property="pid" column="c" javaType="java.lang.Integer"/>
-            <result property="url" column="d" javaType="java.lang.String"/>
-            <result property="comment" column="comment" javaType="java.lang.String"/>
-        </collection>-->
     </resultMap>
     <select id="findFunctionByAdminName" parameterType="java.lang.String" resultMap="functionEntityMap">
         select distinct f.* from roles r,roles_functions rf,functions f

@@ -49,11 +49,9 @@
 	</select>
 
     <select id="findAll" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
-       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
-       FROM courses c
-       LEFT JOIN user_courses uc ON c.courses_id=uc.courses_id
-       ,tag_courses tc,tag t
-       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
+        SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
+       FROM courses c,tag_courses tc,tag t
+       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id GROUP BY c.courses_id ORDER BY c.student_num DESC LIMIT  #{startPage},#{limit};
     </select>
     <select id="findAllByTag" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
        SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
@@ -73,9 +71,9 @@
     </select>
 
     <insert id="insertByCourses" keyProperty="coursesId" useGeneratedKeys="true">
-        insert into courses(section_num,courses_name,student_num,chapter_num,price,cover_pic,introduce_video
-        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{sectionNum},#{coursesName},#{studentNum}
-        ,#{chapterNum},#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
+        insert into courses(courses_name,price,cover_pic,introduce_video
+        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{coursesName}
+        ,#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
         #{featureText},#{featurePic})
     </insert>
 
