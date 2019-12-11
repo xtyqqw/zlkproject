@@ -1,7 +1,7 @@
 package com.zlk.zlkproject.course.stunote.service.impl;
 
-import com.zlk.zlkproject.course.stuNote.mapper.StuNoteMapper;
-import com.zlk.zlkproject.course.stuNote.service.StuNoteService;
+import com.zlk.zlkproject.course.stunote.mapper.StuNoteMapper;
+import com.zlk.zlkproject.course.stunote.service.StuNoteService;
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
 import org.springframework.beans.factory.annotation.Autowired;
