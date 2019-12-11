@@ -182,8 +182,7 @@
                 </li>
             </a>
             <%--愿望清单--%>
-            <a href="javascript:;"
-               name="dian" target="personal-main">
+            <a href="javascript:;" name="dian" target="personal-main">
                 <li>
                     <i class="layui-icon layui-icon-release" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>愿望清单</span>

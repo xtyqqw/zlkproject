@@ -88,15 +88,15 @@ public class PersonalController {
     @RequestMapping(value = "/findUser")
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
-//         userId="1";
+         userId="1";
+
+        User user=userService.selectUserById(userId);
+
+//        //从session中获取ID，进行修改，userId="1";为模拟数据
+//       User user1 = (User) request.getSession().getAttribute("user");
 //
-//        User user=userService.selectUserById(userId);
-
-        //从session中获取ID，进行修改，userId="1";为模拟数据
-       User user1 = (User) request.getSession().getAttribute("user");
-
-       //调用查询单个对象的方法
-        User user=userService.selectUserById(user1.getUserId());
+//       //调用查询单个对象的方法
+//        User user=userService.selectUserById(user1.getUserId());
 
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");
@@ -131,10 +131,14 @@ public class PersonalController {
         // fdfsConfig.getResHost()是获取服务器ip，
         // fdfsConfig.getStoragePort()获取服务器端口
         String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
         System.out.println(path);
+        //最终访问文件资源的地址，
         System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
         map.put("url",url);
         map.put("message","上传成功");
+        //返回map集合
         return map;
     }
 }
