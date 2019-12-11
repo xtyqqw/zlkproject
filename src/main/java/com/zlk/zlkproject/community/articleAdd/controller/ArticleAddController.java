@@ -36,17 +36,17 @@ public class ArticleAddController {
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
-    public ModelAndView articleGuide(Article article, HttpServletRequest httpServletRequest) throws Exception{
+    public ModelAndView articleGuide(Article article, HttpServletRequest request) throws Exception{
+        //User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv=new ModelAndView();
         //进入发文提示页面前先判断当前用户的登录状态
-        /*article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
-        if (httpServletRequest.getSession().getAttribute("user") == null){
+        /*if (user == null){
             mv.addObject("flag", "true");
             mv.addObject("msg","想发文，请先进行登录");
-            mv.setViewName("view/");
+            mv.setViewName("view/community/communityMain");
         }*/
         //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
-        Article approval=articleAddService.getArticleInApproval(article.getApproval());
+        /*Article approval=articleAddService.getArticleInApproval(article.getApproval());
         if (approval != null) {
             if (article.getApproval()==1) {
                 article.setApproval(1);
@@ -56,13 +56,14 @@ public class ArticleAddController {
             }else if (article.getApproval()==0){
                 mv.addObject("flag", "true");
                 mv.addObject("msg","你的文章正在审核中，通过以后才能继续发表文章，我们会尽快处理，给您反馈");
-                mv.setViewName("view/");
+                mv.setViewName("view/community/communityMain");
             }else {
                 mv.addObject("flag", "true");
                 mv.addObject("msg","你之前的文章审核失败，以后发表文章请注意撰文规则，感谢您的配合");
-                mv.setViewName("view/");
+                mv.setViewName("view/community/communityMain");
             }
-        }
+        }*/
+        mv.setViewName("view/community/communityMain");
         return mv;
     }
 
@@ -84,16 +85,15 @@ public class ArticleAddController {
 
     //创建文章的请求方法
     @PostMapping(value = "/articles")
-    public String post(Article article, RedirectAttributes attributes, HttpServletRequest httpServletRequest) throws Exception {
-        //article.setUser((User) httpServletRequest.getSession().getAttribute("user"));
+    public String post(Article article, HttpServletRequest request) throws Exception {
+        /*User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();*/
+        User user=new User();
+        user.setUserId("1");
+        article.setUser(user);
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
-        if (a == null) {
-            attributes.addFlashAttribute("message","操作失败");
-        } else {
-            attributes.addFlashAttribute("message","操作成功");
-        }
-        return "redirect:/community/article-guide";
+        return "redirect:/toCommunity-page";
     }
 
     //文章编辑页面的图片上传方法

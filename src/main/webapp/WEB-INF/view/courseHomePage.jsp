@@ -422,7 +422,7 @@
                         console.log(data);
                         $.ajax({
                             type: "POST",
-                            url: "/tagKe/findTagList",
+                            url: "<%=request.getContextPath()%>/tagKe/findTagList",
                             dataType: "json",
                             data: data,
                             success: function (result) {

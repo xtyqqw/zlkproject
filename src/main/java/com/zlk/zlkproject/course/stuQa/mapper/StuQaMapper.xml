@@ -99,7 +99,7 @@
         SELECT *
         FROM (SELECT * FROM stu_qa
         <where>
-            <if test="sectionId !=null and sectionId != ''">
+            <if test="sectionId !=null">
                 section_id = #{sectionId}
             </if>
             and pId = 0
@@ -112,7 +112,7 @@
     <select id="findCountBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM stu_qa
         <where>
-            <if test="sectionId !=null and sectionId != ''">
+            <if test="sectionId !=null">
                 section_id = #{sectionId}
             </if>
             and pId = 0
@@ -123,7 +123,7 @@
         SELECT *
         FROM (SELECT * FROM stu_qa
         <where>
-            <if test="sectionId !=null and sectionId != ''">
+            <if test="sectionId !=null">
                 section_id = #{sectionId}
             </if>
             and pId = 0
@@ -155,10 +155,10 @@
         SELECT *
         FROM (SELECT * FROM stu_qa
         <where>
-            <if test="sectionId !=null and sectionId != ''">
+            <if test="sectionId !=null">
                 AND section_id = #{sectionId}
             </if>
-            <if test="pId != null and pId != ''">
+            <if test="pId != null">
                 AND pid = #{pId}
             </if>
         </where> ORDER BY date DESC
