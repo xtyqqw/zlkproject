@@ -58,15 +58,6 @@ public interface FunctionService {
      * @return java.lang.Integer
      **/
     Integer deleteFunction(Integer functionId);
-    
-    /**
-     * @Author lufengxiang
-     * @Description //TODO 通过菜单ID删除角色权限中间表信息
-     * @Date 15:16 2019/11/27
-     * @Param [functionId]
-     * @return java.lang.Integer
-     **/
-    Integer deleteFunctionAndRoleByFunctionId(Integer functionId);
 
     /**
      * @Author lufengxiang

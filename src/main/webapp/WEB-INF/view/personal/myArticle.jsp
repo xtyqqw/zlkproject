@@ -94,6 +94,10 @@
     .main .title {
         margin-top: 7px;
         font-weight: bold;
+        max-width: 50em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .main .type {
@@ -138,6 +142,7 @@
         display: none;
     }
     .check_all{width: 40px;height: 20px;background: #009688;color: white;display: inline-block;text-align: center;line-height: 20px;cursor: pointer;}
+    .context ul li:hover{background: white;}
 </style>
 <body>
 <div>
@@ -185,10 +190,10 @@
     </ul>
 </div>
 <div id="test1"></div>
-<div hidden="hidden" id="demo" style="padding: 25px">
-    <form action="<%=request.getContextPath()%>/articles/update" method="post">
-        <textarea id="articleContent" name="articleContent"></textarea>
-        <input type="text" id="input_hid" hidden="hidden" name="articleId">
+<%--<div hidden="hidden" id="demo" style="padding: 25px">--%>
+<%--    <form action="<%=request.getContextPath()%>/articles/update" method="post">--%>
+<%--        <textarea id="articleContent" name="articleContent"></textarea>--%>
+<%--        <input type="text" id="input_hid" hidden="hidden" name="articleId">--%>
 <%--        <input type="text" id="input_hid2" hidden="hidden" name="tagList">--%>
 <%--        <h4>请选择文章栏目</h4>--%>
 <%--        <p class="tag_p"><span style="color: red;">*</span>至少选择一个，最多选择三个</p>--%>
@@ -198,9 +203,9 @@
 <%--            <input type="checkbox" value="MYSQL" name="checkbox" title="MYSQL">--%>
 <%--            <span class="check_all">确定</span>--%>
 <%--        </div>--%>
-        <input type="submit" class="layui-btn" value="提交" style="float: right;margin-top: 20px;">
-    </form>
-</div>
+<%--        <input type="submit" class="layui-btn" value="提交" style="float: right;margin-top: 20px;">--%>
+<%--    </form>--%>
+<%--</div>--%>
 </body>
 <script>
     layui.use('form', function(){
@@ -221,44 +226,35 @@
             layer.close(index);
         });
     }
-    layui.use('layer', function(){
-        var $ = layui.jquery, layer = layui.layer;
-        window.editArt = function(obj,articleId){
-            $("#articleContent").html(obj);
-            $("#input_hid").val(articleId);
-            layer.open({
-                type: 1
-                ,title: '编辑'
-                ,btn: false
-                ,area: ['70%','30%']
-                ,content: $('#demo')
-                ,offset: '30px'
-            })
-        }
-    })
-    layui.use('layedit', function(){
-        var layedit = layui.layedit;
-        layedit.build('articleContent',{
-            tool: [
-                'strong' //加粗
-                ,'italic' //斜体
-                ,'underline' //下划线
-                ,'del' //删除线
-            ]
-        });
-    });
+    // layui.use('layer', function(){
+    //     var $ = layui.jquery, layer = layui.layer;
+    //     window.editArt = function(obj,articleId){
+    //         $("#articleContent").html(obj);
+    //         $("#input_hid").val(articleId);
+    //         layer.open({
+    //             type: 1
+    //             ,title: '编辑'
+    //             ,btn: false
+    //             ,area: ['70%','30%']
+    //             ,content: $('#demo')
+    //             ,offset: '30px'
+    //         })
+    //     }
+    // })
+    // layui.use('layedit', function(){
+    //     var layedit = layui.layedit;
+    //     layedit.build('articleContent',{
+    //         tool: [
+    //             'strong' //加粗
+    //             ,'italic' //斜体
+    //             ,'underline' //下划线
+    //             ,'del' //删除线
+    //         ]
+    //     });
+    // });
     $(function () {
         loadData()
         getPage()
-        $(".lookall").click(function(){
-            if(($(this).html())==="查看全文"){
-                $(this).parent().siblings('.con').removeClass("con_p");
-                $(this).html("收起");
-            }else{
-                $(this).parent().siblings('.con').addClass("con_p");
-                $(this).html("查看全文");
-            }
-        })
     })
     var page = 1; //设置首页页码
     var limit = 8;  //设置一页显示的条数
@@ -299,11 +295,10 @@
                     html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
                     html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
                     html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
-                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览</span>';
-                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论</span>';
-                    html += '<span class="span_w">'+data1[i].commentCount+'</span><span class="lookall">查看全文</span>';
+                    html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览量</span>';
+                    html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论数</span>';
+                    html += '<span class="span_w">'+data1[i].commentCount+'</span><a href="/articles/toArt?articleId='+data1[i].articleId+'" class="lookall">查看修改</a>';
                     html += '<span class="delete cur" onclick="deleteArt('+ data1[i].articleId+')">删除</span>';
-                    html += '<span class="edit cur" onclick="editArt(\''+data1[i].articleContent+'\','+data1[i].articleId +')">编辑</span>';
                     html += '<span class="cur">分享</span></div></div></li>';
                 }
                 $(".context ul").empty().append(html);
@@ -327,5 +322,85 @@
             });
         });
     }
+    // $(function () {
+    //     loadData()
+    //     getPage()
+    //     $(".lookall").click(function(){
+    //         if(($(this).html())==="查看全文"){
+    //             $(this).parent().siblings('.con').removeClass("con_p");
+    //             $(this).html("收起");
+    //         }else{
+    //             $(this).parent().siblings('.con').addClass("con_p");
+    //             $(this).html("查看全文");
+    //         }
+    //     })
+    // })
+    // var page = 1; //设置首页页码
+    // var limit = 8;  //设置一页显示的条数
+    // var total;    //总条数
+    // function loadData() {
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/articles/flow",
+    //         async: false,
+    //         dataType: 'json',
+    //         data: {
+    //             "page": page,
+    //             "limit": limit,
+    //         },
+    //         success: function (ret) {
+    //             total = ret.count;  //设置总条数
+    //             var data1 = ret.data;
+    //             var html = '';
+    //             for (var i = 0; i < data1.length; i++) {
+    //                 var tagList = data1[i].tagList;
+    //                 var htmlTag = "";
+    //                 html += '<li>';
+    //                 html += '<div class="img">';
+    //                 html += '<img src="'+data1[i].figures+'" style="height: 70px;width: 70px;border-radius: 3px;">';
+    //                 html += '</div>';
+    //                 html += '<div class="main">';
+    //                 html += '<p><ul>';
+    //                 html += '<li class="tag_li">';
+    //                 for (var j = 0;j<tagList.length;j++){
+    //                     htmlTag +='<span class="tag">'+tagList[j].tagName+'</span>';
+    //                 }
+    //                 html += htmlTag;
+    //                 html += '</li>';
+    //                 html += '</ul>';
+    //                 html += '<span class="time">'+data1[i].createDate+'</span></p>';
+    //                 html += '<p class="title">'+data1[i].title+'</p>';
+    //                 html += '<p class="type">'+data1[i].typeName+'</p>';
+    //                 html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
+    //                 html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
+    //                 html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
+    //                 html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览</span>';
+    //                 html += '<span class="span_w">'+data1[i].browseCount+'</span><span>评论</span>';
+    //                 html += '<span class="span_w">'+data1[i].commentCount+'</span><span class="lookall">查看全文</span>';
+    //                 html += '<span class="delete cur" onclick="deleteArt('+ data1[i].articleId+')">删除</span>';
+    //                 html += '<span class="edit cur" onclick="editArt(\''+data1[i].articleContent+'\','+data1[i].articleId +')">编辑</span>';
+    //                 html += '<span class="cur">分享</span></div></div></li>';
+    //             }
+    //             $(".context ul").empty().append(html);
+    //         }
+    //     });
+    // }
+    // function getPage(){
+    //     layui.use('laypage', function(){
+    //         var laypage = layui.laypage;
+    //         laypage.render({
+    //             elem: 'test1'
+    //             ,count: total,
+    //             limit:limit,
+    //             jump: function(obj, first){
+    //                 page=obj.curr;
+    //                 limit=obj.limit;
+    //                 if(!first){
+    //                     loadData()
+    //                 }
+    //             }
+    //         });
+    //     });
+    // }
 </script>
 </html>

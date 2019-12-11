@@ -47,8 +47,12 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/person")
-    public String jsp(){
-        return "view/personal/personal";
+    public ModelAndView jsp(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("user",user);
+        mv.setViewName("view/personal/personal");
+        return mv;
     }
 
     //用户前台信息展示页面
@@ -88,7 +92,7 @@ public class PersonalController {
     @RequestMapping(value = "/findUser")
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
-//         userId="5";
+//         userId="1";
 //
 //        User user=userService.selectUserById(userId);
 
@@ -97,6 +101,7 @@ public class PersonalController {
 
        //调用查询单个对象的方法
         User user=userService.selectUserById(user1.getUserId());
+
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");
         // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");

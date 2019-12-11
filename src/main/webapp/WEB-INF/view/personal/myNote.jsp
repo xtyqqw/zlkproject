@@ -47,7 +47,9 @@
         border-radius: 5px;
         margin-top: 20px;
     }
-
+    .context ul li:hover{
+        background: white;
+    }
     .context ul li p {
         margin-bottom: 15px;
         color: #808080;

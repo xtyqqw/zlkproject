@@ -1,4 +1,4 @@
-package com.zlk.zlkproject.course.stuNote.service.impl;
+package com.zlk.zlkproject.course.stunote.service.impl;
 
 import com.zlk.zlkproject.course.stuNote.mapper.StuNoteMapper;
 import com.zlk.zlkproject.course.stuNote.service.StuNoteService;
