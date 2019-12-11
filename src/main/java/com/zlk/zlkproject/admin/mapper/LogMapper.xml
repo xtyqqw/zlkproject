@@ -27,7 +27,10 @@
     <insert id="addLog" parameterType="com.zlk.zlkproject.entity.Log">
         insert into logs(name,description,time,ip,type) values (#{name},#{description},#{time},#{ip},#{type})
     </insert>
-    <delete id="deleteLogByLogId" parameterType="java.lang.String">
-        delete from logs where log_id=#{logId}
+    <delete id="deleteLogByLogId">
+        delete from logs where log_id in
+        <foreach collection="logList" item="logList" open="(" separator="," close=")">
+            #{logList.logId}
+        </foreach>
     </delete>
 </mapper>
