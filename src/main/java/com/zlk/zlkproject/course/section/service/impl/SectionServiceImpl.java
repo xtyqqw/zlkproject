@@ -54,7 +54,7 @@ public class SectionServiceImpl implements SectionService {
             sectionDetails.setSectionId(section.getSectionId());
             sectionDetails.setSectionIntro(section.getSectionIntro());
             sectionDetails.setSectionName(section.getSectionName());
-            sectionDetails.setSectionTime(section.getSectionTime());
+            sectionDetails.setSectionTime((Integer)section.getSectionTime()/60);
             //根据小节id和用户id查询用户的观看状态
             sectionDetails.setState(sectionMapper.findStateByIdAndChapterId(section.getSectionId(),userId));
             sectionDetailsList.add(sectionDetails);

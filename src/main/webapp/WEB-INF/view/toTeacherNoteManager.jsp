@@ -9,22 +9,22 @@
 <body>
 <div class="layedit-tool-view">
     <form class="layui-form"  id="insertTeacherNote" action="<%=request.getContextPath()%>/teacherNote/insertTNByTeacherNote" method="post" style="width: 400px;display: none;">
-        <div class="layui-form-item">
-            <label class="layui-form-label">所对应的<br/>小节序号</label>
+        <div class="layui-form-item" style="margin-top: 10px">
+            <label class="layui-form-label">小节序号</label>
             <div class="layui-input-block">
-                <input type="text" name="sectionId" id="sectionId" class="layui-input">
+                <input type="text" name="sectionId" id="sectionId" placeholder="请输入讲师笔记所对应的小节序号" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">讲师笔记<br/>标题</label>
             <div class="layui-input-block">
-                <input type="text" name="title" id="title" class="layui-input">
+                <input type="text" name="title" id="title" placeholder="请输入讲师笔记标题内容" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
-                <textarea name="content" id="content" placeholder="请输入介绍内容" class="layui-textarea"></textarea>
+                <textarea name="content" id="content" placeholder="请输入讲师笔记内容" class="layui-textarea" maxlength="200"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -42,8 +42,8 @@
                 <input type="text" name="tnId" id="uptnId" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">所对应的<br/>小节序号</label>
+        <div class="layui-form-item" style="margin-top: 10px">
+            <label class="layui-form-label">小节序号</label>
             <div class="layui-input-block">
                 <input type="text" name="sectionId" id="upsectionId" class="layui-input">
             </div>
@@ -57,7 +57,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">讲师笔记<br/>内容</label>
             <div class="layui-input-block">
-                <textarea name="content" id="upcontent" placeholder="请输入介绍内容" class="layui-textarea"></textarea>
+                <textarea name="content" id="upcontent" class="layui-textarea" maxlength="200"></textarea>
             </div>
         </div>
         <div class="layui-form-item">
@@ -116,9 +116,9 @@
             ,height: 480
             ,cols: [[
                 {field:'tnId', title: '讲师笔记序号', width:120}
-                ,{field:'sectionId', title: '所对应小节的序号', width:150}
+                ,{field:'sectionId', title: '讲师笔记所对应小节的序号', width:200}
                 ,{field:'title', title: '讲师笔记标题', width:150}
-                ,{field:'content', title: '讲师笔记内容', width:150}
+                ,{field:'content', title: '讲师笔记内容', width:400}
                 ,{field:'date', title: '写笔记时的日期',templet: '<div>{{ layui.util.toDateString(d.date,"yyyy-MM-dd HH:mm:ss") }}</div>', width:170}
                 ,{title:'操作', toolbar:'#handle', fixed: 'right'}
             ]]
@@ -133,7 +133,7 @@
                 layer.open({
                     title: "新增",
                     type: 1,
-                    area: ['35%', '65%'],
+                    area: ['40%', '65%'],
                     content: $("#insertTeacherNote")
                 });
             }
@@ -179,7 +179,7 @@
                 layer.open({
                     title: "修改",
                     type: 1,
-                    area: ['35%', '65%'],
+                    area: ['40%', '65%'],
                     content: $("#updateTeacherNote")
                 });
             }

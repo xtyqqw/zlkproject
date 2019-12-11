@@ -292,7 +292,7 @@
 
 </head>
 <body>
-<jsp:include page="<%=request.getContextPath()%>/jsp/header.jsp"></jsp:include>
+<jsp:include page="../jsp/header.jsp"></jsp:include>
 <div id="kechengzhuti">
     <div id="kechengjeishao">
         <input id="kechengId" type="hidden">
@@ -446,7 +446,7 @@
 
 </div>
 
-<jsp:include page="<%=request.getContextPath()%>/jsp/footer.jsp"></jsp:include>
+<jsp:include page="../jsp/footer.jsp"></jsp:include>
 
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
