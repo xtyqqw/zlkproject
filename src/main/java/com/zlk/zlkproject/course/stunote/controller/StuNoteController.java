@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.course.stunote.controller;
 
-import com.zlk.zlkproject.course.stuNote.service.StuNoteService;
+import com.zlk.zlkproject.course.stunote.service.StuNoteService;
 import com.zlk.zlkproject.entity.StuNote;
 import com.zlk.zlkproject.entity.StuNoteRes;
 

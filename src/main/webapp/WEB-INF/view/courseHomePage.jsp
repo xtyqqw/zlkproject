@@ -229,34 +229,8 @@
          float: left;
 
      }
-     #biao1{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-        }
-     #biao2{
-         width: 100px;
-         height: 25px;
-         position: relative;
 
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao3{
+     #biao7{
          width: 100px;
          height: 25px;
          position: relative;
@@ -268,45 +242,7 @@
          border-radius: 3px;
          font-weight:bold;
          border: none;
-     }
-     #biao4{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao5{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
-     }
-     #biao6{
-         width: 100px;
-         height: 25px;
-         position: relative;
-         font-size:15px;
-         font-weight:bold;
-         cursor: pointer;
-         background-color: #1E9FFF;
-         color: white;
-         border-radius: 3px;
-         font-weight:bold;
-         border: none;
+         margin: 8px;
      }
      /*#biao1:hover{
          text-decoration:none;
@@ -404,12 +340,7 @@
         <div class="layui-tab-item layui-show">
             <div class="conceal" >
                 <div id="biaoqian">
-                    <br><input id="biao1" type="button" onclick=window.open("HomePageTag?tagName=java") value="java"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao2" type="button" onclick=window.open("HomePageTag?tagName=html") value="html"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao3" type="button" onclick=window.open("HomePageTag?tagName=HTML5") value="HTML5"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao4" type="button" onclick=window.open("HomePageTag?tagName=C++") value="C++"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao5" type="button" onclick=window.open("HomePageTag?tagName=Python") value="Python"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="biao6" type="button" onclick=window.open("HomePageTag?tagName=PHP") value="PHP"/>
+                    <br>
                 </div>
                 </div>
             </div>
@@ -475,18 +406,18 @@
 
 </script>
 <%--瀑布流--%>
-<%--<script>
+<script>
     layui.use(['flow'], function() {
             var flow = layui.flow;
             flow.load({
                 elem: '#biaoqian' //流加载容器
                 , isAuto: false
-                , end: "<p>没有更多了</p>"
+                ,end: "<p></p>"
                 , done: function (page, next) { //加载下一页
 //模拟插入
                     setTimeout(function () {
                         var lis = [];
-                        var limit = 4;
+                        var limit = 10;
                         var data = {"page": page, "limit": limit};
                         console.log(data);
                         $.ajax({
@@ -497,12 +428,14 @@
                             success: function (result) {
                                 layui.each(result.tagList, function (i, tag) {
                                     lis.push(
-                                        '<br><a class="a1">' + tag.tagName + '</a>'
+                                        /*'<br><a class="a1">' + tag.tagName + '</a>'*/
+                                        '<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName=") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+
+
                                     );
 
-
-                                    next(lis.join(''), page < 1); //假设总页数为 6
-                                }, 500);
+                                });
+                                next(lis.join(''), page < 1); //假设总页数为 6
                             }
 
                         });
@@ -510,9 +443,10 @@
                 }
             });
         });
-</script>--%>
+</script>
  <%--瀑布流--%>
 <script>
+    /*视频加载流*/
     layui.use(['flow'], function(){
         var flow = layui.flow;
   flow.load({
@@ -528,7 +462,7 @@ var data={"page":page,"limit":limit};
 console.log(data);
 $.ajax({
     type :"POST",
-    url:"/courseHomePage/findAll",
+    url:"<%=request.getContextPath()%>/courseHomePage/findAll",
     dataType:"json",
     data:data,
     success:function(result) {
@@ -640,7 +574,7 @@ $.ajax({
                     }
             console.log(courses);
                     lis.push(
-                    '<input class="but1" type="button" onclick=window.open("kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="查看详情"/>' +
+                    '<input class="but1" type="button" onclick=window.open("<%=request.getContextPath()%>kecheng/kechengjianjie?coursesId='+courses.coursesId+'") value="查看详情"/>' +
                     '</dd>' +
                     '</dl>' +
                     '</li>' +

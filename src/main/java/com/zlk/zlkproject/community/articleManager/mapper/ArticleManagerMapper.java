@@ -3,6 +3,7 @@ package com.zlk.zlkproject.community.articleManager.mapper;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Article;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,6 +27,13 @@ public interface ArticleManagerMapper {
      * @return
      */
     Integer deleteArticleByArticleId(String articleId);
+
+    /**
+     * 根据文章id批量删除文章
+     * @param articleList
+     * @return
+     */
+    Integer deleteArticlesByArticleId(@Param("articleList") List<Article> articleList);
     /**
      * 根据文章id修改文章内容
      * @param article

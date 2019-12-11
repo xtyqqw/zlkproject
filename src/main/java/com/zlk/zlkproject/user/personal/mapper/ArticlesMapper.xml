@@ -43,7 +43,7 @@
     </select>
     <!--根据文章ID修改我的文章-->
     <update id="updateArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">
-        update article set article_content=#{articleContent}
+        update article set article_content=#{articleContent},title=#{title}
         where article_id=#{articleId}
     </update>
     <!--根据文章ID删除文章-->
@@ -56,7 +56,7 @@
         a.figures,a.article_digest,a.article_content,a.article_content_html,a.zan_count,a.cai_count,a.type_name,t.*
         FROM article a
         LEFT JOIN article_tag az ON az.article_id=a.article_id,tag t
-        where t.tag_id=az.tag_id AND a.user_id=#{userId} GROUP BY article_id order by update_time desc limit #{startPage},#{limit}
+        where t.tag_id=az.tag_id AND a.user_id=#{userId} order by update_time desc
     </select>
     <!--删除标签-->
     <update id="updateTag" parameterType="com.zlk.zlkproject.entity.Tag">
