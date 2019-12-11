@@ -127,6 +127,7 @@ public class ChapterManagerController {
         for (Chapter chapter : chapterList) {
             Integer sectionNum = sectionsManagerService.findCountByChapterId(chapter.getChapterId());
             chapter.setSectionNum(sectionNum);
+            chapterService.updateChapterByChapterId(chapter);
         }
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);

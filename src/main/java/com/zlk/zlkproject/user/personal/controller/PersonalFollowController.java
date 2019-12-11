@@ -71,7 +71,23 @@ public class PersonalFollowController {
 //        return map;
 //    }
 
+    /**
+     * 点击我的关注跳转
+     * @return
+     */
     @RequestMapping(value = "/follower")
+    public String follower(){
+        return "view/personal/myfocus";
+    }
+
+    /**
+     * 我的关注分页
+     * @param request
+     * @param followerPage
+     * @return
+     */
+    @RequestMapping(value = "/myfollow")
+    @ResponseBody
     public Map<String,Object> personalFollow(HttpServletRequest request, FollowerPage followerPage){
         ModelAndView mv = new ModelAndView();
         Map<String,Object> map = new HashMap();
@@ -85,8 +101,8 @@ public class PersonalFollowController {
         List<User> list1 = new ArrayList<>();
         Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
         //手动分页
-        if(list.size()<=endIndex){
-            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        if(followerList.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),followerList.size());
         }else {
             list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
         }
@@ -106,7 +122,6 @@ public class PersonalFollowController {
             m = FiveMsg.userFiveMsg(m);
             list.add(i,m);
         }
-        mv.setViewName("view/personal/myfocus");
         mv.addObject("list",list);
         mv.addObject("userId",user1.getUserId());
         map.put("userId", user1.getUserId());
@@ -116,13 +131,39 @@ public class PersonalFollowController {
     }
 
     /**
-     * 方法用途：点击‘n人关注了ta’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 点击“n人关注了他”跳转
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/hefollows")
+    public ModelAndView hefollows(String userId){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("view/personal/hefollows");
+        mv.addObject("userId",userId);
+        return mv;
+    }
+
+    /**
+     * 点击“他关注了n人”跳转
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/followshim")
+    public ModelAndView followshim(String userId){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("view/personal/followhim");
+        mv.addObject("userId",userId);
+        return mv;
+    }
+    /**
+     * 方法用途：点击‘他关注了n人’ 后调用该方法 查询出对应关注的所有其他用户相关信息
      * 参数类型：String 用途：对应用户的userId用于查询相关信息
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
-    public ModelAndView userFollower(HttpServletRequest request,FollowerPage followerPage){
-        Map map = new HashMap();
+    @ResponseBody
+    public Map<String,Object> userFollower(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap();
         User user1 = (User) request.getSession().getAttribute("user");
         ModelAndView mv = new ModelAndView();
 
@@ -134,8 +175,8 @@ public class PersonalFollowController {
         List<User> list1 = new ArrayList<>();
         Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
         //手动分页
-        if(list.size()<=endIndex){
-            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        if(followerList.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),followerList.size());
         }else {
             list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
         }
@@ -158,14 +199,14 @@ public class PersonalFollowController {
         map.put("list",list);
         map.put("userId",user1.getUserId());
         map.put("count",followerList.size());
-        mv.setViewName("view/personal/followhim");
+        /*mv.setViewName("view/personal/followhim");
         mv.addObject("userId",user1.getUserId());
-        mv.addObject("list",list);
-        return mv;
+        mv.addObject("list",list);*/
+        return map;
     }
 
     /**
-     * 方法用途：点击‘ta关注了n人’ 后调用该方法 查询出对应关注的所有其他用户相关信息
+     * 方法用途：点击‘n人关注了他’ 后调用该方法 查询出对应关注的所有其他用户相关信息
      * 参数类型：String 用途：对应用户的userId用于查询相关信息
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
@@ -181,8 +222,8 @@ public class PersonalFollowController {
         List<User> list1 = new ArrayList<>();
         Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
         //手动分页
-        if(list.size()<=endIndex){
-            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        if(followerList.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),followerList.size());
         }else {
             list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
         }
@@ -205,6 +246,7 @@ public class PersonalFollowController {
         }
         map.put("list",list);
         map.put("count",followerList.size());
+        map.put("userId",user1.getUserId());
 //        mv.addObject("list",list);
 //        mv.setViewName("/view/personal/hefollows");
 //        mv.addObject("userId",user1.getUserId());
