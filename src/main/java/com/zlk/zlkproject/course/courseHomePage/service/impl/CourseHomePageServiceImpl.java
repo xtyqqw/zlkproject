@@ -102,4 +102,9 @@ public class CourseHomePageServiceImpl implements CourseHomePageService{
     public Integer findCountsByCoursesName(String coursesName) {
         return courseHomePageMapper.findCountsByCoursesName(coursesName);
     }
+
+    @Override
+    public List<Courses> findAllCourses() {
+        return courseHomePageMapper.findAllCourses();
+    }
 }

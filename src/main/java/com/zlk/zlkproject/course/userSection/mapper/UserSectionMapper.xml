@@ -7,7 +7,24 @@
         <result property="sectionId" column="section_id" jdbcType="INTEGER"/>
         <result property="state" column="state" jdbcType="VARCHAR"/>
         <result property="time" column="time" jdbcType="TIMESTAMP"/>
+        <result property="sectionGrade" column="section_grade" jdbcType="INTEGER"/>
     </resultMap>
+
+    <!--根据课程id查询评分数的和-->
+    <select id="querySumByCoursesId" resultType="java.lang.Integer">
+        select sum(us.section_grade) from user_section us,section s,chapter c,courses co  where us.section_id =s.section_id
+        and co.courses_id = c.courses_id and c.chapter_id = s.chapter_id and co.courses_id = #{coursesId}
+    </select>
+
+    <!--根据小节id查询评分数的和-->
+    <select id="querySumBySectionId" resultType="java.lang.Integer">
+        select sum(section_grade) from user_section where section_id=#{sectionId}
+    </select>
+
+    <!--根据小节id查询有多少个有相同小节id的数据-->
+    <select id="queryCountBySectionId" resultType="java.lang.Integer">
+        select count(1) from user_section where section_id=#{sectionId}
+    </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserSectionMap">

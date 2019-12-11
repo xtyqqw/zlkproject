@@ -18,7 +18,7 @@
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
         <result property="userId" column="user_id" javaType="java.lang.String"></result>
         <result property="userCoursesId" column="user_courses_id" javaType="java.lang.Integer"></result>
-        <result property="lastStudyTime" column="last_study_time" javaType="java.sql.Date"></result>
+        <result property="lastStudyTime" column="last_study_time" javaType="java.util.Date"></result>
         <result property="tagId" column="tag_id" javaType="java.lang.Integer"></result>
         <result property="tagName" column="tag_name" javaType="java.lang.String"></result>
         <result property="tagTypeId" column="tag_type_id" javaType="java.lang.String"></result>
@@ -51,13 +51,11 @@
     <select id="findAll" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
         SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
        FROM courses c,tag_courses tc,tag t
-       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id GROUP BY c.courses_id ORDER BY c.student_num DESC LIMIT  #{startPage},#{limit};
+       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id  ORDER BY c.student_num DESC LIMIT  #{startPage},#{limit};
     </select>
     <select id="findAllByTag" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
-       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
-       FROM courses c
-       LEFT JOIN user_courses uc ON c.courses_id=uc.courses_id
-       ,tag_courses tc,tag t
+       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
+       FROM courses c,tag_courses tc,tag t
        WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id AND t.tag_name=#{tagName} ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
     </select>
 
@@ -83,13 +81,13 @@
             <if test="coursesName != null and coursesName != ''">
                 courses_name = #{coursesName},
             </if>
-            <if test="studentNum != null and studentNum != ''">
+            <if test="studentNum != null">
                 student_num = #{studentNum},
             </if>
-            <if test="chapterNum != null and chapterNum != ''">
+            <if test="chapterNum != null">
                 chapter_num = #{chapterNum},
             </if>
-            <if test="sectionNum != null and sectionNum != ''">
+            <if test="sectionNum != null">
                 section_num = #{sectionNum},
             </if>
             <if test="price != null and price != ''">
@@ -135,5 +133,9 @@
         <if test="coursesName!=null and coursesName !=''">
             where courses_name like CONCAT('%',#{coursesName},'%')
         </if>
+    </select>
+
+    <select id="findAllCourses" resultMap="CourseHomePageEntityMap">
+        select courses_id,courses_name from courses;
     </select>
 </mapper>
