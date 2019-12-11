@@ -216,6 +216,7 @@
 
 <!-- 主体内容 -->
 <iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+<div><a href="#top" style="position: fixed">返回顶部</a></div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){

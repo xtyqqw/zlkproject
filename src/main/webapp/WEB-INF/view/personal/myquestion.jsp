@@ -437,79 +437,80 @@
     checknum();
 </script>
 <%--全部 分页--%>
-<%--<script>
-    var page = 1;
-    var limit = 5;
-    var total;
-    function showAll() {
-        $.ajax({
-            type: "post",
-            url: "/myfaqq/faqtest1",
-            async: false,
-            dataType: 'json',
-            data: {
-                "page": page,
-                "limit": limit,
-            },
-            success: function (all){
-                total = all.countAll;
-                var data1 = all.list;
-                var html = '';
-                for (var i = 0;i < data1.length;i++){
-                    /*我的提问*/
-                    if (data1.type==0){
-                        html += '<div class="question_waik">';
-                        html += '<ul class="head_lebel">';
-                        for (var j = 0;j<data1.tagList;j++){
-                            html += '<li class="lebel_li">'+ data1[i].tagName+'</li>';
-                        }
-                        html += '</ul><br />';
-                        html += '<p class="title">';
-                        html += '<a href="javascript:;">'+ data1[i].questionTitle+'</a>';
-                        html += '</p>';
-                        html += '<p class="from">来自：'+ data1[i].typeName+'</p>';
-                        html += '<p class="question_num">回答 '+ data1[i].responseCount+'</p>';
-                        html += '<p class="look_num">浏览 '+ data1[i].browseCount+'</p>';
-                        html += '<p class="question_share">分享</p>';
-                        html += '<p class="question_date">'+ data1[i].formatDate+'</p>';
-                        html += '</div>';
-                    }
-                    /*我的回答 已采纳*/
-                    if (data1.type == 1&&data1.accept ==1){
-                        html += '<div class="reply_waik_adopted">';
-                        html += '<p class="reply_date">'+ data1[i].formatDate+'</p>';
-                        html += '<p class="adopted">已采纳</p>';
-                        html += '<p class="reply_adopted_msg">';
-                        html += '<a href="javascript:;">'+ data1[i].responseContent+'</a>';
-                        html += '</p>';
-                        html += '<i class="layui-icon layui-icon-praise"' +
-                            'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
-                        html += '<i class="layui-icon layui-icon-tread"' +
-                            'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
-                        html += '<i class="layui-icon layui-icon-dialogue"\n' +
-                            'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
-                        html += '<p class="reply_adopted_share">分享</p>';
-                        html += '</div>';
-                    }
-                    /*我的回答 未采纳*/
-                    if (data1.type==1&&data1.accept==0){
-                        html += '<div class="reply_waik">';
-                        html += '<p class="reply_date">'+data1[i].formatDate+'</p>';
-                        html += '<p class="reply_msg">';
-                        html += '<a href="javascript:;">'+data1[i].responseContent+'</a>';
-                        html += '</p>';
-                        html += '<i class="layui-icon layui-icon-praise"' +
-                            'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
-                        html += '<i class="layui-icon layui-icon-tread"' +
-                            'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
-                        html += '<i class="layui-icon layui-icon-dialogue"' +
-                            'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
-                        html += '<p class="reply_dian">...</p>';
-                        html += '<p class="reply_delete" onclick="delNote('+ data1[i].responseId+')">删除</p>';
-                        html += '<p class="reply_edit" onclick="editNote('+ data1[i].responseContent+','+ data1[i].responseId+')">编辑</p>';
-                        html += '<p class="reply_share">分享</p>';
-                        html += '</div>';
-                    }
+<script>
+layui.use('flow', function(){
+    var flow = layui.flow;
+    var $ =layui.jquery;
+    flow.load({
+        elem: '.show_li1' //流加载容器
+        ,isAuto: false
+        ,end: "<p>没有更多了</p>"
+        ,done: function(page, next){ //加载下一页
+            //模拟插入
+            setTimeout(function(){
+                var lis = [];
+                var limit = "5";
+                $.ajax({
+                    url:"/articles/findByCreateTime?page="+page+"&limit="+limit,
+                    type: 'post',
+                    dataType: "json",
+                    success: function (result) {
+                        layui.each(result.articleList, function (i, article) {
+                            var html = '';
+                            /*我的提问*/
+                            if (data1.type==0){
+                                html += '<div class="question_waik">';
+                                html += '<ul class="head_lebel">';
+                                for (var j = 0;j<data1.tagList;j++){
+                                    html += '<li class="lebel_li">'+ data1[i].tagName+'</li>';
+                                }
+                                html += '</ul><br />';
+                                html += '<p class="title">';
+                                html += '<a href="javascript:;">'+ data1[i].questionTitle+'</a>';
+                                html += '</p>';
+                                html += '<p class="from">来自：'+ data1[i].typeName+'</p>';
+                                html += '<p class="question_num">回答 '+ data1[i].responseCount+'</p>';
+                                html += '<p class="look_num">浏览 '+ data1[i].browseCount+'</p>';
+                                html += '<p class="question_share">分享</p>';
+                                html += '<p class="question_date">'+ data1[i].formatDate+'</p>';
+                                html += '</div>';
+                            }
+                            /*我的回答 已采纳*/
+                            if (data1.type == 1&&data1.accept ==1){
+                                html += '<div class="reply_waik_adopted">';
+                                html += '<p class="reply_date">'+ data1[i].formatDate+'</p>';
+                                html += '<p class="adopted">已采纳</p>';
+                                html += '<p class="reply_adopted_msg">';
+                                html += '<a href="javascript:;">'+ data1[i].responseContent+'</a>';
+                                html += '</p>';
+                                html += '<i class="layui-icon layui-icon-praise"' +
+                                    'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-tread"' +
+                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-dialogue"\n' +
+                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
+                                html += '<p class="reply_adopted_share">分享</p>';
+                                html += '</div>';
+                            }
+                            /*我的回答 未采纳*/
+                            if (data1.type==1&&data1.accept==0){
+                                html += '<div class="reply_waik">';
+                                html += '<p class="reply_date">'+data1[i].formatDate+'</p>';
+                                html += '<p class="reply_msg">';
+                                html += '<a href="javascript:;">'+data1[i].responseContent+'</a>';
+                                html += '</p>';
+                                html += '<i class="layui-icon layui-icon-praise"' +
+                                    'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-tread"' +
+                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-dialogue"' +
+                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
+                                html += '<p class="reply_dian">...</p>';
+                                html += '<p class="reply_delete" onclick="delNote('+ data1[i].responseId+')">删除</p>';
+                                html += '<p class="reply_edit" onclick="editNote('+ data1[i].responseContent+','+ data1[i].responseId+')">编辑</p>';
+                                html += '<p class="reply_share">分享</p>';
+                                html += '</div>';
+                            }
                 }
                 $(".main_li_show").empty().append(html);
             }
@@ -537,7 +538,7 @@
         getPage()
     })
 </script>
-&lt;%&ndash;我的提问 分页&ndash;%&gt;
+<%--我的提问 分页--%>
 <script>
     var page = 1;
     var limit = 5;
@@ -599,7 +600,7 @@
         getPage()
     })
 </script>
-&lt;%&ndash;我的问答 分页&ndash;%&gt;
+<%--我的问答 分页--%>
 <script>
     var page = 1;
     var limit = 5;
@@ -681,7 +682,7 @@
         showReply();
         getPage()
     })
-</script>--%>
+</script>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
