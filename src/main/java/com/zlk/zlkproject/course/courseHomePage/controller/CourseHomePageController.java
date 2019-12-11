@@ -46,7 +46,7 @@ public class CourseHomePageController {
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         Map<String,Object> map=new HashMap<>();
         map.put("courses",courses);
-        map.put("")
+        //map.put("":);
         return map;
     }
     @RequestMapping(value = "/findCoursesList")
