@@ -178,6 +178,7 @@ function openCheck(){
     layui.use('layer', function(){ //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
         layer.open({
+            offset: '50%',
             anim: 5,
             title: 0,//去除标题
             closeBtn:2,//x按钮格式

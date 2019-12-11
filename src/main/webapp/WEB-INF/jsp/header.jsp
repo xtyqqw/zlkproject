@@ -121,9 +121,9 @@
         </div>
         <!-- 导航 -->
         <div class="header-nav">
-                <a href="/" name="nav" class="nav">首页</a>
-                <a href="/HomePage" name="nav" class="nav">项目</a>
-                <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
+                <a href="<%=request.getContextPath()%>/" name="nav" class="nav">首页</a>
+                <a href="<%=request.getContextPath()%>/HomePage" name="nav" class="nav">项目</a>
+                <a href="<%=request.getContextPath()%>/articleHot/toArticleHot" name="nav" class="nav">社区</a>
         </div>
         <!-- 搜索 -->
         <div class="header-search">
@@ -134,16 +134,16 @@
         </div>
 
         <%--未登录显示注册登录--%>
-        <c:if test="${user==null}">
+        <c:if test="${user.userId==null}">
             <!-- 注册登录 -->
             <div class="header-login">
-                <a href="/users/tosignup">注册</a>
+                <a href="<%=request.getContextPath()%>/users/tosignup">注册</a>
                 <a style="color: #000000;">/</a>
-                <a href="/users/tosignin">登录</a>
+                <a href="<%=request.getContextPath()%>/users/tosignin">登录</a>
             </div>
         </c:if>
         <%--已登录显示登录信息--%>
-        <c:if test="${user!=null}">
+        <c:if test="${user.userId!=null}">
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
                     <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
