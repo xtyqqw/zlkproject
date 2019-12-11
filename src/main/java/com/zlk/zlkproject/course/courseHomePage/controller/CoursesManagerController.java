@@ -3,7 +3,9 @@ package com.zlk.zlkproject.course.courseHomePage.controller;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.type.service.TypeKeService;
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Type;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -40,14 +43,20 @@ public class CoursesManagerController {
     private FdfsConfig fdfsConfig;
     @Autowired
     private ChapterService chapterService;
+    @Autowired
+    private TypeKeService typeKeService;
 
     /**
      * 跳转到课程管理页面
      * @return
      */
     @RequestMapping("/toCourseManager")
-    public String toCourseManager(){
-        return "view/CourseManager";
+    public ModelAndView toCourseManager() throws Exception{
+        List<Type> typeList = typeKeService.selectAll();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("typeList",typeList);
+        mv.setViewName("view/CourseManager");
+        return mv;
     }
 
     /**
@@ -100,7 +109,8 @@ public class CoursesManagerController {
      * @return 课程管理页面
      */
     @RequestMapping(value = "/insertByCourse" )
-    public Map<String,Object> insertByCourse(Courses courses){
+    public Map<String,Object> insertByCourse(Courses courses,Integer typeId,List<Integer> tagId){
+        System.out.println(typeId);
         int i = courseHomePageService.insertByCourses(courses);
         String message = "";
         if (i>0){

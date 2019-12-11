@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,6 +21,23 @@
                 <label class="layui-form-label">课程名</label>
                 <div class="layui-input-block">
                     <input type="text" name="coursesName" id="coursesName" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">课程方向:</label>
+                <div class="layui-input-block">
+                    <select class="layui-select" name="typeId" id="coursesType" lay-filter="typeName" lay-search>
+                        <option value="">请选择课程方向</option>
+                        <c:forEach items="${typeList}" var="type">
+                            <option value="${type.typeId}">(ID:${type.typeId}) ${type.typeName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">课程标签</label>
+                <div class="layui-input-block" id="tagCheck" lay-filter="check">
+
                 </div>
             </div>
             <%--<div class="layui-form-item" style="display: none">
@@ -404,6 +422,24 @@
                         uploadInst4.upload();
                     });
                 }
+            });
+
+            //课程方向下拉框监听事件
+            form.on('select(typeName)', function (data) {
+                let typeId = data.value;
+                $.ajax({
+                    type:"POST",
+                    url:"<%=request.getContextPath()%>/tagKe/findTagByTypeId",
+                    data:{"typeId":typeId},
+                    dataType:"json",
+                    success:function (res) {
+                        $("#tagCheck").empty();
+                        $.each(res.tagList,function (i, tag) {
+                            $("#tagCheck").append('<input type="radio" name="tagId" title="'+tag.tagName+'" value="'+tag.tagId+'">');
+                        });
+                        form.render('radio');
+                    }
+                })
             });
 
 

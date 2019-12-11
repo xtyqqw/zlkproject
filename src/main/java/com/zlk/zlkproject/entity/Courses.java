@@ -30,6 +30,8 @@ public class Courses {
     private Integer chapterNum;
     /**小节数量*/
     private Integer sectionNum;
+    /**课程方向id*/
+    private Integer typeId;
     /**课程价格*/
     private Double price;
     /**封面图片*/

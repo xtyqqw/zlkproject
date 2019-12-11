@@ -384,7 +384,7 @@ $(document).ready(function () {
                                     }
                                 });
                                 str += "<div class=\"stuQa-userPhoto\">";
-                                str += "<img src='"+user.userRealimg+"' class='userPhoto'>";
+                                str += "<img src='"+user.userImg+"' class='userPhoto'>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
                                 str += "</div>";
@@ -2186,18 +2186,29 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-
-            let data = {"state":"播放中"};
+            alert(sectionId);
+            let videoState = "";
             $.ajax({
-                type:"POST",
-                url:basePath+'/player/recordState',
-                data: data,
-                dataType: 'json',
-                success: function () {
-
+                type: "POST",
+                url: basePath+"/section/findState?sectionId=" + sectionId,
+                async: false,
+                success: function (data) {
+                    videoState = data.state;
+                    return videoState;
                 }
             });
+            if (videoState==="未观看"){
+                let data = {"state":"播放中"};
+                $.ajax({
+                    type:"POST",
+                    url:basePath+'/player/recordState',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
 
+                    }
+                });
+            }
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);
