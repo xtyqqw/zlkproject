@@ -24,7 +24,7 @@
         }
 
         .del {
-            margin-left: -425px;
+            margin-left: -510px;
         }
 
         .hint {
@@ -248,7 +248,7 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn del" lay-event="delete">删除</button>' +
+                '<button type="button" class="layui-btn del" lay-event="delete">批量删除</button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
