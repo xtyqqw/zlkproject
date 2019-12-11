@@ -235,7 +235,7 @@
                 , {field: 'commentCount', title: '评论数', width: 75}
                 , {field: 'createTime',title: '发布时间',width: 90}
                 , {field: 'updateTime',title: '更新时间',width: 90}
-                , {field: 'figures', title: '插图相对路径', width: 80}
+                , {field: 'figures', title: '插图相对路径', width: 130}
                 , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
                 , {field: 'articleDigest', title: '文章摘要', width: 90}
                 , {field: 'articleContent', title: '文章内容', width: 90}
