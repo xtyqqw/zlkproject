@@ -187,7 +187,6 @@
     </dependencies>
 
     <build>
-        <finalName>zlk</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -227,11 +226,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20.1</version>
                 <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>web</directory>
-                        </resource>
-                    </webResources>
                     <!-- 不指定单元测试 -->
                     <skipTests>true</skipTests>
                 </configuration>

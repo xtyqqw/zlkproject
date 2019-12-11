@@ -9,10 +9,10 @@
 <html>
 <head>
     <title>登录</title>
-    <link rel="stylesheet" href="/layui/css/layui.css">
-    <link rel="stylesheet" href="/css/sign.css" type="text/css">
-    <script src="/js/jquery-1.12.4.js"></script>
-    <script src="/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sign.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/layui.js" charset="utf-8"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -118,7 +118,7 @@
             <div class="layui-tab-content" style="height: 100px;">
                 <div class="layui-tab-item layui-show">
                     <span>${spanmsg}</span>
-                    <form action="/users/signupbycode" method="post">
+                    <form action="<%=request.getContextPath()%>/users/signupbycode" method="post">
                         <%--                <input name="phonenum" value="" type="text" placeholder="请输入手机号码"> <br>--%>
                         <%--                <input placeholder="请输入验证码"><button type="button">获取验证码</button> <br>--%>
                         <div class="lgD">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="layui-tab-item">
                     <span style="margin-left: 25px;color: red">${spanmsg}</span>
-                    <form action="/users/signupbypwd" method="post">
+                    <form action="<%=request.getContextPath()%>/users/signupbypwd" method="post">
                         <%--                <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><br>--%>
                         <%--                <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <br>--%>
                         <div class="lgD">
@@ -183,7 +183,7 @@
 </div>
 </body>
 
-<script src="/js/signup.js"></script>
+<script src="<%=request.getContextPath()%>/js/signup.js"></script>
 
 <script>
     layui.use('element', function () {
