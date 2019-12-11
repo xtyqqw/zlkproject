@@ -230,20 +230,19 @@
                     <p class="name">${list.userRealname}</p>
                     <!-- 关注状态 -->
                     <div class="attention_type">
-                        <!-- 已关注 -->
-                        <c:if test="${list.followType==1}">
-                            <span style="display: none">${list.userId}</span>
-                            <p class="ok">√</p>
-                            <p class="ok_zi">已关注</p>
-                        </c:if>
-                        <!-- 加关注 -->
-                        <c:if test="${list.followType==0}">
-                            <span style="display: none">${list.userId}</span>
-                            <p class="jia">+</p>
-                            <p class="no_zi">加关注</p>
-                        </c:if>
-                        <c:if test="${list.followType==0 && list.userId == 1}">
-                            <div style="display: none"></div>
+                        <c:if test="${list.userId!=userId}">
+                            <!-- 已关注 -->
+                            <c:if test="${list.followType==1}">
+                                <span style="display: none">${list.userId}</span>
+                                <p class="ok">√</p>
+                                <p class="ok_zi">已关注</p>
+                            </c:if>
+                            <!-- 加关注 -->
+                            <c:if test="${list.followType==0}">
+                                <span style="display: none">${list.userId}</span>
+                                <p class="jia">+</p>
+                                <p class="no_zi">加关注</p>
+                            </c:if>
                         </c:if>
                         <div class="att_tan">
                             <div class="att_success1">
@@ -310,7 +309,7 @@
             dataType:"json",
             context: userId,
             success:function (data) {
-                if (data.code === "1"){
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".ok").hide();
                     mythis.siblings(".jia,.no_zi").show();
@@ -335,7 +334,7 @@
             type:"GET",
             dataType:"json",
             success:function (data) {
-                if (data.code === "1"){
+                if (data.code === '1'){
                     mythis.hide();
                     mythis.siblings(".jia").hide();
                     mythis.siblings(".ok,.ok_zi").show();
@@ -344,7 +343,7 @@
                     mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
                 }
             },
-            error:function (data) {
+            error:function () {
                 mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
             }
         });
