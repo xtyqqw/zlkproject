@@ -1,5 +1,8 @@
 window.onload = function () {
 
+    var localObj = window.location;
+    var basePath = localObj.protocol+"//"+localObj.host;
+
     layui.use(['table','form','layer','upload'], function(){
         var table = layui.table;
         var form = layui.form;
@@ -14,7 +17,7 @@ window.onload = function () {
 
             if(data.value === ''){
                 table.reload('sections_table',{
-                    url : '/SMC/findAllData',
+                    url : basePath+'/SMC/findAllData',
                     page: {
                         curr: 1
                     }
@@ -25,7 +28,7 @@ window.onload = function () {
             }else {
                 let ajaxData = {'courseId': data.value};
                 table.reload('sections_table',{
-                    url : '/SMC/findDataByCourseId',
+                    url : basePath+'/SMC/findDataByCourseId',
                     where: {
                         courseId: data.value
                     },
@@ -35,7 +38,7 @@ window.onload = function () {
                 });
                 $.ajax({
                     type : 'POST',
-                    url : '/SMC/findCourseAndChapterById',
+                    url : basePath+'/SMC/findCourseAndChapterById',
                     data : ajaxData,
                     dataType: "json",
                     success : function (res) {
@@ -55,14 +58,14 @@ window.onload = function () {
             if(data.value === ''){
                 if ($("#courseSelect").val() == ''){
                     table.reload('sections_table',{
-                        url : '/SMC/findAllData',
+                        url : basePath+'/SMC/findAllData',
                         page: {
                             curr: 1
                         }
                     });
                 }else {
                     table.reload('sections_table',{
-                        url : '/SMC/findDataByCourseId',
+                        url : basePath+'/SMC/findDataByCourseId',
                         where: {
                             courseId: $("#courseSelect").val()
                         },
@@ -73,7 +76,7 @@ window.onload = function () {
                 }
             }else {
                 table.reload('sections_table',{
-                    url : '/SMC/findDataByChapterId',
+                    url : basePath+'/SMC/findDataByChapterId',
                     where: {
                         chapterId: data.value
                     },
@@ -95,7 +98,7 @@ window.onload = function () {
                 let ajaxData = {'courseId': data.value};
                 $.ajax({
                     type : 'POST',
-                    url : '/SMC/findCourseAndChapterById',
+                    url : basePath+'/SMC/findCourseAndChapterById',
                     data : ajaxData,
                     dataType: "json",
                     success : function (res) {
@@ -122,7 +125,7 @@ window.onload = function () {
                 let ajaxData = {'courseId': data.value};
                 $.ajax({
                     type : 'POST',
-                    url : '/SMC/findCourseAndChapterById',
+                    url : basePath+'/SMC/findCourseAndChapterById',
                     data : ajaxData,
                     dataType: "json",
                     success : function (res) {
@@ -142,7 +145,7 @@ window.onload = function () {
         table.render({
             elem: '#sections_table'
             ,height: 518
-            ,url: '/SMC/findAllData'
+            ,url: basePath+'/SMC/findAllData'
             ,page: true
             ,toolbar: '#topToolBar'
             ,cols: [[
@@ -180,7 +183,7 @@ window.onload = function () {
 
         var normalVideo = upload.render({
             elem: '#normalVideo_btn' //绑定元素
-            ,url: '/SMC/uploadVideo' //上传接口
+            ,url: basePath+'/SMC/uploadVideo' //上传接口
             ,accept: 'video'
             ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
                 layer.load(); //上传loading
@@ -199,7 +202,7 @@ window.onload = function () {
 
         var normalVideoEdit = upload.render({
             elem: '#normalVideo_btn_edit' //绑定元素
-            ,url: '/SMC/uploadVideo' //上传接口
+            ,url: basePath+'/SMC/uploadVideo' //上传接口
             ,accept: 'video'
             ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
                 layer.load(); //上传loading
@@ -218,7 +221,7 @@ window.onload = function () {
 
         var superVideo = upload.render({
             elem: '#supperVideo_btn' //绑定元素
-            ,url: '/SMC/uploadVideo' //上传接口
+            ,url: basePath+'/SMC/uploadVideo' //上传接口
             ,accept: 'video'
             ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
                 layer.load(); //上传loading
@@ -237,7 +240,7 @@ window.onload = function () {
 
         var superVideoEdit = upload.render({
             elem: '#supperVideo_btn_edit' //绑定元素
-            ,url: '/SMC/uploadVideo' //上传接口
+            ,url: basePath+'/SMC/uploadVideo' //上传接口
             ,accept: 'video'
             ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
                 layer.load(); //上传loading
@@ -293,7 +296,7 @@ window.onload = function () {
         //重置页面
         function resetPage(){
             table.reload('sections_table',{
-                url : '/SMC/findAllData',
+                url : basePath+'/SMC/findAllData',
                 page: {
                     curr: 1
                 }
@@ -348,7 +351,7 @@ window.onload = function () {
                 };
                 $.ajax({
                     type: 'POST',
-                    url: '/SMC/addData',
+                    url: basePath+'/SMC/addData',
                     data: data,
                     dataType: 'json',
                     success: function (res) {
@@ -411,7 +414,7 @@ window.onload = function () {
                 };
                 $.ajax({
                     type: 'POST',
-                    url: '/SMC/updateData',
+                    url: basePath+'/SMC/updateData',
                     data: data,
                     dataType: 'json',
                     success: function (res) {
@@ -437,7 +440,7 @@ window.onload = function () {
             let ajaxData = {'courseId': data.courseId};
             $.ajax({
                 type : 'POST',
-                url : '/SMC/findCourseAndChapterById',
+                url : basePath+'/SMC/findCourseAndChapterById',
                 data : ajaxData,
                 dataType: "json",
                 success : function (res) {
@@ -491,7 +494,7 @@ window.onload = function () {
                     let sectionId = data.sectionId;
                     $.ajax({
                         type:'POST',
-                        url : '/SMC/deleteData',
+                        url : basePath+'/SMC/deleteData',
                         data : {'sectionId':sectionId},
                         dataType: "json",
                         success: function (res) {

@@ -114,15 +114,15 @@
         return check;
     }
 </script>
-<div class="layui-collapse" lay-accordion="">
+<div class="layui-collapse" lay-accordion="" style="width: 83%">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
         <div class="layui-colla-content">
             <c:forEach items="${list}" var="user">
             <div class="list1">
-                <h1>资深讲师：${user.lecturerName}</h1>
+                <h3>资深讲师：${user.lecturerName}</h3>
                 <p>${user.lecturerIntro}</p>
-                <img style="width:200px; height:200px; border-radius:50%; overflow:hidden;" src="${user.lecturerPhotor}">
+                <img style="width:150px; height:150px; border-radius:50%; overflow:hidden;" src="${user.lecturerPhotor}">
             </div>
             </c:forEach>
         </div>

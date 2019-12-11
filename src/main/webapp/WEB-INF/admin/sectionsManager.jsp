@@ -10,12 +10,12 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/css/admin/sectionsManager.css" type="text/css">
-    <script type="text/javascript" src="/js/sectionsManager.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/sectionsManager.css" type="text/css">
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/sectionsManager.js"></script>
     <%--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--%>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 </head>
 <body>
     <div id="main_body">

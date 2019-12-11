@@ -36,36 +36,6 @@ public class ArticleListController {
         return "view/community/newCommunityMain";
     }
     /**
-     * 最新文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleAll")
-    public ModelAndView toArticleAll(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleAll");
-        return mv;
-    }
-    /**
-     * 热门文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleHot")
-    public ModelAndView toArticleHot(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleHot");
-        return mv;
-    }
-    /**
-     * 我的文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleMy")
-    public ModelAndView toArticleMy(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleMy");
-        return mv;
-    }
-    /**
      * 我要发文接口
      * @return
      */
@@ -75,7 +45,6 @@ public class ArticleListController {
         mv.setViewName("view/community/articleGuide");
         return mv;
     }
-
     /**
      * 测试页面
      * @return

@@ -104,6 +104,7 @@ public class ArticlesController {
         map.put("count",all);
         map.put("data",articlesList);
         return map;
+
     }
 
 }
