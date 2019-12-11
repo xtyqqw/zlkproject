@@ -1436,7 +1436,7 @@ $(document).ready(function () {
                                                     '];\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.showLinkImg = false;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer ='+ basePath +'\'stuComment/uploadPic\';\n' +
+                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgHooks = {\n' +
@@ -1541,7 +1541,7 @@ $(document).ready(function () {
                                         '];\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.showLinkImg = false;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \'stuComment/uploadPic\';\n' +
+                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgHooks = {\n' +
