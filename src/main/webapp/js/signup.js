@@ -3,6 +3,11 @@ var phonecode; //输入的验证码
 var code;       //获取到的验证码
 var t; //倒计时对象
 var box = document.getElementById("box");
+var localObj = window.location;
+
+var contextPath = localObj.pathname.split("/")[1];
+var basePath = localObj.protocol+"//"+localObj.host+"/"+contextPath;
+var server_context=basePath;
 
 //获取验证码
 function getcode(e) {
@@ -23,7 +28,7 @@ function getcode(e) {
                 userPhonenum:userPhonenum
             }
             $.ajax({
-                url:'/users/jsontest',
+                url:basePath+'/jsontest',
                 type:'post',
                 // contentType: "application/json; charset=utf-8",
                 dataType: "json",

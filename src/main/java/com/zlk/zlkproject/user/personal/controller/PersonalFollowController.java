@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.user.personal.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.MyFollower;
@@ -156,15 +155,11 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
-        Map map = new HashMap();
+    public Map<String,Object> userFollowed(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap();
         ModelAndView mv = new ModelAndView();
-
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
         User user1 = (User) request.getSession().getAttribute("user");
-        //模拟数据
-        followerPage.setLimit(10);
-        followerPage.setPage(1);
-
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
         //根据查询出的User获取页面所需参数
@@ -187,7 +182,7 @@ public class PersonalFollowController {
         mv.addObject("list",list);
         mv.setViewName("/view/personal/hefollows");
         mv.addObject("userId",user1.getUserId());
-        return mv;
+        return map;
     }
 
     /**
