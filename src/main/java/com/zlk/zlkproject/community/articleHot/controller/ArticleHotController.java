@@ -44,7 +44,7 @@ public class ArticleHotController {
         mv.addObject("blist",blist);
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/communityMain");
+        mv.setViewName("view/community/newCommunityMain");
 
         return mv;
     }

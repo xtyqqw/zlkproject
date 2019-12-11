@@ -1,8 +1,11 @@
 package com.zlk.zlkproject.community.articleList.controller;
 
+import com.zlk.zlkproject.community.articleHot.service.ArticleHotService;
 import com.zlk.zlkproject.community.articleList.service.ArticleListService;
+import com.zlk.zlkproject.community.articleTag.service.TagsService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +34,10 @@ public class ArticleListController {
      * 登录接口
      * @return
      */
-    @RequestMapping(value = "/toLogin")
+    /*@RequestMapping(value = "/toLogin")
     public String toLogin(){
         return "view/community/newCommunityMain";
-    }
+    }*/
     /**
      * 我要发文接口
      * @return
@@ -95,5 +98,33 @@ public class ArticleListController {
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
         return map;
+    }
+
+    @Autowired
+    private ArticleHotService articleHotService;
+
+    @Autowired
+    private TagsService tagsService;
+    /**
+     * 根据条件倒序查询文章标题
+     * 用ModelAndView查询数据库数据返回到jsp页面对应位置显示
+     * @param article
+     * @returnModelAndView
+     */
+    @RequestMapping("/toLogin")
+    public ModelAndView selectTitleByArticle(Article article, Tag tag) {
+        /**根据时间倒序返回文章标题集合 月排序*/
+        List<Article> alist = articleHotService.selectTitleByArticle(article);
+        /**根据浏览量倒序返回文章标题集合 总排序*/
+        List<Article> blist = articleHotService.findTitleByBrowseCount(article);
+        ModelAndView mv=new ModelAndView();
+
+        mv.addObject("alist",alist);
+        mv.addObject("blist",blist);
+        List<Tag> tagList=tagsService.getAllTagByTagId(tag);
+        mv.addObject("tagList",tagList);
+        mv.setViewName("view/community/newCommunityMain");
+
+        return mv;
     }
 }
