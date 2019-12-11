@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -20,6 +21,10 @@
             margin-top: -2px;
             float: right;
             width: 410px;
+        }
+
+        .del {
+            margin-left: -425px;
         }
 
         .hint {
@@ -45,7 +50,7 @@
         <input type="hidden" name="articleId" id="articleId"><br>
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
-                <td style="width: 100px;" valign="bottom">文章标题</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" valign="bottom">文章标题</td>
                 <td><input type="text" readonly required id="title" placeholder="请输入文章标题" name="title"></td>
             </tr>
             <tr>
@@ -140,7 +145,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -148,7 +153,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -156,7 +161,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -164,7 +169,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -216,6 +221,7 @@
         });
         form.render();
         //第一个实例
+        var renderTable = function() {
         table.render({
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
@@ -229,7 +235,7 @@
                 , {field: 'commentCount', title: '评论数', width: 75}
                 , {field: 'createTime',title: '发布时间',width: 90}
                 , {field: 'updateTime',title: '更新时间',width: 90}
-                , {field: 'figures', title: '插图相对路径', width: 80}
+                , {field: 'figures', title: '插图相对路径', width: 130}
                 , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
                 , {field: 'articleDigest', title: '文章摘要', width: 90}
                 , {field: 'articleContent', title: '文章内容', width: 90}
@@ -252,11 +258,11 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                /*'<button type="button" class="layui-btn" lay-event="">新增文章</button>' +*/
+                '<button type="button" class="layui-btn del" lay-event="delete">删除</button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/article/toArticleManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/article/toArticleManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">文章标题</label>\n' +
                 '                    <div class="layui-input-block">\n' +
@@ -274,6 +280,7 @@
                 '    </div>' +
                 '</div>'
         });
+        };
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
@@ -292,6 +299,38 @@
                     break;
             }
             ;
+        });
+
+        renderTable();
+
+        //批量删除
+        table.on('toolbar(test)', function (obj) {//注：tool 是工具条事件名
+            var checkStatus = table.checkStatus(obj.config.id);
+            var data = checkStatus.data;//获得当前行数据（json格式的键值对）
+            switch (obj.event) {
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg("请至少选择一条数据");
+                    } else {
+                        layer.confirm('是否确认删除', function (index) {
+                            var data1 = JSON.stringify(data);
+                            $.ajax({
+                                url: "<%=request.getContextPath()%>/article/deleteList",
+                                contentType: "application/json;charset=UTF-8",
+                                data: {"data": data1},
+                                success: function () {
+                                    renderTable();
+                                    layer.msg("删除成功");
+                                },
+                                error: function () {
+                                    layer.msg("删除失败");
+                                }
+                            });
+                            layer.close(index);
+                        });
+                    }
+                break;
+            };
         });
 
         //监听行工具事件
@@ -337,7 +376,7 @@
                     title: "编辑",
                     type: 1,
                     shade: 0.8,
-                    area: ['100%', '100%'],
+                    area: ['99%', '99%'],
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {
@@ -346,7 +385,10 @@
                 });
             }
         });
+
     });
+
+
 </script>
 </body>
 </html>

@@ -86,10 +86,10 @@
         }
         .attention_person .attention_him,.he_attention{
             float: left;
-            border: 1px solid #bec3d9;
+            border: 1px solid #914FF1;
             border-radius: 50px;
             padding: 0 10px;
-            background-color: #bec3d9;
+            background-color: #914FF1;
             color: #fff;
         }
         .attention_person .attention_him{
@@ -263,7 +263,7 @@
 <%--有关注信息--%>
 <c:if test="${list.size()!= 0}">
     <div class="main">
-        <c:forEach items="${list}" var="bignum" >
+        <%--<c:forEach items="${list}" var="bignum" >
             <div class="waik">
                 <div class="up">
                     <div class="up_left">
@@ -282,7 +282,7 @@
                             <p class="jia">+</p>
                             <p class="no_zi">加关注</p>
                         </div>
-                        <%--已关注未关注的弹窗--%>
+                        &lt;%&ndash;已关注未关注的弹窗&ndash;%&gt;
                         <div class="att_tan">
                             <div class="att_success1">
                                 <p class="att_success_ok1">√</p>
@@ -336,16 +336,16 @@
                 <c:if test="${bignum.list.size()==0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
-                            <%--无动态--%>
+                            &lt;%&ndash;无动态&ndash;%&gt;
                         <p class="down_no_news">该用户暂无任何动态信息</p>
                     </div>
                 </c:if>
-                <%--有最新动态--%>
+                &lt;%&ndash;有最新动态&ndash;%&gt;
                 <c:if test="${bignum.list.size()!=0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
                         <c:forEach items="${bignum.list}" var="snum">
-                            <%--1上传文章--%>
+                            &lt;%&ndash;1上传文章&ndash;%&gt;
                             <c:if test="${snum.actionType==1}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -359,7 +359,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--2评论文章--%>
+                            &lt;%&ndash;2评论文章&ndash;%&gt;
                             <c:if test="${snum.actionType==2}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -377,7 +377,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--3回复评论--%>
+                            &lt;%&ndash;3回复评论&ndash;%&gt;
                             <c:if test="${snum.actionType == 3}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -399,7 +399,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--4提出问题--%>
+                            &lt;%&ndash;4提出问题&ndash;%&gt;
                             <c:if test="${snum.actionType ==4}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -413,7 +413,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--5回答问题--%>
+                            &lt;%&ndash;5回答问题&ndash;%&gt;
                             <c:if test="${snum.actionType ==5}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -431,7 +431,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--6回复答案--%>
+                            &lt;%&ndash;6回复答案&ndash;%&gt;
                             <c:if test="${snum.actionType ==6}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -454,217 +454,187 @@
                                 </div>
                             </c:if>
                         </c:forEach>
-                            <%--上下箭头--%>
+                            &lt;%&ndash;上下箭头&ndash;%&gt;
                         <i class="layui-icon layui-icon-up"
                            style="font-size: 30px;margin: 0 485px;color: #999999;" hidden></i>
                         <i class="layui-icon layui-icon-down"
                            style="font-size: 30px;margin: 0 485px;color: #999999;"></i>
                     </div>
                 </c:if>
-
             </div>
-        </c:forEach>
+        </c:forEach>--%>
     </div>
-
-    <%--<div class="flow_div"></div>--%>
-
+    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 </c:if>
-<%--流加载--%>
-<%--<script type="text/javascript">
-    layui.use('flow', function () {
-        var flow = layui.flow;
-        flow.load({
-            elem: '.flow_div' //流加载容器
-            , isAuto: false
-            , done: function (page, next) { //执行下一页的回调
-                setTimeout(function () {
-                    var lis = [];
-                    var limit = 8;
-                    var data = {"page": page, "limit": limit};
-                    $.ajax({
-                        type: "POST",
-                        url: "/follow/follower",
-                        dataType: "json",
-                        data: data,
-                        success: function (map) {
-                            layui.each(map.list, function (i, courses) {
-                                lis.push(
-                                    '<div class="main">' +
-                            '            <div class="waik">' +
-                            '                <div class="up">' +
-                            '                    <div class="up_left">' +
-                            '                        <img src="../../img/headimg.jpg"/>' +
-                            '                        <p class="name">'+courses.userRealname+'</p>' +
-                            '                        <div class="attention_type">' +
-                            '                            <p class="ok">√</p>' +
-                            '                            <p class="ok_zi">已关注</p>' +
-                            '                            <p class="jia">+</p>' +
-                            '                            <p class="no_zi">加关注</p>' +
-                            '                        </div>' +
-                            '                        <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>' +
-                            '                        <div class="attention_person">' +
-                            '                            <a href="<%=request.getContextPath()%>/follow/userfollower"' +
-                            '                               name="attention" class="attention_him">'+courses.followerNum+'人关注了ta</a>' +
-                            '                            <a href="<%=request.getContextPath()%>/follow/userfollowed"' +
-                            '                               name="attention" class="he_attention">ta关注了'+courses.followedNum+'人</a>' +
-                            '                        </div>' +
-                            '                    </div>' +
-                            '                    <div class="up_right">' +
-                            '                        <div class="xuexili">' +
-                            '                            <i class="layui-icon layui-icon-chart"' +
-                            '                               style="float: left;margin-right: 10px;font-size: 20px;"></i>' +
-                            '                            <p>学习力：'+courses.studyPower+'</p>' +
-                            '                            <p>学习效率：'+courses.studyEfficiency+'</p>' +
-                            '                        </div>' +
-                            '                        <div class="learntime">' +
-                            '                            <i class="layui-icon layui-icon-log"' +
-                            '                               style="float: left;margin-right: 10px;font-size: 20px;"></i>' +
-                            '                            <p>学习时长：'+courses.studyTime+'小时</p>' +
-                            '                            <p>学习成长量：'+courses.studyGrowup+'</p>' +
-                            '                            <p>技能水平：'+courses.studyStandard+'</p>' +
-                            '                        </div>' +
-                            '                    </div>' +
-                            '                </div>' +
-                            '                <c:if test="'+list1.list.size()==0+'">' +
-                            '                    <div class="down">' +
-                            '                        <h2 class="latest_news">最新动态</h2>' +
-                            '                            &lt;%&ndash;无动态&ndash;%&gt;' +
-                            '                        <p class="down_no_news">该用户暂无任何动态信息</p>' +
-                            '                    </div>' +
-                            '                </c:if>' +
-                            '                    &lt;%&ndash;有最新动态&ndash;%&gt;' +
-                            '                <c:if test="${list1.list.size()>0}">' +
-                            '                    <div class="down">' +
-                            '                        <h2 class="latest_news">最新动态</h2>' +
-                            '                        <c:forEach items="${list1.list}" >' +
-                            '                            &lt;%&ndash;1上传文章&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==1}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+coursesnem.leaveTime+'</span>' +
-                            '                                        <span class="action">上传了一篇文章：</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                            &lt;%&ndash;2评论文章&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==2}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+courses.leaveTime+'</span>' +
-                            '                                        <span class="action">评论了</span>' +
-                            '                                        <span class="reply_user">' +
-                            '                                        <a href="javascript:;">'+courses.problemUser+'</a>' +
-                            '                                    </span>' +
-                            '                                        <span class="action">的文章</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                            &lt;%&ndash;3回复评论&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==3}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+courses.leaveTime+'</span>' +
-                            '                                        <span class="action">回复了</span>' +
-                            '                                        <span class="reply_user"' +
-                            '                                        <a href="javascript:;">'+courses.replyUser+'</a>' +
-                            '                                    </span>' +
-                            '                                        <span class="jiu">就</span>' +
-                            '                                        <span class="problem_user">' +
-                            '                                        <a href="javascript:;">'+courses.problemUser+'</a>：' +
-                            '                                    </span>' +
-                            '                                        <span class="action">的文章</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                            &lt;%&ndash;4提出问题&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==4}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+courses.leaveTime+'</span>' +
-                            '                                        <span class="action">提出了一个问题：</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                            &lt;%&ndash;5回答问题&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==5}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+courses.leaveTime+'</span>' +
-                            '                                        <span class="action">回答了</span>' +
-                            '                                        <span class="reply_user">' +
-                            '                                        <a href="javascript:;">'+courses.problemUser+'</a>' +
-                            '                                    </span>' +
-                            '                                        <span class="action">的问题</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                            &lt;%&ndash;6回复答案&ndash;%&gt;' +
-                            '                            <c:if test="${nem.actionType==6}">' +
-                            '                                <div class="down_yes_news">' +
-                            '                                    <div class="bigp">' +
-                            '                                        <p class="user">'+courses.userRealname+'</p>' +
-                            '                                        <span class="time">'+courses.leaveTime+'</span>' +
-                            '                                        <span class="action">回复了</span>' +
-                            '                                        <span class="reply_user">' +
-                            '                                        <a href="javascript:;">'+courses.replyUser+'</a>' +
-                            '                                    </span>' +
-                            '                                        <span class="jiu">就</span>' +
-                            '                                        <span class="problem_user">' +
-                            '                                        <a href="javascript:;">'+courses.problemUser+'</a>：' +
-                            '                                    </span>' +
-                            '                                        <span class="action">的问题</span>' +
-                            '                                        <span class="article">' +
-                            '                                        <a href="javascript:;">'+courses.articleName+'</a>' +
-                            '                                    </span>' +
-                            '                                    </div>' +
-                            '                                    <span class="date">'+courses.dateFormat+'</span>' +
-                            '                                </div>' +
-                            '                            </c:if>' +
-                            '                        </c:forEach>' +
-                            '                            &lt;%&ndash;上下箭头&ndash;%&gt;' +
-                            '                        <i class="layui-icon layui-icon-up"' +
-                            '                           style="font-size: 30px;margin: 0 485px;color: #999999;" hidden></i>' +
-                            '                        <i class="layui-icon layui-icon-down"' +
-                            '                           style="font-size: 30px;margin: 0 485px;color: #999999;"></i>' +
-                            '                    </div>' +
-                            '                </c:if>' +
-                            '            </div>' +
-                                '    </div>'
-                                    )
-                            })
-                            next(lis.join(''), page < 3);
+<%--分页--%>
+<script>
+    var page = 1;
+    var limit = 3;
+    var total;
+    function showFocus() {
+        $.ajax({
+            type: "post",
+            url: "/follow/follower",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (data) {
+                total = data.count;
+                var focus = data.list;
+                var html = '';
+                for (var i = 0;i<focus.length;i++){
+                    html += '<div class="waik">';
+                    html += '<div class="up">';
+                    html += '<div class="up_left">';
+                    html += '<img src="../../img/headimg.jpg"/>';
+                    html += '<p class="name">'+ focus[i].userRealname+'</p>';
+                    html += '<div class="attention_type">';
+                    html += '<span style="display: none">'+ focus[i].userId+'</span>';
+                    html += '<p class="ok">√</p>';
+                    html += '<p class="ok_zi">已关注</p>';
+                    html += '<span style="display: none">'+ focus[i].userId+'</span>';
+                    html += '<p class="jia">+</p>';
+                    html += '<p class="no_zi">加关注</p>';
+                    html += '</div><div class="att_tan"><div class="att_success1">';
+                    html += '<p class="att_success_ok1">√</p>';
+                    html += '<p class="att_success_zi1">取消关注成功!</p>';
+                    html += '</div><div class="att_success2">';
+                    html += '<p class="att_success_no1">X</p>';
+                    html += '<p class="att_success_zi2">取消关注失败，请重新操作！</p></div>';
+                    html += '<div class="att_success3"><p class="att_success_noo">!</p>';
+                    html += '<p class="att_success_zi3">加载超时，请稍后再试！</p></div>';
+                    html += '<div class="att_success4"><p class="att_success_ok2">√</p>';
+                    html += '<p class="att_success_zi4">关注成功!</p></div>';
+                    html += '<div class="att_success5"><p class="att_success_no2">X</p>';
+                    html += '<p class="att_success_zi5">关注失败，请重新操作！</p></div></div>';
+                    html += '<p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>';
+                    html += '<div class="attention_person">';
+                    html += '<a href="/follow/userfollowed?userId='+ focus[i].userId+'"' +
+                        'name="attention" class="attention_him">'+ focus[i].followedNum+'人关注了ta</a>';
+                    html += '<a href="/follow/userfollower?userId='+ focus[i].userId+'"' +
+                        'name="attention" class="he_attention">ta关注了'+ focus[i].followerNum+'人</a>';
+                    html += '</div></div><div class="up_right"><div class="xuexili">';
+                    html += '<i class="layui-icon layui-icon-chart" style="float: left;margin-right: 10px;font-size: 20px;"></i>';
+                    html += '<p>学习力：'+ focus[i].studyPower+'</p><p>学习效率：'+ focus[i].studyEfficiency+'</p>';
+                    html += '</div><div class="learntime">';
+                    html += '<i class="layui-icon layui-icon-log" style="float: left;margin-right: 10px;font-size: 20px;"></i>';
+                    html += '<p>学习时长：'+ focus[i].userDateTime+'小时</p><p>学习成长量：'+ focus[i].studyGrowup+'</p>';
+                    html += '<p>技能水平：'+ focus[i].studyStandard+'</p></div></div></div>';
+                    if (focus[i].list.length===0){
+                        html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
+                        html += '<p class="down_no_news">该用户暂无任何动态信息</p></div>';
+                    }
+                    if (focus[i].list.length!==0){
+                        html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
+                        for (var j=0;j<focus[i].list.length;j++){
+                            /*1 上传文章*/
+                            if (focus[i].list.actionType===1){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">上传了一篇文章：</span><span class="article">';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
+                            }
+                            /*2 评论文章*/
+                            if (focus[i].list.actionType===2){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">评论了</span><span class="reply_user">';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].problemUser+'</a>';
+                                html += '</span><span class="action">的文章</span><span class="article">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
+                            }
+                            /*3 回复评论*/
+                            if (focus[i].list.actionType===3){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">回复了</span><span class="reply_user">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
+                                html += '<span class="jiu">就</span><span class="problem_user">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
+                                html += '<span class="action">的文章</span><span class="article">';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span>';
+                            }
+                            /*4 提出问题*/
+                            if (focus[i].list.actionType===4){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">提出了一个问题：</span><span class="article">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
+                            }
+                            /*5 回答问题*/
+                            if (focus[i].list.actionType===5){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">回答了</span><span class="reply_user">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a></span>';
+                                html += '<span class="action">的问题</span><span class="article">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
+                            }
+                            /*6 回复答案*/
+                            if (focus[i].list.actionType===6){
+                                html += '<div class="down_yes_news"><div class="bigp">';
+                                html += '<p class="user">'+ focus[i].userRealname+'  </p>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
+                                html += '<span class="action">回复了</span><span class="reply_user">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
+                                html += '<span class="jiu">就</span><span class="problem_user">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
+                                html += '<span class="action">的问题</span><span class="article">';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
+                            }
                         }
-                    });
-                }, 500);
+                        html += '<i class="layui-icon layui-icon-up"' +
+                            'style="font-size: 30px;margin: 0 485px;color: #999999;" hidden></i>';
+                        html += '<i class="layui-icon layui-icon-down"' +
+                            'style="font-size: 30px;margin: 0 485px;color: #999999;"></i>';
+                        html += '</div>';
+                    }
+                }
+                $(".main").empty().append(html);
             }
+        })
+    }
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showFocus();
+                    }
+                }
+            });
         });
-    });
-</script>--%>
+    }
+    $(function () {
+        showFocus();
+        getPage();
+    })
+</script>
 <%--点击关注事件--%>
 <script type="text/javascript">
     /*点击已关注 取消关注*/
