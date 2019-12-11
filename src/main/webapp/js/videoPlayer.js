@@ -1097,7 +1097,7 @@ $(document).ready(function () {
                 $(this).parent().parent().parent().css("height","200px");
                 $(this).parent().prev().css("height","86%");
                 $(this).parent().prev().children().eq(1).css("height","90%");
-                $(".SNS_f_b_moduleBox").css("right",130);
+                /*$(".SNS_f_b_moduleBox").css("right",130);*/
                 flexState = false;
             }else{
                 $(this).parent().parent().css("height","auto");
@@ -1107,8 +1107,8 @@ $(document).ready(function () {
                 if (height < 200){
                     height = 200;
                 }
-                $(this).css("right",0);
-                $(this).siblings().css("right",0);
+                /*$(this).css("right",0);
+                $(this).siblings().css("right",0);*/
                 $(this).parent().prev().css("height",height);
                 flexState = true;
             }
