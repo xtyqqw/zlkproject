@@ -27,14 +27,14 @@ public interface RecordService {
      * @param userId
      * @return
      */
-    Integer selectUserSection(String userId);
+    Integer selectUserSection(String userId,Integer coursesId);
 
     /**
      * 查询小结已完成数量
      * @param userId
      * @return
      */
-    Integer selectUser(String userId);
+    Integer selectUser(String userId,Integer coursesId);
     /**
      * 查询课程数量
      * @param pagination

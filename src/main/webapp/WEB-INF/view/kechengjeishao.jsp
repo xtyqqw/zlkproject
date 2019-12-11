@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_zfigtx3pcpa.css">
 
 
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
-    <link rel="stylesheet" href="/css/courseDetails.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/kechengjeishao.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,7 +84,7 @@
             background-color:  #ffffff;
             position: relative;
             border-radius:5px;
-
+            padding-bottom: 18px;
         }
 
         .p-FAQ2{
@@ -100,14 +100,22 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
             text-align: left;
             width:95%;
             margin:0 auto;
             font-size:11px;
             letter-spacing:3px;
             color: #4f5256;
+
+        }
+        .p-FAQ1gai{
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .FAQall{
+            float: right;
+            margin-top: 8px;
+            margin-right: 10px;
 
         }
         .div-FAQ:hover{
@@ -270,14 +278,14 @@
             width:70px;
             position: relative;
             top: -204px;
-            left:813px;
+            left: 86.5%;
         }
         .img1:hover{
             height: 70px;
             width:70px;
             position: relative;
             top: -204px;
-            left:813px;
+            left: 86.5%;
             background:url("img/remenpinglunbai.png");
         }
     </style>
@@ -441,9 +449,9 @@
 <jsp:include page="../jsp/footer.jsp"></jsp:include>
 
 
-<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
-<script type="text/javascript" src="/js/kechengjeishao.js"  charset="utf-8"></script>
-<script src="/js/courseDetails.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/kechengjeishao.js"  charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/js/courseDetails.js" charset="utf-8"></script>
 <%--瀑布流--%>
 <script>
     layui.use('flow', function(){
@@ -461,7 +469,7 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"/Faq/findFaqList",
+                        url:"<%=request.getContextPath()%>/Faq/findFaqList",
                         dataType:"json",
                         data:data,
                         success:function(result) {
@@ -471,7 +479,7 @@
                                     '<div class="div-FAQ">' +
                                     '<br>' +
                                     '<p class="p-FAQ2">'+faq.answer+'</p><br>' +
-                                    '<p class="p-FAQ1">'+faq.question+'</p><br>'+
+                                    '<p class="p-FAQ1 p-FAQ1gai">'+faq.question+'</p><br>'+
 
                                     '</div>'+
                                     '<div class="div1"></div>'
@@ -499,16 +507,17 @@
                 setTimeout(function(){
                     var lis = [];
                     var limit =2;
-                    var number
+                    var number;
                     var data={"page":page,"limit":limit};
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"/comment/findCommentListByUserId",
+                        url:"<%=request.getContextPath()%>/comment/findCommentListByUserId",
                         dataType:"json",
                         data:data,
                         success:function(result) {
                             number=result.yeishu;
+                            console.log(result.yeishu);
                             layui.each(result.commentList, function (i, comment) {
                                 lis.push(
                                     '<div class="div-FAQ1" ><br><br>' +
@@ -552,6 +561,7 @@
                                     '<p class="p-FAQ7">&nbsp'+comment.dislike+'</p>'+
                                     '</div>');
                                 if(comment.flag === "true"){
+
                                     lis.push('<img class="img1" src="../img/remenpinglunbai.png">');
                                 }else{
 
@@ -569,13 +579,28 @@
         });
     });
     $("#liu").on("click",".p-FAQ1",function() {
-        if($(this).css("-webkit-line-clamp","3")){
-            $(this).css("-webkit-line-clamp","8");
+        if($(this).hasClass("p-FAQ1gai")){
+            $(this).removeClass("p-FAQ1gai");
         }else{
-            $(this).css("-webkit-line-clamp","3");
+            $(this).addClass("p-FAQ1gai");
         }
 
     });
+    /*$(function () {
+        $("#liu").on("click", ".FAQall", function () {
+            if (($(this).html())==="查看详情") {
+
+                $(this).siblings(".p-FAQ1").removeClass("p-FAQ1gai");
+                $(this).html("收起");
+            } else {
+                $(this).siblings(".p-FAQ1").addClass("p-FAQ1gai");
+                $(this).html("查看详情");
+            }
+
+        });
+    });*/
+
+
 </script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+var localObj = window.location;
+var basePath = localObj.protocol+"//"+localObj.host;
 
 $('body').on('mouseenter','.layui-table-view td[data-field = "content"]',function () {
     var msg = $(this).find('div').text();
@@ -5,7 +7,7 @@ $('body').on('mouseenter','.layui-table-view td[data-field = "content"]',functio
     //如果msg不为空，执行悬停显示内容操作，即msg为空或msg为空字符串时，悬停事件不执行
     if(msg!=null&msg!=""){
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#f00000'],
+            tips: [3, '#96c8c8'],
             time: 2000
         });
     }
@@ -18,7 +20,7 @@ layui.use(['table','form','layer'], function(){
     var layer = layui.layer;
     table.render({
         elem: '#StuNote'
-        ,url:'/note/selectStuNoteAllByLimit'
+        ,url:basePath+'/note/selectStuNoteAllByLimit'
         ,height: 480
         ,cols: [[
             {field:'snId', title: '用户笔记序号', width:120}
@@ -51,13 +53,13 @@ layui.use(['table','form','layer'], function(){
                 ,yes:function () {
                     $.ajax({
                         type: "GET",
-                        url: "/note/deleteStuNoteBySnId?snId="+snId,
+                        url: basePath+"/note/deleteStuNoteBySnId?snId="+snId,
                         data: "",
                         success: function (result) {
                             //flag = false;
                             layer.msg("删除成功");
                             table.reload('StuNote',{
-                                url: '/stuNote/selectStuNoteAllByLimit',
+                                url: basePath+'/note/selectStuNoteAllByLimit',
                                 height: 480,
                                 page:{
                                     curr:1

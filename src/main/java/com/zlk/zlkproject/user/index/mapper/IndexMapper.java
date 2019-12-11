@@ -24,6 +24,11 @@ public interface IndexMapper {
      */
     List<User> findUsersByAllTime();
     /**
+     * 按照学习总时长从少到多查询用户
+     * @return List<User>
+     */
+    List<User> findUsersByTime();
+    /**
      * 根据ID查询用户
      * @param userId
      * @return User

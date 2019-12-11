@@ -41,7 +41,12 @@ public class RecordServiceImpl implements RecordService {
         int s=list.size();
         for(int i=0;i<s;i++){
             Item item=list.get(i);
-            item.setStuTime(LeaveTime.alterDate(item.getStudyTime()));
+            if(item.getStudyTime()!=null){
+                item.setStuTime(LeaveTime.alterDate(item.getStudyTime()));
+            }else{
+                item.setStuTime("未观看");
+            }
+
             list.set(i,item);
         }
         return list;
@@ -53,8 +58,8 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public Integer selectUserSection(String userId){
-        return recordMapper.selectUserSection(userId);
+    public Integer selectUserSection(String userId,Integer coursesId){
+        return recordMapper.selectUserSection(userId,coursesId);
     }
 
     /**
@@ -63,8 +68,9 @@ public class RecordServiceImpl implements RecordService {
      * @return
      */
     @Override
-    public Integer selectUser(String userId){
-        return recordMapper.selectUser(userId);
+    public Integer selectUser(String userId,Integer coursesId){
+
+        return recordMapper.selectUser(userId,coursesId);
     }
 
     /**

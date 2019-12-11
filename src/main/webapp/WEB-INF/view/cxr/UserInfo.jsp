@@ -210,14 +210,14 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">兴趣爱好</label>
             <div class="layui-input-block">
-                <textarea name="userHobby" value="${user.userHobby}" id="userHobby" placeholder="请输入你的兴趣爱好(不超过100字)" class="layui-textarea" maxlength="100"></textarea>
+                <textarea name="userHobby" value="${user.userHobby}" id="userHobby" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50"></textarea>
             </div>
         </div>
         <%--自我评价--%>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">自我评价</label>
             <div class="layui-input-block">
-                <textarea name="userSelfappraise" value="${user.userSelfappraise}" id="userSelfappraise" placeholder="请输入自我评价内容(不超过200字)" class="layui-textarea" maxlength="200"></textarea>
+                <textarea name="userSelfappraise" value="${user.userSelfappraise}" id="userSelfappraise" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100"></textarea>
             </div>
         </div>
         <%--最高学历--%>
@@ -372,9 +372,10 @@
             , page: true //开启分页
             , height: 400
             , cols: [[ //表头
-                {type: 'checkbox'}
+                //
+                // {type: 'checkbox'}
                                     //序号自动排序  type:'numbers'
-                ,{field:'zizeng',title:'序号',type:'numbers'}
+                {field:'zizeng',title:'序号',type:'numbers'}
                 // , {field: 'userId', title: '编号', width: 80, sort: true}
                                     //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
                 , {field: 'userImg', title: '头像', width: 60,templet:'<div><img src="{{d.userImg}}">'}
@@ -500,6 +501,10 @@
                     area: ['43%', '90%'],
                     content: $("#updateUser"),
                     btn: ['提交'],
+                    // 更新渲染,将下拉框的内容反显至页面
+                    success: function(){
+                       form.render('select');
+                    },
                     yes: function (index, layero) {
                                                 //修改按钮
                         layero.find("form").find("#updateSubmit").click();
@@ -519,13 +524,38 @@
         var laydate=layui.laydate;
         laydate.render({
             elem: '#userBirthday'
-        });
-        laydate.render({
-            elem: '#userBirthday'
-            ,type: 'date'
+             //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
         });
 
+
+        // laydate.render({
+        //     elem: '#userBirthday'
+        //     ,type: 'date'
+        // });
+
     });
+
+
+    //  设置选择日期不能超过当前日期
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month
+            + seperator1 + strDate + " " + date.getHours() + seperator2
+            + date.getMinutes() + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
 
     // 图片上传js
     layui.use(["jquery", "upload", "form", "layer", "element"], function () {
