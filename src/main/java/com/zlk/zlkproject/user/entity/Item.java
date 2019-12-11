@@ -29,18 +29,21 @@ public class Item {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date studyTime;
     /*格式化时间*/
-    private String StuTime;
+    private String stuTime;
     private long per;
+    /*获星数量*/
+    private Integer sectionGrade;
 
-    public Item(Integer coursesId, String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime, String stuTime, long per) {
+    public Item(Integer coursesId, String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime, String stuTime, long per, Integer sectionGrade) {
         this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.coverPic = coverPic;
         this.chapterName = chapterName;
         this.sectionName = sectionName;
         this.studyTime = studyTime;
-        StuTime = stuTime;
+        this.stuTime = stuTime;
         this.per = per;
+        this.sectionGrade = sectionGrade;
     }
 
     public Item() {

@@ -44,6 +44,11 @@ public class Courses {
     private String featureText;
     /**功能图片*/
     private String featurePic;
+    /**章节Id*/
+    private int typeId;
+    /**小节Id*/
+    private int coursesTagId;
+
     /**章节列表*/
     private List<Chapter> chapterList;
     /**用户Id*/
