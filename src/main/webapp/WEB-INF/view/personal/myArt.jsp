@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../../../layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
     h2{margin: 20px 0;}
 </style>
 <body>
-<form action="/articles/update" method="post">
+<form action="<%=request.getContextPath() %>/articles/update" method="post">
     <h2>修改标题：</h2>
     <input class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="title" value="${articles.title}">
     <h2>修改内容：</h2>
@@ -33,8 +33,8 @@
     <input type="submit" class="layui-btn" style="float: right;margin-top: 30px;background: grey" value="返回">
 </form>
 </body>
-<script src="../../../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../../editormd/editormd.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
 <script>
     /*MarkDown组件*/
     var testEditor;
@@ -44,7 +44,7 @@
             height : 640,
             syncScrolling : "single",
             //你的lib目录的路径
-            path : "../editormd/lib/",
+            path : "<%=request.getContextPath() %>/editormd/lib/",
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "/uploadfile",

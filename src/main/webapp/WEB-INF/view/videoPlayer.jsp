@@ -10,19 +10,19 @@
 <html>
 <head>
     <title>VideoPlayer</title>
-    <link rel="stylesheet" href="/css/videoPlayer.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/videoPlayer.css" type="text/css">
     <%--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--%>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="/layui/layui.js"></script>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1517658_03zd610p4xl.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
 
     <%--引入wangEditor富文本编辑器--%>
-    <script type="text/javascript" src="/js/wangEditor.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/wangEditor.js"></script>
 
     <%--<script type="text/javascript" src="/js/player.js"></script>--%>
-    <script type="text/javascript" src="/js/videoPlayer.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/videoPlayer.js"></script>
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"></jsp:include>
