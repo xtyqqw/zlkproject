@@ -169,10 +169,6 @@
 <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 <%--分页--%>
 <script>
-    /*$(function () {
-        document.documentElement.scrollTop=document.body.scrollTop=0;
-        $(window).scrollTop(0);
-    });*/
     var page = 1;
     var limit = 5;
     var total;
@@ -200,7 +196,9 @@
                     html += '<div class="learn-main mainname main">';
                     html += '<div class="learn-title">';
                     html += '<h2>'+ data1[i].coursesName+'</h2>';
-                    html += '<p>解锁任务：'+ data1[i].coursesName+' — '+ data1[i].chapterName+' — '+ data1[i].sectionName+'</p>';
+                    html += '<p>解锁任务：'+ data1[i].coursesName+' ' +
+                        '<span style="font-weight: bold;">——</span> '+ data1[i].chapterName+' ' +
+                        '<span style="font-weight: bold;">——</span> '+ data1[i].sectionName+'</p>';
                     html += '<img src="'+ data1[i].coverPic+'">';
                     html += '</div>';
                     html += '<div class="learn-main-getstar">';
@@ -226,6 +224,7 @@
             }
         })
     }
+    /*进度条*/
     function percent() {
         layui.use('element', function(){
             var element = layui.element;

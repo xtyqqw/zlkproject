@@ -33,37 +33,7 @@ public class ArticleListController {
      */
     @RequestMapping(value = "/toLogin")
     public String toLogin(){
-        return "view/community/communityMain";
-    }
-    /**
-     * 最新文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleAll")
-    public ModelAndView toArticleAll(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleAll");
-        return mv;
-    }
-    /**
-     * 热门文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleHot")
-    public ModelAndView toArticleHot(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleHot");
-        return mv;
-    }
-    /**
-     * 我的文章列表接口
-     * @return
-     */
-    @RequestMapping(value = "/toArticleMy")
-    public ModelAndView toArticleMy(){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleMy");
-        return mv;
+        return "view/community/newCommunityMain";
     }
     /**
      * 我要发文接口
@@ -75,6 +45,15 @@ public class ArticleListController {
         mv.setViewName("view/community/articleGuide");
         return mv;
     }
+    /**
+     * 测试页面
+     * @return
+     */
+    @RequestMapping(value = "/toTest")
+    public String toTest(){
+        return "view/community/test";
+    }
+
     @RequestMapping(value = "/findByCreateTime")
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{

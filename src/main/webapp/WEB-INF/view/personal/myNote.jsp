@@ -213,7 +213,7 @@
     function loadData() {
         $.ajax({
             type: "post",
-            url: "/myNote/toPage",
+            url: "<%=request.getContextPath()%>/myNote/toPage",
             async: false,
             dataType: 'json',
             data: {
