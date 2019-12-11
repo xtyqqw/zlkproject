@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.articleManager.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.admin.util.IDUtil;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
@@ -157,6 +158,19 @@ public class ArticleManagerController {
         //日志记录删除文章
         logUtil.setLog(request,"删除文章标题为"+articleByArticleId.getTitle()+"的信息");
 
+        return "admin/articleManager";
+    }
+
+    /**
+     * 通过文章id批量删除文章
+     * @param data
+     * @return
+     */
+    @RequestMapping(value = "/deleteList")
+    @ResponseBody
+    public String deleteArticlesByArticleId(String data){
+        List<Article> articleList = JSONArray.parseArray(data, Article.class);
+        Integer flag = articleManagerService.deleteArticlesByArticleId(articleList);
         return "admin/articleManager";
     }
 

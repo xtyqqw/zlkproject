@@ -105,12 +105,13 @@
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
 <script>
-    layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
+    layui.use(['table', 'laydate', 'form', 'util', 'layer','jquery'], function () {
         var table = layui.table;
         var laydate = layui.laydate;
         var layer = layui.layer;
         var util = layui.util;
         var form = layui.form;
+        var $ = layui.jquery;
         <c:if test="${flag}">
         $(function () {
             var index=layer.msg($("#msg").val());
@@ -131,10 +132,9 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/admin/adminManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 503
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'adminId', title: '用户编号', width: 290, sort: true}
+                 {field: 'adminId', title: '用户编号', width: 290, sort: true}
                 , {field: 'adminName', title: '用户名称', width: 130, sort: true}
                 , {field: 'adminPassword', title: '用户密码', width: 290}
                 , {field: 'adminRole', title: '所属角色', width: 130}
@@ -152,7 +152,7 @@
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/admin/toAdminManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/admin/toAdminManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">用户名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
@@ -196,11 +196,11 @@
             var id = data.adminId;
             if (obj.event === 'del') {
                 layer.confirm('是否确认删除', function (index) {
-                    obj.del();
                     $.ajax({
                         type: "POST",
                         url: "<%=request.getContextPath()%>/admin/delete?adminId=" + id,
                         success: function (msg) {
+                            obj.del();
                             layer.msg("删除成功");
                         },
                         error: function (msg) {

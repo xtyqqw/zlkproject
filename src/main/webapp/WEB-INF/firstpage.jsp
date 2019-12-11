@@ -411,7 +411,7 @@
     .studing .studing_ul_s_dd p {
         font-size: 12px;
         position: relative;
-        top: -31px;
+        top: -27px;
         display: inline-block;
     }
 
@@ -419,7 +419,7 @@
         color: white;
         font-size: 10px;
         position: relative;
-        top: -36px;
+        top: -32px;
         left: 5px;
     }
 

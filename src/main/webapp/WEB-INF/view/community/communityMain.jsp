@@ -113,7 +113,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 76vw;
+            margin-left: 92vw;
             margin-top: 0vw;
         }
         .wz_remen{

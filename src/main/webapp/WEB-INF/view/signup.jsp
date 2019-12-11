@@ -9,8 +9,8 @@
 <html>
 <head>
     <title>注册</title>
-    <link rel="stylesheet" href="/css/sign.css" type="text/css">
-    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sign.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="../../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         body {
@@ -106,7 +106,7 @@
             <p class="p1">账号注册</p>
         </div>
         <center><span style="color:red;">${spanmsg}</span></center>
-        <form action="/users/signup" method="post" onsubmit="return check()">
+        <form action="<%=request.getContextPath()%>/users/signup" method="post" onsubmit="return check()">
 
             <%--    <input id="userPhonenum" name="phonenum" value="" type="text" onchange="phone()"  placeholder="请输入手机号码"><span class="error" id="phoneError"></span><br>--%>
             <%--    <input id="pwd1" name="userPwd" type="password" value="" onchange="checkpwd1()" placeholder="请输入密码"> <span class="error" id="checktext2"></span><br>--%>
@@ -171,8 +171,8 @@
 </div>
 
 </body>
-<script src="/layui/layui.js"></script>
-<script src="/js/signup.js"></script>
+<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+<script src="<%=request.getContextPath()%>/js/signup.js"></script>
 <script type="text/javascript">
     function doJudge() {//判断是否选中的自定义函数
         if (document.getElementById('ck').checked = true) {//判断id为ck的复选框(input框)的状态是否是选中，假设是选中

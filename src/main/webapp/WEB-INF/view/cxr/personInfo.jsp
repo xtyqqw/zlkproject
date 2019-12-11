@@ -14,8 +14,8 @@
     <title>个人信息完善</title>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
-    <script src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
 
 
@@ -29,15 +29,6 @@
             margin: 0px;
             padding: 0px;
         }
-
-
-
-
-
-
-
-
-
 
         /*信息完善css*/
         .xuanxiangka{
@@ -54,16 +45,11 @@
 
         }
 
-
-
-
         .layui-tab{
             margin-left: 2vw;
             float: left;
             margin-top: 2vw;
         }
-
-
 
 
         /*账号绑定样式*/
@@ -106,8 +92,6 @@
             line-height: 2vw;
             font-size: 1vw;
             text-align: center;
-
-
         }
 
 
@@ -186,8 +170,6 @@
             line-height: 6vw;
             text-align:center;
             margin-left: 1vw;
-
-
         }
         .dsf_right{
             width: 50vw;
@@ -236,8 +218,6 @@
             width: 10vw;
             float: left;
             font-size: 1.2vw;
-
-
         }
         .i{
             width: 3vw;
@@ -278,7 +258,7 @@
         <div class="layui-tab-item layui-show">
 
             <%--<!-- 信息完善 -->--%>
-            <form class="layui-form" action="/personal/updateUser" method="post" >
+            <form class="layui-form" action="<%=request.getContextPath()%>/personal/updateUser" method="post" >
                 <%--隐藏 的userid--%>
                 <div class="layui-form-item" style="display: none">
                     <label class="layui-form-label">用户编号</label>
@@ -451,7 +431,7 @@
                         <%--保存按钮--%>
                         <button class="layui-btn" type="submit" id="baocun">保存</button>
                         <%--重置按钮--%>
-                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button type="reset" id="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </form>
@@ -634,6 +614,7 @@
 
 
 
+
     //日期js
     layui.use('laydate',function(){
         var laydate=layui.laydate;
@@ -641,10 +622,9 @@
         laydate.render({
             elem: '#bri1'
 
+            , format: 'yyyy-MM-dd'
           //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
-              ,  format: 'yyyy-MM-dd' //日期格式
-
             ,choose: function(dates){ //选择好日期的回调
             }
         });
@@ -669,11 +649,6 @@
         return currentdate;
     }
 
-
-
-
-
-
     // 图片上传js
     layui.use(["jquery", "upload", "form", "layer", "element"], function () {
         var $ = layui.$,
@@ -694,6 +669,7 @@
                 });
             }
             , done: function (res) {
+
                 //本地上传回调
                 // //如果上传失败
                 // if (res.code > 0) {
@@ -728,6 +704,12 @@
         });
         element.init();
     });
+
+    //重置按钮点击事件,当点击重置按钮时，显示信息
+    $("#reset").click(function () {
+        layer.msg("信息已重置");
+    });
+
 
     //账户绑定js
     layui.use('layer', function(){ //独立版的layer无需执行这一句
@@ -779,15 +761,15 @@
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '<form>'+
                         '<center>'+
-                        '<input style="width:40vw;margin-top:2vw;height:2vw;" type="email" name="email" placeholder="请输入你的邮箱地址" id="user_email" onchange="email()" />'+
-                        '<span class="error" id="emailError"></span>'+
+                        '<input class="layui-input-block" style="width:40vw; margin-left: -0.5vw; margin-top:2vw;height:2vw;" type="email" name="email" placeholder="请输入你的邮箱地址" id="user_email" onchange="email()" />'+
+                        '<br><span class="error" id="emailError"></span>'+
                         '<br>'+
-                        '<input style="width:30vw;height:2vw;margin-left:-4.2vw;margin-top:2vw;" type="text" name="text" placeholder="请输入你的验证码"/>'+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-left:-4.2vw;margin-top:2vw;" type="text" name="text" placeholder="请输入你的验证码"/>'+
                         '<button style="height:2vw;font-size:1vw;margin-left:1vw;">获取验证码</button>'+
                         '</center>'+
                         '</form>'
                     ,success: function(layero){
-
+                    //        成功之后的方法回调
                     }
                 });
             }
@@ -807,16 +789,20 @@
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '<form action="">'+
                         '<center>'+
-                        '<input style="width:40vw;margin-top:2vw;height:2vw;" type="tel" name="userPhonenum" placeholder="请输入你的手机号" id="user_phonenum" onchange="phone()"/>'+
-                        '<span class="error" id="phoneError"></span>'+
+
+                        '<input class="layui-input-block" style="width:40vw; margin-left:8vw; margin-top:2vw;height:2vw;" type="tel" name="userPhonenum" placeholder="请输入你的手机号" id="user_phonenum" onchange="phone()"/>'+
+                        '<br/><span class="error" id="phoneError"></span>'+
                         '<br>'+
-                        '<input style="width:30vw;height:2vw;margin-left:-4.6vw;margin-top:2vw;" type="text" name="duanxin" placeholder="请输入你的短信验证码"/>'+
+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-left:5vw;margin-top:2vw;" type="text" name="duanxin" placeholder="请输入你的短信验证码"/>'+
                         '<button style="height:2vw;font-size:1vw;margin-left:1vw;">获取验证码</button>'+'<br>'+
-                        '<input style="width:30vw;height:2vw;margin-left:-10vw;margin-top:2vw;" name="userPwd" type="password" name="password" placeholder="请输入6-16位的字母或数字" id="pwd1" onchange="checkpwd1()"/>'+
-                        '<span class="error" id="checktext2"></span>'+
+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-left:-2vw;margin-top:2vw;" name="userPwd" type="password" name="password" placeholder="请输入6-18位的字母或数字" id="pwd1" onchange="checkpwd1()"/>'+
+                        '<br/><span class="error" id="checktext2"></span>'+
                         '<br>'+
-                        '<input style="width:30vw;height:2vw;margin-left:-10vw;margin-top:2vw;" type="password" name="password" placeholder="请再次输入密码"  id="pwd2" onchange="checkpwd2()"/>'+
-                        '<span class="error" id="checktext3"></span>'+
+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-left:-2vw;margin-top:2vw;" type="password" name="password" placeholder="请再次输入密码"  id="pwd2" onchange="checkpwd2()"/>'+
+                        '<br/><span class="error" id="checktext3"></span>'+
 
                         '</center>'+
                         '</form>'
@@ -844,8 +830,9 @@
                     ,btnAlign: 'c'
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '<form>'+'<center>'+
-                        '<p style="font-size:1.2vw;">提示:解绑后将再不能使用第三方账号登录了'+'</p>'+'<br>'+
-                        '<input style="width:30vw;height:2vw;margin-top:1vw;" type="password" name="password" placeholder="请输入已绑定的手机号"/>'+
+                        '<p style="font-size:1.5vw;">提示:解绑后将再不能使用第三方账号登录了'+'</p>'+'<br>'+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-top:1vw; margin-left: 2vw;" type="text" name="phone" placeholder="请输入已绑定的手机号" />'+
+
                         '</center>'+
                         '<a href="#" style="float:right;margin-right:10vw;">忘记密码</a>'+
                         '</form>'
@@ -875,9 +862,9 @@
                     ,btnAlign: 'c'
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '<form>'+'<center>'+
-                        '<p style="font-size:1.2vw;">提示:解绑后将再不能使用第三方账号登录了'+
+                        '<p style="font-size:1.5vw;">提示:解绑后将再不能使用第三方账号登录了'+
                         '</p>'+'<br>'+
-                        '<input style="width:30vw;height:2vw;margin-top:1vw;" type="password" name="password" placeholder="请输入智量库登录密码"/>'+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-top:1vw;  margin-left: 2vw;" type="password" name="password" placeholder="请输入智量库登录密码"/>'+
                         '</center>'+
                         '<a href="#" style="float:right;margin-right:10vw;">忘记密码</a>'+
                         '</form>'
@@ -904,9 +891,9 @@
                     ,btnAlign: 'c'
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '<form>'+'<center>'+
-                        '<p style="font-size:1.2vw;">提示:解绑后将再不能使用第三方账号登录了'+
+                        '<p style="font-size:1.5vw;">提示:解绑后将再不能使用第三方账号登录了'+
                         '</p>'+'<br>'+
-                        '<input style="width:30vw;height:2vw;margin-top:1vw;" type="password" name="password" placeholder="请输入智量库登录密码"/>'+
+                        '<input class="layui-input-block" style="width:30vw;height:2vw;margin-top:1vw;  margin-left: 2vw;" type="password" name="password" placeholder="请输入智量库登录密码"/>'+
                         '</center>'+
                         '<a href="#" style="float:right;margin-right:10vw;">忘记密码</a>'+
                         '</form>'
@@ -968,36 +955,24 @@
         }
     }
 
-//验证6-16位字母数字
-    function checkpwd1(){
-        var regu = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{5,16}$/;
-        var pwd = document.getElementById("pwd1").value;
-        var bool = regu.test(pwd);
-        if(bool == true){
-            document.getElementById("checktext1").innerHTML="";
-            return true;
-        } else {
-            document.getElementById("checktext1").innerHTML="请输入正确的密码";
-            document.getElementById("checktext1").style.color="red";
-            return false;
-        }
-    }
 
-    // 密码
+    //密码验证
     function checkpwd1() {
         var check = false;
         //获取密码输入框输入的值
-         var password = document.getElementById("pwd1").value;
-        if (password.length == 6) {
+        var password = document.getElementById("pwd1").value;
+        var regpass = /^[a-zA-Z]{1}(?![a-zA-Z]+$)([a-zA-Z0-9]|[._]){5,17}$/;
+        var bool = regpass.test(password);
+        if (bool == true) {
             document.getElementById("checktext2").innerHTML = "";
             check = true;
         } else {
-            document.getElementById("checktext2").innerHTML = "密码必须是六位-16位字母";
+            document.getElementById("checktext2").innerHTML = "密码必须以字母开头包含6-18数字字母和._符号";
+            document.getElementById("checktext2").style.color="red";
             check = false;
         }
         return check;
     }
-
     //确认密码
     function checkpwd2() {
         var check = false;
@@ -1005,6 +980,7 @@
         var pwd2 = document.getElementById("pwd2").value;
         if (pwd1 != pwd2) {
             document.getElementById("checktext3").innerHTML = "两次输入密码不一致";
+            document.getElementById("checktext3").style.color="red";
             check = false;
         } else {
             document.getElementById("checktext3").innerHTML = "";
