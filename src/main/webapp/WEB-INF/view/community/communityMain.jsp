@@ -307,7 +307,7 @@
                     <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                         <div>
                             <ul>
-                                <li>< a href=" " type="button" class="">${tag.tagName}</ a></li>
+                                <li><a href="" type="button" class="">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>
@@ -316,7 +316,7 @@
                     <c:forEach items="${tagList}" var="tag">
                         <div>
                             <ul>
-                                <li>< a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</ a></li>
+                                <li><a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>

@@ -24,6 +24,8 @@ public class UserSection {
     private Integer state;
     /**小节时间记录 对应字段time*/
     private Double time;
+    /**小节的个人评分 主键 对应字段section_Grade*/
+    private Integer sectionGrade;
 
     public UserSection() {
     }

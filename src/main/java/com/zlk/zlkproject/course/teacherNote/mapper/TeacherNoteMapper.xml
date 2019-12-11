@@ -13,14 +13,14 @@
 
     <select id="findNotesBySectionId" parameterType="java.lang.Integer" resultMap="teacherNoteEntityMap">
         select * from teacher_note
-        <if test="sectionId !=null and sectionId != ''">
+        <if test="sectionId !=null">
             where section_id = #{sectionId}
         </if>
         limit #{offset},#{limit}
     </select>
     <select id="findCountBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select count(1) from teacher_note
-        <if test="sectionId !=null and sectionId != ''">
+        <if test="sectionId !=null">
             where section_id = #{sectionId}
         </if>
     </select>
@@ -44,7 +44,7 @@
     <update id="updateTNByTeacherNote">
         update teacher_note
         <set>
-            <if test="sectionId != null and sectionId != ''">
+            <if test="sectionId != null">
                 section_id = #{sectionId},
             </if>
             <if test="title != null and title != ''">
@@ -53,7 +53,7 @@
             <if test="content != null and content != ''">
                 content = #{content},
             </if>
-            <if test="date != null and date != ''">
+            <if test="date != null">
                 date = #{date},
             </if>
         </set>

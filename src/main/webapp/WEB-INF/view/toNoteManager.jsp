@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="layedit-tool-view">
-    <form class="layui-form"  id="updateStuNote" action="/note/updateStuNoteByStuNote" method="post" style="width: 400px;display: none;">
+    <form class="layui-form"  id="updateStuNote" action="<%=request.getContextPath()%>/note/updateStuNoteByStuNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">笔记ID</label>
             <div class="layui-input-block">
@@ -39,7 +39,7 @@
         <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</button>
     </div>
 </script>
-<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
-<script src="/js/toNoteManager.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/js/toNoteManager.js" charset="utf-8"></script>
 </body>
 </html>

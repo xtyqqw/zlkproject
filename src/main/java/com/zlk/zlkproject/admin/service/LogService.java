@@ -40,5 +40,5 @@ public interface LogService {
      * @Param [logId]
      * @return java.lang.Integer
      **/
-    Integer deleteLogByLogId(String logId);
+    Integer deleteLogByLogId(List<Log> logList);
 }
