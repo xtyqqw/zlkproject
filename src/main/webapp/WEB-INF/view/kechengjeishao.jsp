@@ -278,14 +278,14 @@
             width:70px;
             position: relative;
             top: -204px;
-            left: 88%;
+            left: 86.5%;
         }
         .img1:hover{
             height: 70px;
             width:70px;
             position: relative;
             top: -204px;
-            left:813px;
+            left: 86.5%;
             background:url("img/remenpinglunbai.png");
         }
     </style>
@@ -469,7 +469,7 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"/Faq/findFaqList",
+                        url:"<%=request.getContextPath()%>/Faq/findFaqList",
                         dataType:"json",
                         data:data,
                         success:function(result) {
@@ -512,7 +512,7 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"/comment/findCommentListByUserId",
+                        url:"<%=request.getContextPath()%>/comment/findCommentListByUserId",
                         dataType:"json",
                         data:data,
                         success:function(result) {

@@ -20,11 +20,10 @@
 <body>
 <form action="/articles/update" method="post">
     <h2>修改标题：</h2>
-    <input class="layui-text" style="width: 800px;height: 40px;line-height: 40px;" type="text" name="title" value="${articles.title}">
+    <input class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="title" value="${articles.title}">
     <h2>修改内容：</h2>
     <div id="md-content">
         <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
-        <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
         <textarea class="editormd-html-textarea" name="articleContentHtml" style="display: none">${articles.articleContentHtml}</textarea>
     </div>
     <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}"/>
