@@ -47,8 +47,12 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/person")
-    public String jsp(){
-        return "view/personal/personal";
+    public ModelAndView jsp(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("user",user);
+        mv.setViewName("view/personal/personal");
+        return mv;
     }
 
     //用户前台信息展示页面

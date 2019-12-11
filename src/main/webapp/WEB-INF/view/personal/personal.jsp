@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wy
@@ -194,11 +195,16 @@
     <div class="signature">
         <!-- 头像 -->
         <div class="headimg">
-            <img src="/img/headimg.jpg" class="headerimg">
+            <c:if test="${user.userImg==null}">
+                <img src="/img/headimg.jpg" class="headerimg">
+            </c:if>
+            <c:if test="${user.userImg!=null}">
+                <img src="${user.userImg}" class="headerimg">
+            </c:if>
         </div>
         <!-- 昵称 -->
         <div class="petname">
-            <p>我是大牛</p>
+            <p>${user.userRealname}</p>
         </div>
         <!-- 签名 -->
         <div class="sdf">
@@ -209,6 +215,9 @@
 
 <!-- 主体内容 -->
 <iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+<div><a href="#top" style="position: fixed;margin-left: 40px;z-index: 100;">
+    <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
+</a></div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){

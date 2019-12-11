@@ -68,6 +68,10 @@
     <select id="findUsersByAllTime" resultMap="userMap">
        select * from user order by user_all_time DESC
     </select>
+    <!--按照学习总时长从少到多查询用户-->
+    <select id="findUsersByTime" resultMap="userMap">
+       select * from user order by user_all_time
+    </select>
     <!--根据ID查询用户-->
     <select id="findUsersById" parameterType="com.zlk.zlkproject.entity.User" resultMap="userMap">
        select * from user where user_id = #{userId}
