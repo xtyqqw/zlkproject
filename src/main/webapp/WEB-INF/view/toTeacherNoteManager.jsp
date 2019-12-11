@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="layedit-tool-view">
-    <form class="layui-form"  id="insertTeacherNote" action="/teacherNote/insertTNByTeacherNote" method="post" style="width: 400px;display: none;">
+    <form class="layui-form"  id="insertTeacherNote" action="<%=request.getContextPath()%>/teacherNote/insertTNByTeacherNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item">
             <label class="layui-form-label">所对应的<br/>小节序号</label>
             <div class="layui-input-block">
@@ -35,7 +35,7 @@
     </form>
 </div>
 <div class="layedit-tool-view">
-    <form class="layui-form"  id="updateTeacherNote" action="/teacherNote/updateTNByTeacherNote" method="post" style="width: 400px;display: none;">
+    <form class="layui-form"  id="updateTeacherNote" action="<%=request.getContextPath()%>/teacherNote/updateTNByTeacherNote" method="post" style="width: 400px;display: none;">
         <div class="layui-form-item" style="display: none;">
             <label class="layui-form-label">讲师笔记<br/>序号</label>
             <div class="layui-input-block">
@@ -79,7 +79,7 @@
             <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</button>
         </div>
     </script>
-<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
         var msg = $(this).find('div').text();
@@ -111,7 +111,7 @@
         var layer = layui.layer;
         table.render({
             elem: '#teacherNote'
-            ,url:'/teacherNote/selectTNAllByLimit'
+            ,url:'<%=request.getContextPath()%>/teacherNote/selectTNAllByLimit'
             ,toolbar: '#toolbarDemo'
             ,height: 480
             ,cols: [[
@@ -148,13 +148,13 @@
                     ,yes:function () {
                         $.ajax({
                             type: "POST",
-                            url: "/teacherNote/deleteByTNId",
+                            url: "<%=request.getContextPath()%>/teacherNote/deleteByTNId",
                             data: {"tnId":tnId},
                             success: function (result) {
                                 //flag = false;
                                 layer.msg("删除成功");
                                 table.reload('teacherNote',{
-                                    url:'/teacherNote/selectTNAllByLimit',
+                                    url:'<%=request.getContextPath()%>/teacherNote/selectTNAllByLimit',
                                     toolbar: '#toolbarDemo',
                                     height: 480,
                                     page:{

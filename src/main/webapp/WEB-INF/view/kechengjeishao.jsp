@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_zfigtx3pcpa.css">
 
 
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
-    <link rel="stylesheet" href="/css/courseDetails.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/kechengjeishao.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -284,7 +284,7 @@
 
 </head>
 <body>
-<jsp:include page="../jsp/header.jsp"></jsp:include>
+<jsp:include page="<%=request.getContextPath()%>/jsp/header.jsp"></jsp:include>
 <div id="kechengzhuti">
     <div id="kechengjeishao">
         <input id="kechengId" type="hidden">
@@ -438,12 +438,12 @@
 
 </div>
 
-<jsp:include page="../jsp/footer.jsp"></jsp:include>
+<jsp:include page="<%=request.getContextPath()%>/jsp/footer.jsp"></jsp:include>
 
 
-<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
-<script type="text/javascript" src="/js/kechengjeishao.js"  charset="utf-8"></script>
-<script src="/js/courseDetails.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"  charset="utf-8"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/kechengjeishao.js"  charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/js/courseDetails.js" charset="utf-8"></script>
 <%--瀑布流--%>
 <script>
     layui.use('flow', function(){
