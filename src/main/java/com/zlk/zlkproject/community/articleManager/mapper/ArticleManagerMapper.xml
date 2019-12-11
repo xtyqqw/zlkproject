@@ -38,6 +38,12 @@
     <delete id="deleteArticleByArticleId" parameterType="java.lang.String">
         delete from article where article_id=#{articleId}
     </delete>
+    <delete id="deleteArticlesByArticleId">
+        delete from article where article_id in
+        <foreach collection="articleList" item="articleList" open="(" separator="," close=")">
+            #{articleList.articleId}
+        </foreach>
+    </delete>
     <update id="updateArticleByArticleId" parameterType="com.zlk.zlkproject.entity.Article">
         update article
         <set>

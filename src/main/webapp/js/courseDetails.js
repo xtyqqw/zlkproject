@@ -43,7 +43,7 @@ layui.use('flow', function(){
                                 '<input type="hidden"  value="'+courses.sectionId+'">'+
                                 '<div class="kechengxiaojeibiaoti">'+
                                 '<b class="kechengmingcheng">'+courses.sectionName+'</b>'+
-                                '<b class="kechengsijian">'+courses.sectionTime/60+'分钟'+'</b>'+
+                                '<b class="kechengsijian">'+courses.sectionTime+'分钟'+'</b>'+
                                 '</div>'+
                                 '<div class="kechengxiaojeijeishao">'+courses.sectionIntro+'</div>'+
                                 '<div class="kechengxiaojeipingfen">'+
