@@ -34,8 +34,20 @@ public class QuestionHomeController {
     @RequestMapping(value = "/test")
     public ModelAndView quizAll() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("view/community/particulars");
+        mv.setViewName("view/community/test");
         return mv;
+    }
+    /*
+     * @descrption
+     * @author gby
+     * @param [pagination]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @date 2019/12/11 15:17
+     */
+    @RequestMapping(value = "/index")
+    public String index(){
+
+        return "view/community/newCommunityMain";
     }
     /*
      * @descrption 全部问答
@@ -63,7 +75,7 @@ public class QuestionHomeController {
     @GetMapping(value = "/findQuestion")
     public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("question", questionHomeService.getAndConvert(questionId));
+        mv.addObject("questionId", questionHomeService.getAndConvert(questionId));
         mv.setViewName("/view/community/questionParticulars");
         return mv;
     }

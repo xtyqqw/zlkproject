@@ -22,7 +22,7 @@ public interface QuestionMapper {
      * @date 2019/12/10 11:58
      */
 
-    Integer selectUserId(User user);
+    Integer selectUserId(Question qusetion);
     /*
      * @descrption 判断用户问题审核状态
      * @author gby
@@ -31,7 +31,6 @@ public interface QuestionMapper {
      * @date 2019/12/10 11:33
      */
     Integer selectCheck(String userId);
-
     /*
      * @descrption 提交提问
      * @author gby

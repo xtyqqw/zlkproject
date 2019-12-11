@@ -262,7 +262,7 @@
     function loadData() {
         $.ajax({
             type: "post",
-            url: "/articles/flow",
+            url: "<%=request.getContextPath()%>/articles/flow",
             async: false,
             dataType: 'json',
             data: {
@@ -341,7 +341,7 @@
     // function loadData() {
     //     $.ajax({
     //         type: "post",
-    //         url: "/articles/flow",
+    //         url: "<%=request.getContextPath()%>/articles/flow",
     //         async: false,
     //         dataType: 'json',
     //         data: {

@@ -36,6 +36,7 @@ public class ArticleListController {
         return "view/community/newCommunityMain";
     }
     /**
+
      * 最新文章列表接口
      * @return
      */
@@ -67,6 +68,8 @@ public class ArticleListController {
         return mv;
     }
     /**
+
+
      * 我要发文接口
      * @return
      */
@@ -76,7 +79,6 @@ public class ArticleListController {
         mv.setViewName("view/community/articleGuide");
         return mv;
     }
-
     /**
      * 测试页面
      * @return

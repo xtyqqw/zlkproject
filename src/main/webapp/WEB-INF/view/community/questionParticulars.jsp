@@ -12,17 +12,13 @@
 <html>
 <head>
     <title>文章详情</title>
-    <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-    <script src="<%=request.getContextPath()%>/layui/css/layui.css"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.4.5/css/bootstrapValidator.min.css"
-          rel="stylesheet">
-    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .label {
             display: inline-block;
@@ -59,29 +55,53 @@
 <%@include file="../../jsp/sidebar.jsp" %>
 <div class="layui-row" style="margin-top:30px;width: 1000px;margin-left: 230px;height: 63px">
     <div class="title">
-        <i class="label" style="float: left;">${question.solve}</i>&nbsp;&nbsp;&nbsp;
-        <h2>${question.questionTitle}</h2>
+        <i class="label" style="float: left;" data-value="${question.solve}"></i>&nbsp;&nbsp;&nbsp;
+        <h2 data-value="${question.questionTitle}"></h2>
         <div class="tt">
-            <span class="label">${question.tagName}</span>
+            <span class="label" data-value="${question.tagName}"></span>
             <span style="margin-right: 26px;">
                             <i class="layui-icon layui-icon-radio"></i>
-                            <b>${question.browseCount}</b>浏览
+                            <b data-value="${question.browseCount}"></b>浏览
                         </span>
             <sapn class="time">
-                <i class="layui-icon layui-icon-log">${question.createTime}</i>
+                <i class="layui-icon layui-icon-log" data-value="${question.createTime}"></i>
             </sapn>
         </div>
     </div>
     <!--中间内容-->
     <div class="question">
-        <span>${question.questionContent}</span>
+        <div id="test-editormd-view">
+            <textarea id="articleContent" style="display:none;" data-value="${article.articleContent}"></textarea>
+        </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
 
+<script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
+
+<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+<script type="text/javascript">
+    document.title = "${question.questionTitle}"
+    $(function () {
+        $(".nav2").hide();
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 50) {
+                $(".nav2").addClass("fixnav").slideDown();
+            } else {
+                $(".nav2").hide();
+            }
+        })
+
+    })
+</script>
 
 </body>
 </html>

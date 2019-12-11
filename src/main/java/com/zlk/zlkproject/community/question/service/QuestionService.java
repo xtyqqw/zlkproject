@@ -15,8 +15,7 @@ public interface QuestionService {
      * @return
      * @date 2019/12/10 11:58
      */
-
-    Integer selectUserId(User user);
+    Integer selectUserId(Question qusetion);
     /*
      * @descrption 判断用户问题审核状态
      * @author gby

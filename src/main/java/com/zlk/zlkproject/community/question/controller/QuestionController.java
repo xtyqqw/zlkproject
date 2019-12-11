@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.question.controller;
 
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.question.service.QuestionTagService;
+import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +35,6 @@ public class QuestionController {
     @Autowired
     private QuestionTagService questionTagService;
 
-
     /*
      * @descrption 提问提示页面
      * @author gby
@@ -42,10 +43,10 @@ public class QuestionController {
      * @date 2019/11/27 16:43
      */
     @RequestMapping(value = "/questionGuide")
-    public ModelAndView main(HttpServletRequest request, Question question) throws Exception {
+    public ModelAndView main(HttpServletRequest request, Question question, String userId) throws Exception {
         ModelAndView mv = new ModelAndView();
-    /*    String userId = (String) request.getSession().getAttribute("user");
-        if (userId != null) {
+ /*       Integer user = questionService.selectUserId(question);
+        if (user != null) {
             mv.addObject("msg", "您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
             Integer check1 = questionService.selectCheck(userId);
@@ -95,24 +96,30 @@ public class QuestionController {
      * @date 2019/11/27 16:46
      */
     @PostMapping(value = "/addQuestion")
-    public ModelAndView addQuestion(Question question) throws Exception {
+    public ModelAndView addQuestion(Question question, User user) throws Exception {
         ModelAndView mv = new ModelAndView();
+        question.setQuestionId(UUIDUtils.getId());
+        question.setCreateTime(new Date());
+        //发布文章的动态的状态为1
+        question.setSolve(0);
+        question.setZanCount(0);
+        question.setCaiCount(0);
+        question.setBrowseCount("0");
+        question.setQuestionSetTop("1");
+        question.setResponseCount(0);
+        question.setAudit("1");
+        question.setUserId(user.getUserRealname());
         questionService.addQuestion(question);
-    /*    if (qu != null) {
+        if (question != null) {
             mv.addObject("flag", "true");
             mv.addObject("error", "发表成功");
-            mv.setViewName("redirect:/articleList/toArticleHot");
-            return mv;
+            mv.setViewName("redirect:/articles/toLogin");
         } else {
             mv.addObject("flag", "true");
-            mv.addObject("error", "发表失败");
+            mv.addObject("error", "格式不符合要求");
             mv.setViewName("redirect:/question/editQuestion");
-            return mv;
-        }*/
-        mv.addObject("发表成功");
-        mv.setViewName("/view/community/communityMain");
+        }
         return mv;
-
     }
 
     //文章编辑页面的图片上传方法

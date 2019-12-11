@@ -16,14 +16,6 @@ public interface QuestionHomeService {
      * @date 2019/12/10 14:15
      */
     List<Question> findByQuestionTime(Pagination pagination);
-    /*
-     * @descrption 查询我的提问
-     * @author gby
-     * @param
-     * @return
-     * @date 2019/12/10 14:15
-     */
-    List<Question> findByUserId(Pagination pagination);
 
     /*
      * @descrption 根据问题id查询文章

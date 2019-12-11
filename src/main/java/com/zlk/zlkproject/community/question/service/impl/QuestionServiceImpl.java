@@ -4,7 +4,6 @@ import com.zlk.zlkproject.community.question.mapper.QuestionMapper;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +21,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionMapper questionMapper;
 
     @Override
-    public Integer selectUserId(User user) {
-        return questionMapper.selectUserId(user);
+    public Integer selectUserId(Question qusetion) {
+        return questionMapper.selectUserId(qusetion);
     }
 
     @Override
@@ -34,12 +33,6 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     @Override
     public Integer addQuestion(Question question) {
-        User user = new User();
-        question.setQuestionId(UUIDUtils.getId());
-        question.setCreateTime(new Date());
-        //发布文章的动态的状态为1
-        question.setSolve(0);
-        question.setQuestionId(question.getQuestionId());
 
         return questionMapper.addQuestion(question);
     }

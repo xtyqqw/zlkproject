@@ -58,18 +58,17 @@ public class Question {
     /*被踩数*/
     private Integer caiCount;
     /*审核：0 审核中，1 审核过，2 审核未过*/
-    private Integer check;
+    private String audit;
     /*回答数*/
-    private String responseCount;
+    private Integer responseCount;
     /*分类*/
     private String typeName;
-    /*小节表主键*/
-    private String sectionId;
     /*标签*/
     private String tagName;
     /*用户*/
     private String userId;
-
+    /*小节表主键*/
+    private String sectionId;
     public Question() {
     }
 
