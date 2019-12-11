@@ -115,7 +115,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/tag/tagManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 503
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
                  {field: 'tagId', title: '类别编号', width: 290, sort: true}
                 , {field: 'tagName', title: '类别名称', width: 130, sort: true}
@@ -134,7 +134,7 @@
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/tag/toTagManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/tag/toTagManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">类别名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +

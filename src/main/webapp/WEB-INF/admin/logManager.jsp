@@ -85,7 +85,7 @@
                 elem: '#demo'
                 , url: '<%=request.getContextPath()%>/log/logManager?condition=${condition}' //数据接口
                 , page: true //开启分页
-                , height: 503
+                , height: $(document).height()-$('#demo').offset().top-20
                 , limit: 100
                 , cols: [[ //表头
                     {type: 'checkbox'}
@@ -113,7 +113,7 @@
                     '<div class="layui-card search">\n' +
                     '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                     '            <div class="layui-form-item">' +
-                    '               <form type="post" action="/log/toLogManager"> \n' +
+                    '               <form type="post" action="<%=request.getContextPath()%>/log/toLogManager"> \n' +
                     '                <div class="layui-inline">\n' +
                     '                    <label class="layui-form-label hint">操作者名称</label>\n' +
                     '                    <div class="layui-input-block">\n' +

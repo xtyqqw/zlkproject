@@ -132,7 +132,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/admin/adminManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 503
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
                  {field: 'adminId', title: '用户编号', width: 290, sort: true}
                 , {field: 'adminName', title: '用户名称', width: 130, sort: true}
@@ -152,7 +152,7 @@
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/admin/toAdminManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/admin/toAdminManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">用户名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +

@@ -107,7 +107,7 @@
         var setting = {
             async: {
                 enable: true,
-                url: "/function/findAllFunction",
+                url: "<%=request.getContextPath()%>/function/findAllFunction",
                 dataType: JSON
             },
             check: {
@@ -214,7 +214,7 @@
         var setting = {
             async: {
                 enable: true,
-                url: "/function/findAllFunction",
+                url: "<%=request.getContextPath()%>/function/findAllFunction",
                 dataType: JSON
             },
             check: {
@@ -239,7 +239,7 @@
                     zTree.expandAll(true);
                     var treeNode;
                     $.ajax({
-                        url: "/function/findFunctionByRoleId?roleId="+data.roleId,
+                        url: "<%=request.getContextPath()%>/function/findFunctionByRoleId?roleId="+data.roleId,
                         type: 'post',
                         async:false, //==######=请求外部接收到Ajax请求 返回值的关键。===保证不是异步的请求。后面  【外部 接收变量 语句】   一定是后执行。
                         dataType: "json",
@@ -352,7 +352,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/role/roleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 503
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
                 {field: 'roleId', title: '角色编号', width: 290, sort: true}
                 , {field: 'roleName', title: '角色名称', width: 130, sort: true}
@@ -371,7 +371,7 @@
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/role/toRoleManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/role/toRoleManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">角色名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +

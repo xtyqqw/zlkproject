@@ -107,7 +107,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/dept/deptManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 503
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
                  {field: 'deptId', title: '部门编号', width: 290, sort: true}
                 , {field: 'deptName', title: '部门名称', width: 130, sort: true}
@@ -126,7 +126,7 @@
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/dept/toDeptManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/dept/toDeptManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">部门名称</label>\n' +
                 '                    <div class="layui-input-block">\n' +
