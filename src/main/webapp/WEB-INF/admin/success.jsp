@@ -30,7 +30,7 @@
 
         .top {
             width: 100%;
-            height: 100px;
+            height: 16%;
             background-image:url(<%=request.getContextPath()%>/img/admin/admin_logo.png);
             background-repeat:no-repeat;
             background-position: 30px center;
@@ -113,7 +113,7 @@
 
         .bottom {
             width: 100%;
-            height: 523px;
+            height: 83%;
         }
 
         .bottom div {
@@ -149,7 +149,7 @@
     var setting = {
         async: {
             enable: true,
-            url: "/function/findFunction",
+            url: "<%=request.getContextPath()%>/function/findFunction",
             dataType: JSON
         },
         view: {

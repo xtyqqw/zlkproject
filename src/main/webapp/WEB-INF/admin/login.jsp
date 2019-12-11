@@ -41,7 +41,7 @@
 </div>
 <input type="hidden" value="${error}" id="msg">
 <script>
-    layui.use(['layer'], function () {
+    layui.use(['layer','jquery'], function () {
         var $ = layui.jquery;
         var layer = layui.layer;
         <c:if test="${flag}">
