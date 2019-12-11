@@ -422,16 +422,14 @@
                         console.log(data);
                         $.ajax({
                             type: "POST",
-                            url: "/tagKe/findTagList",
+                            url: "<%=request.getContextPath()%>/tagKe/findTagList",
                             dataType: "json",
                             data: data,
                             success: function (result) {
                                 layui.each(result.tagList, function (i, tag) {
                                     lis.push(
                                         /*'<br><a class="a1">' + tag.tagName + '</a>'*/
-                                        '<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName=") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-
-
+                                        '<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName='+tag.tagName+'") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                                     );
 
                                 });

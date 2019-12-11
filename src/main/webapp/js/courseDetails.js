@@ -1,3 +1,5 @@
+var localObj = window.location;
+var basePath = localObj.protocol+"//"+localObj.host;
 layui.use('flow', function(){
     var flow = layui.flow;
 
@@ -15,7 +17,7 @@ layui.use('flow', function(){
                 var data = {"page":page,"limit":limit};
                 $.ajax({
                     type :"POST",
-                    url:"/section/findSectionDetails",
+                    url:basePath+"/section/findSectionDetails",
                     dataType:"json",
                     data:data,
                     success:function(result) {
@@ -176,16 +178,16 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
     var sectionId = $(this).children().first().val();
     $.ajax({
         type : "POST",
-        url :"/kecheng/seleUserCoursesByUserCourses",
+        url :basePath+"/kecheng/seleUserCoursesByUserCourses",
         data:"",
         success: function (bool) {
             if (bool=="已参加"){
                 $.ajax({
                     type : "POST",
-                    url :"/toVideo",
+                    url :basePath+"/toVideo",
                     data:{"sectionId":sectionId},
                     success: function (data) {
-                        window.location.href = "/toVideo?sectionId="+sectionId;
+                        window.location.href = basePath+"/toVideo?sectionId="+sectionId;
                     }
                 });
             }else {
