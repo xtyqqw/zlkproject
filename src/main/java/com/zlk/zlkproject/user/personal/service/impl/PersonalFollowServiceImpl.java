@@ -35,7 +35,7 @@ public class PersonalFollowServiceImpl implements PersonalFollowService {
 
     @Override
     public List<User> findFollowed(FollowerPage followerPage) {
-        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
+
         List<User> list = followerMapper.findFollowed(followerPage);
         return list;
     }

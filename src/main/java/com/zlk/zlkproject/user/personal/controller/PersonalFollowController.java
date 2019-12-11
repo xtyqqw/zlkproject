@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.user.personal.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.MyFollower;
@@ -73,23 +72,28 @@ public class PersonalFollowController {
 //    }
 
     @RequestMapping(value = "/follower")
-    public ModelAndView personalFollow(HttpServletRequest request, FollowerPage followerPage){
+    public Map<String,Object> personalFollow(HttpServletRequest request, FollowerPage followerPage){
         ModelAndView mv = new ModelAndView();
-        Map map = new HashMap();
-        followerPage.setLimit(5);
-        followerPage.setPage(1);
+        Map<String,Object> map = new HashMap();
         User user1 = (User) request.getSession().getAttribute("user");
-        //测试用数据
-        //模拟数据
-        followerPage.setLimit(10);
-        followerPage.setPage(1);
+
         followerPage.setUserId(user1.getUserId());
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
+
+        List<User> list1 = new ArrayList<>();
+        Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
+        //手动分页
+        if(list.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        }else {
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
+        }
         //根据查询出的User获取页面所需参数
-        for(int i = 0;i < followerList.size();i++){
+        for(int i = 0;i < list1.size();i++){
             MyFollower m = new MyFollower();
-            User user = followerList.get(i);
+            User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
             m.setUserAllTime(user.getUserAllTime());
@@ -107,7 +111,8 @@ public class PersonalFollowController {
         mv.addObject("userId",user1.getUserId());
         map.put("userId", user1.getUserId());
         map.put("list",list);
-        return mv;
+        map.put("count",followerList.size());
+        return map;
     }
 
     /**
@@ -119,17 +124,25 @@ public class PersonalFollowController {
     public ModelAndView userFollower(HttpServletRequest request,FollowerPage followerPage){
         Map map = new HashMap();
         User user1 = (User) request.getSession().getAttribute("user");
-        //模拟数据
-        followerPage.setLimit(10);
-        followerPage.setPage(1);
         ModelAndView mv = new ModelAndView();
 
+
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
         List<User> followerList = personalFollowService.findFollower(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
+
+        List<User> list1 = new ArrayList<>();
+        Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
+        //手动分页
+        if(list.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        }else {
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
+        }
         //根据查询出的User获取页面所需参数
-        for(int i = 0;i < followerList.size();i++){
+        for(int i = 0;i < list1.size();i++){
             MyFollower m = new MyFollower();
-            User user = followerList.get(i);
+            User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
             m.setUserAllTime(user.getUserAllTime());
@@ -144,6 +157,7 @@ public class PersonalFollowController {
         }
         map.put("list",list);
         map.put("userId",user1.getUserId());
+        map.put("count",followerList.size());
         mv.setViewName("view/personal/followhim");
         mv.addObject("userId",user1.getUserId());
         mv.addObject("list",list);
@@ -156,21 +170,27 @@ public class PersonalFollowController {
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollowed")
-    public ModelAndView userFollowed(HttpServletRequest request,FollowerPage followerPage){
-        Map map = new HashMap();
+    @ResponseBody
+    public Map<String,Object> userFollowed(HttpServletRequest request,FollowerPage followerPage){
+        Map<String,Object> map = new HashMap();
         ModelAndView mv = new ModelAndView();
-
+        followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());
         User user1 = (User) request.getSession().getAttribute("user");
-        //模拟数据
-        followerPage.setLimit(10);
-        followerPage.setPage(1);
-
         List<User> followerList = personalFollowService.findFollowed(followerPage);
         List<MyFollower> list = new ArrayList<MyFollower>();
+        List<User> list1 = new ArrayList<>();
+        Integer endIndex = (followerPage.getPage()-1)*followerPage.getLimit()+followerPage.getLimit();
+        //手动分页
+        if(list.size()<=endIndex){
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),list.size());
+        }else {
+            list1 = followerList.subList((followerPage.getPage()-1)*followerPage.getLimit(),endIndex);
+        }
+
         //根据查询出的User获取页面所需参数
-        for(int i = 0;i < followerList.size();i++){
+        for(int i = 0;i < list1.size();i++){
             MyFollower m = new MyFollower();
-            User user = followerList.get(i);
+            User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
             m.setUserAllTime(user.getUserAllTime());
@@ -184,10 +204,11 @@ public class PersonalFollowController {
             list.add(i,m);
         }
         map.put("list",list);
-        mv.addObject("list",list);
-        mv.setViewName("/view/personal/hefollows");
-        mv.addObject("userId",user1.getUserId());
-        return mv;
+        map.put("count",followerList.size());
+//        mv.addObject("list",list);
+//        mv.setViewName("/view/personal/hefollows");
+//        mv.addObject("userId",user1.getUserId());
+        return map;
     }
 
     /**
