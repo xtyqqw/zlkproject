@@ -3,6 +3,7 @@ package com.zlk.zlkproject.admin.mapper;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.entity.Log;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -42,5 +43,5 @@ public interface LogMapper {
      * @Param [logId]
      * @return java.lang.Integer
      **/
-    Integer deleteLogByLogId(String logId);
+    Integer deleteLogByLogId(@Param("logList") List<Log> logList);
 }

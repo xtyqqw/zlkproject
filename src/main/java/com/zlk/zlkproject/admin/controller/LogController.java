@@ -1,14 +1,20 @@
 package com.zlk.zlkproject.admin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.admin.service.LogService;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.NetworkUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
+import com.zlk.zlkproject.entity.Function;
 import com.zlk.zlkproject.entity.Log;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,8 +83,10 @@ public class LogController {
      * @return java.lang.String
      **/
     @RequestMapping(value = "/delete")
-    public String delete(String logId){
-        Integer flag = logService.deleteLogByLogId(logId);
+    @ResponseBody
+    public String delete(String data){
+        List<Log> logList = JSONArray.parseArray(data, Log.class);
+        Integer flag = logService.deleteLogByLogId(logList);
         return "admin/logManager";
     }
 

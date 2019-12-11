@@ -12,6 +12,8 @@
 
     <select id="findTagList" parameterType="com.zlk.zlkproject.entity.Tag" resultMap="tagEntityMap">
       select  * FROM tag limit #{startPage},#{limit}
-
+    </select>
+    <select id="findTagByTypeId" parameterType="java.lang.Integer" resultMap="tagEntityMap">
+        select * from tag t left join type ty on t.tag_type_id = ty.type_id where ty.type_id = #{typeId}
     </select>
 </mapper>

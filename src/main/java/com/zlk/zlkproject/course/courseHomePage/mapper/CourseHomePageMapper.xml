@@ -16,6 +16,9 @@
         <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
+        <result property="typeId" column="type_id" javaType="java.lang.Integer"></result>
+        <result property="coursesTagId" column="courses_tag_id" javaType="java.lang.Integer"></result>
+
         <result property="userId" column="user_id" javaType="java.lang.String"></result>
         <result property="userCoursesId" column="user_courses_id" javaType="java.lang.Integer"></result>
         <result property="lastStudyTime" column="last_study_time" javaType="java.sql.Date"></result>
@@ -49,22 +52,19 @@
 	</select>
 
     <select id="findAll" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
-       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
-       FROM courses c
-       LEFT JOIN user_courses uc ON c.courses_id=uc.courses_id
-       ,tag_courses tc,tag t
-       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id GROUP BY c.courses_id ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
-    </select>
+        SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
+       FROM courses c,tag t
+       WHERE t.tag_id=c.courses_tag_id ORDER BY c.student_num DESC  LIMIT #{startPage},#{limit};
+      </select>
+
     <select id="findAllByTag" parameterType="com.zlk.zlkproject.entity.Courses" resultMap="CourseHomePageEntityMap">
-       SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price ,uc.last_study_time,t.tag_name,c.introduce_pic
-       FROM courses c
-       LEFT JOIN user_courses uc ON c.courses_id=uc.courses_id
-       ,tag_courses tc,tag t
-       WHERE t.tag_id=tc.tag_id AND c.courses_id=tc.courses_id AND t.tag_name=#{tagName} ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
-    </select>
+        SELECT c.courses_id,c.courses_name,c.student_num,c.chapter_num,c.section_num,c.price,t.tag_name,c.introduce_pic
+       FROM courses c,tag t
+       WHERE t.tag_id=c.courses_tag_id  AND t.tag_name=#{tagName} ORDER BY c.student_num DESC LIMIT #{startPage},#{limit};
+ </select>
 
     <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
-        select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
+        select courses_id,courses_name,student_num,chapter_num,section_num,type_id,courses_tag_id,price,cover_pic,
         introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{offset},#{limit};
     </select>
 
@@ -73,9 +73,9 @@
     </select>
 
     <insert id="insertByCourses" keyProperty="coursesId" useGeneratedKeys="true">
-        insert into courses(courses_name,price,cover_pic,introduce_video
-        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{coursesName}
-        ,#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
+        insert into courses(courses_name,type_id,courses_tag_id,price,cover_pic,introduce_video
+        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{coursesName},#{typeId}
+        ,#{coursesTagId},#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
         #{featureText},#{featurePic})
     </insert>
 
@@ -85,16 +85,22 @@
             <if test="coursesName != null and coursesName != ''">
                 courses_name = #{coursesName},
             </if>
-            <if test="studentNum != null and studentNum != ''">
+            <if test="studentNum != null">
                 student_num = #{studentNum},
             </if>
-            <if test="chapterNum != null and chapterNum != ''">
+            <if test="chapterNum != null">
                 chapter_num = #{chapterNum},
             </if>
-            <if test="sectionNum != null and sectionNum != ''">
+            <if test="sectionNum != null">
                 section_num = #{sectionNum},
             </if>
-            <if test="price != null and price != ''">
+            <if test="typeId != null">
+                type_id = #{typeId},
+            </if>
+            <if test="coursesTagId != null">
+                courses_tag_id = #{coursesTagId},
+            </if>
+            <if test="price != null">
                 price = #{price},
             </if>
             <if test="coverPic != null and coverPic != ''">
@@ -137,5 +143,9 @@
         <if test="coursesName!=null and coursesName !=''">
             where courses_name like CONCAT('%',#{coursesName},'%')
         </if>
+    </select>
+    <!--查找全部课程-->
+    <select id="findAllCourses" resultMap="CourseHomePageEntityMap">
+        select * from courses;
     </select>
 </mapper>

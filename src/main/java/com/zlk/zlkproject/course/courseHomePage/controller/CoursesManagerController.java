@@ -1,8 +1,11 @@
 package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
+import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.type.service.TypeKeService;
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Type;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -37,14 +41,22 @@ public class CoursesManagerController {
     private CommonFileUtil commonFileUtil;
     @Autowired
     private FdfsConfig fdfsConfig;
+    @Autowired
+    private ChapterService chapterService;
+    @Autowired
+    private TypeKeService typeKeService;
 
     /**
      * 跳转到课程管理页面
      * @return
      */
     @RequestMapping("/toCourseManager")
-    public String toCourseManager(){
-        return "view/CourseManager";
+    public ModelAndView toCourseManager() throws Exception{
+        List<Type> typeList = typeKeService.selectAll();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("typeList",typeList);
+        mv.setViewName("view/CourseManager");
+        return mv;
     }
 
     /**
@@ -56,11 +68,19 @@ public class CoursesManagerController {
     @RequestMapping(value = "/findAllByLimit" )
     @ResponseBody
     public Map findAllByLimit(Integer page, Integer limit){
+        List<Courses> coursesList = courseHomePageService.selectCoursesByLimit(page, limit);
+        for (Courses courses : coursesList) {
+            Integer chapterNum = chapterService.selectCountByCoursesId(courses.getCoursesId());
+            Integer sectionNum = chapterService.selectSumSectionByCoursesId(courses.getCoursesId());
+            courses.setChapterNum(chapterNum);
+            courses.setSectionNum(sectionNum);
+            courseHomePageService.updateByCoursesId(courses);
+        }
         Map map = new HashMap();
         map.put("code",0);
         map.put("msg","");
         map.put("count",courseHomePageService.selectCount());
-        map.put("data",courseHomePageService.selectCoursesByLimit(page, limit));
+        map.put("data",coursesList);
         return map;
     }
 
@@ -90,6 +110,7 @@ public class CoursesManagerController {
      */
     @RequestMapping(value = "/insertByCourse" )
     public Map<String,Object> insertByCourse(Courses courses){
+        System.out.println(courses.getCoursesTagId());
         int i = courseHomePageService.insertByCourses(courses);
         String message = "";
         if (i>0){
@@ -153,6 +174,15 @@ public class CoursesManagerController {
         }
         Map<String,Object> map=new HashMap<>();
         map.put("mmm",message);
+        return map;
+    }
+
+    @RequestMapping(value = "/findAllCourses",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> findAllCourses() throws Exception{
+        List<Courses> coursesList = courseHomePageService.findAllCourses();
+        Map<String,Object> map=new HashMap<>();
+        map.put("coursesList",coursesList);
         return map;
     }
 

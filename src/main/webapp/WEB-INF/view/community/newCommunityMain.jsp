@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
-    <script src="../js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         *{
             margin: 0;
@@ -38,6 +38,9 @@
             width: 930px;
             height: 1350px;
             border: none 0;
+        }
+        .all-body-center .body-right{
+
         }
         /*发表按钮样式*/
         .add a {
@@ -108,7 +111,7 @@
         }
         .show_ul{
             list-style: none;
-            margin-top: 55px;
+            margin-top: 60px;
         }
         .tab_ul .tab_li1{
             color: #8c24dd;
@@ -132,17 +135,17 @@
             color: #8c24dd;
             border-bottom: 2px solid #8c24dd;
         }
-        <%--热门文章样式--%>
+        /*热门文章样式*/
         ::-webkit-scrollbar{
             display: none;
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 76vw;
+            margin-left: 84vw;
             margin-top: -8vw;
         }
         .wz_remen{
-            background-color: rgba(192,192,192,0.1);
+            background-color: #e7e7e7;
             float: left;
             width: 20vw;
             color: black;
@@ -183,7 +186,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 0.4vw;
             -webkit-border-bottom-right-radius: 0.4vw;
-            margin-top: -2.2vw;
+            margin-top: -2.14vw;
             margin-left: 1.2vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -194,11 +197,11 @@
             background-color: white;
         }
         .wz_remen_zt1{
-            background-color: rgba(192,192,192,0.1);
+            background-color: #e7e7e7;
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 3vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -211,11 +214,11 @@
 
         .wz_remen_zt2{
             display: none;
-            background-color: rgba(192,192,192,0.1);
+            background-color: #e7e7e7;
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 3vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -253,14 +256,15 @@
             color: black;
             margin-right: 0.6vw;
         }
-        <%--文章标签卡样式--%>
+        /*文章标签卡样式*/
         .show {
             width: 69%;
-            height: 30px;
+            height: 56px;
             padding-top: 6px;
             margin-top: 10px;
             border-radius: 5px;
             margin-left: 12px;
+            padding-bottom: 4px;
             background-color: whitesmoke;
         }
         .show li {
@@ -285,40 +289,11 @@
             border: none;
             transition-duration: 0.4s;
         }
-        .hide a:hover{
+        .show a:hover{
             background-color: #AFEEEE;
             color: #0a61ff;
         }
-        .hide {
-            padding-top: 6px;
-            margin-top: 10px;
-            margin-left: 12px;
-            display: none;
-            width: 69%;
-            height: 60px;
-            background-color: whitesmoke;
-            border-radius: 5px;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 0 7px 0 rgba(0,0,0,0.19);
-        }
-        .hide li{
-            float: left;
-            padding-left: 12px;
-        }
-        .hide a{
-            float: left;
-            padding: 5px;
-            display: inline;
-            line-height: 15px;
-            word-break: break-all;
-            word-wrap: break-word;
-            background-color: #e7e7e7;
-            color: black;
-            font-size: 15px;
-            border-radius: 4px;
-            border: none;
-            transition-duration: 0.4s;
-        }
-        <%--流加载样式--%>
+        /*流加载样式*/
         .all{
             width: 100%;
             height: 182px;
@@ -477,7 +452,7 @@
             float: left;
             display: inline;
         }
-        a:hover{
+        .all a:hover{
             color: #1296db;
             text-decoration:none;
         }
@@ -500,19 +475,12 @@
         <div class="body-top">
             <div style="height: 0px; margin-bottom: -10px;">
                 <div class="show">
-                    <c:forEach items="${tagList}" var="tag" begin="0" end="10">
-                        <div>
-                            <ul>
-                                <li>< a href=" " type="button" class="">${tag.tagName}</ a></li>
-                            </ul>
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="hide">
                     <c:forEach items="${tagList}" var="tag">
                         <div>
                             <ul>
-                                <li>< a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</ a></li>
+                                <li>
+                                    <a href="<%=request.getContextPath() %>/community/tags?tagId=${tag.tagId}" type="button" target="pageTags">${tag.tagName}</a>
+                                </li>
                             </ul>
                         </div>
                     </c:forEach>
@@ -537,61 +505,57 @@
             </div>
         </div>
         <div>
-            <iframe name="targer" frameborder="0" scrolling="no"></iframe>
+            <iframe class="iframe" name="pageTags" frameborder="1" ></iframe>
         </div>
-        <div class="add">
-            <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
-            <a class="btn2" role="button" href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
-        </div>
-        <div class="wz_remenwenzhang">
-            <div class="wz_remen">
-                <div class="wz_remen_wz">
-                    <span>热门文章</span>
-                </div>
-                <div class="anniu">
-                    <div class="yueanniu">月</div><div class="zonganniu">总</div>
-                </div>
+        <div class="body-right">
+            <div class="add">
+                <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+                <a class="btn2" role="button" href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
             </div>
-            <div class="wz_remen_zt1">
-                <ul>
-                    <c:forEach items="${alist}" var="article">
-                        <li>
-                            <a href="/community/article-show">
-                                    <%--<div class="wz_remen_img">
-                                        <img src="<c:out value="${article.userImg}"></c:out>" >
-                                    </div>--%>
-                                <div class="wz_remen_bt">
-                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                    <div class="wz_bt_bq">
-                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+            <div class="wz_remenwenzhang">
+                <div class="wz_remen">
+                    <div class="wz_remen_wz">
+                        <span>热门文章</span>
+                    </div>
+                    <div class="anniu">
+                        <div class="yueanniu">月</div><div class="zonganniu">总</div>
+                    </div>
+                </div>
+                <div class="wz_remen_zt1">
+                    <ul>
+                        <c:forEach items="${alist}" var="article">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}">
+                                    <div class="wz_remen_bt">
+                                        <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                        <div class="wz_bt_bq">
+                                            <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                            <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
 
-            <div class="wz_remen_zt2">
-                <ul>
-                    <c:forEach items="${blist}" var="article">
-                        <li>
-                            <a href="/community/article-show">
-                                    <%--<div class="wz_remen_img">
-                                        <img src="<c:out value="${article.userImg}"></c:out>" >
-                                    </div>--%>
-                                <div class="wz_remen_bt">
-                                    <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                    <div class="wz_bt_bq">
-                                        <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                        <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                <div class="wz_remen_zt2">
+                    <ul>
+                        <c:forEach items="${blist}" var="article">
+                            <li>
+                                <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}">
+                                    <div class="wz_remen_bt">
+                                        <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                        <div class="wz_bt_bq">
+                                            <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                            <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -599,7 +563,7 @@
         <%@include file="../../jsp/footer.jsp"%>
     </div>
 </div>
-
+<!--热门文章 文章标签点击事件-->
 <script type="text/javascript">
     $(document).on('mouseenter','.bt',function(){
         $(this).css('color','#914ff1');
@@ -652,28 +616,19 @@
         $('.wz_remen_zt2').css('display','block');
         $('.wz_remen_zt1').css('display','none');
     })
-    <%-----------------------------------文章标签卡 js start---------------------------------------%>
-    $(document).on('mouseenter','.show',function () {
-        $('.hide').css('display','block');
-        $(this).css('display','none');
-    });
-    $(document).on('mouseleave','.hide',function () {
-        $('.show').css('display','block');
-        $(this).css('display','none');
-    });
+    /*文章标签*/
     $(function() {
-        $(".hide li").click(function() {
-            if($(this).nextAll().is('#a')) {
-                $(".hide").append($(this));
+        $(".show li").click(function() {
+            if($(this).nextAll().is('')) {
+                $(".show").append($(this));
             }
             else {
-                $(".hide").prepend($(this));
+                $(".show").prepend($(this));
             }
         });
     });
-    <%-----------------------------------文章标签卡 js end---------------------------------------%>
 </script>
-<!--点击选项卡(全部 我的提问 我的回答)事件-->
+<!--点击选项卡(最新 热门 我的文章 回答)事件-->
 <script>
     $(".show_li2,.show_li3,.show_li4").hide();
     $(document).ready(function () {
@@ -707,6 +662,7 @@
         });
     });
 </script>
+<!--最新流加载-->
 <script>
     layui.use('flow', function(){
         var flow = layui.flow;
@@ -728,7 +684,7 @@
                             layui.each(result.articleList, function (i, article) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}">'+article.title+'</a></div>';
+                                    '<div class="title"><a href="">'+article.title+'</a></div>';
                                 if (article.createArticleType == 0){
                                     html += '<div class="createArticleType">原创</div>';
                                 } else if (article.createArticleType == 1){
@@ -746,14 +702,14 @@
                                     '<div class="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
                                     '</div>'+
                                     '<div>'+
-                                    '<div class="userRealname"><a href="../articles/toTest">'+article.user.userRealname+'</a></div>'+
+                                    '<div class="userRealname"><a href="../articles/toTest" target="pageTarget">'+article.user.userRealname+'</a></div>'+
                                     '<div class="little"></div>'+
                                     '<div class="createTime"><span class="timeago" title="'+article.createTime+'"></span></div>'+
                                     '</div>'+
                                     '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
-                                    '<div class="browseCount"><a href="../articles/toTest">'+article.browseCount+'阅读'+'</a></div>'+
+                                    '<div class="browseCount"><a href="../articles/toTest" target="pageTarget">'+article.browseCount+'阅读'+'</a></div>'+
                                     '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
-                                    '<div class="commentCount"><a href="../articles/toTest">'+article.commentCount+'评论'+'</a></div>'+
+                                    '<div class="commentCount"><a href="../articles/toTest" target="pageTarget">'+article.commentCount+'评论'+'</a></div>'+
                                     '</div>';
                                 lis.push(html);
                             });
@@ -766,6 +722,7 @@
         });
     });
 </script>
+<!--热门流加载-->
 <script>
     layui.use('flow', function(){
         var flow = layui.flow;
@@ -825,6 +782,7 @@
         });
     });
 </script>
+<!--我的文章流加载-->
 <script>
     layui.use('flow', function(){
         var flow = layui.flow;
@@ -885,6 +843,7 @@
         });
     });
 </script>
+<!--回答流加载-->
 <script>
     layui.use('flow', function(){
         var flow = layui.flow;
@@ -945,13 +904,14 @@
         });
     });
 </script>
+<!--iframe点击事件-->
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".attention_him").click(function(){
+        $("").click(function(){
             $(".body-left").css("display","none")
             $("iframe").css("display","block");
         });
-        $(".he_attention").click(function(){
+        $("").click(function(){
             $(".body-left").css("display","none")
             $("iframe").css("display","block");
         });

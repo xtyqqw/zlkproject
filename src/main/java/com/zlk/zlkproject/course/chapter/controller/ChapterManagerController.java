@@ -2,11 +2,15 @@ package com.zlk.zlkproject.course.chapter.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.chapter.service.ChapterService;
+import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.entity.Chapter;
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -27,11 +31,19 @@ public class ChapterManagerController {
     private ChapterService chapterService;
     @Autowired
     private LogUtil logUtil;
+    @Autowired
+    private CourseHomePageService courseHomePageService;
+    @Autowired
+    private SectionsManagerService sectionsManagerService;
 
     /** 跳转至章节管理页面*/
     @RequestMapping(value = "/toChapterManager")
-    public String toChapterManager() throws Exception{
-        return "view/ChapterManager";
+    public ModelAndView toChapterManager() throws Exception{
+        List<Courses> coursesList = courseHomePageService.findAllCourses();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("coursesList",coursesList);
+        mv.setViewName("view/ChapterManager");
+        return mv;
     }
 
     /**
@@ -94,7 +106,6 @@ public class ChapterManagerController {
             message = "删除成功";
             logUtil.setLog(request,"删除了章节id为"+chapter.getChapterId()+"的信息");
         }
-
         Map<String,Object> map = new HashMap<>();
         map.put("msg",message);
         return map;
@@ -113,6 +124,11 @@ public class ChapterManagerController {
     public Map<String,Object> selectAll(Pagination pagination) throws Exception{
         List<Chapter> chapterList = chapterService.selectAllAndLimit(pagination);
         Integer count = chapterService.selectAllCount();
+        for (Chapter chapter : chapterList) {
+            Integer sectionNum = sectionsManagerService.findCountByChapterId(chapter.getChapterId());
+            chapter.setSectionNum(sectionNum);
+            chapterService.updateChapterByChapterId(chapter);
+        }
         Map<String,Object> map = new HashMap<>();
         map.put("code",0);
         map.put("msg","");

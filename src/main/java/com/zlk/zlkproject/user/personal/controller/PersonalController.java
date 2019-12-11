@@ -135,10 +135,14 @@ public class PersonalController {
         // fdfsConfig.getResHost()是获取服务器ip，
         // fdfsConfig.getStoragePort()获取服务器端口
         String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
         System.out.println(path);
+        //最终访问文件资源的地址，
         System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
         map.put("url",url);
         map.put("message","上传成功");
+        //返回map集合
         return map;
     }
 }

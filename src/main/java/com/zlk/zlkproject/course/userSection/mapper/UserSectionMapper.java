@@ -16,6 +16,28 @@ import java.util.List;
 @Mapper
 @Component
 public interface UserSectionMapper {
+
+    /**
+     * 根据课程id查询评分数的和
+     * @param coursesId
+     * @return
+     */
+    Integer querySumByCoursesId(Integer coursesId);
+
+    /**
+     * 根据小节id查询评分数的和
+     * @param sectionId
+     * @return
+     */
+     Integer querySumBySectionId(Integer sectionId);
+
+    /**
+     * 根据小节id查询有多少个有相同小节id的数据
+     * @param sectionId
+     * @return
+     */
+    Integer queryCountBySectionId(Integer sectionId);
+
     /**
      * 通过ID查询单条数据
      *
