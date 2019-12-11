@@ -483,7 +483,7 @@
             },
             success: function (data) {
                 total = data.count;
-                var focus = data.data;
+                var focus = data.list;
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
                     html += '<div class="waik">';
@@ -523,80 +523,80 @@
                     html += '<i class="layui-icon layui-icon-log" style="float: left;margin-right: 10px;font-size: 20px;"></i>';
                     html += '<p>学习时长：'+ focus[i].userDateTime+'小时</p><p>学习成长量：'+ focus[i].studyGrowup+'</p>';
                     html += '<p>技能水平：'+ focus[i].studyStandard+'</p></div></div></div>';
-                    if (focus[i].list().length===0){
+                    if (focus[i].list.length===0){
                         html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
                         html += '<p class="down_no_news">该用户暂无任何动态信息</p></div>';
                     }
-                    if (focus[i].list().length!==0){
+                    if (focus[i].list.length!==0){
                         html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
-                        for (var j=0;j<focus[i].list().length;j++){
+                        for (var j=0;j<focus[i].list.length;j++){
                             /*1 上传文章*/
-                            if (focus[i].list().actionType===1){
+                            if (focus[i].list.actionType===1){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">上传了一篇文章：</span><span class="article">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*2 评论文章*/
-                            if (focus[i].list().actionType===2){
+                            if (focus[i].list.actionType===2){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">评论了</span><span class="reply_user">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].problemUser+'</a>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].problemUser+'</a>';
                                 html += '</span><span class="action">的文章</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
                                 html += '</span></div>';
-                                html += '<span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*3 回复评论*/
-                            if (focus[i].list().actionType===3){
+                            if (focus[i].list.actionType===3){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回复了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].replyUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
                                 html += '<span class="jiu">就</span><span class="problem_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a>：</span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
                                 html += '<span class="action">的文章</span><span class="article">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span>';
                             }
                             /*4 提出问题*/
-                            if (focus[i].list().actionType===4){
+                            if (focus[i].list.actionType===4){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">提出了一个问题：</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*5 回答问题*/
-                            if (focus[i].list().actionType===5){
+                            if (focus[i].list.actionType===5){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回答了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a></span>';
                                 html += '<span class="action">的问题</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*6 回复答案*/
-                            if (focus[i].list().actionType===6){
+                            if (focus[i].list.actionType===6){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回复了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].replyUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
                                 html += '<span class="jiu">就</span><span class="problem_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a>：</span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
                                 html += '<span class="action">的问题</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
                                 html += '</span></div>';
-                                html += '<span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                         }
                         html += '<i class="layui-icon layui-icon-up"' +
@@ -633,7 +633,6 @@
     $(function () {
         showFocus();
         getPage();
-        document.documentElement.scrollTop=document.body.scrollTop=0;
     })
 </script>
 <%--点击关注事件--%>

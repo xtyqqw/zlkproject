@@ -269,8 +269,8 @@
             <li class="main_li_show">
                 <p class="count">共${list.size()}条记录</p><br>
                 <div class="lay_flow1"></div>
-                <%--<c:forEach items="${list}" var="all">
-                    &lt;%&ndash;我的提问&ndash;%&gt;
+                <c:forEach items="${list}" var="all">
+                    <%--我的提问--%>
                     <c:if test="${all.type==0}">
                         <div class="question_waik">
                             <ul class="head_lebel">
@@ -324,13 +324,13 @@
                             <p class="reply_share">分享</p>
                         </div>
                     </c:if>
-                </c:forEach>--%>
+                </c:forEach>
             </li>
             <%--我的提问--%>
             <li class="main_li2">
                 <p class="count">共${qList.size()}条笔记</p><br>
                 <div class="lay_flow2"></div>
-                <%--<c:forEach items="${qList}" var="question">
+                <c:forEach items="${qList}" var="question">
                     <div class="question_waik">
                         <ul class="head_lebel">
                             <c:forEach items="${question.tagList}" var="tag1">
@@ -346,13 +346,13 @@
                         <p class="question_share">分享</p>
                         <p class="question_date">${question.formatDate}</p>
                     </div>
-                </c:forEach>--%>
+                </c:forEach>
             </li>
             <%--我的回答--%>
             <li class="main_li3">
                 <p class="count">共${rList.size()}条笔记</p><br>
                 <div class="lay_flow3"></div>
-                <%--<c:forEach items="${rList}" var="response">
+                <c:forEach items="${rList}" var="response">
                     <!-- 我的回答 已采纳 -->
                     <c:if test="${response.accept==1}">
                         <div class="reply_waik_adopted">
@@ -390,7 +390,7 @@
                             <p class="reply_share">分享</p>
                         </div>
                     </c:if>
-                </c:forEach>--%>
+                </c:forEach>
             </li>
             <%--富文本编辑框--%>
             <div hidden="hidden" id="demo" style="padding: 25px">
@@ -439,8 +439,9 @@
     }
     checknum();
 </script>
-<script>
-<%--全部 分页--%>
+<%--分页--%>
+<%--<script>
+&lt;%&ndash;全部 分页&ndash;%&gt;
 layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
@@ -524,7 +525,7 @@ layui.use('flow', function(){
         }
     });
 });
-<%--我的提问 分页--%>
+&lt;%&ndash;我的提问 分页&ndash;%&gt;
 layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
@@ -569,7 +570,7 @@ layui.use('flow', function(){
         }
     });
 });
-<%--我的问答 分页--%>
+&lt;%&ndash;我的问答 分页&ndash;%&gt;
 layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
@@ -635,7 +636,7 @@ layui.use('flow', function(){
         }
     });
 });
-</script>
+</script>--%>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
