@@ -196,7 +196,9 @@
                     html += '<div class="learn-main mainname main">';
                     html += '<div class="learn-title">';
                     html += '<h2>'+ data1[i].coursesName+'</h2>';
-                    html += '<p>解锁任务：'+ data1[i].coursesName+' — '+ data1[i].chapterName+' — '+ data1[i].sectionName+'</p>';
+                    html += '<p>解锁任务：'+ data1[i].coursesName+' ' +
+                        '<span style="font-weight: bold;">——</span> '+ data1[i].chapterName+' ' +
+                        '<span style="font-weight: bold;">——</span> '+ data1[i].sectionName+'</p>';
                     html += '<img src="'+ data1[i].coverPic+'">';
                     html += '</div>';
                     html += '<div class="learn-main-getstar">';
@@ -223,10 +225,6 @@
         })
     }
     /*进度条*/
-    /*layui.use('element', function(){
-        var element = layui.element;
-        element.render('progress');
-    });*/
     function percent() {
         layui.use('element', function(){
             var element = layui.element;
@@ -258,6 +256,8 @@
         showRecord();
         getPage();
         percent();
+        /*$(window).scrollTop(0);*/
+        document.documentElement.scrollTop=document.body.scrollTop=0;
     })
 </script>
 <%--流加载--%>
