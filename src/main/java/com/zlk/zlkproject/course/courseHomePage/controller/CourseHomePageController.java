@@ -2,6 +2,7 @@ package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.course.userSection.service.UserSectionService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
@@ -33,6 +34,9 @@ public class CourseHomePageController {
     private UserSectionService userSectionService;
 
     @Autowired
+    private SectionService sectionService;
+
+    @Autowired
     private CourseHomePageService courseHomePageService;
     @Autowired
     private CommonFileUtil commonFileUtil;
@@ -45,8 +49,11 @@ public class CourseHomePageController {
         coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         Map<String,Object> map=new HashMap<>();
+        double ratio = userSectionService.querySumByCoursesId(coursesId)/(sectionService.findCountByCourseId(coursesId)*3.0*courses.getStudentNum())*100;
         map.put("courses",courses);
-        //map.put("":);
+        map.put("ratio",(int)ratio);
+        map.put("starSum",userSectionService.querySumByCoursesId(coursesId));
+        map.put("sectionCount",sectionService.findCountByCourseId(coursesId));
         return map;
     }
     @RequestMapping(value = "/findCoursesList")

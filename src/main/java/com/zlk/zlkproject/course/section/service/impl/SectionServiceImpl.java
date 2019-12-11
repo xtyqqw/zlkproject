@@ -32,6 +32,11 @@ public class SectionServiceImpl implements SectionService {
     private UserSectionService userSectionService;
 
     @Override
+    public Integer findCountByCourseId(Integer courseId) {
+        return sectionMapper.findCountByCourseId(courseId);
+    }
+
+    @Override
     public List<Section> findSectionByChapterId(Integer chapterId) {
         return sectionMapper.findSectionByChapterId(chapterId);
     }
