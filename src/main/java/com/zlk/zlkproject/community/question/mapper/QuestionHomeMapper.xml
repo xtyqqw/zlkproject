@@ -22,6 +22,9 @@
         <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
     </resultMap>
+    <select id="findNumById" parameterType="java.lang.String" resultType="java.lang.Integer">
+       select count(*) from question
+    </select>
     <select id="findByQuestionTime" resultMap="questionEntityMap" >
         select * from  question order by create_time  DESC  limit  #{startPage},#{limit}
     </select>

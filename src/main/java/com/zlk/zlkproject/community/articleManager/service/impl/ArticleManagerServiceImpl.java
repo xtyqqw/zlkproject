@@ -41,6 +41,16 @@ public class ArticleManagerServiceImpl implements ArticleManagerService {
     }
 
     /**
+     * 根据文章id批量删除
+     * @param articleList
+     * @return
+     */
+    @Override
+    public Integer deleteArticlesByArticleId(List<Article> articleList) {
+        return articleManagerMapperMapper.deleteArticlesByArticleId(articleList);
+    }
+
+    /**
      * 修改文章
      * @param article
      * @return

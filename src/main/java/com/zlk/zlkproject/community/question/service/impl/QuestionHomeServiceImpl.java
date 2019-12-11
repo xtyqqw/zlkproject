@@ -6,6 +6,8 @@ import com.zlk.zlkproject.community.question.service.QuestionHomeService;
 import com.zlk.zlkproject.community.util.MarkdownUtils;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
+import com.zlk.zlkproject.user.entity.StuNote;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import javassist.NotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,11 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
     private QuestionHomeMapper questionHomeMapper;
     @Autowired
     private QuestionHomeDao questionHomeDao;
+
+    @Override
+    public Integer findNumById(Question question) {
+        return questionHomeMapper.findNumById(question);
+    }
 
     @Override
     public List<Question> findByQuestionTime(Pagination pagination) {

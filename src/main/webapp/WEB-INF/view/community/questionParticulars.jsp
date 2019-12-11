@@ -1,81 +1,135 @@
 <%--
   Created by IntelliJ IDEA.
   User: gby
-  Date: 2019/12/2
-  Time: 11:09
+  Date: 2019/12/11
+  Time: 20:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>文章详情</title>
+    <title>问题详情</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
+          type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        .label {
-            display: inline-block;
-            padding: 0 4px;
-            height: 18px;
-            line-height: 18px;
-            background: #6294b5;
-            font-size: 12px;
-            cursor: pointer;
-            color: #fff;
-            border-radius: 2px;
+        .editormd-html-preview {
+            width: 90%;
+            margin: 0 auto;
         }
-
-        .tt {
-            float: left;
-        }
-
-        .time {
-            margin-right: 26px;
-        }
-
-        .question {
-            text-align: center;
-            float: left;
-            width: 100%;
-            height: auto;
-        }
-
     </style>
-
+    <style type="text/css">
+        .top {
+            height: auto;
+            width: 100%;
+            left: 0;
+            top: 0; /*离顶部的距离为0*/
+        }
+        /*导航栏变异部分*/
+        .nav2 {
+            font-size: 20px;
+            top: 0px;
+            height: 60px;
+            width: 100%;
+            background-color: white;
+        }
+        .nav3 {
+            float: left;
+            margin-left: 252px;
+            margin-top: 15px;
+        }
+        .fixnav {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        .div1 {
+            width: 1000px;
+            margin-left: 250px;
+        }
+        .div2 {
+            margin-top: -27px;
+            float: left;
+            margin-left: 50px;
+        }
+        .span {
+            float: right;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-<%@include file="../../jsp/header.jsp" %>
-<%@include file="../../jsp/sidebar.jsp" %>
-<div class="layui-row" style="margin-top:30px;width: 1000px;margin-left: 230px;height: 63px">
-    <div class="title">
-        <i class="label" style="float: left;" data-value="${question.solve}"></i>&nbsp;&nbsp;&nbsp;
-        <h2 data-value="${question.questionTitle}"></h2>
-        <div class="tt">
-            <span class="label" data-value="${question.tagName}"></span>
-            <span style="margin-right: 26px;">
-                            <i class="layui-icon layui-icon-radio"></i>
-                            <b data-value="${question.browseCount}"></b>浏览
-                        </span>
-            <sapn class="time">
-                <i class="layui-icon layui-icon-log" data-value="${question.createTime}"></i>
-            </sapn>
+<div class="top">
+    <%@include file="../../jsp/header.jsp" %>
+    <%@include file="../../jsp/sidebar.jsp" %>
+    <div class="nav2">
+        <div class="nav3">
+            <h2>${question.questionTitle}提问标题</h2>
         </div>
     </div>
-    <!--中间内容-->
-    <div class="question">
-        <div id="test-editormd-view">
-            <textarea id="articleContent" style="display:none;" data-value="${article.articleContent}"></textarea>
+    <div class="div1">
+        <%--文章标题及特征--%>
+        <div style="margin-top: 50px;height: 80px;width: auto;">
+            <div class="title" style="font-size: 10px;float: left">
+                <div style="background-color: #1296db;height: 20px;width: 40px;padding:1px 2px;border-radius: 5%; ">
+                    <i style="color: white">${question.solve}待解决</i>
+                </div>
+                <div class="div2">
+                    <h2> ${question.questionTitle}提问标题</h2>
+                </div>
+            </div>
+            <br><br>
+            <div style="float: left; margin-top: 10px;">
+                <div style="width: 40px;height:20px;background-color:#E8E8E8;border-radius: 5%;">
+                    <p class="tag">${question.tagName}标签</p>
+                </div>
+            </div>
+            <div class="span">
+                <small>
+                    <span>${question.browseCount}浏览</span>
+                    <i>|</i>
+                    <span>分类：官方<%--${article.typeName}--%></span>
+                </small>
+            </div>
+        </div>
+        <%--文章--%>
+        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;"></fieldset>
+        <div id="layout" style="margin-left: -60px;height: auto">
+            <div id="test-editormd-view">
+                <textarea id="articleContent" style="display:none;">${question.questionContent}提问内容</textarea>
+            </div>
+        </div>
+        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
+        <%--评论--%>
+        <div>
+            <label class="layui-form-label" style="margin-left: -30px">回复</label><br><br>
+            <div class="layui-input-block" style="margin-left: 1px">
+                    <textarea name="articleDigest" placeholder="开始编辑..."
+                              style="text-decoration-top: 300px;" maxlength="150"
+                              class="layui-textarea" lay-verify="required"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" style="float:right;background-color: #1296db;" class="layui-btn"
+                        lay-submit="sub" lay-filter="demo2">提交评论
+                </button>
+            </div>
+            <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
+            <div style="float: left;">
+                评论数：1<%--${title.responseCount}--%>
+            </div>
         </div>
     </div>
 </div>
-
 
 <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
@@ -89,7 +143,7 @@
 
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
-    document.title = "${question.questionTitle}"
+    document.title = "${question.questionTitle}提问标题"
     $(function () {
         $(".nav2").hide();
         $(window).scroll(function () {
@@ -99,9 +153,20 @@
                 $(".nav2").hide();
             }
         })
-
     })
 </script>
-
+<script type="text/javascript">
+    $(function () {
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+            htmlDecode: "style,script,iframe",  // you can filter tags decode
+            emoji: true,
+            taskList: true,
+            tex: true,  // 默认不解析
+            flowChart: true,  // 默认不解析
+            sequenceDiagram: true  // 默认不解析
+        });
+    });
+</script>
 </body>
 </html>

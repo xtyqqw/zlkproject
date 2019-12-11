@@ -19,6 +19,21 @@ public class UserSectionServiceImpl implements UserSectionService {
     @Autowired
     private UserSectionMapper userSectionMapper;
 
+    @Override
+    public Integer querySumByCoursesId(Integer coursesId) {
+        return userSectionMapper.querySumByCoursesId(coursesId);
+    }
+
+    @Override
+    public Integer querySumBySectionId(Integer sectionId) {
+        return userSectionMapper.querySumBySectionId(sectionId);
+    }
+
+    @Override
+    public Integer queryCountBySectionId(Integer sectionId) {
+        return userSectionMapper.queryCountBySectionId(sectionId);
+    }
+
     /**
      * 通过ID查询单条数据
      *

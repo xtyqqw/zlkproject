@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Title</title>
@@ -20,6 +21,10 @@
             margin-top: -2px;
             float: right;
             width: 410px;
+        }
+
+        .del {
+            margin-left: -510px;
         }
 
         .hint {
@@ -45,7 +50,7 @@
         <input type="hidden" name="articleId" id="articleId"><br>
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
-                <td style="width: 100px;" valign="bottom">文章标题</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" valign="bottom">文章标题</td>
                 <td><input type="text" readonly required id="title" placeholder="请输入文章标题" name="title"></td>
             </tr>
             <tr>
@@ -80,10 +85,6 @@
                 <td style="width: 100px;" valign="bottom">举报</td>
                 <td><input type="text" required id="inform" placeholder="请输入举报" name="inform"></td>
             </tr>
-            <%--<tr>
-                <td style="width: 100px;" valign="bottom">用户id</td>
-                <td><input type="text" required id="userId" placeholder="请输入用户id" name="userId"></td>
-            </tr>--%>
             <tr>
                 <td style="width: 100px;" valign="bottom">发文类型</td>
                 <td><input type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType"></td>
@@ -100,10 +101,6 @@
                 <td style="width: 100px;" valign="bottom">文章方向</td>
                 <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
-            <%--<tr>
-                <td style="width: 100px;" valign="bottom">文章类别</td>
-                <td><input type="text" required id="tagName" placeholder="请输入文章类别" name="tagName"></td>
-            </tr>--%>
             <tr>
                 <td style="width: 100px;">文章摘要</td>
                 <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
@@ -140,7 +137,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -148,7 +145,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -156,7 +153,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -164,7 +161,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#000'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -216,34 +213,33 @@
         });
         form.render();
         //第一个实例
+        var renderTable = function() {
         table.render({
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 460
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
-                {type: 'checkbox'}
+                {type: 'checkbox', fixed: 'left'}
                 , {field: 'articleId', title: '文章ID', width: 80, sort: true}
                 , {field: 'title', title: '文章标题', width: 100, sort: true}
                 , {field: 'browseCount', title: '浏览数', width: 75}
                 , {field: 'commentCount', title: '评论数', width: 75}
                 , {field: 'createTime',title: '发布时间',width: 90}
                 , {field: 'updateTime',title: '更新时间',width: 90}
-                , {field: 'figures', title: '插图相对路径', width: 80}
+                , {field: 'figures', title: '插图相对路径', width: 130}
                 , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
                 , {field: 'articleDigest', title: '文章摘要', width: 90}
                 , {field: 'articleContent', title: '文章内容', width: 90}
                 , {field: 'zanCount', title: '赞数', width: 60}
                 , {field: 'caiCount', title: '踩数', width: 60}
                 , {field: 'inform', title: '举报', width: 60}
-                /*, {field: 'userId', title: '用户id', width: 80}*/
                 , {field: 'createArticleType', title: '发文类型', width: 90}
                 , {field: 'articleSetTop', title: '文章置顶', width: 90}
                 , {field: 'approval', title: '审核', width: 60}
                 , {field: 'typeName', title: '文章方向', width: 90}
-                /*, {field: 'tagName', title: '文章类别', width: 90}*/
                 , {
-                    title: '操作', width: 180, align: 'center', toolbar: '' +
+                    title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
@@ -252,11 +248,11 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                /*'<button type="button" class="layui-btn" lay-event="">新增文章</button>' +*/
+                '<button type="button" class="layui-btn del" lay-event="delete">批量删除</button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
-                '               <form type="post" action="/article/toArticleManager"> \n' +
+                '               <form type="post" action="<%=request.getContextPath()%>/article/toArticleManager"> \n' +
                 '                <div class="layui-inline">\n' +
                 '                    <label class="layui-form-label hint">文章标题</label>\n' +
                 '                    <div class="layui-input-block">\n' +
@@ -274,6 +270,7 @@
                 '    </div>' +
                 '</div>'
         });
+        };
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
@@ -292,6 +289,38 @@
                     break;
             }
             ;
+        });
+
+        renderTable();
+
+        //批量删除
+        table.on('toolbar(test)', function (obj) {//注：tool 是工具条事件名
+            var checkStatus = table.checkStatus(obj.config.id);
+            var data = checkStatus.data;//获得当前行数据（json格式的键值对）
+            switch (obj.event) {
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg("请至少选择一条数据");
+                    } else {
+                        layer.confirm('是否确认删除', function (index) {
+                            var data1 = JSON.stringify(data);
+                            $.ajax({
+                                url: "<%=request.getContextPath()%>/article/deleteList",
+                                contentType: "application/json;charset=UTF-8",
+                                data: {"data": data1},
+                                success: function () {
+                                    renderTable();
+                                    layer.msg("删除成功");
+                                },
+                                error: function () {
+                                    layer.msg("删除失败");
+                                }
+                            });
+                            layer.close(index);
+                        });
+                    }
+                break;
+            };
         });
 
         //监听行工具事件
@@ -327,17 +356,15 @@
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
-                /*$("#userId").val(data.userId);*/
                 $("#createArticleType").val(data.createArticleType);
                 $("#articleSetTop").val(data.articleSetTop);
                 $("#approval").val(data.approval);
                 $("#typeName").val(data.typeName);
-                /*$("#tagName").val(data.tagName);*/
                 layer.open({
                     title: "编辑",
                     type: 1,
                     shade: 0.8,
-                    area: ['100%', '100%'],
+                    area: ['99%', '99%'],
                     content: $("#editForm"),
                     btn: ['提交'],
                     yes: function (index, layero) {
@@ -346,7 +373,10 @@
                 });
             }
         });
+
     });
+
+
 </script>
 </body>
 </html>

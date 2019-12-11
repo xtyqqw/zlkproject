@@ -263,7 +263,7 @@
 <%--有关注信息--%>
 <c:if test="${list.size()!= 0}">
     <div class="main">
-        <c:forEach items="${list}" var="bignum" >
+        <%--<c:forEach items="${list}" var="bignum" >
             <div class="waik">
                 <div class="up">
                     <div class="up_left">
@@ -282,7 +282,7 @@
                             <p class="jia">+</p>
                             <p class="no_zi">加关注</p>
                         </div>
-                        <%--已关注未关注的弹窗--%>
+                        &lt;%&ndash;已关注未关注的弹窗&ndash;%&gt;
                         <div class="att_tan">
                             <div class="att_success1">
                                 <p class="att_success_ok1">√</p>
@@ -336,16 +336,16 @@
                 <c:if test="${bignum.list.size()==0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
-                            <%--无动态--%>
+                            &lt;%&ndash;无动态&ndash;%&gt;
                         <p class="down_no_news">该用户暂无任何动态信息</p>
                     </div>
                 </c:if>
-                <%--有最新动态--%>
+                &lt;%&ndash;有最新动态&ndash;%&gt;
                 <c:if test="${bignum.list.size()!=0}">
                     <div class="down">
                         <h2 class="latest_news">最新动态</h2>
                         <c:forEach items="${bignum.list}" var="snum">
-                            <%--1上传文章--%>
+                            &lt;%&ndash;1上传文章&ndash;%&gt;
                             <c:if test="${snum.actionType==1}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -359,7 +359,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--2评论文章--%>
+                            &lt;%&ndash;2评论文章&ndash;%&gt;
                             <c:if test="${snum.actionType==2}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -377,7 +377,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--3回复评论--%>
+                            &lt;%&ndash;3回复评论&ndash;%&gt;
                             <c:if test="${snum.actionType == 3}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -399,7 +399,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--4提出问题--%>
+                            &lt;%&ndash;4提出问题&ndash;%&gt;
                             <c:if test="${snum.actionType ==4}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -413,7 +413,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--5回答问题--%>
+                            &lt;%&ndash;5回答问题&ndash;%&gt;
                             <c:if test="${snum.actionType ==5}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -431,7 +431,7 @@
                                     <span class="date">${snum.dateFormat}</span>
                                 </div>
                             </c:if>
-                            <%--6回复答案--%>
+                            &lt;%&ndash;6回复答案&ndash;%&gt;
                             <c:if test="${snum.actionType ==6}">
                                 <div class="down_yes_news">
                                     <div class="bigp">
@@ -454,7 +454,7 @@
                                 </div>
                             </c:if>
                         </c:forEach>
-                            <%--上下箭头--%>
+                            &lt;%&ndash;上下箭头&ndash;%&gt;
                         <i class="layui-icon layui-icon-up"
                            style="font-size: 30px;margin: 0 485px;color: #999999;" hidden></i>
                         <i class="layui-icon layui-icon-down"
@@ -462,19 +462,19 @@
                     </div>
                 </c:if>
             </div>
-        </c:forEach>
+        </c:forEach>--%>
     </div>
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 </c:if>
 <%--分页--%>
-<%--<script>
+<script>
     var page = 1;
-    var limit = 5;
+    var limit = 3;
     var total;
     function showFocus() {
         $.ajax({
             type: "post",
-            url: "/courses/tocourses",
+            url: "/follow/follower",
             async: false,
             dataType: 'json',
             data: {
@@ -483,7 +483,7 @@
             },
             success: function (data) {
                 total = data.count;
-                var focus = data.data;
+                var focus = data.list;
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
                     html += '<div class="waik">';
@@ -523,80 +523,80 @@
                     html += '<i class="layui-icon layui-icon-log" style="float: left;margin-right: 10px;font-size: 20px;"></i>';
                     html += '<p>学习时长：'+ focus[i].userDateTime+'小时</p><p>学习成长量：'+ focus[i].studyGrowup+'</p>';
                     html += '<p>技能水平：'+ focus[i].studyStandard+'</p></div></div></div>';
-                    if (focus[i].list().length===0){
+                    if (focus[i].list.length===0){
                         html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
                         html += '<p class="down_no_news">该用户暂无任何动态信息</p></div>';
                     }
-                    if (focus[i].list().length!==0){
+                    if (focus[i].list.length!==0){
                         html += '<div class="down"><h2 class="latest_news">最新动态</h2>';
-                        for (var j=0;j<focus[i].list().length;j++){
+                        for (var j=0;j<focus[i].list.length;j++){
                             /*1 上传文章*/
-                            if (focus[i].list()sfwewfewe){
+                            if (focus[i].list.actionType===1){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">上传了一篇文章：</span><span class="article">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*2 评论文章*/
-                            if (){
+                            if (focus[i].list.actionType===2){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">评论了</span><span class="reply_user">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].problemUser+'</a>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].problemUser+'</a>';
                                 html += '</span><span class="action">的文章</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
                                 html += '</span></div>';
-                                html += '<span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*3 回复评论*/
-                            if (){
+                            if (focus[i].list.actionType===3){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回复了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].replyUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
                                 html += '<span class="jiu">就</span><span class="problem_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a>：</span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
                                 html += '<span class="action">的文章</span><span class="article">';
-                                html += '<a href="/community/article-show?articleId="+'+ focus[i].articleId+'>'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span>';
+                                html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span>';
                             }
                             /*4 提出问题*/
-                            if (){
+                            if (focus[i].list.actionType===4){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">提出了一个问题：</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*5 回答问题*/
-                            if (){
+                            if (focus[i].list.actionType===5){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回答了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a></span>';
                                 html += '<span class="action">的问题</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*6 回复答案*/
-                            if (){
+                            if (focus[i].list.actionType===6){
                                 html += '<div class="down_yes_news"><div class="bigp">';
                                 html += '<p class="user">'+ focus[i].userRealname+'  </p>';
-                                html += '<span class="time">'+ focus[i].leaveTime+'</span>';
+                                html += '<span class="time">'+ focus[i].list[j].leaveTime+'</span>';
                                 html += '<span class="action">回复了</span><span class="reply_user">';
-                                html += '<a href="javascript:;">'+ focus[i].replyUser+'</a></span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].replyUser+'</a></span>';
                                 html += '<span class="jiu">就</span><span class="problem_user">';
-                                html += '<a href="javascript:;">'+ focus[i].problemUser+'</a>：</span>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
                                 html += '<span class="action">的问题</span><span class="article">';
-                                html += '<a href="javascript:;">'+ focus[i].articleName+'</a>';
+                                html += '<a href="javascript:;">'+ focus[i].list[j].articleName+'</a>';
                                 html += '</span></div>';
-                                html += '<span class="date">'+ focus[i].dateFormat+'</span></div>';
+                                html += '<span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                         }
                         html += '<i class="layui-icon layui-icon-up"' +
@@ -633,9 +633,8 @@
     $(function () {
         showFocus();
         getPage();
-        document.documentElement.scrollTop=document.body.scrollTop=0;
     })
-</script>--%>
+</script>
 <%--点击关注事件--%>
 <script type="text/javascript">
     /*点击已关注 取消关注*/

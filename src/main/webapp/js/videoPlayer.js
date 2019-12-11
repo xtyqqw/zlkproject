@@ -2,6 +2,12 @@ var replyEditorArr = [];
 
 $(document).ready(function () {
 
+    var localObj = window.location;
+    var basePath = localObj.protocol+"//"+localObj.host;
+    var server_context=basePath;
+
+    alert(basePath);
+
     layui.use(['element', 'flow','layer'], function () {
         var element = layui.element,
             $ = layui.jquery,
@@ -35,7 +41,7 @@ $(document).ready(function () {
             if (display === "none") {
                 $.ajax({
                     type: "POST",
-                    url: "/chapter/findChapters",
+                    url: basePath+'/chapter/findChapters',
                     data: "",
                     dataType: "json",
                     success: function (data) {
@@ -58,7 +64,7 @@ $(document).ready(function () {
                                 str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
                                 $.ajax({
                                     type: "POST",
-                                    url: "/section/findState?sectionId=" + sectionId,
+                                    url: basePath+"/section/findState?sectionId=" + sectionId,
                                     async: false,
                                     success: function (data) {
                                         state = data.state;
@@ -72,7 +78,7 @@ $(document).ready(function () {
                                 } else if (state === "未观看") {
                                     str += "<i class=\"iconfont icon-suoding state\"></i>";
                                 }
-                                str += "<input hidden name=\"sectionState\" value=\"" + state + "\">";
+                                str += "<input hidden class=\"sectionState\" value=\"" + state + "\">";
                                 str += section.sectionName;
                                 str += "<span class=\"duration\">" + time1 + "</span>";
                                 str += "</li>";
@@ -103,11 +109,11 @@ $(document).ready(function () {
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
             let sectionId = $(this).find("input").val();
+            let state = $(this).find("input").eq(1).val();
             let currentSectionId = parseInt($("#sectionId").text());
-            let state =
             $.ajax({
                 type: "POST",
-                url: "/section/findVideoAddr?sectionId=" + sectionId,
+                url: basePath+"/section/findVideoAddr?sectionId=" + sectionId,
                 success: function (data) {
                     var src = data.section.videoAddr1;
                     switchVideo(src,currentSectionId);
@@ -131,7 +137,7 @@ $(document).ready(function () {
             $("#div_stuCmt").css("display", "none");
             $.ajax({
                 type:"POST",
-                url:"/courseTag/findAll",
+                url:basePath+"/courseTag/findAll",
                 success:function (result) {
                     var str = "";
                     var tagList = result.tagList;
@@ -189,7 +195,7 @@ $(document).ready(function () {
             }
         };
 
-        /*提交按钮点击提交事件*/
+        /*问答提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
             if (tagIdArray.length==0){
                 alert("至少选择1个标签");
@@ -198,7 +204,7 @@ $(document).ready(function () {
                 var data = {"content":content,"tagIdArray":tagIdArray};
                 $.ajax({
                     type:"POST",
-                    url:"/stuQa/insertStuQa",
+                    url:basePath+"/stuQa/insertStuQa",
                     data:data,
                     dataType: "json",
                     traditional:true,
@@ -212,11 +218,12 @@ $(document).ready(function () {
                             tagIdArray.splice(0);
                         }
                     }
-                })
+                });
+                stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
             }
         });
 
-        /*取消按钮点击提交事件*/
+        /*问答取消按钮点击提交事件*/
         $(document).on("click", "#btn_reset_wenda", function () {
             editor.txt.clear();
             $(".tagName").css("background-color","grey");
@@ -248,7 +255,7 @@ $(document).ready(function () {
         // 隐藏"网络图片"tab
         editor.customConfig.showLinkImg = false;
         editor.customConfig.uploadFileName = 'file';
-        editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+        editor.customConfig.uploadImgServer = basePath+'/stuNote/uploadPic';
         editor.customConfig.uploadImgTimeout = 1000*20;
         editor.customConfig.uploadImgMaxLength = 1;
         editor.customConfig.uploadImgHooks = {
@@ -279,7 +286,7 @@ $(document).ready(function () {
         };
 
 
-        //视频时长格式转换函数  hh:mm:ss
+        /*//视频时长格式转换函数  hh:mm:ss
         function format(num) {
             num = Math.round(num);
             var hour = parseInt((num / 3600) + '');
@@ -301,7 +308,7 @@ $(document).ready(function () {
                 second = '0' + second;
             }
             return hour + ':' + minute + ':' + second;
-        }
+        }*/
 
         /*选项卡教师笔记加载bigin*/
         function note_flow(sectionId) {
@@ -316,7 +323,7 @@ $(document).ready(function () {
                     console.log(data);
                     $.ajax({
                         type: "POST",
-                        url: "/teacherNote/findNotes",
+                        url: basePath+"/teacherNote/findNotes",
                         dataType: "json",
                         data: data,
                         success: function (result) {
@@ -339,7 +346,7 @@ $(document).ready(function () {
 
         /*学生问答选项卡切换加载*/
         $("#stuQa-tab").click(function () {
-            stu_qa_flow("#stuQaall","/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
         });
 
         /*学生问答流加载*/
@@ -368,7 +375,7 @@ $(document).ready(function () {
                                 str += "<div class=\"stuQa-user\">";
                                 $.ajax({
                                     type:"POST",
-                                    url: '/users/selectNameAndImg',
+                                    url: basePath+'/users/selectNameAndImg',
                                     async: false,
                                     data:{"userId":stuQa.userId},
                                     success:function (result1) {
@@ -377,7 +384,7 @@ $(document).ready(function () {
                                     }
                                 });
                                 str += "<div class=\"stuQa-userPhoto\">";
-                                str += "<img src='"+user.userImg+"' class='userPhoto'>";
+                                str += "<img src='"+user.userRealimg+"' class='userPhoto'>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
                                 str += "</div>";
@@ -441,12 +448,12 @@ $(document).ready(function () {
 
         //全部选项卡点击事件
         $("#stuQaall-tab").click(function () {
-            stu_qa_flow("#stuQaall","/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
         });
 
         //精华选项卡点击事件
         $("#stuQaelite-tab").click(function () {
-            stu_qa_flow("#stuQaelite","/stuQa/findStuQaListElite",sectionId);
+            stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",sectionId);
         });
 
         /*查看全文按钮点击提交事件*/
@@ -513,7 +520,7 @@ $(document).ready(function () {
                 var stuQa = {"sqaId":sqaId,"share":share};
                 $.ajax({
                     type:"POST",
-                    url:"/stuQa/updateShareOrReport",
+                    url:basePath+"/stuQa/updateShareOrReport",
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
@@ -529,13 +536,13 @@ $(document).ready(function () {
         /*举报按钮点击提交事件*/
         $(document).on("click", ".stuQa-report", function () {
             var report = $(this).text();
+            var sqaId = $(this).parent().parent().parent().find("input").val();
             if (report === "举报"){
-                var sqaId = $(this).parent().parent().parent().find("input").val();
                 report = "已举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
-                    url:"/stuQa/updateShareOrReport",
+                    url:basePath+"/stuQa/updateShareOrReport",
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
@@ -544,7 +551,20 @@ $(document).ready(function () {
                 });
                 $(this).text(""+report);
                 $(this).css("color","#9ea2ea");
-                $(this).css("pointer-events","none");
+            }else if (report === "已举报"){
+                report = "举报";
+                var stuQa = {"sqaId":sqaId,"report":report};
+                $.ajax({
+                    type:"POST",
+                    url:basePath+"/stuQa/updateShareOrReport",
+                    contentType:'application/json',
+                    data:JSON.stringify(stuQa),
+                    success:function (result) {
+                        report = result.stuQa.report;
+                    }
+                });
+                $(this).text(""+report);
+                $(this).css("color","#ffffff");
             }
         });
 
@@ -597,7 +617,7 @@ $(document).ready(function () {
             var data = {"sqaId":sqaId,"sectionId": sectionId};
             $.ajax({
                 type: "POST",
-                url: "/stuQa/findAnswersByPId",
+                url: basePath+"/stuQa/findAnswersByPId",
                 dataType: "json",
                 data: data,
                 success: function (result) {
@@ -607,7 +627,7 @@ $(document).ready(function () {
                         str += "<div class=\"stuQa-user\">";
                         $.ajax({
                             type:"POST",
-                            url: '/users/selectNameAndImg',
+                            url: basePath+'/users/selectNameAndImg',
                             async: false,
                             data:{"userId":stuQa.userId},
                             success:function (result1) {
@@ -678,7 +698,7 @@ $(document).ready(function () {
         // 隐藏"网络图片"tab
         ans_editor.customConfig.showLinkImg = false;
         ans_editor.customConfig.uploadFileName = 'file';
-        ans_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+        ans_editor.customConfig.uploadImgServer = basePath+'/stuNote/uploadPic';
         ans_editor.customConfig.uploadImgTimeout = 1000*20;
         ans_editor.customConfig.uploadImgMaxLength = 1;
         ans_editor.customConfig.uploadImgHooks = {
@@ -707,7 +727,7 @@ $(document).ready(function () {
                     var data = {"sqaId":sqaId,"content":content};
                     $.ajax({
                         type:"POST",
-                        url:"/stuQa/insertAnswer",
+                        url:basePath+"/stuQa/insertAnswer",
                         dataType: "json",
                         data: data,
                         success:function (result) {
@@ -762,7 +782,7 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : "/stuNote/submit",
+                        url : basePath+"/stuNote/submit",
                         data : data,
                         success : function (res) {
                             alert(res.retmsg);
@@ -793,7 +813,7 @@ $(document).ready(function () {
             // 隐藏"网络图片"tab
             stu_editor.customConfig.showLinkImg = false;
             stu_editor.customConfig.uploadFileName = 'file';
-            stu_editor.customConfig.uploadImgServer = 'stuNote/uploadPic';
+            stu_editor.customConfig.uploadImgServer = basePath+'/stuNote/uploadPic';
             stu_editor.customConfig.uploadImgTimeout = 1000*20;
             stu_editor.customConfig.uploadImgMaxLength = 1;
             stu_editor.customConfig.uploadImgHooks = {
@@ -819,9 +839,9 @@ $(document).ready(function () {
             $(this).siblings().eq(0).css("border-bottom","0px solid rgb(102,71,238)");
             $(this).siblings().eq(0).css("color","rgb(109,109,109)");
             if ($(this).text() === '最新'){
-                flowLoad("/stuNote/findStuNote",userId);
+                flowLoad(basePath+"/stuNote/findStuNote",userId);
             }else {
-                flowLoad("/stuNote/findStuNoteUp",userId);
+                flowLoad(basePath+"/stuNote/findStuNoteUp",userId);
             }
         });
 
@@ -851,7 +871,7 @@ $(document).ready(function () {
                 var thisObj = $(this);
                 $.ajax({
                     type:'POST',
-                    url:'/stuNote/collect',
+                    url:basePath+'/stuNote/collect',
                     dataType:'json',
                     data:data,
                     success:function (res) {
@@ -870,7 +890,7 @@ $(document).ready(function () {
                 var thisObj = $(this);
                 $.ajax({
                     type:'POST',
-                    url:'/stuNote/collect',
+                    url:basePath+'/stuNote/collect',
                     dataType:'json',
                     data:data,
                     success:function (res) {
@@ -895,7 +915,7 @@ $(document).ready(function () {
                 var thisObj = $(this);
                 $.ajax({
                     type:'POST',
-                    url:'/stuNote/report',
+                    url:basePath+'/stuNote/report',
                     dataType:'json',
                     data:data,
                     success:function (res) {
@@ -911,7 +931,7 @@ $(document).ready(function () {
                 var thisObj = $(this);
                 $.ajax({
                     type:'POST',
-                    url:'/stuNote/report',
+                    url:basePath+'/stuNote/report',
                     dataType:'json',
                     data:data,
                     success:function (res) {
@@ -935,7 +955,7 @@ $(document).ready(function () {
                 if($(this).parent().parent().prev().text() === 'none'){
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/upAdd",
+                        url: basePath+"/stuNote/upAdd",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -952,7 +972,7 @@ $(document).ready(function () {
                 }else if ($(this).parent().parent().prev().text() === 'up'){
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/upDelete",
+                        url: basePath+"/stuNote/upDelete",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -969,7 +989,7 @@ $(document).ready(function () {
                 }else {
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/upAddDownDelete",
+                        url: basePath+"/stuNote/upAddDownDelete",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -998,7 +1018,7 @@ $(document).ready(function () {
                 if($(this).parent().parent().prev().prev().text() === 'none'){
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/downAdd",
+                        url: basePath+"/stuNote/downAdd",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -1016,7 +1036,7 @@ $(document).ready(function () {
                 }else if ($(this).parent().parent().prev().prev().text() === 'down'){
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/downDelete",
+                        url: basePath+"/stuNote/downDelete",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -1034,7 +1054,7 @@ $(document).ready(function () {
                 }else {
                     $.ajax({
                         type: "POST",
-                        url: "/stuNote/downAddUpDelete",
+                        url: basePath+"/stuNote/downAddUpDelete",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -1077,7 +1097,7 @@ $(document).ready(function () {
                 $(this).parent().parent().parent().css("height","200px");
                 $(this).parent().prev().css("height","86%");
                 $(this).parent().prev().children().eq(1).css("height","90%");
-                $(".SNS_f_b_moduleBox").css("right",130);
+                /*$(".SNS_f_b_moduleBox").css("right",130);*/
                 flexState = false;
             }else{
                 $(this).parent().parent().css("height","auto");
@@ -1087,8 +1107,8 @@ $(document).ready(function () {
                 if (height < 200){
                     height = 200;
                 }
-                $(this).css("right",0);
-                $(this).siblings().css("right",0);
+                /*$(this).css("right",0);
+                $(this).siblings().css("right",0);*/
                 $(this).parent().prev().css("height",height);
                 flexState = true;
             }
@@ -1096,7 +1116,7 @@ $(document).ready(function () {
 
 
         $("#selection_stuNote").click(function () {
-            flowLoad("/stuNote/findStuNote",userId);
+            flowLoad(basePath+"/stuNote/findStuNote",userId);
         });
 
         function flowLoad(url,userId) {
@@ -1240,7 +1260,7 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : "/stuComment/submit",
+                        url : basePath+"/stuComment/submit",
                         data : data,
                         success : function (res) {
                             alert(res.retmsg);
@@ -1271,7 +1291,7 @@ $(document).ready(function () {
             // 隐藏"网络图片"tab
             stuCmt_editor.customConfig.showLinkImg = false;
             stuCmt_editor.customConfig.uploadFileName = 'file';
-            stuCmt_editor.customConfig.uploadImgServer = 'stuComment/uploadPic';
+            stuCmt_editor.customConfig.uploadImgServer = basePath+'/stuComment/uploadPic';
             stuCmt_editor.customConfig.uploadImgTimeout = 1000*20;
             stuCmt_editor.customConfig.uploadImgMaxLength = 1;
             stuCmt_editor.customConfig.uploadImgHooks = {
@@ -1416,7 +1436,7 @@ $(document).ready(function () {
                                                     '];\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.showLinkImg = false;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer = \'stuComment/uploadPic\';\n' +
+                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgHooks = {\n' +
@@ -1521,7 +1541,7 @@ $(document).ready(function () {
                                         '];\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.showLinkImg = false;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \'stuComment/uploadPic\';\n' +
+                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgHooks = {\n' +
@@ -1546,7 +1566,7 @@ $(document).ready(function () {
             //学生评论选项卡 点击事件
             $("#selection_stuCmt").click(function () {
                 replyEditorArr.length = 0;
-                cmtFlowLoad("/stuComment/findStuCmt");
+                cmtFlowLoad(basePath+"/stuComment/findStuCmt");
             });
 
             //举报点击事件
@@ -1560,7 +1580,7 @@ $(document).ready(function () {
                     data = {'smId':smId,'report':'true'};
                     $.ajax({
                         type: "POST",
-                        url: "/stuComment/updateReport",
+                        url: basePath+"/stuComment/updateReport",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -1575,7 +1595,7 @@ $(document).ready(function () {
                     data = {'smId':smId,'report':'false'};
                     $.ajax({
                         type: "POST",
-                        url: "/stuComment/updateReport",
+                        url: basePath+"/stuComment/updateReport",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -1600,7 +1620,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'UpMinus'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success:function (res) {
@@ -1619,7 +1639,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'UpAdd'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success:function (res) {
@@ -1638,7 +1658,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'UpAddDownMinus'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success: function (res) {
@@ -1667,7 +1687,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'DownMinus'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success:function (res) {
@@ -1687,7 +1707,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'DownAdd'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success:function (res) {
@@ -1707,7 +1727,7 @@ $(document).ready(function () {
                         data = {'userId':userId,'smId':smId,'type':'UpMinusDownAdd'};
                         $.ajax({
                             type: "POST",
-                            url: "/stuComment/updateUD",
+                            url: basePath+"/stuComment/updateUD",
                             dataType: "json",
                             data: data,
                             success:function (res) {
@@ -1778,13 +1798,13 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : "/stuComment/replySubmit",
+                        url : basePath+"/stuComment/replySubmit",
                         data : data,
                         success : function (res) {
                             alert(res.retmsg);
                             if (res.retmsg === '回复成功'){
                                 replyEditorArr.length = 0;
-                                cmtFlowLoad("/stuComment/findStuCmt");
+                                cmtFlowLoad(basePath+"/stuComment/findStuCmt");
                             }
                         }
                     });
@@ -1898,7 +1918,7 @@ $(document).ready(function () {
         $.ajax({
             type : "POST",
             async: false,
-            url : "/player/recordTimeSwitch",
+            url : basePath+"/player/recordTimeSwitch",
             data : data,
             success: function () {
                 document.getElementById("video_src").src = src;
@@ -2000,7 +2020,7 @@ $(document).ready(function () {
             $.ajax({
                 type : "POST",
                 async: false,
-                url : "/player/recordTime",
+                url : basePath+"/player/recordTime",
                 data : data
             });
         }
@@ -2022,7 +2042,7 @@ $(document).ready(function () {
             $.ajax({
                 type : "POST",
                 async: false,
-                url : "/player/readRecord",
+                url : basePath+"/player/readRecord",
                 success:function (res) {
                     elem_video1.currentTime = res;
                     elem_pgBtn.style.left = res/elem_video1.duration * $("#pg_bg").width() + 'px';
@@ -2166,18 +2186,18 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-            if ($("#sectionState").val()==="未观看"){
-                let data = {"state":"播放中"};
-                $.ajax({
-                    type:"POST",
-                    url:'/player/recordState',
-                    data: data,
-                    dataType: 'json',
-                    success: function () {
 
-                    }
-                });
-            }
+            let data = {"state":"播放中"};
+            $.ajax({
+                type:"POST",
+                url:basePath+'/player/recordState',
+                data: data,
+                dataType: 'json',
+                success: function () {
+
+                }
+            });
+
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);
@@ -2192,7 +2212,7 @@ $(document).ready(function () {
                     let data = {'state':'已完成'};
                     $.ajax({
                         type: 'POST',
-                        url: '/player/recordState',
+                        url: basePath+'/player/recordState',
                         data: data,
                         dataType: 'json',
                         success: function () {

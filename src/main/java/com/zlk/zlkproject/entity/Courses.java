@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +44,11 @@ public class Courses {
     private String featureText;
     /**功能图片*/
     private String featurePic;
+    /**章节Id*/
+    private int typeId;
+    /**小节Id*/
+    private int coursesTagId;
+
     /**章节列表*/
     private List<Chapter> chapterList;
     /**用户Id*/

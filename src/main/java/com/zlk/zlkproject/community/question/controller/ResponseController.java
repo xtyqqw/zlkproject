@@ -23,7 +23,7 @@ public class ResponseController {
 
     @RequestMapping("test")
     public String test() {
-        return "/view/community/particulars";
+        return "view/community/questionParticulars";
     }
 
     @RequestMapping(value = "/save")

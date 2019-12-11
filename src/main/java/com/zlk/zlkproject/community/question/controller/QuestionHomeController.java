@@ -1,13 +1,11 @@
 package com.zlk.zlkproject.community.question.controller;
 
 import com.zlk.zlkproject.community.question.service.QuestionHomeService;
-import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,7 +32,7 @@ public class QuestionHomeController {
     @RequestMapping(value = "/test")
     public ModelAndView quizAll() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("view/community/test");
+        mv.setViewName("view/community/questionList");
         return mv;
     }
     /*
@@ -58,10 +56,15 @@ public class QuestionHomeController {
      */
     @RequestMapping(value = "/questionAll")
     @ResponseBody
-    public Map<String, Object> questionAll(Pagination pagination) throws Exception {
-        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
+    public Map<String, Object> questionAll(Pagination pagination, HttpServletRequest request,Question question) throws Exception {
+  /*      User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUserId(userId);*/
+        List<Question> questionList = questionHomeService.findByQuestionTime(pagination);
+        Integer num = questionHomeService.findNumById(question);
         Map<String, Object> map = new HashMap<>();
-        map.put("questionAllList", questionAllList);
+        map.put("num",num);
+        map.put("questionList", questionList);
         return map;
     }
 

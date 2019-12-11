@@ -71,7 +71,7 @@ public class LogServiceImpl implements LogService {
      * @return java.lang.Integer
      **/
     @Override
-    public Integer deleteLogByLogId(String logId) {
-        return logMapper.deleteLogByLogId(logId);
+    public Integer deleteLogByLogId(List<Log> logList) {
+        return logMapper.deleteLogByLogId(logList);
     }
 }

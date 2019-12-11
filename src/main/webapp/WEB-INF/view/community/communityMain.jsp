@@ -136,7 +136,7 @@
 
         .wz_remenwenzhang {
             position: absolute;
-            margin-left: 76vw;
+            margin-left: 92vw;
             margin-top: 0vw;
         }
 
@@ -364,7 +364,7 @@
                     <c:forEach items="${tagList}" var="tag" begin="0" end="10">
                         <div>
                             <ul>
-                                <li>< a href=" " type="button" class="">${tag.tagName}</ a></li>
+                                <li><a href="" type="button" class="">${tag.tagName}</a></li>
                             </ul>
                         </div>
                     </c:forEach>
@@ -374,11 +374,15 @@
                         <div>
                             <ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <li><a href="<%=request.getContextPath() %>/" type="button" target="pageTarget"
                                        onclick="dj(this);">${tag.tagName}</a></li>
 =======
                                 <li>< a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</ a></li>
 >>>>>>> ee9fa743ed1a0e3c699c7ffbd2e8d02f64280ac6
+=======
+                                <li><a href="<%=request.getContextPath() %>/getArticleByTag?tagId=${tag.tagId}" type="button" target="pageTarget">${tag.tagName}</a></li>
+>>>>>>> edef26ec62616f2865508a2c34b522d56aa59311
                             </ul>
                         </div>
                     </c:forEach>
