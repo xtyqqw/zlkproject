@@ -4,6 +4,8 @@ import com.zlk.zlkproject.entity.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @program: ArticleTagService
  * @description:
@@ -13,4 +15,7 @@ import org.springframework.data.domain.Pageable;
 public interface ArticlesTagsService {
 
     Page<Article> listArticles(Integer tagId, Pageable pageable);
+
+    List<Article> findArticleAll(Article article);
+
 }

@@ -30,7 +30,7 @@
 <jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
-    location.href = "<%=request.getContextPath()%>/index/toIndex";
+    location.href = "<%=request.getContextPath()%>/";
 </script>
 <body>
 

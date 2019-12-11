@@ -37,6 +37,14 @@ public class IndexServiceImpl implements IndexService {
         return indexMapper.findUsersByAllTime();
     }
     /**
+     * 按照学习总时长从少到多查询用户
+     * @return List<User>
+     */
+    @Override
+    public List<User> findUsersByTime() {
+        return indexMapper.findUsersByTime();
+    }
+    /**
      * 根据ID查询用户
      * @param userId
      * @return User

@@ -35,5 +35,10 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.findCommentListByUserId(comment,startPage,limit,commentUserId);
     }
 
+    @Override
+    public Integer findCommentCountByUserId(String commentUserId) {
+        return commentMapper.findCommentCountByUserId(commentUserId);
+    }
+
 
 }
