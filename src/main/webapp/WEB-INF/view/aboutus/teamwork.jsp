@@ -41,7 +41,7 @@
         .headimg{width: 100%;height: 150px;}
         .headimg img{width: 100%;}
         .div1{width: 100%;height: 70%;}
-        .waik{background: #FFFFFF;width: 60%;height: 400px;/*800*/
+        .waik{background: #FFFFFF;width: 60%;height: 800px;
             margin: 0px auto;padding-bottom: 20px;}
         h2{padding: 40px;letter-spacing: 20px;/*margin-left: 350px;*/}
         .box{/*padding-left: 250px;*/ }
@@ -115,7 +115,7 @@
     }
 </script>
 <div class="layui-collapse" lay-accordion="" style="width: 83%">
-    <div class="layui-colla-item" style="overflow: auto">
+    <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
         <div class="layui-colla-content">
             <c:forEach items="${list}" var="user">
@@ -128,7 +128,7 @@
         </div>
     </div>
     <div style="clear: both;"></div>
-    <div class="layui-colla-item" style="overflow: auto">
+    <div class="layui-colla-item">
         <h2 class="layui-colla-title">招聘信息</h2>
         <div class="layui-colla-content">
             <p>联系我们：<br>
