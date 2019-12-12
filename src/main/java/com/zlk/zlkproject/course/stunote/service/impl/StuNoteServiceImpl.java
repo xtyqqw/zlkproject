@@ -56,9 +56,10 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer upAdd(Integer snId, String userId, String upOrDown) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getUp() + 1;
-        Integer res = stuNoteMapper.updateStuNoteUp(snId, num);
+        Integer res = stuNoteMapper.updateStuNoteUp(snId, num);*/
+        Integer res = stuNoteMapper.stuNoteUpAdd(snId);
         if (res != 1){
             return 0;
         }
@@ -67,9 +68,10 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer downAdd(Integer snId, String userId, String upOrDown) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getDown() + 1;
-        Integer res = stuNoteMapper.updateStuNoteDown(snId, num);
+        Integer res = stuNoteMapper.updateStuNoteDown(snId, num);*/
+        Integer res = stuNoteMapper.stuNoteDownAdd(snId);
         if (res != 1){
             return 0;
         }
@@ -78,9 +80,10 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer upDelete(Integer snId, String userId) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getUp() - 1;
-        Integer res = stuNoteMapper.updateStuNoteUp(snId, num);
+        Integer res = stuNoteMapper.updateStuNoteUp(snId, num);*/
+        Integer res = stuNoteMapper.stuNoteUpDelete(snId);
         if (res != 1){
             return 0;
         }
@@ -89,9 +92,10 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer downDelete(Integer snId, String userId) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getDown() - 1;
-        Integer res = stuNoteMapper.updateStuNoteDown(snId, num);
+        Integer res = stuNoteMapper.updateStuNoteDown(snId, num);*/
+        Integer res = stuNoteMapper.stuNoteDownDelete(snId);
         if (res != 1){
             return 0;
         }
@@ -100,7 +104,7 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer upAddDownDelete(Integer snId, String userId, String upOrDown) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getUp() + 1;
         Integer res = stuNoteMapper.updateStuNoteUp(snId, num);
         if (res != 1){
@@ -111,6 +115,11 @@ public class StuNoteServiceImpl implements StuNoteService {
         res = stuNoteMapper.updateStuNoteDown(snId, num);
         if (res != 1){
             return 0;
+        }*/
+
+        Integer res = stuNoteMapper.stuNoteUpAddDownDelete(snId);
+        if (res != 1){
+            return 0;
         }
 
         res = stuNoteMapper.updateDownOrUp(snId,userId,upOrDown);
@@ -119,7 +128,7 @@ public class StuNoteServiceImpl implements StuNoteService {
 
     @Override
     public Integer downAddUpDelete(Integer snId, String userId, String upOrDown) {
-        StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
+        /*StuNoteRes stuNoteRes = stuNoteMapper.findStuNoteBySnId(snId);
         Integer num = stuNoteRes.getDown() + 1;
         Integer res = stuNoteMapper.updateStuNoteDown(snId, num);
         if (res != 1){
@@ -128,6 +137,11 @@ public class StuNoteServiceImpl implements StuNoteService {
 
         num = stuNoteRes.getUp() - 1;
         res = stuNoteMapper.updateStuNoteUp(snId, num);
+        if (res != 1){
+            return 0;
+        }*/
+
+        Integer res = stuNoteMapper.stuNoteUpDeleteDownAdd(snId);
         if (res != 1){
             return 0;
         }

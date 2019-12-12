@@ -36,14 +36,14 @@ public class DurationController {
         ModelAndView mv=new ModelAndView();
         /*技能水平*/
         Integer addd= Arith.ride(lists.getUserDateTime());
-        /*学习成长量*/
-        Integer ad = Arith.plus(lists.getUserDateTime());
+        /*学习成长量*//*
+        Integer ad = Arith.plus(lists.getUserDateTime());*/
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
         /*超过多少学生，百分比*/
         Integer rankall=Arith.divide(rank,all);
         mv.addObject("rankall",rankall);
-        mv.addObject("ad",ad);
+        /*mv.addObject("ad",ad);*/
         mv.addObject("addd",addd);
         mv.addObject("lists",lists);
         mv.setViewName("view/personal/learnlook");
