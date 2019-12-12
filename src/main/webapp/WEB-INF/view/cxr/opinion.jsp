@@ -11,6 +11,8 @@
 <head>
     <title>意见反馈</title>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
     <style type="text/css">
         *{
@@ -18,7 +20,7 @@
             padding: 0;
         }
         #yijianzhuti{
-            z-index: -9;
+            /*z-index: 9;*/
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
@@ -156,52 +158,27 @@
             </div>
 
     <div id="zhuti_wei">
-        <button id="tijiao">提交</button>
+        <button id="tijiao" class="layui-btn">提交</button>
         <button id="quxiao">取消</button>
     </div>
     </form>
     </div>
-    <div id="chenggong">
-        <img src="/img/cxr/提交成功图片.png" />提交已成功
-    </div>
-    <div id="chongxin">
-        <img src="/img/cxr/提交失败.png" />编辑内容不符合要求，请重新编辑！
-    </div>
-    <div id="shibai">
-        <img src="/img/cxr/加载超时.png" />加载超时请重试
-    </div>
+    <%--<div id="chenggong">--%>
+        <%--<img src="/img/cxr/提交成功图片.png" />提交已成功--%>
+    <%--</div>--%>
+    <%--<div id="chongxin">--%>
+        <%--<img src="/img/cxr/提交失败.png" />编辑内容不符合要求，请重新编辑！--%>
+    <%--</div>--%>
+    <%--<div id="shibai">--%>
+        <%--<img src="/img/cxr/加载超时.png" />加载超时请重试--%>
+    <%--</div>--%>
 </div>
+<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 <script type="text/javascript">
-    $("#tishi").hide();
-    $("#chenggong").hide();
-    $("#chongxin").hide();
-    $("#shibai").hide();
-    $('#tijiao').click(function () {
-        $("#chenggong").show();
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },1500)
-    });
-    $('#quxiao').click(function () {
-        $("#chongxin").show();
-        setTimeout(function () {
-            $("#chongxin").hide();
-        },1500)
-    });
-    var suru = $('#shurukuang').val();;
-    if (suru.length>20&&suru.length<100) {
-        $("#tishi").hide();
-    }else{
-        $("#tishi").show();
-    };
-    $('#shurukuang').keyup(function(){
-        var suru = $('#shurukuang').val();
 
-        if (suru.length>20&&suru.length<100) {
-            $("#tishi").hide();
-        }else{
-            $("#tishi").show();
-        };
+    //提交按钮点击事件,当点击重置按钮时，显示信息
+    $("#tijiao").click(function () {
+        layer.msg("信息已提交");
     });
 </script>
 

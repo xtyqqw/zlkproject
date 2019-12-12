@@ -12,4 +12,10 @@ public interface OpinionService {
      * @return
      */
     public int addOpinion(Opinion opinion);
+    /**
+     * 游客新增意见方法
+     * @param opinion
+     * @return
+     */
+    public int insertOpinion(Opinion opinion);
 }
