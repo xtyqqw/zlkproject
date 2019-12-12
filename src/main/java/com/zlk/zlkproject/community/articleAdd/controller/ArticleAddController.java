@@ -86,11 +86,11 @@ public class ArticleAddController {
     //创建文章的请求方法
     @PostMapping(value = "/articles")
     public String post(Article article, HttpServletRequest request) throws Exception {
-        User user = (User) request.getSession().getAttribute("user");
-        String userId = "" + user.getUserId();
-        //User user=new User();
-        //user.setUserId("1");
-        //article.setUser(userId);
+        /*User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();*/
+        User user=new User();
+        user.setUserId("1");
+        article.setUser(user);
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
         return "redirect:/CommunityPage";

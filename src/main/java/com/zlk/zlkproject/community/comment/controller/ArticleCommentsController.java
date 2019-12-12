@@ -33,12 +33,13 @@ public class ArticleCommentsController {
     @ResponseBody
     public Map submit(ArticleComment articleComment, HttpServletRequest request) {
         /*User user = (User) request.getSession().getAttribute("user");
-        String userId = "" + user.getUserId();
-        String articleId = (String) request.getSession().getAttribute("articleId");*/
+        String userId = "" + user.getUserId();*/
+        String articleId = (String) request.getSession().getAttribute("articleId");
 
         HashMap map = new HashMap<>();
-        /*articleComment.setArticleId(articleId);
-        articleComment.setUserId(userId);*/
+        articleComment.setArticleId(articleId);
+        articleComment.setUserId("1");
+        //articleComment.setUserId(userId);
         articleComment.setPId(0);
         articleComment.setDate(new Date());
         Integer res = articleCommentsService.addArtCmt(articleComment);
@@ -56,12 +57,12 @@ public class ArticleCommentsController {
     @ResponseBody
     public Map replySubmit(ArticleComment articleComment, HttpServletRequest request) {
         /*User user = (User) request.getSession().getAttribute("user");
-        String userId = "" + user.getUserId();
-        String articleId = (String) request.getSession().getAttribute("articleId");*/
+        String userId = "" + user.getUserId();*/
+        String articleId = (String) request.getSession().getAttribute("articleId");
 
         HashMap map = new HashMap<>();
-        /*articleComment.setArticleId(articleId);
-        articleComment.setUserId(userId);*/
+        articleComment.setArticleId(articleId);
+        articleComment.setUserId("1");
         articleComment.setDate(new Date());
         Integer res = articleCommentsService.addArtCmt(articleComment);
         String retmsg;
@@ -78,8 +79,7 @@ public class ArticleCommentsController {
     @ResponseBody
     public Map findArtCmt(@RequestParam("articleId") String articleId,
                           @RequestParam("page") Integer page,@RequestParam("size") Integer size, HttpServletRequest request) {
-        /*articleId = (String) request.getSession().getAttribute("articleId");*/
-
+        articleId = (String) request.getSession().getAttribute("articleId");
         Map map = new HashMap();
         List<ArticleComment> artCmtList = articleCommentsService.findArtCmt(articleId, page, size);
         Integer pages = articleCommentsService.findArtCmtCount(articleId);

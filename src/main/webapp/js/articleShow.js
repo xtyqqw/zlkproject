@@ -20,14 +20,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                let arrP = $("#div-artCmt-text").children().eq(0).children();
-                for (let i=0;i<arrP.length;i++){
-                    if (arrP.eq(i).children("img").length > 0){
-                        isEmpty = false;
-                    }
-                }
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let articleId = 1546605080;
+
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
                 let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
@@ -69,8 +62,6 @@ $(document).ready(function () {
         {
             //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             let userId = 1;
-            //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            let articleId =964469199;
 
             function cmtFlowLoad(url) {
                 $("#art-cmt-ul-stream").empty();
@@ -361,6 +352,7 @@ $(document).ready(function () {
                                     num --;
                                     thisObj.parent().next().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }else if(ZCState === 'none'){
@@ -380,6 +372,7 @@ $(document).ready(function () {
                                     num ++;
                                     thisObj.parent().next().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }else {
@@ -406,6 +399,7 @@ $(document).ready(function () {
                                     num --;
                                     thisObj.parent().next().next().next().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }
@@ -428,6 +422,7 @@ $(document).ready(function () {
                                     num --;
                                     thisObj.parent().next().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }else if (ZCState === 'none'){
@@ -448,6 +443,7 @@ $(document).ready(function () {
                                     num ++;
                                     thisObj.parent().next().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }else {
@@ -474,6 +470,7 @@ $(document).ready(function () {
                                     num --;
                                     thisObj.parent().prev().text(num);
                                 }
+                                thisObj.prev().text('yes');
                             }
                         });
                     }
@@ -495,14 +492,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                let arrP = $(this).prev().prev().children().eq(0).children();
-                for (let i=0;i<arrP.length;i++){
-                    if (arrP.eq(i).children("img").length > 0){
-                        isEmpty = false;
-                    }
-                }
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let articleId = 964469199;
+
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
                 let data;
