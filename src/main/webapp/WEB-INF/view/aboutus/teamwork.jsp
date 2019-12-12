@@ -83,7 +83,7 @@
     }
     //验证邮箱
     function email() {
-        var id = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var id =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var txtemail= document.getElementById("recruit_mail").value;
         var bool = id.test(txtemail);
         if(bool == true){
@@ -114,132 +114,127 @@
         return check;
     }
 </script>
-<div class="layui-container">
-    <div class="layui-collapse" lay-accordion="">
-        <div class="layui-colla-item">
-            <h2 class="layui-colla-title">合作讲师</h2>
-            <div class="layui-colla-content">
-                <c:forEach items="${list}" var="user">
-                    <div class="list1">
-                        <h3>资深讲师：${user.lecturerName}</h3>
-                        <p>${user.lecturerIntro}</p>
-                        <img style="width:150px; height:150px; border-radius:50%; overflow:hidden;" src="${user.lecturerPhotor}">
-                    </div>
-                </c:forEach>
+<div class="layui-collapse" lay-accordion="" style="width: 83%">
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">合作讲师</h2>
+        <div class="layui-colla-content">
+            <c:forEach items="${list}" var="user">
+            <div class="list1">
+                <h3>资深讲师：${user.lecturerName}</h3>
+                <p>${user.lecturerIntro}</p>
+                <img style="width:150px; height:150px; border-radius:50%; overflow:hidden;" src="${user.lecturerPhotor}">
             </div>
-        </div>
-<<<<<<< HEAD
-        <%--        <div style="clear: both;"></div>--%>
-=======
-<%--        <div style="clear: both;"></div>--%>
->>>>>>> 95eac6bbfa85ef2028b2f9448eb60efa348c80f0
-        <div class="layui-colla-item">
-            <h2 class="layui-colla-title">招聘信息</h2>
-            <div class="layui-colla-content">
-                <p>联系我们：<br>
-                    地址：北京市海淀区四道口路2号京果商厦A座4层466<br>
-                    电话：010-53567019<br>
-                    工作时间：9：30--18：00<br></p>
-                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                    <legend>请填写个人信息</legend>
-                </fieldset>
-                <form class="waik" action="<%=request.getContextPath()%>/recruit/recruits" method="post" onsubmit="return check()" >
-                    <ul class="box">
-                        <li>
-                            <label>姓名</label>
-                            <input type="text" placeholder="请输入姓名" required="required"
-                                   name="recruitName" id="recruit_name" oninput="if(value.length>2)value=value.slice(0,10)" autocomplete="off"/>
-                            <span class="error" style="color: grey">(不能多于十个文字)</span>
-                        </li>
-                        <li>
-                            <label>学历</label>
-                            <select name="recruitBac" class="recruit_bac" id="recruit_bac">
-                                <option value="专科">专科</option>
-                                <option value="本科">本科</option>
-                                <option value="硕士">硕士</option>
-                                <option value="博士">博士</option>
-                                <option value="博士后">博士后</option>
-                            </select>
-                        </li><br />
-                        <li>
-                            <label>身份证号码</label>
-                            <input type="text" placeholder="请输入证件号码" required="required"
-                                   name="recruitNumber" id="recruit_number" onchange="num()"/>
-                            <span class="error" id="numberError"></span>
-                        </li>
-                        <li>
-                            <label>手机号码</label>
-                            <input type="text" placeholder="请输入手机号码" required="required"
-                                   name="recruitPhone" id="recruit_phone" onchange="phone()" />
-                            <span class="error" id="phoneError"></span>
-                        </li>
-                        <li>
-                            <label>电子邮箱</label>
-                            <input type="recruit_mail" placeholder="请输入电子邮箱" required="required"
-                                   name="recruitMail" id="recruit_mail" onchange="email()" />
-                            <span class="error" id="emailError"></span>
-                        </li>
-                        <li>
-                            <label>地址</label>
-                            <input type="text" placeholder="请输入居住地址" required="required"
-                                   name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)"/>
-                            <span class="error" id="error" style="color: grey">(不能多余五十个文字)</span>
-                        </li>
-                        <li>
-                            <label>性别</label>
-                            <select name="recruitSex" class="recruit_sex" id="recruit_sex">
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                            </select>
-                        </li><br />
-                    </ul>
-                    <div class="submit">                   <%--添加提交弹窗--%>
-                        <input class="login" type="button" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
-                    </div>
-                </form>
-            </div>
-
+            </c:forEach>
         </div>
     </div>
+    <div style="clear: both;"></div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">招聘信息</h2>
+        <div class="layui-colla-content">
+            <p>联系我们：<br>
+                地址：北京市海淀区四道口路2号京果商厦A座4层466<br>
+                电话：010-53567019<br>
+                工作时间：9：30--18：00<br></p>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>请填写个人信息</legend>
+            </fieldset>
+            <form class="waik" action="<%=request.getContextPath()%>/recruit/recruits" method="post" onsubmit="return check()" >
+                <ul class="box">
+                    <li>
+                        <label>姓名</label>
+                        <input type="text" placeholder="请输入姓名" required="required"
+                               name="recruitName" id="recruit_name" oninput="if(value.length>2)value=value.slice(0,10)" autocomplete="off"/>
+                        <span class="error" style="color: grey">(不能多于十个文字)</span>
+                    </li>
+                    <li>
+                        <label>学历</label>
+                        <select name="recruitBac" class="recruit_bac" id="recruit_bac">
+                            <option value="专科">专科</option>
+                            <option value="本科">本科</option>
+                            <option value="硕士">硕士</option>
+                            <option value="博士">博士</option>
+                            <option value="博士后">博士后</option>
+                        </select>
+                    </li><br />
+                    <li>
+                        <label>身份证号码</label>
+                        <input type="text" placeholder="请输入证件号码" required="required"
+                               name="recruitNumber" id="recruit_number" onchange="num()"/>
+                        <span class="error" id="numberError"></span>
+                    </li>
+                    <li>
+                        <label>手机号码</label>
+                        <input type="text" placeholder="请输入手机号码" required="required"
+                               name="recruitPhone" id="recruit_phone" onchange="phone()" />
+                        <span class="error" id="phoneError"></span>
+                    </li>
+                    <li>
+                        <label>电子邮箱</label>
+                        <input type="recruit_mail" placeholder="请输入电子邮箱" required="required"
+                               name="recruitMail" id="recruit_mail" onchange="email()" />
+                        <span class="error" id="emailError"></span>
+                    </li>
+                    <li>
+                        <label>地址</label>
+                        <input type="text" placeholder="请输入居住地址" required="required"
+                               name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)"/>
+                        <span class="error" id="error" style="color: grey">(不能多余五十个文字)</span>
+                    </li>
+                    <li>
+                        <label>性别</label>
+                        <select name="recruitSex" class="recruit_sex" id="recruit_sex">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </li><br />
+                </ul>
+                <div class="submit">                   <%--添加提交弹窗--%>
+                    <input class="login" type="button" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>
-<script>
+    <script>
 
-    layui.use(['element', 'layer'], function(){
-        var element = layui.element;
-        var layer = layui.layer;
-    });
-    $(function () {
-        $(".login").click(function () {
-            var recruitName=$("#recruit_name").val();
-            var recruitBac=$("#recruit_bac").val();
-            var recruitNumber=$("#recruit_number").val();
-            var recruitPhone=$("#recruit_phone").val();
-            var recruitMail=$("#recruit_mail").val();
-            var recruitSite=$("#recruit_site").val();
-            var recruitSex=$("#recruit_sex").val();
-            var recruit={
-                "recruitName":recruitName,
-                "recruitBac":recruitBac,
-                "recruitNumber":recruitNumber,
-                "recruitPhone":recruitPhone,
-                "recruitMail":recruitMail,
-                "recruitSite":recruitSite,
-                "recruitSex":recruitSex
-            };
-            $.ajax({
-                type:'post',
-                url:"<%=request.getContextPath()%>/recruit/recruits",
-                data:recruit,
-                datatype:'json',
-                success:function (msg) {
-                    alert(msg.msg);
+        layui.use(['element', 'layer'], function(){
+            var element = layui.element;
+            var layer = layui.layer;
 
-                }
-            });
+        });
+        $(function () {
+            $(".login").click(function () {
+                var recruitName=$("#recruit_name").val();
+                var recruitBac=$("#recruit_bac").val();
+                var recruitNumber=$("#recruit_number").val();
+                var recruitPhone=$("#recruit_phone").val();
+                var recruitMail=$("#recruit_mail").val();
+                var recruitSite=$("#recruit_site").val();
+                var recruitSex=$("#recruit_sex").val();
+                var recruit={
+                    "recruitName":recruitName,
+                    "recruitBac":recruitBac,
+                    "recruitNumber":recruitNumber,
+                    "recruitPhone":recruitPhone,
+                    "recruitMail":recruitMail,
+                    "recruitSite":recruitSite,
+                    "recruitSex":recruitSex
+                };
+                $.ajax({
+                    type:'post',
+                    url:"<%=request.getContextPath()%>/recruit/recruits",
+                    data:recruit,
+                    datatype:'json',
+                    success:function (msg) {
+                        alert(msg.msg);
+
+                    }
+                });
+            })
         })
-    })
 
-</script>
+    </script>
 
 </body>
 </html>
