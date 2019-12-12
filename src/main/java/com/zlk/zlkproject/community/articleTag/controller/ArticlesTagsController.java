@@ -26,16 +26,14 @@ public class ArticlesTagsController {
     @Autowired
     private ArticlesTagsService articlesTagsService;
 
-    @Autowired
-    private TagsService tagsService;
-
     @GetMapping(value = "/community/tags")
-    public ModelAndView tags(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-                             Integer tagId, Article article, Tag tag){
+    public ModelAndView tags(@PageableDefault(page = 0,value = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+                             Integer tagId){
         ModelAndView mv = new ModelAndView();
+        /*if (pageable.getPageSize() == 0) {
+            mv.setViewName("view/community/articleNo");
+        }*/
         mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
-        mv.addObject("articles", articlesTagsService.findArticleAll(article));
-        //mv.addObject("tags",tagsService.getAllTagByTagId(tag));
         mv.addObject("activeTagId",tagId);
         mv.setViewName("view/community/articlesTags");
         return mv;
