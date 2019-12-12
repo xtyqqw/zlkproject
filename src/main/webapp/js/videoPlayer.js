@@ -876,7 +876,7 @@ $(document).ready(function () {
 
         //采集
         $("#SNS_contentBox").on('click','.collectBtn',function () {
-            var snId = parseInt($(this).parent().parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().parent().children().eq(1).text());
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             if ($(this).prev().text() === 'false'){
@@ -922,7 +922,7 @@ $(document).ready(function () {
 
         //举报
         $("#SNS_contentBox").on("click",".reportBtn",function () {
-            var snId = parseInt($(this).parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().children().eq(1).text());
             if ($(this).prev().text() === 'false'){
                 $(this).prev().text('true');
                 var data = {'state':'true','snId':snId};
@@ -963,12 +963,12 @@ $(document).ready(function () {
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             var thisObj = $(this);
-            if($(this).parent().parent().attr("data_name") === 'up'){
-                var snId = parseInt($(this).parent().parent().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                let completeState = thisObj.prev().text() + '';
-                if(completeState === 'yes'){
-                    thisObj.prev().text('no');
+            let completeState = thisObj.parent().parent().parent().children().eq(0).text() + '';
+            if(completeState === 'yes'){
+                thisObj.parent().parent().parent().children().eq(0).text('no');
+                if($(this).parent().parent().attr("data_name") === 'up'){
+                    var snId = parseInt($(this).parent().parent().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
                     if($(this).parent().parent().prev().text() === 'none'){
                         $.ajax({
                             type: "POST",
@@ -984,7 +984,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("up");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else if ($(this).parent().parent().prev().text() === 'up'){
@@ -1002,7 +1002,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("none");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else {
@@ -1020,7 +1020,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("up");
 
-                                    var downPic = thisObj.parent().parent().next().children().eq(0).children().eq(1);
+                                    var downPic = thisObj.parent().parent().next().children().eq(0).children().eq(0);
                                     downPic.removeClass('icon-dianzan_active');
                                     downPic.addClass('icon-qinziAPPtubiao-');
                                     downPic.css('font-size','17px');
@@ -1028,17 +1028,13 @@ $(document).ready(function () {
                                     value = parseInt(downPic.parent().next().text()) - 1;
                                     downPic.parent().next().text(value);
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }
-                }
-            }else {
-                var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                let completeState = thisObj.prev().text() + '';
-                if (completeState === 'yes'){
-                    thisObj.prev().text('no');
+                }else {
+                    var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
                     if($(this).parent().parent().prev().prev().text() === 'none'){
                         $.ajax({
                             type: "POST",
@@ -1055,7 +1051,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("down");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else if ($(this).parent().parent().prev().prev().text() === 'down'){
@@ -1074,7 +1070,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("none");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else {
@@ -1093,14 +1089,14 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("down");
 
-                                    var upPic = thisObj.parent().parent().prev().children().eq(0).children().eq(1);
+                                    var upPic = thisObj.parent().parent().prev().children().eq(0).children().eq(0);
                                     upPic.removeClass('icon-dianzan');
                                     upPic.addClass('icon-qinziAPPtubiao-1');
                                     upPic.css("color","rgb(121,121,121)");
                                     var value = parseInt(upPic.parent().next().text()) - 1;
                                     upPic.parent().next().text(value);
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }
@@ -1181,11 +1177,11 @@ $(document).ready(function () {
                                         }
                                     }
                                 }
-                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 45px">采集</div>';
+                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 50px;font-size: 1vw">采集</div>';
                                 var collectState = 'false';
                                 for (var i in note.stuNoteCollect){
                                     if (note.stuNoteCollect[i].userId === uId){
-                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 45px">已采集</div>';
+                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 50px;font-size: 1vw">已采集</div>';
                                         collectState = 'true';
                                     }
                                 }
@@ -1204,31 +1200,30 @@ $(document).ready(function () {
                                                 '<div id="SNS_textEditorId'+ flag +'" class="SNS_textEditor"></div>\n' +
                                             '</div>\n' +
                                             '<div class="SNS_func_box">' +
+                                                '<span style="display: none">yes</span>' +
                                                 '<span style="display: none">'+ note.snId +'</span>' +
                                                 '<span style="display: none">'+ upDownState +'</span>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.up +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox" style="padding: 2px 0 0 0;height: 26px">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.down +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 85px">' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 13%">' +
                                                     '<span style="display: none">'+ collectState +'</span>' +
                                                     collectStr +
                                                     '<div class="SNS_moduleBox_rbox" style="padding: 5px 0 0 5px;width: 35px;height: 18px">'+ note.collect +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left">展开/收起</div>' +
+                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left;width: 10%;font-size: 1vw">展开/收起</div>' +
                                                 '<span style="display: none">false</span>' +
-                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left">举报</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 140px;padding: 2px 0 0 0">'+ note.dateString +'</div>' +
+                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left;width: 10%;font-size: 1vw">举报</div>' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 20%;padding: 2px 0 0 0;font-size: 1vw">'+ note.dateString +'</div>' +
                                             '</div>\n' +
                                         '</div>\n' +
                                     '</div>' +
@@ -1423,12 +1418,10 @@ $(document).ready(function () {
                                                                 '<span style="display: none">yes</span> ' +
                                                                 '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                                    /*'<span style="display: none">yes</span>' +*/
                                                                     upStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].up +'</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                                    /*'<span style="display: none">yes</span>' +*/
                                                                     downStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].down +'</div>' +
@@ -1522,12 +1515,10 @@ $(document).ready(function () {
                                                     '<span style="display: none">yes</span>' +
                                                     '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                        /*'<span style="display: none">yes</span>' +*/
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.up +'</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                        /*'<span style="display: none">yes</span>' +*/
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.down +'</div>' +
@@ -1651,10 +1642,10 @@ $(document).ready(function () {
                 let type = $(this).attr('data_name');
                 let data;
                 let thisObj = $(this);
-                if (type === 'up'){
-                    let completeState = thisObj.prev().text() + '';
-                    if(completeState === 'yes'){
-                        thisObj.prev().text('no');
+                let completeState = thisObj.parent().parent().children().eq(1).text() + '';
+                if (completeState === 'yes'){
+                    thisObj.parent().parent().children().eq(1).text('no');
+                    if (type === 'up'){
                         if(UDState === 'up'){
                             data = {'userId':userId,'smId':smId,'type':'UpMinus'};
                             $.ajax({
@@ -1672,7 +1663,7 @@ $(document).ready(function () {
                                         num --;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else if(UDState === 'none'){
@@ -1692,7 +1683,7 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else {
@@ -1712,23 +1703,19 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
 
-                                        thisObj.parent().next().next().children().eq(1).removeClass('icon-dianzan_active');
-                                        thisObj.parent().next().next().children().eq(1).addClass('icon-qinziAPPtubiao-');
-                                        thisObj.parent().next().next().children().eq(1).css('font-size','18px');
-                                        thisObj.parent().next().next().children().eq(1).css('color','rgb(121,121,121)');
+                                        thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
+                                        thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
+                                        thisObj.parent().next().next().children().eq(0).css('font-size','18px');
+                                        thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
                                         num = parseInt(thisObj.parent().next().next().next().text());
                                         num --;
                                         thisObj.parent().next().next().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }
-                    }
-                }else {
-                    let completeState = thisObj.prev().text() + '';
-                    if (completeState === 'yes'){
-                        thisObj.prev().text('no');
+                    }else {
                         if(UDState === 'down'){
                             data = {'userId':userId,'smId':smId,'type':'DownMinus'};
                             $.ajax({
@@ -1747,7 +1734,7 @@ $(document).ready(function () {
                                         num --;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else if (UDState === 'none'){
@@ -1768,7 +1755,7 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else {
@@ -1790,14 +1777,14 @@ $(document).ready(function () {
                                         thisObj.parent().next().text(num);
 
 
-                                        thisObj.parent().prev().prev().children().eq(1).removeClass('icon-dianzan');
-                                        thisObj.parent().prev().prev().children().eq(1).addClass('icon-qinziAPPtubiao-1');
-                                        thisObj.parent().prev().prev().children().eq(1).css('color','rgb(121,121,121)');
+                                        thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
+                                        thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
                                         num = parseInt(thisObj.parent().prev().text());
                                         num --;
                                         thisObj.parent().prev().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }
