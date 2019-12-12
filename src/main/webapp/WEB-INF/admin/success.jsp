@@ -70,7 +70,7 @@
         }
 
         .left {
-            overflow-y: scroll;
+            overflow: scroll;
             scrollbar-color: transparent transparent;
             scrollbar-track-color: transparent;
             -ms-scrollbar-track-color: transparent;
