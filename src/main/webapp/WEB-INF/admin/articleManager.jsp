@@ -24,7 +24,7 @@
         }
 
         .del {
-            margin-left: -510px;
+            margin-left: -490px;
         }
 
         .hint {
@@ -40,6 +40,9 @@
             margin-top: 15px;
             height: 24px;
             width: 60%;
+        }
+        .layui-layer-tips {
+            word-break: break-all;
         }
     </style>
 </head>
@@ -154,6 +157,7 @@
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [3, '#009688'],
+            area: ['auto', 'auto'],
             time: 2000
         });
     });
