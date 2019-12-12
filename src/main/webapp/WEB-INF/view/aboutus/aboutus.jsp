@@ -87,28 +87,32 @@
 <!-- 侧边导航 -->
 <div id="about-nav">
     <ul>
-        <a href="<%=request.getContextPath()%>/aboutus/findAboutus"
+        <a href="<%=request.getContextPath()%>/aboutus/aboutzlk"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>关于我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce"
+           name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/toCoo" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/toCoo"
+           name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>合作企业</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/lecturer/lecturers" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/lecturer/lecturers"
+           name="dian" class="nodian" id="teacher" target="aboutus-main">
             <li>
                 <span>讲师合作</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/help" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/help"
+           name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>帮助中心</span>
             </li>
@@ -119,12 +123,14 @@
                 <span>友情链接</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/contactus/findContactus" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/contactus/findContactus"
+           name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/toOpinion" name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/opinion/toOpinion"
+           name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>意见反馈</span>
             </li>
@@ -134,17 +140,18 @@
 
 <!-- 主体内容 -->
 <div>
-<iframe id="aboutus-iframe" name="aboutus-main"  frameborder="0" scrolling="no"></iframe>
+<iframe src="<%=request.getContextPath()%>/aboutus/aboutzlk"
+        id="aboutus-iframe" name="aboutus-main"  style="width: 80%;height: 100%;vertical-align:middle"  frameborder="0" scrolling="no"></iframe>
 </div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#aboutus-iframe").load(function(){
         var main = $(window.parent.document).find("#aboutus-iframe");
-        var thisheight = $(document).height()+30;
+        main.height(0);
+        var thisheight = $(document).height();
         main.height(thisheight);
     });
 </script>
-<%--侧栏--%>
 <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
 <div style="clear: both"></div>
 <%--尾部--%>

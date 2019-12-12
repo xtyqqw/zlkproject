@@ -554,20 +554,22 @@ button{
     text-align: center;
     font-size: 15px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .SNS_moduleBox_lbox{
-    width: 30px;
+    width: 35%;
     height: 28px;
     float: left;
 }
 .SNS_moduleBox_rbox{
-    width: 40px;
+    width: 65%;
     height: 23px;
     float: left;
     color: rgb(121,121,121);
     text-align: left;
     padding: 5px 0 0 0;
-    font-size: 12px;
+    font-size: 1vw;
 }
 .UDBtn{
     cursor: pointer;
@@ -686,7 +688,7 @@ button{
     height: 22px;
     position: relative;
     top: 0;
-    left: 646px;
+    margin: 0 1px 0 auto;
     border-radius: 3px;
     color: white;
     font-size: 16px;
@@ -1041,6 +1043,7 @@ button{
 
 .stuQa-userName{
     height: 20%;
+    font-size: 15px;
 }
 .stuQa-content-box{
     width: 80%;
@@ -1063,7 +1066,7 @@ button{
     border-radius: 20px;
     cursor: pointer;
     display: inline-block;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .stuQa-toolbar{
@@ -1074,6 +1077,7 @@ button{
     width: 95%;
     height: 60%;
     overflow: hidden;
+    font-size: 15px;
     /*text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1117,7 +1121,7 @@ button{
 
 .stuQa-func-tag{
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     margin: 0 5px;
 }
 

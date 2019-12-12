@@ -827,7 +827,7 @@ $(document).ready(function () {
                         url : basePath+"/stuNote/submit",
                         data : data,
                         success : function (res) {
-                            alert(res.retmsg);
+                            layer.msg(res.retmsg);
                             if (res.retmsg === '保存成功'){
                                 stu_editor.txt.clear();
                             }
@@ -904,7 +904,7 @@ $(document).ready(function () {
 
         //采集
         $("#SNS_contentBox").on('click','.collectBtn',function () {
-            var snId = parseInt($(this).parent().parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().parent().children().eq(1).text());
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             if ($(this).prev().text() === 'false'){
@@ -950,7 +950,7 @@ $(document).ready(function () {
 
         //举报
         $("#SNS_contentBox").on("click",".reportBtn",function () {
-            var snId = parseInt($(this).parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().children().eq(1).text());
             if ($(this).prev().text() === 'false'){
                 $(this).prev().text('true');
                 var data = {'state':'true','snId':snId};
@@ -991,133 +991,143 @@ $(document).ready(function () {
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             var thisObj = $(this);
-            if($(this).parent().parent().attr("data_name") === 'up'){
-                var snId = parseInt($(this).parent().parent().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                if($(this).parent().parent().prev().text() === 'none'){
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/upAdd",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                thisObj.addClass('icon-dianzan');
-                                thisObj.css("color","rgb(102,71,238)");
-                                var value = parseInt(thisObj.parent().next().text()) + 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().text("up");
+            let completeState = thisObj.parent().parent().parent().children().eq(0).text() + '';
+            if(completeState === 'yes'){
+                thisObj.parent().parent().parent().children().eq(0).text('no');
+                if($(this).parent().parent().attr("data_name") === 'up'){
+                    var snId = parseInt($(this).parent().parent().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
+                    if($(this).parent().parent().prev().text() === 'none'){
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/upAdd",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                    thisObj.addClass('icon-dianzan');
+                                    thisObj.css("color","rgb(102,71,238)");
+                                    var value = parseInt(thisObj.parent().next().text()) + 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().text("up");
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
-                        }
-                    });
-                }else if ($(this).parent().parent().prev().text() === 'up'){
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/upDelete",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-dianzan');
-                                thisObj.addClass('icon-qinziAPPtubiao-1');
-                                thisObj.css("color","rgb(121,121,121)");
-                                var value = parseInt(thisObj.parent().next().text()) - 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().text("none");
+                        });
+                    }else if ($(this).parent().parent().prev().text() === 'up'){
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/upDelete",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-dianzan');
+                                    thisObj.addClass('icon-qinziAPPtubiao-1');
+                                    thisObj.css("color","rgb(121,121,121)");
+                                    var value = parseInt(thisObj.parent().next().text()) - 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().text("none");
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
-                        }
-                    });
-                }else {
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/upAddDownDelete",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                thisObj.addClass('icon-dianzan');
-                                thisObj.css("color","rgb(102,71,238)");
-                                var value = parseInt(thisObj.parent().next().text()) + 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().text("up");
+                        });
+                    }else {
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/upAddDownDelete",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                    thisObj.addClass('icon-dianzan');
+                                    thisObj.css("color","rgb(102,71,238)");
+                                    var value = parseInt(thisObj.parent().next().text()) + 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().text("up");
 
-                                var downPic = thisObj.parent().parent().next().children().eq(0).children();
-                                downPic.removeClass('icon-dianzan_active');
-                                downPic.addClass('icon-qinziAPPtubiao-');
-                                downPic.css('font-size','17px');
-                                downPic.css('color','rgb(121,121,121)');
-                                value = parseInt(downPic.parent().next().text()) - 1;
-                                downPic.parent().next().text(value);
+                                    var downPic = thisObj.parent().parent().next().children().eq(0).children().eq(0);
+                                    downPic.removeClass('icon-dianzan_active');
+                                    downPic.addClass('icon-qinziAPPtubiao-');
+                                    downPic.css('font-size','17px');
+                                    downPic.css('color','rgb(121,121,121)');
+                                    value = parseInt(downPic.parent().next().text()) - 1;
+                                    downPic.parent().next().text(value);
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
-                        }
-                    });
-                }
-            }else {
-                var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                if($(this).parent().parent().prev().prev().text() === 'none'){
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/downAdd",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-qinziAPPtubiao-');
-                                thisObj.addClass('icon-dianzan_active');
-                                thisObj.css('font-size','20px');
-                                thisObj.css("color","rgb(102,71,238)");
-                                var value = parseInt(thisObj.parent().next().text()) + 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().prev().text("down");
-                            }
-                        }
-                    });
-                }else if ($(this).parent().parent().prev().prev().text() === 'down'){
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/downDelete",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-dianzan_active');
-                                thisObj.addClass('icon-qinziAPPtubiao-');
-                                thisObj.css('font-size','17px');
-                                thisObj.css("color","rgb(121,121,121)");
-                                var value = parseInt(thisObj.parent().next().text()) - 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().prev().text("none");
-                            }
-                        }
-                    });
+                        });
+                    }
                 }else {
-                    $.ajax({
-                        type: "POST",
-                        url: basePath+"/stuNote/downAddUpDelete",
-                        dataType: "json",
-                        data: data,
-                        success:function (res) {
-                            if (res.error === 0){
-                                thisObj.removeClass('icon-qinziAPPtubiao-');
-                                thisObj.addClass('icon-dianzan_active');
-                                thisObj.css('font-size','20px');
-                                thisObj.css("color","rgb(102,71,238)");
-                                var value = parseInt(thisObj.parent().next().text()) + 1;
-                                thisObj.parent().next().text(value);
-                                thisObj.parent().parent().prev().prev().text("down");
-
-                                var upPic = thisObj.parent().parent().prev().children().eq(0).children();
-                                upPic.removeClass('icon-dianzan');
-                                upPic.addClass('icon-qinziAPPtubiao-1');
-                                upPic.css("color","rgb(121,121,121)");
-                                var value = parseInt(upPic.parent().next().text()) - 1;
-                                upPic.parent().next().text(value);
+                    var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
+                    if($(this).parent().parent().prev().prev().text() === 'none'){
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/downAdd",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-qinziAPPtubiao-');
+                                    thisObj.addClass('icon-dianzan_active');
+                                    thisObj.css('font-size','20px');
+                                    thisObj.css("color","rgb(102,71,238)");
+                                    var value = parseInt(thisObj.parent().next().text()) + 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().prev().text("down");
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
-                        }
-                    });
+                        });
+                    }else if ($(this).parent().parent().prev().prev().text() === 'down'){
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/downDelete",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-dianzan_active');
+                                    thisObj.addClass('icon-qinziAPPtubiao-');
+                                    thisObj.css('font-size','17px');
+                                    thisObj.css("color","rgb(121,121,121)");
+                                    var value = parseInt(thisObj.parent().next().text()) - 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().prev().text("none");
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
+                            }
+                        });
+                    }else {
+                        $.ajax({
+                            type: "POST",
+                            url: basePath+"/stuNote/downAddUpDelete",
+                            dataType: "json",
+                            data: data,
+                            success:function (res) {
+                                if (res.error === 0){
+                                    thisObj.removeClass('icon-qinziAPPtubiao-');
+                                    thisObj.addClass('icon-dianzan_active');
+                                    thisObj.css('font-size','20px');
+                                    thisObj.css("color","rgb(102,71,238)");
+                                    var value = parseInt(thisObj.parent().next().text()) + 1;
+                                    thisObj.parent().next().text(value);
+                                    thisObj.parent().parent().prev().prev().text("down");
+
+                                    var upPic = thisObj.parent().parent().prev().children().eq(0).children().eq(0);
+                                    upPic.removeClass('icon-dianzan');
+                                    upPic.addClass('icon-qinziAPPtubiao-1');
+                                    upPic.css("color","rgb(121,121,121)");
+                                    var value = parseInt(upPic.parent().next().text()) - 1;
+                                    upPic.parent().next().text(value);
+                                }
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -1195,11 +1205,11 @@ $(document).ready(function () {
                                         }
                                     }
                                 }
-                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 45px">采集</div>';
+                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 50px;font-size: 1vw">采集</div>';
                                 var collectState = 'false';
                                 for (var i in note.stuNoteCollect){
                                     if (note.stuNoteCollect[i].userId === uId){
-                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 45px">已采集</div>';
+                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 50px;font-size: 1vw">已采集</div>';
                                         collectState = 'true';
                                     }
                                 }
@@ -1218,29 +1228,30 @@ $(document).ready(function () {
                                                 '<div id="SNS_textEditorId'+ flag +'" class="SNS_textEditor"></div>\n' +
                                             '</div>\n' +
                                             '<div class="SNS_func_box">' +
+                                                '<span style="display: none">yes</span>' +
                                                 '<span style="display: none">'+ note.snId +'</span>' +
                                                 '<span style="display: none">'+ upDownState +'</span>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox">' +
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.up +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox" style="padding: 2px 0 0 0;height: 26px">' +
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.down +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 85px">' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 13%">' +
                                                     '<span style="display: none">'+ collectState +'</span>' +
                                                     collectStr +
                                                     '<div class="SNS_moduleBox_rbox" style="padding: 5px 0 0 5px;width: 35px;height: 18px">'+ note.collect +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left">展开/收起</div>' +
+                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left;width: 10%;font-size: 1vw">展开/收起</div>' +
                                                 '<span style="display: none">false</span>' +
-                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left">举报</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 140px;padding: 2px 0 0 0">'+ note.dateString +'</div>' +
+                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left;width: 10%;font-size: 1vw">举报</div>' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 20%;padding: 2px 0 0 0;font-size: 1vw">'+ note.dateString +'</div>' +
                                             '</div>\n' +
                                         '</div>\n' +
                                     '</div>' +
@@ -1305,7 +1316,7 @@ $(document).ready(function () {
                         url : basePath+"/stuComment/submit",
                         data : data,
                         success : function (res) {
-                            alert(res.retmsg);
+                            layer.msg(res.retmsg);
                             if (res.retmsg === '保存成功'){
                                 stuCmt_editor.txt.clear();
                             }
@@ -1427,11 +1438,12 @@ $(document).ready(function () {
                                                                 '<div id="SCS_reply_ToolBar'+ flag +'" class="SCS_replyToolBar"></div>\n' +
                                                                 '<div id="SCS_reply_Editor'+ flag +'" class="SCS_replyEditor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
-                                                                '<div class="SCS_replyBtn" data_type="son" style="left: 476px">回复</div>' +
+                                                                '<div class="SCS_replyBtn" data_type="son">回复</div>' +
                                                                 '<span style="display: none">'+ comment.smId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="SCS_cmt_toolBox">' +
                                                                 '<span style="display: none">'+ upDownState +'</span>' +
+                                                                '<span style="display: none">yes</span> ' +
                                                                 '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
                                                                     upStr +
@@ -1528,6 +1540,7 @@ $(document).ready(function () {
                                                 '</div>\n' +
                                                 '<div class="SCS_cmt_toolBox">' +
                                                     '<span style="display: none">'+ upDownState +'</span>' +
+                                                    '<span style="display: none">yes</span>' +
                                                     '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
                                                         upStr +
@@ -1657,142 +1670,152 @@ $(document).ready(function () {
                 let type = $(this).attr('data_name');
                 let data;
                 let thisObj = $(this);
-                if (type === 'up'){
-                    if(UDState === 'up'){
-                        data = {'userId':userId,'smId':smId,'type':'UpMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('none');
-                                    thisObj.removeClass('icon-dianzan');
-                                    thisObj.addClass('icon-qinziAPPtubiao-1');
-                                    thisObj.css('color','rgb(121,121,121)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num --;
-                                    thisObj.parent().next().text(num);
+                let completeState = thisObj.parent().parent().children().eq(1).text() + '';
+                if (completeState === 'yes'){
+                    thisObj.parent().parent().children().eq(1).text('no');
+                    if (type === 'up'){
+                        if(UDState === 'up'){
+                            data = {'userId':userId,'smId':smId,'type':'UpMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('none');
+                                        thisObj.removeClass('icon-dianzan');
+                                        thisObj.addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.css('color','rgb(121,121,121)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num --;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }else if(UDState === 'none'){
-                        data = {'userId':userId,'smId':smId,'type':'UpAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('up');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                    thisObj.addClass('icon-dianzan');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else if(UDState === 'none'){
+                            data = {'userId':userId,'smId':smId,'type':'UpAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('up');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                        thisObj.addClass('icon-dianzan');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
+                            });
+                        }else {
+                            data = {'userId':userId,'smId':smId,'type':'UpAddDownMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success: function (res) {
+                                    if (res.error === 0) {
+                                        thisObj.parent().parent().children().eq(0).text('up');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                        thisObj.addClass('icon-dianzan');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+
+                                        thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
+                                        thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
+                                        thisObj.parent().next().next().children().eq(0).css('font-size','18px');
+                                        thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
+                                        num = parseInt(thisObj.parent().next().next().next().text());
+                                        num --;
+                                        thisObj.parent().next().next().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
+                                }
+                            });
+                        }
                     }else {
-                        data = {'userId':userId,'smId':smId,'type':'UpAddDownMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success: function (res) {
-                                if (res.error === 0) {
-                                    thisObj.parent().parent().children().eq(0).text('up');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                    thisObj.addClass('icon-dianzan');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
-
-                                    thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
-                                    thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
-                                    thisObj.parent().next().next().children().eq(0).css('font-size','18px');
-                                    thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
-                                    num = parseInt(thisObj.parent().next().next().next().text());
-                                    num --;
-                                    thisObj.parent().next().next().next().text(num);
+                        if(UDState === 'down'){
+                            data = {'userId':userId,'smId':smId,'type':'DownMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('none');
+                                        thisObj.removeClass('icon-dianzan_active');
+                                        thisObj.addClass('icon-qinziAPPtubiao-');
+                                        thisObj.css('font-size','18px');
+                                        thisObj.css('color','rgb(121,121,121)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num --;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }
-                }else {
-                    if(UDState === 'down'){
-                        data = {'userId':userId,'smId':smId,'type':'DownMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('none');
-                                    thisObj.removeClass('icon-dianzan_active');
-                                    thisObj.addClass('icon-qinziAPPtubiao-');
-                                    thisObj.css('font-size','18px');
-                                    thisObj.css('color','rgb(121,121,121)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num --;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else if (UDState === 'none'){
+                            data = {'userId':userId,'smId':smId,'type':'DownAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('down');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-');
+                                        thisObj.addClass('icon-dianzan_active');
+                                        thisObj.css('font-size','20px');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }else if (UDState === 'none'){
-                        data = {'userId':userId,'smId':smId,'type':'DownAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('down');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-');
-                                    thisObj.addClass('icon-dianzan_active');
-                                    thisObj.css('font-size','20px');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
-                                }
-                            }
-                        });
-                    }else {
-                        data = {'userId':userId,'smId':smId,'type':'UpMinusDownAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: basePath+"/stuComment/updateUD",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('down');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-');
-                                    thisObj.addClass('icon-dianzan_active');
-                                    thisObj.css('font-size','20px');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else {
+                            data = {'userId':userId,'smId':smId,'type':'UpMinusDownAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/stuComment/updateUD",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('down');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-');
+                                        thisObj.addClass('icon-dianzan_active');
+                                        thisObj.css('font-size','20px');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
 
 
-                                    thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
-                                    thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
-                                    thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
-                                    num = parseInt(thisObj.parent().prev().text());
-                                    num --;
-                                    thisObj.parent().prev().text(num);
+                                        thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
+                                        thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
+                                        num = parseInt(thisObj.parent().prev().text());
+                                        num --;
+                                        thisObj.parent().prev().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             });
@@ -1843,7 +1866,7 @@ $(document).ready(function () {
                         url : basePath+"/stuComment/replySubmit",
                         data : data,
                         success : function (res) {
-                            alert(res.retmsg);
+                            layer.msg(res.retmsg);
                             if (res.retmsg === '回复成功'){
                                 replyEditorArr.length = 0;
                                 cmtFlowLoad(basePath+"/stuComment/findStuCmt");
@@ -1953,9 +1976,12 @@ $(document).ready(function () {
     var isMousemove = false;
     var isClose = false;
     var sharpState = false;
+    var getSourceLength = false;
+    var studyTime = 0;
 
     //切换视频函数
     function switchVideo (src,sectionId) {
+        getSourceLength = false;
         var data = {'time':elem_video1.currentTime,'sectionId':sectionId};
         $.ajax({
             type : "POST",
@@ -2065,6 +2091,19 @@ $(document).ready(function () {
                 url : basePath+"/player/recordTime",
                 data : data
             });
+            data = {'studyTime':studyTime};
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: basePath+'/player/recordStudyTime',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.error === 0){
+                        studyTime = 0;
+                    }
+                }
+            });
         }
     };
 
@@ -2080,6 +2119,7 @@ $(document).ready(function () {
 
     //成功获取资源长度事件监听
     elem_video1.addEventListener("loadedmetadata",function () {
+        elem_totalTime.innerText = format(elem_video1.duration);
         if (!sharpState) {
             $.ajax({
                 type : "POST",
@@ -2102,6 +2142,7 @@ $(document).ready(function () {
                 clearInterval(interval_cache);
             }
         },1000);
+        getSourceLength = true;
     });
 
     //全屏按钮点击
@@ -2119,6 +2160,7 @@ $(document).ready(function () {
     //监听全屏改变事件
     window.addEventListener("fullscreenchange",function () {
         if (screenState) {
+            $(".FS_hidden").css('display','none');
             $("#div_video_all").css("overflow","visible");
             $("#div_all").offset({top:0,left:0});
             elem_all.style.width = window.document.body.offsetWidth + 'px';
@@ -2132,6 +2174,7 @@ $(document).ready(function () {
             document.getElementById("r_video").style.overflow = "visible";
             screenState = false;
         }else{
+            $(".FS_hidden").css('display','block');
             $("#div_video_all").css("overflow","hidden");
             $("#div_all").offset({top:$("#r_video").offset().top,left:$("#r_video").offset().left});
             elem_all.style.width = "100%";
@@ -2146,10 +2189,10 @@ $(document).ready(function () {
         }
     });
 
-    //监听成功获取资源长度事件
+    /*//监听成功获取资源长度事件
     elem_video1.addEventListener('loadedmetadata',function () {
         elem_totalTime.innerText = format(elem_video1.duration);
-    });
+    });*/
 
     //进度条点击
     elem_pgBg.onmousedown = function (ev) {
@@ -2227,61 +2270,76 @@ $(document).ready(function () {
     var interval1 = null;
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
-        if(elem_video1.paused){
-            let videoState = "";
-            $.ajax({
-                type: "POST",
-                url: basePath+"/section/findState?sectionId=" + parseInt($("#sectionId").text()),
-                async: false,
-                success: function (data) {
-                    videoState = data.state;
-                    return videoState;
-                }
-            });
-            if (videoState==="未观看"){
-                let data = {"state":"播放中"};
+        if (getSourceLength){
+            if(elem_video1.paused){
+                let videoState = "";
                 $.ajax({
-                    type:"POST",
-                    url:basePath+'/player/recordState',
-                    data: data,
-                    dataType: 'json',
-                    success: function () {
-
+                    type: "POST",
+                    url: basePath+"/section/findState?sectionId=" + parseInt($("#sectionId").text()),
+                    async: false,
+                    success: function (data) {
+                        videoState = data.state;
+                        return videoState;
                     }
                 });
-            }
-            elem_video1.play();
-            elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
-            elem_totalTime.innerText = format(elem_video1.duration);
-            elem_btnPlay.innerHTML = "&#xe651;";
-            interval1 = setInterval(function () {
-                res = elem_video1.currentTime/elem_video1.duration * $("#pg_bg").width();
-                elem_pgBtn.style.left = res + 'px';
-                elem_pgBar.style.width = res + 'px';
-                elem_currentTime.innerText = format(elem_video1.currentTime);
-                CTrecord = elem_video1.currentTime;
-                if(elem_video1.ended) {
-                    let data = {'state':'已完成'};
+                if (videoState==="未观看"){
+                    let data = {"state":"播放中"};
                     $.ajax({
-                        type: 'POST',
-                        url: basePath+'/player/recordState',
+                        type:"POST",
+                        url:basePath+'/player/recordState',
                         data: data,
                         dataType: 'json',
                         success: function () {
 
                         }
                     });
-                    elem_btnPlay.innerHTML = "&#xe652;";
-                    clearInterval(interval1);
-                    elem_pgBtn.style.left = 0 + 'px';
-                    elem_pgBar.style.width = 0 + 'px';
-                    elem_currentTime.innerText = '00:00:00';
                 }
-            },1000);
-        }else{
-            elem_video1.pause();
-            elem_btnPlay.innerHTML = "&#xe652;";
-            clearInterval(interval1);
+                elem_video1.play();
+                elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
+                elem_totalTime.innerText = format(elem_video1.duration);
+                elem_btnPlay.innerHTML = "&#xe651;";
+                interval1 = setInterval(function () {
+                    studyTime ++ ;
+                    res = elem_video1.currentTime/elem_video1.duration * $("#pg_bg").width();
+                    elem_pgBtn.style.left = res + 'px';
+                    elem_pgBar.style.width = res + 'px';
+                    elem_currentTime.innerText = format(elem_video1.currentTime);
+                    CTrecord = elem_video1.currentTime;
+                    if(elem_video1.ended) {
+                        let data = {'state':'已完成'};
+                        $.ajax({
+                            type: 'POST',
+                            url: basePath+'/player/recordState',
+                            data: data,
+                            dataType: 'json',
+                            success: function () {
+
+                            }
+                        });
+                        data = {'studyTime':studyTime};
+                        $.ajax({
+                            type: 'POST',
+                            url: basePath+'/player/recordStudyTime',
+                            data: data,
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res.error === 0){
+                                    studyTime = 0;
+                                }
+                            }
+                        });
+                        elem_btnPlay.innerHTML = "&#xe652;";
+                        clearInterval(interval1);
+                        elem_pgBtn.style.left = 0 + 'px';
+                        elem_pgBar.style.width = 0 + 'px';
+                        elem_currentTime.innerText = '00:00:00';
+                    }
+                },1000);
+            }else{
+                elem_video1.pause();
+                elem_btnPlay.innerHTML = "&#xe652;";
+                clearInterval(interval1);
+            }
         }
     };
 
@@ -2385,8 +2443,10 @@ $(document).ready(function () {
         clearInterval(delay_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
+            getSourceLength = false;
             document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
+            getSourceLength = false;
             document.getElementById("video_src").src = '' + $("#nv").text();
         }
         elem_video1.load();

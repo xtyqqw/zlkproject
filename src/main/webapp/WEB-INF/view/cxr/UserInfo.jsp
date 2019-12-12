@@ -34,19 +34,12 @@
             font-size: 1vw;
         }
 
-        /*.laytable-cell-1-userImg{*/
-            /*height: 100%;*/
-            /*max-width: 100%;*/
-        /*}*/
-
         p{
             font-size: 1.5vw;
             color: red;
             text-align: center;
         }
-        /*h2{*/
-            /*text-align: center;*/
-        /*}*/
+
         /*图片在表格里完整显示*/
         .layui-table-cell{
             text-align:center;
@@ -67,7 +60,7 @@
 </head>
 <body>
 
-<%--<h2>用户信息管理</h2>--%>
+
 <%--点击按钮后，提示框信息--%>
 <input type="hidden" value="${msg}" id="msg">
 
@@ -135,7 +128,6 @@
         </div>
             <%--文件信息反显--%>
         <div class="layui-input-inline" style="margin-bottom:2vw;">
-
             <div class="layui-upload-list">
                 <img class="layui-upload-img headImage"  src="${user.userImg}"  id="userImg"
                      style="width: 8vw; height: 8vw;">
@@ -359,12 +351,12 @@
             layer.alert($("#msg").val());
         })
         </c:if>
-        laydate.render({
-            elem: '#createTime'
-            , type: 'datetime'
-            , format: 'yyyy-MM-dd'
-
-        });
+        // laydate.render({
+        //     elem: '#createTime'
+        //     , type: 'datetime'
+        //     , format: 'yyyy-MM-dd'
+        //
+        // });
         form.render();
         //第一个实例
         table.render({
@@ -398,8 +390,9 @@
                 , {field: 'userAcademy', title: '所在学校', width: 90}
                 , {field: 'userSpecialty', title: '所属专业', width: 90}
 
-                , {
-                    title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
+                , {                                           // fixed: 'right' 将操作栏固定在右侧
+                    title: '操作', width: 180, align: 'center', fixed: 'right'
+                    , toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
@@ -529,13 +522,6 @@
              //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
         });
-
-
-        // laydate.render({
-        //     elem: '#userBirthday'
-        //     ,type: 'date'
-        // });
-
     });
 
 

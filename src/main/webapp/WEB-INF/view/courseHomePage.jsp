@@ -9,10 +9,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <link rel="stylesheet" href="../layui/css/layuiXingxing.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
-    <script src="../layui/layui.js"></script>
-    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>../layui/css/layuiXingxing.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%> http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <script src="<%=request.getContextPath()%>../layui/layui.js"></script>
+    <script src="<%=request.getContextPath()%>../js/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +20,13 @@
     <title>Bootstrap 101 Template</title>
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="<%=request.getContextPath()%> https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="<%=request.getContextPath()%>https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 
@@ -166,7 +166,7 @@
      .li1{
          float: left;
          height: 190px;
-
+         margin-left: 7px;
      }
 
      .h51{
@@ -348,7 +348,8 @@
 
         </div>
 
-        <ul id="LAY_demo2"></ul>
+        <ul id="LAY_demo2" class="LAY_demo2"></ul>
+
     </div>
 </div>
 
@@ -401,10 +402,7 @@
 
 <script src="/layui/layui.js" charset="utf-8"></script>
 
-<%--图片中的星星--%>
-<script>
 
-</script>
 <%--瀑布流--%>
 <script>
     layui.use(['flow'], function() {
@@ -429,7 +427,8 @@
                                 layui.each(result.tagList, function (i, tag) {
                                     lis.push(
                                         /*'<br><a class="a1">' + tag.tagName + '</a>'*/
-                                        '<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName='+tag.tagName+'") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                                        //'<input id="biao7" type="button" onclick=window.open("HomePageTag?tagName='+tag.tagName+'") value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                                    '<input class="biao7" id="biao7" type="button"  value="' + tag.tagName + '"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                                     );
 
                                 });
@@ -441,7 +440,166 @@
                 }
             });
         });
+
+
+
+
+    /*流点击标签筛选*/
+    $("#biaoqian").on("click","#biao7",function() {
+        $("#LAY_demo2").empty();
+        $("#LAY_demo2").append("<ul id='LAY_demo3'class='LAY_demo3'></ul>");
+        console.log($(this).val());
+        var name=$(this).val();
+        layui.use(['flow'], function(){
+            var flow = layui.flow;
+            flow.load({
+                elem: '#LAY_demo3' //流加载容器
+                ,isAuto: false
+                ,end: "<p>没有更多了</p>"
+                ,done: function(page, next){ //加载下一页
+                    //模拟插入
+                    setTimeout(function(){
+                        var lis = [];
+                        var limit =8;
+                        var tagName= name;
+                        var data={"page":page,"limit":limit,"tagName":tagName};
+                        console.log(data);
+                                $.ajax({
+                                    type :"POST",
+                                    url:"<%=request.getContextPath()%>/courseHomePage/findAllByTag",
+                                    dataType:"json",
+                                    data:data,
+                                    success:function(result) {
+                                        layui.each(result.allListTag, function (i,coursesTag) {
+                                            lis.push(
+
+                                                '<div>' +
+                                                '<li class="li1">' +
+                                                '<dl class="dl1">' +
+                                                '<dt class="dt1">' +
+                                                '<img id="img1" src="'+coursesTag.introducePic+'" style="height: 90px;width: 213px ">' +
+                                                '</dt>' +
+                                                '<dd class="dd2">' +
+                                                '<h5 class="h51">'+coursesTag.coursesName+'</h5>' +
+                                                ' <span class="badge badge-warning" contenteditable="true" id="new1">NEW</span> ' );
+                                            if(coursesTag.studentNum>=5000){
+                                                lis.push(
+                                                    ' <span class="badge badge-important" contenteditable="true" id="hot1">HOT</span>  '
+                                                );
+                                            }
+                                            lis.push(
+                                                '<p><span class="badge" contenteditable="true" id="badge9">'+coursesTag.tagName+'</span></p>' +
+                                                /*'<p><span class="badge" contenteditable="true" id="badge10">html</span></p>' +*/
+                                                '<div class="xingxing">');
+
+                                            if(coursesTag.studentNum>=5000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing2">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing3">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing4">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing5">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }else if(coursesTag.studentNum<5000&&coursesTag.studentNum>=4000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing2">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing3">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing4">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }else if(coursesTag.studentNum<4000&&coursesTag.studentNum>=3000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing2">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing3">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }else if(coursesTag.studentNum<3000&&coursesTag.studentNum>=2000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing2">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }else if(coursesTag.studentNum<2000&&coursesTag.studentNum>=1000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '<li id="xing2">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }else if(coursesTag.studentNum<1000){
+                                                lis.push('<ul class="kechengxiaojeipingfen_ul">'+
+                                                    '<li id="xing1">'+
+                                                    '<i class="iconfont icon-star-fill xingxing" style="color: rgb(255,251,27);"></i>'+
+                                                    '</li>'+
+                                                    '</ul>');
+                                            }
+                                            lis.push(
+                                                '</div>'+
+                                                '</dd>' +
+                                                '<dd class="dd3">' +
+                                                '<h6 class="h61" id="renshu">学习人数:'+coursesTag.studentNum+'人</h6>' +
+                                                '<h6 class="h62" id="zhang">'+coursesTag.chapterNum+'章</h6>' +
+                                                '<h6 class="h63" id="jie">'+coursesTag.sectionNum+'节</h6>' +
+                                                '<h6 class="h64" id="jin">￥'+coursesTag.price+'</h6>' );
+                                            if(coursesTag.lastStudyTime==null){
+                                                lis.push(
+                                                    '<h6 class="h65"></h6>' );
+                                            }else{ lis.push(
+                                                '<h6 class="h65">上次学习时间：'+coursesTag.lastStudyTime+'</h6>' );
+                                            }
+                                            console.log(coursesTag);
+                                            lis.push(
+                                                '<input class="but1" type="button" onclick=window.open("<%=request.getContextPath()%>kecheng/kechengjianjie?coursesId='+coursesTag.coursesId+'") value="查看详情"/>' +
+                                                '</dd>' +
+                                                '</dl>' +
+                                                '</li>' +
+                                                '</div>'
+                                            );
+
+                                        });
+
+                                        next(lis.join(''), page < 1); //假设总页数为 6
+                                    }
+                                });
+                        },500);
+
+                    }
+            });
+        });
+
+    })
+
 </script>
+
  <%--瀑布流--%>
 <script>
     /*视频加载流*/
@@ -588,6 +746,8 @@ $.ajax({
 }
   });
     });
+
+
 </script>
 
 
@@ -596,25 +756,25 @@ $.ajax({
 <div id="footer">
     <ul>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutzlk">关于我们</a>
+            <a href="/aboutus/aboutus">关于我们</a>
         </li>
         <li>
-            <a href="javascript:;">加入我们</a>
+            <a href="/aboutus/aboutus">加入我们</a>
         </li>
         <li>
-            <a href="javascript:;">联系我们</a>
+            <a href="/aboutus/aboutus">联系我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/lecturer/lecturers">讲师合作</a>
+            <a href="/aboutus/aboutus">讲师合作</a>
         </li>
         <li>
-            <a href="javascript:;">帮助中心</a>
+            <a href="/aboutus/aboutus">帮助中心</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/blogroll">友情链接</a>
+            <a href="/aboutus/aboutus">友情链接</a>
         </li>
         <li>
-            <a href="javascript:;">合作企业</a>
+            <a href="/aboutus/aboutus">合作企业</a>
         </li>
     </ul>
     <p>

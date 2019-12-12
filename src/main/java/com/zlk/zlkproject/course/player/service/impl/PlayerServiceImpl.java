@@ -22,6 +22,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public Integer recordStudyTime(String userId, Integer studyTime) {
+        return playerMapper.recordStudyTime(userId, studyTime);
+    }
+
+    @Override
     public void recordState(String userId, Integer sectionId, String state) {
         playerMapper.recordState(userId,sectionId,state);
     }
