@@ -221,8 +221,8 @@
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
-        main.height(0);
         var main = $(window.parent.document).find("#personal-iframe");
+        main.height(800);
         var thisheight = $(document).height();
         main.height(thisheight);
     });

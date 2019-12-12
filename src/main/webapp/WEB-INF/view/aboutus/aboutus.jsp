@@ -139,8 +139,8 @@
 <%--iframe自适应高度--%>
 <script type="text/javascript">
         $(window.parent.document).find("#aboutus-iframe").load(function(){
-            main.height(0);
             var main = $(window.parent.document).find("#aboutus-iframe");
+            main.height(0);
             var thisheight = $(document).height();
             main.height(thisheight);
         });

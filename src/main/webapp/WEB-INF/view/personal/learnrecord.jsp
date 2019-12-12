@@ -171,7 +171,7 @@
 <%--分页--%>
 <script>
     var page = 1;
-    var limit = 4;
+    var limit = 3;
     var total;
     function showRecord() {
         $.ajax({
