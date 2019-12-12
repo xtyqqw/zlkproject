@@ -1415,19 +1415,20 @@ $(document).ready(function () {
                                                                 '<div id="SCS_reply_ToolBar'+ flag +'" class="SCS_replyToolBar"></div>\n' +
                                                                 '<div id="SCS_reply_Editor'+ flag +'" class="SCS_replyEditor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
-                                                                '<div class="SCS_replyBtn" data_type="son" style="left: 476px">回复</div>' +
+                                                                '<div class="SCS_replyBtn" data_type="son">回复</div>' +
                                                                 '<span style="display: none">'+ comment.smId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="SCS_cmt_toolBox">' +
                                                                 '<span style="display: none">'+ upDownState +'</span>' +
+                                                                '<span style="display: none">yes</span> ' +
                                                                 '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                                    '<span style="display: none">yes</span>' +
+                                                                    /*'<span style="display: none">yes</span>' +*/
                                                                     upStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].up +'</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                                    '<span style="display: none">yes</span>' +
+                                                                    /*'<span style="display: none">yes</span>' +*/
                                                                     downStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].down +'</div>' +
@@ -1518,14 +1519,15 @@ $(document).ready(function () {
                                                 '</div>\n' +
                                                 '<div class="SCS_cmt_toolBox">' +
                                                     '<span style="display: none">'+ upDownState +'</span>' +
+                                                    '<span style="display: none">yes</span>' +
                                                     '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                        '<span style="display: none">yes</span>' +
+                                                        /*'<span style="display: none">yes</span>' +*/
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.up +'</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                        '<span style="display: none">yes</span>' +
+                                                        /*'<span style="display: none">yes</span>' +*/
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.down +'</div>' +
