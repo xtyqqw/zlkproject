@@ -110,71 +110,76 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <!-- logo -->
-        <div class="header-logo">
-            <img src="/img/logo.png" />
-        </div>
-        <!-- 导航 -->
-        <div class="header-nav">
-                <a href="/" name="nav" class="nav">首页</a>
-                <a href="/HomePage" name="nav" class="nav">项目</a>
-                <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
-        </div>
-        <!-- 搜索 -->
-        <div class="header-search">
-            <form action="">
-                <input class="text" type="text" placeholder="请输入关键词" />
-                <input class="submit" type="submit" value="搜索" />
-            </form>
-        </div>
-
-        <%--未登录显示注册登录--%>
-        <c:if test="${user==null}">
-            <!-- 注册登录 -->
-            <div class="header-login">
-                <a href="/users/tosignup">注册</a>
-                <a style="color: #000000;">/</a>
-                <a href="/users/tosignin">登录</a>
-            </div>
-        </c:if>
-        <%--已登录显示登录信息--%>
-        <c:if test="${user!=null}">
-            <div>
-                <ul class="layui-nav" style="margin: 0 430px 0 1150px;background-color: #ffffff">
-                    <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
-                        <a href="javascript:;">
-                            <img src="//t.cn/RCzsdCq" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto;">
-                            <p class="name" style="">${user.userRealname}</p>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <a href="/personal/person">个人中心</a>
-                            <a href="/users/logout;">退出</a>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </c:if>
-
+<div class="header">
+    <!-- logo -->
+    <div class="header-logo">
+        <img src="/img/logo.png" />
     </div>
-    <%--鼠标移入移出头像事件--%>
-    <script>
-        layui.use('element', function(){
-            var element = layui.element;
-            //监听导航点击
-            element.on('nav(demo)', function(elem){
-                //console.log(elem)
-                layer.msg(elem.text());
-            });
+    <!-- 导航 -->
+    <div class="header-nav">
+        <a href="/" name="nav" class="nav">首页</a>
+        <a href="/HomePage" name="nav" class="nav">项目</a>
+        <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
+    </div>
+    <!-- 搜索 -->
+    <div class="header-search">
+        <form action="">
+            <input class="text" type="text" placeholder="请输入关键词" />
+            <input class="submit" type="submit" value="搜索" />
+        </form>
+    </div>
+
+    <%--未登录显示注册登录--%>
+    <c:if test="${user==null}">
+        <!-- 注册登录 -->
+        <div class="header-login">
+            <a href="/users/tosignup">注册</a>
+            <a style="color: #000000;">/</a>
+            <a href="/users/tosignin">登录</a>
+        </div>
+    </c:if>
+    <%--已登录显示登录信息--%>
+    <c:if test="${user!=null}">
+        <div>
+            <ul class="layui-nav" style="margin: 0 330px 0 1150px; background-color: #ffffff;">
+                <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
+                    <a href="javascript:;">
+                        <c:if test="${user.userImg==null}">
+                            <img src="/img/headimg.jpg" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
+                        </c:if>
+                        <c:if test="${user.userImg!=null}">
+                            <img src="${user.userImg}" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
+                        </c:if>
+                        <p class="name" style="">${user.userRealname}</p>
+                    </a>
+                    <dl class="layui-nav-child" style="margin-top: 15px;">
+                        <a href="/personal/person">个人中心</a>
+                        <a href="/users/logout;">退出</a>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </c:if>
+
+</div>
+<%--鼠标移入移出头像事件--%>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
         });
-    </script>
-    <%--头部导航点击事件--%>
-    <script type="text/javascript">
-        $(function(){
-            $("a[name='nav']").click(function(){
-                $(this).addClass("active").siblings().removeClass("active");
-            });
+    });
+</script>
+<%--头部导航点击事件--%>
+<script type="text/javascript">
+    $(function(){
+        $("a[name='nav']").click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
         });
-    </script>
+    });
+</script>
 </body>
 </html>

@@ -123,7 +123,7 @@
         <div class="header-nav">
                 <a href="<%=request.getContextPath()%>/" name="nav" class="nav">首页</a>
                 <a href="<%=request.getContextPath()%>/HomePage" name="nav" class="nav">项目</a>
-                <a href="<%=request.getContextPath()%>/toCommunity-page" name="nav" class="nav">社区</a>
+                <a href="<%=request.getContextPath()%>/CommunityPage" name="nav" class="nav">社区</a>
         </div>
         <!-- 搜索 -->
         <div class="header-search">

@@ -4,14 +4,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.admin.util.IDUtil;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
+import com.zlk.zlkproject.community.articleAdd.service.ActionAddService;
 import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService;
 import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +40,8 @@ public class ArticleManagerController {
     private ArticleManagerService articleManagerService;
     @Autowired
     private LogUtil logUtil;
+    @Autowired
+    private ActionAddService actionAddService;
 
     /**
      * 跳转到文章管理页面
@@ -115,8 +121,13 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/update")
-    public ModelAndView update(Article article, HttpServletRequest request){
+    public ModelAndView update( Article article, HttpServletRequest request, Action action){
         ModelAndView mv=new ModelAndView();
+        /*User user1=new User();
+        User user=(User) request.getSession().getAttribute("user");
+        String userId="" + user.getUserId();
+        user1.setUserId(userId);
+        articleId=(String) request.getSession().getAttribute("articleId");*/
         /**判断文章是否更改，更改后判断更改后的文章是否存在*/
         List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
@@ -134,6 +145,9 @@ public class ArticleManagerController {
             mv.setViewName("admin/articleManager");
             //日志记录修改文章
             logUtil.setLog(request," 修改文章标题为"+articleByArticleId.getTitle()+"的信息");
+            /*article.setUser(user1);
+            article.setArticleId(articleId);
+            actionAddService.saveAction(action);*/
             return mv;
         }else {
             mv.addObject("flag","true");
