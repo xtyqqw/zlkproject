@@ -53,7 +53,7 @@ public class Article {
     /**踩数*/
     private Integer caiCount;
     /**举报：0 是，1 否*/
-    private Integer inform;
+    private String inform;
     /**发文类型：0 原创，1 转载，2 翻译*/
     private Integer createArticleType;
     /**文章置顶：0 置顶，1 不置顶*/

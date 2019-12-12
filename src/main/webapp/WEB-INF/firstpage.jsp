@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
-    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <style>
     * {
@@ -274,11 +274,11 @@
     }
 
     .rank_second {
-        background: url(../img/yin.png) no-repeat left;
+        background: url(<%=request.getContextPath() %>/img/yin.png) no-repeat left;
     }
 
     .rank_third {
-        background: url(../img/tong.png) no-repeat left;
+        background: url(<%=request.getContextPath() %>/img/tong.png) no-repeat left;
     }
 
     .rank .rank_me {
@@ -662,16 +662,16 @@
                 <!--轮播图-->
                 <div carousel-item>
                     <div>
-                        <img src="../img/1.jpg">
+                        <img src="<%=request.getContextPath() %>/img/1.jpg">
                     </div>
                     <div>
-                        <img src="../img/2.jpg">
+                        <img src="<%=request.getContextPath() %>/img/2.jpg">
                     </div>
                     <div>
-                        <img src="../img/3.jpg">
+                        <img src="<%=request.getContextPath() %>/img/3.jpg">
                     </div>
                     <div>
-                        <img src="../img/4.jpg">
+                        <img src="<%=request.getContextPath() %>/img/4.jpg">
                     </div>
                 </div>
             </div>

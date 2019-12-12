@@ -8,16 +8,18 @@ var localObj = window.location;
 var contextPath = localObj.pathname.split("/")[1];
 var basePath = localObj.protocol+"//"+localObj.host+"/"+contextPath;
 var server_context=basePath;
-
+var layer = layui.layer
 //获取验证码
 function getcode(e) {
     phonenumber = document.getElementById("userPhonenum");
     if(phonenumber.value.length == 0){
-        alert("请输入手机号码");
-        location.reload();
+        layer.msg("请输入手机号码");
+        // alert("请输入手机号码");
+        // location.reload();
     }else{
         if(!(/^1[34578]\d{9}$/.test(phonenumber.value))){
-            alert("手机号码有误，请重新输入");
+            layer.msg("手机号码有误，请重新输入");
+            // alert("手机号码有误，请重新输入");
             location.reload();
         }else{
             //测试用数据
@@ -44,7 +46,8 @@ function getcode(e) {
             t = setInterval(function () {
                 countdown(e)
             }, 1000)
-            alert("验证码已发送");
+            layer.msg("验证码已发送");
+            // alert("验证码已发送");
             //获取验证码成功后调用倒计时函数
             countdown(e);
         }
