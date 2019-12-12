@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>尾部</title>
-    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <style type="text/css">
         body{margin: 0;}
         #footer{
@@ -56,25 +56,25 @@
 <div id="footer">
     <ul>
         <li>
-            <a href="/aboutus/aboutus">关于我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">关于我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">加入我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">加入我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">联系我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">联系我们</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">讲师合作</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">讲师合作</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">帮助中心</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">帮助中心</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">友情链接</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">友情链接</a>
         </li>
         <li>
-            <a href="/aboutus/aboutus">合作企业</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus">合作企业</a>
         </li>
     </ul>
     <p>

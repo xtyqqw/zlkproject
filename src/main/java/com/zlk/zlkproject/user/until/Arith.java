@@ -43,5 +43,13 @@ public class Arith {
             return null;
         }
     }
+    public static Integer duration(Integer w){
+        if(w != null){
+            Integer e = w/3600;
+            return e;
+        }else {
+            return null;
+        }
+    }
 
 }
