@@ -50,7 +50,7 @@
                 <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <div class="ui selection compact basic dropdown label" style="background-color: #FFFFFF; color: #5A5CAD;">
+                            <div class="ui selection compact basic dropdown violet label">
                                 <input type="hidden" value="原创" name="createArticleType">
                                 <i class="dropdown icon"></i>
                                 <div class="text">原创</div>
@@ -75,23 +75,23 @@
                     <div class="two fields">
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">方向</label>
+                                <label class="ui compact basic violet label">方向</label>
                                 <div class="ui fluid selection dropdown">
                                     <input type="hidden" name="typeName">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">请选择方向</div>
                                     <div class="menu">
-                                        <div class="item" data-value="java">java</div>
-                                        <div class="item" data-value="linux">linux</div>
-                                        <div class="item" data-value="html">html</div>
-                                        <div class="item" data-value="mysql">mysql</div>
+                                        <div class="item" data-value="java">JAVA</div>
+                                        <div class="item" data-value="linux">Linux</div>
+                                        <div class="item" data-value="html">HTML</div>
+                                        <div class="item" data-value="mysql">MYSQL</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">标签</label>
+                                <label class="ui compact basic violet label">标签</label>
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
@@ -108,14 +108,14 @@
 
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">摘要</label>
+                            <label class="ui basic violet label">摘要</label>
                             <input type="text" name="articleDigest" placeholder="请输入文章摘要">
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui left labeled input">
-                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">首图</label>
+                            <label class="ui basic violet label">首图</label>
                             <input type="text" name="figures" placeholder="首图引用地址">
                         </div>
                     </div>
@@ -124,7 +124,7 @@
 
                     <div class="ui right aligned container">
                         <button type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" onclick="publish()" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
+                        <button type="submit" onclick="publish()" class="ui button violet">发布</button>
                     </div>
 
                 </form>
@@ -200,7 +200,7 @@
                             prompt: '请至少选择一个文章标签'
                         }, {
                             type: 'maxCount[3]',
-                            prompt: '请最多选择三个文章标签'
+                            prompt: '请最多选择三个文章标签,你可以先删除一个标签,再重新选择'
                         }]
                     },
                     figures: {

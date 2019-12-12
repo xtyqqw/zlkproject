@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ArticleHotService {
     /**
-     * 根据当月创建时间createTime降序查询热门文章标题
+     * 根据当月创建时间createTime降序查询和浏览量热门文章标题
      * @param article
      * @return
      */
