@@ -467,6 +467,18 @@
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 </c:if>
 <script>
+    $(function () {
+        showFocus();getPage();
+        $(".no_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            jiafollow(str,$(this));
+        });
+        $(".ok_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            nofollow(str,$(this));
+        });
+        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+    });
     /*----------------------------点击已关注 取消关注---------------------------*/
     $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     $(".ok_zi").click(function () {
@@ -499,10 +511,6 @@
         let str = $(this).prev().prev().text() + '';
         jiafollow(str,$(this));
     });*/
-    function jiaclick() {
-        let str = $(this).prev().prev().text() + '';
-        jiafollow(str,$(this));
-    }
     function jiafollow(userId,mythis){
         $.ajax({
             url:"/follow/follow?userId="+userId,
@@ -524,12 +532,6 @@
         });
     }
     /*----------------------------分页---------------------------*/
-    $(function () {
-        showFocus();
-        getPage();
-        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-        jiaclick();
-    });
     var page = 1;
     var limit = 3;
     var total;
@@ -553,7 +555,7 @@
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="ok">√</p><p class="ok_zi" onclick="jiaclick()">已关注</p>';
+                    html += '<p class="ok">√</p><p class="ok_zi"">已关注</p>';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
                     html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
                     html += '</div><div class="att_tan"><div class="att_success1">';
@@ -684,6 +686,15 @@
                     limit=obj.limit;
                     if(!first){
                         showFocus();
+                        $(".no_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            jiafollow(str,$(this));
+                        });
+                        $(".ok_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            nofollow(str,$(this));
+                        });
+                        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
                     }
                 }
             });
