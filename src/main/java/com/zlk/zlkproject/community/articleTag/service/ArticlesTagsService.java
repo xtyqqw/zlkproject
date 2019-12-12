@@ -15,7 +15,4 @@ import java.util.List;
 public interface ArticlesTagsService {
 
     Page<Article> listArticles(Integer tagId, Pageable pageable);
-
-    List<Article> findArticleAll(Article article);
-
 }

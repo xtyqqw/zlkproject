@@ -35,7 +35,7 @@ public class CommunityController {
      * @author: QianKeQin
      * @date: 2019/12/10 9:26
      */
-    @RequestMapping("/toCommunity-page")
+    @RequestMapping("/CommunityPage")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
         //根据时间倒序返回文章标题集合 月排序
         List<Article> alist = articleHotService.selectTitleByArticle(article);
