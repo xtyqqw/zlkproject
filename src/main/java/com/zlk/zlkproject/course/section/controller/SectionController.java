@@ -59,14 +59,10 @@ public class SectionController {
     @RequestMapping(value = "/findState")
     @ResponseBody
     public Map<String, Object> findState(HttpServletRequest request,Integer sectionId) throws Exception{
-//        String userId = "1";
         //获取当前登录的用户id
         User user=(User)request.getSession().getAttribute("user");
         String userId = user.getUserId();
         String state = sectionService.findStateById(userId,sectionId);
-        if (state ==null){
-            state = "未开始";
-        }
         Map<String,Object> map = new HashMap<>();
         map.put("state",state);
         return map;

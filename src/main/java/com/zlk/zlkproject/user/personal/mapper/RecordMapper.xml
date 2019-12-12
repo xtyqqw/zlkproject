@@ -41,6 +41,8 @@
             <result property="chapterName" column="chapter_name" javaType="java.lang.String"/>
             <result property="sectionName" column="section_name" javaType="java.lang.String"/>
             <result property="studyTime" column="study_time" javaType="java.util.Date"/>
+            <result property="sectionGrade" column="section_grade" javaType="java.lang.Integer"/>
+            <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
     </resultMap>
     <!--查询学习记录-->
     <select id="selectCourses" resultMap="ItemMap" parameterType="com.zlk.zlkproject.entity.Pagination">
@@ -52,7 +54,9 @@
         c.cover_pic,
         ch.chapter_name,
 		s.section_name,
-		us.study_time
+		s.section_id,
+		us.study_time,
+		us.section_grade
         from user u
         JOIN user_courses uc on u.user_id=uc.user_id
         JOIN courses c on c.courses_id=uc.courses_id

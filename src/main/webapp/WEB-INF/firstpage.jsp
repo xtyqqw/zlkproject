@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
-    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <style>
     * {
@@ -199,6 +199,7 @@
 
     .li_none_box_nav li {
         float: left;
+        margin-top: 15px;
     }
 
     .li_none_box_nav li a {
@@ -220,10 +221,12 @@
         height: 58px;
         float: left;
         padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
     }
 
     .li_none_box_class li:hover {
-        box-shadow: 0 0 5px;
+        box-shadow: 1px 1px 5px 1px #d4d4d4;
     }
 
     .li_none_box_class dl {
@@ -274,11 +277,11 @@
     }
 
     .rank_second {
-        background: url(../img/yin.png) no-repeat left;
+        background: url(<%=request.getContextPath() %>/img/yin.png) no-repeat left;
     }
 
     .rank_third {
-        background: url(../img/tong.png) no-repeat left;
+        background: url(<%=request.getContextPath() %>/img/tong.png) no-repeat left;
     }
 
     .rank .rank_me {
@@ -426,6 +429,9 @@
     .layui-rate li i.layui-icon {
         font-size: 10px;
     }
+    .sec_span{
+        margin-left: 25px;
+    }
     #footer{
         background-color: #333C4D;
         height: 130px;
@@ -515,7 +521,7 @@
                                 <ul>
                                     <c:forEach items="${tags}" var="tag">
                                         <li>
-                                            <a href="javascript:;">${tag.tagName}</a>
+                                            <a href="<%=request.getContextPath()%>/HomePageTag?tagName=${tag.tagName}">${tag.tagName}</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -525,7 +531,7 @@
                                     <c:forEach items="${courses}" var="courses"  begin="0" end="3">
                                         <li>
                                             <div>
-                                                <a href="javascript:;">
+                                                <a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId=${courses.coursesId}">
                                                     <img style="width: 80px;height: 60px;float: left;"
                                                          src="${courses.introducePic}"/>
                                                 </a>
@@ -553,7 +559,7 @@
                                 <ul>
                                     <c:forEach items="${tags2}" var="tag">
                                         <li>
-                                            <a href="javascript:;">${tag.tagName}</a>
+                                            <a href="<%=request.getContextPath()%>/HomePageTag?tagName=${tag.tagName}">${tag.tagName}</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -563,7 +569,7 @@
                                     <c:forEach items="${courses2}" var="courses"  begin="0" end="3">
                                         <li>
                                             <div>
-                                                <a href="javascript:;">
+                                                <a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId=${courses.coursesId}">
                                                     <img style="width: 80px;height: 60px;float: left;"
                                                          src="${courses.introducePic}"/>
                                                 </a>
@@ -591,7 +597,7 @@
                                 <ul>
                                     <c:forEach items="${tags3}" var="tag">
                                         <li>
-                                            <a href="javascript:;">${tag.tagName}</a>
+                                            <a href="<%=request.getContextPath()%>/HomePageTag?tagName=${tag.tagName}">${tag.tagName}</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -601,7 +607,7 @@
                                     <c:forEach items="${courses3}" var="courses" begin="0" end="3">
                                         <li>
                                             <div>
-                                                <a href="javascript:;">
+                                                <a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId=${courses.coursesId}">
                                                     <img style="width: 80px;height: 60px;float: left;"
                                                          src="${courses.introducePic}"/>
                                                 </a>
@@ -629,7 +635,7 @@
                                 <ul>
                                     <c:forEach items="${tags4}" var="tag">
                                         <li>
-                                            <a href="javascript:;">${tag.tagName}</a>
+                                            <a href="<%=request.getContextPath()%>/HomePageTag?tagName=${tag.tagName}">${tag.tagName}</a>
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -639,7 +645,7 @@
                                     <c:forEach items="${courses4}" var="courses" begin="0" end="3">
                                         <li>
                                             <div>
-                                                <a href="javascript:;">
+                                                <a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId=${courses.coursesId}">
                                                     <img style="width: 80px;height: 60px;float: left;"
                                                          src="${courses.introducePic}"/>
                                                 </a>
@@ -662,23 +668,24 @@
                 <!--轮播图-->
                 <div carousel-item>
                     <div>
-                        <img src="../img/1.jpg">
+                        <img src="<%=request.getContextPath() %>/img/1.jpg">
                     </div>
                     <div>
-                        <img src="../img/2.jpg">
+                        <img src="<%=request.getContextPath() %>/img/2.jpg">
                     </div>
                     <div>
-                        <img src="../img/3.jpg">
+                        <img src="<%=request.getContextPath() %>/img/3.jpg">
                     </div>
                     <div>
-                        <img src="../img/4.jpg">
+                        <img src="<%=request.getContextPath() %>/img/4.jpg">
                     </div>
                 </div>
             </div>
         </div>
         <!--点击隐藏按钮-->
         <div id="click_none">
-            <i class="layui-icon layui-icon-up"></i>
+            <i class="layui-icon layui-icon-up upup"></i>
+            <i class="layui-icon layui-icon-down downdown" hidden="hidden"></i>
         </div>
         <div class="clear"></div>
         <c:if test="${userId!= null and userId!=''}">
@@ -754,7 +761,7 @@
                             <li class="rank_me">
                                 <p>NO.<span>${rank}</span></p>
                                 <div>
-                                    <a href="javascript:;">
+                                    <a href="<%=request.getContextPath()%>/personal/person">
                                         <img style="width: 30px;height: 30px;float: left;border-radius: 50%;"
                                              src="${user1.userImg}"/>
                                     </a>
@@ -957,13 +964,27 @@
         if ($('.title_flow2').is(':hidden')) {
             $('#footer').css("margin-top","50px");
         } else {
-            $('#footer').css("margin-top","240px");
+            $('#footer').css("margin-top","50px");
         }
         $("#click_none").click(function () {
             if ($('.banner').is(':hidden')) {
                 $('.banner').show();
+                if ($('.upup').is(':hidden')){
+                    $('.upup').show();
+                    $('.downdown').hide();
+                }else{
+                    $('.upup').hide();
+                    $('.downdown').show();
+                }
             } else {
                 $('.banner').hide();
+                if ($('.upup').is(':hidden')){
+                    $('.upup').show();
+                    $('.downdown').hide();
+                }else{
+                    $('.upup').hide();
+                    $('.downdown').show();
+                }
             }
         })
         $(".rank_more_p").click(function () {
@@ -996,7 +1017,7 @@
                                     '<li>' +
                                     '<dl>' +
                                     '<dt>' +
-                                    '<a href="javascript:;">' +
+                                    '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
                                     '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
@@ -1008,7 +1029,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span>上次学习时间：<span>2019-10-12</span></p>' +
+                                    '<p>￥<span style="display:inline-block;width:30px">' + courses.price + '</span><span class="sec_span">共'+courses.chapterNum+'章'+courses.sectionNum+'节</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +
@@ -1043,7 +1064,7 @@
                                     '<li>' +
                                     '<dl>' +
                                     '<dt>' +
-                                    '<a href="javascript:;">' +
+                                    '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
                                     '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
@@ -1055,7 +1076,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span>上次学习时间：<span>2019-10-12</span></p>' +
+                                    '<p>￥<span style="display:inline-block;width:30px">' + courses.price + '</span><span class="sec_span">共'+courses.chapterNum+'章'+courses.sectionNum+'节</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +
@@ -1089,7 +1110,7 @@
                                     '<li>' +
                                     '<dl>' +
                                     '<dt>' +
-                                    '<a href="javascript:;">' +
+                                    '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
                                     '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
@@ -1101,7 +1122,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span></p>' +
+                                    '<p>￥<span style="display:inline-block;width:30px">' + courses.price + '</span><span class="sec_span">共'+courses.chapterNum+'章'+courses.sectionNum+'节</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +
@@ -1135,7 +1156,7 @@
                                     '<li>' +
                                     '<dl>' +
                                     '<dt>' +
-                                    '<a href="javascript:;">' +
+                                    '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
                                     '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
@@ -1147,7 +1168,7 @@
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
-                                    '<p>￥<span>' + courses.price + '</span></p>' +
+                                    '<p>￥<span style="display:inline-block;width:30px">' + courses.price + '</span><span class="sec_span">共'+courses.chapterNum+'章'+courses.sectionNum+'节</span></p>' +
                                     '</dd>' +
                                     '</dl>' +
                                     '</li>' +

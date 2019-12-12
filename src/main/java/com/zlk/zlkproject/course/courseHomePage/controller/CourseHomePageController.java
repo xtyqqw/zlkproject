@@ -2,14 +2,16 @@ package com.zlk.zlkproject.course.courseHomePage.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.section.service.SectionService;
+import com.zlk.zlkproject.course.userSection.service.UserSectionService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -29,6 +31,12 @@ public class CourseHomePageController {
     private LogUtil logUtil;
 
     @Autowired
+    private UserSectionService userSectionService;
+
+    @Autowired
+    private SectionService sectionService;
+
+    @Autowired
     private CourseHomePageService courseHomePageService;
     @Autowired
     private CommonFileUtil commonFileUtil;
@@ -41,7 +49,24 @@ public class CourseHomePageController {
         coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         Map<String,Object> map=new HashMap<>();
+        int starSum;
+        int sectionCount;
+        double ratio;
+        if(userSectionService.querySumByCoursesId(coursesId)!=null){
+            starSum = userSectionService.querySumByCoursesId(coursesId);
+            sectionCount = sectionService.findCountByCourseId(coursesId);
+            ratio = starSum/(sectionCount*3.0*courses.getStudentNum())*100;
+        }else {
+            starSum = 0;
+            sectionCount = 0;
+            ratio = 0;
+        }
+
+
         map.put("courses",courses);
+        map.put("ratio",(int)ratio);
+        map.put("starSum",starSum);
+        map.put("sectionCount",sectionCount);
         return map;
     }
     @RequestMapping(value = "/findCoursesList")
@@ -96,7 +121,7 @@ public class CourseHomePageController {
     @RequestMapping(value = "/findAllByTag")
     @ResponseBody
     public Map<String,Object> findAllByTag(Courses courses,String tagName,Integer page,Integer limit,HttpServletRequest request)throws Exception{
-        tagName = (String) request.getSession().getAttribute("tagName");
+        //tagName = (String) request.getSession().getAttribute("tagName");
         List<Courses> allListTag=courseHomePageService.findAllByTag(courses,tagName,page,limit);
         Map<String,Object> map=new HashMap<>();
         map.put("allListTag",allListTag);

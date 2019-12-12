@@ -24,7 +24,7 @@
         }
 
         .del {
-            margin-left: -425px;
+            margin-left: -490px;
         }
 
         .hint {
@@ -40,6 +40,9 @@
             margin-top: 15px;
             height: 24px;
             width: 60%;
+        }
+        .layui-layer-tips {
+            word-break: break-all;
         }
     </style>
 </head>
@@ -85,10 +88,6 @@
                 <td style="width: 100px;" valign="bottom">举报</td>
                 <td><input type="text" required id="inform" placeholder="请输入举报" name="inform"></td>
             </tr>
-            <%--<tr>
-                <td style="width: 100px;" valign="bottom">用户id</td>
-                <td><input type="text" required id="userId" placeholder="请输入用户id" name="userId"></td>
-            </tr>--%>
             <tr>
                 <td style="width: 100px;" valign="bottom">发文类型</td>
                 <td><input type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType"></td>
@@ -105,16 +104,12 @@
                 <td style="width: 100px;" valign="bottom">文章方向</td>
                 <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
-            <%--<tr>
-                <td style="width: 100px;" valign="bottom">文章类别</td>
-                <td><input type="text" required id="tagName" placeholder="请输入文章类别" name="tagName"></td>
-            </tr>--%>
             <tr>
-                <td style="width: 100px;">文章摘要</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
                 <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
             </tr>
             <tr>
-                <td style="width: 100px;">HTML格式文章内容</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">HTML格式文章内容</td>
                 <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
             </tr>
             <tr>
@@ -153,7 +148,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [1, '#009688'],
             time: 2000
         });
     });
@@ -162,6 +157,7 @@
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [3, '#009688'],
+            area: ['auto', 'auto'],
             time: 2000
         });
     });
@@ -226,9 +222,9 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: 460
+            , height: $(document).height()-$('#demo').offset().top-20
             , cols: [[ //表头
-                {type: 'checkbox'}
+                {type: 'checkbox', fixed: 'left'}
                 , {field: 'articleId', title: '文章ID', width: 80, sort: true}
                 , {field: 'title', title: '文章标题', width: 100, sort: true}
                 , {field: 'browseCount', title: '浏览数', width: 75}
@@ -242,14 +238,12 @@
                 , {field: 'zanCount', title: '赞数', width: 60}
                 , {field: 'caiCount', title: '踩数', width: 60}
                 , {field: 'inform', title: '举报', width: 60}
-                /*, {field: 'userId', title: '用户id', width: 80}*/
                 , {field: 'createArticleType', title: '发文类型', width: 90}
                 , {field: 'articleSetTop', title: '文章置顶', width: 90}
                 , {field: 'approval', title: '审核', width: 60}
                 , {field: 'typeName', title: '文章方向', width: 90}
-                /*, {field: 'tagName', title: '文章类别', width: 90}*/
                 , {
-                    title: '操作', width: 180, align: 'center', toolbar: '' +
+                    title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
                         '<div class="layui-btn-group">' +
                         '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
                         '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
@@ -258,7 +252,7 @@
             ]]
             , limits: [5, 10, 20]
             , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn del" lay-event="delete">删除</button>' +
+                '<button type="button" class="layui-btn del" lay-event="delete">批量删除</button>' +
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
@@ -366,12 +360,10 @@
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
-                /*$("#userId").val(data.userId);*/
                 $("#createArticleType").val(data.createArticleType);
                 $("#articleSetTop").val(data.articleSetTop);
                 $("#approval").val(data.approval);
                 $("#typeName").val(data.typeName);
-                /*$("#tagName").val(data.tagName);*/
                 layer.open({
                     title: "编辑",
                     type: 1,

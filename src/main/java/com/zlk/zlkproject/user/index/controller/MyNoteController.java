@@ -105,4 +105,19 @@ public class MyNoteController {
         map.put("data", stuNoteList);
         return map;
     }
+
+    /**
+     * 回显context
+     * @param snId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/toCon")
+    @ResponseBody
+    public Map<String, Object> toCon(Integer snId)throws Exception{
+        String content = myNoteService.findNoteBySn(snId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", content);
+        return map;
+    }
 }

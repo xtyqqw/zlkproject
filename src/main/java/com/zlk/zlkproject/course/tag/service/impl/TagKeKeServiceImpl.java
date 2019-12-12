@@ -25,4 +25,9 @@ public class TagKeKeServiceImpl implements TagKeService {
         return tagKeMapper.findTagList(tag, startPage, limit);
 
     }
+
+    @Override
+    public List<Tag> findTagByTypeId(Integer typeId) {
+        return tagKeMapper.findTagByTypeId(typeId);
+    }
 }

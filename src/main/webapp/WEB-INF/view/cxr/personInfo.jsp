@@ -288,6 +288,10 @@
                                autocomplete="off" class="layui-input" maxlength="5">
                     </div>
                 </div>
+
+
+
+
                 <%--性别--%>
                 <div class="layui-form-item">
                     <label class="layui-form-label">性别</label>
@@ -624,17 +628,7 @@
         });
 
     });
-   // 保存成功后提示信息js
-    $("#chenggong").hide();
-    $('#baocun').click(function () {
-        layer.msg("保存成功");
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },5500)
-    });
-    // $('#baocun').click(function () {
-    //    alert("保存成功");
-    // });
+
 
 
 
@@ -742,7 +736,10 @@
         });
         element.init();
     });
-
+    //保存按钮点击事件,当点击重置按钮时，显示信息
+    $("#baocun").click(function () {
+        layer.msg("修改成功");
+    });
     //重置按钮点击事件,当点击重置按钮时，显示信息
     $("#reset").click(function () {
         layer.msg("信息已重置");

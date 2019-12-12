@@ -43,6 +43,7 @@ public class OpinionController {
                 mv.setViewName("view/cxr/opinion");
                 return mv;
 
+
             }else{
                 return null;
             }
@@ -50,6 +51,7 @@ public class OpinionController {
             //  如果user1为空，调用游客新增方法
 
             int i=opinionService.insertOpinion(opinion);
+
             if(i>0){
                 mv.setViewName("view/cxr/opinion");
                 return mv;

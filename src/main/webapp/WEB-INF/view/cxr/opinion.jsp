@@ -98,7 +98,7 @@
             font-size: 1vw;
             border: none;
             color: #ffffff;
-            background-color: #713ED7;
+            /*background-color: #713ED7;*/
             float: right;
         }
         #yijianzhuti #chenggong{
@@ -158,28 +158,33 @@
             </div>
 
     <div id="zhuti_wei">
-        <button id="tijiao" class="layui-btn">提交</button>
+        <button id="tijiao" class="layui-btn" οnclick="tijiao();">提交</button>
         <button id="quxiao">取消</button>
+        <script>
+            $("#tijiao").click(function () {
+                layer.msg("提交成功");
+            });
+        </script>
+
     </div>
     </form>
     </div>
+
     <%--<div id="chenggong">--%>
         <%--<img src="/img/cxr/提交成功图片.png" />提交已成功--%>
     <%--</div>--%>
-    <%--<div id="chongxin">--%>
-        <%--<img src="/img/cxr/提交失败.png" />编辑内容不符合要求，请重新编辑！--%>
-    <%--</div>--%>
-    <%--<div id="shibai">--%>
-        <%--<img src="/img/cxr/加载超时.png" />加载超时请重试--%>
-    <%--</div>--%>
+
 </div>
 <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-<script type="text/javascript">
 
-    //提交按钮点击事件,当点击重置按钮时，显示信息
-    $("#tijiao").click(function () {
-        layer.msg("信息已提交");
+<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js">
+    $('#tijiao').click(function () {
+        layer.msg("提交成功");
+
     });
+
+
+
 </script>
 
 </body>

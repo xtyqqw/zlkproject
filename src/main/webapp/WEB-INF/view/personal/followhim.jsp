@@ -109,7 +109,7 @@
             border: 1px solid #bec3d9;
             border-radius: 50px;
             padding: 0 10px;
-            background-color: #bec3d9;
+            background-color: #713ed7;
             color: #fff;
         }
         .attention_person .attention_him{
@@ -217,11 +217,16 @@
     <div class="followhim_title">
         <p>关注TA的人</p>
     </div>
+    <%--返回上一页--%>
+    <a href="javascript:history.go(-1)" style="margin-left: 30px;margin-top: -30px;position: fixed">
+        <i class="layui-icon layui-icon-return" style="font-size: 20px"></i>
+    </a>
     <c:if test="${list.size()==0}">
         <p class="noperson">没有任何人关注ta</p>
     </c:if>
     <c:if test="${list.size()!=0}">
-        <c:forEach items="${list}" var="list">
+        <div class="main"></div>
+        <%--<c:forEach items="${list}" var="list">
             <div class="followhim_main">
                 <div class="main_left">
                     <!-- 头像 -->
@@ -244,7 +249,7 @@
                                 <p class="no_zi">加关注</p>
                             </c:if>
                         </c:if>
-                        <%--已关注加关注弹窗--%>
+                        &lt;%&ndash;已关注加关注弹窗&ndash;%&gt;
                         <div class="att_tan">
                             <div class="att_success1">
                                 <p class="att_success_ok1">√</p>
@@ -292,20 +297,125 @@
                     </div>
                 </div>
             </div>
-        </c:forEach>
-
+        </c:forEach>--%>
+        <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
     </c:if>
 
     <%--<div class="flow_div"></div>--%>
 </div>
-<%--点击关注事件--%>
-<script type="text/javascript">
-    /*点击已关注 取消关注*/
-    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-    $(".ok_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        nofollow(str,$(this));
+<script>
+    $(function () {
+        /*分页*/
+        showFollowhim();getPage();
+        /*点击已关注 取消关注*/
+        $(".ok_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            nofollow(str,$(this));
+        });
+        /*点击加关注*/
+        $(".no_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            jiafollow(str,$(this));
+        });
+        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     });
+    /*---------------------------分页-----------------------*/
+    var page = 1;
+    var limit = 2;
+    var total;
+    var userId1 =${userId};
+    function showFollowhim() {
+        $.ajax({
+            type: "post",
+            url: "/follow/userfollower",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+                "userId":userId1
+            },
+            success: function (data) {
+                total = data.count;
+                var follhim = data.list;
+                var userId = data.userId;
+                var html = '';
+                for (var i = 0;i<follhim.length;i++){
+                    html += '<div class="followhim_main"><div class="main_left">';
+                    html += '<img src="../../img/headimg.jpg" /><p class="name">'+ follhim[i].userRealname+'</p>';
+                    html += '<div class="attention_type">';
+                    if (follhim[i].userId!==userId) {
+                        if (follhim[i].followType === 1) {
+                            html += '<span style="display: none">' + follhim[i].userId + '</span>';
+                            html += '<p class="ok">√</p><p class="ok_zi">已关注</p>';
+                        }
+                        if (follhim[i].followType === 0) {
+                            html += '<span style="display: none">' + follhim[i].userId + '</span>';
+                            html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
+                        }
+                    }
+                    html += '<div class="att_tan"><div class="att_success1">';
+                    html += '<p class="att_success_ok1">√</p><p class="att_success_zi1">取消关注成功!</p>';
+                    html += '</div><div class="att_success2">';
+                    html += '<p class="att_success_no1">X</p><p class="att_success_zi2">取消关注失败，请重新操作！</p>';
+                    html += '</div><div class="att_success3">';
+                    html += '<p class="att_success_noo">!</p><p class="att_success_zi3">加载超时，请稍后再试！</p>';
+                    html += '</div><div class="att_success4">';
+                    html += '<p class="att_success_ok2">√</p><p class="att_success_zi4">关注成功!</p>';
+                    html += '</div><div class="att_success5">';
+                    html += '<p class="att_success_no2">X</p><p class="att_success_zi5">关注失败，请重新操作！</p>';
+                    html += '</div></div></div><p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>';
+                    html += '<div class="attention_person">';
+                    html += '<a class="attention_him">'+ follhim[i].followedNum+'人关注了ta</a>';
+                    html += '<a class="he_attention">ta关注了'+ follhim[i].followerNum+'人</a>';
+                    html += '</div></div><div class="main_right"><div class="xuexili">';
+                    html += '<i class="layui-icon layui-icon-chart"' +
+                        'style="float: left;margin-right: 10px;font-size: 20px;"></i>';
+                    html += '<p>学习力：'+ follhim[i].studyPower+'</p>';
+                    html += '<p>学习效率：'+ follhim[i].studyEfficiency+'</p>';
+                    html += '</div><div class="learntime">';
+                    html += '<i class="layui-icon layui-icon-log"' +
+                        'style="float: left;margin-right: 10px;font-size: 20px;"></i>';
+                    html += '<p>学习时长：'+ follhim[i].userDateTime+'小时</p>';
+                    html += '<p>学习成长量：'+ follhim[i].studyGrowup+'</p>';
+                    html += '<p>技能水平：'+ follhim[i].studyStandard+'</p>';
+                    html += '</div></div></div>';
+                }
+                $(".main").empty().append(html);
+            }
+        })
+    }
+    function getPage(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'demo7'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showFollowhim();
+                        $(".ok_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            nofollow(str,$(this));
+                        });
+                        /*点击加关注*/
+                        $(".no_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            jiafollow(str,$(this));
+                        });
+                        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+                    }
+                }
+            });
+        });
+    }
+    /*---------------------------点击已关注 取消关注---------------------*/
     function nofollow(userId,mythis){
         $.ajax({
             url:"/follow/defollow?userId="+userId,
@@ -327,11 +437,7 @@
             }
         });
     }
-    /*点击加关注*/
-    $(".no_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        jiafollow(str,$(this));
-    });
+    /*--------------------------点击加关注-----------------------*/
     function jiafollow(userId,mythis){
         $.ajax({
             url:"/follow/follow?userId="+userId,
@@ -353,73 +459,5 @@
         });
     }
 </script>
-<%--流加载--%>
-<%--<script type="text/javascript">
-    layui.use('flow', function () {
-        var flow = layui.flow;
-        flow.load({
-            elem: '.flow_div' //流加载容器
-            , isAuto: false
-            , done: function (page, next) { //执行下一页的回调
-                setTimeout(function () {
-                    var lis = [];
-                    var limit = 8;
-                    var data = {"page": page, "limit": limit};
-                    $.ajax({
-                        type: "POST",
-                        url: "",
-                        dataType: "json",
-                        data: data,
-                        success: function (result) {
-                            layui.each(result.coursesList, function (i, courses) {
-                                lis.push(
-                                    '<div class="followhim_main">' +
-                                    '     <div class="main_left">' +
-                                    '         <!-- 头像 -->' +
-                                    '         <img src="../../img/headimg.jpg" />' +
-                                    '            <!-- 昵称 -->' +
-                                    '            <p class="name">骑驴看唱本</p>' +
-                                    '            <!-- 关注状态 -->' +
-                                    '            <div class="attention_type">' +
-                                    '                <!-- 已关注 -->' +
-                                    '                <p class="ok">√</p>' +
-                                    '                <p class="ok_zi">已关注</p>' +
-                                    '                <!-- 加关注 -->' +
-                                    '                <p class="jia">+</p>' +
-                                    '                <p class="no_zi">加关注</p>' +
-                                    '            </div>\n' +
-                                    '            <!-- 个性签名 -->' +
-                                    '            <p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>' +
-                                    '            <!-- 关注人情况 -->' +
-                                    '            <div class="attention_person">' +
-                                    '                <a class="attention_him">n人关注了ta</a>' +
-                                    '                <a class="he_attention">ta关注了n人</a>' +
-                                    '            </div>' +
-                                    '        </div>' +
-                                    '        <div class="main_right">' +
-                                    '            <div class="xuexili">' +
-                                    '                <i class="layui-icon layui-icon-chart"' +
-                                    '                   style="float: left;margin-right: 10px;font-size: 20px;"></i>' +
-                                    '                <p>学习力：710</p>' +
-                                    '                <p>学习效率：510</p>' +
-                                    '            </div>' +
-                                    '            <div class="learntime">' +
-                                    '                <i class="layui-icon layui-icon-log"' +
-                                    '                   style="float: left;margin-right: 10px;font-size: 20px;"></i>' +
-                                    '                <p>学习时长：7小时</p>' +
-                                    '                <p>学习成长量：13</p>' +
-                                    '                <p>技能水平：100</p>' +
-                                    '            </div>' +
-                                    '        </div>' +
-                                    '    </div>')
-                            })
-                            next(lis.join(''), page < 3);
-                        }
-                    });
-                }, 500);
-            }
-        });
-    });
-</script>--%>
 </body>
 </html>
