@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface ArticleHotMapper {
     /**
-     * 根据当月创建时间createTime降序查询最新文章标题
+     * 根据当月创建时间createTime和浏览量降序查询最新文章标题
      * @param article
      * @return
      */

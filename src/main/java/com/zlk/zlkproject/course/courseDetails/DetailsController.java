@@ -103,7 +103,7 @@ public class DetailsController {
      */
     @RequestMapping("/kecheng/seleUserCoursesByUserCourses")
     @ResponseBody
-    public String seleUserCoursesByUserCourses(HttpServletRequest request,UserCourses userCourses){
+    public String seleUserCoursesByUserCourses(HttpServletRequest request,Integer coursesId,UserCourses userCourses){
         User user=(User) request.getSession().getAttribute("user");
         if(user==null){
             return "未登录";
@@ -111,7 +111,7 @@ public class DetailsController {
         String userId = user.getUserId();
 
         userCourses.setUserId(userId);
-        userCourses.setCoursesId((Integer) request.getSession().getAttribute("coursesId"));
+        userCourses.setCoursesId(coursesId);
         List<UserCourses> UC=userCoursesService.queryAll(userCourses);
         if(UC.size()!=0){
             return "已参加";
