@@ -32,7 +32,7 @@ public class QuestionHomeController {
     @RequestMapping(value = "/test")
     public ModelAndView quizAll() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("view/community/questionList");
+        mv.setViewName("view/community/questionParticulars");
         return mv;
     }
     /*
@@ -56,17 +56,25 @@ public class QuestionHomeController {
      */
     @RequestMapping(value = "/questionAll")
     @ResponseBody
-    public Map<String, Object> questionAll(Pagination pagination, HttpServletRequest request,Question question) throws Exception {
-  /*      User user = (User) request.getSession().getAttribute("user");
-        String userId = user.getUserId();
-        pagination.setUserId(userId);*/
-        List<Question> questionList = questionHomeService.findByQuestionTime(pagination);
-        Integer num = questionHomeService.findNumById(question);
+    public Map<String, Object> questionAll(Pagination pagination) throws Exception {
+        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
         Map<String, Object> map = new HashMap<>();
-        map.put("num",num);
-        map.put("questionList", questionList);
+        map.put("questionAllList", questionAllList);
         return map;
     }
+/*    @RequestMapping(value = "/questionAll")
+    @ResponseBody
+    public Map<String, Object> questionAll(Pagination pagination, HttpServletRequest request,Question question) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUserId(userId);
+        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
+        Integer num = questionHomeService.findNumById(question);
+        Map<String, Object> map = new HashMap<>();
+        map.put("count",num);
+        map.put("questionAllList", questionAllList);
+        return map;
+    }*/
 
     /*
      * @descrption 通过问题id查询问题详情
