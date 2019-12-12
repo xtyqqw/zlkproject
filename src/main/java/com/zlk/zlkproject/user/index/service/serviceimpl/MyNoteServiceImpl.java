@@ -85,4 +85,9 @@ public class MyNoteServiceImpl implements MyNoteService {
         }
         return list;
     }
+
+    @Override
+    public String findNoteBySn(Integer snId) {
+        return myNoteMapper.findNoteBySn(snId);
+    }
 }
