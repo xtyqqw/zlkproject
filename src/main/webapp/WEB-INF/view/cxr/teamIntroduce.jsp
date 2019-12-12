@@ -21,7 +21,7 @@
             padding: 0;
         }
         #tuanduizhuti{
-            z-index: -9;
+            /*z-index: -9;*/
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;

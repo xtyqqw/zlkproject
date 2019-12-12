@@ -92,6 +92,7 @@ public class PersonalController {
     @RequestMapping(value = "/findUser")
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
+//
 //         userId="1";
 //
 //        User user=userService.selectUserById(userId);

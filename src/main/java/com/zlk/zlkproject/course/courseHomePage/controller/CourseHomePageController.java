@@ -49,11 +49,24 @@ public class CourseHomePageController {
         coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Courses courses=courseHomePageService.selectCoursesByCoursesId(coursesId);
         Map<String,Object> map=new HashMap<>();
-        double ratio = userSectionService.querySumByCoursesId(coursesId)/(sectionService.findCountByCourseId(coursesId)*3.0*courses.getStudentNum())*100;
+        int starSum;
+        int sectionCount;
+        double ratio;
+        if(userSectionService.querySumByCoursesId(coursesId)!=null){
+            starSum = userSectionService.querySumByCoursesId(coursesId);
+            sectionCount = sectionService.findCountByCourseId(coursesId);
+            ratio = starSum/(sectionCount*3.0*courses.getStudentNum())*100;
+        }else {
+            starSum = 0;
+            sectionCount = 0;
+            ratio = 0;
+        }
+
+
         map.put("courses",courses);
         map.put("ratio",(int)ratio);
-        map.put("starSum",userSectionService.querySumByCoursesId(coursesId));
-        map.put("sectionCount",sectionService.findCountByCourseId(coursesId));
+        map.put("starSum",starSum);
+        map.put("sectionCount",sectionCount);
         return map;
     }
     @RequestMapping(value = "/findCoursesList")

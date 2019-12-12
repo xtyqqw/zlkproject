@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -97,6 +98,7 @@ public class UsersController {
         ModelAndView mv=new ModelAndView();
         //获取修改前用户信息
         User user1=userService.selectUserById(user.getUserId());
+
         //调用修改方法
         Integer flag= userService.updateUser(user);
             //对flag进行判断，弹出相应提示信息
