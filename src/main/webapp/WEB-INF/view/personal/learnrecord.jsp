@@ -31,6 +31,7 @@
         }
         .timeline .date .year{
             font-size: 17px;
+            width: 95px;
         }
         .yuan{
             border: 1px solid #999999;
@@ -170,7 +171,7 @@
 <%--分页--%>
 <script>
     var page = 1;
-    var limit = 5;
+    var limit = 4;
     var total;
     function showRecord() {
         $.ajax({
@@ -199,18 +200,16 @@
                     html += '<p>解锁任务：'+ data1[i].coursesName+' ' +
                         '<span style="font-weight: bold;">——</span> '+ data1[i].chapterName+' ' +
                         '<span style="font-weight: bold;">——</span> '+ data1[i].sectionName+'</p>';
-                    html += '<img src="'+ data1[i].coverPic+'">';
-                    html += '</div>';
+                    html += '<img src="'+ data1[i].coverPic+'"></div>';
                     html += '<div class="learn-main-getstar">';
                     html += '<p>获星数量</p>';
                     html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
                         'style="width: 100px;margin: 10px 0 0 auto;">';
-                    html += '<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>';
+                    html += '<div class="layui-progress-bar" lay-percent="'+data1[i].sectionGrade+'/3" style="background-color: #FBC328;"></div>';
                     html += '</div>';
-                    html += '<a href="/toVideo" target="_blank">';
+                    html += '<a href="/toVideo?sectionId='+ data1[i].sectionId+'" target="_blank">';
                     html += '<div class="continue-learn">继续学习</div>';
-                    html += '</a>';
-                    html += '</div>';
+                    html += '</a></div>';
                     html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
                         'style="width: 520px;height: 20px;background-color: #dfd9fd;' +
                         'margin: 230px 30px auto 350px;float: right;position: fixed;">';

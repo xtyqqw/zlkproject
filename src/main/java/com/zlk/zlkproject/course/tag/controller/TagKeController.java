@@ -32,4 +32,21 @@ public class TagKeController {
         map.put("tagList", tagList);
         return map;
     }
+
+    /**
+     *  根据typeId查找全部tag
+     *@method findTagByTypeId
+     *@params [typeId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/11  16:12
+     */
+    @RequestMapping(value = "/findTagByTypeId")
+    @ResponseBody
+    public Map<String, Object> findTagByTypeId(Integer typeId) throws Exception {
+        List<Tag> tagList = tagKeService.findTagByTypeId(typeId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("tagList", tagList);
+        return map;
+    }
 }

@@ -47,9 +47,8 @@
         <if test="userId != '-1'">
             AND sn.sn_user_id = #{userId}
         </if>
-        ORDER BY sn_date DESC) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
+        ORDER BY sn_date DESC LIMIT #{page} , #{size}) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
-        LIMIT #{page} , #{size}
     </select>
 
     <select id="findStuNoteUp" resultMap="stuNoteResEntityMap">
@@ -59,9 +58,8 @@
         <if test="userId != '-1'">
             AND sn.sn_user_id = #{userId}
         </if>
-        ORDER BY up DESC) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
+        ORDER BY up DESC LIMIT #{page} , #{size}) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
-        LIMIT #{page} , #{size}
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
@@ -110,4 +108,28 @@
     <delete id="deleteCollect">
         DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND user_id = #{userId}
     </delete>
+
+    <update id="stuNoteUpAdd">
+        UPDATE stu_note SET up = up + 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpDelete">
+        UPDATE stu_note SET up = up - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteDownAdd">
+        UPDATE stu_note SET down = down + 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteDownDelete">
+        UPDATE stu_note SET down = down - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpAddDownDelete">
+        UPDATE stu_note SET up = up + 1, down = down - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpDeleteDownAdd">
+        UPDATE stu_note SET up = up - 1, down = down + 1 WHERE sn_id = #{snId}
+    </update>
 </mapper>
