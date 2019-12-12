@@ -92,16 +92,16 @@ public class PersonalController {
     @RequestMapping(value = "/findUser")
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
-//
-//         userId="1";
-//
-//        User user=userService.selectUserById(userId);
 
-        //从session中获取ID，进行修改，userId="1";为模拟数据
-       User user1 = (User) request.getSession().getAttribute("user");
+         userId="1";
 
-       //调用查询单个对象的方法
-        User user=userService.selectUserById(user1.getUserId());
+        User user=userService.selectUserById(userId);
+
+//        //从session中获取ID，进行修改，userId="1";为模拟数据
+//       User user1 = (User) request.getSession().getAttribute("user");
+//
+//       //调用查询单个对象的方法
+//        User user=userService.selectUserById(user1.getUserId());
 
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");

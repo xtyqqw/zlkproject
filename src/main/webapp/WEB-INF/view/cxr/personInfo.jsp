@@ -282,10 +282,10 @@
                     <div class="layui-input-block">
                         <%--onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"--%>
                         <%--onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"--%>
-                        <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不能包含空格数字)"
-                        onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-                        onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"
-                               autocomplete="off" class="layui-input" maxlength="5">
+                        <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不超过6个字)"
+                               οnkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))"
+
+                               autocomplete="off" class="layui-input" maxlength="6">
                     </div>
                 </div>
 
@@ -488,6 +488,7 @@
                     <div class="site-demo-button" id="layerDemo1" style="margin-bottom: 0;">
 
                         <button data-method="bdyx" class="layui-btn">绑定邮箱</button>
+                        <%--<button data-method="offset" data-type="lt" class="layui-btn layui-btn-normal">左上弹出</button>--%>
                     </div>
                     <!-- 结束 -->
                 </div>

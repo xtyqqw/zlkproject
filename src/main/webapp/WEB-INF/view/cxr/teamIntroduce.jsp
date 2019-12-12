@@ -88,7 +88,7 @@
         .layui-flow-more a cite{
             padding:0 20px;
             border-radius:55px;
-
+            display: none;
             font-size: 1.5vw;
             background-color:#713ED7;
             color:white;
