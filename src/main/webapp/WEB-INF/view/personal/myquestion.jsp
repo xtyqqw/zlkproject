@@ -606,23 +606,21 @@
                 var html = '';
                 for (var i = 0;i<question.length;i++){
                     /*我的提问*/
-                    if (question[i].type===0){
-                        html += '<div class="question_waik">';
-                        html += '<ul class="head_lebel">';
-                        for (var j = 0;j<question[i].tagList.length;j++){
-                            html += '<li class="lebel_li">'+ question[i].tagList[j].tagName+'</li>';
-                        }
-                        html += '</ul><br />';
-                        html += '<p class="title">';
-                        html += '<a href="javascript:;">'+ question[i].questionTitle+'</a>';
-                        html += '</p>';
-                        html += '<p class="from">来自：'+ question[i].typeName+'</p>';
-                        html += '<p class="question_num">回答 '+ question[i].responseCount+'</p>';
-                        html += '<p class="look_num">浏览 '+ question[i].browseCount+'</p>';
-                        html += '<p class="question_share">分享</p>';
-                        html += '<p class="question_date">'+ question[i].formatDate+'</p>';
-                        html += '</div>';
+                    html += '<div class="question_waik">';
+                    html += '<ul class="head_lebel">';
+                    for (var j = 0;j<question[i].tagList.length;j++){
+                        html += '<li class="lebel_li">'+ question[i].tagList[j].tagName+'</li>';
                     }
+                    html += '</ul><br />';
+                    html += '<p class="title">';
+                    html += '<a href="javascript:;">'+ question[i].questionTitle+'</a>';
+                    html += '</p>';
+                    html += '<p class="from">来自：'+ question[i].typeName+'</p>';
+                    html += '<p class="question_num">回答 '+ question[i].responseCount+'</p>';
+                    html += '<p class="look_num">浏览 '+ question[i].browseCount+'</p>';
+                    html += '<p class="question_share">分享</p>';
+                    html += '<p class="question_date">'+ question[i].formatDate+'</p>';
+                    html += '</div>';
                 }
                 $(".lay_flow2").empty().append(html);
             }

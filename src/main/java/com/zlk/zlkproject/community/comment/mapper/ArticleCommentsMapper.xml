@@ -53,7 +53,7 @@
                ,b.content content1,b.zan zan1,b.cai cai1,b.inform inform1,b.date date1,b.user_realname user_realname1
                ,b.user_img user_img1,b.user_id3,b.zan_cai3,c.user_id user_id2,c.zan_cai zan_cai2
         FROM (
-                SELECT am.*,s.user_realname,s.user_img
+                SELECT am.*
 		        FROM article_comment am
 				     ,(SELECT user_id,user_realname,user_img FROM user) s
 			    WHERE am.user_id = s.user_id AND am.article_id = #{articleId} AND am.pid = 0 ORDER BY date DESC
@@ -62,7 +62,7 @@
         LEFT JOIN (
                     SELECT q.*,auz.user_id user_id3,auz.zan_cai zan_cai3
 				    FROM (
-				            SELECT am.*,s.user_realname,s.user_img
+				            SELECT am.*
 						    FROM article_comment am
 							     ,(SELECT user_id,user_realname,user_img FROM user) s
 						    WHERE am.user_id = s.user_id AND am.article_id = #{articleId} AND am.pid != 0 ORDER BY date

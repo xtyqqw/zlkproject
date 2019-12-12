@@ -36,10 +36,4 @@ public class ArticlesTagsServiceImpl implements ArticlesTagsService {
             }
         },pageable);
     }
-
-    @Override
-    public List<Article> findArticleAll(Article article) {
-        return articlesTagsRepository.findAll();
-    }
-
 }

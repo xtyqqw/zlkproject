@@ -107,9 +107,9 @@
                             '</div>'
                     }*/
                 ]]
-                , limits: [50, 100, 200]
+                , limits: [24,50, 100]
                 , toolbar: '<div class="layui-btn-group">' +
-                    '<button type="hidden" class="layui-btn layui-btn-danger" lay-event="add">删除</button>' +
+                    '<button type="hidden" class="layui-btn layui-btn-danger" lay-event="add">批量删除</button>' +
                     '<div class="layui-card search">\n' +
                     '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                     '            <div class="layui-form-item">' +
@@ -139,6 +139,7 @@
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
             var data = checkStatus.data;
+            var data2 = data.logId;
             switch (obj.event) {
                 case 'add':
                     if (data.length === 0) {
@@ -155,7 +156,7 @@
                                     layer.msg("删除成功");
                                 },
                                 error: function () {
-                                    layer.msg("遇到意外错误");
+                                    layer.msg("选择数据量过多,一般24条以下");
                                 }
                             });
                             layer.close(index);

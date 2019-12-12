@@ -121,7 +121,7 @@ public class CourseHomePageController {
     @RequestMapping(value = "/findAllByTag")
     @ResponseBody
     public Map<String,Object> findAllByTag(Courses courses,String tagName,Integer page,Integer limit,HttpServletRequest request)throws Exception{
-        tagName = (String) request.getSession().getAttribute("tagName");
+        //tagName = (String) request.getSession().getAttribute("tagName");
         List<Courses> allListTag=courseHomePageService.findAllByTag(courses,tagName,page,limit);
         Map<String,Object> map=new HashMap<>();
         map.put("allListTag",allListTag);
