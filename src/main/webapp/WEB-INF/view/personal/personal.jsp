@@ -221,11 +221,10 @@
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
+        main.height(0);
         var main = $(window.parent.document).find("#personal-iframe");
-        var thisheight = document.documentElement.clientHeight && $(document).height()+30;
+        var thisheight = $(document).height();
         main.height(thisheight);
-        /*var ifm= document.getElementById("personal-iframe");
-        ifm.height=document.documentElement.clientHeight;*/
     });
 </script>
 <%--侧栏--%>
