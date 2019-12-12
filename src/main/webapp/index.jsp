@@ -14,24 +14,6 @@
     <title>首页</title>
 </head>
 <body>
-<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-<script>
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
-
-    });
-</script>
-<%--头部--%>
-
-
-<%--引入头部--%>
-
-<jsp:include page="WEB-INF/jsp/header.jsp"></jsp:include>
-
-<%--引入尾部--%>
-<jsp:include page="WEB-INF/jsp/footer.jsp"></jsp:include>
-
 <script type="text/javascript">
     location.href = "<%=request.getContextPath()%>/";
 </script>

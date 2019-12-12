@@ -3,6 +3,7 @@ package com.zlk.zlkproject.user.personal.service.impl;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.personal.mapper.DurationMapper;
 import com.zlk.zlkproject.user.personal.service.DurationService;
+import com.zlk.zlkproject.user.until.Arith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,14 @@ public class DurationServiceImpl implements DurationService {
      */
     @Override
     public User selectDuration(String userId){
-        return durationMapper.selectDuration(userId);
+        User user=durationMapper.selectDuration(userId);
+        /*Integer hour= Arith.duration(user.getUserAllTime()) ;*/
+        if(user.getUserDateTime() > 60){
+            user.setUserDateTime(Arith.duration(user.getUserDateTime()));
+        }else if(user.getUserDateTime() < 60&&user.getUserDateTime()>1){
+            user.setUserDateTime(1);
+        }
+        return user;
 
     }
 

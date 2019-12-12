@@ -83,7 +83,7 @@
     }
     //验证邮箱
     function email() {
-        var id = /^[A-Za-z0-9-._]+@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,6})$/;
+        var id =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var txtemail= document.getElementById("recruit_mail").value;
         var bool = id.test(txtemail);
         if(bool == true){
@@ -97,7 +97,7 @@
     }
     //验证身份证号码
     function num() {
-        var regPhone=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        var regPhone=/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
         var num=document.getElementById("recruit_number").value;
         var bool=regPhone.test(num);
         if(bool==true){
@@ -117,7 +117,7 @@
 <div class="layui-collapse" lay-accordion="" style="width: 83%">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
-        <div class="layui-colla-content layui-show">
+        <div class="layui-colla-content">
             <c:forEach items="${list}" var="user">
             <div class="list1">
                 <h3>资深讲师：${user.lecturerName}</h3>
@@ -201,6 +201,7 @@
         layui.use(['element', 'layer'], function(){
             var element = layui.element;
             var layer = layui.layer;
+
         });
         $(function () {
             $(".login").click(function () {

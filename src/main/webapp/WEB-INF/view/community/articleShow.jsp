@@ -30,8 +30,8 @@
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">
-                        <%--<img src="${article.user.userImg}" alt="" class="ui avatar image">--%>
-                        <%--<div class="content"><a href="#" class="header">${article.user.userRealname}</a></div>--%>
+                        <img src="${article.user.userImg}" alt="" class="ui avatar image">
+                        <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header" style="box-shadow: none;height: auto;">${article.user.userRealname}</a></div>
                     </div>
                     <div class="item">
                         <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
@@ -40,6 +40,10 @@
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
                 </div>
+            </div>
+            <div class="ui attached segment">
+                <!--图片区域-->
+                <img src="${article.figures}" alt="" class="ui fluid rounded image">
             </div>
             <div class="ui attached padded segment">
                 <!--内容-->
@@ -66,6 +70,11 @@
 
             <div class="ui bottom attached segment">
                 <!--留言区域列表-->
+                <script>
+                    $.ajax({
+
+                    });
+                </script>
                 <div class="ui form" id="div_stuCmt">
                     <div id="stuCmt_titleBox">
                         <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
@@ -77,14 +86,14 @@
                             </div>
                         </div>
                     </div>
-                    <div id="art-cmt-textBox" class="field" style="border: #5A5CAD 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                        <div id="div-artCmt-toolBar" class="toolbar" style="border-bottom: 1px #5A5CAD solid;"></div>
+                    <div id="art-cmt-textBox" class="field violet" style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                        <div id="div-artCmt-toolBar" class="toolbar violet" style="border-bottom: 1px solid;"></div>
                         <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
                     </div>
                     <div id="art-cmt-btnBox" class="fields">
                         <div class="field m-margin-bottom-small m-mobile-wide">
-                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide" style="background-color: #5A5CAD; color: #ffffff"><i class="edit icon"></i>发布</button>
-                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide" style="background-color: #5A5CAD; color: #ffffff">测试</button>
+                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>
+                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">测试</button>
                         </div>
                     </div>
                 </div>

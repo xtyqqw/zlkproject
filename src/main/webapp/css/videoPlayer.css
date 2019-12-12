@@ -685,7 +685,7 @@ button{
     height: 22px;
     position: relative;
     top: 0;
-    left: 646px;
+    margin: 0 1px 0 auto;
     border-radius: 3px;
     color: white;
     font-size: 16px;

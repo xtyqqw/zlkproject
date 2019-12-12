@@ -24,7 +24,7 @@
         }
 
         .del {
-            margin-left: -510px;
+            margin-left: -490px;
         }
 
         .hint {
@@ -40,6 +40,9 @@
             margin-top: 15px;
             height: 24px;
             width: 60%;
+        }
+        .layui-layer-tips {
+            word-break: break-all;
         }
     </style>
 </head>
@@ -102,11 +105,11 @@
                 <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
             <tr>
-                <td style="width: 100px;">文章摘要</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
                 <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
             </tr>
             <tr>
-                <td style="width: 100px;">HTML格式文章内容</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">HTML格式文章内容</td>
                 <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
             </tr>
             <tr>
@@ -145,7 +148,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [1, '#009688'],
             time: 2000
         });
     });
@@ -154,6 +157,7 @@
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [3, '#009688'],
+            area: ['auto', 'auto'],
             time: 2000
         });
     });

@@ -166,7 +166,7 @@
      .li1{
          float: left;
          height: 190px;
-
+         margin-left: 7px;
      }
 
      .h51{
@@ -532,7 +532,7 @@ $.ajax({
                         lis.push(
                             '<h6 class="h65"></h6>' );
                         }else{ lis.push(
-                        '<h6 class="h65">上次学习时间：'+courses.lastStudyTime+'</h6>' );
+                        '<h6 class="h65"></h6>' );
                     }
             console.log(courses);
                     lis.push(
@@ -560,25 +560,25 @@ $.ajax({
 <div id="footer">
     <ul>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutzlk">关于我们</a>
+            <a href="/aboutus/aboutus">关于我们</a>
         </li>
         <li>
-            <a href="javascript:;">加入我们</a>
+            <a href="/aboutus/aboutus">加入我们</a>
         </li>
         <li>
-            <a href="javascript:;">联系我们</a>
+            <a href="/aboutus/aboutus">联系我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/lecturer/lecturers">讲师合作</a>
+            <a href="/aboutus/aboutus">讲师合作</a>
         </li>
         <li>
-            <a href="javascript:;">帮助中心</a>
+            <a href="/aboutus/aboutus">帮助中心</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/blogroll">友情链接</a>
+            <a href="/aboutus/aboutus">友情链接</a>
         </li>
         <li>
-            <a href="javascript:;">合作企业</a>
+            <a href="/aboutus/aboutus">合作企业</a>
         </li>
     </ul>
     <p>
