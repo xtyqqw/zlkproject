@@ -528,6 +528,7 @@
         showFocus();
         getPage();
         $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+        jiaclick();
     });
     var page = 1;
     var limit = 3;
