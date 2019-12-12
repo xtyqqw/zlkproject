@@ -128,7 +128,11 @@
                 </c:forEach>
             </div>
         </div>
+<<<<<<< HEAD
+        <%--        <div style="clear: both;"></div>--%>
+=======
 <%--        <div style="clear: both;"></div>--%>
+>>>>>>> 95eac6bbfa85ef2028b2f9448eb60efa348c80f0
         <div class="layui-colla-item">
             <h2 class="layui-colla-title">招聘信息</h2>
             <div class="layui-colla-content">
@@ -198,44 +202,44 @@
         </div>
     </div>
 </div>
-    <script>
+<script>
 
-        layui.use(['element', 'layer'], function(){
-            var element = layui.element;
-            var layer = layui.layer;
-        });
-        $(function () {
-            $(".login").click(function () {
-                var recruitName=$("#recruit_name").val();
-                var recruitBac=$("#recruit_bac").val();
-                var recruitNumber=$("#recruit_number").val();
-                var recruitPhone=$("#recruit_phone").val();
-                var recruitMail=$("#recruit_mail").val();
-                var recruitSite=$("#recruit_site").val();
-                var recruitSex=$("#recruit_sex").val();
-                var recruit={
-                    "recruitName":recruitName,
-                    "recruitBac":recruitBac,
-                    "recruitNumber":recruitNumber,
-                    "recruitPhone":recruitPhone,
-                    "recruitMail":recruitMail,
-                    "recruitSite":recruitSite,
-                    "recruitSex":recruitSex
-                };
-                $.ajax({
-                    type:'post',
-                    url:"<%=request.getContextPath()%>/recruit/recruits",
-                    data:recruit,
-                    datatype:'json',
-                    success:function (msg) {
-                        alert(msg.msg);
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
+    });
+    $(function () {
+        $(".login").click(function () {
+            var recruitName=$("#recruit_name").val();
+            var recruitBac=$("#recruit_bac").val();
+            var recruitNumber=$("#recruit_number").val();
+            var recruitPhone=$("#recruit_phone").val();
+            var recruitMail=$("#recruit_mail").val();
+            var recruitSite=$("#recruit_site").val();
+            var recruitSex=$("#recruit_sex").val();
+            var recruit={
+                "recruitName":recruitName,
+                "recruitBac":recruitBac,
+                "recruitNumber":recruitNumber,
+                "recruitPhone":recruitPhone,
+                "recruitMail":recruitMail,
+                "recruitSite":recruitSite,
+                "recruitSex":recruitSex
+            };
+            $.ajax({
+                type:'post',
+                url:"<%=request.getContextPath()%>/recruit/recruits",
+                data:recruit,
+                datatype:'json',
+                success:function (msg) {
+                    alert(msg.msg);
 
-                    }
-                });
-            })
+                }
+            });
         })
+    })
 
-    </script>
+</script>
 
 </body>
 </html>
