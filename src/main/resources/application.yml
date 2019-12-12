@@ -60,10 +60,9 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-    username: root
-    password:
-    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: user1
+    password: xianglongshibazhang666
+    url: jdbc:mysql://193.112.82.60/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
@@ -91,22 +90,15 @@ spring:
     allow-bean-definition-overriding: true
   jmx:
     enabled: false
-
-  #文件上传大小限制
-  servlet:
-    multipart:
-      max-file-size: 2048MB
-      max-request-size: 2048MB
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list:
+  tracker-list: 193.112.82.60:22122
   #通过nginx 访问地址
-  resHost:
+  resHost: http://193.112.82.60
   storagePort: 8888/
   #缩略图配置
   thumb-image:
