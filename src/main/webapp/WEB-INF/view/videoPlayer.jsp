@@ -25,7 +25,9 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/videoPlayer.js"></script>
 </head>
 <body>
+<div class="FS_hidden">
 <jsp:include page="../jsp/header.jsp"></jsp:include>
+</div>
     <div class="layui-container">
         <span id="sectionId" style="display: none">${sectionId}</span>
         <span id="userId" style="display: none">${userId}</span>
@@ -237,7 +239,7 @@
         </div>
     </div>
 
-    <div style="clear: both">
+    <div style="clear: both" class="FS_hidden">
         <jsp:include page="../jsp/footer.jsp"></jsp:include>
     </div>
 
