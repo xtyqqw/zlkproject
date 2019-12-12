@@ -38,11 +38,10 @@ public class OpinionController {
         //获取用户id
         opinion.setOpinionUserId(user1.getUserId());
 
-
-        int i=opinionService.addOpinion(opinion);
-        if(i>0){
-            mv.setViewName("view/cxr/opinion");
-            return mv;
+            int i=opinionService.addOpinion(opinion);
+            if(i>0){
+                mv.setViewName("view/cxr/opinion");
+                return mv;
 
         }else{
             return null;
