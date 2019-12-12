@@ -46,21 +46,21 @@
         select count(1) from article
     </select>
     <select id="findByCreateTime" resultMap="articleListEntityMap">
-        select a.title,a.article_digest,a.figures,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id, a.title,a.article_digest,a.figures,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
         from article a , user u
         where a.user_id=u.user_id
         order by a.article_set_top,a.create_time DESC
         limit #{startPage},#{limit}
     </select>
     <select id="findByBrowseCount" resultMap="articleListEntityMap">
-        select a.title,a.article_digest,a.browse_count,a.figures,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id,a.title,a.article_digest,a.browse_count,a.figures,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
         from article a , user u
         where a.user_id=u.user_id
         order by a.article_set_top,a.browse_count DESC
         limit #{startPage},#{limit}
     </select>
     <select id="findByUserId" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
-        select a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname
         from article a
         left join user u on a.user_id=u.user_id
         where a.user_id=#{userId} limit #{startPage},#{limit}
