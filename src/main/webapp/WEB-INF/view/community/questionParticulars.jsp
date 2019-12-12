@@ -212,7 +212,7 @@
         </div>
         <div class="layui-form-item">
             <form action="<%=request.getContextPath() %>/response/save" method="post" class="ui form" id="publish">
-                <textarea id="demo" style="display: none;"maxlength="200" required  placeholder="开始编辑。。。" name="responseContent"></textarea>
+                <textarea id="demo" style="display: none;" maxlength="200"  placeholder="开始编辑。。。" name="responseContent"></textarea>
                 <div class="layui-input-block">
                     <button type="submit" style="float:right;background-color: #914FF1;" class="layui-btn"
                             lay-submit="sub" lay-filter="demo2">提交回复
@@ -225,7 +225,7 @@
         <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
             <ul class="layui-tab-title">
                 <li class="layui-this">全部</li>
-                <li>精华</li>
+                <li>最新</li>
             </ul>
             <div class="layui-tab-content" style="height: 100px;">
                 <div class="layui-tab-item layui-show">
@@ -267,18 +267,35 @@
 <script>
     layui.use('layedit', function () {
         var layedit = layui.layedit;
-        layedit.build('id', {
-            tool: ['left', 'center', 'right', '|', 'face']
-        });
         layedit.set({
             uploadImage: {
-                url: '/question/uploadImg' //接口url
+                url: '/response/responseImg' //接口url
                 , type: 'post' //默认post
             }
         });
         layedit.build('demo'); //建立编辑器
     });
+
 </script>
+<%--<script type="text/javascript">
+    /*表单验证开启*/
+    $('.form').form({
+        inline: true,
+        on: 'blur',
+        fields: {
+            responseContent: {
+                identifier: 'responseContent',
+                rules: [{
+                    type: 'empty',
+                    prompt: '内容不能为空呦'
+                }, {
+                    type: 'maxLength[50]',
+                    prompt: '请注意内容最大长度不能超过200'
+                }]
+            },
+        }
+    });
+</script>--%>
 <script type="text/javascript">
     $(function () {
         var testEditormdView;

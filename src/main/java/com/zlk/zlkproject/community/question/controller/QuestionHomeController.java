@@ -25,18 +25,7 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    /*
-     * @descrption
-     * @author gby
-     * @param [pagination]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     * @date 2019/12/11 15:17
-     */
-    @RequestMapping(value = "/index")
-    public String index(){
 
-        return "view/community/newCommunityMain";
-    }
     /*
      * @descrption 全部问答
      * @author gby

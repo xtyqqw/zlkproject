@@ -8,9 +8,14 @@ import com.zlk.zlkproject.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +86,20 @@ public class ResponseController {
         map.put("responseNewList", responseNewList);
         return map;
     }
+
+    //回答编辑页面的图片上传方法
+    @RequestMapping(value = "/responseImg", method = RequestMethod.POST)
+    public static void uploadFile(MultipartFile file, HttpServletRequest request, String path)
+            throws IllegalStateException, IOException {
+            request.getSession().getServletContext().getRealPath("/upload"); //服务器地址
+        if (!file.isEmpty()) {
+            // 文件保存路径
+            String filePath = path + file.getOriginalFilename();
+            // 转存文件
+            file.transferTo(new File(filePath));
+        }
+    }
+
 
 
 }
