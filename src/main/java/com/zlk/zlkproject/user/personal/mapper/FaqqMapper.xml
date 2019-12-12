@@ -33,7 +33,7 @@
         select q.*,t.tag_name
         from question q LEFT JOIN question_tag qt
         ON qt.question_id = q.question_id,tag t
-        WHERE t.tag_id = qt.tag_id AND q.user_id = '1'
+        WHERE t.tag_id = qt.tag_id AND q.user_id = #{userId}
     </select>
     
     <select id="findResponse" resultMap="responseMap" parameterType="java.lang.String">

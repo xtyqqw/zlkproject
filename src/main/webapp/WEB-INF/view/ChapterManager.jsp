@@ -27,7 +27,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">课程名称:</label>
                 <div class="layui-input-block">
-                    <select class="layui-select" name="coursesName" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search>
+                    <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search>
                         <option value="">请选择课程</option>
                         <c:forEach items="${coursesList}" var="course">
                             <option value="${course.coursesId}">(ID:${course.coursesId}) ${course.coursesName}</option>
@@ -215,6 +215,7 @@
                 } else if(obj.event === 'edit') {
                     $("#chapterId").val(data.chapterId);
                     $("#coursesNameInsertSelect").val(data.coursesId);
+                    form.render('select');
                     $("#chapterName").val(data.chapterName);
                     $("#chapterNum").val(data.chapterNum);
                     $("#chapterTime").val(data.chapterTime);

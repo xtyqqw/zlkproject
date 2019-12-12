@@ -10,6 +10,9 @@ $(function () {
         data:"",
         success: function (data) {
             console.log(data);
+            baifansu = data.ratio;
+            var starSum = data.starSum;
+            var sectionCount =  data.sectionCount;
             /*判断是否已参加项目*/
             $.ajax({
                 type : "POST",
@@ -30,21 +33,22 @@ $(function () {
                 +" </video>");
             $("#rensu").text(data.courses.studentNum+"人");
             /*判断课程的评分*/
-            if(data.courses.studentNum<10){
+            if(baifansu<=0){
                 xingsu=0;
-            }else if (data.courses.studentNum>=10&&data.courses.studentNum<50){
+            }else if (baifansu>0&&baifansu<=20){
                 xingsu=1;
-            } else if (data.courses.studentNum>=50&&data.courses.studentNum<150){
+            } else if (baifansu>20&&baifansu<=40){
                 xingsu=2;
-            } else if (data.courses.studentNum>=150&&data.courses.studentNum<300){
+            } else if (baifansu>40&&baifansu<=60){
                 xingsu=3;
-            } else if (data.courses.studentNum>=300&&data.courses.studentNum<500){
+            } else if (baifansu>60&&baifansu<=80){
                 xingsu=4;
-            }else if (data.courses.studentNum>=500){
+            }else if (baifansu>80){
                 xingsu=5;
             }
             $("#jiage").text("￥"+data.courses.price);
             $("#xianmuliang").text(data.courses.chapterNum+"章"+data.courses.sectionNum+"节");
+            $("#huoxingshu").text(starSum+"/"+(sectionCount*3*data.courses.studentNum));
             $("#jeishaozhengwen").html("<p>"+data.courses.introduceText+"</p>");
             $("#tedianzhengwenneirong").html("<p>"+data.courses.featureText+"</p>");
             $("#jeishaoImg").html("<img src='"+data.courses.introducePic+"'>");
@@ -74,7 +78,7 @@ layui.use(['rate'], function(){
 layui.use('element', function(){
     var $ = layui.jquery
         ,element = layui.element;
-    element.progress('demo', "80%");
+    element.progress('demo', baifansu+"%");
 });
 $(".xinxi").mouseenter(function () {
     $(this).css("background-color","#fff");

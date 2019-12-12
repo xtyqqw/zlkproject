@@ -31,6 +31,7 @@
         }
         .timeline .date .year{
             font-size: 17px;
+            width: 95px;
         }
         .yuan{
             border: 1px solid #999999;
@@ -170,7 +171,7 @@
 <%--分页--%>
 <script>
     var page = 1;
-    var limit = 5;
+    var limit = 4;
     var total;
     function showRecord() {
         $.ajax({
@@ -205,7 +206,7 @@
                     html += '<p>获星数量</p>';
                     html += '<div class="layui-progress layui-progress-big" lay-showpercent="true" ' +
                         'style="width: 100px;margin: 10px 0 0 auto;">';
-                    html += '<div class="layui-progress-bar" lay-percent="80/120" style="background-color: #FBC328;"></div>';
+                    html += '<div class="layui-progress-bar" lay-percent="'+data1[i].sectionGrade+'/3" style="background-color: #FBC328;"></div>';
                     html += '</div>';
                     html += '<a href="/toVideo" target="_blank">';
                     html += '<div class="continue-learn">继续学习</div>';

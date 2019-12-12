@@ -199,6 +199,7 @@
         .reply_waik .reply_msg a:hover{
             color: #000;
         }
+        .lay_flow1,.lay_flow2,.lay_flow3{margin-top: 40px}
         /*提交答案弹窗*/
         /*.answer_succ1,.answer_succ2,.answer_succ3{
             width: 400px;
@@ -260,17 +261,18 @@
 <div class="main">
     <div class="nav">
         <ul class="nav_ul">
-            <li class="nav_li1">全部</li>
-            <li class="nav_li2">我的提问</li>
-            <li class="nav_li3">我的问答</li>
+            <li class="nav_li1" onclick="diannav1()">全部</li>
+            <li class="nav_li2" onclick="diannav2()">我的提问</li>
+            <li class="nav_li3" onclick="diannav3()">我的回答</li>
         </ul>
         <ul class="main_ul">
             <%--全部--%>
             <li class="main_li_show">
-                <p class="count">共${list.size()}条记录</p><br>
+                <p class="count">共${allCount}条记录</p><br>
                 <div class="lay_flow1"></div>
-                <c:forEach items="${list}" var="all">
-                    <%--我的提问--%>
+                <div id="allpage" style="float: right;margin: 50px 20px auto"></div>
+                <%--<c:forEach items="${list}" var="all">
+                    &lt;%&ndash;我的提问&ndash;%&gt;
                     <c:if test="${all.type==0}">
                         <div class="question_waik">
                             <ul class="head_lebel">
@@ -324,13 +326,14 @@
                             <p class="reply_share">分享</p>
                         </div>
                     </c:if>
-                </c:forEach>
+                </c:forEach>--%>
             </li>
             <%--我的提问--%>
             <li class="main_li2">
-                <p class="count">共${qList.size()}条笔记</p><br>
+                <p class="count">共${qCount}条笔记</p><br>
                 <div class="lay_flow2"></div>
-                <c:forEach items="${qList}" var="question">
+                <div id="quespage" style="float: right;margin: 50px 20px auto"></div>
+                <%--<c:forEach items="${qList}" var="question">
                     <div class="question_waik">
                         <ul class="head_lebel">
                             <c:forEach items="${question.tagList}" var="tag1">
@@ -346,13 +349,14 @@
                         <p class="question_share">分享</p>
                         <p class="question_date">${question.formatDate}</p>
                     </div>
-                </c:forEach>
+                </c:forEach>--%>
             </li>
             <%--我的回答--%>
             <li class="main_li3">
-                <p class="count">共${rList.size()}条笔记</p><br>
+                <p class="count">共${rCount}条笔记</p><br>
                 <div class="lay_flow3"></div>
-                <c:forEach items="${rList}" var="response">
+                <div id="replypage" style="float: right;margin: 50px 20px auto"></div>
+                <%--<c:forEach items="${rList}" var="response">
                     <!-- 我的回答 已采纳 -->
                     <c:if test="${response.accept==1}">
                         <div class="reply_waik_adopted">
@@ -390,7 +394,7 @@
                             <p class="reply_share">分享</p>
                         </div>
                     </c:if>
-                </c:forEach>
+                </c:forEach>--%>
             </li>
             <%--富文本编辑框--%>
             <div hidden="hidden" id="demo" style="padding: 25px">
@@ -440,9 +444,286 @@
     checknum();
 </script>
 <%--分页--%>
-<%--<script>
-&lt;%&ndash;全部 分页&ndash;%&gt;
-layui.use('flow', function(){
+<script>
+    $(function () {
+        /*选项卡点击事件*/
+        diannav2();diannav3();diannav1();
+        $(".main_li2,.main_li3").hide();
+        $(".main_li_show").show();
+        /*我的提问分页*/
+        showQuestion();getPageQuestion();
+        /*我的回答分页*/
+        showReply();getPageReply();
+        /*全部分页*/
+        showAll();getPageAll();
+    });
+    /*--------------------点击选项卡事件----------------*/
+    function diannav1(){
+        /*$(this).addClass("active").siblings().removeClass("active");*/
+        $(".nav_li1").css("color","#8c24dd");
+        $(".nav_li1").css("border-bottom","2px solid #8c24dd");
+        $(".nav_li2").css("color","#656565");
+        $(".nav_li2").css("border-bottom","none");
+        $(".nav_li3").css("color","#656565");
+        $(".nav_li3").css("border-bottom","none");
+        $(".main_li_show").show();
+        $(".main_li2,.main_li3").hide();
+    }
+    function diannav2(){
+        /*$(this).addClass("active").siblings().removeClass("active");*/
+        $(".nav_li2").css("color","#8c24dd");
+        $(".nav_li2").css("border-bottom","2px solid #8c24dd");
+        $(".nav_li1").css("color","#656565");
+        $(".nav_li1").css("border-bottom","none");
+        $(".nav_li3").css("color","#656565");
+        $(".nav_li3").css("border-bottom","none");
+        $(".main_li2").show();
+        $(".main_li_show,.main_li3").hide();
+    }
+    function diannav3(){
+        /*$(this).addClass("active").siblings().removeClass("active");*/
+        $(".nav_li3").css("color","#8c24dd");
+        $(".nav_li3").css("border-bottom","2px solid #8c24dd");
+        $(".nav_li1").css("color","#656565");
+        $(".nav_li1").css("border-bottom","none");
+        $(".nav_li2").css("color","#656565");
+        $(".nav_li2").css("border-bottom","none");
+        $(".main_li3").show();
+        $(".main_li_show,.main_li2").hide();
+    }
+    /*------------------------分页---------------------*/
+    var page = 1;
+    var limit = 3;
+    var total;
+    /*-------------全部分页------------*/
+    function showAll() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtest1",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (data) {
+                total = data.countAll;
+                var all = data.list;
+                var html = '';
+                for (var i = 0;i<all.length;i++){
+                    /*我的提问*/
+                    if (all[i].type===0){
+                        html += '<div class="question_waik">';
+                        html += '<ul class="head_lebel">';
+                        /*for (var j = 0;j<all[i].tagList.length;j++){
+                            html += '<li class="lebel_li">'+ all[i].tagList[j].tagName+'</li>';
+                        }*/
+                        html += '</ul><br />';
+                        html += '<p class="title">';
+                        html += '<a href="javascript:;">'+ all[i].questionTitle+'</a>';
+                        html += '</p>';
+                        html += '<p class="from">来自：'+ all[i].typeName+'</p>';
+                        html += '<p class="question_num">回答 '+ all[i].responseCount+'</p>';
+                        html += '<p class="look_num">浏览 '+ all[i].browseCount+'</p>';
+                        html += '<p class="question_share">分享</p>';
+                        html += '<p class="question_date">'+ all[i].formatDate+'</p>';
+                        html += '</div>';
+                    }
+                    /*我的回答 已采纳*/
+                    if (all[i].type===1&&all[i].accept===1){
+                        html += '<div class="reply_waik_adopted">';
+                        html += '<p class="reply_date">'+ all[i].formatDate+'</p>';
+                        html += '<p class="adopted">已采纳</p>';
+                        html += '<p class="reply_adopted_msg">';
+                        html += '<a href="javascript:;">'+ all[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ all[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ all[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">'+ all[i].replyCount+'</i>';
+                        html += '<p class="reply_adopted_share">分享</p>';
+                        html += '</div>';
+                    }
+                    /*我的回答 未采纳*/
+                    if (all[i].type===1&&all[i].accept===0) {
+                        html += '<div class="reply_waik">';
+                        html += '<p class="reply_date">' + all[i].formatDate + '</p>';
+                        html += '<p class="reply_msg">';
+                        html += '<a href="javascript:;">' + all[i].responseContent + '</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">' + all[i].zanCount + '</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">' + all[i].caiCount + '</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">' + all[i].replyCount + '</i>';
+                        html += '<p class="reply_delete" onclick="delNote(' + all[i].responseId +')">删除</p>';
+                        html += '<p class="reply_edit" onclick="editNote(\''+all[i].responseContent+'\','+all[i].responseId + ')">编辑</p>';
+                        html += '<p class="reply_share">分享</p>';
+                        html += '</div>';
+                    }
+                }
+                $(".lay_flow1").empty().append(html);
+            }
+        })
+    }
+    function getPageAll(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'allpage'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showAll();
+                    }
+                }
+            });
+        });
+    }
+    /*------------我的提问 分页------------*/
+    function showQuestion() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtestq",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (data) {
+                total = data.countq;
+                var question = data.qlist;
+                var html = '';
+                for (var i = 0;i<question.length;i++){
+                    /*我的提问*/
+                    html += '<div class="question_waik">';
+                    html += '<ul class="head_lebel">';
+                    for (var j = 0;j<question[i].tagList.length;j++){
+                        html += '<li class="lebel_li">'+ question[i].tagList[j].tagName+'</li>';
+                    }
+                    html += '</ul><br />';
+                    html += '<p class="title">';
+                    html += '<a href="javascript:;">'+ question[i].questionTitle+'</a>';
+                    html += '</p>';
+                    html += '<p class="from">来自：'+ question[i].typeName+'</p>';
+                    html += '<p class="question_num">回答 '+ question[i].responseCount+'</p>';
+                    html += '<p class="look_num">浏览 '+ question[i].browseCount+'</p>';
+                    html += '<p class="question_share">分享</p>';
+                    html += '<p class="question_date">'+ question[i].formatDate+'</p>';
+                    html += '</div>';
+                }
+                $(".lay_flow2").empty().append(html);
+            }
+        })
+    }
+    function getPageQuestion(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'quespage'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showQuestion();
+                    }
+                }
+            });
+        });
+    }
+    /*------------我的回答 分页------------*/
+    function showReply() {
+        $.ajax({
+            type: "post",
+            url: "/myfaqq/faqtestr",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (data) {
+                total = data.countr;
+                var reply = data.rlist;
+                var html = '';
+                for (var i = 0;i<reply.length;i++){
+                    /*我的回答 已采纳*/
+                    if (reply[i].type===1&&reply[i].accept===1){
+                        html += '<div class="reply_waik_adopted">';
+                        html += '<p class="reply_date">'+ reply[i].formatDate+'</p>';
+                        html += '<p class="adopted">已采纳</p>';
+                        html += '<p class="reply_adopted_msg">';
+                        html += '<a href="javascript:;">'+ reply[i].responseContent+'</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">'+ reply[i].zanCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].caiCount+'</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">'+ reply[i].replyCount+'</i>';
+                        html += '<p class="reply_adopted_share">分享</p>';
+                        html += '</div>';
+                    }
+                    /*我的回答 未采纳*/
+                    if (reply[i].type===1&&reply[i].accept===0) {
+                        html += '<div class="reply_waik">';
+                        html += '<p class="reply_date">' + reply[i].formatDate + '</p>';
+                        html += '<p class="reply_msg">';
+                        html += '<a href="javascript:;">' + reply[i].responseContent + '</a>';
+                        html += '</p>';
+                        html += '<i class="layui-icon layui-icon-praise"' +
+                            'style="margin-left: 30px;color: #494949;">' + reply[i].zanCount + '</i>';
+                        html += '<i class="layui-icon layui-icon-tread"' +
+                            'style="margin-left: 20px;color: #494949;">' + reply[i].caiCount + '</i>';
+                        html += '<i class="layui-icon layui-icon-dialogue"' +
+                            'style="margin-left: 20px;color: #494949;">' + reply[i].replyCount + '</i>';
+                        html += '<p class="reply_delete" onclick="delNote(' + reply[i].responseId +')">删除</p>';
+                        html += '<p class="reply_edit" onclick="editNote(\''+reply[i].responseContent+'\','+reply[i].responseId + ')">编辑</p>';
+                        html += '<p class="reply_share">分享</p>';
+                        html += '</div>';
+                    }
+                }
+                $(".lay_flow3").empty().append(html);
+            }
+        })
+    }
+    function getPageReply(){
+        layui.use('laypage', function() {
+            var laypage = layui.laypage;
+            //完整功能
+            laypage.render({
+                elem: 'replypage'
+                ,count: total //数据总数
+                ,theme: '#914FF1'
+                ,limit:limit
+                ,layout: ['prev', 'page', 'next', 'count']
+                ,jump: function(obj,first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        showReply();
+                    }
+                }
+            });
+        });
+    }
+<%--全部 分页--%>
+/*layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
     flow.load({
@@ -453,80 +734,78 @@ layui.use('flow', function(){
             //模拟插入
             setTimeout(function(){
                 var lis = [];
-                var limit = "5";
+                var limit = "3";
                 $.ajax({
-                    url:"/articles/findByCreateTime?page="+page+"&limit="+limit,
+                    url:"/myfaqq/faqtest1?page="+page+"&limit="+limit,
                     type: 'post',
                     dataType: "json",
                     success: function (result) {
-                        layui.each(result.articleList, function (i, article) {
+                        layui.each(result.list, function (i, list) {
                             var html = '';
-                            /*我的提问*/
-                            if (data1.type==0){
+                            /!*我的提问*!/
+                            if (list.type===0){
                                 html += '<div class="question_waik">';
                                 html += '<ul class="head_lebel">';
-                                for (var j = 0;j<data1.tagList;j++){
-                                    html += '<li class="lebel_li">'+ data1[i].tagName+'</li>';
+                                for (var j = 0;j<list.tagList;j++){
+                                    html += '<li class="lebel_li">'+ list.tagName+'</li>';
                                 }
                                 html += '</ul><br />';
                                 html += '<p class="title">';
-                                html += '<a href="javascript:;">'+ data1[i].questionTitle+'</a>';
+                                html += '<a href="javascript:;">'+ list.questionTitle+'</a>';
                                 html += '</p>';
-                                html += '<p class="from">来自：'+ data1[i].typeName+'</p>';
-                                html += '<p class="question_num">回答 '+ data1[i].responseCount+'</p>';
-                                html += '<p class="look_num">浏览 '+ data1[i].browseCount+'</p>';
+                                html += '<p class="from">来自：'+ list.typeName+'</p>';
+                                html += '<p class="question_num">回答 '+ list.responseCount+'</p>';
+                                html += '<p class="look_num">浏览 '+ list.browseCount+'</p>';
                                 html += '<p class="question_share">分享</p>';
-                                html += '<p class="question_date">'+ data1[i].formatDate+'</p>';
+                                html += '<p class="question_date">'+ list.formatDate+'</p>';
                                 html += '</div>';
                             }
-                            /*我的回答 已采纳*/
-                            if (data1.type == 1&&data1.accept ==1){
+                            /!*我的回答 已采纳*!/
+                            if (list.type===1&&list.accept===1){
                                 html += '<div class="reply_waik_adopted">';
-                                html += '<p class="reply_date">'+ data1[i].formatDate+'</p>';
+                                html += '<p class="reply_date">'+ list.formatDate+'</p>';
                                 html += '<p class="adopted">已采纳</p>';
                                 html += '<p class="reply_adopted_msg">';
-                                html += '<a href="javascript:;">'+ data1[i].responseContent+'</a>';
+                                html += '<a href="javascript:;">'+ list.responseContent+'</a>';
                                 html += '</p>';
                                 html += '<i class="layui-icon layui-icon-praise"' +
-                                    'style="margin-left: 30px;color: #494949;">'+ data1[i].zanCount+'</i>';
+                                    'style="margin-left: 30px;color: #494949;">'+ list.zanCount+'</i>';
                                 html += '<i class="layui-icon layui-icon-tread"' +
-                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].caiCount+'</i>';
-                                html += '<i class="layui-icon layui-icon-dialogue"\n' +
-                                    'style="margin-left: 20px;color: #494949;">'+ data1[i].replyCount+'</i>';
+                                    'style="margin-left: 20px;color: #494949;">'+ list.caiCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-dialogue"' +
+                                    'style="margin-left: 20px;color: #494949;">'+ list.replyCount+'</i>';
                                 html += '<p class="reply_adopted_share">分享</p>';
                                 html += '</div>';
                             }
-                            /*我的回答 未采纳*/
-                            if (data1.type==1&&data1.accept==0) {
+                            /!*我的回答 未采纳*!/
+                            if (list.type===1&&list.accept===0) {
                                 html += '<div class="reply_waik">';
-                                html += '<p class="reply_date">' + data1[i].formatDate + '</p>';
+                                html += '<p class="reply_date">' + list.formatDate + '</p>';
                                 html += '<p class="reply_msg">';
-                                html += '<a href="javascript:;">' + data1[i].responseContent + '</a>';
+                                html += '<a href="javascript:;">' + list.responseContent + '</a>';
                                 html += '</p>';
                                 html += '<i class="layui-icon layui-icon-praise"' +
-                                    'style="margin-left: 30px;color: #494949;">' + data1[i].zanCount + '</i>';
+                                    'style="margin-left: 30px;color: #494949;">' + list.zanCount + '</i>';
                                 html += '<i class="layui-icon layui-icon-tread"' +
-                                    'style="margin-left: 20px;color: #494949;">' + data1[i].caiCount + '</i>';
+                                    'style="margin-left: 20px;color: #494949;">' + list.caiCount + '</i>';
                                 html += '<i class="layui-icon layui-icon-dialogue"' +
-                                    'style="margin-left: 20px;color: #494949;">' + data1[i].replyCount + '</i>';
-                                html += '<p class="reply_dian">...</p>';
-                                html += '<p class="reply_delete" onclick="delNote(' + data1[i].responseId + ')">删除</p>';
-                                html += '<p class="reply_edit" onclick="editNote(' + data1[i].responseContent + ',' + data1[i].responseId + ')">编辑</p>';
+                                    'style="margin-left: 20px;color: #494949;">' + list.replyCount + '</i>';
+                                html += '<p class="reply_delete" onclick="delNote(' + list.responseId + ')">删除</p>';
+                                html += '<p class="reply_edit" onclick="editNote(' + list.responseContent + ',' + list.responseId + ')">编辑</p>';
                                 html += '<p class="reply_share">分享</p>';
                                 html += '</div>';
                             }
                             lis.push(html);
                         });
                     next(lis.join(''), page < 3);
-                    $(".timeago").timeago();
                     }
                 });
             }, 500);
         }
     });
-});
-&lt;%&ndash;我的提问 分页&ndash;%&gt;
-layui.use('flow', function(){
+});*/
+<%--我的提问 分页--%>
+/*layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
     flow.load({
@@ -543,35 +822,34 @@ layui.use('flow', function(){
                     type: 'post',
                     dataType: "json",
                     success: function (result) {
-                        layui.each(result.articleList, function (i, article) {
+                        layui.each(result.list, function (i, ques) {
                             var html = '';
                             html += '<div class="question_waik">';
                             html += '<ul class="head_lebel">';
                             for (var j = 0;j<ques.tagList;j++){
-                                html += '<li class="lebel_li">'+ ques[i].tagName+'</li>';
+                                html += '<li class="lebel_li">'+ ques.tagName+'</li>';
                             }
                             html += '</ul><br />';
                             html += '<p class="title">';
-                            html += '<a href="javascript:;">'+ ques[i].questionTitle+'</a>';
+                            html += '<a href="javascript:;">'+ ques.questionTitle+'</a>';
                             html += '</p>';
-                            html += '<p class="from">来自：'+ ques[i].typeName+'</p>';
-                            html += '<p class="question_num">回答 '+ ques[i].responseCount+'</p>';
-                            html += '<p class="look_num">浏览 '+ ques[i].browseCount+'</p>';
+                            html += '<p class="from">来自：'+ ques.typeName+'</p>';
+                            html += '<p class="question_num">回答 '+ ques.responseCount+'</p>';
+                            html += '<p class="look_num">浏览 '+ ques.browseCount+'</p>';
                             html += '<p class="question_share">分享</p>';
-                            html += '<p class="question_date">'+ ques[i].formatDate+'</p>';
+                            html += '<p class="question_date">'+ ques.formatDate+'</p>';
                             html += '</div>';
                             lis.push(html);
                         });
                         next(lis.join(''), page < 3);
-                        $(".timeago").timeago();
                     }
                 });
             }, 500);
         }
     });
-});
-&lt;%&ndash;我的问答 分页&ndash;%&gt;
-layui.use('flow', function(){
+});*/
+<%--我的问答 分页--%>
+/*layui.use('flow', function(){
     var flow = layui.flow;
     var $ =layui.jquery;
     flow.load({
@@ -588,55 +866,53 @@ layui.use('flow', function(){
                     type: 'post',
                     dataType: "json",
                     success: function (result) {
-                        layui.each(result.articleList, function (i, article) {
+                        layui.each(result.articleList, function (i, reply) {
                             var html = '';
-                            /*我的回答 已采纳*/
-                            if (reply.accept ==1){
+                            /!*我的回答 已采纳*!/
+                            if (reply.accept === 1){
                                 html += '<div class="reply_waik_adopted">';
-                                html += '<p class="reply_date">'+ reply[i].formatDate+'</p>';
+                                html += '<p class="reply_date">'+ reply.formatDate+'</p>';
                                 html += '<p class="adopted">已采纳</p>';
                                 html += '<p class="reply_adopted_msg">';
-                                html += '<a href="javascript:;">'+ reply[i].responseContent+'</a>';
+                                html += '<a href="javascript:;">'+ reply.responseContent+'</a>';
                                 html += '</p>';
                                 html += '<i class="layui-icon layui-icon-praise"' +
-                                    'style="margin-left: 30px;color: #494949;">'+ reply[i].zanCount+'</i>';
+                                    'style="margin-left: 30px;color: #494949;">'+ reply.zanCount+'</i>';
                                 html += '<i class="layui-icon layui-icon-tread"' +
-                                    'style="margin-left: 20px;color: #494949;">'+ reply[i].caiCount+'</i>';
-                                html += '<i class="layui-icon layui-icon-dialogue"\n' +
-                                    'style="margin-left: 20px;color: #494949;">'+ reply[i].replyCount+'</i>';
+                                    'style="margin-left: 20px;color: #494949;">'+ reply.caiCount+'</i>';
+                                html += '<i class="layui-icon layui-icon-dialogue"' +
+                                    'style="margin-left: 20px;color: #494949;">'+ reply.replyCount+'</i>';
                                 html += '<p class="reply_adopted_share">分享</p>';
                                 html += '</div>';
                             }
-                            /*我的回答 未采纳*/
-                            if (reply.accept==0){
+                            /!*我的回答 未采纳*!/
+                            if (reply.accept === 0){
                                 html += '<div class="reply_waik">';
-                                html += '<p class="reply_date">'+reply[i].formatDate+'</p>';
+                                html += '<p class="reply_date">'+reply.formatDate+'</p>';
                                 html += '<p class="reply_msg">';
-                                html += '<a href="javascript:;">'+reply[i].responseContent+'</a>';
+                                html += '<a href="javascript:;">'+reply.responseContent+'</a>';
                                 html += '</p>';
                                 html += '<i class="layui-icon layui-icon-praise"' +
-                                    'style="margin-left: 30px;color: #494949;">'+ reply[i].zanCount+'</i>';
+                                    'style="margin-left: 30px;color: #494949;">'+ reply.zanCount+'</i>';
                                 html += '<i class="layui-icon layui-icon-tread"' +
-                                    'style="margin-left: 20px;color: #494949;">'+ reply[i].caiCount+'</i>';
+                                    'style="margin-left: 20px;color: #494949;">'+ reply.caiCount+'</i>';
                                 html += '<i class="layui-icon layui-icon-dialogue"' +
-                                    'style="margin-left: 20px;color: #494949;">'+ reply[i].replyCount+'</i>';
-                                html += '<p class="reply_dian">...</p>';
-                                html += '<p class="reply_delete" onclick="delNote('+ reply[i].responseId+')">删除</p>';
-                                html += '<p class="reply_edit" onclick="editNote('+ reply[i].responseContent+','+ data1[i].responseId+')">编辑</p>';
+                                    'style="margin-left: 20px;color: #494949;">'+ reply.replyCount+'</i>';
+                                html += '<p class="reply_delete" onclick="delNote('+ reply.responseId+')">删除</p>';
+                                html += '<p class="reply_edit" onclick="editNote('+ reply.responseContent+','+ data1[i].responseId+')">编辑</p>';
                                 html += '<p class="reply_share">分享</p>';
                                 html += '</div>';
                             }
                             lis.push(html);
                         });
                         next(lis.join(''), page < 3);
-                        $(".timeago").timeago();
                     }
                 });
             }, 500);
         }
     });
-});
-</script>--%>
+});*/
+</script>
 <script type="text/javascript">
     /*点击删除*/
     function delNote(responseId){
@@ -706,43 +982,6 @@ layui.use('flow', function(){
                 'underline', //下划线
                 'del' //删除线
             ]
-        });
-    });
-</script>
-<%--点击...显示分享 编辑 删除事件--%>
-<script>
-    $(".reply_delete,.reply_edit,.reply_share").hide();
-    $(document).ready(function(){
-        $(".reply_dian").click(function(){
-            $(this).siblings(".reply_delete,.reply_edit,.reply_share").show();
-            $(this).hide();
-        });
-    });
-</script>
-<!--点击选项卡(全部 我的提问 我的回答)事件-->
-<script>
-    $(".main_li2,.main_li3").hide();
-    $(document).ready(function () {
-        $(".nav_li1").click(function(){
-            $(this).addClass("active").siblings().removeClass("active");
-            $(".nav_li1").css("color","#8c24dd");
-            $(".nav_li1").css("border-bottom","2px solid #8c24dd");
-            $(".main_li_show").show();
-            $(".main_li2,.main_li3").hide();
-        });
-        $(".nav_li2").click(function () {
-            $(this).addClass("active").siblings().removeClass("active");
-            $(".nav_li1").css("color","#656565");
-            $(".nav_li1").css("border-bottom","none");
-            $(".main_li2").show();
-            $(".main_li_show,.main_li3").hide();
-        });
-        $(".nav_li3").click(function () {
-            $(this).addClass("active").siblings().removeClass("active");
-            $(".nav_li1").css("color","#656565");
-            $(".nav_li1").css("border-bottom","none");
-            $(".main_li3").show();
-            $(".main_li_show,.main_li2").hide();
         });
     });
 </script>

@@ -123,7 +123,7 @@
         <div class="header-nav">
                 <a href="/" name="nav" class="nav">首页</a>
                 <a href="/HomePage" name="nav" class="nav">项目</a>
-                <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
+                <a href="/CommunityPage" name="nav" class="nav">社区</a>
         </div>
         <!-- 搜索 -->
         <div class="header-search">
