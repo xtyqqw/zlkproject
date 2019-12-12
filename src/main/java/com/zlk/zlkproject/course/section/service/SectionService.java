@@ -8,6 +8,13 @@ import java.util.Map;
 public interface SectionService {
 
     /**
+     * 根据课程id查询课程下小节的数量
+     * @param courseId 课程id
+     * @return 小节数
+     */
+    Integer findCountByCourseId(Integer courseId);
+
+    /**
      *  根据章节id查找小节信息
      *@method findSectionByChapterId
      *@params [chapterId]

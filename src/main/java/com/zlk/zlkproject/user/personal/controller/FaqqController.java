@@ -32,10 +32,22 @@ public class FaqqController {
      * 方法用途：点击我的问答后调用该方法 查询出我的问答所有信息并按照时间排序
      * 参数类型：HttpServletRequest 用途 从session中后去操作的userId
      * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
-     *            其中 list为全部数据 qList为我的问题rList为我的回答
+     *            其中 allCount为全部总条数 qCount为我的问题总条数 rCount为我的回答总条数
      * */
     @RequestMapping(value = "faqtest")
-    public ModelAndView faqTest(HttpServletRequest request){
+    public ModelAndView myQuestion(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        User user = (User) request.getSession().getAttribute("user");
+        List list = faqqService.findAll(user.getUserId());
+        List<MyQuestions> qList = faqqService.findQuestion(user.getUserId());
+        List<MyResponse> rList = faqqService.findResponse(user.getUserId());
+        mv.setViewName("/view/personal/myquestion");
+        mv.addObject("allCount",list.size());
+        mv.addObject("qCount",qList.size());
+        mv.addObject("rCount",rList.size());
+        return mv;
+    }
+    /*public ModelAndView faqTest(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         User user = (User) request.getSession().getAttribute("user");
         String userId = user.getUserId();
@@ -47,7 +59,7 @@ public class FaqqController {
         mv.addObject("rList",rList);
         mv.addObject("list",list);
         return mv;
-    }
+    }*/
 
     /**
      * 方法用途：点击我的问答中删除答案调用该方法
@@ -95,6 +107,12 @@ public class FaqqController {
         }
     }
 
+    /**
+     * 我的回答全部分页
+     * @param request
+     * @param followerPage
+     * @return
+     */
     @RequestMapping(value = "faqtest1")
     @ResponseBody
     public Map<String,Object> faqTestAll(HttpServletRequest request,FollowerPage followerPage){
