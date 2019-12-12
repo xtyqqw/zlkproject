@@ -131,16 +131,27 @@
 
     layui.use('layer', function () {
         var $ = layui.jquery, layer = layui.layer;
-        window.editNote = function (obj, snId) {
-            $("#content").html(obj);
-            $("#input_hid").val(snId);
-            layer.open({
-                type: 1
-                , title: '编辑'
-                , btn: false
-                , area: ['70%', '50%']
-                , content: $('#demo')
-                , offset: '30px'
+        window.editNote = function (snId) {
+            $.ajax({
+                type: "post",
+                url: "<%=request.getContextPath()%>/myNote/toCon",
+                async: false,
+                dataType: 'json',
+                data: {
+                    "snId": snId,
+                },
+                success: function (ret) {
+                    $("#content").html(ret.content);
+                    $("#input_hid").val(snId);
+                    layer.open({
+                        type: 1
+                        , title: '编辑'
+                        , btn: false
+                        , area: ['70%', '50%']
+                        , content: $('#demo')
+                        , offset: '30px'
+                    })
+                }
             })
         }
     })
@@ -208,7 +219,7 @@
         })
     })
     var page = 1; //设置首页页码
-    var limit = 10;  //设置一页显示的条数
+    var limit = 9;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({
@@ -233,7 +244,7 @@
                     html += '<i class="layui-icon layui-icon-tread"></i>';
                     html += '<span class="down">'+data1[i].down +'</span>';
                     html += '<span class="lookall">查看全文</span>';
-                    html += '<span class="edit" onclick="editNote(\''+data1[i].content+'\','+data1[i].snId+')">编辑</span>';
+                    html += '<span class="edit" onclick="editNote('+data1[i].snId+')">编辑</span>';
                     html += '<span class="delete" onclick="delNote('+ data1[i].snId +')">删除</span>';
                     html += '<span class="time">'+ data1[i].stuTime +'</span>';
                     html += '</div>';
@@ -254,7 +265,16 @@
                     page=obj.curr;
                     limit=obj.limit;
                     if(!first){
-                        loadData()
+                        loadData();
+                        $(".lookall").click(function () {
+                            if (($(this).html())==="查看全文") {
+                                $(this).parent().siblings('.remove_p').removeClass("con_p");
+                                $(this).html("收起");
+                            } else {
+                                $(this).parent().siblings('.remove_p').addClass("con_p");
+                                $(this).html("查看全文");
+                            }
+                        })
                     }
                 }
             });

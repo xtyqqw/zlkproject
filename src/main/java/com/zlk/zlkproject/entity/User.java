@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,7 +39,8 @@ public class User {
     /**用户性别*/
     private String userSex;
     /**用户出生年月*/
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date userBirthday;
     /**用户籍贯*/
     private String userNative;

@@ -14,12 +14,12 @@ function getcode(e) {
     phonenumber = document.getElementById("userPhonenum");
     if(phonenumber.value.length == 0){
         layer.msg("请输入手机号码");
-        // alert("请输入手机号码");
-        // location.reload();
+        alert("请输入手机号码");
+        location.reload();
     }else{
         if(!(/^1[34578]\d{9}$/.test(phonenumber.value))){
             layer.msg("手机号码有误，请重新输入");
-            // alert("手机号码有误，请重新输入");
+            alert("手机号码有误，请重新输入");
             location.reload();
         }else{
             //测试用数据
@@ -50,6 +50,7 @@ function getcode(e) {
             // alert("验证码已发送");
             //获取验证码成功后调用倒计时函数
             countdown(e);
+            layer.closeAll();
         }
     }
 }
@@ -68,7 +69,7 @@ function countdown(e){
     }else{
         //这里是显示时间倒计时的时候点击不生效
         a.setAttribute("onclick", '');
-        document.getElementById("getcod").innerHTML="重新发送"+time;
+        document.getElementById("getcod").innerHTML="验证码已发送"+time;
         time--;
     }
 }

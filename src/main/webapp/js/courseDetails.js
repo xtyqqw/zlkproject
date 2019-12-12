@@ -176,10 +176,11 @@ layui.use('flow', function(){
 });
 $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function(){
     var sectionId = $(this).children().first().val();
+    var kechengId = $("#kechengId").val();
     $.ajax({
         type : "POST",
         url :basePath+"/kecheng/seleUserCoursesByUserCourses",
-        data:"",
+        data:{"coursesId":kechengId},
         success: function (bool) {
             if (bool=="已参加"){
                 $.ajax({
@@ -191,7 +192,11 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
                     }
                 });
             }else {
-                alert("您还未参加项目")
+                alert("您还未参加项目");
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('您还未参加项目');
+                });
             }
         }
 

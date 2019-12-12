@@ -257,7 +257,7 @@
         getPage()
     })
     var page = 1; //设置首页页码
-    var limit = 8;  //设置一页显示的条数
+    var limit = 6;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({

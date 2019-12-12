@@ -18,7 +18,7 @@ $(function () {
                 type : "POST",
                 async: false,
                 url :basePath+"/kecheng/seleUserCoursesByUserCourses",
-                data:"",
+                data:{"coursesId":data.courses.coursesId},
                 success: function (bool) {
                     /*当有记录时把 “参加项目”变为“已参加”*/
                     if (bool=="已参加"){

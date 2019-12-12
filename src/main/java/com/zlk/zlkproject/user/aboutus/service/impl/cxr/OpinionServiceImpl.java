@@ -19,4 +19,9 @@ public class OpinionServiceImpl implements OpinionService {
     public int addOpinion(Opinion opinion) {
         return opinionMapper.addOpinion(opinion);
     }
+
+    @Override
+    public int insertOpinion(Opinion opinion) {
+        return opinionMapper.insertOpinion(opinion);
+    }
 }

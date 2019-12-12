@@ -148,7 +148,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [1, '#009688'],
             time: 2000
         });
     });
