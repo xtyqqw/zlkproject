@@ -27,4 +27,7 @@ public class SectionDetails {
 
     /**个人观看的状态 */
     private String state;
+
+    /**小节的个人评分 */
+    private Integer sectionGrade;
 }

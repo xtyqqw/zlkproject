@@ -157,19 +157,23 @@ public class StuQaController {
     @RequestMapping(value = "/insertAnswer",method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public Map<String,Object> insertAnswer(HttpServletRequest request,@RequestParam Integer sqaId,String content) throws Exception{
+    public Map<String,Object> insertAnswer(HttpServletRequest request,@RequestParam Integer sqaId,Integer pId,String content) throws Exception{
         //获取session中的userid值
         User user=(User)request.getSession().getAttribute("user");
         String userId = user.getUserId();
         //获取session中的sectionId值
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         StuQa stuQa = new StuQa();
-        stuQa.setPId(sqaId);
+        if (pId==0){
+            stuQa.setPId(sqaId);
+        }else {
+            stuQa.setPId(pId);
+        }
         stuQa.setUserId(userId);
         stuQa.setSectionId(sectionId);
         stuQa.setContent(content);
-        stuQa.setAnswerNum(0);//默认为0
-        stuQa.setViewNum(0);//默认为0
+//        stuQa.setAnswerNum(0);//默认为0
+//        stuQa.setViewNum(0);//默认为0
         stuQa.setShare("分享");//默认
         stuQa.setReport("举报");//默认
         stuQa.setDate(new Date());
@@ -178,9 +182,12 @@ public class StuQaController {
         //更改当前id的回答数量
         String s = stuQaService.updateAnswerNum(sqaId);
         //查找更新后当前sqaId的信息
-        StuQa stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
-
-
+        StuQa stuQa1 = new StuQa();
+        if (pId==0){
+             stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
+        }else {
+            stuQa1 = stuQaService.findStuQaBySqaId(pId);
+        }
         Map<String,Object> map = new HashMap<>();
         map.put("message",message);
         map.put("stuQa",stuQa1);

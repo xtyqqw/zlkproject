@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"></script>
 </head>
 <body>
     <div id="insertCourseDiv" style="width: 400px; display: none">
@@ -20,6 +21,23 @@
                 <label class="layui-form-label">课程名</label>
                 <div class="layui-input-block">
                     <input type="text" name="coursesName" id="coursesName" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">课程方向:</label>
+                <div class="layui-input-block">
+                    <select class="layui-select" name="typeId" id="coursesType" lay-filter="typeName" lay-search>
+                        <option value="">请选择课程方向</option>
+                        <c:forEach items="${typeList}" var="type">
+                            <option value="${type.typeId}">(ID:${type.typeId}) ${type.typeName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">课程标签</label>
+                <div class="layui-input-block" id="tagCheck" lay-filter="check">
+
                 </div>
             </div>
             <%--<div class="layui-form-item" style="display: none">
@@ -158,7 +176,8 @@
 
             table.render({
                 elem: '#course'
-                ,url:'/courseManager/findAllByLimit'
+                ,height:'full-20'
+                ,url:'<%=request.getContextPath()%>/courseManager/findAllByLimit'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
                     {field:'coursesId', width:100, title: '课程ID', edit: 'text', sort: true}
@@ -172,6 +191,8 @@
                     ,{field:'studentNum', width:100, title: '学习人数', sort: true}
                     ,{field:'chapterNum', width:100, title: '章节数'}
                     ,{field:'sectionNum', width: 100, title: '小节数'}
+                    ,{field:'typeId', width: 100, title: '课程方向id'}
+                    ,{field:'coursesTagId', width: 100, title: '课程标签id'}
                     ,{field:'price', width:100, title: '金额', sort: true}
                     ,{field:'coverPic', width:150, title: '封面图片',templet:function (data) {
                             return "<img src='"+data.coverPic+"'/>"
@@ -197,22 +218,24 @@
                     layer.open({
                         title: "新增",
                         type: 1,
-                        area: ['40%', '80%'],
+                        area: ['80%', '80%'],
                         content: $("#insertCourseDiv"),
                         btn:['提交'],
                         success:function(index,layero){
+                            clear();
                             form.on('submit(submit)',function (data) {
                                 layer.alert(data.field.coursesName);
                                 $.ajax({
                                     type: "POST",
-                                    url:"/courseManager/insertByCourse",
+                                    url:"<%=request.getContextPath()%>/courseManager/insertByCourse",
                                     data:data.field,
                                     dataType:"json",
                                     success:function (result) {
                                         layer.alert(result.message);
                                         table.reload('course', {
                                              method: "post"
-                                            , url: '/courseHomePage/findAllByLimit'
+                                            , height:'full-20'
+                                            , url: '<%=request.getContextPath()%>/courseHomePage/findAllByLimit'
                                             , page:{
                                                 curr:1
                                             }
@@ -230,7 +253,8 @@
                     let coursesName = $("#coursesNameInput").val();
                     table.reload('course', {
                         method: "post"
-                        , url: '/courseManager/findByCoursesNameLimit?coursesName='+coursesName
+                        , height:'full-20'
+                        , url: '<%=request.getContextPath()%>/courseManager/findByCoursesNameLimit?coursesName='+coursesName
                         , page:{
                             curr:1
                         }
@@ -238,20 +262,6 @@
                     });
                 }
             });
-
-            /*$("#seek").click(function () {
-                let coursesName = $("#coursesNameInput").val();
-                table.reload('course', {
-                    method: "post"
-                    , url: '/courseHomePage/findByCoursesNameLimit?coursesName='+coursesName
-                    , page:{
-                        curr:1
-                    }
-                    , toolbar: '#toolbarDemo'
-                });
-            });*/
-
-
 
             //监听行工具事件
             table.on('tool(course)', function(obj){
@@ -262,13 +272,14 @@
                         $.ajax({
                             type : "POST",
                             async: false,
-                            url :"/courseManager/deleteByCourseId",
+                            url :"<%=request.getContextPath()%>/courseManager/deleteByCourseId",
                             data: {"courseId":data.coursesId},
                             success: function (result) {
                                 // layer.msg("删除成功");
                                 layer.alert(result.message);
                                 table.reload('course',{
-                                    url: '/courseManager/findAllByLimit',
+                                    url: '<%=request.getContextPath()%>/courseManager/findAllByLimit',
+                                    height:'full-20',
                                     method: 'post',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -279,14 +290,13 @@
                         });
                     });
                 } else if(obj.event === 'edit'){
+                    clear();
                     $("#coverPicImg").attr("src",data.coverPic);
                     $("#introduceVideo1").val("src",data.introduceVideo);
                     $("#introducePicImg").attr("src",data.introducePic);
                     $("#featurePicImg").attr("src",data.featurePic);
                     $("#coursesId").val(data.coursesId);
                     $("#coursesName").val(data.coursesName);
-                    /*$("#chapterNum").val(data.chapterNum);
-                    $("#sectionNum").val(data.sectionNum);*/
                     $("#price").val(data.price);
                     $("#coverPicInput").val(data.coverPic);
                     $("#introduceVideoInput").val(data.introduceVideo);
@@ -294,18 +304,21 @@
                     $("#introducePicInput").val(data.introducePic);
                     $("#featureText").val(data.featureText);
                     $("#featurePicInput").val(data.featurePic);
+                    $("#coursesType").val(data.typeId);
+                    form.render('select');
+                    $("#tagCheck").val(data.coursesTagId);
+                    form.render('radio');
                     layer.open({
                         title: "编辑",
                         type: 1,
-                        area: ['40%', '80%'],
+                        area: ['80%', '80%'],
                         content: $("#insertCourseDiv"),
                         btn:['提交'],
                         success:function(index,layero){
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
-                                    url:"/courseManager/updateCourses",
-                                    // contentType: "application/json;charset=UTF-8",
+                                    url:"<%=request.getContextPath()%>/courseManager/updateCourses",
                                     data:data.field,
                                     dataType:"json",
                                     success:function (result) {
@@ -326,7 +339,7 @@
             //拖拽上传
             let uploadInst1 = upload.render({
                 elem: '#introduceVideo'
-                ,url: '/courseManager/uploadPic'
+                ,url: '<%=request.getContextPath()%>/courseManager/uploadPic'
                 ,accept: 'file'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
@@ -351,7 +364,7 @@
             });
             let uploadInst2 = upload.render({
                 elem: '#coverPic'
-                ,url: '/courseManager/uploadPic'
+                ,url: '<%=request.getContextPath()%>/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -374,7 +387,7 @@
             });
             let uploadInst3 = upload.render({
                 elem: '#introducePic'
-                ,url: '/courseManager/uploadPic'
+                ,url: '<%=request.getContextPath()%>/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -397,7 +410,7 @@
             });
             let uploadInst4 = upload.render({
                 elem: '#featurePic'
-                ,url: '/courseManager/uploadPic'
+                ,url: '<%=request.getContextPath()%>/courseManager/uploadPic'
                 ,before: function(obj){
                     //预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -418,6 +431,40 @@
                     });
                 }
             });
+
+            //课程方向下拉框监听事件
+            form.on('select(typeName)', function (data) {
+                let typeId = data.value;
+                $.ajax({
+                    type:"POST",
+                    url:"<%=request.getContextPath()%>/tagKe/findTagByTypeId",
+                    data:{"typeId":typeId},
+                    dataType:"json",
+                    success:function (res) {
+                        $("#tagCheck").empty();
+                        $.each(res.tagList,function (i, tag) {
+                            $("#tagCheck").append('<input type="radio" name="coursesTagId" title="'+tag.tagName+'" value="'+tag.tagId+'">');
+                        });
+                        form.render('radio');
+                    }
+                })
+            });
+
+            //清空表单数据
+            function clear() {
+                $("#coursesId").val();
+                $("#coursesName").val();
+                $("#price").val();
+                $("#coverPicInput").val();
+                $("#introduceVideoInput").val();
+                $("#introduceText").val();
+                $("#introducePicInput").val();
+                $("#featureText").val();
+                $("#featurePicInput").val();
+                $("#coursesType").val();
+                $("#tagCheck").val();
+                form.render();
+            }
 
 
         });

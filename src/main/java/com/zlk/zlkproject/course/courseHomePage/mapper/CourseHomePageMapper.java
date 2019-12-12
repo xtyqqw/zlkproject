@@ -118,5 +118,15 @@ public interface CourseHomePageMapper {
      *@time 2019/12/4  11:19
      */
     Integer findCountsByCoursesName(String coursesName);
+
+    /**
+     * 查找全部课程id与名字
+     *@method findAllCourses
+     *@params []
+     *@return java.util.List<com.zlk.zlkproject.entity.Courses>
+     *@author zhang
+     *@time 2019/12/10  16:01
+     */
+    List<Courses> findAllCourses();
 }
 
