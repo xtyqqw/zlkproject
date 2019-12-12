@@ -24,7 +24,7 @@
         <!--<result property="tagName" column="tag_name" javaType="java.lang.String"></result>-->
     </resultMap>
 
-    <!--根据当月创建时间降序和浏览量降序查询最新文章标题-->
+    <!--根据当月创建时间和浏览量降序查询最新文章标题-->
     <select id="selectTitleByArticle" resultType="com.zlk.zlkproject.entity.Article" resultMap="articleEntityMap">
         select article_id,title,browse_count,comment_count from article where date_format(create_time,'%Y-%m') = date_format(now(),'%Y-%m') order by browse_count desc LIMIT 0,6
     </select>

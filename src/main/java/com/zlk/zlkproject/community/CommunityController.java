@@ -37,9 +37,9 @@ public class CommunityController {
      */
     @RequestMapping("/CommunityPage")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
-        //根据时间倒序返回文章标题集合 月排序
+        //根据当月创建时间和浏览量降序查询最新文章集合 月排序
         List<Article> alist = articleHotService.selectTitleByArticle(article);
-        //根据浏览量倒序返回文章标题集合 总排序
+        //根据浏览量倒序返回文章集合 总排序
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
         ModelAndView mv=new ModelAndView();
         mv.addObject("alist",alist);
