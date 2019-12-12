@@ -16,7 +16,7 @@
         <result property="introducePic" column="introduce_pic" javaType="java.lang.String"></result>
         <result property="featureText" column="feature_text" javaType="java.lang.String"></result>
         <result property="featurePic" column="feature_pic" javaType="java.lang.String"></result>
-        <result property="typeId" column="feature_text" javaType="java.lang.Integer"></result>
+        <result property="typeId" column="type_id" javaType="java.lang.Integer"></result>
         <result property="coursesTagId" column="courses_tag_id" javaType="java.lang.Integer"></result>
 
         <result property="userId" column="user_id" javaType="java.lang.String"></result>
@@ -64,7 +64,7 @@
  </select>
 
     <select id="selectCoursesByLimit" resultMap="CourseHomePageEntityMap">
-        select courses_id,courses_name,student_num,chapter_num,section_num,price,cover_pic,
+        select courses_id,courses_name,student_num,chapter_num,section_num,type_id,courses_tag_id,price,cover_pic,
         introduce_video,introduce_text,introduce_pic,feature_text,feature_pic from courses limit #{offset},#{limit};
     </select>
 
@@ -73,9 +73,9 @@
     </select>
 
     <insert id="insertByCourses" keyProperty="coursesId" useGeneratedKeys="true">
-        insert into courses(courses_name,price,cover_pic,introduce_video
-        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{coursesName}
-        ,#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
+        insert into courses(courses_name,type_id,courses_tag_id,price,cover_pic,introduce_video
+        ,introduce_text,introduce_pic,feature_text,feature_pic) values(#{coursesName},#{typeId}
+        ,#{coursesTagId},#{price},#{coverPic},#{introduceVideo},#{introduceText},#{introducePic},
         #{featureText},#{featurePic})
     </insert>
 
@@ -85,16 +85,22 @@
             <if test="coursesName != null and coursesName != ''">
                 courses_name = #{coursesName},
             </if>
-            <if test="studentNum != null and studentNum != ''">
+            <if test="studentNum != null">
                 student_num = #{studentNum},
             </if>
-            <if test="chapterNum != null and chapterNum != ''">
+            <if test="chapterNum != null">
                 chapter_num = #{chapterNum},
             </if>
-            <if test="sectionNum != null and sectionNum != ''">
+            <if test="sectionNum != null">
                 section_num = #{sectionNum},
             </if>
-            <if test="price != null and price != ''">
+            <if test="typeId != null">
+                type_id = #{typeId},
+            </if>
+            <if test="coursesTagId != null">
+                courses_tag_id = #{coursesTagId},
+            </if>
+            <if test="price != null">
                 price = #{price},
             </if>
             <if test="coverPic != null and coverPic != ''">
@@ -137,5 +143,9 @@
         <if test="coursesName!=null and coursesName !=''">
             where courses_name like CONCAT('%',#{coursesName},'%')
         </if>
+    </select>
+    <!--查找全部课程-->
+    <select id="findAllCourses" resultMap="CourseHomePageEntityMap">
+        select * from courses;
     </select>
 </mapper>
