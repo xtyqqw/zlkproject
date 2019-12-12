@@ -1,8 +1,8 @@
 package com.zlk.zlkproject.community.question.controller;
 
+import com.zlk.zlkproject.community.question.entity.Response;
 import com.zlk.zlkproject.community.question.service.ResponseService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
-import com.zlk.zlkproject.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +20,9 @@ import java.util.Date;
 public class ResponseController {
     @Autowired
     private ResponseService responseService;
-
-    @RequestMapping("test")
-    public String test() {
-        return "view/community/questionParticulars";
+    @RequestMapping("/test")
+    public String test(){
+        return "/view/community/test";
     }
 
     @RequestMapping(value = "/save")

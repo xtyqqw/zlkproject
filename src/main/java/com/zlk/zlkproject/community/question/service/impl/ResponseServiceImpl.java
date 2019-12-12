@@ -1,8 +1,8 @@
 package com.zlk.zlkproject.community.question.service.impl;
 
 import com.zlk.zlkproject.community.question.dao.ResponseDao;
+import com.zlk.zlkproject.community.question.entity.Response;
 import com.zlk.zlkproject.community.question.service.ResponseService;
-import com.zlk.zlkproject.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

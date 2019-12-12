@@ -28,7 +28,7 @@
         select user_id=#{userId} from question
     </select>
     <select id="selectCheck" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
-        select check=#{check} from question where user_id=#{userId}
+        select audit=#{audit} from question where user_id=#{userId}
     </select>
     <insert id="addQuestion"  parameterType="com.zlk.zlkproject.entity.Question" >
         insert into question (question_id,question_title,question_content,solve,create_time,browse_count,question_set_top,zan_count,cai_count,audit,response_count,type_name,tag_name)

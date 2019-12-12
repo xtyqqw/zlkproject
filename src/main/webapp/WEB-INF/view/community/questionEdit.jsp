@@ -75,7 +75,7 @@
                             <i class="dropdown icon"></i>
                             <div class="text">待解决</div>
                             <div class="menu">
-                                    <div class="item" data-value="0">待解决</div>
+                                <div class="item" data-value="0">待解决</div>
                                 <div class="item" data-value="1">已解决</div>
                                 <div class="item" data-value="2">未解决</div>
                             </div>

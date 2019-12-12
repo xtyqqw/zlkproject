@@ -86,7 +86,9 @@ public class QuestionHomeController {
     @GetMapping(value = "/findQuestion")
     public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("questionId", questionHomeService.getAndConvert(questionId));
+     /*   questionId="1047919253";*/
+        Question question = questionHomeService.getAndConvert(questionId);
+        mv.addObject("question",question);
         mv.setViewName("/view/community/questionParticulars");
         return mv;
     }

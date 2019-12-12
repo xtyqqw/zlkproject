@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.question.dao;
 
-import com.zlk.zlkproject.entity.Response;
+import com.zlk.zlkproject.community.question.entity.Response;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

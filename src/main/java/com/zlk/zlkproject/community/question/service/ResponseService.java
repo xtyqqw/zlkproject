@@ -1,6 +1,6 @@
 package com.zlk.zlkproject.community.question.service;
 
-import com.zlk.zlkproject.entity.Response;
+import com.zlk.zlkproject.community.question.entity.Response;
 import org.springframework.stereotype.Service;
 
 @Service

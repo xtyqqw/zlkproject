@@ -873,7 +873,7 @@
                             layui.each(result.questionAllList, function (i, question) {
                                 var html = '';
                                 html += '<div class="all" >' +
-                                    '<div class="title"><a href="../question/findQuestion">' + question.questionTitle + '</a></div>';
+                                    '<div class="title"><h3><a href="../question/findQuestion" name="questionId">' + question.questionTitle + '</a></h3></div>';
                                 if (question.solve == 0) {
                                     html += '<div class="createArticleType">待解决</div>';
                                 } else if (question.solve == 1) {

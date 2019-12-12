@@ -43,34 +43,33 @@ public class QuestionController {
      * @date 2019/11/27 16:43
      */
     @RequestMapping(value = "/questionGuide")
-    public ModelAndView main(HttpServletRequest request, Question question, String userId) throws Exception {
+    public ModelAndView main(HttpServletRequest request, Question question) throws Exception {
         ModelAndView mv = new ModelAndView();
- /*       Integer user = questionService.selectUserId(question);
-        if (user != null) {
+      /*  User user = (User) request.getSession().getAttribute("user");
+        String usId = user.getUserId();
+        if (usId != null) {*/
             mv.addObject("msg", "您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
-            Integer check1 = questionService.selectCheck(userId);
-            if (check1 != null) {
-                if (question.getCheck() == 1) {
-                    question.setCheck(1);
+      /*      Integer audit1 = questionService.selectAudit(usId);
+            if (audit1 != null) {
+                if (audit1 == 1) {
+                    question.setAudit("1");
                     mv.addObject("flag", "true");
                     mv.addObject("msg", "可以发文");
                     mv.setViewName("/view/community/questionGuide");
-                } else if (question.getCheck() == 0) {
-                    mv.addObject("flag", "true");
-                    mv.addObject("msg", "你的提问正在审核中，通过以后才能继续发表提问，我们会尽快处理，给您反馈");
-                    mv.setViewName("/view/community/");
-                } else {
+                } else if (audit1 == 0) {
                     mv.addObject("flag", "true");
                     mv.addObject("msg", "你之前的提问审核失败，以后发表提问请注意撰文规则，感谢您的配合");
                     mv.setViewName("/view/community");
-                }
-            } else {
-                mv.addObject("msg", "你还没有登录，请先登录");
-                mv.setViewName("/view/signin");
-            }
+                } else {
+                    mv.addObject("flag", "true");
+                    mv.addObject("msg", "你的提问正在审核中，通过以后才能继续发表提问，我们会尽快处理，给您反馈");
+                    mv.setViewName("/view/community/");
+                }*/
+/*            } else {
+            mv.addObject("msg", "你还没有登录，请先登录");
+            mv.setViewName("/view/signin");
         }*/
-        mv.setViewName("/view/community/questionGuide");
         return mv;
     }
 

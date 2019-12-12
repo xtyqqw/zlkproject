@@ -23,7 +23,7 @@ public interface QuestionService {
      * @return java.lang.Integer
      * @date 2019/12/10 11:33
      */
-    Integer selectCheck(String userId);
+    Integer selectAudit(String userId);
     /*
      * @descrption 提交提问
      * @author gby

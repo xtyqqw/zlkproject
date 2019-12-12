@@ -26,8 +26,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Integer selectCheck(String userId) {
-        return questionMapper.selectCheck(userId);
+    public Integer selectAudit(String userId) {
+        return questionMapper.selectAudit(userId);
     }
 
     @Transactional

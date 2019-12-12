@@ -1,6 +1,5 @@
-package com.zlk.zlkproject.entity;
+package com.zlk.zlkproject.community.question.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +11,7 @@ import java.util.Date;
 /**
  * @author gby
  * @ClassName Response
- * @description 回答表
+ * @description 社区回答
  * @date 2019/12/11 16:17
  */
 @Entity
