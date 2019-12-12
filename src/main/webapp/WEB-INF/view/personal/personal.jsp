@@ -196,7 +196,7 @@
         <!-- 头像 -->
         <div class="headimg">
             <c:if test="${user.userImg==null}">
-                <img src="/img/headimg.jpg" class="headerimg">
+                <img src="/img/headimg.png" class="headerimg">
             </c:if>
             <c:if test="${user.userImg!=null}">
                 <img src="${user.userImg}" class="headerimg">
