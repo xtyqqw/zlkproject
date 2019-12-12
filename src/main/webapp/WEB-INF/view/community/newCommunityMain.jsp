@@ -119,8 +119,9 @@
         iframe{
             width: 100%;
             height: 98%;
-            border: none 0;
             display: inline;
+            z-index: -1;
+            border: none 0;
         }
         /*热门文章样式*/
         ::-webkit-scrollbar{
@@ -128,7 +129,7 @@
         }
         .wz_remenwenzhang{
             position: absolute;
-            margin-left: 76vw;
+            margin-left: 84vw;
             margin-top: -8vw;
         }
         .wz_remen{
@@ -173,7 +174,7 @@
         .zonganniu{
             -webkit-border-top-right-radius: 0.4vw;
             -webkit-border-bottom-right-radius: 0.4vw;
-            margin-top: -2.2vw;
+            margin-top: -2.14vw;
             margin-left: 1.2vw;
             border: 1px solid white;
             line-height: 2vw;
@@ -188,7 +189,7 @@
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 12.09vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -205,7 +206,7 @@
             width: 20vw;
             margin-left: -14vw;
             position: absolute;
-            margin-top: 12.09vw;
+            margin-top: 12.07vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -314,7 +315,7 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>" target="">问答</a>
             </div>
-            <iframe class="iframe" name="pageTags" frameborder="1" ></iframe>
+            <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
         <div class="add">
             <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
@@ -346,7 +347,6 @@
                     </c:forEach>
                 </ul>
             </div>
-
             <div class="wz_remen_zt2">
                 <ul>
                     <c:forEach items="${blist}" var="article">

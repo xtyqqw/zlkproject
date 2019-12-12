@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../../../layui/css/layui.css"/>
-    <script src="../../../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../../../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <style type="text/css">
     body {

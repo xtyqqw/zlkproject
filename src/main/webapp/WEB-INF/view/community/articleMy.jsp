@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的文章</title>
     <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
-    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .context-div{
             overflow-x:hidden;
@@ -74,11 +75,6 @@
             display: inline-block;
             vertical-align: middle;
             text-align: left;
-        }
-        .kuang{
-            width: 98%;
-            position: relative;
-            top: 1px;
         }
         .articleDigest{
             margin-left: 20px;
@@ -184,20 +180,10 @@
     </style>
 </head>
 <body>
-<div class="context-div" id="context-div"></div>
-<!--没插图就隐藏-->
-<%--<script>
-    $(function () {
-        var img = $("#figures").find("img");
-        if(img.length<=0){
-            $("#figures").hide();
-        }
-    })
-</script>--%>
-<script type="text/javascript" src="/layui/layui.js"  charset="utf-8"></script>
-<!--瀑布流-->
+<div class="context-div"></div>
+<div id="demo1"></div>
 <script>
-    layui.use('flow', function(){
+    /*layui.use('flow', function(){
         var flow = layui.flow;
         var $ =layui.jquery;
         flow.load({
@@ -254,6 +240,86 @@
                 }, 500);
             }
         });
+    });*/
+    $(function () {
+        loadData();
+        getPage();
+        $(".timeago").timeago();
+    });
+    var page = 1; //设置首页页码
+    var limit = 5;  //设置一页显示的条数
+    var total;    //总条数
+    function loadData() {
+        $.ajax({
+            type: "post",
+            url: "/articles/findByUserId?userId="+userId,
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit,
+            },
+            success: function (ret) {
+                total = ret.count;  //设置总条数
+                var article = ret.articleList;
+                var html = '';
+                for (var i = 0; i < article.length; i++) {
+                    html += '<div class="all" >';
+                    html += '<div class="title"><a href="" onclick="articleShow()">' + article[i].title + '</a></div>';
+                    if (article[i].createArticleType === 0) {
+                        html += '<div class="createArticleType">原创</div>';
+                    }
+                    if (article[i].createArticleType === 1) {
+                        html += '<div class="createArticleType">转载</div>';
+                    }
+                    if (article[i].createArticleType === 2) {
+                        html += '<div class="createArticleType">翻译</div>';
+                    }
+                    if (article[i].articleSetTop === 0) {
+                        html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
+                    }
+                    if (article[i].articleSetTop === 1) {
+                        html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + article.articleSetTop + '</p></div>';
+                    }
+                    html += '<div class="figures" id="figures">' + '<img src="' + article[i].figures + '"/>' + '</div>';
+                    html += '<div class="articleDigest" style="width: 660px">' + article[i].articleDigest + '</div>';
+                    html += '<div>';
+                    html += '<div class="userRealname"><a href="../articles/toTest">' + article[i].user.userRealname + '</a></div>';
+                    html += '<div class="little"></div>';
+                    html += '<div class="createTime"><span class="timeago" title="' + article[i].createTime + '"></span></div>';
+                    html += '</div>';
+                    html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
+                    html += '<div class="browseCount"><a href="../articles/toTest">' + article[i].browseCount + '阅读' + '</a></div>';
+                    html += '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>';
+                    html += '<div class="commentCount"><a href="../articles/toTest">' + article[i].commentCount + '评论' + '</a></div>';
+                    html += '</div>';
+                }
+                $(".context-div").empty().append(html);
+            }
+        });
+    }
+    function getPage(){
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'demo1'
+                ,count: total,
+                limit:limit,
+                jump: function(obj, first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    if(!first){
+                        loadData()
+                    }
+                }
+            });
+        });
+    }
+</script>
+<script>
+    layer.msg('请先进行登录',{
+        time:2000,
+        btn:['好的']
     });
 </script>
 </body>

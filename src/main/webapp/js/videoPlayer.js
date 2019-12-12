@@ -384,7 +384,7 @@ $(document).ready(function () {
                                     }
                                 });
                                 str += "<div class=\"stuQa-userPhoto\">";
-                                str += "<img src='"+user.userRealimg+"' class='userPhoto'>";
+                                str += "<img src='"+user.userImg+"' class='userPhoto'>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-userName\">"+user.userRealname+"</div>";
                                 str += "</div>";
@@ -420,6 +420,7 @@ $(document).ready(function () {
                                     str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editorflag+"'>"+stuQa.report+"</div>";
                                 }
                                 str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editorflag+"'>回复</div>";
+                                str += "<input hidden value='"+stuQa.pId+"'></input>";
                                 str += "<div class=\"stuQa-date\" id='stuQa-date"+editorflag+"'>"+stuQa.date+"</div>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-answer-div\" id='sqaId"+stuQa.sqaId+"' style='display: none'>";
@@ -659,8 +660,18 @@ $(document).ready(function () {
                         str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-view"+editori+"'>浏览</div>";
                         str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-viewNum"+editori+"'>"+stuQa.viewNum+"</div>";
                         str += "<div class=\"stuQa-func-tag stuQa-readMore\" id='stuQa-answer-readMore"+editori+"'>查看全文</div>";
-                        str += "<div class=\"stuQa-func-tag stuQa-share\" id='stuQa-answer-share"+editori+"'>"+stuQa.share+"</div>";
-                        str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-answer-report"+editori+"'>"+stuQa.report+"</div>";
+                        if (stuQa.share === "已分享"){
+                            str += "<div class=\"stuQa-func-tag stuQa-share\" style='color: #9ea2ea' id='stuQa-share"+editori+"'>"+stuQa.share+"</div>";
+                        }else {
+                            str += "<div class=\"stuQa-func-tag stuQa-share\" id='stuQa-share"+editori+"'>"+stuQa.share+"</div>";
+                        }
+                        if (stuQa.report === "已举报"){
+                            str += "<div class=\"stuQa-func-tag stuQa-report\" style='color: #9ea2ea' id='stuQa-report"+editori+"'>"+stuQa.report+"</div>";
+                        }else {
+                            str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editori+"'>"+stuQa.report+"</div>";
+                        }
+                        str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editori+"'>回复</div>";
+                        str += "<input hidden value='"+stuQa.pId+"'></input>";
                         str += "<div class=\"stuQa-date\" id='stuQa-answer-date"+editori+"'>"+stuQa.date+"</div>";
                         str += "</div>";
                         str += "</div>";
@@ -712,6 +723,9 @@ $(document).ready(function () {
         //回复点击事件
         $(document).on("click", ".stuQa-reply", function () {
             var sqaId = $(this).parent().parent().parent().find("input").val();
+            var pId = $(this).next("input").val();
+            alert(sqaId);
+            alert(pId);
             var answerId = $(this).parent().find("div").attr("id");
             var answerNumId= $(this).parent().find("div").eq(1).attr("id");
             layer.open({
@@ -724,7 +738,7 @@ $(document).ready(function () {
                 yes: function (index, layero) {
                     layer.close(index);
                     var content = ans_editor.txt.html();
-                    var data = {"sqaId":sqaId,"content":content};
+                    var data = {"sqaId":sqaId,"pId":pId,"content":content};
                     $.ajax({
                         type:"POST",
                         url:basePath+"/stuQa/insertAnswer",
@@ -1097,7 +1111,7 @@ $(document).ready(function () {
                 $(this).parent().parent().parent().css("height","200px");
                 $(this).parent().prev().css("height","86%");
                 $(this).parent().prev().children().eq(1).css("height","90%");
-                $(".SNS_f_b_moduleBox").css("right",130);
+                /*$(".SNS_f_b_moduleBox").css("right",130);*/
                 flexState = false;
             }else{
                 $(this).parent().parent().css("height","auto");
@@ -1107,8 +1121,8 @@ $(document).ready(function () {
                 if (height < 200){
                     height = 200;
                 }
-                $(this).css("right",0);
-                $(this).siblings().css("right",0);
+                /*$(this).css("right",0);
+                $(this).siblings().css("right",0);*/
                 $(this).parent().prev().css("height",height);
                 flexState = true;
             }
@@ -1436,7 +1450,7 @@ $(document).ready(function () {
                                                     '];\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.showLinkImg = false;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer ='+ basePath +'\'stuComment/uploadPic\';\n' +
+                                                    'SCS_reply_editors'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                                     'SCS_reply_editors'+ flag +'.customConfig.uploadImgHooks = {\n' +
@@ -1541,7 +1555,7 @@ $(document).ready(function () {
                                         '];\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.showLinkImg = false;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadFileName = \'file\';\n' +
-                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \'stuComment/uploadPic\';\n' +
+                                        'SCS_reply_editor'+ flag +'.customConfig.uploadImgServer = \''+ basePath +'/stuComment/uploadPic\';\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgTimeout = 1000*20;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgMaxLength = 1;\n' +
                                         'SCS_reply_editor'+ flag +'.customConfig.uploadImgHooks = {\n' +
@@ -2186,18 +2200,29 @@ $(document).ready(function () {
     // 播放/暂停 按钮点击
     elem_btnPlay.onclick = function () {
         if(elem_video1.paused){
-
-            let data = {"state":"播放中"};
+            alert(sectionId);
+            let videoState = "";
             $.ajax({
-                type:"POST",
-                url:basePath+'/player/recordState',
-                data: data,
-                dataType: 'json',
-                success: function () {
-
+                type: "POST",
+                url: basePath+"/section/findState?sectionId=" + sectionId,
+                async: false,
+                success: function (data) {
+                    videoState = data.state;
+                    return videoState;
                 }
             });
+            if (videoState==="未观看"){
+                let data = {"state":"播放中"};
+                $.ajax({
+                    type:"POST",
+                    url:basePath+'/player/recordState',
+                    data: data,
+                    dataType: 'json',
+                    success: function () {
 
+                    }
+                });
+            }
             elem_video1.play();
             elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
             elem_totalTime.innerText = format(elem_video1.duration);

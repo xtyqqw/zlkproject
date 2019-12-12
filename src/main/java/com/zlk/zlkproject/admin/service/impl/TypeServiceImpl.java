@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @ClassName TypeService
+ * @ClassName TypeKeService
  * @Description: 方向业务逻辑类
  * @Author lufengxiang
  * Date 2019/11/21 14:28

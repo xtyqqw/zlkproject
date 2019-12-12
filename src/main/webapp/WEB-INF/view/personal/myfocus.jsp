@@ -466,15 +466,76 @@
     </div>
     <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
 </c:if>
-<%--分页--%>
 <script>
+    /*----------------------------点击已关注 取消关注---------------------------*/
+    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+    $(".ok_zi").click(function () {
+        let str = $(this).prev().prev().text() + '';
+        nofollow(str,$(this));
+    });
+    function nofollow(userId,mythis){
+        $.ajax({
+            url:"/follow/defollow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            context: userId,
+            success:function (data) {
+                if (data.code === '1'){
+                    mythis.hide();
+                    mythis.siblings(".ok").hide();
+                    mythis.siblings(".jia,.no_zi").show();
+                    mythis.parents().siblings(".att_tan").children(".att_success1").show().delay(2000).hide(300);
+                } else {
+                    mythis.parents().siblings(".att_tan").children(".att_success2").show().delay(2000).hide(300);
+                }
+            },
+            error:function () {
+                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
+            }
+        });
+    }
+    /*----------------------------------点击加关注-------------------------------*/
+    /*$(".no_zi").click(function () {
+        let str = $(this).prev().prev().text() + '';
+        jiafollow(str,$(this));
+    });*/
+    function jiaclick() {
+        let str = $(this).prev().prev().text() + '';
+        jiafollow(str,$(this));
+    }
+    function jiafollow(userId,mythis){
+        $.ajax({
+            url:"/follow/follow?userId="+userId,
+            type:"GET",
+            dataType:"json",
+            success:function (data) {
+                if (data.code === '1'){
+                    mythis.hide();
+                    mythis.siblings(".jia").hide();
+                    mythis.siblings(".ok,.ok_zi").show();
+                    mythis.parents().siblings(".att_tan").children(".att_success4").show().delay(2000).hide(300);
+                } else {
+                    mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
+                }
+            },
+            error:function () {
+                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
+            }
+        });
+    }
+    /*----------------------------分页---------------------------*/
+    $(function () {
+        showFocus();
+        getPage();
+        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+    });
     var page = 1;
     var limit = 3;
     var total;
     function showFocus() {
         $.ajax({
             type: "post",
-            url: "/follow/follower",
+            url: "/follow/myfollow",
             async: false,
             dataType: 'json',
             data: {
@@ -486,18 +547,14 @@
                 var focus = data.list;
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
-                    html += '<div class="waik">';
-                    html += '<div class="up">';
-                    html += '<div class="up_left">';
+                    html += '<div class="waik"><div class="up"><div class="up_left">';
                     html += '<img src="../../img/headimg.jpg"/>';
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="ok">√</p>';
-                    html += '<p class="ok_zi">已关注</p>';
+                    html += '<p class="ok">√</p><p class="ok_zi" onclick="jiaclick()">已关注</p>';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="jia">+</p>';
-                    html += '<p class="no_zi">加关注</p>';
+                    html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
                     html += '</div><div class="att_tan"><div class="att_success1">';
                     html += '<p class="att_success_ok1">√</p>';
                     html += '<p class="att_success_zi1">取消关注成功!</p>';
@@ -512,9 +569,9 @@
                     html += '<p class="att_success_zi5">关注失败，请重新操作！</p></div></div>';
                     html += '<p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>';
                     html += '<div class="attention_person">';
-                    html += '<a href="/follow/userfollowed?userId='+ focus[i].userId+'"' +
+                    html += '<a href="/follow/hefollows?userId='+ focus[i].userId+'"' +
                         'name="attention" class="attention_him">'+ focus[i].followedNum+'人关注了ta</a>';
-                    html += '<a href="/follow/userfollower?userId='+ focus[i].userId+'"' +
+                    html += '<a href="/follow/followshim?userId='+ focus[i].userId+'"' +
                         'name="attention" class="he_attention">ta关注了'+ focus[i].followerNum+'人</a>';
                     html += '</div></div><div class="up_right"><div class="xuexili">';
                     html += '<i class="layui-icon layui-icon-chart" style="float: left;margin-right: 10px;font-size: 20px;"></i>';
@@ -562,7 +619,7 @@
                                 html += '<a href="javascript:;">'+ focus[i].list[j].problemUser+'</a>：</span>';
                                 html += '<span class="action">的文章</span><span class="article">';
                                 html += '<a href="/community/article-show?articleId="+'+ focus[i].list[j].articleId+'>'+ focus[i].list[j].articleName+'</a>';
-                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span>';
+                                html += '</span></div><span class="date">'+ focus[i].list[j].dateFormat+'</span></div>';
                             }
                             /*4 提出问题*/
                             if (focus[i].list.actionType===4){
@@ -605,6 +662,7 @@
                             'style="font-size: 30px;margin: 0 485px;color: #999999;"></i>';
                         html += '</div>';
                     }
+                    html += '</div>';
                 }
                 $(".main").empty().append(html);
             }
@@ -628,65 +686,6 @@
                     }
                 }
             });
-        });
-    }
-    $(function () {
-        showFocus();
-        getPage();
-    })
-</script>
-<%--点击关注事件--%>
-<script type="text/javascript">
-    /*点击已关注 取消关注*/
-    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-    $(".ok_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        nofollow(str,$(this));
-    });
-    function nofollow(userId,mythis){
-        $.ajax({
-            url:"/follow/defollow?userId="+userId,
-            type:"GET",
-            dataType:"json",
-            context: userId,
-            success:function (data) {
-                if (data.code === '1'){
-                    mythis.hide();
-                    mythis.siblings(".ok").hide();
-                    mythis.siblings(".jia,.no_zi").show();
-                    mythis.parents().siblings(".att_tan").children(".att_success1").show().delay(2000).hide(300);
-                } else {
-                    mythis.parents().siblings(".att_tan").children(".att_success2").show().delay(2000).hide(300);
-                }
-            },
-            error:function () {
-                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
-            }
-        });
-    }
-    /*点击加关注*/
-    $(".no_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        jiafollow(str,$(this));
-    });
-    function jiafollow(userId,mythis){
-        $.ajax({
-            url:"/follow/follow?userId="+userId,
-            type:"GET",
-            dataType:"json",
-            success:function (data) {
-                if (data.code === '1'){
-                    mythis.hide();
-                    mythis.siblings(".jia").hide();
-                    mythis.siblings(".ok,.ok_zi").show();
-                    mythis.parents().siblings(".att_tan").children(".att_success4").show().delay(2000).hide(300);
-                } else {
-                    mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
-                }
-            },
-            error:function () {
-                mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
-            }
         });
     }
 </script>

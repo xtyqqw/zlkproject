@@ -26,6 +26,7 @@ import java.util.Map;
 public class ArticleListController {
     @Autowired
     private ArticleListService articleListService;
+
     /**
      * 最新文章接口
      * @return
@@ -41,7 +42,7 @@ public class ArticleListController {
      */
     @RequestMapping(value = "/toArticleHot")
     public String toArticleHot(){
-        return "view/community/toArticleHot";
+        return "view/community/articleHot";
     }
 
     /**
@@ -50,8 +51,9 @@ public class ArticleListController {
      */
     @RequestMapping(value = "/toArticleMy")
     public String toArticleMy(){
-        return "view/community/toArticleMy";
+        return "view/community/articleMy";
     }
+
     /**
      * 测试页面
      * @return
@@ -65,8 +67,10 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{
         List<Article> articleList=articleListService.findByCreateTime(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
 
@@ -74,8 +78,10 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByBrowseCount(Pagination pagination)throws Exception{
         List<Article> articleList = articleListService.findByBrowseCount(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map =new HashMap<>();
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
     /*@RequestMapping(value = "/findByUserId")
@@ -96,11 +102,13 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{
         User user=new User();
-        user.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
-        pagination.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
+        user.setUserId("1");
+        pagination.setUserId("1");
         List<Article> articleList=articleListService.findByUserId(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
 }

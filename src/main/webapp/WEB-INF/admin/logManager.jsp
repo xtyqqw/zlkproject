@@ -92,7 +92,7 @@
                     , {field: 'logId', title: '日志编号', width: 110, sort: true}
                     , {field: 'name', title: '操作者名称', width: 120, sort: true}
                     , {field: 'description', title: '操作描述', width: 340}
-                    , {field: 'ip', title: 'IP地址', width: 130}
+                    , {field: 'ip', title: 'IP地址', width: 150}
                     , {field: 'type', title: '浏览器类型', width: 105}
                     , {
                         field: 'time',
