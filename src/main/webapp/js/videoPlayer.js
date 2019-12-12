@@ -2074,6 +2074,19 @@ $(document).ready(function () {
                 url : basePath+"/player/recordTime",
                 data : data
             });
+            data = {'studyTime':studyTime};
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: basePath+'/player/recordStudyTime',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.error === 0){
+                        studyTime = 0;
+                    }
+                }
+            });
         }
     };
 
@@ -2270,6 +2283,7 @@ $(document).ready(function () {
                 elem_totalTime.innerText = format(elem_video1.duration);
                 elem_btnPlay.innerHTML = "&#xe651;";
                 interval1 = setInterval(function () {
+                    studyTime ++ ;
                     res = elem_video1.currentTime/elem_video1.duration * $("#pg_bg").width();
                     elem_pgBtn.style.left = res + 'px';
                     elem_pgBar.style.width = res + 'px';
@@ -2284,6 +2298,18 @@ $(document).ready(function () {
                             dataType: 'json',
                             success: function () {
 
+                            }
+                        });
+                        data = {'studyTime':studyTime};
+                        $.ajax({
+                            type: 'POST',
+                            url: basePath+'/player/recordStudyTime',
+                            data: data,
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res.error === 0){
+                                    studyTime = 0;
+                                }
                             }
                         });
                         elem_btnPlay.innerHTML = "&#xe652;";

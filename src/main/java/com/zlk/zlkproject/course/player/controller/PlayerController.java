@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: zlkproject
@@ -35,6 +37,22 @@ public class PlayerController {
         userSection.setSectionId(sectionId);
         userSection.setTime(time);
         playerService.recordTime(userSection);
+    }
+
+    @RequestMapping("recordStudyTime")
+    @ResponseBody
+    public Map recordStudyTime(@RequestParam("studyTime") Integer studyTime, HttpServletRequest request){
+        Map map = new HashMap();
+        if (studyTime != 0){
+            User user = (User) request.getSession().getAttribute("user");
+            String userId = "" + user.getUserId();
+            Integer res = playerService.recordStudyTime(userId, studyTime);
+            if (res == 1)
+                map.put("error",0);
+            else
+                map.put("error",1);
+        }
+        return map;
     }
 
     @RequestMapping("recordTimeSwitch")

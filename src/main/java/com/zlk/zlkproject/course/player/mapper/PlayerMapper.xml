@@ -20,4 +20,9 @@
     <select id="readRecord" parameterType="com.zlk.zlkproject.entity.UserSection" resultType="java.lang.Double">
         SELECT time FROM user_section WHERE user_id = #{userId} AND section_id = #{sectionId}
     </select>
+
+    <update id="recordStudyTime">
+        UPDATE user SET user_all_time = user_all_time + ${studyTime}, user_date_time = user_date_time + ${studyTime}
+        WHERE user_id = #{userId}
+    </update>
 </mapper>
