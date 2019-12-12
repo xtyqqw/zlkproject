@@ -25,16 +25,6 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    /**
-     * 提问列表接口
-     * @return
-     */
-    @RequestMapping(value = "/test")
-    public ModelAndView quizAll() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("view/community/questionParticulars");
-        return mv;
-    }
     /*
      * @descrption
      * @author gby
@@ -86,7 +76,7 @@ public class QuestionHomeController {
     @GetMapping(value = "/findQuestion")
     public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-     /*   questionId="1047919253";*/
+        questionId="1047919253";
         Question question = questionHomeService.getAndConvert(questionId);
         mv.addObject("question",question);
         mv.setViewName("/view/community/questionParticulars");

@@ -20,9 +20,9 @@
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
-        body {
+     /*   body {
             background: url("/img/12949615.jpg");
-        }
+        }*/
 
         .top {
             height: auto;
@@ -70,7 +70,7 @@
                   id="publish">
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <div class="ui selection compact teal basic dropdown label">
+                        <div class="ui selection compact violet basic dropdown label">
                             <input type="hidden" value="待解决" name="solve">
                             <i class="dropdown icon"></i>
                             <div class="text">待解决</div>
@@ -80,7 +80,7 @@
                                 <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入50字" maxlength="50">
+                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入20字" maxlength="20">
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label" placeholder="">分类</label>
+                            <label class="ui compact violet basic label" placeholder="">分类</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName">
                                 <i class="dropdown icon"></i>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label">标签</label>
+                            <label class="ui compact violet basic label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
                                 <input type="hidden" name="tagName">
                                 <i class="dropdown icon"></i>
@@ -124,7 +124,7 @@
                     </div>
                     <div class="ui error message"></div>
                     <div class="ui right aligned container">
-                        <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>
+                        <button type="submit" id="publish-btn"  class="ui violet button">发布问题</button>
                     </div>
                 </div>
             </form>

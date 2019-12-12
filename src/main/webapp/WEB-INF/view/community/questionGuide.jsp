@@ -120,7 +120,7 @@
     <div class="down">
         <div style="margin-left: 600px">
             <a href="<%=request.getContextPath() %>/question/editQuestion" role="button"
-               class="btn btn-info col-md-4">知道了，开始提问</a>
+               class="btn btn-info col-md-4" >知道了，开始提问</a>
         </div>
     </div>
 </div>

@@ -1,10 +1,15 @@
 package com.zlk.zlkproject.community.question.service.impl;
 
 import com.zlk.zlkproject.community.question.dao.ResponseDao;
-import com.zlk.zlkproject.community.question.entity.Response;
+import com.zlk.zlkproject.community.question.mapper.ResponseMapper;
 import com.zlk.zlkproject.community.question.service.ResponseService;
+
+import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author gby
@@ -16,8 +21,30 @@ import org.springframework.stereotype.Service;
 public class ResponseServiceImpl implements ResponseService {
     @Autowired
     private ResponseDao responseDao;
+    @Autowired
+    private ResponseMapper responseMapper;
+
     @Override
     public Response save(Response response) {
         return responseDao.save(response);
     }
+
+    @Override
+    public List<Response> findAll(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return responseMapper.findAll(pagination);
+    }
+
+    @Override
+    public List<Response> findByResponseTime(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return responseMapper.findByResponseTime(pagination);
+    }
+
 }

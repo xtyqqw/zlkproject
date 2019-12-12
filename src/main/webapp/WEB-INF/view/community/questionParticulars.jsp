@@ -71,6 +71,87 @@
             float: right;
             margin-top: 10px;
         }
+        .border{
+            height: 150px;
+            border: 1px solid #ccc;
+            width: 990px;
+            margin-top: 10px;
+        }
+        .user{
+            border: 1px solid #ccc;
+            height: 149px;
+            width: 100px;
+        }
+        .right{
+            width: 888px;
+            height: 149px;
+            float: right;
+            margin-top: -150px;
+        }
+        .count{
+            margin: 20px;
+            height: 100px;
+        }
+        .img{
+            height: 60px;
+            width: 60px;
+            border: 1px #ccc solid;
+            border-radius: 50%;
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+        .border{
+            height: 150px;
+            border: 1px solid #ccc;
+            width: 990px;
+            margin-top: 10px;
+        }
+        .user{
+            border: 1px solid #ccc;
+            height: 149px;
+            width: 100px;
+        }
+        .right{
+            width: 888px;
+            height: 149px;
+            float: right;
+            margin-top: -150px;
+        }
+        .count{
+            margin: 20px;
+            height: 100px;
+        }
+        .img{
+            height: 60px;
+            width: 60px;
+            border: 1px #ccc solid;
+            border-radius: 50%;
+            margin-left: 18px;
+            margin-top: 30px;
+        }
+        .name{
+            margin-top: 20px;
+        }
+        .zan{
+            width: 30px;
+            height: 30px;
+            margin-left: 30px;
+            margin-top: -20px;
+        }
+        .cai{
+            height: 30px;
+            width: 30px;
+            margin-left: 100px;
+            margin-top: -30px;
+        }
+
+        .time{
+            margin-top: -30px;
+            float: right;
+            margin-right: 20px;
+        }
+
+
     </style>
 </head>
 
@@ -90,7 +171,7 @@
                 <div style="background-color: #1296db;height: 20px;width: 50px;padding:1px 2px;border-radius: 5%; ">
                     <%--    <i style="color: white">${question.solve}</i>--%>
                     <c:if test="${question.solve == 0}">
-                        <div class="ui orange basic label" style="font-size: 12px;line-height: -1;">待解决</div>
+                        <div class="ui orange basic label" style="font-size: 12px;">待解决</div>
                     </c:if>
                     <c:if test="${question.solve == 1}">
                         <div class="ui orange basic label" style="font-size: 12px">已解决</div>
@@ -131,9 +212,9 @@
         </div>
         <div class="layui-form-item">
             <form action="<%=request.getContextPath() %>/response/save" method="post" class="ui form" id="publish">
-                <textarea id="demo" style="display: none;" placeholder="开始编辑。。。" name="responseContent"></textarea>
+                <textarea id="demo" style="display: none;"maxlength="200" required  placeholder="开始编辑。。。" name="responseContent"></textarea>
                 <div class="layui-input-block">
-                    <button type="submit" style="float:right;background-color: #1296db;" class="layui-btn"
+                    <button type="submit" style="float:right;background-color: #914FF1;" class="layui-btn"
                             lay-submit="sub" lay-filter="demo2">提交回复
                     </button>
                 </div>
@@ -226,17 +307,19 @@
                     var lis = [];
                     var limit = "5";
                     $.ajax({
-                        url: "/question/questionAll?page=" + page + "&limit=" + limit,
+                        url: "/response/responseAll?page=" + page + "&limit=" + limit,
                         type: 'post',
                         dataType: "json",
                         success: function (result) {
-                            layui.each(result.responseAllList, function (i, question) {
+                            layui.each(result.responseAllList, function (i, response) {
                                 var html = '';
-                                html += '<div><span class="con con_p">'+data1[i].response.responseContent+'</span>';
-                                html += '<span class="span_w">'+data1[i].response.createTime+'</span><i class="layui-icon layui-icon-tread"></i>;
-                                html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
-                                html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览量</span>';
-                                html += '<span class="span_w">'+data1[i].responseContent+'</span><span>评论数</span></div>';
+                                html += '<div class="border">' +
+                                    '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
+                                    '<div class="right" id="right">' +
+                                    '<div class="count"><span>'+ response.responseContent +'</span></div>'+
+                                    '<div>' + '<div class="zan">' + response.zanCount +'赞'+ '</div>' + ' <div class="cai">' + response.caiCount +'踩'+ '</div>' + '</div>' +
+                                    '<div class="time">' + response.createTime + '</div>' + '</div>' +
+                                    '</div>';
                                 lis.push(html);
                             });
                             next(lis.join(''), page < 9);
@@ -262,17 +345,19 @@
                     var lis = [];
                     var limit = "5";
                     $.ajax({
-                        url: "/question/questionAll?page=" + page + "&limit=" + limit,
+                        url: "/response/responseNew?page=" + page + "&limit=" + limit,
                         type: 'post',
                         dataType: "json",
                         success: function (result) {
-                            layui.each(result.questionNewList, fun  ction (i, question) {
+                            layui.each(result.responseNewList, function (i, response) {
                                 var html = '';
-                                html += '<div><span class="con con_p">'+data1[i].response.responseContent+'</span>';
-                                html += '<span class="span_w">'+data1[i].response.createTime+'</span><i class="layui-icon layui-icon-tread"></i>;
-                                html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
-                                html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览量</span>';
-                                html += '<span class="span_w">'+data1[i].responseContent+'</span><span>评论数</span></div>';
+                                html += '<div class="border">' +
+                                    '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
+                                    '<div class="right" id="right">' +
+                                    '<div class="count"><span>'+ response.responseContent +'</span></div>'+
+                                    '<div>' + '<div class="zan">' + response.zanCount +'赞'+ '</div>' + ' <div class="cai">' + response.caiCount +'踩'+ '</div>' + '</div>' +
+                                    '<div class="time">' + response.createTime + '</div>' + '</div>' +
+                                    '</div>';
                                 lis.push(html);
                             });
                             next(lis.join(''), page < 9);

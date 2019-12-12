@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface QuestionHomeMapper {
     /*
-     * @descrption 据ID查询问答个数
+     * @descrption 据ID查询问答信息个数
      * @author gby
      * @param []
      * @return java.lang.Integer
