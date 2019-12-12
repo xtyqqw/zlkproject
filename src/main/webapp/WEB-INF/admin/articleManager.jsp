@@ -102,11 +102,11 @@
                 <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
             <tr>
-                <td style="width: 100px;">文章摘要</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
                 <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
             </tr>
             <tr>
-                <td style="width: 100px;">HTML格式文章内容</td>
+                <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">HTML格式文章内容</td>
                 <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
             </tr>
             <tr>
