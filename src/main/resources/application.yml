@@ -66,7 +66,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
-  #    mode: HTML5
   #    #编码 可不用配置
   #    encoding: UTF-8
   #    #开发配置为false,避免修改模板还要重启服务器
@@ -104,9 +103,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list:
+  tracker-list: localhost
   #通过nginx 访问地址
-  resHost:
+  resHost: localhost
   storagePort: 8888/
   #缩略图配置
   thumb-image:

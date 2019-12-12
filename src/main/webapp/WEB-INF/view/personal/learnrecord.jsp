@@ -31,6 +31,7 @@
         }
         .timeline .date .year{
             font-size: 17px;
+            width: 95px;
         }
         .yuan{
             border: 1px solid #999999;
@@ -170,7 +171,7 @@
 <%--分页--%>
 <script>
     var page = 1;
-    var limit = 5;
+    var limit = 4;
     var total;
     function showRecord() {
         $.ajax({

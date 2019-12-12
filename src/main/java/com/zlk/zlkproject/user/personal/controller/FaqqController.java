@@ -123,7 +123,7 @@ public class FaqqController {
         List list1 = new ArrayList();
         Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
         Integer end = sta + followerPage.getLimit();
-        if(list.size()>=sta){
+        if(list.size()>=end){
             list1 = list.subList(sta,end);
         }else{
             list1 = list.subList(sta,list.size());
@@ -143,7 +143,7 @@ public class FaqqController {
         List list1 = new ArrayList();
         Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
         Integer end = sta + followerPage.getLimit();
-        if(qList.size()>=sta){
+        if(qList.size()>=end){
             list1 = qList.subList(sta,end);
         }else{
             list1 = qList.subList(sta,qList.size());
@@ -163,7 +163,7 @@ public class FaqqController {
         List list1 = new ArrayList();
         Integer sta = (followerPage.getPage()-1)*followerPage.getLimit();
         Integer end = sta + followerPage.getLimit();
-        if(rList.size()>=sta){
+        if(rList.size()>=end){
             list1 = rList.subList(sta,end);
         }else{
             list1 = rList.subList(sta,rList.size());
