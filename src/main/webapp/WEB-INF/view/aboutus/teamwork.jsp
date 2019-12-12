@@ -128,7 +128,11 @@
                 </c:forEach>
             </div>
         </div>
+<<<<<<< HEAD
         <%--        <div style="clear: both;"></div>--%>
+=======
+<%--        <div style="clear: both;"></div>--%>
+>>>>>>> 95eac6bbfa85ef2028b2f9448eb60efa348c80f0
         <div class="layui-colla-item">
             <h2 class="layui-colla-title">招聘信息</h2>
             <div class="layui-colla-content">
