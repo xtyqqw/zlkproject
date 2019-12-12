@@ -30,6 +30,8 @@ public class Courses {
     private Integer chapterNum;
     /**小节数量*/
     private Integer sectionNum;
+    /**课程方向id*/
+    private Integer typeId;
     /**课程价格*/
     private Double price;
     /**封面图片*/
@@ -44,9 +46,7 @@ public class Courses {
     private String featureText;
     /**功能图片*/
     private String featurePic;
-    /**章节Id*/
-    private int typeId;
-    /**小节Id*/
+    /**标签 Id*/
     private int coursesTagId;
 
     /**章节列表*/
@@ -65,12 +65,13 @@ public class Courses {
     /**标签属性Id*/
     private String tagTypeId;
 
-    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic, List<Chapter> chapterList, String userId, int userCoursesId, Date lastStudyTime, int tagId, String tagName, String tagTypeId) {
+    public Courses(Integer coursesId, String coursesName, Integer studentNum, Integer chapterNum, Integer sectionNum, Integer typeId, Double price, String coverPic, String introduceVideo, String introduceText, String introducePic, String featureText, String featurePic, int coursesTagId, List<Chapter> chapterList, String userId, int userCoursesId, Date lastStudyTime, int tagId, String tagName, String tagTypeId) {
         this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.studentNum = studentNum;
         this.chapterNum = chapterNum;
         this.sectionNum = sectionNum;
+        this.typeId = typeId;
         this.price = price;
         this.coverPic = coverPic;
         this.introduceVideo = introduceVideo;
@@ -78,6 +79,7 @@ public class Courses {
         this.introducePic = introducePic;
         this.featureText = featureText;
         this.featurePic = featurePic;
+        this.coursesTagId = coursesTagId;
         this.chapterList = chapterList;
         this.userId = userId;
         this.userCoursesId = userCoursesId;
