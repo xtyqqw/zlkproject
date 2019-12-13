@@ -86,11 +86,6 @@
 
             <div class="ui bottom attached segment">
                 <!--留言区域列表-->
-                <script>
-                    $.ajax({
-
-                    });
-                </script>
                 <div class="ui form" id="div_stuCmt">
                     <div id="stuCmt_titleBox">
                         <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
@@ -107,9 +102,9 @@
                         <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
                     </div>
                     <div id="art-cmt-btnBox" class="fields">
-                        <div class="field m-margin-bottom-small m-mobile-wide">
+                        <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
                             <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>
-                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">测试</button>
+                            <button id="selection_stuCmt" style="float: right;margin-left: 39vw;" type="button" class="ui button m-mobile-wide violet">查看</button>
                         </div>
                     </div>
                 </div>

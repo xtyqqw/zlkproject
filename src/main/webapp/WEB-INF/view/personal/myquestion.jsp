@@ -515,9 +515,9 @@
                     if (all[i].type===0){
                         html += '<div class="question_waik">';
                         html += '<ul class="head_lebel">';
-                        /*for (var j = 0;j<all[i].tagList.length;j++){
+                        for (var j = 0;j<all[i].tagList.length;j++){
                             html += '<li class="lebel_li">'+ all[i].tagList[j].tagName+'</li>';
-                        }*/
+                        }
                         html += '</ul><br />';
                         html += '<p class="title">';
                         html += '<a href="javascript:;">'+ all[i].questionTitle+'</a>';

@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.community.articleAdd.service;
 
 import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.User;
-import com.zlk.zlkproject.user.entity.Action;
 
 
 /**

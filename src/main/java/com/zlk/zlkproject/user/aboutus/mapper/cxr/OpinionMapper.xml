@@ -9,11 +9,18 @@
         <result property="opinionContext" column="opinion_content" javaType="java.lang.String"></result>
         <result property="opinionTime" column="opinion_time" javaType="java.util.Date"></result>
     </resultMap>
+    <!--用户新增方法-->
     <insert id="addOpinion" parameterType="com.zlk.zlkproject.user.entity.Opinion">
 
         insert  into opinion(opinion_user_id,opinion_content,opinion_time) values (#{opinionUserId},#{opinionContext},
        now())
+
     </insert>
+    <!--游客新增方法-->
+    <insert id="insertOpinion" parameterType="com.zlk.zlkproject.user.entity.Opinion">
+    insert  into opinion(opinion_content,opinion_time) values (#{opinionContext},now())
+    </insert>
+
 
 
 </mapper>

@@ -196,7 +196,7 @@
         <!-- 头像 -->
         <div class="headimg">
             <c:if test="${user.userImg==null}">
-                <img src="/img/headimg.jpg" class="headerimg">
+                <img src="/img/headimg.png" class="headerimg">
             </c:if>
             <c:if test="${user.userImg!=null}">
                 <img src="${user.userImg}" class="headerimg">
@@ -214,18 +214,18 @@
 </div>
 
 <!-- 主体内容 -->
-<iframe id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
-<div><a href="#top" style="position: fixed;margin-left: 68px;z-index: 100;">
+<iframe src="<%=request.getContextPath()%>/duration/select"
+        id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+<div><a href="#top" style="position: fixed;margin-left: 68px;margin-top:-110px;z-index: 100;">
     <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
 </a></div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
         var main = $(window.parent.document).find("#personal-iframe");
-        var thisheight = document.documentElement.clientHeight && $(document).height()+30;
+        main.height(800);
+        var thisheight = $(document).height();
         main.height(thisheight);
-        /*var ifm= document.getElementById("personal-iframe");
-        ifm.height=document.documentElement.clientHeight;*/
     });
 </script>
 <%--侧栏--%>

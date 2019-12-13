@@ -42,4 +42,10 @@ public interface MyNoteMapper {
      * @return List<StuNote>
      */
     List<StuNote> findNotesList(Pagination pagination);
+    /**
+     * 根据snId查询个人笔记内容
+     * @param snId
+     * @return
+     */
+    String findNoteBySn(Integer snId);
 }

@@ -34,7 +34,7 @@ public class ArticleHotController {
      */
     /*@RequestMapping("/toArticleHot")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
-        *//**根据时间倒序返回文章标题集合 月排序*//*
+        *//**根据时间和浏览量倒序返回文章标题集合 月排序*//*
         List<Article> alist = articleHotService.selectTitleByArticle(article);
         *//**根据浏览量倒序返回文章标题集合 总排序*//*
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
@@ -44,7 +44,7 @@ public class ArticleHotController {
         mv.addObject("blist",blist);
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/communityMain");
+        mv.setViewName("view/community/newCommunityMain");
 
         return mv;
     }*/
