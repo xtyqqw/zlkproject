@@ -32,10 +32,7 @@ import java.util.Map;
 public class ResponseController {
     @Autowired
     private ResponseService responseService;
-    @RequestMapping("/test")
-    public String test(){
-        return "/view/community/test";
-    }
+
     /*
      * @descrption 提交回复
      * @author gby

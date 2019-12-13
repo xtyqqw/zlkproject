@@ -9,13 +9,13 @@ import java.util.List;
 @Service
 public interface QuestionHomeService {
     /*
-     * @descrption 据ID查询问答个数
+     * @descrption 查询总数
      * @author gby
-     * @param []
-     * @return java.lang.Integer
-     * @date 2019/12/11 22:18
+     * @param
+     * @return
+     * @date 2019/12/13 0:31
      */
-    Integer findNumById(Question question);
+    Integer findQuestionCount(Pagination pagination);
     /*
      * @descrption 按照最新发布日期排序（默认）
      * @author gby

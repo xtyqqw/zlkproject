@@ -22,8 +22,8 @@
         <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
     </resultMap>
-    <select id="findNumById" parameterType="java.lang.String" resultType="java.lang.Integer">
-       select count(*) from question
+    <select id="findQuestionCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
+        select count(1) from question
     </select>
     <select id="findByQuestionTime" resultMap="questionEntityMap" >
         select * from  question order by create_time  DESC  limit  #{startPage},#{limit}

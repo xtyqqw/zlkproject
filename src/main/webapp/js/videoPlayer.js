@@ -6,8 +6,6 @@ $(document).ready(function () {
     var basePath = localObj.protocol+"//"+localObj.host;
     var server_context=basePath;
 
-    alert(basePath);
-
     layui.use(['element', 'flow','layer'], function () {
         var element = layui.element,
             $ = layui.jquery,
@@ -17,6 +15,12 @@ $(document).ready(function () {
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
+
+        //弹出层设置
+        layer.config({
+            offset: '20%'
+        });
+
 
         /*讲师笔记初加载*/
         note_flow(sectionId);
@@ -37,7 +41,6 @@ $(document).ready(function () {
         /*点击目录功能*/
         $("#icon-mulu").click(function () {
             var display = $("#mulu_div").css("display");
-            console.log(display);
             if (display === "none") {
                 $.ajax({
                     type: "POST",
@@ -45,7 +48,6 @@ $(document).ready(function () {
                     data: "",
                     dataType: "json",
                     success: function (data) {
-                        alert(data.msg);
                         $("#mulu_div").css("display", "block");
                         $("#wenda_div").css("display", "none");
                         $("#div_stuNote").css("display", "none");
@@ -57,31 +59,34 @@ $(document).ready(function () {
                             str += "<ul>";
                             str += "<span class=\"headline\">" + chapter.chapterName + "</span>";
                             $.each(chapter.sectionList, function (i, section) {
-                                var time = section.sectionTime;
-                                var time1 = format(time);
-                                var sectionId = section.sectionId;
-                                str += "<li class='section'>";
-                                str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
-                                $.ajax({
-                                    type: "POST",
-                                    url: basePath+"/section/findState?sectionId=" + sectionId,
-                                    async: false,
-                                    success: function (data) {
-                                        state = data.state;
-                                        return state;
+                                if (section.sectionId !=null){
+                                    var time = section.sectionTime;
+                                    var time1 = format(time);
+                                    var sectionId = section.sectionId;
+                                    str += "<li class='section'>";
+                                    str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
+                                    $.ajax({
+                                        type: "POST",
+                                        url: basePath+"/section/findState?sectionId=" + sectionId,
+                                        async: false,
+                                        success: function (data) {
+                                            state = data.state;
+                                            return state;
+                                        }
+                                    });
+                                    if (state === "播放中") {
+                                        str += "<i class=\"iconfont icon-bofang state\"></i>";
+                                    } else if (state === "已完成") {
+                                        str += "<i class=\"iconfont icon-wancheng state\"></i>";
+                                    } else if (state === "未观看") {
+                                        str += "<i class=\"iconfont icon-suoding state\"></i>";
                                     }
-                                });
-                                if (state === "播放中") {
-                                    str += "<i class=\"iconfont icon-bofang state\"></i>";
-                                } else if (state === "已完成") {
-                                    str += "<i class=\"iconfont icon-wancheng state\"></i>";
-                                } else if (state === "未观看") {
-                                    str += "<i class=\"iconfont icon-suoding state\"></i>";
+                                    str += "<input hidden class=\"sectionState\" value=\"" + state + "\">";
+                                    str += section.sectionName;
+                                    str += "<span class=\"duration\">" + time1 + "</span>";
+                                    str += "</li>";
                                 }
-                                str += "<input hidden class=\"sectionState\" value=\"" + state + "\">";
-                                str += section.sectionName;
-                                str += "<span class=\"duration\">" + time1 + "</span>";
-                                str += "</li>";
+
                             });
                             str += "</ul>";
                         });
@@ -167,7 +172,7 @@ $(document).ready(function () {
                     var tagId = $(this).find("input").val();
                     tagIdArray.push(tagId);
                 }else {
-                    alert("最多选择3个标签,请先取消1个标签后再选择新标签");
+                    layer.alert("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
             }else {
                 $(this).css("background-color","grey");
@@ -198,7 +203,7 @@ $(document).ready(function () {
         /*问答提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
             if (tagIdArray.length==0){
-                alert("至少选择1个标签");
+                layer.confirm("至少选择1个标签");
             }else {
                 var content = editor.txt.html();
                 var data = {"content":content,"tagIdArray":tagIdArray};
@@ -209,14 +214,17 @@ $(document).ready(function () {
                     dataType: "json",
                     traditional:true,
                     success:function (result) {
-                        alert(result.message);
-                        if(result.message==="添加成功"){
+                        layer.confirm(result.message,function (index,layero) {
+                            layer.close(index);
                             editor.txt.clear();
                             $(".tagName").css("background-color","grey");
                             $(".tagName").attr("isselect","false");
                             $("#wenda_div").css("display", "none");
                             tagIdArray.splice(0);
-                        }
+                        });
+                        /*if(result.message==="添加成功"){
+
+                        }*/
                     }
                 });
                 stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
@@ -228,7 +236,7 @@ $(document).ready(function () {
             editor.txt.clear();
             $(".tagName").css("background-color","grey");
             $(".tagName").attr("isselect","false");
-            // $("#wenda_div").css("display", "none");
+            $("#wenda_div").css("display", "none");
             tagIdArray.splice(0);
         });
 
@@ -310,6 +318,11 @@ $(document).ready(function () {
             return hour + ':' + minute + ':' + second;
         }*/
 
+        // 讲师笔记点击加载内容
+        $("#teacherNote-tab").click(function () {
+            note_flow(parseInt($("#sectionId").text()));
+        });
+
         /*选项卡教师笔记加载bigin*/
         function note_flow(sectionId) {
             $("#lay_flow1").empty();
@@ -320,7 +333,6 @@ $(document).ready(function () {
                     var lis = [];
                     var limit = 3;
                     var data = {"sectionId": sectionId, "page": page, "limit": limit};
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: basePath+"/teacherNote/findNotes",
@@ -359,7 +371,6 @@ $(document).ready(function () {
                     var lis = [];
                     var limit = 5;
                     var data = {"sectionId": sectionId, "page": page, "limit": limit};
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: ""+url,
@@ -368,8 +379,7 @@ $(document).ready(function () {
                         success: function (result) {
                             var str = "";
                             var user = "";
-                            layui.each(result.stuQaList, function (i, stuQa) {
-                                console.log("stuQa="+stuQa);
+                            $.each(result.stuQaList, function (i, stuQa) {
                                 editorflag++;
                                 str += "<div class=\"stuQa-box\">";
                                 str += "<div class=\"stuQa-user\">";
@@ -390,10 +400,8 @@ $(document).ready(function () {
                                 str += "</div>";
                                 str += "<div class=\"stuQa-content-box\">";
                                 str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
-                                /*str += "<input name='pId' value='"+stuQa.pId+"' hidden='hidden'>";*/
                                 str += "<div class=\"stuQa-tag-box\">";
                                 layui.each(stuQa.tagList,function (i, tag) {
-                                    console.log(tag);
                                     str += "<div class=\"stuQa-tag\">"+tag.tagName+"</div>";
                                 });
                                 str += "</div>";
@@ -420,7 +428,7 @@ $(document).ready(function () {
                                     str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editorflag+"'>"+stuQa.report+"</div>";
                                 }
                                 str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editorflag+"'>回复</div>";
-                                str += "<input hidden value='"+stuQa.pId+"'></input>";
+                                str += "<input name='pId' value='"+stuQa.pid+"' hidden='hidden'>";
                                 str += "<div class=\"stuQa-date\" id='stuQa-date"+editorflag+"'>"+stuQa.date+"</div>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-answer-div\" id='sqaId"+stuQa.sqaId+"' style='display: none'>";
@@ -455,37 +463,6 @@ $(document).ready(function () {
         //精华选项卡点击事件
         $("#stuQaelite-tab").click(function () {
             stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",sectionId);
-        });
-
-        /*查看全文按钮点击提交事件*/
-        $(document).on("click", ".stuQa-readMore", function () {
-            if ($(this).text() === "查看全文"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
-                height1 = $(this).parent().parent().height(); //功能按钮框的高度
-                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
-                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
-                if (height <= 200){
-                    $(this).text("收起");
-                }else {
-                    $(this).parent().parent().prev().css("height","auto");
-                    $(this).parent().parent().parent().css("height","auto");
-                    $(this).parent().parent().parent().parent().css("height","auto");
-                    $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
-                    $(this).parent().parent().css("height",height1);
-                    $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
-                    $(this).text("收起");
-                }
-            }else if($(this).text() === "收起"){
-                $(this).parent().parent().prev().css("height","60%");
-                $(this).parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().parent().css("height",height3);
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
-                $(this).parent().parent().css("height","20%");
-                $(this).parent().parent().parent().find("div").eq(0).css("height","20%");
-                $(this).text("查看全文");
-            }
-
-
         });
 
         /*div鼠标移入事件*/
@@ -536,10 +513,10 @@ $(document).ready(function () {
 
         /*举报按钮点击提交事件*/
         $(document).on("click", ".stuQa-report", function () {
-            var report = $(this).text();
+            var thisReport = $(this).text();
             var sqaId = $(this).parent().parent().parent().find("input").val();
-            if (report === "举报"){
-                report = "已举报";
+            if (thisReport === "举报"){
+                let report = "已举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
@@ -547,13 +524,13 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        report = result.stuQa.report;
+                        thisReport = result.stuQa.report;
                     }
                 });
-                $(this).text(""+report);
+                $(this).text(""+thisReport);
                 $(this).css("color","#9ea2ea");
-            }else if (report === "已举报"){
-                report = "举报";
+            }else if (thisReport === "已举报"){
+                let report = "举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
@@ -561,55 +538,109 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        report = result.stuQa.report;
+                        thisReport = result.stuQa.report;
                     }
                 });
-                $(this).text(""+report);
+                $(this).text(""+thisReport);
                 $(this).css("color","#ffffff");
             }
         });
 
-        var height;
-        var height1;
-        var height2;
-        var height3;
-        var height4;
+
+
 
         /*回答按钮点击事件*/
         $(document).on("click", ".stuQa-answer", function () {
             if ($(this).text() === "回答"){
-
                 height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
                 height1 = $(this).parent().parent().height(); //功能按钮框的高度
                 height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
-                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
-                height4 = $(this).parent().parent().prev().height();//内容部分高度
+                height7 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                height6 = $(this).parent().parent().prev().height();//内容部分高度
+                height5 = $(this).parent().parent().parent().prev().find("div").eq(0).height();//用户部分高度
+
                 var sqaId = $(this).parent().parent().parent().find("input").val();
                 var id = $(this).parent().next().attr("id");
                 answer(id,sqaId,sectionId);
-                if (height <= 200){
-                    $(this).parent().parent().prev().css("height",height4);
-                }else {
-                    $(this).parent().parent().prev().css("height","auto");
-                }
+
                 $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
-                $(this).parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);//160
+
+
+                $(this).parent().parent().prev().css("height",height6);
                 $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
                 $(this).parent().next().css("display","block");
+                $(this).parent().parent().css("height","auto");
                 $(this).text("收起回复");
             }else if ($(this).text() === "收起回复"){
+                let height10 = $(this).parent().parent().prev().height();//内容部分高度
                 $(this).parent().next().css("display","none");
                 $(this).text("回答");
-                $(this).parent().parent().prev().css("height","60%");
-                $(this).parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().parent().css("height",height3);
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
                 $(this).parent().parent().css("height",height1);
+                $(this).parent().parent().prev().css("height",height10);
+                $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+
+                $(this).parent().parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+
+
             }
 
+        });
+
+        let height;
+        let height1;
+        let height2;
+        let height3;
+        let height4;
+        let height5;
+        let height6;
+        let height7;
+        let height8;
+        let height9;
+
+        /*查看全文按钮点击提交事件*/
+        $(document).on("click", ".stuQa-readMore", function () {
+            if ($(this).text() === "查看全文"){
+                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                if ($(this).parent().next().css("display")==="none"){
+                    height1 = $(this).parent().parent().height(); //功能按钮框的高度
+                    height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                }else {
+                    height8 = $(this).parent().parent().height(); //功能按钮框的高度
+                    height9 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                }
+                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
+
+                height4 = $(this).parent().parent().prev().height();//内容部分高度
+                height5 = $(this).parent().parent().parent().prev().find("div").eq(0).height();//用户部分高度
+                if (height <= 200){
+                    $(this).text("收起");
+                }else {
+                    $(this).parent().parent().css("height",height1);
+                    $(this).parent().parent().prev().css("height","auto");
+                    $(this).parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+                    $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                    $(this).text("收起");
+                }
+            }else if($(this).text() === "收起"){
+                $(this).parent().parent().prev().css("height",height4);
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+                if ($(this).parent().next().css("display")==="none"){
+                    $(this).parent().parent().css("height",height1);
+                    $(this).parent().parent().parent().parent().css("height",height3);
+                }else {
+                    $(this).parent().parent().css("height",height8);
+                    $(this).parent().parent().parent().parent().css("height",height9);
+                }
+                $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                $(this).text("查看全文");
+            }
         });
 
         function answer(id, sqaId, sectionId) {
@@ -671,7 +702,7 @@ $(document).ready(function () {
                             str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editori+"'>"+stuQa.report+"</div>";
                         }
                         str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editori+"'>回复</div>";
-                        str += "<input hidden value='"+stuQa.pId+"'></input>";
+                        str += "<input hidden value='"+stuQa.pid+"'></input>";
                         str += "<div class=\"stuQa-date\" id='stuQa-answer-date"+editori+"'>"+stuQa.date+"</div>";
                         str += "</div>";
                         str += "</div>";
@@ -724,16 +755,13 @@ $(document).ready(function () {
         $(document).on("click", ".stuQa-reply", function () {
             var sqaId = $(this).parent().parent().parent().find("input").val();
             var pId = $(this).next("input").val();
-            alert(sqaId);
-            alert(pId);
-            var answerId = $(this).parent().find("div").attr("id");
-            var answerNumId= $(this).parent().find("div").eq(1).attr("id");
+            var Id = $("#stuQatab").children(".layui-tab-content").children(".layui-show").attr("id");
             layer.open({
                 title: '回复',
                 type: 1,
                 content: $("#answer-div"),
-                area:['500px','300px'],
-                offset:'t',
+                area:['500px','350px'],
+                offset:'20%',
                 btn: ['提交'],
                 yes: function (index, layero) {
                     layer.close(index);
@@ -745,11 +773,11 @@ $(document).ready(function () {
                         dataType: "json",
                         data: data,
                         success:function (result) {
-                            layer.alert(result.message);
-                            $('#'+answerId).click();
-                            $('#'+answerNumId).text(result.stuQa.answerNum);
+                            layer.msg(result.message);
+                            stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
                         }
-                    })
+                    });
+
                 }
             });
         });
@@ -876,7 +904,7 @@ $(document).ready(function () {
 
         //采集
         $("#SNS_contentBox").on('click','.collectBtn',function () {
-            var snId = parseInt($(this).parent().parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().parent().children().eq(1).text());
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             if ($(this).prev().text() === 'false'){
@@ -922,7 +950,7 @@ $(document).ready(function () {
 
         //举报
         $("#SNS_contentBox").on("click",".reportBtn",function () {
-            var snId = parseInt($(this).parent().children().eq(0).text());
+            var snId = parseInt($(this).parent().children().eq(1).text());
             if ($(this).prev().text() === 'false'){
                 $(this).prev().text('true');
                 var data = {'state':'true','snId':snId};
@@ -963,12 +991,12 @@ $(document).ready(function () {
             //需接入+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             var userId = 1;
             var thisObj = $(this);
-            if($(this).parent().parent().attr("data_name") === 'up'){
-                var snId = parseInt($(this).parent().parent().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                let completeState = thisObj.prev().text() + '';
-                if(completeState === 'yes'){
-                    thisObj.prev().text('no');
+            let completeState = thisObj.parent().parent().parent().children().eq(0).text() + '';
+            if(completeState === 'yes'){
+                thisObj.parent().parent().parent().children().eq(0).text('no');
+                if($(this).parent().parent().attr("data_name") === 'up'){
+                    var snId = parseInt($(this).parent().parent().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
                     if($(this).parent().parent().prev().text() === 'none'){
                         $.ajax({
                             type: "POST",
@@ -984,7 +1012,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("up");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else if ($(this).parent().parent().prev().text() === 'up'){
@@ -1002,7 +1030,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("none");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else {
@@ -1020,7 +1048,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().text("up");
 
-                                    var downPic = thisObj.parent().parent().next().children().eq(0).children().eq(1);
+                                    var downPic = thisObj.parent().parent().next().children().eq(0).children().eq(0);
                                     downPic.removeClass('icon-dianzan_active');
                                     downPic.addClass('icon-qinziAPPtubiao-');
                                     downPic.css('font-size','17px');
@@ -1028,17 +1056,13 @@ $(document).ready(function () {
                                     value = parseInt(downPic.parent().next().text()) - 1;
                                     downPic.parent().next().text(value);
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }
-                }
-            }else {
-                var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
-                var data = {"userId":userId,"snId":snId};
-                let completeState = thisObj.prev().text() + '';
-                if (completeState === 'yes'){
-                    thisObj.prev().text('no');
+                }else {
+                    var snId = parseInt($(this).parent().parent().prev().prev().prev().text());
+                    var data = {"userId":userId,"snId":snId};
                     if($(this).parent().parent().prev().prev().text() === 'none'){
                         $.ajax({
                             type: "POST",
@@ -1055,7 +1079,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("down");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else if ($(this).parent().parent().prev().prev().text() === 'down'){
@@ -1074,7 +1098,7 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("none");
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }else {
@@ -1093,14 +1117,14 @@ $(document).ready(function () {
                                     thisObj.parent().next().text(value);
                                     thisObj.parent().parent().prev().prev().text("down");
 
-                                    var upPic = thisObj.parent().parent().prev().children().eq(0).children().eq(1);
+                                    var upPic = thisObj.parent().parent().prev().children().eq(0).children().eq(0);
                                     upPic.removeClass('icon-dianzan');
                                     upPic.addClass('icon-qinziAPPtubiao-1');
                                     upPic.css("color","rgb(121,121,121)");
                                     var value = parseInt(upPic.parent().next().text()) - 1;
                                     upPic.parent().next().text(value);
                                 }
-                                thisObj.prev().text('yes');
+                                thisObj.parent().parent().parent().children().eq(0).text('yes');
                             }
                         });
                     }
@@ -1181,11 +1205,11 @@ $(document).ready(function () {
                                         }
                                     }
                                 }
-                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 45px">采集</div>';
+                                var collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="width: 50px;font-size: 1vw">采集</div>';
                                 var collectState = 'false';
                                 for (var i in note.stuNoteCollect){
                                     if (note.stuNoteCollect[i].userId === uId){
-                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 45px">已采集</div>';
+                                        collectStr = '<div class="SNS_moduleBox_lbox collectBtn" style="color: blue;width: 50px;font-size: 1vw">已采集</div>';
                                         collectState = 'true';
                                     }
                                 }
@@ -1204,31 +1228,30 @@ $(document).ready(function () {
                                                 '<div id="SNS_textEditorId'+ flag +'" class="SNS_textEditor"></div>\n' +
                                             '</div>\n' +
                                             '<div class="SNS_func_box">' +
+                                                '<span style="display: none">yes</span>' +
                                                 '<span style="display: none">'+ note.snId +'</span>' +
                                                 '<span style="display: none">'+ upDownState +'</span>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="up" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.up +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left">' +
+                                                '<div class="SNS_f_b_moduleBox updown_btn" data_name="down" style="float: left;width: 10%">' +
                                                     '<div class="SNS_moduleBox_lbox" style="padding: 2px 0 0 0;height: 26px">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SNS_moduleBox_rbox">'+ note.down +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 85px">' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 13%">' +
                                                     '<span style="display: none">'+ collectState +'</span>' +
                                                     collectStr +
                                                     '<div class="SNS_moduleBox_rbox" style="padding: 5px 0 0 5px;width: 35px;height: 18px">'+ note.collect +'</div>' +
                                                 '</div>' +
-                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left">展开/收起</div>' +
+                                                '<div class="SNS_f_b_moduleBox enableClk flexBtn" style="float: left;width: 10%;font-size: 1vw">展开/收起</div>' +
                                                 '<span style="display: none">false</span>' +
-                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left">举报</div>' +
-                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 140px;padding: 2px 0 0 0">'+ note.dateString +'</div>' +
+                                                '<div class="SNS_f_b_moduleBox reportBtn" style="float: left;width: 10%;font-size: 1vw">举报</div>' +
+                                                '<div class="SNS_f_b_moduleBox" style="float: left;width: 20%;padding: 2px 0 0 0;font-size: 1vw">'+ note.dateString +'</div>' +
                                             '</div>\n' +
                                         '</div>\n' +
                                     '</div>' +
@@ -1415,19 +1438,18 @@ $(document).ready(function () {
                                                                 '<div id="SCS_reply_ToolBar'+ flag +'" class="SCS_replyToolBar"></div>\n' +
                                                                 '<div id="SCS_reply_Editor'+ flag +'" class="SCS_replyEditor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
-                                                                '<div class="SCS_replyBtn" data_type="son" style="left: 476px">回复</div>' +
+                                                                '<div class="SCS_replyBtn" data_type="son">回复</div>' +
                                                                 '<span style="display: none">'+ comment.smId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="SCS_cmt_toolBox">' +
                                                                 '<span style="display: none">'+ upDownState +'</span>' +
+                                                                '<span style="display: none">yes</span> ' +
                                                                 '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                                    '<span style="display: none">yes</span>' +
                                                                     upStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].up +'</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                                    '<span style="display: none">yes</span>' +
                                                                     downStr +
                                                                 '</div>' +
                                                                 '<div class="SCS_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.stuCommentList[i].down +'</div>' +
@@ -1518,14 +1540,13 @@ $(document).ready(function () {
                                                 '</div>\n' +
                                                 '<div class="SCS_cmt_toolBox">' +
                                                     '<span style="display: none">'+ upDownState +'</span>' +
+                                                    '<span style="display: none">yes</span>' +
                                                     '<div class="SCS_spaceDiv" style="float: left"></div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         upStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.up +'</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
-                                                        '<span style="display: none">yes</span>' +
                                                         downStr +
                                                     '</div>' +
                                                     '<div class="SCS_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.down +'</div>' +
@@ -1649,10 +1670,10 @@ $(document).ready(function () {
                 let type = $(this).attr('data_name');
                 let data;
                 let thisObj = $(this);
-                if (type === 'up'){
-                    let completeState = thisObj.prev().text() + '';
-                    if(completeState === 'yes'){
-                        thisObj.prev().text('no');
+                let completeState = thisObj.parent().parent().children().eq(1).text() + '';
+                if (completeState === 'yes'){
+                    thisObj.parent().parent().children().eq(1).text('no');
+                    if (type === 'up'){
                         if(UDState === 'up'){
                             data = {'userId':userId,'smId':smId,'type':'UpMinus'};
                             $.ajax({
@@ -1670,7 +1691,7 @@ $(document).ready(function () {
                                         num --;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else if(UDState === 'none'){
@@ -1690,7 +1711,7 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else {
@@ -1710,23 +1731,19 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
 
-                                        thisObj.parent().next().next().children().eq(1).removeClass('icon-dianzan_active');
-                                        thisObj.parent().next().next().children().eq(1).addClass('icon-qinziAPPtubiao-');
-                                        thisObj.parent().next().next().children().eq(1).css('font-size','18px');
-                                        thisObj.parent().next().next().children().eq(1).css('color','rgb(121,121,121)');
+                                        thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
+                                        thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
+                                        thisObj.parent().next().next().children().eq(0).css('font-size','18px');
+                                        thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
                                         num = parseInt(thisObj.parent().next().next().next().text());
                                         num --;
                                         thisObj.parent().next().next().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }
-                    }
-                }else {
-                    let completeState = thisObj.prev().text() + '';
-                    if (completeState === 'yes'){
-                        thisObj.prev().text('no');
+                    }else {
                         if(UDState === 'down'){
                             data = {'userId':userId,'smId':smId,'type':'DownMinus'};
                             $.ajax({
@@ -1745,7 +1762,7 @@ $(document).ready(function () {
                                         num --;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else if (UDState === 'none'){
@@ -1766,7 +1783,7 @@ $(document).ready(function () {
                                         num ++;
                                         thisObj.parent().next().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }else {
@@ -1788,14 +1805,14 @@ $(document).ready(function () {
                                         thisObj.parent().next().text(num);
 
 
-                                        thisObj.parent().prev().prev().children().eq(1).removeClass('icon-dianzan');
-                                        thisObj.parent().prev().prev().children().eq(1).addClass('icon-qinziAPPtubiao-1');
-                                        thisObj.parent().prev().prev().children().eq(1).css('color','rgb(121,121,121)');
+                                        thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
+                                        thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
                                         num = parseInt(thisObj.parent().prev().text());
                                         num --;
                                         thisObj.parent().prev().text(num);
                                     }
-                                    thisObj.prev().text('yes');
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
                             });
                         }
@@ -2074,6 +2091,19 @@ $(document).ready(function () {
                 url : basePath+"/player/recordTime",
                 data : data
             });
+            data = {'studyTime':studyTime};
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: basePath+'/player/recordStudyTime',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.error === 0){
+                        studyTime = 0;
+                    }
+                }
+            });
         }
     };
 
@@ -2242,11 +2272,10 @@ $(document).ready(function () {
     elem_btnPlay.onclick = function () {
         if (getSourceLength){
             if(elem_video1.paused){
-                alert(sectionId);
                 let videoState = "";
                 $.ajax({
                     type: "POST",
-                    url: basePath+"/section/findState?sectionId=" + sectionId,
+                    url: basePath+"/section/findState?sectionId=" + parseInt($("#sectionId").text()),
                     async: false,
                     success: function (data) {
                         videoState = data.state;
@@ -2270,6 +2299,7 @@ $(document).ready(function () {
                 elem_totalTime.innerText = format(elem_video1.duration);
                 elem_btnPlay.innerHTML = "&#xe651;";
                 interval1 = setInterval(function () {
+                    studyTime ++ ;
                     res = elem_video1.currentTime/elem_video1.duration * $("#pg_bg").width();
                     elem_pgBtn.style.left = res + 'px';
                     elem_pgBar.style.width = res + 'px';
@@ -2284,6 +2314,18 @@ $(document).ready(function () {
                             dataType: 'json',
                             success: function () {
 
+                            }
+                        });
+                        data = {'studyTime':studyTime};
+                        $.ajax({
+                            type: 'POST',
+                            url: basePath+'/player/recordStudyTime',
+                            data: data,
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res.error === 0){
+                                    studyTime = 0;
+                                }
                             }
                         });
                         elem_btnPlay.innerHTML = "&#xe652;";

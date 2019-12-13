@@ -24,6 +24,7 @@
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
         <result column="section_id" property="sectionId" javaType="java.lang.String"/>
     </resultMap>
+
     <select id="selectUserId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
         select user_id=#{userId} from question
     </select>

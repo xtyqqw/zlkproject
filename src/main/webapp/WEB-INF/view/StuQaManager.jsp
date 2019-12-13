@@ -56,7 +56,7 @@
 
             table.render({
                 elem: '#stuQa'
-                ,height:'full-50'
+                ,height:$(document).height()-$('#stuQa').offset().top-20
                 ,url:'<%=request.getContextPath()%>/stuQaManager/selectAllLimit'
                 ,method:'POST'
                 ,toolbar: '#toolbarDemo'
@@ -83,7 +83,7 @@
                 if (evend==="report"){
                     table.reload('stuQa', {
                         url: '<%=request.getContextPath()%>/stuQaManager/reportDesc'
-                        , height:'full-50'
+                        , height:$(document).height()-$('#stuQa').offset().top-20
                         , method:'post'
                         , page:{
                             curr:1
@@ -106,7 +106,7 @@
                 let val = $("#selectInput").val();
                 table.reload('stuQa', {
                     url: '<%=request.getContextPath()%>/stuQaManager/fuzzySelect'
-                    , height:'full-50'
+                    , height:$(document).height()-$('#stuQa').offset().top-20
                     , method:'post'
                     , where:{
                         name:name,
@@ -133,7 +133,7 @@
                                 layer.alert(data.msg);
                                 table.reload('stuQa',{
                                     url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
-                                    height:'full-50',
+                                    height:$(document).height()-$('#stuQa').offset().top-20,
                                     method: 'post',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -164,7 +164,7 @@
                         layer.alert(data.msg);
                         table.reload('stuQa',{
                             url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
-                            height:'full-50',
+                            height:$(document).height()-$('#stuQa').offset().top-20,
                             method: 'post',
                             toolbar: '#toolbarDemo',
                             page:{
@@ -175,6 +175,7 @@
 
                 })
             });
+
         })
 
     </script>

@@ -176,7 +176,7 @@
 
             table.render({
                 elem: '#course'
-                ,height:'full-20'
+                ,height:$(document).height()-$('#course').offset().top-20
                 ,url:'<%=request.getContextPath()%>/courseManager/findAllByLimit'
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
@@ -231,10 +231,10 @@
                                     data:data.field,
                                     dataType:"json",
                                     success:function (result) {
-                                        layer.alert(result.message);
+                                        layer.msg(result.message);
                                         table.reload('course', {
                                              method: "post"
-                                            , height:'full-20'
+                                            , height:$(document).height()-$('#course').offset().top-20
                                             , url: '<%=request.getContextPath()%>/courseHomePage/findAllByLimit'
                                             , page:{
                                                 curr:1
@@ -253,7 +253,7 @@
                     let coursesName = $("#coursesNameInput").val();
                     table.reload('course', {
                         method: "post"
-                        , height:'full-20'
+                        , height:$(document).height()-$('#course').offset().top-20
                         , url: '<%=request.getContextPath()%>/courseManager/findByCoursesNameLimit?coursesName='+coursesName
                         , page:{
                             curr:1
@@ -266,7 +266,6 @@
             //监听行工具事件
             table.on('tool(course)', function(obj){
                 var data = obj.data;
-                console.log(obj);
                 if(obj.event === 'del'){
                     layer.confirm('真的删除行么', function(index){
                         $.ajax({
@@ -276,10 +275,10 @@
                             data: {"courseId":data.coursesId},
                             success: function (result) {
                                 // layer.msg("删除成功");
-                                layer.alert(result.message);
+                                layer.msg(result.message);
                                 table.reload('course',{
                                     url: '<%=request.getContextPath()%>/courseManager/findAllByLimit',
-                                    height:'full-20',
+                                    height:$(document).height()-$('#course').offset().top-20,
                                     method: 'post',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -290,7 +289,6 @@
                         });
                     });
                 } else if(obj.event === 'edit'){
-                    clear();
                     $("#coverPicImg").attr("src",data.coverPic);
                     $("#introduceVideo1").val("src",data.introduceVideo);
                     $("#introducePicImg").attr("src",data.introducePic);

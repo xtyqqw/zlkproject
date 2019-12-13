@@ -25,7 +25,10 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-
+    @RequestMapping("/questionMain")
+    public String test(){
+        return "/view/community/questionAll";
+    }
     /*
      * @descrption 全部问答
      * @author gby
@@ -37,8 +40,10 @@ public class QuestionHomeController {
     @ResponseBody
     public Map<String, Object> questionAll(Pagination pagination) throws Exception {
         List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
+        Integer count = questionHomeService.findQuestionCount(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("questionAllList", questionAllList);
+        map.put("count",count);
         return map;
     }
 /*    @RequestMapping(value = "/questionAll")
@@ -65,7 +70,7 @@ public class QuestionHomeController {
     @GetMapping(value = "/findQuestion")
     public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-        questionId="1047919253";
+/*        questionId="1047919253";*/
         Question question = questionHomeService.getAndConvert(questionId);
         mv.addObject("question",question);
         mv.setViewName("/view/community/questionParticulars");

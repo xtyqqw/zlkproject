@@ -1,10 +1,7 @@
 package com.zlk.zlkproject.community.question.mapper;
 
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.Date;
 
 /**
  * @author gby
@@ -14,6 +11,7 @@ import java.util.Date;
  */
 @Mapper
 public interface QuestionMapper {
+
     /*
      * @descrption 判断用户登录状态
      * @author gby

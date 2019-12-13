@@ -29,8 +29,8 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
     private QuestionHomeDao questionHomeDao;
 
     @Override
-    public Integer findNumById(Question question) {
-        return questionHomeMapper.findNumById(question);
+    public Integer findQuestionCount(Pagination pagination) {
+        return questionHomeMapper.findQuestionCount(pagination);
     }
 
     @Override

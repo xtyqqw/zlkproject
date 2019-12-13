@@ -104,7 +104,7 @@
             var form = layui.form;//表单
             table.render({
                 elem: '#chapter'
-                ,height:'full-20'
+                ,height:$(document).height()-$('#chapter').offset().top-20
                 ,url:'<%=request.getContextPath()%>/chapterManager/selectAll'
                 ,method:'POST'
                 ,toolbar: '#toolbarDemo'
@@ -158,6 +158,7 @@
                         content: $("#insertChapterDiv"),
                         btn:['提交'],
                         success:function(index,layero){
+                            clear();
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
@@ -165,10 +166,10 @@
                                     data:$('#insertChapterForm').serialize(),
                                     dataType:"json",
                                     success:function (result) {
-                                        layer.alert(result.msg);
+                                        layer.msg(result.msg);
                                         table.reload('chapter', {
                                             url: '<%=request.getContextPath()%>/chapterManager/selectAll'
-                                            , height:'full-20'
+                                            , height:$(document).height()-$('#chapter').offset().top-20
                                             , method:"POST"
                                             , page:{
                                                 curr:1
@@ -198,11 +199,10 @@
                             url :"<%=request.getContextPath()%>/chapterManager/deleteChapter",
                             data: {"chapterId":data.chapterId},
                             success: function (result) {
-                                console.log(result);
-                                layer.alert(result.msg);
+                                layer.msg(result.msg);
                                 table.reload('chapter',{
                                     url: '<%=request.getContextPath()%>/chapterManager/selectAll',
-                                    height:'full-20',
+                                    height: $(document).height()-$('#chapter').offset().top-20,
                                     method: 'POST',
                                     toolbar: '#toolbarDemo',
                                     page:{
@@ -235,10 +235,10 @@
                                     data: data.field,
                                     dataType: "json",
                                     success: function (result) {
-                                        layer.message(result.msg);
+                                        layer.msg(result.msg);
                                         table.reload('chapter', {
                                             url: '<%=request.getContextPath()%>/chapterManager/selectAll'
-                                            , height:'full-20'
+                                            , height:$(document).height()-$('#chapter').offset().top-20
                                             , method: "POST"
                                             , page: {
                                                 curr: 1
@@ -261,7 +261,7 @@
                 let coursesId = data.value;
                 table.reload('chapter', {
                     url: '<%=request.getContextPath()%>/chapterManager/selectByCoursesId'
-                    , height:'full-20'
+                    , height:$(document).height()-$('#chapter').offset().top-20
                     , method: "POST"
                     , where:{
                         coursesId:coursesId
@@ -272,6 +272,17 @@
                     , toolbar: '#toolbarDemo'
                 });
             });
+
+            //清空表单数据
+            function clear() {
+                $("#chapterId").val();
+                $("#coursesNameInsertSelect").val();
+                $("#chapterName").val();
+                $("#chapterNum").val();
+                $("#chapterTime").val();
+                $("#sectionNum").val();
+                form.render();
+            }
 
         })
 

@@ -21,7 +21,7 @@
             padding: 0;
         }
         #tuanduizhuti{
-            z-index: -9;
+            /*z-index: -9;*/
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
@@ -88,7 +88,7 @@
         .layui-flow-more a cite{
             padding:0 20px;
             border-radius:55px;
-
+            display: none;
             font-size: 1.5vw;
             background-color:#713ED7;
             color:white;
