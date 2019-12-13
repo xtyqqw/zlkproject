@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,7 +39,8 @@ public class User {
     /**用户性别*/
     private String userSex;
     /**用户出生年月*/
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date userBirthday;
     /**用户籍贯*/
     private String userNative;
@@ -75,6 +77,7 @@ public class User {
     /**用户和文章一对多关系*/
     @OneToMany(mappedBy = "user")
     private List<Article> articles=new ArrayList<>();
+
 
     public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
         this.userId = userId;

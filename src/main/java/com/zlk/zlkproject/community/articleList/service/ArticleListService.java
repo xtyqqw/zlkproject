@@ -14,6 +14,8 @@ import java.util.List;
  * @date:2019/11/19 10:33
  */
 public interface ArticleListService {
+    /**查询总数*/
+    Integer findArticleCount(Pagination pagination);
     /**倒序查询最新（默认）*/
     List<Article> findByCreateTime(Pagination pagination);
     /**倒序查询热门（浏览次数）*/

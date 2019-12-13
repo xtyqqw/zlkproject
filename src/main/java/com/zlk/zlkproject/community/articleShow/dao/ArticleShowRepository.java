@@ -21,3 +21,4 @@ public interface ArticleShowRepository extends JpaRepository<Article, String>, J
     @Query("update Article a set a.browseCount = a.browseCount+1 where a.articleId = ?1")
     int updateBrowseCounts(String articleId);
 }
+
