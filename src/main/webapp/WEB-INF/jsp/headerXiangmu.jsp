@@ -18,7 +18,7 @@
         }
         .header{
             background-color: #FFFFFF;
-            height: 80px;
+            height: 85px;
             width: 100%;
             border-bottom: 1px #989898;
             box-shadow: 1px 1px 5px 3px #D4D4D4;
@@ -119,7 +119,7 @@
     <div class="header-nav">
         <a href="/" name="nav" class="nav">首页</a>
         <a href="/HomePage" name="nav" class="nav">项目</a>
-        <a href="/articleHot/toArticleHot" name="nav" class="nav">社区</a>
+        <a href="/CommunityPage" name="nav" class="nav">社区</a>
     </div>
     <!-- 搜索 -->
     <div class="header-search">
@@ -143,7 +143,7 @@
         <div>
             <ul class="layui-nav" style="margin: 0 330px 0 1150px; background-color: #ffffff;">
                 <li class="layui-nav-item" lay-unselect="" style="margin-top: -8px;text-align: center">
-                    <a href="javascript:;">
+                    <a href="javascript:;" style="width: 100px;">
                         <c:if test="${user.userImg==null}">
                             <img src="/img/headimg.jpg" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
                         </c:if>

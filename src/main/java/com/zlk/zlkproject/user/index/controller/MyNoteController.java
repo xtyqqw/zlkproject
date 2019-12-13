@@ -26,7 +26,6 @@ import java.util.Map;
 public class MyNoteController {
     @Autowired(required = false)
     private MyNoteService myNoteService;
-
     @RequestMapping("/toMyNote")
     public ModelAndView toMyNote(HttpServletRequest request)throws Exception{
         ModelAndView mv = new ModelAndView();

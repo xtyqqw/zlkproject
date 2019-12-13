@@ -409,6 +409,10 @@
         position: relative;
         top: -36px;
         left: 5px;
+        width:100px;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;
     }
 
     .studing .studing_ul_s_dd p {
@@ -1022,9 +1026,8 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1069,9 +1072,8 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1115,9 +1117,8 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1161,9 +1162,8 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
