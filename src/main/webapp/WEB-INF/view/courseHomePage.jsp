@@ -32,7 +32,7 @@
 
     <style>
      .layui-tab {
-         width: 950px;
+         width: 1050px;
          height: 500px;
          position: relative;
          left: 200px;
@@ -166,7 +166,7 @@
      .li1{
          float: left;
          height: 190px;
-         margin-left: 7px;
+         margin-left: 30px;
      }
 
      .h51{
