@@ -19,6 +19,12 @@ import java.util.List;
 public class ArticleListServiceImpl implements ArticleListService {
     @Autowired
     private ArticleListMapper articleListMapper;
+
+    @Override
+    public Integer findArticleCount(Pagination pagination) {
+        return articleListMapper.findArticleCount(pagination);
+    }
+
     @Override
     public List<Article> findByCreateTime(Pagination pagination) {
         Integer page = pagination.getPage();

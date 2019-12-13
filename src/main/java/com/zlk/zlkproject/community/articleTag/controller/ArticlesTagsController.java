@@ -1,10 +1,6 @@
 package com.zlk.zlkproject.community.articleTag.controller;
 
-import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
 import com.zlk.zlkproject.community.articleTag.service.ArticlesTagsService;
-import com.zlk.zlkproject.community.articleTag.service.TagsService;
-import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
