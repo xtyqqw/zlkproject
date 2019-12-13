@@ -14,6 +14,16 @@ public interface PlayerService {
     public void recordTime(UserSection userSection);
 
     /**
+     *  记录学习时长
+     *@method recordStudyTime
+     *@params [String,Integer]
+     *@return Integer
+     *@author hry
+     *@time 2019/12/12  15:45
+     */
+    public Integer recordStudyTime(String userId, Integer studyTime);
+
+    /**
      *  记录视频观看状态
      *@method recordState
      *@params [String,Integer]

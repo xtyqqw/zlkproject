@@ -3,8 +3,6 @@ package com.zlk.zlkproject.community.articleAdd.service.impl;
 import com.zlk.zlkproject.community.articleAdd.dao.ActionAddRepository;
 import com.zlk.zlkproject.community.articleAdd.service.ActionAddService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
-import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -180,17 +180,17 @@ public class StuQaController {
         List<Integer> tagIdList = stuQaService.findTagIdBySqaId(sqaId);
         String message = stuQaService.insertStuQa(stuQa, tagIdList);
         //更改当前id的回答数量
-        String s = stuQaService.updateAnswerNum(sqaId);
-        //查找更新后当前sqaId的信息
-        StuQa stuQa1 = new StuQa();
         if (pId==0){
-             stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
+            stuQaService.updateAnswerNum(sectionId,sqaId);
         }else {
-            stuQa1 = stuQaService.findStuQaBySqaId(pId);
+            stuQaService.updateAnswerNum(sectionId,pId);
+            StuQa stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
+            stuQa1.setAnswerNum(stuQa1.getAnswerNum()+1);
+            stuQaService.updateStuQaBySqaId(stuQa1);
         }
+
         Map<String,Object> map = new HashMap<>();
         map.put("message",message);
-        map.put("stuQa",stuQa1);
         return map;
     }
 

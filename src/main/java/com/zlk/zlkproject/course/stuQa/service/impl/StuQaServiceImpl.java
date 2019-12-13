@@ -107,12 +107,12 @@ public class StuQaServiceImpl implements StuQaService {
 
     @Override
     @Transactional
-    public String updateAnswerNum(Integer sqaId) {
+    public String updateAnswerNum(Integer sectionId,Integer sqaId) {
         //根据sqaId查找主问题信息
         StuQa stuQa = stuQaMapper.findStuQaBySqaId(sqaId);
-        Integer answerNum = stuQa.getAnswerNum();
-        stuQa.setAnswerNum(answerNum+1);
-        //问题回答数加1
+        Integer count = stuQaMapper.findCountBySectionIdAndPId(sectionId, sqaId);
+        stuQa.setAnswerNum(count);
+        //修改问题回答数
         Integer flag = stuQaMapper.updateStuQaBySqaId(stuQa);
         if (flag>0){
             return "修改成功";
