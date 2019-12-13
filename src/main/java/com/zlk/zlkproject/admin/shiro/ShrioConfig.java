@@ -34,9 +34,7 @@ public class ShrioConfig {
         shiroFilterFactoryBean.setLoginUrl("/loginController/toLogin");
         shiroFilterFactoryBean.setSuccessUrl("/loginController/toSuccess");
         //添加Shiro内置过滤器
-
         Map<String, String> filterMap = new LinkedHashMap<String, String>();
-        filterMap.put("/logout", "logout");
         filterMap.put("/loginController/login", "anon");
         filterMap.put("/loginController/*", "authc");
         filterMap.put("/admin/*", "authc");
