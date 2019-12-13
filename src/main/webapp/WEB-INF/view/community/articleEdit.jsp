@@ -42,7 +42,7 @@
         <%--顶部内容--%>
         <div class="header">
             <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
-            <a href="javascript:void(0)" id="a2">我的草稿</a>
+            <a href="javascript:void(0)" id="a2">我的文章</a>
         </div>
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
@@ -95,7 +95,7 @@
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
-                                    <div class="default text">请选择标签</div>
+                                    <div class="default text">请选择标签&nbsp;&nbsp;&nbsp;1&nbsp;/&nbsp;3</div>
                                     <div class="menu">
                                         <c:forEach items="${tags}" var="tag">
                                             <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
@@ -109,14 +109,14 @@
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">摘要</label>
-                            <input type="text" name="articleDigest" placeholder="请输入文章摘要">
+                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多">
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">首图</label>
-                            <input type="text" name="figures" placeholder="首图引用地址">
+                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是任何一张引人注目的封面等等,请不要输入奇怪的URL地址进行提交">
                         </div>
                     </div>
 
@@ -175,8 +175,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[30]',
-                            prompt: '请注意文章标题最大长度不能超过30'
+                            type: 'maxLength[50]',
+                            prompt: '请注意文章标题最大字数不能超过50'
                         }]
                     },
                     articleContent: {
@@ -218,7 +218,7 @@
                             prompt: '请注意文章摘要不能为空'
                         }, {
                             type: 'maxLength[150]',
-                            prompt: '请注意文章摘要最大长度不能超过150'
+                            prompt: '请注意文章摘要最大字数不能超过150'
                         }]
                     }
                 },

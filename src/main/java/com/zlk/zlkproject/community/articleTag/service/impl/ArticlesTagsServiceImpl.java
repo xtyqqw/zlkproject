@@ -3,7 +3,6 @@ package com.zlk.zlkproject.community.articleTag.service.impl;
 import com.zlk.zlkproject.community.articleTag.dao.ArticlesTagsRepository;
 import com.zlk.zlkproject.community.articleTag.service.ArticlesTagsService;
 import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
-import java.util.List;
 
 /**
  * @program: ArticlesTagsServiceImpl

@@ -6,8 +6,6 @@ $(document).ready(function () {
     var basePath = localObj.protocol+"//"+localObj.host;
     var server_context=basePath;
 
-    alert(basePath);
-
     layui.use(['element', 'flow','layer'], function () {
         var element = layui.element,
             $ = layui.jquery,
@@ -17,6 +15,12 @@ $(document).ready(function () {
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
+
+        //弹出层设置
+        layer.config({
+            offset: '20%'
+        });
+
 
         /*讲师笔记初加载*/
         note_flow(sectionId);
@@ -37,7 +41,6 @@ $(document).ready(function () {
         /*点击目录功能*/
         $("#icon-mulu").click(function () {
             var display = $("#mulu_div").css("display");
-            console.log(display);
             if (display === "none") {
                 $.ajax({
                     type: "POST",
@@ -45,7 +48,6 @@ $(document).ready(function () {
                     data: "",
                     dataType: "json",
                     success: function (data) {
-                        alert(data.msg);
                         $("#mulu_div").css("display", "block");
                         $("#wenda_div").css("display", "none");
                         $("#div_stuNote").css("display", "none");
@@ -57,31 +59,34 @@ $(document).ready(function () {
                             str += "<ul>";
                             str += "<span class=\"headline\">" + chapter.chapterName + "</span>";
                             $.each(chapter.sectionList, function (i, section) {
-                                var time = section.sectionTime;
-                                var time1 = format(time);
-                                var sectionId = section.sectionId;
-                                str += "<li class='section'>";
-                                str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
-                                $.ajax({
-                                    type: "POST",
-                                    url: basePath+"/section/findState?sectionId=" + sectionId,
-                                    async: false,
-                                    success: function (data) {
-                                        state = data.state;
-                                        return state;
+                                if (section.sectionId !=null){
+                                    var time = section.sectionTime;
+                                    var time1 = format(time);
+                                    var sectionId = section.sectionId;
+                                    str += "<li class='section'>";
+                                    str += "<input hidden name=\"sectionId\" value=\"" + sectionId + "\">";
+                                    $.ajax({
+                                        type: "POST",
+                                        url: basePath+"/section/findState?sectionId=" + sectionId,
+                                        async: false,
+                                        success: function (data) {
+                                            state = data.state;
+                                            return state;
+                                        }
+                                    });
+                                    if (state === "播放中") {
+                                        str += "<i class=\"iconfont icon-bofang state\"></i>";
+                                    } else if (state === "已完成") {
+                                        str += "<i class=\"iconfont icon-wancheng state\"></i>";
+                                    } else if (state === "未观看") {
+                                        str += "<i class=\"iconfont icon-suoding state\"></i>";
                                     }
-                                });
-                                if (state === "播放中") {
-                                    str += "<i class=\"iconfont icon-bofang state\"></i>";
-                                } else if (state === "已完成") {
-                                    str += "<i class=\"iconfont icon-wancheng state\"></i>";
-                                } else if (state === "未观看") {
-                                    str += "<i class=\"iconfont icon-suoding state\"></i>";
+                                    str += "<input hidden class=\"sectionState\" value=\"" + state + "\">";
+                                    str += section.sectionName;
+                                    str += "<span class=\"duration\">" + time1 + "</span>";
+                                    str += "</li>";
                                 }
-                                str += "<input hidden class=\"sectionState\" value=\"" + state + "\">";
-                                str += section.sectionName;
-                                str += "<span class=\"duration\">" + time1 + "</span>";
-                                str += "</li>";
+
                             });
                             str += "</ul>";
                         });
@@ -167,7 +172,7 @@ $(document).ready(function () {
                     var tagId = $(this).find("input").val();
                     tagIdArray.push(tagId);
                 }else {
-                    alert("最多选择3个标签,请先取消1个标签后再选择新标签");
+                    layer.alert("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
             }else {
                 $(this).css("background-color","grey");
@@ -198,7 +203,7 @@ $(document).ready(function () {
         /*问答提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
             if (tagIdArray.length==0){
-                alert("至少选择1个标签");
+                layer.confirm("至少选择1个标签");
             }else {
                 var content = editor.txt.html();
                 var data = {"content":content,"tagIdArray":tagIdArray};
@@ -209,14 +214,17 @@ $(document).ready(function () {
                     dataType: "json",
                     traditional:true,
                     success:function (result) {
-                        alert(result.message);
-                        if(result.message==="添加成功"){
+                        layer.confirm(result.message,function (index,layero) {
+                            layer.close(index);
                             editor.txt.clear();
                             $(".tagName").css("background-color","grey");
                             $(".tagName").attr("isselect","false");
                             $("#wenda_div").css("display", "none");
                             tagIdArray.splice(0);
-                        }
+                        });
+                        /*if(result.message==="添加成功"){
+
+                        }*/
                     }
                 });
                 stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
@@ -228,7 +236,7 @@ $(document).ready(function () {
             editor.txt.clear();
             $(".tagName").css("background-color","grey");
             $(".tagName").attr("isselect","false");
-            // $("#wenda_div").css("display", "none");
+            $("#wenda_div").css("display", "none");
             tagIdArray.splice(0);
         });
 
@@ -310,6 +318,11 @@ $(document).ready(function () {
             return hour + ':' + minute + ':' + second;
         }*/
 
+        // 讲师笔记点击加载内容
+        $("#teacherNote-tab").click(function () {
+            note_flow(parseInt($("#sectionId").text()));
+        });
+
         /*选项卡教师笔记加载bigin*/
         function note_flow(sectionId) {
             $("#lay_flow1").empty();
@@ -320,7 +333,6 @@ $(document).ready(function () {
                     var lis = [];
                     var limit = 3;
                     var data = {"sectionId": sectionId, "page": page, "limit": limit};
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: basePath+"/teacherNote/findNotes",
@@ -359,7 +371,6 @@ $(document).ready(function () {
                     var lis = [];
                     var limit = 5;
                     var data = {"sectionId": sectionId, "page": page, "limit": limit};
-                    console.log(data);
                     $.ajax({
                         type: "POST",
                         url: ""+url,
@@ -368,8 +379,7 @@ $(document).ready(function () {
                         success: function (result) {
                             var str = "";
                             var user = "";
-                            layui.each(result.stuQaList, function (i, stuQa) {
-                                console.log("stuQa="+stuQa);
+                            $.each(result.stuQaList, function (i, stuQa) {
                                 editorflag++;
                                 str += "<div class=\"stuQa-box\">";
                                 str += "<div class=\"stuQa-user\">";
@@ -390,10 +400,8 @@ $(document).ready(function () {
                                 str += "</div>";
                                 str += "<div class=\"stuQa-content-box\">";
                                 str += "<input name='sqaId' value='"+stuQa.sqaId+"' hidden='hidden'>";
-                                /*str += "<input name='pId' value='"+stuQa.pId+"' hidden='hidden'>";*/
                                 str += "<div class=\"stuQa-tag-box\">";
                                 layui.each(stuQa.tagList,function (i, tag) {
-                                    console.log(tag);
                                     str += "<div class=\"stuQa-tag\">"+tag.tagName+"</div>";
                                 });
                                 str += "</div>";
@@ -420,7 +428,7 @@ $(document).ready(function () {
                                     str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editorflag+"'>"+stuQa.report+"</div>";
                                 }
                                 str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editorflag+"'>回复</div>";
-                                str += "<input hidden value='"+stuQa.pId+"'></input>";
+                                str += "<input name='pId' value='"+stuQa.pid+"' hidden='hidden'>";
                                 str += "<div class=\"stuQa-date\" id='stuQa-date"+editorflag+"'>"+stuQa.date+"</div>";
                                 str += "</div>";
                                 str += "<div class=\"stuQa-answer-div\" id='sqaId"+stuQa.sqaId+"' style='display: none'>";
@@ -455,37 +463,6 @@ $(document).ready(function () {
         //精华选项卡点击事件
         $("#stuQaelite-tab").click(function () {
             stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",sectionId);
-        });
-
-        /*查看全文按钮点击提交事件*/
-        $(document).on("click", ".stuQa-readMore", function () {
-            if ($(this).text() === "查看全文"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
-                height1 = $(this).parent().parent().height(); //功能按钮框的高度
-                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
-                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
-                if (height <= 200){
-                    $(this).text("收起");
-                }else {
-                    $(this).parent().parent().prev().css("height","auto");
-                    $(this).parent().parent().parent().css("height","auto");
-                    $(this).parent().parent().parent().parent().css("height","auto");
-                    $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
-                    $(this).parent().parent().css("height",height1);
-                    $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
-                    $(this).text("收起");
-                }
-            }else if($(this).text() === "收起"){
-                $(this).parent().parent().prev().css("height","60%");
-                $(this).parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().parent().css("height",height3);
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
-                $(this).parent().parent().css("height","20%");
-                $(this).parent().parent().parent().find("div").eq(0).css("height","20%");
-                $(this).text("查看全文");
-            }
-
-
         });
 
         /*div鼠标移入事件*/
@@ -536,10 +513,10 @@ $(document).ready(function () {
 
         /*举报按钮点击提交事件*/
         $(document).on("click", ".stuQa-report", function () {
-            var report = $(this).text();
+            var thisReport = $(this).text();
             var sqaId = $(this).parent().parent().parent().find("input").val();
-            if (report === "举报"){
-                report = "已举报";
+            if (thisReport === "举报"){
+                let report = "已举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
@@ -547,13 +524,13 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        report = result.stuQa.report;
+                        thisReport = result.stuQa.report;
                     }
                 });
-                $(this).text(""+report);
+                $(this).text(""+thisReport);
                 $(this).css("color","#9ea2ea");
-            }else if (report === "已举报"){
-                report = "举报";
+            }else if (thisReport === "已举报"){
+                let report = "举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
@@ -561,55 +538,109 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        report = result.stuQa.report;
+                        thisReport = result.stuQa.report;
                     }
                 });
-                $(this).text(""+report);
+                $(this).text(""+thisReport);
                 $(this).css("color","#ffffff");
             }
         });
 
-        var height;
-        var height1;
-        var height2;
-        var height3;
-        var height4;
+
+
 
         /*回答按钮点击事件*/
         $(document).on("click", ".stuQa-answer", function () {
             if ($(this).text() === "回答"){
-
                 height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
                 height1 = $(this).parent().parent().height(); //功能按钮框的高度
                 height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
-                height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
-                height4 = $(this).parent().parent().prev().height();//内容部分高度
+                height7 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                height6 = $(this).parent().parent().prev().height();//内容部分高度
+                height5 = $(this).parent().parent().parent().prev().find("div").eq(0).height();//用户部分高度
+
                 var sqaId = $(this).parent().parent().parent().find("input").val();
                 var id = $(this).parent().next().attr("id");
                 answer(id,sqaId,sectionId);
-                if (height <= 200){
-                    $(this).parent().parent().prev().css("height",height4);
-                }else {
-                    $(this).parent().parent().prev().css("height","auto");
-                }
+
                 $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",160);
-                $(this).parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);//160
+
+
+                $(this).parent().parent().prev().css("height",height6);
                 $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
                 $(this).parent().next().css("display","block");
+                $(this).parent().parent().css("height","auto");
                 $(this).text("收起回复");
             }else if ($(this).text() === "收起回复"){
+                let height10 = $(this).parent().parent().prev().height();//内容部分高度
                 $(this).parent().next().css("display","none");
                 $(this).text("回答");
-                $(this).parent().parent().prev().css("height","60%");
-                $(this).parent().parent().parent().css("height","auto");
-                $(this).parent().parent().parent().parent().css("height",height3);
-                $(this).parent().parent().parent().prev().find("div").eq(0).css("height","80%");
                 $(this).parent().parent().css("height",height1);
+                $(this).parent().parent().prev().css("height",height10);
+                $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+
+                $(this).parent().parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+
+
             }
 
+        });
+
+        let height;
+        let height1;
+        let height2;
+        let height3;
+        let height4;
+        let height5;
+        let height6;
+        let height7;
+        let height8;
+        let height9;
+
+        /*查看全文按钮点击提交事件*/
+        $(document).on("click", ".stuQa-readMore", function () {
+            if ($(this).text() === "查看全文"){
+                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                if ($(this).parent().next().css("display")==="none"){
+                    height1 = $(this).parent().parent().height(); //功能按钮框的高度
+                    height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                }else {
+                    height8 = $(this).parent().parent().height(); //功能按钮框的高度
+                    height9 = $(this).parent().parent().parent().parent().height();//评论块整体高度
+                }
+                height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
+
+                height4 = $(this).parent().parent().prev().height();//内容部分高度
+                height5 = $(this).parent().parent().parent().prev().find("div").eq(0).height();//用户部分高度
+                if (height <= 200){
+                    $(this).text("收起");
+                }else {
+                    $(this).parent().parent().css("height",height1);
+                    $(this).parent().parent().prev().css("height","auto");
+                    $(this).parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().parent().css("height","auto");
+                    $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+                    $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                    $(this).text("收起");
+                }
+            }else if($(this).text() === "收起"){
+                $(this).parent().parent().prev().css("height",height4);
+                $(this).parent().parent().parent().css("height","auto");
+                $(this).parent().parent().parent().prev().find("div").eq(0).css("height",height5);
+                if ($(this).parent().next().css("display")==="none"){
+                    $(this).parent().parent().css("height",height1);
+                    $(this).parent().parent().parent().parent().css("height",height3);
+                }else {
+                    $(this).parent().parent().css("height",height8);
+                    $(this).parent().parent().parent().parent().css("height",height9);
+                }
+                $(this).parent().parent().parent().find("div").eq(0).css("height",height2);
+                $(this).text("查看全文");
+            }
         });
 
         function answer(id, sqaId, sectionId) {
@@ -671,7 +702,7 @@ $(document).ready(function () {
                             str += "<div class=\"stuQa-func-tag stuQa-report\" id='stuQa-report"+editori+"'>"+stuQa.report+"</div>";
                         }
                         str += "<div class=\"stuQa-func-tag stuQa-reply\" id='stuQa-reply"+editori+"'>回复</div>";
-                        str += "<input hidden value='"+stuQa.pId+"'></input>";
+                        str += "<input hidden value='"+stuQa.pid+"'></input>";
                         str += "<div class=\"stuQa-date\" id='stuQa-answer-date"+editori+"'>"+stuQa.date+"</div>";
                         str += "</div>";
                         str += "</div>";
@@ -724,16 +755,13 @@ $(document).ready(function () {
         $(document).on("click", ".stuQa-reply", function () {
             var sqaId = $(this).parent().parent().parent().find("input").val();
             var pId = $(this).next("input").val();
-            alert(sqaId);
-            alert(pId);
-            var answerId = $(this).parent().find("div").attr("id");
-            var answerNumId= $(this).parent().find("div").eq(1).attr("id");
+            var Id = $("#stuQatab").children(".layui-tab-content").children(".layui-show").attr("id");
             layer.open({
                 title: '回复',
                 type: 1,
                 content: $("#answer-div"),
-                area:['500px','300px'],
-                offset:'t',
+                area:['500px','350px'],
+                offset:'20%',
                 btn: ['提交'],
                 yes: function (index, layero) {
                     layer.close(index);
@@ -745,11 +773,11 @@ $(document).ready(function () {
                         dataType: "json",
                         data: data,
                         success:function (result) {
-                            layer.alert(result.message);
-                            $('#'+answerId).click();
-                            $('#'+answerNumId).text(result.stuQa.answerNum);
+                            layer.msg(result.message);
+                            stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
                         }
-                    })
+                    });
+
                 }
             });
         });
@@ -2244,11 +2272,10 @@ $(document).ready(function () {
     elem_btnPlay.onclick = function () {
         if (getSourceLength){
             if(elem_video1.paused){
-                alert(sectionId);
                 let videoState = "";
                 $.ajax({
                     type: "POST",
-                    url: basePath+"/section/findState?sectionId=" + sectionId,
+                    url: basePath+"/section/findState?sectionId=" + parseInt($("#sectionId").text()),
                     async: false,
                     success: function (data) {
                         videoState = data.state;

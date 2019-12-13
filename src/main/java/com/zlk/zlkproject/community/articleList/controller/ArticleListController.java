@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -27,24 +26,34 @@ import java.util.Map;
 public class ArticleListController {
     @Autowired
     private ArticleListService articleListService;
+
     /**
-     * 登录接口
+     * 最新文章接口
      * @return
      */
-    @RequestMapping(value = "/toLogin")
-    public String toLogin(){
-        return "view/community/newCommunityMain";
+    @RequestMapping(value = "toArticleAll")
+    public String toArticleAll(){
+        return "view/community/articleAll";
     }
+
     /**
-     * 我要发文接口
+     * 最热文章接口
      * @return
      */
-    @RequestMapping(value = "/toArticleEdit")
-    public ModelAndView toArticleEdit(HttpServletRequest request){
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("view/community/articleGuide");
-        return mv;
+    @RequestMapping(value = "/toArticleHot")
+    public String toArticleHot(){
+        return "view/community/articleHot";
     }
+
+    /**
+     * 我的文章接口
+     * @return
+     */
+    @RequestMapping(value = "/toArticleMy")
+    public String toArticleMy(){
+        return "view/community/articleMy";
+    }
+
     /**
      * 测试页面
      * @return
@@ -58,8 +67,10 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{
         List<Article> articleList=articleListService.findByCreateTime(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map=new HashMap<>();
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
 
@@ -67,8 +78,10 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByBrowseCount(Pagination pagination)throws Exception{
         List<Article> articleList = articleListService.findByBrowseCount(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map =new HashMap<>();
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
     /*@RequestMapping(value = "/findByUserId")
@@ -87,13 +100,19 @@ public class ArticleListController {
     }*/
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
-    public Map<String,Object> findByUserId(String userId,Pagination pagination)throws Exception{
+    public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{
         User user=new User();
-        user.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
-        pagination.setUserId("adfd95a4b3634b58b0cf3b8c67b18a29");
+        user.setUserId((String) request.getSession().getAttribute("userId"));
+        pagination.setUserId((String) request.getSession().getAttribute("userId"));
         List<Article> articleList=articleListService.findByUserId(pagination);
+        Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map=new HashMap<>();
+        if (user.getUserId() == null) {
+            map.put("msg","请先进行登录");
+            return map;
+        }
         map.put("articleList",articleList);
+        map.put("count",count);
         return map;
     }
 }
