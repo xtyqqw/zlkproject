@@ -10,9 +10,15 @@
 <html>
 <head>
     <title>意见反馈</title>
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script type="text/javascript">
+        $("#tijiao").click(function () {
+            layer.msg("提交成功");
+        });
+    </script>
+
 
     <style type="text/css">
         *{
@@ -24,7 +30,7 @@
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 1000px;
+            width: 1300px;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -160,11 +166,7 @@
     <div id="zhuti_wei">
         <button id="tijiao" class="layui-btn" οnclick="tijiao();">提交</button>
         <button id="quxiao">取消</button>
-        <script>
-            $("#tijiao").click(function () {
-                layer.msg("提交成功");
-            });
-        </script>
+
 
     </div>
     </form>
@@ -177,15 +179,15 @@
 </div>
 <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js">
-    $('#tijiao').click(function () {
-        layer.msg("提交成功");
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js">--%>
+    <%--$('#tijiao').click(function () {--%>
+        <%--layer.msg("提交成功");--%>
 
-    });
+    <%--});--%>
 
 
 
-</script>
+<%--</script>--%>
 
 </body>
 </html>
