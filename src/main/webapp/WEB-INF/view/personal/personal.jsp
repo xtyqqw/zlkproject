@@ -236,7 +236,7 @@
 <script type="text/javascript">
     $(window.parent.document).find("#personal-iframe").load(function(){
         var main = $(window.parent.document).find("#personal-iframe");
-        main.height(800);
+        main.height(300);
         var thisheight = $(document).height();
         main.height(thisheight);
     });

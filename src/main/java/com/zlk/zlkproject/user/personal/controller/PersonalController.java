@@ -98,7 +98,7 @@ public class PersonalController {
 //         userId="1";
 //
 //        User user=userService.selectUserById(userId);
-
+//
         //从session中获取ID，进行修改，userId="1";为模拟数据
        User user1 = (User) request.getSession().getAttribute("user");
 
