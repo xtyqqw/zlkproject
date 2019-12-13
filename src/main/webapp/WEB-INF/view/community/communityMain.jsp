@@ -196,7 +196,6 @@
         .wz_remen_zt1 ul li:nth-child(1){
             margin-top: 0.5vw;
         }
-
         .wz_remen_zt2{
             display: none;
             background-color: #e7e7e7;
@@ -310,7 +309,7 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTags">我的文章</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>" target="">问答</a>
+                <a href="<%= request.getContextPath()%>/question/questionMain" target="pageTags">问答</a>
             </div>
             <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
@@ -384,7 +383,6 @@
     $(document).on('mouseleave','.wz_bt_bq>span',function(){
         $(this).css('color','black');
     })
-
     $(document).on('mouseenter','.yueanniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
         $(this).css('border','1px solid #914ff1');
@@ -393,7 +391,6 @@
         $(this).css('box-shadow','none');
         $(this).css('border','1px solid white');
     })
-
     $(document).on('mouseenter','.zonganniu',function(){
         $(this).css('box-shadow','#D8D8D8 0 0 0.4vw');
         $(this).css('border','1px solid #914ff1');
@@ -402,7 +399,6 @@
         $(this).css('box-shadow','none');
         $(this).css('border','1px solid white');
     })
-
     $(document).on('click','.yueanniu',function(){
         $('.yueanniu').css('background-color','#914ff1');
         $('.yueanniu').css('color','white');

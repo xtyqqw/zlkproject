@@ -409,6 +409,10 @@
         position: relative;
         top: -36px;
         left: 5px;
+        width:100px;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;
     }
 
     .studing .studing_ul_s_dd p {
@@ -1018,7 +1022,7 @@
                                     '<dl>' +
                                     '<dt>' +
                                     '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
-                                    '<img src="' + courses.introducePic + '" />' +
+                                    '<img src="' + courses.coursesName + '" />' +
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
@@ -1069,7 +1073,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
                                     '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
@@ -1115,7 +1119,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
                                     '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
@@ -1161,7 +1165,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
                                     '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
