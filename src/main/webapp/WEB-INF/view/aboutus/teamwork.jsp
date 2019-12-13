@@ -41,7 +41,7 @@
         .headimg{width: 100%;height: 150px;}
         .headimg img{width: 100%;}
         .div1{width: 100%;height: 70%;}
-        .waik{background: #FFFFFF;width: 60%;height: 800px;
+        .waik{background: #FFFFFF;width: 60%;height: 400px;
             margin: 0px auto;padding-bottom: 20px;}
         h2{padding: 40px;letter-spacing: 20px;/*margin-left: 350px;*/}
         .box{/*padding-left: 250px;*/ }
@@ -83,7 +83,7 @@
     <div style="clear: both;"></div>
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">招聘信息</h2>
-        <div class="layui-colla-content">
+        <div class="layui-colla-content" overflow="auto">
             <p>联系我们：<br>
                 地址：北京市海淀区四道口路2号京果商厦A座4层466<br>
                 电话：010-53567019<br>
