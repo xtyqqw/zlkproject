@@ -283,8 +283,7 @@
                         <%--onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"--%>
                         <%--onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"--%>
                         <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不超过6个字)"
-                               οnkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))"
-
+                               onkeyup="value=value.replace(/[\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"
                                autocomplete="off" class="layui-input" maxlength="6">
                     </div>
                 </div>
@@ -666,6 +665,7 @@
 
 
     //转换日期格式
+    //获取出生年月的值
     var date = $("#userBirthday").val();
     function formatDate(date){
         date = new Date(date);
@@ -680,6 +680,7 @@
         return y+"-"+m+"-"+d;
     }
     date = formatDate(date);
+    //将格式化后的值放入到出生年月中
     $("#userBirthday").val(date);
 
     // 图片上传js
