@@ -30,23 +30,40 @@ public class OpinionController {
         ModelAndView mv=new ModelAndView();
 
 //        //userId="1";
-//       opinion.setOpinionUserId("1");
-
+//        opinion.setOpinionUserId("1");
 
         //从session中获取ID，进行修改，userId="1";为模拟数据
         User user1 = (User) request.getSession().getAttribute("user");
-        //获取用户id
-        opinion.setOpinionUserId(user1.getUserId());
+        //如果user1不为空时，调用用户新增意见反馈方法
+        if(user1!=null){
+            //获取用户id，将ID放入对象中。
+            opinion.setOpinionUserId(user1.getUserId());
+            int a=opinionService.addOpinion(opinion);
+            if(a>0){
+                mv.setViewName("view/cxr/opinion");
+                return mv;
 
 
-        int i=opinionService.addOpinion(opinion);
-        if(i>0){
-            mv.setViewName("view/cxr/opinion");
-            return mv;
+            }else{
+                return null;
+            }
+        }else {
+            //  如果user1为空，调用游客新增方法
 
-        }else{
-            return null;
+            int i=opinionService.insertOpinion(opinion);
+
+            if(i>0){
+                mv.setViewName("view/cxr/opinion");
+                return mv;
+
+            }else{
+                return null;
+            }
         }
+
+
+
+
 
     }
 }

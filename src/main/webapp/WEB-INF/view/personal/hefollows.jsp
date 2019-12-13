@@ -109,7 +109,7 @@
             border: 1px solid #bec3d9;
             border-radius: 50px;
             padding: 0 10px;
-            background-color: #bec3d9;
+            background-color: #713ed7;
             color: #fff;
         }
         .attention_person .attention_him{
@@ -217,12 +217,16 @@
     <div class="hefollows_title">
         <p>TA关注的人</p>
     </div>
+    <%--返回上一页--%>
+    <a href="javascript:history.go(-1)" style="margin-left: 30px;margin-top: -30px;position: fixed">
+        <i class="layui-icon layui-icon-return" style="font-size: 20px"></i>
+    </a>
     <c:if test="${list.size()==0}">
         <p class="noperson">ta没有关注任何人</p>
     </c:if>
     <c:if test="${list.size()!=0}">
         <div class="main"></div>
-        <c:forEach items="${list}" var="list">
+        <%--<c:forEach items="${list}" var="list">
             <div class="hefollows_main">
                 <div class="main_left">
                     <!-- 头像 -->
@@ -292,15 +296,31 @@
                     </div>
                 </div>
             </div>
-        </c:forEach>
+        </c:forEach>--%>
         <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
     </c:if>
     <input id="user_id" value="${userId}" style="display: none">
 </div>
 <%--分页--%>
 <script>
+    $(function () {
+        /*分页*/
+        showHefollows();getPage();
+        /*点击已关注 取消关注*/
+        $(".ok_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            nofollow(str,$(this));
+        });
+        /*点击加关注*/
+        $(".no_zi").click(function () {
+            let str = $(this).prev().prev().text() + '';
+            jiafollow(str,$(this));
+        });
+        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
+    });
+    /*----------------------分页--------------------------*/
     var page = 1;
-    var limit = 3;
+    var limit = 2;
     var total;
     var userId1 =${userId};
     function showHefollows() {
@@ -379,25 +399,22 @@
                     limit=obj.limit;
                     if(!first){
                         showHefollows();
+                        $(".ok_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            nofollow(str,$(this));
+                        });
+                        /*点击加关注*/
+                        $(".no_zi").click(function () {
+                            let str = $(this).prev().prev().text() + '';
+                            jiafollow(str,$(this));
+                        });
+                        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
                     }
                 }
             });
         });
     }
-    $(function () {
-        showHefollows();
-        getPage();
-        $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-    })
-</script>
-<%--点击关注事件--%>
-<script type="text/javascript">
-    /*点击已关注 取消关注*/
-    $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-    $(".ok_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        nofollow(str,$(this));
-    });
+    /*-----------------------点击已关注 取消关注--------------------*/
     function nofollow(userId,mythis){
         $.ajax({
             url:"/follow/defollow?userId="+userId,
@@ -419,11 +436,7 @@
             }
         });
     }
-    /*点击加关注*/
-    $(".no_zi").click(function () {
-        let str = $(this).prev().prev().text() + '';
-        jiafollow(str,$(this));
-    });
+    /*---------------------------点击加关注--------------------------*/
     function jiafollow(userId,mythis){
         $.ajax({
             url:"/follow/follow?userId="+userId,

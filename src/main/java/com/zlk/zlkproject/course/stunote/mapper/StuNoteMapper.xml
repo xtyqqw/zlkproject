@@ -108,4 +108,28 @@
     <delete id="deleteCollect">
         DELETE FROM stunote_user_collect WHERE sn_id = #{snId} AND user_id = #{userId}
     </delete>
+
+    <update id="stuNoteUpAdd">
+        UPDATE stu_note SET up = up + 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpDelete">
+        UPDATE stu_note SET up = up - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteDownAdd">
+        UPDATE stu_note SET down = down + 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteDownDelete">
+        UPDATE stu_note SET down = down - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpAddDownDelete">
+        UPDATE stu_note SET up = up + 1, down = down - 1 WHERE sn_id = #{snId}
+    </update>
+
+    <update id="stuNoteUpDeleteDownAdd">
+        UPDATE stu_note SET up = up - 1, down = down + 1 WHERE sn_id = #{snId}
+    </update>
 </mapper>

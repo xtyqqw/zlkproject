@@ -90,6 +90,7 @@
     height: 100%;
     opacity: 0.7;
     position: absolute;
+    overflow-y: auto;
 }
 
 #mulu_div ul{
@@ -553,20 +554,22 @@ button{
     text-align: center;
     font-size: 15px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .SNS_moduleBox_lbox{
-    width: 30px;
+    width: 35%;
     height: 28px;
     float: left;
 }
 .SNS_moduleBox_rbox{
-    width: 40px;
+    width: 65%;
     height: 23px;
     float: left;
     color: rgb(121,121,121);
     text-align: left;
     padding: 5px 0 0 0;
-    font-size: 12px;
+    font-size: 1vw;
 }
 .UDBtn{
     cursor: pointer;
@@ -685,7 +688,7 @@ button{
     height: 22px;
     position: relative;
     top: 0;
-    left: 646px;
+    margin: 0 1px 0 auto;
     border-radius: 3px;
     color: white;
     font-size: 16px;
@@ -1016,7 +1019,7 @@ button{
 }
 
 .stuQa-user{
-    height: 100%;
+    height: 200px;
     width: 20%;
     display: block;
     text-align: center;
@@ -1040,6 +1043,7 @@ button{
 
 .stuQa-userName{
     height: 20%;
+    font-size: 15px;
 }
 .stuQa-content-box{
     width: 80%;
@@ -1062,7 +1066,7 @@ button{
     border-radius: 20px;
     cursor: pointer;
     display: inline-block;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .stuQa-toolbar{
@@ -1073,10 +1077,11 @@ button{
     width: 95%;
     height: 60%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 15px;
+    /*text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;*/
 }
 
 .stuQa-function-box{
@@ -1108,15 +1113,15 @@ button{
     overflow: hidden;
     height: auto;
     width: 100%;
-    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;*/
 }
 
 .stuQa-func-tag{
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     margin: 0 5px;
 }
 
@@ -1144,6 +1149,15 @@ button{
 .stuQa-date{
     margin-left: auto;
     margin-right: 3%;
+}
+
+#answer-div .w-e-text-container{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#answer-div .w-e-text-container .w-e-text{
+    overflow-y: auto !important;
 }
 /*-------------------------学生问答end-----------------------------------------------*/
 

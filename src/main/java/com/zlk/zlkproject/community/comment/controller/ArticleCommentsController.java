@@ -79,7 +79,6 @@ public class ArticleCommentsController {
     public Map findArtCmt(@RequestParam("articleId") String articleId,
                           @RequestParam("page") Integer page,@RequestParam("size") Integer size, HttpServletRequest request) {
         articleId = (String) request.getSession().getAttribute("articleId");
-
         Map map = new HashMap();
         List<ArticleComment> artCmtList = articleCommentsService.findArtCmt(articleId, page, size);
         Integer pages = articleCommentsService.findArtCmtCount(articleId);

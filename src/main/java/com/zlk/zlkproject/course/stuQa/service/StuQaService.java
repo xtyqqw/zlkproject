@@ -111,12 +111,12 @@ public interface StuQaService {
     /**
      *  根据id修改回答数量
      *@method updateAnswerNum
-     *@params [sqaId]
+     *@params [sectionId,sqaId]
      *@return java.lang.String
      *@author zhang
      *@time 2019/12/3  13:57
      */
-    String updateAnswerNum(Integer sqaId);
+    String updateAnswerNum(Integer sectionId,Integer sqaId);
 
     /**
      *  查找全部问答并分页

@@ -2,6 +2,9 @@ var replyEditorArr = [];
 
 $(document).ready(function () {
 
+    var localObj = window.location;
+    var basePath = localObj.protocol+"//"+localObj.host;
+
     layui.use(['element','flow','layer'], function () {
         var element = layui.element,
             $ = layui.jquery,
@@ -20,14 +23,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                let arrP = $("#div-artCmt-text").children().eq(0).children();
-                for (let i=0;i<arrP.length;i++){
-                    if (arrP.eq(i).children("img").length > 0){
-                        isEmpty = false;
-                    }
-                }
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let articleId = 1546605080;
+
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
                 let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
@@ -41,7 +37,7 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : "/artComment/submit",
+                        url : basePath+"/artComment/submit",
                         data : data,
                         success : function (res) {
                             alert(res.retmsg);
@@ -68,11 +64,9 @@ $(document).ready(function () {
 
         {
             //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            let userId = '1';
-            //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            let articleId =1;
+            let userId = 1;
 
-            function cmtFlowLoad(url) {
+            function cmtFlowLoad(url,articleId) {
                 $("#art-cmt-ul-stream").empty();
                 flow.load({
                     elem: '#art-cmt-ul-stream',//流加载容器
@@ -104,7 +98,7 @@ $(document).ready(function () {
                                         zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                         caiStr = '<i class="iconfont icon-qinziAPPtubiao- cmt-ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                         for (let l=0;l<comment.articleCommentList[i].articleCommentZanCaiList.length;l++){
-                                            if(comment.articleCommentList[i].articleCommentZanCaiList[l].userId === userId/*$("#userId").text() + ''*/){
+                                            if(comment.articleCommentList[i].articleCommentZanCaiList[l].userId === $("#userId").text() + ''){
                                                 zanCaiState = comment.articleCommentList[i].articleCommentZanCaiList[l].zanCai;
                                                 if (zanCaiState === 'zan')
                                                     zanStr = '<i class="iconfont icon-dianzan cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -197,7 +191,7 @@ $(document).ready(function () {
                                     zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                     caiStr = '<i class="iconfont icon-qinziAPPtubiao- cmt-ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                     for (let i=0;i<comment.articleCommentZanCaiList.length;i++){
-                                        if(comment.articleCommentZanCaiList[i].userId === userId/*$("#userId").text() + ''*/){
+                                        if(comment.articleCommentZanCaiList[i].userId === $("#userId").text() + ''){
                                             zanCaiState = comment.articleCommentZanCaiList[i].zanCai;
                                             if (zanCaiState === 'zan')
                                                 zanStr = '<i class="iconfont icon-dianzan cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
@@ -294,7 +288,7 @@ $(document).ready(function () {
             //文章评论选项卡 点击事件
             $("#selection_stuCmt").click(function () {
                 replyEditorArr.length = 0;
-                cmtFlowLoad("/artComment/findArtCmt");
+                cmtFlowLoad(basePath+"/artComment/findArtCmt","articleId");
             });
 
             //举报点击事件
@@ -308,7 +302,7 @@ $(document).ready(function () {
                     data = {'articleCommentId':articleCommentId,'inform':'true'};
                     $.ajax({
                         type: "POST",
-                        url: "/artComment/updateInform",
+                        url: basePath+"/artComment/updateInform",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -323,7 +317,7 @@ $(document).ready(function () {
                     data = {'articleCommentId':articleCommentId,'inform':'false'};
                     $.ajax({
                         type: "POST",
-                        url: "/artComment/updateInform",
+                        url: basePath+"/artComment/updateInform",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -343,141 +337,152 @@ $(document).ready(function () {
                 let type = $(this).attr('data_name');
                 let data;
                 let thisObj = $(this);
-                if (type === 'zan'){
-                    if(ZCState === 'zan'){
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('none');
-                                    thisObj.removeClass('icon-dianzan');
-                                    thisObj.addClass('icon-qinziAPPtubiao-1');
-                                    thisObj.css('color','rgb(121,121,121)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num --;
-                                    thisObj.parent().next().text(num);
+                let completeState = thisObj.parent().parent().children().eq(1).text() + '';
+                if (completeState === 'yes'){
+                    thisObj.parent().parent().children().eq(1).text('no');
+                    if (type === 'zan'){
+                        if(ZCState === 'zan'){
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('none');
+                                        thisObj.removeClass('icon-dianzan');
+                                        thisObj.addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.css('color','rgb(121,121,121)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num --;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }else if(ZCState === 'none'){
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('zan');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                    thisObj.addClass('icon-dianzan');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else if(ZCState === 'none'){
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('zan');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                        thisObj.addClass('icon-dianzan');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
+                            });
+                        }else {
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAddCaiMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success: function (res) {
+                                    if (res.error === 0) {
+                                        thisObj.parent().parent().children().eq(0).text('zan');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-1');
+                                        thisObj.addClass('icon-dianzan');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                        thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
+                                        thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
+                                        thisObj.parent().next().next().children().eq(0).css('font-size','18px');
+                                        thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
+                                        num = parseInt(thisObj.parent().next().next().next().text());
+                                        num --;
+                                        thisObj.parent().next().next().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
+                                }
+                            });
+                        }
                     }else {
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAddCaiMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success: function (res) {
-                                if (res.error === 0) {
-                                    thisObj.parent().parent().children().eq(0).text('zan');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-1');
-                                    thisObj.addClass('icon-dianzan');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
-                                    thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
-                                    thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
-                                    thisObj.parent().next().next().children().eq(0).css('font-size','18px');
-                                    thisObj.parent().next().next().children().eq(0).css('color','rgb(121,121,121)');
-                                    num = parseInt(thisObj.parent().next().next().next().text());
-                                    num --;
-                                    thisObj.parent().next().next().next().text(num);
+                        if(ZCState === 'cai'){
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiMinus'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('none');
+                                        thisObj.removeClass('icon-dianzan_active');
+                                        thisObj.addClass('icon-qinziAPPtubiao-');
+                                        thisObj.css('font-size','18px');
+                                        thisObj.css('color','rgb(121,121,121)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num --;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }
-                }else {
-                    if(ZCState === 'cai'){
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiMinus'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('none');
-                                    thisObj.removeClass('icon-dianzan_active');
-                                    thisObj.addClass('icon-qinziAPPtubiao-');
-                                    thisObj.css('font-size','18px');
-                                    thisObj.css('color','rgb(121,121,121)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num --;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else if (ZCState === 'none'){
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('cai');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-');
+                                        thisObj.addClass('icon-dianzan_active');
+                                        thisObj.css('font-size','20px');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }else if (ZCState === 'none'){
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('cai');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-');
-                                    thisObj.addClass('icon-dianzan_active');
-                                    thisObj.css('font-size','20px');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
+                            });
+                        }else {
+                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinusCaiAdd'};
+                            $.ajax({
+                                type: "POST",
+                                url: basePath+"/artComment/updateZC",
+                                dataType: "json",
+                                data: data,
+                                success:function (res) {
+                                    if (res.error === 0){
+                                        thisObj.parent().parent().children().eq(0).text('cai');
+                                        thisObj.removeClass('icon-qinziAPPtubiao-');
+                                        thisObj.addClass('icon-dianzan_active');
+                                        thisObj.css('font-size','20px');
+                                        thisObj.css('color','rgb(102,71,238)');
+                                        let num = parseInt(thisObj.parent().next().text());
+                                        num ++;
+                                        thisObj.parent().next().text(num);
+                                        thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
+                                        thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
+                                        thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
+                                        num = parseInt(thisObj.parent().prev().text());
+                                        num --;
+                                        thisObj.parent().prev().text(num);
+                                    }
+                                    thisObj.parent().parent().children().eq(1).text('yes');
                                 }
-                            }
-                        });
-                    }else {
-                        data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinusCaiAdd'};
-                        $.ajax({
-                            type: "POST",
-                            url: "/artComment/updateZC",
-                            dataType: "json",
-                            data: data,
-                            success:function (res) {
-                                if (res.error === 0){
-                                    thisObj.parent().parent().children().eq(0).text('cai');
-                                    thisObj.removeClass('icon-qinziAPPtubiao-');
-                                    thisObj.addClass('icon-dianzan_active');
-                                    thisObj.css('font-size','20px');
-                                    thisObj.css('color','rgb(102,71,238)');
-                                    let num = parseInt(thisObj.parent().next().text());
-                                    num ++;
-                                    thisObj.parent().next().text(num);
-                                    thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
-                                    thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
-                                    thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
-                                    num = parseInt(thisObj.parent().prev().text());
-                                    num --;
-                                    thisObj.parent().prev().text(num);
-                                }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
+
             });
 
             //回复富文本编辑器 回复按钮点击事件
@@ -495,14 +500,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                let arrP = $(this).prev().prev().children().eq(0).children();
-                for (let i=0;i<arrP.length;i++){
-                    if (arrP.eq(i).children("img").length > 0){
-                        isEmpty = false;
-                    }
-                }
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let articleId = 1546605080;
+
                 //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 let userId = 1;
                 let data;

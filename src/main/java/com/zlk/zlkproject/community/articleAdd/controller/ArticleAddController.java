@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,14 +36,14 @@ public class ArticleAddController {
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
     public ModelAndView articleGuide(Article article, HttpServletRequest request) throws Exception{
-        //User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv=new ModelAndView();
         //进入发文提示页面前先判断当前用户的登录状态
-        /*if (user == null){
+        if (user == null){
             mv.addObject("flag", "true");
             mv.addObject("msg","想发文，请先进行登录");
             mv.setViewName("view/community/communityMain");
-        }*/
+        }
         //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
         /*Article approval=articleAddService.getArticleInApproval(article.getApproval());
         if (approval != null) {
@@ -63,7 +62,7 @@ public class ArticleAddController {
                 mv.setViewName("view/community/communityMain");
             }
         }*/
-        mv.setViewName("view/community/communityMain");
+        mv.setViewName("view/community/articleGuide");
         return mv;
     }
 
@@ -86,14 +85,15 @@ public class ArticleAddController {
     //创建文章的请求方法
     @PostMapping(value = "/articles")
     public String post(Article article, HttpServletRequest request) throws Exception {
-        /*User user = (User) request.getSession().getAttribute("user");
-        String userId = "" + user.getUserId();*/
-        User user=new User();
-        user.setUserId("1");
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        //User user=new User();
+        //user.setUserId("1");
+        user.setUserId(userId);
         article.setUser(user);
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
-        return "redirect:/toCommunity-page";
+        return "redirect:/CommunityPage";
     }
 
     //文章编辑页面的图片上传方法

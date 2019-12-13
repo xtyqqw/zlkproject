@@ -17,7 +17,7 @@ public class Arith {
     /*技能水平*/
     public static Integer ride(Integer x) {
         if (x!=null) {
-            Integer y = (x * 5)+ 3;
+            Integer y = x * 2 * 15;
             return y;
         }else {
             return null;
@@ -26,7 +26,7 @@ public class Arith {
     /*学习成长量*/
     public static Integer plus(Integer c){
         if(c != null){
-            Integer a = (c + 1) * 3;
+            Integer a = c * 3 * 6;
             return a;
         }else {
             return null;
@@ -39,6 +39,14 @@ public class Arith {
         if(q!=0){
             Integer h=100-(b*100)/q;
             return h;
+        }else {
+            return null;
+        }
+    }
+    public static Integer duration(Integer w){
+        if(w != null){
+            Integer e = w/60;
+            return e;
         }else {
             return null;
         }

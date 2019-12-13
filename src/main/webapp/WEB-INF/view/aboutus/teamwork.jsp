@@ -66,54 +66,7 @@
 </head>
 <body>
 <%--<p style="color: red">${msg}</p>--%>
-<script type="text/javascript">
-    //验证手机号
-    function phone() {
-        var regPhone = /^1([356789]\d|5[0-35-9]|7[3678])\d{8}$/;
-        var phone = document.getElementById("recruit_phone").value;
-        var bool = regPhone.test(phone);
-        if(bool == true){
-            document.getElementById("phoneError").innerHTML="";
-            return true;
-        } else {
-            document.getElementById("phoneError").innerHTML="请输入正确的手机号";
-            document.getElementById("phoneError").style.color="red";
-            return false;
-        }
-    }
-    //验证邮箱
-    function email() {
-        var id = /^[A-Za-z0-9-._]+@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,6})$/;
-        var txtemail= document.getElementById("recruit_mail").value;
-        var bool = id.test(txtemail);
-        if(bool == true){
-            document.getElementById("emailError").innerHTML="";
-            return true;
-        }else{
-            document.getElementById("emailError").innerHTML="格式不对如jack@163.com";
-            document.getElementById("emailError").style.color="red";
-            return false;
-        }
-    }
-    //验证身份证号码
-    function num() {
-        var regPhone=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-        var num=document.getElementById("recruit_number").value;
-        var bool=regPhone.test(num);
-        if(bool==true){
-            document.getElementById("numberError").innerHTML="";
-            return true
-        }else {
-            document.getElementById("numberError").innerHTML="请输入正确身份证号";
-            document.getElementById("numberError").style.color="red";
-            return false;
-        }
-    }
-    function check() {
-        var check = phone() && email() && num();
-        return check;
-    }
-</script>
+
 <div class="layui-collapse" lay-accordion="" style="width: 83%">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
@@ -138,13 +91,13 @@
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
                 <legend>请填写个人信息</legend>
             </fieldset>
-            <form class="waik" action="<%=request.getContextPath()%>/recruit/recruits" method="post" onsubmit="return check()" >
+            <form class="waik"  method="post" >
                 <ul class="box">
                     <li>
                         <label>姓名</label>
-                        <input type="text" placeholder="请输入姓名" required="required"
+                        <input type="text" placeholder="请输入姓名" required="required" onchange="name()"
                                name="recruitName" id="recruit_name" oninput="if(value.length>2)value=value.slice(0,10)" autocomplete="off"/>
-                        <span class="error" style="color: grey">(不能多于十个文字)</span>
+                        <span class="error" style="color: grey" id="idError">(不能多于十个文字)</span>
                     </li>
                     <li>
                         <label>学历</label>
@@ -177,8 +130,8 @@
                     <li>
                         <label>地址</label>
                         <input type="text" placeholder="请输入居住地址" required="required"
-                               name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)"/>
-                        <span class="error" id="error" style="color: grey">(不能多余五十个文字)</span>
+                               name="recruitSite" id="recruit_site" oninput="if(value.length>2)value=value.slice(0,50)" onchange="site()"/>
+                        <span class="error" id="siteError" style="color: grey">(不能多余五十个文字)</span>
                     </li>
                     <li>
                         <label>性别</label>
@@ -189,49 +142,137 @@
                     </li><br />
                 </ul>
                 <div class="submit">                   <%--添加提交弹窗--%>
-                    <input class="login" type="button" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
+                    <input id="btm1" class="login" type="button" onclick="javascript:return confirm('您确认要提交表单吗？');"  value="提交"/>
                 </div>
             </form>
         </div>
 
     </div>
 </div>
+<script type="text/javascript">
+    //验证地址
+    function site() {
+        var regPhone =  /\S/;
+        var site = document.getElementById("recruit_site").value;
+        var bool = regPhone.test(site);
+        if(bool == true){
+            document.getElementById("siteError").innerHTML="";
+            return true;
+        } else {
+            document.getElementById("siteError").innerHTML="请输入地址";
+            document.getElementById("siteError").style.color="red";
+            return false;
+        }
+    }
+    //验证mame
+    function name() {
+        var regPhone =  /\S/;
+        var name = document.getElementById("recruit_name").value;
+        var bool = regPhone.test(name);
+        if(bool == true){
+            document.getElementById("idError").innerHTML="";
+            return true;
+        } else {
+            document.getElementById("idError").innerHTML="请输入姓名";
+            document.getElementById("idError").style.color="red";
+            return false;
+        }
+    }
+    //验证手机号
+    function phone() {
+        var regPhone = /^1([356789]\d|5[0-35-9]|7[3678])\d{8}$/;
+        var phone = document.getElementById("recruit_phone").value;
+        var bool = regPhone.test(phone);
+        if(bool == true){
+            document.getElementById("phoneError").innerHTML="";
+            return true;
+        } else {
+            document.getElementById("phoneError").innerHTML="请输入正确的手机号";
+            document.getElementById("phoneError").style.color="red";
+            return false;
+        }
+    }
+    //验证邮箱
+    function email() {
+        var id =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var txtemail= document.getElementById("recruit_mail").value;
+        var bool = id.test(txtemail);
+        if(bool == true){
+            document.getElementById("emailError").innerHTML="";
+            return true;
+        }else{
+            document.getElementById("emailError").innerHTML="格式不对如jack@163.com";
+            document.getElementById("emailError").style.color="red";
+            return false;
+        }
+    }
+    //验证身份证号码
+    function num() {
+        var regPhone=/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        var num=document.getElementById("recruit_number").value;
+        var bool=regPhone.test(num);
+        if(bool==true){
+            document.getElementById("numberError").innerHTML="";
+            return true
+        }else {
+            document.getElementById("numberError").innerHTML="请输入正确身份证号";
+            document.getElementById("numberError").style.color="red";
+            return false;
+        }
+    }
+    function check() {
+        var check = phone() && email() && num() && name() && site();
+        return check;
+    }
+</script>
     <script>
 
         layui.use(['element', 'layer'], function(){
             var element = layui.element;
             var layer = layui.layer;
-        });
-        $(function () {
-            $(".login").click(function () {
-                var recruitName=$("#recruit_name").val();
-                var recruitBac=$("#recruit_bac").val();
-                var recruitNumber=$("#recruit_number").val();
-                var recruitPhone=$("#recruit_phone").val();
-                var recruitMail=$("#recruit_mail").val();
-                var recruitSite=$("#recruit_site").val();
-                var recruitSex=$("#recruit_sex").val();
-                var recruit={
-                    "recruitName":recruitName,
-                    "recruitBac":recruitBac,
-                    "recruitNumber":recruitNumber,
-                    "recruitPhone":recruitPhone,
-                    "recruitMail":recruitMail,
-                    "recruitSite":recruitSite,
-                    "recruitSex":recruitSex
-                };
-                $.ajax({
-                    type:'post',
-                    url:"<%=request.getContextPath()%>/recruit/recruits",
-                    data:recruit,
-                    datatype:'json',
-                    success:function (msg) {
-                        alert(msg.msg);
 
-                    }
-                });
-            })
-        })
+        });
+
+
+
+              $(function () {
+
+                  $(".login").click(function () {
+                      if(check()) {
+                          var recruitName = $("#recruit_name").val();
+                          var recruitBac = $("#recruit_bac").val();
+                          var recruitNumber = $("#recruit_number").val();
+                          var recruitPhone = $("#recruit_phone").val();
+                          var recruitMail = $("#recruit_mail").val();
+                          var recruitSite = $("#recruit_site").val();
+                          var recruitSex = $("#recruit_sex").val();
+                          var recruit = {
+                              "recruitName": recruitName,
+                              "recruitBac": recruitBac,
+                              "recruitNumber": recruitNumber,
+                              "recruitPhone": recruitPhone,
+                              "recruitMail": recruitMail,
+                              "recruitSite": recruitSite,
+                              "recruitSex": recruitSex
+                          };
+                          $.ajax({
+                              type: 'post',
+                              url: "<%=request.getContextPath()%>/recruit/recruits",
+                              data: recruit,
+                              datatype: 'json',
+                              success: function (msg) {
+                                  alert(msg.msg);
+
+                              }
+                          });
+
+                      }else {
+                          alert("请输入完善信息！！！");
+                      }
+                  })
+
+              })
+
 
     </script>
 

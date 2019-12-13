@@ -40,8 +40,8 @@
 
             float: left;
             margin-top: 3vw;
-            font-size: 1vw;
-
+            font-size: 1.3vw;
+            margin-left: -4vw;
 
         }
 
@@ -156,7 +156,7 @@
 
 
         .layui-btn{
-            font-size: 1vw;
+            font-size: 1.5vw;
 
             height: 2vw;
             line-height: 2vw;
@@ -237,9 +237,19 @@
               font-size: 0.8vw;
           }
 
-    .xxzt{
-        height: 600px;
-    }
+        .youce{
+            float: left;
+            margin-top:-50.5vw;
+            margin-left: 40vw;
+            width: 45vw;
+        }
+        .xzk{
+            margin-top: 4vw;
+        }
+        .buttonb{
+            margin-left: 10vw;
+            margin-top: 1.5vw;
+        }
     </style>
 
 </head>
@@ -270,10 +280,18 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不能包含空格数字)" autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-                               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" maxlength="5">
+                        <%--onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"--%>
+                        <%--onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"--%>
+                        <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不超过6个字)"
+                               οnkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))"
+
+                               autocomplete="off" class="layui-input" maxlength="6">
                     </div>
                 </div>
+
+
+
+
                 <%--性别--%>
                 <div class="layui-form-item">
                     <label class="layui-form-label">性别</label>
@@ -290,11 +308,15 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userBirthday" value="${user.userBirthday}" id="bri1" autocomplete="off" class="layui-input"
+                                <input type="text" name="userBirthday" value="${user.userBirthday}" id="userBirthday" autocomplete="off" class="layui-input"
                                        style="width: 24.5vw;">
                             </div>
                         </div>
                     </div>
+
+
+
+
 
                 <!-- 修改上传头像 -->
                 <label class="layui-form-label">上传头像</label>
@@ -351,7 +373,9 @@
                         </select>
                     </div>
                 </div>
+
                 <%--目标职位--%>
+                    <div class="youce">
                 <div class="layui-form-item">
                     <label class="layui-form-label">目标职位</label>
                     <div class="layui-input-block">
@@ -382,21 +406,23 @@
                     </div>
                 </div>
                 <%--兴趣爱好--%>
+
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">兴趣爱好</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="height: 10vw;">
                         <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50" >${user.userHobby}</textarea>
                     </div>
                 </div>
                 <%--自我评价--%>
-                <div class="layui-form-item layui-form-text">
+                <div class="layui-form-item layui-form-text" style="margin-top: 2vw;">
                     <label class="layui-form-label">自我评价</label>
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="height: 9vw;">
                         <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100" >${user.userSelfappraise}</textarea>
                     </div>
                 </div>
                 <%--最高学历--%>
-                <div class="layui-form-item">
+                        <div class="xzk">
+                            <div class="layui-form-item">
                     <label class="layui-form-label">最高学历</label>
                     <div class="layui-input-block">
                         <select name="userEducation"  value="${user.userEducation}">
@@ -425,7 +451,7 @@
                         <input type="text" name="userSpecialty" value="${user.userSpecialty}" placeholder="请输入所属专业（不超过20个字）" autocomplete="off" class="layui-input" maxlength="20">
                     </div>
                 </div>
-
+                <div class="buttonb">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <%--保存按钮--%>
@@ -434,9 +460,11 @@
                         <button type="reset" id="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
+                </div>
             </form>
         </div>
-
+    </div>
+</div>
 
         <!-- 账号绑定 -->
         <div class="layui-tab-item">
@@ -460,6 +488,7 @@
                     <div class="site-demo-button" id="layerDemo1" style="margin-bottom: 0;">
 
                         <button data-method="bdyx" class="layui-btn">绑定邮箱</button>
+                        <%--<button data-method="offset" data-type="lt" class="layui-btn layui-btn-normal">左上弹出</button>--%>
                     </div>
                     <!-- 结束 -->
                 </div>
@@ -600,17 +629,7 @@
         });
 
     });
-    //保存成功后提示信息js
-    $("#chenggong").hide();
-    // $('#baocun').click(function () {
-    //     layer.msg("保存成功");
-    //     setTimeout(function () {
-    //         $("#chenggong").hide();
-    //     },5500)
-    // });
-    $('#baocun').click(function () {
-       alert("保存成功");
-    });
+
 
 
 
@@ -618,19 +637,15 @@
     //日期js
     layui.use('laydate',function(){
         var laydate=layui.laydate;
-
         laydate.render({
-            elem: '#bri1'
-
-            , format: 'yyyy-MM-dd'
+            elem: '#userBirthday'
+            ,type:'date'
           //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
-            ,choose: function(dates){ //选择好日期的回调
-            }
         });
     });
 
-    //  设置选择日期不能超过当前日期
+        //  设置选择日期不能超过当前日期
     function getNowFormatDate() {
         var date = new Date();
         var seperator1 = "-";
@@ -648,6 +663,24 @@
             + date.getMinutes() + seperator2 + date.getSeconds();
         return currentdate;
     }
+
+
+    //转换日期格式
+    var date = $("#userBirthday").val();
+    function formatDate(date){
+        date = new Date(date);
+        var y=date.getFullYear();
+        var m=date.getMonth()+1;
+        var d=date.getDate();
+        var h=date.getHours();
+        var m1=date.getMinutes();
+        var s=date.getSeconds();
+        m = m<10?("0"+m):m;
+        d = d<10?("0"+d):d;
+        return y+"-"+m+"-"+d;
+    }
+    date = formatDate(date);
+    $("#userBirthday").val(date);
 
     // 图片上传js
     layui.use(["jquery", "upload", "form", "layer", "element"], function () {
@@ -704,7 +737,10 @@
         });
         element.init();
     });
-
+    //保存按钮点击事件,当点击重置按钮时，显示信息
+    $("#baocun").click(function () {
+        layer.msg("修改成功");
+    });
     //重置按钮点击事件,当点击重置按钮时，显示信息
     $("#reset").click(function () {
         layer.msg("信息已重置");

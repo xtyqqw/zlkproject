@@ -42,7 +42,7 @@
         <%--顶部内容--%>
         <div class="header">
             <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
-            <a href="javascript:void(0)" id="a2">我的草稿</a>
+            <a href="javascript:void(0)" id="a2">我的文章</a>
         </div>
         <!--中间内容-->
         <div  class="m-container m-padded-tb-big">
@@ -50,7 +50,7 @@
                 <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <div class="ui selection compact basic dropdown label" style="background-color: #FFFFFF; color: #5A5CAD;">
+                            <div class="ui selection compact basic dropdown violet label">
                                 <input type="hidden" value="原创" name="createArticleType">
                                 <i class="dropdown icon"></i>
                                 <div class="text">原创</div>
@@ -75,27 +75,27 @@
                     <div class="two fields">
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">方向</label>
+                                <label class="ui compact basic violet label">方向</label>
                                 <div class="ui fluid selection dropdown">
                                     <input type="hidden" name="typeName">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">请选择方向</div>
                                     <div class="menu">
-                                        <div class="item" data-value="java">java</div>
-                                        <div class="item" data-value="linux">linux</div>
-                                        <div class="item" data-value="html">html</div>
-                                        <div class="item" data-value="mysql">mysql</div>
+                                        <div class="item" data-value="java">JAVA</div>
+                                        <div class="item" data-value="linux">Linux</div>
+                                        <div class="item" data-value="html">HTML</div>
+                                        <div class="item" data-value="mysql">MYSQL</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="required field">
                             <div class="ui left labeled action input">
-                                <label class="ui compact basic label" style="background-color: #5A5CAD; color: #ffffff;">标签</label>
+                                <label class="ui compact basic violet label">标签</label>
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
-                                    <div class="default text">请选择标签</div>
+                                    <div class="default text">请选择标签&nbsp;&nbsp;&nbsp;1&nbsp;/&nbsp;3</div>
                                     <div class="menu">
                                         <c:forEach items="${tags}" var="tag">
                                             <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
@@ -108,15 +108,15 @@
 
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">摘要</label>
-                            <input type="text" name="articleDigest" placeholder="请输入文章摘要">
+                            <label class="ui basic violet label">摘要</label>
+                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多">
                         </div>
                     </div>
 
                     <div class="field">
                         <div class="ui left labeled input">
-                            <label class="ui basic label" style="background-color: #5A5CAD; color: #ffffff;">首图</label>
-                            <input type="text" name="figures" placeholder="首图引用地址">
+                            <label class="ui basic violet label">首图</label>
+                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是任何一张引人注目的封面等等,请不要输入奇怪的URL地址进行提交">
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
 
                     <div class="ui right aligned container">
                         <button type="reset" class="ui reset secondary button">重置</button>
-                        <button type="submit" onclick="publish()" class="ui button" style="background-color: #5A5CAD; color: #ffffff;">发布</button>
+                        <button type="submit" onclick="publish()" class="ui button violet">发布</button>
                     </div>
 
                 </form>
@@ -175,8 +175,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[30]',
-                            prompt: '请注意文章标题最大长度不能超过30'
+                            type: 'maxLength[50]',
+                            prompt: '请注意文章标题最大字数不能超过50'
                         }]
                     },
                     articleContent: {
@@ -200,7 +200,7 @@
                             prompt: '请至少选择一个文章标签'
                         }, {
                             type: 'maxCount[3]',
-                            prompt: '请最多选择三个文章标签'
+                            prompt: '请最多选择三个文章标签,你可以先删除一个标签,再重新选择'
                         }]
                     },
                     figures: {
@@ -218,7 +218,7 @@
                             prompt: '请注意文章摘要不能为空'
                         }, {
                             type: 'maxLength[150]',
-                            prompt: '请注意文章摘要最大长度不能超过150'
+                            prompt: '请注意文章摘要最大字数不能超过150'
                         }]
                     }
                 },

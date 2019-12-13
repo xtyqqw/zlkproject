@@ -147,4 +147,11 @@ public interface StuNoteMapper {
      *@time 2019/12/02  17:57
      */
     public Integer deleteCollect(Integer snId,String userId);
+
+    public Integer stuNoteUpAdd(Integer snId);
+    public Integer stuNoteUpDelete(Integer snId);
+    public Integer stuNoteDownAdd(Integer snId);
+    public Integer stuNoteDownDelete(Integer snId);
+    public Integer stuNoteUpAddDownDelete(Integer snId);
+    public Integer stuNoteUpDeleteDownAdd(Integer snId);
 }

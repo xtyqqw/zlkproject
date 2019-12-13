@@ -69,9 +69,18 @@ public class SectionServiceImpl implements SectionService {
             sectionDetails.setSectionTime((Integer)section.getSectionTime()/60);
             //根据小节id和用户id查询用户的观看状态
             sectionDetails.setState(sectionMapper.findStateByIdAndChapterId(section.getSectionId(),userId));
-            double Sum = userSectionService.querySumBySectionId(section.getSectionId());
-            double Count = userSectionService.queryCountBySectionId(section.getSectionId())*3;
-            double SectionGrade = Sum/Count*100;
+            double Sum;
+            double Count;
+            double SectionGrade;
+            if(userSectionService.queryCountBySectionId(section.getSectionId())!=null&&userSectionService.querySumBySectionId(section.getSectionId())!=null){
+                Sum = userSectionService.querySumBySectionId(section.getSectionId());
+                Count = userSectionService.queryCountBySectionId(section.getSectionId())*3.0;
+                SectionGrade =  Sum/Count*100;
+            }else {
+                Sum = 0;
+                Count = 0;
+                SectionGrade = 0;
+            }
             sectionDetails.setSectionGrade((int)SectionGrade);
             sectionDetailsList.add(sectionDetails);
         }

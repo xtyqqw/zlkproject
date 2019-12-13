@@ -35,11 +35,11 @@ public class CommunityController {
      * @author: QianKeQin
      * @date: 2019/12/10 9:26
      */
-    @RequestMapping("/toCommunity-page")
+    @RequestMapping("/CommunityPage")
     public ModelAndView selectTitleByArticle(Article article, Tag tag) {
-        //根据时间倒序返回文章标题集合 月排序
+        //根据当月创建时间和浏览量降序查询最新文章集合 月排序
         List<Article> alist = articleHotService.selectTitleByArticle(article);
-        //根据浏览量倒序返回文章标题集合 总排序
+        //根据浏览量倒序返回文章集合 总排序
         List<Article> blist = articleHotService.findTitleByBrowseCount(article);
         ModelAndView mv=new ModelAndView();
         mv.addObject("alist",alist);
@@ -47,7 +47,7 @@ public class CommunityController {
         //查询所有标签
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/newCommunityMain");
+        mv.setViewName("view/community/communityMain");
         return mv;
     }
 }
