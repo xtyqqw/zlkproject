@@ -149,7 +149,7 @@
                     <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
                         <a href="javascript:;">
                             <c:if test="${user.userImg==null}">
-                                <img src="/img/headimg.jpg" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
+                                <img src="/img/headimg.png" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
                             </c:if>
                             <c:if test="${user.userImg!=null}">
                                 <img src="${user.userImg}" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
