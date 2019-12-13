@@ -20,11 +20,20 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
+    @Override
+    public Integer selectUserId(Question qusetion) {
+        return questionMapper.selectUserId(qusetion);
+    }
+
+    @Override
+    public Integer selectAudit(String userId) {
+        return questionMapper.selectAudit(userId);
+    }
+
     @Transactional
     @Override
     public Integer addQuestion(Question question) {
-        question.setQuestionId(UUIDUtils.getId());
-        question.setCreateTime(new Date());
+
         return questionMapper.addQuestion(question);
     }
 }

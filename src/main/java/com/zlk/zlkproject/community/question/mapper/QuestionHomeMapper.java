@@ -1,8 +1,7 @@
 package com.zlk.zlkproject.community.question.mapper;
 
-import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,13 +10,22 @@ import java.util.List;
 @Mapper
 public interface QuestionHomeMapper {
     /*
-     * @descrption 根据最新时间查询排序所有的问题
+     * @descrption 查询总数
      * @author gby
      * @param
      * @return
-     * @date 2019/12/7 18:58
+     * @date 2019/12/13 0:31
      */
-    List<Question> findQuestionByTime(String createTime);
+    Integer findQuestionCount(Pagination pagination);
+
+    /*
+     * @descrption 按照最新发布日期排序（默认）
+     * @author gby
+     * @param
+     * @return
+     * @date 2019/12/10 14:15
+     */
+    List<Question> findByQuestionTime(Pagination pagination);
 
     /*
      * @descrption 根据问题id查询文章
@@ -27,7 +35,12 @@ public interface QuestionHomeMapper {
      * @date 2019/12/7 18:56
      */
     Question findByQuestionId(@Param("questionId") String questionId);
-
-
-
+    /*
+     * @descrption 浏览量+1
+     * @author gby
+     * @param [questionId]
+     * @return java.lang.Integer
+     * @date 2019/12/10 9:16
+     */
+    Question editBrowseCount(String questionId);
 }
