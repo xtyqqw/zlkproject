@@ -32,7 +32,7 @@
 
     <style>
      .layui-tab {
-         width: 950px;
+         width: 1050px;
          height: 500px;
          position: relative;
          left: 200px;
@@ -166,7 +166,7 @@
      .li1{
          float: left;
          height: 190px;
-         margin-left: 7px;
+         margin-left: 30px;
      }
 
      .h51{
@@ -376,7 +376,7 @@
     $(".layui-this").mouseleave(function () {
         $(this).css("background-color","#fff");
         $(this).css("height","3vw");
-        $(this).css("border-radius","5px");
+        $(this).css("bordeer-radius","5px");
         $(this).css("margin-top","0vw");
         $(this).css("border","none");
         $(this).css("color","#4ea9cd");

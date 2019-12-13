@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,39 +30,45 @@ public class Question {
     /*问题内容*/
     private String questionContent;
     /*是否解决：0待解决，1已解决，2未解决*/
-    private String solve;
+    private Integer solve;
     /*发布时间*/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /*浏览数*/
     private String browseCount;
-    /**问题置顶：0 置顶，1 不置顶*/
+    /**
+     * 问题置顶：0 置顶，1 不置顶
+     */
     private String questionSetTop;
-    /**相对路径*/
+    /**
+     * 相对路径
+     */
     private String figures;
-    /**插图相对路径*/
+    /**
+     * 插图相对路径
+     */
     private String figuresReal;
     /*用户实际姓名*/
     private String userRealname;
     /*用户头像*/
     private String userImg;
     /*获赞数*/
-    private String zanCount;
+    private Integer zanCount;
     /*被踩数*/
-    private String caiCount;
+    private Integer caiCount;
     /*审核：0 审核中，1 审核过，2 审核未过*/
-    private String check;
+    private String audit;
     /*回答数*/
-    private String responseCount;
+    private Integer responseCount;
     /*分类*/
     private String typeName;
-    /*小节表主键*/
-    private String sectionId;
     /*标签*/
     private String tagName;
     /*用户*/
     private String userId;
-
+    /*小节表主键*/
+    private String sectionId;
     public Question() {
     }
 

@@ -42,6 +42,7 @@
             <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
         </association>
     </resultMap>
+
     <select id="findArticleCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
         select count(1) from article
     </select>
