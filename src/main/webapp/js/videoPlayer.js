@@ -1821,7 +1821,7 @@ $(document).ready(function () {
             });
 
             //回复富文本编辑器 回复按钮点击事件
-            $("#SCS_contentBox").on('click','.SCS_replyBtn',function () {
+            $("#SCS_contentBox").on('click','.SCS_replyBtn',function (ev) {
                 let index = parseInt($(this).prev().text());
                 let pid = parseInt($(this).next().text());
                 let replyPerson = $(this).parent().parent().prev().children().eq(0).children().eq(1).text();
@@ -1866,7 +1866,7 @@ $(document).ready(function () {
                         url : basePath+"/stuComment/replySubmit",
                         data : data,
                         success : function (res) {
-                            layer.msg(res.retmsg);
+                            layer.msg(res.retmsg,{offset:''+ev.clientY});
                             if (res.retmsg === '回复成功'){
                                 replyEditorArr.length = 0;
                                 cmtFlowLoad(basePath+"/stuComment/findStuCmt");
