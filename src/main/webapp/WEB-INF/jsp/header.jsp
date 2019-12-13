@@ -157,8 +157,8 @@
                             <p class="name" style="">${user.userRealname}</p>
                         </a>
                         <dl class="layui-nav-child">
-                            <a href="/personal/person">个人中心</a>
-                            <a href="/users/logout;">退出</a>
+                            <a href="<%=request.getContextPath()%>/personal/person">个人中心</a>
+                            <a href="<%=request.getContextPath()%>/users/logout;">退出</a>
                         </dl>
                     </li>
                 </ul>
