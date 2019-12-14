@@ -41,25 +41,45 @@
     </insert>
 
     <select id="findStuNote" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
-        WHERE sn.sn_user_id = s.user_id AND sn.sn_section_id = #{sectionId}
-        <if test="userId != '-1'">
-            AND sn.sn_user_id = #{userId}
-        </if>
-        ORDER BY sn_date DESC LIMIT #{page} , #{size}) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
+        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2
+        FROM(
+                SELECT sn.*,s.user_realname,s.user_img
+                FROM stu_note sn
+                LEFT JOIN(
+                            SELECT user_id,user_realname,user_img
+                            FROM user
+                         ) s
+                ON sn.sn_user_id = s.user_id
+                WHERE sn.sn_section_id = #{sectionId}
+                <if test="userId != '-1'">
+                    AND sn.sn_user_id = #{userId}
+                </if>
+                ORDER BY sn_date DESC LIMIT #{page} , #{size}
+            ) a
+        LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
+        ORDER BY sn_date DESC
     </select>
 
     <select id="findStuNoteUp" resultMap="stuNoteResEntityMap">
-        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2 FROM
-        (SELECT sn.*,s.user_realname,s.user_img FROM stu_note sn,(SELECT user_id,user_realname,user_img FROM user) s
-        WHERE sn.sn_user_id = s.user_id AND sn.sn_section_id = #{sectionId}
-        <if test="userId != '-1'">
-            AND sn.sn_user_id = #{userId}
-        </if>
-        ORDER BY up DESC LIMIT #{page} , #{size}) a LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
+        SELECT a.*,suu.user_id sn_user_id1,suu.up_down,suc.user_id sn_user_id2
+        FROM(
+                SELECT sn.*,s.user_realname,s.user_img
+                FROM stu_note sn
+                LEFT JOIN(
+                            SELECT user_id,user_realname,user_img
+                            FROM user
+                         ) s
+                ON sn.sn_user_id = s.user_id
+                WHERE sn.sn_section_id = #{sectionId}
+                <if test="userId != '-1'">
+                    AND sn.sn_user_id = #{userId}
+                </if>
+                ORDER BY up DESC LIMIT #{page} , #{size}
+            ) a
+        LEFT OUTER JOIN stunote_user_updown suu ON a.sn_id = suu.sn_id
         LEFT OUTER JOIN stunote_user_collect suc ON a.sn_id = suc.sn_id
+        ORDER BY up DESC
     </select>
 
     <select id="findCount" resultType="java.lang.Integer">
