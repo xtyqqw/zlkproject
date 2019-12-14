@@ -2,18 +2,21 @@ package com.zlk.zlkproject.course.player.mapper;
 
 import com.zlk.zlkproject.entity.UserSection;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 @Mapper
 public interface PlayerMapper {
     /**
      *  记录视频观看位置
      *@method recordTime
-     *@params [UserSection]
+     *@params [UserSection,Date]
      *@return void
      *@author hry
      *@time 2019/11/25  14:28
      */
-    public void recordTime(UserSection userSection);
+    public void recordTime(@Param("userSection") UserSection userSection, @Param("date") Date date);
 
     /**
      *  记录学习时长

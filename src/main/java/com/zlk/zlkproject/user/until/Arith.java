@@ -48,8 +48,19 @@ public class Arith {
             Integer e = w/60;
             return e;
         }else {
-            return null;
+            return 0;
         }
     }
-
+    public static Integer toHour(Integer a){
+        if(a != null && a!= 0){
+            Integer b = a/3600;
+            if (b == 0){
+                return 1;
+            }else {
+                return b;
+            }
+        }else {
+            return 0;
+        }
+    }
 }
