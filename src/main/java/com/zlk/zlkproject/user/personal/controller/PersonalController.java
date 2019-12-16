@@ -47,10 +47,11 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/person")
-    public ModelAndView jsp(HttpServletRequest request){
+    public ModelAndView jsp(HttpServletRequest request,String typeNum){
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv = new ModelAndView();
         mv.addObject("user",user);
+        mv.addObject("typeNum",typeNum);
         mv.setViewName("view/personal/personal");
         return mv;
     }

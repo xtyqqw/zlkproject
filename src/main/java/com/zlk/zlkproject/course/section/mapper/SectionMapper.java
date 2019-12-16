@@ -81,4 +81,14 @@ public interface SectionMapper {
      *@time 2019/12/6  14:50
      */
     Section findSectionBySectionIdAndUserId(Integer sectionId,String userId);
+
+    /**
+     *  根据sectionId查找小节名称
+     *@method findNameBySectionId
+     *@params [sectionId]
+     *@return java.lang.String
+     *@author zhang
+     *@time 2019/12/16  11:40
+     */
+    String findNameBySectionId(Integer sectionId);
 }
