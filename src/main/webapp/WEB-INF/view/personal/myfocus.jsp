@@ -558,7 +558,7 @@
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="ok">√</p><p class="ok_zi"">已关注</p>';
+                    html += '<p class="ok">√</p><p class="ok_zi">已关注</p>';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
                     html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
                     html += '</div><div class="att_tan"><div class="att_success1">';
