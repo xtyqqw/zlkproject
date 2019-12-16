@@ -110,7 +110,10 @@ $("#jiaru").click(function () {
         success: function (data) {
             console.log(data);
             if(data=="未登录"){
-                alert("请先登录")
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.msg('请先登录');
+                });
             }else{
                 $("#chanjia").html('<button id="xinjiaru">已参加项目</button>');
                 $.ajax({
