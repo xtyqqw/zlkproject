@@ -1319,6 +1319,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + stuCmt_editor.txt.html();
                 let contentText = '' + stuCmt_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -2042,6 +2043,8 @@ $(document).ready(function () {
                 elem_currentTime.innerText = '00:00:00';
                 clearInterval(interval_cache);
                 document.getElementById("pg_cache").style.width = 0 + 'px';
+                $("#sharpness_btn").text('普清');
+                $("#speed_btn").text('1.0x');
             }
         });
     }
