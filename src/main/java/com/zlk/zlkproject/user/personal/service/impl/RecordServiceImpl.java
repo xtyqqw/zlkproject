@@ -32,7 +32,6 @@ public class RecordServiceImpl implements RecordService {
      */
     @Override
     public List<Item> selectCourses(Pagination pagination){
-        /*followerPage.setIndex((followerPage.getPage()-1)*followerPage.getLimit());*/
         Integer page = pagination.getPage();
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
