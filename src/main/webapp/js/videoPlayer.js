@@ -1990,6 +1990,7 @@ $(document).ready(function () {
         elem_pgBtn.style.left = 0 + 'px';
         elem_pgBar.style.width = 0 + 'px';
         elem_currentTime.innerText = format(0);
+        resetCache();
     });
 
     //切换视频函数
@@ -2156,7 +2157,7 @@ $(document).ready(function () {
                     memoryLoadTimeOut = setTimeout(function () {
                         $("#memoryLoadBox").css('display','none');
                         clearTimeout(memoryLoadTimeOut);
-                    },5000);
+                    },10000);
                 }
             });
         }
