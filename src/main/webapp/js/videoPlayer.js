@@ -798,6 +798,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + stu_editor.txt.html();
                 let contentText = '' + stu_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -815,11 +816,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'snSectionId':sectionId, 'snUserId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1304,11 +1305,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1366,6 +1367,7 @@ $(document).ready(function () {
             let userId = '1';
             //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             let sectionId =1;
+            let flag = 0;
 
             function cmtFlowLoad(url) {
                 $("#SCS_ul_stream").empty();
@@ -1376,7 +1378,6 @@ $(document).ready(function () {
                         let lis = [];
                         let size = 3;
 
-                        let flag = 0;
                         let data = {"sectionId": sectionId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -1831,6 +1832,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + replyEditorArr[index].txt.html();
                 let contentText = '' + replyEditorArr[index].txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -1854,11 +1856,11 @@ $(document).ready(function () {
                 }
 
                 if(contentHtml.length>1024){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！",{offset:''+ev.clientY});
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
