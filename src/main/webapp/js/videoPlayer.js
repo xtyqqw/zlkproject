@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 
         /*讲师笔记初加载*/
-        note_flow(sectionId);
+        note_flow(parseInt($("#sectionId").text()));
 
         // $(".w_e_text").attr("placeholder","字数不超过200字");
 
@@ -370,7 +370,7 @@ $(document).ready(function () {
 
         /*学生问答选项卡切换加载*/
         $("#stuQa-tab").click(function () {
-            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         /*学生问答流加载*/
@@ -469,12 +469,12 @@ $(document).ready(function () {
 
         //全部选项卡点击事件
         $("#stuQaall-tab").click(function () {
-            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         //精华选项卡点击事件
         $("#stuQaelite-tab").click(function () {
-            stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",sectionId);
+            stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",parseInt($("#sectionId").text()));
         });
 
         /*div鼠标移入事件*/
@@ -575,7 +575,7 @@ $(document).ready(function () {
 
                 var sqaId = $(this).parent().parent().parent().find("input").val();
                 var id = $(this).parent().next().attr("id");
-                answer(id,sqaId,sectionId);
+                answer(id,sqaId,parseInt($("#sectionId").text()));
 
                 $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().parent().css("height","auto");
@@ -2021,6 +2021,7 @@ $(document).ready(function () {
         elem_pgBtn.style.left = 0 + 'px';
         elem_pgBar.style.width = 0 + 'px';
         elem_currentTime.innerText = format(0);
+        resetCache();
     });
 
     //切换视频函数
@@ -2187,7 +2188,7 @@ $(document).ready(function () {
                     memoryLoadTimeOut = setTimeout(function () {
                         $("#memoryLoadBox").css('display','none');
                         clearTimeout(memoryLoadTimeOut);
-                    },5000);
+                    },10000);
                 }
             });
         }
