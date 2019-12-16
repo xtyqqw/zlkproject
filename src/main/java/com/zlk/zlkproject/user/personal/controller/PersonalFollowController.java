@@ -157,8 +157,8 @@ public class PersonalFollowController {
     }
     /**
      * 方法用途：点击‘他关注了n人’ 后调用该方法 查询出对应关注的所有其他用户相关信息
-     * 参数类型：String 用途：对应用户的userId用于查询相关信息
-     * 返回值类型：modelAndView 内填入页面地址和对应用户信息的集合
+     * 参数类型：FollowerPage 用途：根据前台返回完成分页
+     * 返回值类型：map 内填入页面地址和对应用户信息的集合
      * */
     @RequestMapping(value = "/userfollower")
     @ResponseBody
