@@ -52,24 +52,24 @@ public class RecordServiceImpl implements RecordService {
     }
 
     /**
-     * 查询小结状态总数
+     * 查询视频总时间
      * @param userId
      * @return
      */
     @Override
-    public Integer selectUserSection(String userId,Integer coursesId){
-        return recordMapper.selectUserSection(userId,coursesId);
+    public Integer selectUserSection(String userId,Integer sectionId){
+        return recordMapper.selectUserSection(userId,sectionId);
     }
 
     /**
-     * 查询小结已完成数量
+     * 查询视频已观看时间
      * @param userId
      * @return
      */
     @Override
-    public Integer selectUser(String userId,Integer coursesId){
+    public Integer selectUserTime(String userId,Integer sectionId){
 
-        return recordMapper.selectUser(userId,coursesId);
+        return recordMapper.selectUserTime(userId,sectionId);
     }
 
     /**
