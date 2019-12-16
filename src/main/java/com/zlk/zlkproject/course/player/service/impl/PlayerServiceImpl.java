@@ -6,6 +6,8 @@ import com.zlk.zlkproject.entity.UserSection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @program: zlkproject
  * @description: 播放器业务实现类
@@ -18,7 +20,8 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerMapper playerMapper;
     @Override
     public void recordTime(UserSection userSection) {
-        playerMapper.recordTime(userSection);
+        Date date = new Date();
+        playerMapper.recordTime(userSection, date);
     }
 
     @Override
