@@ -1,13 +1,19 @@
 package com.zlk.zlkproject.community.question.service.impl;
 
+import com.zlk.zlkproject.community.question.dao.QuestionHomeDao;
 import com.zlk.zlkproject.community.question.mapper.QuestionHomeMapper;
 import com.zlk.zlkproject.community.question.service.QuestionHomeService;
+import com.zlk.zlkproject.community.util.MarkdownUtils;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
+import javassist.NotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author gby
@@ -19,16 +25,46 @@ import java.util.List;
 public class QuestionHomeServiceImpl implements QuestionHomeService {
     @Autowired
     private QuestionHomeMapper questionHomeMapper;
+    @Autowired
+    private QuestionHomeDao questionHomeDao;
 
     @Override
-    public List<Question> findQuestionByTime(String createTime) {
-        return questionHomeMapper.findQuestionByTime(createTime);
+    public Integer findQuestionCount(Pagination pagination) {
+        return questionHomeMapper.findQuestionCount(pagination);
     }
 
     @Override
-    public Question findByQuestionId(String questionId) {
-        return questionHomeMapper.findByQuestionId(questionId);
+    public List<Question> findByQuestionTime(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return questionHomeMapper.findByQuestionTime(pagination);
     }
 
+
+    @Override
+    public Question getQuestion(String questionId) {
+        Optional<Question> question = questionHomeDao.findById(questionId);
+        return question.orElse(null);
+    }
+    @Transactional
+    @Override
+    public Question getAndConvert(String questionId){
+        Question question = questionHomeDao.findById(questionId).get();
+        if(question == null){
+            try {
+                throw new NotFoundException("该问题不存在");
+            }catch (NotFoundException e){
+                e.printStackTrace();
+            }
+        }
+        Question q = new Question();
+        BeanUtils.copyProperties(question,q);
+        String count = q.getQuestionContent();
+        q.setQuestionContent(MarkdownUtils.markdownToHtmlExtensions(count));
+        questionHomeDao.editBrowseCount(questionId);
+        return q;
+    }
 
 }

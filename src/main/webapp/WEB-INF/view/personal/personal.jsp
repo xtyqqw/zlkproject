@@ -109,6 +109,11 @@
             float: left;
             height: 100%;
         }
+        .logon{
+            margin: 20px auto auto 400px;
+            font-size: 25px;
+            color: #999;
+        }
     </style>
 </head>
 <body>
@@ -191,41 +196,47 @@
             </a>
         </ul>
     </div>
-    <!-- 个性签名 -->
-    <div class="signature">
-        <!-- 头像 -->
-        <div class="headimg">
-            <c:if test="${user.userImg==null}">
-                <img src="/img/headimg.png" class="headerimg">
-            </c:if>
-            <c:if test="${user.userImg!=null}">
-                <img src="${user.userImg}" class="headerimg">
-            </c:if>
+    <c:if test="${user.userId==null}">
+        <p class="logon">先登录才能刚看到个人中心哦~</p>
+    </c:if>
+    <c:if test="${user.userId!=null}">
+            <!-- 个性签名 -->
+            <div class="signature">
+                <!-- 头像 -->
+                <div class="headimg">
+                    <c:if test="${user.userImg==null}">
+                        <img src="/img/headimg.png" class="headerimg">
+                    </c:if>
+                    <c:if test="${user.userImg!=null}">
+                        <img src="${user.userImg}" class="headerimg">
+                    </c:if>
+                </div>
+                <!-- 昵称 -->
+                <div class="petname">
+                    <p>${user.userRealname}</p>
+                </div>
+                <!-- 签名 -->
+                <div class="sdf">
+                    <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
+                </div>
+            </div>
         </div>
-        <!-- 昵称 -->
-        <div class="petname">
-            <p>${user.userRealname}</p>
-        </div>
-        <!-- 签名 -->
-        <div class="sdf">
-            <p>失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>
-        </div>
-    </div>
-</div>
 
-<!-- 主体内容 -->
-<iframe src="<%=request.getContextPath()%>/duration/select"
-        id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
-<div><a href="#top" style="position: fixed;margin-left: 68px;margin-top:-110px;z-index: 100;">
-    <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
-</a></div>
+        <!-- 主体内容 -->
+        <iframe src="<%=request.getContextPath()%>/duration/select"
+                id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
+
+        <a href="#top" style="position: fixed;top: 550px;right: 120px;z-index: 100;">
+            <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
+        </a>
+    </c:if>
+
 <%--iframe自适应高度--%>
 <script type="text/javascript">
-    $(window.parent.document).find("#personal-iframe").load(function(){
-        var main = $(window.parent.document).find("#personal-iframe");
-        main.height(800);
-        var thisheight = $(document).height();
-        main.height(thisheight);
+    $("#personal-iframe").load(function () {
+        $("#personal-iframe").height(0);
+        var height = document.getElementById("personal-iframe").contentWindow.document.body.scrollHeight;
+        $("#personal-iframe").height(height);
     });
 </script>
 <%--侧栏--%>

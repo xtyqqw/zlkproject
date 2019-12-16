@@ -17,6 +17,8 @@ import java.util.List;
  */
 @Mapper
 public interface ArticleListMapper {
+    /**查询总数*/
+    Integer findArticleCount(Pagination pagination);
     /**查询最新发布日期（默认）*/
     List<Article> findByCreateTime(Pagination pagination);
     /**查询最高浏览量（浏览次数）*/

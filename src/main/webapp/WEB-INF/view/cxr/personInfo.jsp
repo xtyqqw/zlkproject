@@ -99,7 +99,7 @@
             float: left;
             background-color: 	#F8F8F8;
             width: 68vw;
-            height: 8vw;
+            height: 10vw;
             margin-top: 2vw;
             font-size: 1vw;
         }
@@ -146,7 +146,7 @@
             float: left;
             background-color: 	#F8F8F8;
             width: 68vw;
-            height: 12vw;
+            height: 16vw;
             margin-top: 2vw;
             font-size: 1vw;
         }
@@ -157,9 +157,6 @@
 
         .layui-btn{
             font-size: 1.5vw;
-
-            height: 2vw;
-            line-height: 2vw;
         }
         .dsf_left{
             width: 12vw;
@@ -190,25 +187,23 @@
         }
         .weixin{
             width: 15vw;
-
             height: 9vw;
             float: left;
             line-height: 6vw;
             font-size: 1vw;
-
+            margin-left: 20px;
         }
         .weibo{
             width: 15vw;
-
+            margin-left: 20px;
             height: 9vw;
             float: left;
             line-height: 6vw;
             font-size: 1vw;
-
         }
         .qq{
             width: 15vw;
-
+            margin-left: 20px;
             height: 9vw;
             float: left;
             line-height: 6vw;
@@ -255,7 +250,7 @@
 </head>
 <body>
 
-
+<%--<div style="font-size: 1.2vw;color: red; display: none; text-align: center;" id="bccg">保存成功</div>--%>
 <!-- 信息完善/账号绑定 -->
 <div class="xxzt">
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -277,14 +272,13 @@
                     </div>
                 </div>
                   <%--姓名--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">姓名</label>
                     <div class="layui-input-block">
                         <%--onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"--%>
                         <%--onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"--%>
                         <input type="text" name="userRealname" value="${user.userRealname}" required  lay-verify="required" placeholder="请输入你的真实姓名(不超过6个字)"
-                               οnkeyup="value=value.replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\a-zA-Z\u4E00-\u9FA5]/g,''))"
-
+                               onkeyup="value=value.replace(/[\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"
                                autocomplete="off" class="layui-input" maxlength="6">
                     </div>
                 </div>
@@ -293,7 +287,7 @@
 
 
                 <%--性别--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">性别</label>
                     <div class="layui-input-block ">
                         <select name="userSex" value="${user.userSex}" id="userSex"lay-verify="required">
@@ -304,7 +298,7 @@
                     </div>
                 </div>
                     <%--出生年月--%>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item" style="margin-bottom: 30px">
                         <div class="layui-inline">
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-block">
@@ -319,7 +313,7 @@
 
 
                 <!-- 修改上传头像 -->
-                <label class="layui-form-label">上传头像</label>
+                <label class="layui-form-label" style="margin-bottom: 30px">上传头像</label>
                 <div class="layui-input-inline uploadHeadImage" style="margin-bottom:2vw;">
                     <div class="layui-upload-drag"  id="headImg">
                         <i class="layui-icon"></i>
@@ -330,7 +324,7 @@
 
                 </div>
                     <%--动态反显图片--%>
-                <div class="layui-input-inline" style="margin-bottom:2vw;">
+                <div class="layui-input-inline" style="margin-bottom:3vw;">
                     <div class="layui-upload-list">
                         <img class="layui-upload-img headImage" name="userImg" src="${user.userImg}"   id="demo1"
                              style="width: 8vw; height: 8vw;">
@@ -338,14 +332,14 @@
                     </div>
                 </div>
                  <%--籍贯--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">籍贯</label>
                     <div class="layui-input-block">
                         <input type="text" name="userNative" value="${user.userNative}"  placeholder="请输入籍贯（与身份证一致）" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <%--婚否--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">婚否</label>
                     <div class="layui-input-block">
                         <select name="userMarry" value="${user.userMarry}" id="userMarry">
@@ -356,14 +350,14 @@
                     </div>
                 </div>
             <%--所在城市--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所在城市</label>
                     <div class="layui-input-block">
                         <input type="text" name="userCity" value="${user.userCity}" placeholder="请输入所在城市" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                     <%--现状--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">现状</label>
                     <div class="layui-input-block">
                         <select name="userState" value="${user.userState}">
@@ -375,7 +369,7 @@
                 </div>
 
                 <%--目标职位--%>
-                    <div class="youce">
+                    <div class="youce" style="margin-bottom: 30px">
                 <div class="layui-form-item">
                     <label class="layui-form-label">目标职位</label>
                     <div class="layui-input-block">
@@ -390,7 +384,7 @@
                     </div>
                 </div>
                 <%--所属行业--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所属行业</label>
                     <div class="layui-input-block">
                         <select name="userIndustry" value="${user.userIndustry}">
@@ -407,14 +401,14 @@
                 </div>
                 <%--兴趣爱好--%>
 
-                <div class="layui-form-item layui-form-text">
+                <div class="layui-form-item layui-form-text" style="margin-bottom: 30px">
                     <label class="layui-form-label">兴趣爱好</label>
                     <div class="layui-input-block" style="height: 10vw;">
                         <textarea name="userHobby" value="${user.userHobby}" placeholder="请输入你的兴趣爱好(不超过50字)" class="layui-textarea" maxlength="50" >${user.userHobby}</textarea>
                     </div>
                 </div>
                 <%--自我评价--%>
-                <div class="layui-form-item layui-form-text" style="margin-top: 2vw;">
+                <div class="layui-form-item layui-form-text" style="margin-top: 2vw;margin-bottom: 30px">
                     <label class="layui-form-label">自我评价</label>
                     <div class="layui-input-block" style="height: 9vw;">
                         <textarea name="userSelfappraise" value="${user.userSelfappraise}" placeholder="请输入自我评价内容(不超过100字)" class="layui-textarea" maxlength="100" >${user.userSelfappraise}</textarea>
@@ -422,7 +416,7 @@
                 </div>
                 <%--最高学历--%>
                         <div class="xzk">
-                            <div class="layui-form-item">
+                            <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">最高学历</label>
                     <div class="layui-input-block">
                         <select name="userEducation"  value="${user.userEducation}">
@@ -438,14 +432,14 @@
                     </div>
                 </div>
                     <%--所在院校--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所在院校</label>
                     <div class="layui-input-block">
                         <input type="text" name="userAcademy" value="${user.userAcademy}" placeholder="请输入所在院校" autocomplete="off" class="layui-input" maxlength="25">
                     </div>
                 </div>
                 <%--所属专业--%>
-                <div class="layui-form-item">
+                <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所属专业</label>
                     <div class="layui-input-block">
                         <input type="text" name="userSpecialty" value="${user.userSpecialty}" placeholder="请输入所属专业（不超过20个字）" autocomplete="off" class="layui-input" maxlength="20">
@@ -453,9 +447,10 @@
                 </div>
                 <div class="buttonb">
                 <div class="layui-form-item">
-                    <div class="layui-input-block">
+                    <div class="layui-input-block" style="margin-top: 50px">
                         <%--保存按钮--%>
                         <button class="layui-btn" type="submit" id="baocun">保存</button>
+
                         <%--重置按钮--%>
                         <button type="reset" id="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -472,13 +467,14 @@
             <!-- 邮箱 -->
             <div class="youxiang zhanghao">
 
-                <div class="yxbd"><i class="layui-icon layui-icon-picture-fine "></i>
+                <div class="yxbd">
+                    <i class="layui-icon layui-icon-picture-fine" style="font-size: 30px"></i>
                     <span>邮箱绑定</span>
                 </div>
 
                 <%--邮箱信息--%>
                 <div class="yxxx">
-                    <span>你还没绑定任何邮箱，快去绑定吧</span>
+                    <span style="font-size: 16px">你还没绑定任何邮箱，快去绑定吧</span>
                 </div>
 
 
@@ -499,13 +495,14 @@
             <!-- 手机绑定 -->
             <div class="phone zhanghao">
 
-                <div class="sjbd"><i class="layui-icon layui-icon-cellphone "></i>
+                <div class="sjbd">
+                    <i class="layui-icon layui-icon-cellphone" style="font-size: 30px"></i>
                     <span>手机绑定</span>
                 </div>
 
                     <%--手机信息--%>
                 <div class="sjxx">
-                    <span>${user.phonenum}</span>
+                    <span style="font-size: 16px">${user.phonenum}</span>
                 </div>
 
                 <%--手机修改信息--%>
@@ -533,7 +530,8 @@
             <div class="dsf">
 
                 <%--第三方绑定死数据--%>
-                <div class="dsf_left"><i class="layui-icon layui-icon-user "></i>
+                <div class="dsf_left">
+                    <i class="layui-icon layui-icon-user" style="font-size: 30px"></i>
                     <span>第三方绑定</span>
                 </div>
 
@@ -545,12 +543,12 @@
                             </div>
                             <div class="wenzi">
                                 <p>微信</p>
-                                <p id="bangding1">已绑定</p>
+                                <p id="bangding1" style="font-size: 1vm">已绑定</p>
                                 <div class="butt3">
                                     <!-- layui弹出层 -->
                                     <div class="site-demo-button" id="layerDemo4" style="margin-bottom: 0;">
 
-                                        <button data-method="jiechubd" class="layui-btn">解除绑定</button>
+                                        <button data-method="jiechubd" class="layui-btn" style="margin-top: 25px">解除绑定</button>
                                     </div>
                                     <!-- 结束 -->
                                 </div>
@@ -562,13 +560,13 @@
                             </div>
                             <div class="wenzi">
                                 <p>微博</p>
-                                <p id="bangding2">已绑定</p>
+                                <p id="bangding2" style="font-size: 1vm">已绑定</p>
 
                                 <div class="butt3">
                                     <!-- layui弹出层 -->
                                     <div class="site-demo-button" id="layerDemo5" style="margin-bottom: 0;">
 
-                                        <button data-method="jiechubd" class="layui-btn">解除绑定</button>
+                                        <button data-method="jiechubd" class="layui-btn" style="margin-top: 25px">解除绑定</button>
                                     </div>
                                     <!-- 结束 -->
                                 </div>
@@ -579,13 +577,13 @@
                             <div class="i"><i class="layui-icon layui-icon-login-qq"></i></div>
                             <div class="wenzi">
                                 <p>腾讯QQ</p>
-                                <p id="bangding">未绑定</p>
+                                <p id="bangding" style="font-size: 1vm">未绑定</p>
 
                                 <div class="butt3">
                                     <!-- layui弹出层 -->
                                     <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
 
-                                        <button data-method="tianjiabd" class="layui-btn">添加绑定</button>
+                                        <button data-method="tianjiabd" class="layui-btn" style="margin-top: 25px">添加绑定</button>
                                     </div>
                                     <!-- 结束 -->
                                 </div>
@@ -594,7 +592,7 @@
                         </div>
                     </div>
 
-                    <div class="dsf_right_di">
+                    <div class="dsf_right_di" style="margin-top: 30px">
                         <span>绑定第三方账号后，可以直接登录，还可以将内容同步到对应平台，与更多好友分享？</span>
                     </div>
                 </div>
@@ -666,6 +664,7 @@
 
 
     //转换日期格式
+    //获取出生年月的值
     var date = $("#userBirthday").val();
     function formatDate(date){
         date = new Date(date);
@@ -680,6 +679,7 @@
         return y+"-"+m+"-"+d;
     }
     date = formatDate(date);
+    //将格式化后的值放入到出生年月中
     $("#userBirthday").val(date);
 
     // 图片上传js
@@ -721,7 +721,7 @@
 
 
                 //服务器上传成功
-                layer.msg(res.message);
+                layer.msg(res.message,{icon: 1});
                 //获取图片路径URL
                 $("#userImg").val(res.url)
             }
@@ -737,13 +737,30 @@
         });
         element.init();
     });
+
+
+
+
     //保存按钮点击事件,当点击重置按钮时，显示信息
     $("#baocun").click(function () {
-        layer.msg("修改成功");
+        layer.msg('保存成功', {
+            shift: -1
+           , icon: 1,
+            time: 5000 //2秒关闭（如果不配置，默认是3秒）
+        }, function(){
+            location.reload();
+        });
     });
+
+    // //
+    // layer.msg("成功", { shift: -1 }, function () {
+    //     location.reload();
+    // });
+
+
     //重置按钮点击事件,当点击重置按钮时，显示信息
     $("#reset").click(function () {
-        layer.msg("信息已重置");
+        layer.msg("信息已重置",{ icon:6});
     });
 
 
@@ -787,6 +804,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                   , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -815,6 +834,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -857,6 +878,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -889,6 +912,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -918,6 +943,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'

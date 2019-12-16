@@ -126,6 +126,73 @@
     <delete id="deleteByUserId" parameterType="com.zlk.zlkproject.entity.User">
         delete from user where user_id=#{userId}
     </delete>
+    <!--&lt;!&ndash;通过主键修改数据&ndash;&gt;-->
+    <!--<update id="updatesUser" parameterType="com.zlk.zlkproject.entity.User">-->
+        <!--update user-->
+        <!--<set>-->
+            <!--<if test="phonenum != null and phonenum != ''">-->
+                <!--user_phonenum = #{phonenum},-->
+            <!--</if>-->
+            <!--<if test="userPwd != null and userPwd != ''">-->
+                <!--user_pwd = #{userPwd},-->
+            <!--</if>-->
+            <!--<if test="userRealname != null and userRealname != ''">-->
+                <!--user_realname = #{userRealname},-->
+            <!--</if>-->
+            <!--<if test="userSex != null and userSex != ''">-->
+                <!--user_sex = #{userSex},-->
+            <!--</if>-->
+            <!--<if test="userBirthday != null">-->
+                <!--user_birthday = #{userBirthday},-->
+            <!--</if>-->
+            <!--<if test="userNative != null and userNative != ''">-->
+                <!--user_native = #{userNative},-->
+            <!--</if>-->
+            <!--<if test="userMarry != null and userMarry != ''">-->
+                <!--user_marry = #{userMarry},-->
+            <!--</if>-->
+            <!--<if test="userCity != null and userCity != ''">-->
+                <!--user_city = #{userCity},-->
+            <!--</if>-->
+            <!--<if test="userState != null and userState != ''">-->
+                <!--user_state = #{userState},-->
+            <!--</if>-->
+            <!--<if test="userTarget != null and userTarget != ''">-->
+                <!--user_target = #{userTarget},-->
+            <!--</if>-->
+            <!--<if test="userIndustry != null and userIndustry != ''">-->
+                <!--user_industry = #{userIndustry},-->
+            <!--</if>-->
+            <!--<if test="userHobby != null and userHobby != ''">-->
+                <!--user_hobby = #{userHobby},-->
+            <!--</if>-->
+            <!--<if test="userSelfappraise != null and userSelfappraise != ''">-->
+                <!--user_selfappraise = #{userSelfappraise},-->
+            <!--</if>-->
+            <!--<if test="userEducation != null and userEducation != ''">-->
+                <!--user_education = #{userEducation},-->
+            <!--</if>-->
+            <!--<if test="userAcademy != null and userAcademy != ''">-->
+                <!--user_academy = #{userAcademy},-->
+            <!--</if>-->
+            <!--<if test="userSpecialty != null and userSpecialty != ''">-->
+                <!--user_specialty = #{userSpecialty},-->
+            <!--</if>-->
+            <!--<if test="userAllTime != null">-->
+                <!--user_all_time = #{userAllTime},-->
+            <!--</if>-->
+            <!--<if test="userDateTime != null">-->
+                <!--user_date_time = #{userDateTime},-->
+            <!--</if>-->
+            <!--<if test="userImg != null and userImg != ''">-->
+                <!--user_img = #{userImg},-->
+            <!--</if>-->
+            <!--<if test="userRealimg != null and userRealimg != ''">-->
+                <!--user_realimg = #{userRealimg},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where user_id = #{userId}-->
+    <!--</update>-->
 
 
 

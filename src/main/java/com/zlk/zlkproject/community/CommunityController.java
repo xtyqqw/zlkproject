@@ -47,7 +47,7 @@ public class CommunityController {
         //查询所有标签
         List<Tag> tagList=tagsService.getAllTagByTagId(tag);
         mv.addObject("tagList",tagList);
-        mv.setViewName("view/community/newCommunityMain");
+        mv.setViewName("view/community/communityMain");
         return mv;
     }
 }

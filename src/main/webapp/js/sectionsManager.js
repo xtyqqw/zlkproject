@@ -268,9 +268,9 @@ window.onload = function () {
 
         $("#sectionNumEdit").blur(function () {
             if(/^[1-9]\d*$/.test($(this).val())){
-                submitState = true;
+                submitStateEdit = true;
             }else {
-                submitState = false;
+                submitStateEdit = false;
                 layer.msg('小节序号请输入一个非零正整数');
             }
         });

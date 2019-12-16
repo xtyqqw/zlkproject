@@ -1,13 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>最新</title>
-    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
-    <script src="../js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+    <title>热门</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" type="text/css">
+    <script src="../js/jquery-1.12.4.js"></script>
+    <script src="../layui/layui.js"></script>
     <script src="../js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .context-div{
@@ -15,28 +12,12 @@
             position: absolute;
             margin: auto 0;
             width: 100%;
-            height: 100%;
-        }
-        /*高宽分别对应横竖滚动条的尺寸*/
-        .context-div ::-webkit-scrollbar{
-            width: 5px;
-            height: 1px;
-        }
-        /*滚动条里面小方块*/
-        .context-div ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
-            background   : #535353;
-        }
-        /*滚动条里面轨道*/
-        .context-div ::-webkit-scrollbar-track {
-            box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background   : #ededed;
+            height: 78%;
+            z-index: -999;
         }
         .all{
             width: 100%;
-            height: 170px;
+            height: 178px;
             background-color: #FFFFFF;
             border-bottom: 1px solid #F0F0F0;
             position: relative;
@@ -91,11 +72,6 @@
             vertical-align: middle;
             text-align: left;
         }
-        .kuang{
-            width: 98%;
-            position: relative;
-            top: 1px;
-        }
         .articleDigest{
             margin-left: 20px;
             margin-top: -52px;
@@ -119,11 +95,12 @@
             border-radius: 5px;
             border: none 0;
         }
-        img {
-            /*width: 170px;
-            height: 95px;
+        .img {
+            width: 100%;
+            height: 100%;
             object-fit:cover;
-            border-radius: 5px;*/
+            border-radius: 5px;
+            border: none 0;
         }
         .icon{
             position: absolute;
@@ -199,75 +176,85 @@
     </style>
 </head>
 <body>
-<div class="context-div" id="context-div"></div>
-<!--没插图就隐藏-->
-<%--<script>
-    $(function () {
-        var img = $("#figures").find("img");
-        if(img.length<=0){
-            $("#figures").hide()
-        }
-    })
-</script>--%>
-<!--瀑布流-->
+<div class="context-div" style="float: left"></div>
+<div id="demo1" style="float: right;margin: 1047px 2px auto"></div>
 <script>
-    layui.use('flow', function(){
-        var flow = layui.flow;
-        var $ =layui.jquery;
-        flow.load({
-            elem: '#context-div' //流加载容器
-            ,isAuto: false
-            ,end: "<p>没有更多了</p>"
-            ,done: function(page, next){ //加载下一页
-                //模拟插入
-                setTimeout(function(){
-                    var lis = [];
-                    var limit = "5";
-                    $.ajax({
-                        url:"/articles/findByCreateTime?page="+page+"&limit="+limit,
-                        type: 'post',
-                        dataType: "json",
-                        success: function (result) {
-                            layui.each(result.articleList, function (i, article) {
-                                var html = '';
-                                html += '<div class="all" >' +
-                                    '<div class="title"><a href="../articles/toTest">'+article.title+'</a></div>';
-                                if (article.createArticleType == 0){
-                                    html += '<div class="createArticleType">原创</div>';
-                                } else if (article.createArticleType == 1){
-                                    html += '<div class="createArticleType">转载</div>';
-                                }else if (article.createArticleType == 2){
-                                    html += '<div class="createArticleType">翻译</div>';
-                                }
-                                if (article.articleSetTop == 0) {
-                                    html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
-                                } else {
-                                    html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">'+article.articleSetTop+'</p></div>';
-                                }
-                                html += '<div class="kuang">'+
-                                    '<div class="figures" id="figures">'+'<img src="'+article.figures+'"/>'+'</div>'+
-                                    '<div class="articleDigest" style="width: 660px">'+article.articleDigest+'</div>'+
-                                    '</div>'+
-                                    '<div>'+
-                                    '<div class="userRealname"><a href="../articles/toTest">'+article.user.userRealname+'</a></div>'+
-                                    '<div class="little"></div>'+
-                                    '<div class="createTime"><span class="timeago" title="'+article.createTime+'"></span></div>'+
-                                    '</div>'+
-                                    '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>'+
-                                    '<div class="browseCount"><a href="../articles/toTest">'+article.browseCount+'阅读'+'</a></div>'+
-                                    '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>'+
-                                    '<div class="commentCount"><a href="../articles/toTest">'+article.commentCount+'评论'+'</a></div>'+
-                                    '</div>';
-                                lis.push(html);
-                            });
-                            next(lis.join(''), page < 3);
-                            $(".timeago").timeago();
-                        }
-                    });
-                }, 500);
+    $(function () {
+        loadData();
+        getPage();
+        $(".timeago").timeago();
+    });
+    var page = 1; //设置首页页码
+    var limit = 5;  //设置一页显示的条数
+    var total;    //总条数
+    function loadData() {
+        $.ajax({
+            type: "post",
+            url: "<%=request.getContextPath()%>/articles/findByCreateTime",
+            async: false,
+            dataType: 'json',
+            data: {
+                "page": page,
+                "limit": limit
+            },
+            success: function (ret) {
+                total = ret.count;  //设置总条数
+                var article = ret.articleList;
+                var html = '';
+                for (var i = 0; i < article.length; i++) {
+                    html += '<div class="all" >';
+                    html += '<div class="title"><a href="/community/article-show?articleId='+article[i].articleId+'" target="_blank">' + article[i].title + '</a></div>';
+                    if (article[i].createArticleType === 0) {
+                        html += '<div class="createArticleType">原创</div>';
+                    }
+                    if (article[i].createArticleType === 1) {
+                        html += '<div class="createArticleType">转载</div>';
+                    }
+                    if (article[i].createArticleType === 2) {
+                        html += '<div class="createArticleType">翻译</div>';
+                    }
+                    if (article[i].articleSetTop === 0) {
+                        html += '<div class="articleSetTop" id="articleSetTop"><p id="p">置顶</p></div>';
+                    }
+                    if (article[i].articleSetTop === 1) {
+                        html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + article.articleSetTop + '</p></div>';
+                    }
+                    html += '<div class="figures" id="figures">' + '<img class="img" src="' + article[i].figures + '"/>' + '</div>';
+                    html += '<div class="articleDigest" style="width: 660px">' + article[i].articleDigest + '</div>';
+                    html += '<div>';
+                    html += '<div class="userRealname"><a href="/community/article-show?articleId='+article[i].articleId+'" target="_blank">' + article[i].user.userRealname + '</a></div>';
+                    html += '<div class="little"></div>';
+                    html += '<div class="createTime"><span class="timeago" title="' + article[i].createTime + '"></span></div>';
+                    html += '</div>';
+                    html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
+                    html += '<div class="browseCount"><a href="/community/article-show?articleId='+article[i].articleId+'" target="_blank">' + article[i].browseCount + '阅读' + '</a></div>';
+                    html += '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>';
+                    html += '<div class="commentCount"><a href="/community/article-show?articleId='+article[i].articleId+'" target="_blank">' + article[i].commentCount + '评论' + '</a></div>';
+                    html += '</div>';
+                }
+                $(".context-div").empty().append(html);
             }
         });
-    });
+    }
+    function getPage(){
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+            laypage.render({
+                elem: 'demo1',
+                count: total,
+                limit:limit,
+                layout: ['prev', 'page', 'next', 'count'],
+                jump: function(obj, first){
+                    page=obj.curr;
+                    limit=obj.limit;
+                    console.log(obj);
+                    if(!first){
+                        loadData()
+                    }
+                }
+            });
+        });
+    }
 </script>
 </body>
 </html>
