@@ -315,7 +315,7 @@
             <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
         <div class="add">
-            <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+            <a class="btn1" id="publish" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
             <a class="btn2" role="button" href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
         </div>
         <div class="wz_remenwenzhang">
@@ -431,6 +431,20 @@
             }
         });
     });*/
+    var localObj = window.location;
+    var basePath = localObj.protocol+"//"+localObj.host;
+    $("#publish").click(function () {
+        $.ajax({
+            type: "POST",
+            //async: false,
+            url: basePath+"/community/article-guide",
+            success: function (msg) {
+                if(msg == "未登录"){
+                    alert("请先登录")
+                }
+            }
+        });
+    })
 </script>
 </body>
 </html>

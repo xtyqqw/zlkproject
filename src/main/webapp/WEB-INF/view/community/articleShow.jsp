@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
 
     <style type="text/css">
-        /*文章详情底部样式*/
+        /*底部样式*/
         body{margin: 0;}
         #footer{
             background-color: #333C4D;
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div id="art-cmt-textBox" class="field violet" style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                        <div id="div-artCmt-toolBar" class="toolbar violet" style="border-bottom: 1px solid;"></div>
+                        <div id="div-artCmt-toolBar" class="toolbar violet"></div>
                         <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
                     </div>
                     <div id="art-cmt-btnBox" class="fields">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">查看</button>
+                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet"><i class="eye icon"></i>查看</button>
                         </div>
                     </div>
                 </div>

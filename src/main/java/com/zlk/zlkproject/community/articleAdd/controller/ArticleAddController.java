@@ -38,12 +38,13 @@ public class ArticleAddController {
     public ModelAndView articleGuide(Article article, HttpServletRequest request) throws Exception{
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv=new ModelAndView();
-        //进入发文提示页面前先判断当前用户的登录状态
         if (user == null){
-            mv.addObject("flag", "true");
-            mv.addObject("msg","请先登录");
-            mv.setViewName("view/community/communityMain");
+            mv.addObject("msg","未登录");
+            mv.setViewName("redirect:/CommunityPage");
+        }else {
+            mv.setViewName("view/community/articleGuide");
         }
+        return mv;
         //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
         /*Article approval=articleAddService.getArticleInApproval(article.getApproval());
         if (approval != null) {
@@ -62,8 +63,6 @@ public class ArticleAddController {
                 mv.setViewName("view/community/communityMain");
             }
         }*/
-        mv.setViewName("view/community/articleGuide");
-        return mv;
     }
 
     //给暂无更多文章提示页面提供接口
@@ -87,8 +86,6 @@ public class ArticleAddController {
     public String post(Article article, HttpServletRequest request) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
-        //User user=new User();
-        //user.setUserId("1");
         user.setUserId(userId);
         article.setUser(user);
         article.setTags(articleAddTagService.listTags(article.getTagIds()));

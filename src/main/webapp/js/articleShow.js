@@ -62,8 +62,8 @@ $(document).ready(function () {
 
         {
 
-            let userId = '1';
-            let articleId ='1546605080';
+            /*let userId = '1';
+            let articleId ='1546605080';*/
             function cmtFlowLoad(url) {
                 $("#art-cmt-ul-stream").empty();
                 flow.load({
@@ -500,7 +500,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                let userId = "1";
+                /*let userId = "1";*/
                 let data;
                 if (type === 'son'){
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid, 'replyPerson':replyPerson};
