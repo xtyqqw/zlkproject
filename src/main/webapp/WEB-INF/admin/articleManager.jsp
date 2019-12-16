@@ -123,7 +123,7 @@
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">文章方向</td>
-                <td><input type="text" required id="typeName" placeholder="请输入文章方向" name="typeName"></td>
+                <td><input type="text" required readonly id="typeName" placeholder="请输入文章方向" name="typeName"></td>
             </tr>
             <tr>
                 <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
