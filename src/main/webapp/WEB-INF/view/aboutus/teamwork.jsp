@@ -221,7 +221,7 @@
         }
     }
     function check() {
-        var check = phone() && email() && num() && name() && site();
+        var check = name() && num() && phone() && email() && site();
         return check;
     }
 </script>

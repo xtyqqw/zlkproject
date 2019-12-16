@@ -554,11 +554,16 @@
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
                     html += '<div class="waik"><div class="up"><div class="up_left">';
-                    html += '<img src="../../img/headimg.jpg"/>';
+                    if (focus[i].userImg == null){
+                        html += '<img src="../../../img/headimg.png"/>';
+                    }
+                    if (focus[i].userImg != null){
+                        html += '<img src="'+ focus[i].userImg +'"/>';
+                    }
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="ok">√</p><p class="ok_zi"">已关注</p>';
+                    html += '<p class="ok">√</p><p class="ok_zi">已关注</p>';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
                     html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
                     html += '</div><div class="att_tan"><div class="att_success1">';

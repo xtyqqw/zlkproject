@@ -247,6 +247,9 @@
                         },
                         yes:function (index, layero) {
                             layero.find('form').find('button[lay-submit]').click();
+                        },
+                        end:function () {
+                            clear();
                         }
                     });
                 } else if (evend==="submit"){
@@ -327,8 +330,10 @@
                         },
                         yes:function (index, layero) {
                             layero.find('form').find('button[lay-submit]').click();
-                        }/*,
-                        end:*/
+                        },
+                        end:function () {
+                            clear();
+                        }
                     });
                 }
             });
@@ -450,17 +455,21 @@
 
             //清空表单数据
             function clear() {
-                $("#coursesId").val();
-                $("#coursesName").val();
-                $("#price").val();
-                $("#coverPicInput").val();
-                $("#introduceVideoInput").val();
-                $("#introduceText").val();
-                $("#introducePicInput").val();
-                $("#featureText").val();
-                $("#featurePicInput").val();
-                $("#coursesType").val();
-                $("#tagCheck").val();
+                $("#coursesId").val("");
+                $("#coursesName").val("");
+                $("#price").val("");
+                $("#coverPicInput").val("");
+                $("#introduceVideoInput").val("");
+                $("#introduceText").val("");
+                $("#introducePicInput").val("");
+                $("#featureText").val("");
+                $("#featurePicInput").val("");
+                $("#coursesType").val("");
+                $("#tagCheck").val("");
+                $("#coverPicImg").attr("src","");
+                $("#introduceVideo1").val("src","");
+                $("#introducePicImg").attr("src","");
+                $("#featurePicImg").attr("src","");
                 form.render();
             }
 

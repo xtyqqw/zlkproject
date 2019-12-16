@@ -18,7 +18,7 @@
         }
         .all_body_center{
             width: 90%;
-            height: 1223px;
+            height: 1233px;
             margin-left: 68px;
         }
         .left{
@@ -301,7 +301,7 @@
         </div>
         <div class="right">
             <div class="add">
-                <a class="btn1" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
+                <a class="btn1" id="publish" role="button" href="<%= request.getContextPath()%>/community/article-guide">我要发文</a>
                 <a class="btn2" role="button" href="<%= request.getContextPath()%>/question/questionGuide">我要提问</a>
             </div>
             <div class="wz_remenwenzhang">
@@ -313,39 +313,49 @@
                         <div class="yueanniu">月</div><div class="zonganniu">总</div>
                     </div>
                 </div>
-                <div class="wz_remen_zt1">
-                    <ul>
-                        <c:forEach items="${alist}" var="article">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}" target="_blank">
-                                    <div class="wz_remen_bt">
-                                        <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                        <div class="wz_bt_bq">
-                                            <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                            <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                <div class="wz_remenwenzhang">
+                    <div class="wz_remen">
+                        <div class="wz_remen_wz">
+                            <span>热门文章</span>
+                        </div>
+                        <div class="anniu">
+                            <div class="yueanniu">月</div><div class="zonganniu">总</div>
+                        </div>
+                    </div>
+                    <div class="wz_remen_zt1">
+                        <ul>
+                            <c:forEach items="${alist}" var="article">
+                                <li>
+                                    <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}" target="_blank">
+                                        <div class="wz_remen_bt">
+                                            <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                            <div class="wz_bt_bq">
+                                                <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                                <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-                <div class="wz_remen_zt2">
-                    <ul>
-                        <c:forEach items="${blist}" var="article">
-                            <li>
-                                <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}" target="_blank">
-                                    <div class="wz_remen_bt">
-                                        <div class="bt"><c:out value="${article.title}"></c:out></div>
-                                        <div class="wz_bt_bq">
-                                            <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
-                                            <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                    <div class="wz_remen_zt2">
+                        <ul>
+                            <c:forEach items="${blist}" var="article">
+                                <li>
+                                    <a href="<%=request.getContextPath() %>/community/article-show?articleId=${article.articleId}" target="_blank">
+                                        <div class="wz_remen_bt">
+                                            <div class="bt"><c:out value="${article.title}"></c:out></div>
+                                            <div class="wz_bt_bq">
+                                                <span><i class="layui-icon">&#xe705;</i>&nbsp;&nbsp;阅读<c:out value="${article.browseCount}"></c:out></span>
+                                                <span><i class="layui-icon">&#xe611;</i>&nbsp;&nbsp;评论<c:out value="${article.commentCount}"></c:out></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </ul>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -409,7 +419,7 @@
         $('.wz_remen_zt1').css('display','none');
     })
     /*文章标签*/
-    $(function() {
+    /*$(function() {
         $(".show li").click(function() {
             if($(this).nextAll().is('')) {
                 $(".show").append($(this));
@@ -418,7 +428,21 @@
                 $(".show").prepend($(this));
             }
         });
-    });
+    });*/
+    var localObj = window.location;
+    var basePath = localObj.protocol+"//"+localObj.host;
+    $("#publish").click(function () {
+        $.ajax({
+            type: "POST",
+            //async: false,
+            url: basePath+"/community/article-guide",
+            success: function (msg) {
+                if(msg == "未登录"){
+                    alert("请先登录")
+                }
+            }
+        });
+    })
 </script>
 </body>
 </html>

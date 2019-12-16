@@ -25,12 +25,12 @@ public class DurationServiceImpl implements DurationService {
     @Override
     public User selectDuration(String userId){
         User user=durationMapper.selectDuration(userId);
-        /*Integer hour= Arith.duration(user.getUserAllTime()) ;*/
-        if(user.getUserDateTime() > 60){
+        /*if(user.getUserDateTime() > 60){
             user.setUserDateTime(Arith.duration(user.getUserDateTime()));
         }else if(user.getUserDateTime() < 60&&user.getUserDateTime()>1){
             user.setUserDateTime(1);
-        }
+        }*/
+        user.setUserDateTime(Arith.toHour(user.getUserDateTime()));
         return user;
 
     }
