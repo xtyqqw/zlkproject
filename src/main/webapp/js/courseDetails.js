@@ -192,7 +192,7 @@ $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function()
                     }
                 });
             }else {
-                alert("您还未参加项目");
+
                 layui.use('layer', function(){
                     var layer = layui.layer;
                     layer.msg('您还未参加项目');

@@ -966,9 +966,9 @@
     })
     $(function () {
         if ($('.title_flow2').is(':hidden')) {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         } else {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         }
         $("#click_none").click(function () {
             if ($('.banner').is(':hidden')) {
