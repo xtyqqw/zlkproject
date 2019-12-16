@@ -116,7 +116,7 @@
                     <div class="field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">首图</label>
-                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是任何一张引人注目的封面等等,请不要输入奇怪的URL地址进行提交">
+                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等">
                         </div>
                     </div>
 
@@ -147,6 +147,10 @@
                 syncScrolling : "single",
                 //你的lib目录的路径
                 path : "../editormd/lib/",
+                emoji: false,
+                toolbarIcons: function () {  //自定义工具栏
+                    return editormd.toolbarModes['simple']; // full, simple, mini
+                },
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/uploadfile",
@@ -200,7 +204,7 @@
                             prompt: '请至少选择一个文章标签'
                         }, {
                             type: 'maxCount[3]',
-                            prompt: '请最多选择三个文章标签,你可以先删除一个标签,再重新选择'
+                            prompt: '请最多选择三个文章标签,你可以先删除多余标签,再重新选择'
                         }]
                     },
                     figures: {
