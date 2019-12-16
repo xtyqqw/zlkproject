@@ -183,10 +183,17 @@
 <script>
     $("#chenggong").hide();
     $('#tijiao').click(function () {
-        $("#chenggong").show();
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },5500)
+        //获取输入框的值
+        var shuru = $('#shurukuang').val();
+        //对输入框的值得长度进行判断，
+        // 如果20<长度<100时。该提示信息显示
+        if(shuru.length>20&&shuru.length<100){
+            $("#chenggong").show();
+            setTimeout(function () {
+                $("#chenggong").hide();
+            },5500)
+        }
+
     });
 </script>
 
