@@ -23,9 +23,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let userId = 1;
+                let userId = '1';
                 let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
                     alert("内容超出最大长度限制！");
@@ -40,7 +38,7 @@ $(document).ready(function () {
                         url : basePath+"/artComment/submit",
                         data : data,
                         success : function (res) {
-                            alert(res.retmsg);
+                            layer.msg(res.retmsg);
                             if (res.retmsg === '评论成功'){
                                 artCmt_editor.txt.clear();
                             }
@@ -63,10 +61,10 @@ $(document).ready(function () {
         }
 
         {
-            //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            let userId = 1;
 
-            function cmtFlowLoad(url,articleId) {
+            let userId = '1';
+            let articleId ='1546605080';
+            function cmtFlowLoad(url) {
                 $("#art-cmt-ul-stream").empty();
                 flow.load({
                     elem: '#art-cmt-ul-stream',//流加载容器
@@ -134,11 +132,12 @@ $(document).ready(function () {
                                                                 '<div id="ART_reply_ToolBar'+ flag +'" class="cmt-reply-toolBar"></div>\n' +
                                                                 '<div id="ART-reply-Editor'+ flag +'" class="cmt-reply-editor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
-                                                                '<div class="ART_replyBtn" data_type="son" style="left: 476px">回复</div>' +
+                                                                '<div class="ART_replyBtn" data_type="son">回复</div>' +
                                                                 '<span style="display: none">'+ comment.articleCommentId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="art-cmt-toolBox">' +
                                                                 '<span style="display: none">'+ zanCaiState +'</span>' +
+                                                                '<span style="display: none">yes</span> ' +
                                                                 '<div class="cmt-space-div" style="float: left"></div>' +
                                                                 '<div class="cmt-c-t-box" style="float: left;width: 30px">' +
                                                                     zanStr +
@@ -221,6 +220,7 @@ $(document).ready(function () {
                                                 '</div>\n' +
                                                 '<div class="art-cmt-toolBox">' +
                                                     '<span style="display: none">'+ zanCaiState +'</span>' +
+                                                    '<span style="display: none">yes</span>' +
                                                     '<div class="cmt-space-div" style="float: left"></div>' +
                                                     '<div class="cmt-c-t-box" style="float: left;width: 30px">' +
                                                         zanStr +
@@ -288,7 +288,7 @@ $(document).ready(function () {
             //文章评论选项卡 点击事件
             $("#selection_stuCmt").click(function () {
                 replyEditorArr.length = 0;
-                cmtFlowLoad(basePath+"/artComment/findArtCmt","articleId");
+                cmtFlowLoad(basePath+"/artComment/findArtCmt");
             });
 
             //举报点击事件
@@ -500,9 +500,7 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-
-                //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                let userId = 1;
+                let userId = "1";
                 let data;
                 if (type === 'son'){
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid, 'replyPerson':replyPerson};
@@ -520,13 +518,13 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : "/artComment/replySubmit",
+                        url : basePath+"/artComment/replySubmit",
                         data : data,
                         success : function (res) {
-                            alert(res.retmsg);
+                            layer.msg(res.retmsg,{offset:''+ev.clientY});
                             if (res.retmsg === '回复成功'){
                                 replyEditorArr.length = 0;
-                                cmtFlowLoad("/artComment/findArtCmt");
+                                cmtFlowLoad(basePath+"/artComment/findArtCmt");
                             }
                         }
                     });

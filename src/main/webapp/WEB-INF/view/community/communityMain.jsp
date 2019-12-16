@@ -420,7 +420,7 @@
         $('.wz_remen_zt1').css('display','none');
     })
     /*文章标签*/
-    $(function() {
+    /*$(function() {
         $(".show li").click(function() {
             if($(this).nextAll().is('')) {
                 $(".show").append($(this));
@@ -429,7 +429,7 @@
                 $(".show").prepend($(this));
             }
         });
-    });
+    });*/
 </script>
 </body>
 </html>

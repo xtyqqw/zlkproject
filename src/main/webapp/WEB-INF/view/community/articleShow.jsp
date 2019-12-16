@@ -20,6 +20,49 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+
+    <style type="text/css">
+        /*文章详情底部样式*/
+        body{margin: 0;}
+        #footer{
+            background-color: #333C4D;
+            height: 130px;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 0;
+            position: absolute;
+        }
+        #footer ul{
+            padding-top: 30px;
+            width: 800px;
+            height: 60px;
+            margin: 0 auto;
+            border-bottom: 1px solid #999999;
+        }
+        #footer ul li{
+            float: left;
+            list-style: none;
+            padding-left: 30px;
+        }
+        #footer ul li a{
+            color: #989898;
+            text-decoration: none;
+            float: left;
+            padding-left: 20px;
+        }
+        #footer ul li a:hover{
+            color: #F2F2F2;
+        }
+        #footer hr{
+            width: 800px;
+            color: #989898;
+        }
+        #footer p{
+            color: #989898;
+            text-align: center;
+            padding-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <%@include file="../../jsp/header.jsp"%>
@@ -64,7 +107,6 @@
                         <div class="ui orange basic label">翻译</div>
                     </c:if>
                 </div>
-
                 <h2 class="ui center aligned header" style="box-shadow: none;">
                     ${article.title}
                 </h2>
@@ -73,7 +115,6 @@
                 <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
                     <pre>${article.articleContent}</pre>
                 </div>
-
                 <!--标签-->
                 <div class="m-padded-lr-responsive" style="margin-bottom: 55px;margin-top: -20px;">
                     <c:forEach items="${article.tags}" var="tag">
@@ -103,15 +144,46 @@
                     </div>
                     <div id="art-cmt-btnBox" class="fields">
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>
-                            <button id="selection_stuCmt" style="float: right;margin-left: 39vw;" type="button" class="ui button m-mobile-wide violet">查看</button>
+                            <div class="ui left">
+                                <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>
+                            </div>
+                        </div>
+                        <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
+                            <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">查看</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <%@include file="../../jsp/footer.jsp"%>
+    <div id="footer">
+        <ul>
+            <li>
+                <a href="/aboutus/aboutus">关于我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">加入我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">联系我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">讲师合作</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">帮助中心</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">友情链接</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">合作企业</a>
+            </li>
+        </ul>
+        <p>
+            copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
+        </p>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>

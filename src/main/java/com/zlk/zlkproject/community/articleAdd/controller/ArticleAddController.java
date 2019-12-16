@@ -41,7 +41,7 @@ public class ArticleAddController {
         //进入发文提示页面前先判断当前用户的登录状态
         if (user == null){
             mv.addObject("flag", "true");
-            mv.addObject("msg","想发文，请先进行登录");
+            mv.addObject("msg","请先登录");
             mv.setViewName("view/community/communityMain");
         }
         //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
