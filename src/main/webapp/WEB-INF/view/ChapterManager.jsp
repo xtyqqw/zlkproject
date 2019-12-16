@@ -158,7 +158,7 @@
                         content: $("#insertChapterDiv"),
                         btn:['提交'],
                         success:function(index,layero){
-                            clear();
+                            // clear();
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
@@ -182,6 +182,9 @@
                         },
                         yes:function (index, layero) {
                             layero.find('form').find('button[lay-submit]').click();
+                        },
+                        end:function () {
+                            clear();
                         }
                     });
                 }
@@ -251,6 +254,9 @@
                         },
                         yes: function (index, layero) {
                             layero.find('form').find('button[lay-submit]').click();
+                        },
+                        end: function () {
+                            clear();
                         }
                     });
                 }
@@ -275,12 +281,12 @@
 
             //清空表单数据
             function clear() {
-                $("#chapterId").val();
-                $("#coursesNameInsertSelect").val();
-                $("#chapterName").val();
-                $("#chapterNum").val();
-                $("#chapterTime").val();
-                $("#sectionNum").val();
+                $("#chapterId").val("");
+                $("#coursesNameInsertSelect").val("");
+                $("#chapterName").val("");
+                $("#chapterNum").val("");
+                $("#chapterTime").val("");
+                $("#sectionNum").val("");
                 form.render();
             }
 

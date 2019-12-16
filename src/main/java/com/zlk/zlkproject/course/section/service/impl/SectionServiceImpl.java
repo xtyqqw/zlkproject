@@ -98,4 +98,9 @@ public class SectionServiceImpl implements SectionService {
     public Section findSectionBySectionIdAndUserId(Integer sectionId, String userId) {
         return sectionMapper.findSectionBySectionIdAndUserId(sectionId, userId);
     }
+
+    @Override
+    public String findNameBySectionId(Integer sectionId) {
+        return sectionMapper.findNameBySectionId(sectionId);
+    }
 }
