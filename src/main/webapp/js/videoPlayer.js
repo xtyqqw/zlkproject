@@ -2166,8 +2166,10 @@ $(document).ready(function () {
             $(".FS_hidden").css('display','none');
             $("#div_video_all").css("overflow","visible");
             $("#div_all").offset({top:0,left:0});
-            elem_all.style.width = window.document.body.offsetWidth + 'px';
-            elem_all.style.height = window.document.body.offsetHeight + 'px';
+            /*elem_all.style.width = window.document.body.offsetWidth + 'px';
+            elem_all.style.height = window.document.body.offsetHeight + 'px';*/
+            elem_all.style.width = window.screen.width + '';
+            elem_all.style.height = window.screen.height + '';
             elem_all.style.margin = "auto";
             var res = elem_video1.buffered.end(0)/elem_video1.duration * $("#pg_bg").width();
             document.getElementById("pg_cache").style.width = res + 'px';
