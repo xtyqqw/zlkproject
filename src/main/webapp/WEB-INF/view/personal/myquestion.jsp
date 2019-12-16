@@ -270,7 +270,7 @@
             <li class="main_li_show">
                 <p class="count">共${allCount}条记录</p><br>
                 <div class="lay_flow1"></div>
-                <div><div id="allpage" style="float: right;"></div></div>
+                <div id="allpage" style="float: right;"></div>
                 <%--<c:forEach items="${list}" var="all">
                     &lt;%&ndash;我的提问&ndash;%&gt;
                     <c:if test="${all.type==0}">
@@ -327,6 +327,7 @@
                         </div>
                     </c:if>
                 </c:forEach>--%>
+                <div style="clear: both"></div>
             </li>
             <%--我的提问--%>
             <li class="main_li2">
@@ -450,12 +451,13 @@
         diannav2();diannav3();diannav1();
         $(".main_li2,.main_li3").hide();
         $(".main_li_show").show();
+        getPageAll();showAll();
         /*我的提问分页*/
-        showQuestion();getPageQuestion();
+        getPageQuestion();showQuestion();
         /*我的回答分页*/
-        showReply();getPageReply();
+        getPageReply();showReply();
         /*全部分页*/
-        showAll();getPageAll();
+        getPageAll();showAll();
     });
     /*--------------------点击选项卡事件----------------*/
     function diannav1(){
