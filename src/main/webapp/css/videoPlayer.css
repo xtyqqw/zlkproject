@@ -772,7 +772,7 @@ button{
 }
 #waitIcon_box{
     width: 50px;
-    height: 50px;
+    height: 55px;
     z-index: 500;
     position: relative;
     bottom: 55%;
