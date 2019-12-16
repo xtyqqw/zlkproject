@@ -2084,13 +2084,16 @@ $(document).ready(function () {
     //刷新/关闭 事件监听
     window.onunload = function () {
         if (isClose){
-            var data = {'time':elem_video1.currentTime};
-            $.ajax({
-                type : "POST",
-                async: false,
-                url : basePath+"/player/recordTime",
-                data : data
-            });
+            var data = {};
+            if(getSourceLength){
+                data = {'time':elem_video1.currentTime};
+                $.ajax({
+                    type : "POST",
+                    async: false,
+                    url : basePath+"/player/recordTime",
+                    data : data
+                });
+            }
             data = {'studyTime':studyTime};
             $.ajax({
                 type: 'POST',

@@ -41,6 +41,9 @@
             height: 24px;
             width: 60%;
         }
+        #articleContentHtml{
+            word-break: break-all;
+        }
         .layui-layer-tips {
             word-break: break-all;
         }
@@ -54,15 +57,15 @@
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
                 <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" valign="bottom">文章标题</td>
-                <td><input type="text" readonly required id="title" placeholder="请输入文章标题" name="title"></td>
+                <td><input type="text" readonly required id="title" placeholder="请输入文章标题(不超过20个字)" name="title" maxlength="20"></td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">浏览数</td>
-                <td><input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount"></td>
+                <td><input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount" oninput = "value=value.replace(/[^\d]/g,'')"></td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">评论数</td>
-                <td><input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount"></td>
+                <td><input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount" oninput = "value=value.replace(/[^\d]/g,'')"></td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">发布时间</td>
@@ -78,27 +81,45 @@
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">赞数</td>
-                <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount"></td>
+                <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount" oninput = "value=value.replace(/[^\d]/g,'')"></td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">踩数</td>
-                <td><input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount"></td>
+                <td><input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount" oninput = "value=value.replace(/[^\d]/g,'')"></td>
             </tr>
             <tr>
-                <td style="width: 100px;" valign="bottom">举报</td>
-                <td><input type="text" required id="inform" placeholder="请输入举报" name="inform"></td>
+                <td style="width: 100px;text-align: center;" valign="bottom">举报</td>
+                <td><select type="text" required id="inform" placeholder="请输入举报" name="inform">
+                    <option value="0">是</option>
+                    <option value="1">否</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">发文类型</td>
-                <td><input type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType"></td>
+                <td><select type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType">
+                    <option value="0">原创</option>
+                    <option value="1">转载</option>
+                    <option value="2">翻译</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">文章置顶</td>
-                <td><input type="text" required id="articleSetTop" placeholder="请输入文章置顶" name="articleSetTop"></td>
+                <td><select type="text" required id="articleSetTop" placeholder="请输入文章置顶" name="articleSetTop">
+                    <option value="0">置顶</option>
+                    <option value="1">不置顶</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">审核</td>
-                <td><input type="text" required id="approval" placeholder="请输入审核状态" name="approval"></td>
+                <td><select type="text" required id="approval" placeholder="请输入审核状态" name="approval">
+                    <option value="0">审核中</option>
+                    <option value="1">审核过</option>
+                    <option value="2">审核未过</option>
+                </select>
+                </td>
             </tr>
             <tr>
                 <td style="width: 100px;" valign="bottom">文章方向</td>
