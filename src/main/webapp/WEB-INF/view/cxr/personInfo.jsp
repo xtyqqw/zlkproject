@@ -805,7 +805,7 @@
                 layer.open({
                     type: 1
                     //弹出框置顶
-                    ,offset: 't'
+                   , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -835,7 +835,7 @@
                 layer.open({
                     type: 1
                     //弹出框置顶
-                    ,offset: 't'
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -879,7 +879,7 @@
                 layer.open({
                     type: 1
                     //弹出框置顶
-                    ,offset: 't'
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -913,7 +913,7 @@
                 layer.open({
                     type: 1
                     //弹出框置顶
-                    ,offset: 't'
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -944,7 +944,7 @@
                 layer.open({
                     type: 1
                     //弹出框置顶
-                    ,offset: 't'
+                    , offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'

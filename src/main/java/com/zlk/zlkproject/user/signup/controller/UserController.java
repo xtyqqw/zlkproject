@@ -228,7 +228,12 @@ public class UserController {
     public Map<String,Object> selectNameAndImg(String userId) throws Exception{
         User user = signService.selectNameAndImg(userId);
         Map<String,Object> map= new HashMap<>();
-        map.put("user",user);
+        if (user!= null){
+            map.put("user",user);
+            map.put("userRealname",user.getUserRealname());
+        }else {
+            map.put("message","该用户已为空");
+        }
         return map;
     }
 }

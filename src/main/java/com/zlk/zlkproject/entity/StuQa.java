@@ -40,13 +40,15 @@ public class StuQa {
     /**问答日期 对应字段 date*/
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date date;
+    /**回复对象 对应字段 replay_person*/
+    private String replayPerson;
     /**与标签表多对多关联*/
     private List<Tag> tagList;
 
     public StuQa() {
     }
 
-    public StuQa(Integer sqaId, Integer pId, Integer sectionId, String userId, String content, Integer answerNum, Integer viewNum, String share, String report, Date date) {
+    public StuQa(Integer sqaId, Integer pId, Integer sectionId, String userId, String content, Integer answerNum, Integer viewNum, String share, String report, Date date, String replayPerson, List<Tag> tagList) {
         this.sqaId = sqaId;
         this.pId = pId;
         this.sectionId = sectionId;
@@ -57,5 +59,7 @@ public class StuQa {
         this.share = share;
         this.report = report;
         this.date = date;
+        this.replayPerson = replayPerson;
+        this.tagList = tagList;
     }
 }

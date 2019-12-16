@@ -45,6 +45,9 @@
             syncScrolling : "single",
             //你的lib目录的路径
             path : "<%=request.getContextPath() %>/editormd/lib/",
+            toolbarIcons: function () {  //自定义工具栏
+                return editormd.toolbarModes['simple']; // full, simple, mini
+            },
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "/uploadfile",
