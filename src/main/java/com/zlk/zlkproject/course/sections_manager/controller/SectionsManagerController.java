@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.sections_manager.controller;
 
+import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Section;
@@ -10,6 +11,7 @@ import it.sauronsoftware.jave.MultimediaInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,8 @@ import java.util.Map;
 public class SectionsManagerController {
     @Autowired
     private SectionsManagerService sectionsManagerService;
+    @Autowired
+    private SectionService sectionService;
     @Autowired
     private CommonFileUtil commonFileUtil;
     @Autowired
@@ -132,6 +136,23 @@ public class SectionsManagerController {
         Map map = new HashMap();
         Integer res = sectionsManagerService.deleteData(section);
         map.put("res",res);
+        return map;
+    }
+
+    /**
+     *  根据小节id查找小节名称
+     *@method findNameBySectionId
+     *@params [sectionId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/16  11:47
+     */
+    @RequestMapping(value = "/findNameBySectionId",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> findNameBySectionId(Integer sectionId) throws Exception{
+        String sectionName = sectionService.findNameBySectionId(sectionId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("sectionName",sectionName);
         return map;
     }
 

@@ -142,4 +142,9 @@
             where courses_id = #{coursesId};
         </if>
     </select>
+    <!--根据小节id查找课程id-->
+    <select id="selectCoursesIdBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select c.courses_id from chapter c left join section s on
+        s.chapter_id = c.chapter_id where s.section_id = #{sectionId}
+    </select>
 </mapper>
