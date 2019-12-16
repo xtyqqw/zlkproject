@@ -54,15 +54,6 @@ public class ArticleListController {
         return "view/community/articleMy";
     }
 
-    /**
-     * 测试页面
-     * @return
-     */
-    @RequestMapping(value = "/toTest")
-    public String toTest(){
-        return "view/community/test";
-    }
-
     @RequestMapping(value = "/findByCreateTime")
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{
@@ -102,8 +93,7 @@ public class ArticleListController {
     @ResponseBody
     public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{
         User user=new User();
-        user.setUserId((String) request.getSession().getAttribute("userId"));
-        pagination.setUserId((String) request.getSession().getAttribute("userId"));
+        String userId = (String) request.getSession().getAttribute("userId");
         List<Article> articleList=articleListService.findByUserId(pagination);
         Integer count=articleListService.findArticleCount(pagination);
         Map<String,Object> map=new HashMap<>();

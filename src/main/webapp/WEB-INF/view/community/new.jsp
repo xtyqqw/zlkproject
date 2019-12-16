@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>社区</title>
+    <title>新社区页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
@@ -103,10 +103,10 @@
         }
         iframe{
             width: 100%;
-            height: 90%;
-            display: inline-block;
+            height: 83%;
+            display: inline;
             border: none 0;
-            /*background-color: #FFB800;*/
+            /*background-color: #009688;*/
         }
         .add a {
             font-family: "Arial";
@@ -296,7 +296,7 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTags">我的文章</a>
                 <span>|</span>
-                <a href="#" target="pageTags">问答</a>
+                <a href="<%= request.getContextPath()%>" target="">问答</a>
             </div>
             <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
