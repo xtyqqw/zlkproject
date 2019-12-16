@@ -476,17 +476,6 @@
         padding-top: 10px;
     }
 </style>
-<script>
-    layui.use('rate', function () {
-        var rate = layui.rate;
-        //渲染
-        var ins1 = rate.render({
-            elem: '#test1'  //绑定元素
-            , readonly: true,
-            value: 5
-        });
-    });
-</script>
 <body>
 <%--引入头部--%>
 <jsp:include page="jsp/header.jsp"></jsp:include>
