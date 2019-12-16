@@ -64,6 +64,7 @@ $(document).ready(function () {
 
             /*let userId = '1';
             let articleId ='1546605080';*/
+            let flag = 0;
             function cmtFlowLoad(url) {
                 $("#art-cmt-ul-stream").empty();
                 flow.load({
@@ -72,7 +73,7 @@ $(document).ready(function () {
                     done: function (page, next) { //加载下一页
                         let lis = [];
                         let size = 3;
-                        let flag = 0;
+
                         let data = {"articleId": articleId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -486,7 +487,7 @@ $(document).ready(function () {
             });
 
             //回复富文本编辑器 回复按钮点击事件
-            $("#cmt-content-box").on('click','.ART_replyBtn',function () {
+            $("#cmt-content-box").on('click','.ART_replyBtn',function (ev) {
                 let index = parseInt($(this).prev().text());
                 let pid = parseInt($(this).next().text());
                 let replyPerson = $(this).parent().parent().prev().children().eq(0).children().eq(1).text();
