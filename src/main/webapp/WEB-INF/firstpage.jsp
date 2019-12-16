@@ -966,9 +966,9 @@
     })
     $(function () {
         if ($('.title_flow2').is(':hidden')) {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         } else {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         }
         $("#click_none").click(function () {
             if ($('.banner').is(':hidden')) {
@@ -1022,13 +1022,12 @@
                                     '<dl>' +
                                     '<dt>' +
                                     '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
-                                    '<img src="' + courses.coursesName + '" />' +
+                                    '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1075,7 +1074,6 @@
                                     '<dd class="studing_ul_f_dd">' +
                                     '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1121,7 +1119,6 @@
                                     '<dd class="studing_ul_f_dd">' +
                                     '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
@@ -1167,7 +1164,6 @@
                                     '<dd class="studing_ul_f_dd">' +
                                     '<p>' + courses.coursesName + '</p>' +
                                     '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
                                     '<span class="stars"></span>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
