@@ -9,7 +9,7 @@
     <style type="text/css">
         .context-div{
             width: 100%;
-            height: 88%;
+            height: auto;
             overflow-y: hidden;
         }
         .all{
@@ -166,7 +166,7 @@
 </head>
 <body>
 <div class="context-div"></div>
-<div id="demo1" style="float: right"></div>
+<div id="demo1" style="float: right;clear: both"></div>
 <script>
     /*layui.use('flow', function(){
         var flow = layui.flow;
@@ -287,7 +287,7 @@
                 elem: 'demo1'
                 ,count: total
                 ,limit:limit
-                ,layout: ['prev', 'page', 'next', 'count']
+                ,layout: ['prev','next', 'count']
                 ,jump: function(obj, first){
                     page=obj.curr;
                     limit=obj.limit;

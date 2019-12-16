@@ -18,21 +18,18 @@
         }
         .all_body_center{
             width: 90%;
-            height: 1400px;
+            height: 1223px;
             margin-left: 68px;
-            /*background-color: #7F0055;*/
         }
         .left{
             width: 75%;
             height: 100%;
             float: left;
-            /*background-color: #1296db;*/
         }
         .right{
             width: 25%;
             height: 100%;
             float: right;
-            /*background-color: #9f161b;*/
         }
         .show {
             width: 99%;
@@ -106,7 +103,6 @@
             height: 90%;
             display: inline-block;
             border: none 0;
-            /*background-color: #FFB800;*/
         }
         .add a {
             font-family: "Arial";
@@ -115,6 +111,9 @@
             text-decoration: none;
             display: block;
             text-align: center;
+        }
+        .add a:hover{
+            color: #F8F8F8;
         }
         .btn1{
             margin-top: 23px;

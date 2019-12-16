@@ -9,7 +9,7 @@
     <style type="text/css">
         .context-div{
             width: 100%;
-            height: 88%;
+            height: auto;
             padding-bottom: 1px;
             overflow-y: hidden;
         }
@@ -79,7 +79,6 @@
             font-family: Arial;
             color:  #707070;
             text-decoration:none;
-
         }
         .figures{
             margin-left: 804px;
@@ -167,7 +166,7 @@
 </head>
 <body>
     <div class="context-div"></div>
-    <div id="demo1" style="float: right;clear: both;margin: auto"></div>
+    <div id="demo1" style="float: right;clear: both"></div>
 <script>
     $(function () {
         loadData();
@@ -245,7 +244,7 @@
     }
     <%--<%
     //页面每隔30秒自动刷新一遍
-    response.setHeader("refresh" , "20" );
+    response.setHeader("refresh" , "30" );
     %>--%>
 </script>
 </body>
