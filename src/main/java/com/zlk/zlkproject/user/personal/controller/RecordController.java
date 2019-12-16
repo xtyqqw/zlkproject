@@ -63,8 +63,6 @@ public class RecordController {
         Map<String,Object> map=new HashMap<>();
         map.put("count",allList);
         map.put("data",itemList);
-        /*学习进度*/
-        /*map.put("per",per);*/
         return map;
     }
 }
