@@ -255,7 +255,7 @@
 </head>
 <body>
 
-
+<%--<div style="font-size: 1.2vw;color: red; display: none; text-align: center;" id="bccg">保存成功</div>--%>
 <!-- 信息完善/账号绑定 -->
 <div class="xxzt">
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -455,6 +455,7 @@
                     <div class="layui-input-block">
                         <%--保存按钮--%>
                         <button class="layui-btn" type="submit" id="baocun">保存</button>
+
                         <%--重置按钮--%>
                         <button type="reset" id="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -722,7 +723,7 @@
 
 
                 //服务器上传成功
-                layer.msg(res.message);
+                layer.msg(res.message,{icon: 1});
                 //获取图片路径URL
                 $("#userImg").val(res.url)
             }
@@ -738,13 +739,30 @@
         });
         element.init();
     });
+
+
+
+
     //保存按钮点击事件,当点击重置按钮时，显示信息
     $("#baocun").click(function () {
-        layer.msg("修改成功");
+        layer.msg('保存成功', {
+            shift: -1
+           , icon: 1,
+            time: 5000 //2秒关闭（如果不配置，默认是3秒）
+        }, function(){
+            location.reload();
+        });
     });
+
+    // //
+    // layer.msg("成功", { shift: -1 }, function () {
+    //     location.reload();
+    // });
+
+
     //重置按钮点击事件,当点击重置按钮时，显示信息
     $("#reset").click(function () {
-        layer.msg("信息已重置");
+        layer.msg("信息已重置",{ icon:6});
     });
 
 
@@ -788,6 +806,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: 't'
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -816,6 +836,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: 't'
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -858,6 +880,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: 't'
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -890,6 +914,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: 't'
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -919,6 +945,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: 't'
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
