@@ -300,6 +300,7 @@
                 elem: '#permissionTable',
                 url: '<%=request.getContextPath()%>/function/functionManager',
                 page: false,
+                height: $(document).height()-$('#permissionTable').offset().top-25,
                 cols: [[
                     {field: 'id', title: '编号',width:80},
                     {field: 'name', title: '资源名称',width:200},
