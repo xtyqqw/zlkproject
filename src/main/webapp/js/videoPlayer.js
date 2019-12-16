@@ -798,6 +798,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + stu_editor.txt.html();
                 let contentText = '' + stu_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -815,11 +816,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'snSectionId':sectionId, 'snUserId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1304,11 +1305,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1366,6 +1367,7 @@ $(document).ready(function () {
             let userId = '1';
             //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             let sectionId =1;
+            let flag = 0;
 
             function cmtFlowLoad(url) {
                 $("#SCS_ul_stream").empty();
@@ -1376,7 +1378,6 @@ $(document).ready(function () {
                         let lis = [];
                         let size = 3;
 
-                        let flag = 0;
                         let data = {"sectionId": sectionId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -1831,6 +1832,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + replyEditorArr[index].txt.html();
                 let contentText = '' + replyEditorArr[index].txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -1854,11 +1856,11 @@ $(document).ready(function () {
                 }
 
                 if(contentHtml.length>1024){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！",{offset:''+ev.clientY});
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1978,6 +1980,16 @@ $(document).ready(function () {
     var sharpState = false;
     var getSourceLength = false;
     var studyTime = 0;
+    var memoryLoadTimeOut = null;
+
+    // “此处” 点击事件
+    $("#goHead").click(function () {
+        elem_video1.currentTime = 0;
+        $("#memoryLoadBox").css('display','none');
+        elem_pgBtn.style.left = 0 + 'px';
+        elem_pgBar.style.width = 0 + 'px';
+        elem_currentTime.innerText = format(0);
+    });
 
     //切换视频函数
     function switchVideo (src,sectionId) {
@@ -1989,6 +2001,7 @@ $(document).ready(function () {
             url : basePath+"/player/recordTimeSwitch",
             data : data,
             success: function () {
+                $("#waitIcon_box").css('display','block');
                 document.getElementById("video_src").src = src;
                 elem_video1.load();
                 clearInterval(interval1);
@@ -2083,7 +2096,8 @@ $(document).ready(function () {
 
     //刷新/关闭 事件监听
     window.onunload = function () {
-        if (isClose){
+        let pageType = $("#pageType").text() + '';
+        if (isClose && pageType === 'videoPlayer'){
             var data = {};
             if(getSourceLength){
                 data = {'time':elem_video1.currentTime};
@@ -2113,11 +2127,13 @@ $(document).ready(function () {
     //视频等待事件监听
     elem_video1.addEventListener("waiting",function () {
         elem_btnPlay.innerHTML = "&#xe652;";
+        $("#waitIcon_box").css('display','block');
     });
 
     //视频播放事件监听
     elem_video1.addEventListener("playing",function () {
         elem_btnPlay.innerHTML = "&#xe651;";
+        $("#waitIcon_box").css('display','none');
     });
 
     //成功获取资源长度事件监听
@@ -2133,6 +2149,11 @@ $(document).ready(function () {
                     elem_pgBtn.style.left = res/elem_video1.duration * $("#pg_bg").width() + 'px';
                     elem_pgBar.style.width = res/elem_video1.duration * $("#pg_bg").width() + 'px';
                     elem_currentTime.innerText = format(res);
+                    $("#memoryLoadBox").css('display','table-cell');
+                    memoryLoadTimeOut = setTimeout(function () {
+                        $("#memoryLoadBox").css('display','none');
+                        clearTimeout(memoryLoadTimeOut);
+                    },5000);
                 }
             });
         }
@@ -2146,6 +2167,7 @@ $(document).ready(function () {
             }
         },1000);
         getSourceLength = true;
+        $("#waitIcon_box").css('display','none');
     });
 
     //全屏按钮点击
@@ -2449,9 +2471,11 @@ $(document).ready(function () {
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
             getSourceLength = false;
+            $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
             getSourceLength = false;
+            $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#nv").text();
         }
         elem_video1.load();

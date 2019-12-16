@@ -97,7 +97,7 @@ public class UsersController {
     public ModelAndView updateUserInfo(User user,HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         //获取修改前用户信息
-        User user1=userService.selectUserById(user.getUserId());
+        User user2=userService.selectUserById(user.getUserId());
 
         //调用修改方法
         Integer flag= userService.updateUser(user);
@@ -107,7 +107,7 @@ public class UsersController {
             mv.addObject("msg","修改成功");
             mv.setViewName("view/cxr/UserInfo");
             //记录修改用户日志
-            logUtil.setLog(request,"修改了前台用户"+user1.getUserRealname()+"的信息");
+            logUtil.setLog(request,"修改了前台用户"+user2.getUserRealname()+"的信息");
             return mv;
         }else{
             mv.addObject("flag","true");

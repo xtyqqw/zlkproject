@@ -352,7 +352,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/role/roleManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: $(document).height()-$('#demo').offset().top-20
+            , height: $(document).height()-$('#demo').offset().top-25
             , cols: [[ //表头
                 {field: 'roleId', title: '角色编号', width: 290, sort: true}
                 , {field: 'roleName', title: '角色名称', width: 130, sort: true}
