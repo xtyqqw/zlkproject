@@ -9,8 +9,8 @@
         <result property="state" column="state" javaType="java.lang.String"/>
         <result property="time" column="time" javaType="java.lang.Double"/>
     </resultMap>
-    <update id="recordTime" parameterType="com.zlk.zlkproject.entity.UserSection">
-        update user_section SET time = #{time} WHERE user_id = #{userId} AND section_id = #{sectionId}
+    <update id="recordTime">
+        update user_section SET time = #{userSection.time}, study_time = #{date} WHERE user_id = #{userSection.userId} AND section_id = #{userSection.sectionId}
     </update>
 
     <update id="recordState">
