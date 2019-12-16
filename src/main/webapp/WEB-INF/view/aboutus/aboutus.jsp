@@ -65,11 +65,12 @@
             padding: 5px;
         }
         #aboutus-iframe{
-            width: 99%;
+            width: 70%;
             margin-top: -518px;
-            margin-left: 250px;
+            margin-left: 300px;
             float: left;
             height: 100%;
+            vertical-align:middle;
         }
     </style>
 </head>
@@ -93,37 +94,37 @@
                 <span>关于我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce"
+        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce?typeNum=1"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/toCoo"
+        <a href="<%=request.getContextPath()%>/coop/toCoo?typeNum=2"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>合作企业</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/lecturer/lecturers"
+        <a href="<%=request.getContextPath()%>/lecturer/lecturers?typeNum=3"
            name="dian" class="nodian" id="teacher" target="aboutus-main">
             <li>
                 <span>讲师合作</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/help"
+        <a href="<%=request.getContextPath()%>/coop/help?typeNum=4"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>帮助中心</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/tofriends"
+        <a href="<%=request.getContextPath()%>/coop/tofriends?typeNum=5"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>友情链接</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/contactus/findContactus"
+        <a href="<%=request.getContextPath()%>/contactus/findContactus?typeNum=6"
            name="dian" class="nodian" target="aboutus-main">
             <li>
                 <span>联系我们</span>
@@ -140,17 +141,24 @@
 
 <!-- 主体内容 -->
 <div>
-<iframe src="<%=request.getContextPath()%>/aboutus/aboutzlk"
-        id="aboutus-iframe" name="aboutus-main"  style="width: 80%;height: 100%;vertical-align:middle"  frameborder="0" scrolling="no"></iframe>
+    <iframe src="<%=request.getContextPath()%>/aboutus/aboutzlk" id="aboutus-iframe"
+        name="aboutus-main" frameborder="0" scrolling="no"></iframe>
 </div>
 <%--iframe自适应高度--%>
 <script type="text/javascript">
-    $(window.parent.document).find("#aboutus-iframe").load(function(){
+    /*$(window.parent.document).find("#aboutus-iframe").load(function(){
         var main = $(window.parent.document).find("#aboutus-iframe");
         main.height(0);
         var thisheight = $(document).height();
         main.height(thisheight);
+    });*/
+    $("#aboutus-iframe").load(function () {
+        $("#aboutus-iframe").height(0);
+        var height = document.getElementById("aboutus-iframe").contentWindow.document.body.scrollHeight;
+        $("#aboutus-iframe").height(height);
+        alert(height);
     });
+
 </script>
 <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
 <div style="clear: both"></div>
