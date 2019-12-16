@@ -59,6 +59,13 @@ public interface UserMapper {
      */
     public List<User> selectByUserId(String userId);
 
+//    /***
+//     * 后台修改用户信息方法
+//     * @param user
+//     * @return
+//     */
+//    public int updatesUser(User user);
+
 
 
 }

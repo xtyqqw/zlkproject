@@ -1,23 +1,29 @@
 package com.zlk.zlkproject.community.question.service;
 
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.Question;
-import com.zlk.zlkproject.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public interface QuestionHomeService {   /*
+public interface QuestionHomeService {
     /*
-     * @descrption 根据最新时间查询排序所有的问题
+     * @descrption 查询总数
      * @author gby
      * @param
      * @return
-     * @date 2019/12/7 18:58
+     * @date 2019/12/13 0:31
      */
-    List<Question> findQuestionByTime(String createTime);
-
+    Integer findQuestionCount(Pagination pagination);
+    /*
+     * @descrption 按照最新发布日期排序（默认）
+     * @author gby
+     * @param
+     * @return
+     * @date 2019/12/10 14:15
+     */
+    List<Question> findByQuestionTime(Pagination pagination);
 
     /*
      * @descrption 根据问题id查询文章
@@ -26,6 +32,13 @@ public interface QuestionHomeService {   /*
      * @return com.zlk.zlkproject.entity.Question
      * @date 2019/12/7 18:56
      */
-    Question findByQuestionId(@Param("questionId") String questionId);
-
+    Question getQuestion(String questionId);
+    /*
+     * @descrption 查询问答详情转换格式
+     * @author gby
+     * @param [questionId]
+     * @return java.lang.Integer
+     * @date 2019/12/10 9:16
+     */
+    Question getAndConvert(String questionId);
 }

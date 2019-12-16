@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
     <script src="/layui/layui.js"></script>
     <style type="text/css">
-        body {
+        *{
             margin: 0;
+            padding: 0;
         }
         .header{
             background-color: #FFFFFF;
@@ -22,6 +23,8 @@
             width: 100%;
             border-bottom: 1px #989898;
             box-shadow: 1px 1px 5px 3px #D4D4D4;
+            margin-top: 0px;
+            margin-left: 0px;
         }
         /* 头部logo样式 */
         .header .header-logo{

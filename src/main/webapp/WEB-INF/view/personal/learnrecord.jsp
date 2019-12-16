@@ -65,15 +65,26 @@
         .learn-title{
             float: left;
             margin: 30px 0 50px 50px;
+            width: 400px;
         }
         .learn-title h2{
             font-size: 23px;
             padding-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            width: 500px;
         }
         .learn-title p{
             font-size: 15px;
             color: #999999;
             padding-bottom: 13px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            width: 500px;
         }
         .learn-title img{
             width: 200px;
@@ -185,7 +196,6 @@
             },
             success: function (data) {
                 total = data.count;
-                var per = data.per;
                 var data1 = data.data;
                 var html = '';
                 for (var i = 0;i<data1.length;i++){

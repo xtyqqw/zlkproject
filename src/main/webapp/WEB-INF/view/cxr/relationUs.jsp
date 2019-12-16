@@ -16,11 +16,11 @@
             padding: 0;
         }
         #lianxiwomenzhuti{
-            z-index: -9;
+            /*z-index: -9;*/
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 1000px;
+            width: 99%;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -79,7 +79,7 @@
     </style>
 
 </head>
-<body>
+<body style="width: 90%;">
 
 <div id="lianxiwomenzhuti">
 

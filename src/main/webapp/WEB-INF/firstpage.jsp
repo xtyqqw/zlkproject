@@ -236,16 +236,29 @@
     }
 
     .li_none_box_class dl dt {
+        width:140px;
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
         font-size: 13px;
         color: grey;
-        margin: 13px 0 0 0;
+        margin-top: 4px;
     }
 
     .li_none_box_class dl dd {
         font-size: 12px;
         color: darkgrey;
     }
-
+    .li_none_box_class dl dd span{
+        display: inline-block;
+        width:105px;
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+    .li_none_box_class dl dd .cha_num{
+        width:50px
+    }
     .rank {
         height: 60px;
         width: 900px;
@@ -407,25 +420,20 @@
         color: white;
         font-size: 12px;
         position: relative;
-        top: -36px;
+        top: -20px;
         left: 5px;
+        width:100px;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;
     }
 
     .studing .studing_ul_s_dd p {
         font-size: 12px;
         position: relative;
-        top: -27px;
+        top: -12px;
         display: inline-block;
     }
-
-    .studing .studing_ul_f_dd span {
-        color: white;
-        font-size: 10px;
-        position: relative;
-        top: -32px;
-        left: 5px;
-    }
-
     .layui-rate li i.layui-icon {
         font-size: 10px;
     }
@@ -468,17 +476,6 @@
         padding-top: 10px;
     }
 </style>
-<script>
-    layui.use('rate', function () {
-        var rate = layui.rate;
-        //渲染
-        var ins1 = rate.render({
-            elem: '#test1'  //绑定元素
-            , readonly: true,
-            value: 5
-        });
-    });
-</script>
 <body>
 <%--引入头部--%>
 <jsp:include page="jsp/header.jsp"></jsp:include>
@@ -540,8 +537,8 @@
                                                 <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
-                                                    <span>${courses.chapterNum}节</span>
-                                                    <span>￥${courses.price}</span>
+                                                    <span class="cha_num">${courses.chapterNum}节</span>
+                                                    <p><span>￥${courses.price}</span></p>
                                                 </dd>
                                             </dl>
                                         </li>
@@ -578,8 +575,8 @@
                                                 <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
-                                                    <span>${courses.chapterNum}节</span>
-                                                    <span>￥${courses.price}</span>
+                                                    <span class="cha_num">${courses.chapterNum}节</span>
+                                                    <p><span>￥${courses.price}</span></p>
                                                 </dd>
                                             </dl>
                                         </li>
@@ -616,8 +613,8 @@
                                                 <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
-                                                    <span>${courses.chapterNum}节</span>
-                                                    <span>￥${courses.price}</span>
+                                                    <span class="cha_num">${courses.chapterNum}节</span>
+                                                    <p><span>￥${courses.price}</span></p>
                                                 </dd>
                                             </dl>
                                         </li>
@@ -654,8 +651,8 @@
                                                 <dt>${courses.coursesName}</dt>
                                                 <dd>
                                                     <span>学习人数：${courses.studentNum}人</span>
-                                                    <span>${courses.chapterNum}节</span>
-                                                    <span>￥${courses.price}</span>
+                                                    <span class="cha_num">${courses.chapterNum}节</span>
+                                                    <p><span>￥${courses.price}</span></p>
                                                 </dd>
                                             </dl>
                                         </li>
@@ -871,25 +868,25 @@
 <div id="footer">
     <ul>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">关于我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=7">关于我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">加入我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=1">团队介绍</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">联系我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=6">联系我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">讲师合作</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=3">讲师合作</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">帮助中心</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=4">帮助中心</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">友情链接</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=5">友情链接</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus">合作企业</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=2">合作企业</a>
         </li>
     </ul>
     <p>
@@ -962,9 +959,9 @@
     })
     $(function () {
         if ($('.title_flow2').is(':hidden')) {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         } else {
-            $('#footer').css("margin-top","50px");
+            $('#footer').css("margin-top","80px");
         }
         $("#click_none").click(function () {
             if ($('.banner').is(':hidden')) {
@@ -1022,10 +1019,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
-                                    '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
-                                    '<span class="stars"></span>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
@@ -1069,10 +1063,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
-                                    '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
-                                    '<span class="stars"></span>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
@@ -1115,10 +1106,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
-                                    '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
-                                    '<span class="stars"></span>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +
@@ -1161,10 +1149,7 @@
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
-                                    '<p>' + courses.introduceText + '</p>' +
-                                    '<span>JAVA</span>' +
-                                    '<span>SPRING</span>' +
-                                    '<span class="stars"></span>' +
+                                    '<p>' + courses.coursesName + '</p>' +
                                     '</dd>' +
                                     '<dd class="studing_ul_s_dd">' +
                                     '<p>学习人数：<span>' + courses.studentNum + '</span>人</p><br/>' +

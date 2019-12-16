@@ -20,9 +20,9 @@
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
-        body {
+     /*   body {
             background: url("/img/12949615.jpg");
-        }
+        }*/
 
         .top {
             height: auto;
@@ -70,17 +70,17 @@
                   id="publish">
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <div class="ui selection compact teal basic dropdown label">
+                        <div class="ui selection compact violet basic dropdown label">
                             <input type="hidden" value="待解决" name="solve">
                             <i class="dropdown icon"></i>
                             <div class="text">待解决</div>
                             <div class="menu">
-                                <div class="item" data-value="待解决">待解决</div>
-                                <div class="item" data-value="已解决">已解决</div>
-                                <div class="item" data-value="未解决">未解决</div>
+                                <div class="item" data-value="0">待解决</div>
+                                <div class="item" data-value="1">已解决</div>
+                                <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="简明扼要的描述你的标题,最多只能输入50字" maxlength="50">
+                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入20字" maxlength="20">
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label" placeholder="">分类</label>
+                            <label class="ui compact violet basic label" placeholder="">分类</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName">
                                 <i class="dropdown icon"></i>
@@ -109,23 +109,7 @@
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label" placeholder="">标签</label>
-                            <div class="ui fluid selection dropdown">
-                                <input type="hidden" name="tagName">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">请选择问答标签</div>
-                                <div class="menu">
-                                    <div class="item" data-value="java">java</div>
-                                    <div class="item" data-value="linux">linux</div>
-                                    <div class="item" data-value="html">html</div>
-                                    <div class="item" data-value="mysql">mysql</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               <%--     <div class="required field">
-                        <div class="ui left labeled action input">
-                            <label class="ui compact teal basic label">标签</label>
+                            <label class="ui compact violet basic label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
                                 <input type="hidden" name="tagName">
                                 <i class="dropdown icon"></i>
@@ -137,15 +121,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>--%>
+                    </div>
                     <div class="ui error message"></div>
                     <div class="ui right aligned container">
-                        <button type="submit" id="publish-btn" class="ui teal button">发布问题</button>
+                        <button type="submit" id="publish-btn"  class="ui violet button">发布问题</button>
                     </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
@@ -177,25 +164,6 @@
         on: 'hover'
     });
 
-    /*编辑完后审核*/
-    function publish() {
-        $.ajax({
-            type: 'POST',
-            url: '/question/addQuestion',
-            data: $('#publish'),
-            success: function (res) {
-                if (res.data()) {
-                    alert("正在审核,请耐心等待");
-                }
-            },
-            error: function (res) {
-                if (res.data() == null) {
-                    alert("文章不符合要求");
-                }
-            }
-        });
-    }
-
     /*表单验证开启*/
     $('.ui.form').form({
         inline: true,
@@ -207,7 +175,7 @@
                     type: 'empty',
                     prompt: '文章不能为空呦'
                 }, {
-                    type: 'maxLength[10]',
+                    type: 'maxLength[50]',
                     prompt: '请注意文章标题最大长度不能超过50'
                 }]
             },
