@@ -29,6 +29,9 @@ public class IndexController {
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<User> userList = indexService.findUsersByAllTime();
+        for(User user:userList){
+            user.setUserAllTime(Arith.toHour(user.getUserAllTime()));
+        }
         List<Type> typeList = indexService.findTypeAll();
         List<Tag> tags = indexService.findTagsById(typeList.get(0).getTypeId());
         List<Tag> tags2 = indexService.findTagsById(typeList.get(1).getTypeId());
@@ -73,8 +76,12 @@ public class IndexController {
             Integer rank = indexService.findUserRankById(userId);
             Integer count = indexService.findUserCount();
             Integer rankBai = Arith.divide(rank, count);
-            Integer jiNeng = Arith.ride(user.getUserDateTime());
-            Integer xueXi = Arith.plus(user.getUserDateTime());
+            Integer userDtime = Arith.toHour(user.getUserDateTime());
+            user.setUserDateTime(userDtime);
+            Integer userAtime = Arith.toHour(user.getUserAllTime());
+            user.setUserAllTime(userAtime);
+            Integer jiNeng = Arith.ride(userDtime);
+            Integer xueXi = Arith.plus(userDtime);
             mv.addObject("userList", userList);
             mv.addObject("userId",userId);
             mv.addObject("user1", user);
