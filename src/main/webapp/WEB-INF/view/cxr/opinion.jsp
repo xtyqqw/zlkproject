@@ -183,10 +183,15 @@
 <script>
     $("#chenggong").hide();
     $('#tijiao').click(function () {
-        $("#chenggong").show();
-        setTimeout(function () {
-            $("#chenggong").hide();
-        },5500)
+        //获取输入框的值
+        var shuru = $('#shurukuang').val();
+        if(shuru.length>20&&shuru.length<100){
+            $("#chenggong").show();
+            setTimeout(function () {
+                $("#chenggong").hide();
+            },5500)
+        }
+
     });
 </script>
 
