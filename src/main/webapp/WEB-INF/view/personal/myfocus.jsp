@@ -464,7 +464,10 @@
             </div>
         </c:forEach>--%>
     </div>
-    <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+    <div>
+        <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
+    </div>
+
 </c:if>
 <script>
     $(function () {

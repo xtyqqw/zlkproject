@@ -149,6 +149,7 @@
         }
         .wz_remen_wz span{
             color: black;
+            font-size: 1vw;
         }
         .anniu{
             float: left;
@@ -236,7 +237,7 @@
         .wz_bt_bq{
             float: right;
             margin-top: 2vw;
-            font-size: 0.5vw;
+            font-size: 0.8vw;
         }
         .wz_bt_bq span{
             color: black;

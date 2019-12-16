@@ -10,21 +10,28 @@
 <html>
 <head>
     <title>意见反馈</title>
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script type="text/javascript">
+        $("#tijiao").click(function () {
+            layer.msg("提交成功");
+        });
+    </script>
+
 
     <style type="text/css">
         *{
             margin: 0;
             padding: 0;
         }
+
         #yijianzhuti{
             /*z-index: 9;*/
             position: relative;
             float: left;
             margin: 8vw 0vw 5vw 19vw;
-            width: 1000px;
+            width: 99%;
             box-shadow: 0vw 0.3vw 0.3vw 0.3vw rgb(235,235,235);
             border-top: 0.3vw solid #713ED7;
             padding-bottom: 5vw;
@@ -85,7 +92,7 @@
             width: 6vw;
             margin-right: 2vw;
             height: 2.5vw;
-            font-size: 1vw;
+            font-size: 1.3vw;
             border: none;
             color: #ffffff;
             background-color: rgb(150,150,150);
@@ -93,9 +100,10 @@
         }
         #yijianzhuti #zhuti_wei #tijiao{
             border-radius: 0.3VW;
+
             width: 6vw;
             height: 2.5vw;
-            font-size: 1vw;
+            font-size: 1.3vw;
             border: none;
             color: #ffffff;
             /*background-color: #713ED7;*/
@@ -103,12 +111,13 @@
         }
         #yijianzhuti #chenggong{
             position: fixed;
-            top: 45%;
-            left: 42%;
-            font-size: 1vw;
+            top: 25%;
+            left:35%;
+            font-size: 1.3vw;
+            color: white;
             border-radius: 0.4vw;
-            background-color: #fff;
-            width: 18vw;
+            background-color:  #713ED7;
+            width: 12vw;
             height: 3.5vw;
             line-height: 3.5vw;
             text-align: center;
@@ -141,7 +150,7 @@
 
     </style>
 </head>
-<body>
+<body style="width:90%;">
 
 
 <div id="yijianzhuti">
@@ -158,34 +167,36 @@
             </div>
 
     <div id="zhuti_wei">
-        <button id="tijiao" class="layui-btn" οnclick="tijiao();">提交</button>
+        <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
         <button id="quxiao">取消</button>
-        <script>
-            $("#tijiao").click(function () {
-                layer.msg("提交成功");
-            });
-        </script>
+
 
     </div>
     </form>
     </div>
-
-    <%--<div id="chenggong">--%>
-        <%--<img src="/img/cxr/提交成功图片.png" />提交已成功--%>
-    <%--</div>--%>
+    <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
 
 </div>
-<script src="<%=request.getContextPath()%>/layui/layui.js"></script>
 
-<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js">
+
+<%----%>
+<script>
+    $("#chenggong").hide();
     $('#tijiao').click(function () {
-        layer.msg("提交成功");
+        //获取输入框的值
+        var shuru = $('#shurukuang').val();
+        //对输入框的值得长度进行判断，
+        // 如果20<长度<100时。该提示信息显示
+        if(shuru.length>20&&shuru.length<100){
+            $("#chenggong").show();
+            setTimeout(function () {
+                $("#chenggong").hide();
+            },5500)
+        }
 
     });
-
-
-
 </script>
+
 
 </body>
 </html>
