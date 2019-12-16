@@ -92,4 +92,9 @@ public class UserServiceImpl implements UserService {
     public List<User> selectByUserId(String userId) {
         return userMapper.selectByUserId(userId);
     }
+
+//    @Override
+//    public int updatesUser(User user) {
+//        return userMapper.updateUser(user);
+//    }
 }

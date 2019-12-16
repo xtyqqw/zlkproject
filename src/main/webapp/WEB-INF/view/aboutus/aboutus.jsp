@@ -65,72 +65,65 @@
             padding: 5px;
         }
         #aboutus-iframe{
-            width: 99%;
+            width: 70%;
             margin-top: -518px;
-            margin-left: 250px;
+            margin-left: 300px;
             float: left;
             height: 100%;
+            vertical-align:middle;
         }
     </style>
 </head>
 <body>
-<!-- 侧边导航点击事件 -->
-<script type="text/javascript">
-    $(function(){
-        $("a[name='dian']").click(function(){
-            $(this).addClass("active").siblings().removeClass("active");
-        });
-    })
-</script>
 <!-- 头部 -->
 <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
 <!-- 侧边导航 -->
 <div id="about-nav">
     <ul>
-        <a href="<%=request.getContextPath()%>/aboutus/aboutzlk"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutzlk?typeNum=7"
+           name="dian" class="nodian" target="aboutus-main" id="aboutzlk">
             <li>
                 <span>关于我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce?typeNum=1"
+           name="dian" class="nodian" target="aboutus-main" id="team">
             <li>
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/toCoo"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/toCoo?typeNum=2"
+           name="dian" class="nodian" target="aboutus-main" id="coo">
             <li>
                 <span>合作企业</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/lecturer/lecturers"
-           name="dian" class="nodian" id="teacher" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/lecturer/lecturers?typeNum=3"
+           name="dian" class="nodian" id="teacher" target="aboutus-main" id="teacher">
             <li>
                 <span>讲师合作</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/help"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/help?typeNum=4"
+           name="dian" class="nodian" target="aboutus-main" id="help">
             <li>
                 <span>帮助中心</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/tofriends"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/coop/tofriends?typeNum=5"
+           name="dian" class="nodian" target="aboutus-main" id="friend">
             <li>
                 <span>友情链接</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/contactus/findContactus"
-           name="dian" class="nodian" target="aboutus-main">
+        <a href="<%=request.getContextPath()%>/contactus/findContactus?typeNum=6"
+           name="dian" class="nodian" target="aboutus-main" id="us">
             <li>
                 <span>联系我们</span>
             </li>
         </a>
         <a href="<%=request.getContextPath()%>/opinion/toOpinion"
-           name="dian" class="nodian" target="aboutus-main">
+           name="dian" class="nodian" target="aboutus-main" id="opinion">
             <li>
                 <span>意见反馈</span>
             </li>
@@ -140,17 +133,67 @@
 
 <!-- 主体内容 -->
 <div>
-<iframe src="<%=request.getContextPath()%>/aboutus/aboutzlk"
-        id="aboutus-iframe" name="aboutus-main"  style="width: 80%;height: 100%;vertical-align:middle"  frameborder="0" scrolling="no"></iframe>
+    <iframe src="<%=request.getContextPath()%>/aboutus/aboutzlk" id="aboutus-iframe"
+        name="aboutus-main" frameborder="0" scrolling="no"></iframe>
 </div>
-<%--iframe自适应高度--%>
+
 <script type="text/javascript">
-    $(window.parent.document).find("#aboutus-iframe").load(function(){
-        var main = $(window.parent.document).find("#aboutus-iframe");
-        main.height(0);
-        var thisheight = $(document).height();
-        main.height(thisheight);
+    /*iframe自适应高度*/
+    $("#aboutus-iframe").load(function () {
+        $("#aboutus-iframe").height(0);
+        var height = document.getElementById("aboutus-iframe").contentWindow.document.body.scrollHeight;
+        $("#aboutus-iframe").height(height);
     });
+    /*侧边导航点击事件*/
+    $(function(){
+        $("a[name='dian']").click(function(){
+            $(this).siblings().css("background-color","#8C24DD");
+            $(this).siblings().css("color","#fff");
+            $(this).css("background-color","#fff");
+            $(this).css("color","#8C24DD");
+        });
+    });
+    var localObj = window.location;
+    var contextPath = localObj.pathname.split("/")[1];
+    var basePath = localObj.protocol+"//"+localObj.host+"/";
+    var typeNum = ${typeNum};
+    $(function () {
+        if (typeNum === 1){
+            $("#aboutus-iframe").attr("src",basePath+"aboutus/teamIntroduce");
+            $("#team").css("background-color","#fff");
+            $("#team").css("color","#8C24DD");
+        }
+        if (typeNum === 2){
+            $("#aboutus-iframe").attr("src",basePath+"coop/toCoo");
+            $("#coo").css("background-color","#fff");
+            $("#coo").css("color","#8C24DD");
+        }
+        if (typeNum === 3){
+            $("#aboutus-iframe").attr("src",basePath+"lecturer/lecturers");
+            $("#teacher").css("background-color","#fff");
+            $("#teacher").css("color","#8C24DD");
+        }
+        if (typeNum === 4){
+            $("#aboutus-iframe").attr("src",basePath+"coop/help");
+            $("#help").css("background-color","#fff");
+            $("#help").css("color","#8C24DD");
+        }
+        if (typeNum === 5){
+            $("#aboutus-iframe").attr("src",basePath+"coop/tofriends");
+            $("#friend").css("background-color","#fff");
+            $("#friend").css("color","#8C24DD");
+        }
+        if (typeNum === 6){
+            $("#aboutus-iframe").attr("src",basePath+"contactus/findContactus");
+            $("#us").css("background-color","#fff");
+            $("#us").css("color","#8C24DD");
+        }
+        if (typeNum === 7){
+            $("#aboutus-iframe").attr("src",basePath+"aboutus/aboutzlk");
+            $("#aboutzlk").css("background-color","#fff");
+            $("#aboutzlk").css("color","#8C24DD");
+        }
+    })
 </script>
 <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>
 <div style="clear: both"></div>
