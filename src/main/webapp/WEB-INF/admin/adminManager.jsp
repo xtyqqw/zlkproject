@@ -132,7 +132,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/admin/adminManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: $(document).height()-$('#demo').offset().top-20
+            , height: $(document).height()-$('#demo').offset().top-25
             , cols: [[ //表头
                  {field: 'adminId', title: '用户编号', width: 290, sort: true}
                 , {field: 'adminName', title: '用户名称', width: 130, sort: true}
