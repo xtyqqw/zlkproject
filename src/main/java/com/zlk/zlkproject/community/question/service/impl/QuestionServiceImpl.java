@@ -4,6 +4,7 @@ import com.zlk.zlkproject.community.question.mapper.QuestionMapper;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +21,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
-    @Override
-    public Integer selectUserId(Question qusetion) {
-        return questionMapper.selectUserId(qusetion);
-    }
 
     @Override
-    public Integer selectAudit(String userId) {
-        return questionMapper.selectAudit(userId);
+    public User findUserById(String userId) {
+        return questionMapper.findUserById(userId);
     }
 
     @Transactional

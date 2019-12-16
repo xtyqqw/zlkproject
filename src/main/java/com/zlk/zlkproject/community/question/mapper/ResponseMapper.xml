@@ -13,11 +13,14 @@
         <result column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="user_id" property="userId" javaType="java.lang.String"/>
     </resultMap>
+    <select id="findResponseById" resultMap="responseEntityMap">
+        select * from response where question_id
+    </select>
     <select id="findAll" resultMap="responseEntityMap">
-        select * from response limit  #{startPage},#{limit}
+        select * from response  where question_id  limit #{startPage},#{limit}
     </select>
     <select id="findByResponseTime" resultMap="responseEntityMap">
-         select * from  response order by create_time  DESC  limit  #{startPage},#{limit}
+         select * from  response where question_id order by create_time  DESC  limit  #{startPage},#{limit}
     </select>
 
 </mapper>

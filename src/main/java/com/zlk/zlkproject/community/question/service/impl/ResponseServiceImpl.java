@@ -25,6 +25,11 @@ public class ResponseServiceImpl implements ResponseService {
     private ResponseMapper responseMapper;
 
     @Override
+    public Response findResponseById(String questionId) {
+        return responseMapper.findResponseById(questionId);
+    }
+
+    @Override
     public Response save(Response response) {
         return responseDao.save(response);
     }

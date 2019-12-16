@@ -11,7 +11,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>问题详情</title>
+    <title>问答详情</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
@@ -71,28 +71,33 @@
             float: right;
             margin-top: 10px;
         }
-        .border{
+
+        .border {
             height: 150px;
             border: 1px solid #ccc;
             width: 990px;
             margin-top: 10px;
         }
-        .user{
+
+        .user {
             border: 1px solid #ccc;
             height: 149px;
             width: 100px;
         }
-        .right{
+
+        .right {
             width: 888px;
             height: 149px;
             float: right;
             margin-top: -150px;
         }
-        .count{
+
+        .count {
             margin: 20px;
             height: 100px;
         }
-        .img{
+
+        .img {
             height: 60px;
             width: 60px;
             border: 1px #ccc solid;
@@ -100,28 +105,33 @@
             margin-left: 18px;
             margin-top: 10px;
         }
-        .border{
+
+        .border {
             height: 150px;
             border: 1px solid #ccc;
             width: 990px;
             margin-top: 10px;
         }
-        .user{
+
+        .user {
             border: 1px solid #ccc;
             height: 149px;
             width: 100px;
         }
-        .right{
+
+        .right {
             width: 888px;
             height: 149px;
             float: right;
             margin-top: -150px;
         }
-        .count{
+
+        .count {
             margin: 20px;
             height: 100px;
         }
-        .img{
+
+        .img {
             height: 60px;
             width: 60px;
             border: 1px #ccc solid;
@@ -129,23 +139,26 @@
             margin-left: 18px;
             margin-top: 30px;
         }
-        .name{
+
+        .name {
             margin-top: 20px;
         }
-        .zan{
+
+        .zan {
             width: 30px;
             height: 30px;
             margin-left: 30px;
             margin-top: -20px;
         }
-        .cai{
+
+        .cai {
             height: 30px;
             width: 30px;
             margin-left: 100px;
             margin-top: -30px;
         }
 
-        .time{
+        .time {
             margin-top: -30px;
             float: right;
             margin-right: 20px;
@@ -211,11 +224,12 @@
             <span style="float: left;font-size: 18px;">回复：</span>
         </div>
         <div class="layui-form-item">
-            <form action="<%=request.getContextPath() %>/response/save" method="post" class="ui form" id="publish">
-                <textarea id="demo" style="display: none;" maxlength="200"  placeholder="开始编辑。。。" name="responseContent"></textarea>
+            <form action="<%=request.getContextPath() %>/response/save" method="post" class="form" id="publish">
+                <textarea id="demo" style="display: none;" maxlength="200" placeholder="开始编辑。。。"
+                          name="responseContent"></textarea>
                 <div class="layui-input-block">
                     <button type="submit" style="float:right;background-color: #914FF1;" class="layui-btn"
-                            lay-submit="sub" lay-filter="demo2">提交回复
+                            lay-submit="sub" onclick="publish()" lay-filter="demo2">提交回复
                     </button>
                 </div>
             </form>
@@ -277,25 +291,30 @@
     });
 
 </script>
-<%--<script type="text/javascript">
+<script type="text/javascript">
     /*表单验证开启*/
-    $('.form').form({
-        inline: true,
-        on: 'blur',
-        fields: {
-            responseContent: {
-                identifier: 'responseContent',
-                rules: [{
-                    type: 'empty',
-                    prompt: '内容不能为空呦'
-                }, {
-                    type: 'maxLength[50]',
-                    prompt: '请注意内容最大长度不能超过200'
-                }]
+    function publish() {
+        $('.form').form({
+            inline: true,
+            on: 'blur',
+            fields: {
+                responseContent: {
+                    identifier: 'responseContent',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '内容不能为空呦'
+                    }, {
+                        type: 'maxLength[50]',
+                        prompt: '请注意内容最大长度不能超过200'
+                    }]
+                }
             },
-        }
-    });
-</script>--%>
+            onSuccess: function () {
+                alert("提交成功");
+            },
+        });
+    }
+</script>
 <script type="text/javascript">
     $(function () {
         var testEditormdView;
@@ -317,12 +336,11 @@
         flow.load({
             elem: '.show_li1' //流加载容器
             , isAuto: false
-            , end: "<p>没有更多了</p>"
             , done: function (page, next) { //加载下一页
                 //模拟插入
                 setTimeout(function () {
                     var lis = [];
-                    var limit = "5";
+                    var limit = 4;
                     $.ajax({
                         url: "/response/responseAll?page=" + page + "&limit=" + limit,
                         type: 'post',
@@ -333,13 +351,13 @@
                                 html += '<div class="border">' +
                                     '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
                                     '<div class="right" id="right">' +
-                                    '<div class="count"><span>'+ response.responseContent +'</span></div>'+
-                                    '<div>' + '<div class="zan">' + response.zanCount +'赞'+ '</div>' + ' <div class="cai">' + response.caiCount +'踩'+ '</div>' + '</div>' +
+                                    '<div class="count"><span>' + response.responseContent + '</span></div>' +
+                                    '<div>' + '<div class="zan">' + response.zanCount + '赞' + '</div>' + ' <div class="cai">' + response.caiCount + '踩' + '</div>' + '</div>' +
                                     '<div class="time">' + response.createTime + '</div>' + '</div>' +
                                     '</div>';
                                 lis.push(html);
                             });
-                            next(lis.join(''), page < 9);
+                            next(lis.join(''), page < 2);
                             $(".timeago").timeago();
                         }
                     });
@@ -347,6 +365,7 @@
             }
         });
     });
+
 </script>
 <script>
     layui.use('flow', function () {
@@ -355,12 +374,11 @@
         flow.load({
             elem: '.show_li2' //流加载容器
             , isAuto: false
-            , end: "<p>没有更多了</p>"
             , done: function (page, next) { //加载下一页
                 //模拟插入
                 setTimeout(function () {
                     var lis = [];
-                    var limit = "5";
+                    var limit = 4;
                     $.ajax({
                         url: "/response/responseNew?page=" + page + "&limit=" + limit,
                         type: 'post',
@@ -371,13 +389,13 @@
                                 html += '<div class="border">' +
                                     '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
                                     '<div class="right" id="right">' +
-                                    '<div class="count"><span>'+ response.responseContent +'</span></div>'+
-                                    '<div>' + '<div class="zan">' + response.zanCount +'赞'+ '</div>' + ' <div class="cai">' + response.caiCount +'踩'+ '</div>' + '</div>' +
+                                    '<div class="count"><span>' + response.responseContent + '</span></div>' +
+                                    '<div>' + '<div class="zan">' + response.zanCount + '赞' + '</div>' + ' <div class="cai">' + response.caiCount + '踩' + '</div>' + '</div>' +
                                     '<div class="time">' + response.createTime + '</div>' + '</div>' +
                                     '</div>';
                                 lis.push(html);
                             });
-                            next(lis.join(''), page < 9);
+                            next(lis.join(''), page < 2);
                             $(".timeago").timeago();
                         }
                     });

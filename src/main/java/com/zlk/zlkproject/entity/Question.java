@@ -69,6 +69,7 @@ public class Question {
     private String userId;
     /*小节表主键*/
     private String sectionId;
+
     public Question() {
     }
 

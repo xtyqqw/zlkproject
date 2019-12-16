@@ -10,6 +10,15 @@ import java.util.List;
 @Service
 public interface ResponseService {
     /*
+     * @descrption 通过问题id查询回答
+     * @author gby
+     * @param
+     * @return
+     * @date 2019/12/14 18:05
+     */
+    Response findResponseById(String questionId);
+
+    /*
      * @descrption 新增回复
      * @author gby
      * @param [response]

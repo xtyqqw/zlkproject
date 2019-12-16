@@ -190,7 +190,7 @@
     function loadData() {
         $.ajax({
             type: "post",
-            url: "<%=request.getContextPath()%>/question/questionAll",
+            url: "<%=request.getContextPath()%>/question/questionMy",
             async: false,
             dataType: 'json',
             data: {
@@ -199,7 +199,7 @@
             },
             success: function (ret) {
                 total = ret.count;  //设置总条数
-                var question = ret.questionAllList;
+                var question = ret.questionMyList;
                 var html = '';
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';

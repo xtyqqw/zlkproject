@@ -60,7 +60,7 @@ public class ArticleListController {
      */
     @RequestMapping(value = "/toTest")
     public String toTest(){
-        return "view/community/test";
+        return "view/community/questionMain";
     }
 
     @RequestMapping(value = "/findByCreateTime")

@@ -4,7 +4,9 @@ import com.zlk.zlkproject.community.question.service.ResponseService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Response;
+import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,12 @@ public class ResponseController {
     @Autowired
     private ResponseService responseService;
 
+    @RequestMapping(value = "/findResponse")
+    public String findResponse(String questionId)throws Exception{
+        responseService.findResponseById(questionId);
+        return "/view/community/questionParticulars";
+    }
+
     /*
      * @descrption 提交回复
      * @author gby
@@ -41,7 +49,7 @@ public class ResponseController {
      * @date 2019/12/12 20:00
      */
     @RequestMapping(value = "/save")
-    public String save(Response response) throws Exception {
+    public String save(Response response,HttpServletRequest request) throws Exception {
         response.setResponseId(UUIDUtils.getId());
         response.setCreateTime(new Date());
         response.setCaiCount(0);
@@ -83,20 +91,5 @@ public class ResponseController {
         map.put("responseNewList", responseNewList);
         return map;
     }
-
-    //回答编辑页面的图片上传方法
-    @RequestMapping(value = "/responseImg", method = RequestMethod.POST)
-    public static void uploadFile(MultipartFile file, HttpServletRequest request, String path)
-            throws IllegalStateException, IOException {
-            request.getSession().getServletContext().getRealPath("/upload"); //服务器地址
-        if (!file.isEmpty()) {
-            // 文件保存路径
-            String filePath = path + file.getOriginalFilename();
-            // 转存文件
-            file.transferTo(new File(filePath));
-        }
-    }
-
-
 
 }

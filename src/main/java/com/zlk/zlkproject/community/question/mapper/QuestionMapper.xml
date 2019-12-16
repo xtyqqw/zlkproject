@@ -24,12 +24,32 @@
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
         <result column="section_id" property="sectionId" javaType="java.lang.String"/>
     </resultMap>
+    <resultMap type="com.zlk.zlkproject.entity.User" id="userEntityMap">
+        <id property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="phonenum" column="user_phonenum" javaType="java.lang.String"/>
+        <result property="userPwd" column="user_pwd" javaType="java.lang.String"/>
+        <result property="userRealname" column="user_realname" javaType="java.lang.String"/>
+        <result property="userSex" column="user_sex" javaType="java.lang.String"/>
+        <result property="userBirthday" column="user_birthday" javaType="java.util.Date"/>
+        <result property="userNative" column="user_native" javaType="java.lang.String"/>
+        <result property="userMarry" column="user_marry" javaType="java.lang.String"/>
+        <result property="userCity" column="user_city" javaType="java.lang.String"/>
+        <result property="userState" column="user_state" javaType="java.lang.String"/>
+        <result property="userTarget" column="user_target" javaType="java.lang.String"/>
+        <result property="userIndustry" column="user_industry" javaType="java.lang.String"/>
+        <result property="userHobby" column="user_hobby" javaType="java.lang.String"/>
+        <result property="userSelfappraise" column="user_selfappraise" javaType="java.lang.String"/>
+        <result property="userEducation" column="user_education" javaType="java.lang.String"/>
+        <result property="userAcademy" column="user_academy" javaType="java.lang.String"/>
+        <result property="userSpecialty" column="user_specialty" javaType="java.lang.String"/>
+        <result property="userAllTime" column="user_all_time" javaType="java.lang.Integer"/>
+        <result property="userDateTime" column="user_date_time" javaType="java.lang.Integer"/>
+        <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="userRealimg" column="user_realimg" javaType="java.lang.String"/>
+    </resultMap>
 
-    <select id="selectUserId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
-        select user_id=#{userId} from question
-    </select>
-    <select id="selectCheck" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
-        select audit=#{audit} from question where user_id=#{userId}
+    <select id="findUserById" resultMap="userEntityMap" parameterType="com.zlk.zlkproject.entity.User">
+        select user from user_id=${userId}
     </select>
     <insert id="addQuestion"  parameterType="com.zlk.zlkproject.entity.Question" >
         insert into question (question_id,question_title,question_content,solve,create_time,browse_count,question_set_top,zan_count,cai_count,audit,response_count,type_name,tag_name)

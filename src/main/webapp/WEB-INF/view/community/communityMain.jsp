@@ -91,7 +91,7 @@
         /*中间有竖线导航栏样式*/
         .tab{
             border: none;
-            width: 282px;
+            width: 402px;
             position: relative;
             left: 6px;
             bottom: 16px;
@@ -309,7 +309,9 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTags">我的文章</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/question/questionMain" target="pageTags">问答</a>
+                <a href="<%=request.getContextPath()%>/question/findQuestionAll" target="pageTags">全部提问</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>/question/findQuestionMy" target="pageTags">我的提问</a>
             </div>
             <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
