@@ -18,7 +18,7 @@ import java.util.List;
 public interface RecordService {
     /**
      * 查询学习项目
-     * @param userId
+     * @param pagination
      * @return
      */
     List<Item> selectCourses(Pagination pagination);
