@@ -15,10 +15,11 @@ $(document).ready(function () {
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
+        var isSubmit = true;
 
         //弹出层设置
         layer.config({
-            offset: '20%'
+            offset: '35%'
         });
 
 
@@ -45,7 +46,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: basePath+'/chapter/findChapters',
-                    data: "",
+                    data: {"sectionId":parseInt($("#sectionId").text())},
                     dataType: "json",
                     success: function (data) {
                         $("#mulu_div").css("display", "block");
@@ -132,7 +133,6 @@ $(document).ready(function () {
             $("#sectionId").text(sectionId);
         });
 
-        /*视频播放按钮点击事件*/
 
         /*功能栏问答点击*/
         $("#icon-wenda").click(function () {
@@ -172,7 +172,7 @@ $(document).ready(function () {
                     var tagId = $(this).find("input").val();
                     tagIdArray.push(tagId);
                 }else {
-                    layer.alert("最多选择3个标签,请先取消1个标签后再选择新标签");
+                    layer.msg("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
             }else {
                 $(this).css("background-color","grey");
@@ -203,31 +203,33 @@ $(document).ready(function () {
         /*问答提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
             if (tagIdArray.length==0){
-                layer.confirm("至少选择1个标签");
+                layer.msg("至少选择1个标签");
             }else {
-                var content = editor.txt.html();
-                var data = {"content":content,"tagIdArray":tagIdArray};
-                $.ajax({
-                    type:"POST",
-                    url:basePath+"/stuQa/insertStuQa",
-                    data:data,
-                    dataType: "json",
-                    traditional:true,
-                    success:function (result) {
-                        layer.confirm(result.message,function (index,layero) {
-                            layer.close(index);
-                            editor.txt.clear();
-                            $(".tagName").css("background-color","grey");
-                            $(".tagName").attr("isselect","false");
-                            $("#wenda_div").css("display", "none");
-                            tagIdArray.splice(0);
-                        });
-                        /*if(result.message==="添加成功"){
+                if (isSubmit){
+                    var content = editor.txt.html();
+                    var data = {"content":content,"tagIdArray":tagIdArray};
+                    $.ajax({
+                        type:"POST",
+                        url:basePath+"/stuQa/insertStuQa",
+                        data:data,
+                        dataType: "json",
+                        traditional:true,
+                        success:function (result) {
+                            layer.confirm(result.message,function (index,layero) {
+                                layer.close(index);
+                                editor.txt.clear();
+                                $(".tagName").css("background-color","grey");
+                                $(".tagName").attr("isselect","false");
+                                $("#wenda_div").css("display", "none");
+                                tagIdArray.splice(0);
+                            });
+                            /*if(result.message==="添加成功"){
 
-                        }*/
-                    }
-                });
-                stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                            }*/
+                        }
+                    });
+                    stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                }
             }
         });
 
@@ -275,11 +277,13 @@ $(document).ready(function () {
         editor.create();
 
         /*限制字数判断方法*/
-        checkLength = function(maxLength) {
-            var text = editor.txt.html();
+        function checkLength(editor,maxLength) {
+            var text = editor.txt.text();
+            layer.msg(text.length);
             var reTag = /<(?:.|\s)*?>/g;
             var reText = text.replace(reTag,"");
             var l = 0;
+            var isfull = false;
             for (var i = 0; i < reText.length; i++) {
                 if (/[\u4e00-\u9fa5]/.test(reText[i])) {
                     l += 2;
@@ -288,10 +292,18 @@ $(document).ready(function () {
                 }
                 if (l > maxLength) {
                     reText = reText.substr(0, maxLength);
-
+                    isfull = true;
                 }
             }
+            return isfull;
         };
+
+        $("#text_div").keyup(function () {
+            if (checkLength(editor,401)){
+                layer.msg("输入内容请不要超过200个汉字或400个英文字符");
+                istrue = false;
+            }
+        });
 
 
         /*//视频时长格式转换函数  hh:mm:ss
@@ -502,7 +514,7 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        share = result.stuQa.share;
+
                     }
                 });
                 $(this).text(""+share);
@@ -513,35 +525,37 @@ $(document).ready(function () {
 
         /*举报按钮点击提交事件*/
         $(document).on("click", ".stuQa-report", function () {
-            var thisReport = $(this).text();
+            var report = $(this).text();
             var sqaId = $(this).parent().parent().parent().find("input").val();
-            if (thisReport === "举报"){
+            if (report === "举报"){
                 let report = "已举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
                     url:basePath+"/stuQa/updateShareOrReport",
-                    contentType:'application/json',
-                    data:JSON.stringify(stuQa),
-                    success:function (result) {
-                        thisReport = result.stuQa.report;
+                    /*contentType:'application/json',*/
+                    data:stuQa,
+                    dataType:"json",
+                    success:function (data) {
+
                     }
                 });
-                $(this).text(""+thisReport);
+                $(this).text(""+report);
                 $(this).css("color","#9ea2ea");
-            }else if (thisReport === "已举报"){
+            }else if (report === "已举报"){
                 let report = "举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
                     url:basePath+"/stuQa/updateShareOrReport",
-                    contentType:'application/json',
-                    data:JSON.stringify(stuQa),
-                    success:function (result) {
-                        thisReport = result.stuQa.report;
+                    // contentType:'application/json',
+                    data:stuQa,
+                    dataType:"json",
+                    success:function (data) {
+
                     }
                 });
-                $(this).text(""+thisReport);
+                $(this).text(""+report);
                 $(this).css("color","#ffffff");
             }
         });
@@ -680,6 +694,9 @@ $(document).ready(function () {
                         });
                         str += "</div>";
                         str += "<div class=\"stuQa-content\">";
+                        if (stuQa.replayPerson!= null && stuQa.replayPerson!= ""){
+                            str += "<div class=\"stuQa-replayPerson\" id='stuQa-replayPerson"+editorflag+"'>回复"+stuQa.replayPerson+":</div>";
+                        }
                         str += "<div class=\"stuQa-toolbar\" id='stuQa-answer-toolbar"+editori+"'></div>";
                         str += "<div class=\"stuQa-textEditor\" id='stuQa-answer-textEditor"+editori+"'>"+stuQa.content+"</div>";
                         str += "</div>";
@@ -751,6 +768,8 @@ $(document).ready(function () {
         };
         ans_editor.create();
 
+        var isReplay = true;
+
         //回复点击事件
         $(document).on("click", ".stuQa-reply", function () {
             var sqaId = $(this).parent().parent().parent().find("input").val();
@@ -763,21 +782,33 @@ $(document).ready(function () {
                 area:['500px','350px'],
                 offset:'20%',
                 btn: ['提交'],
+                success:function(index,layero){
+                    $(index).on('keyup','#answer-editor',function () {
+                        if (checkLength(ans_editor,401)){
+                            layer.alert("输入内容请不要超过200个汉字或400个英文字符");
+                            isReplay = false;
+                        }
+                    })
+                },
                 yes: function (index, layero) {
                     layer.close(index);
-                    var content = ans_editor.txt.html();
-                    var data = {"sqaId":sqaId,"pId":pId,"content":content};
-                    $.ajax({
-                        type:"POST",
-                        url:basePath+"/stuQa/insertAnswer",
-                        dataType: "json",
-                        data: data,
-                        success:function (result) {
-                            layer.msg(result.message);
-                            stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
-                        }
-                    });
-
+                    if (isReplay){
+                        var content = ans_editor.txt.html();
+                        var data = {"sqaId":sqaId,"pId":pId,"content":content};
+                        $.ajax({
+                            type:"POST",
+                            url:basePath+"/stuQa/insertAnswer",
+                            dataType: "json",
+                            data: data,
+                            success:function (result) {
+                                layer.msg(result.message);
+                                stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
+                            }
+                        });
+                    }
+                },
+                end:function () {
+                    ans_editor.txt.clear();
                 }
             });
         });

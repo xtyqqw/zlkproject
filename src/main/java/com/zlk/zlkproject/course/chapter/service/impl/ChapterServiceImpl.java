@@ -86,4 +86,9 @@ public class ChapterServiceImpl implements ChapterService {
     public Integer selectSumSectionByCoursesId(Integer coursesId) {
         return chapterMapper.selectSumSectionByCoursesId(coursesId);
     }
+
+    @Override
+    public Integer selectCoursesIdBySectionId(Integer sectionId) {
+        return chapterMapper.selectCoursesIdBySectionId(sectionId);
+    }
 }

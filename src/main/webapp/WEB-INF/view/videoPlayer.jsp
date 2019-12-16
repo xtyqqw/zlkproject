@@ -128,7 +128,7 @@
                             </div>
                             <div id="stu_qa_editor">
                                 <div id="toolbar_div" class="toolbar"></div>
-                                <div id="text_div" class="text" onkeyup="checkLength(400);"></div>
+                                <div id="text_div" class="text" <%--onkeyup="checkLength(400);"--%>></div>
                                 <div id="btn_div">
                                     <button type="button" id="btn_submit_wenda">提交</button>
                                     <button type="reset" id="btn_reset_wenda">取消</button>

@@ -1003,6 +1003,7 @@ button{
     width: 100%;
     height: auto;
     font-size: 18px;
+    word-wrap: break-word;
 }
 /*-------------------------讲师笔记end-----------------------------------------------*/
 /*-------------------------学生问答bigin-----------------------------------------------*/
@@ -1113,6 +1114,7 @@ button{
     overflow: hidden;
     height: auto;
     width: 100%;
+    word-wrap: break-word;
     /*text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1130,7 +1132,7 @@ button{
 }
 
 .stuQa-readMore{
-    width: 10%;
+    width: 12%;
     cursor: pointer;
 }
 
