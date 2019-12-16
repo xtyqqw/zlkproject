@@ -554,7 +554,12 @@
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
                     html += '<div class="waik"><div class="up"><div class="up_left">';
-                    html += '<img src="../../img/headimg.jpg"/>';
+                    if (focus[i].userImg == null){
+                        html += '<img src="../../../img/headimg.png"/>';
+                    }
+                    if (focus[i].userImg != null){
+                        html += '<img src="'+ focus[i].userImg +'"/>';
+                    }
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';

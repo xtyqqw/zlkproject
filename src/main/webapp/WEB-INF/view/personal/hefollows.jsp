@@ -325,7 +325,7 @@
     });
     /*----------------------分页--------------------------*/
     var page = 1;
-    var limit = 3;
+    var limit = 4;
     var total;
     var userId1 =${userId};
     function showHefollows() {
@@ -346,7 +346,13 @@
                 var html = '';
                 for (var i = 0;i<foll.length;i++){
                     html += '<div class="hefollows_main"><div class="main_left">';
-                    html += '<img src="../../img/headimg.jpg" /><p class="name">'+ foll[i].userRealname+'</p>';
+                    if (foll[i].userImg == null){
+                        html += '<img src="../../../img/headimg.png" />';
+                    }
+                    if (foll[i].userImg != null){
+                        html += '<img src="'+ foll[i].userImg +'" />';
+                    }
+                    html += '<p class="name">'+ foll[i].userRealname+'</p>';
                     if (foll[i].userId!==userId) {
                         if (foll[i].followType === 1) {
                             html += '<div class="attention_type">';
