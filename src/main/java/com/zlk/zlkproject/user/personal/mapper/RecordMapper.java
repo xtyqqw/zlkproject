@@ -26,18 +26,18 @@ public interface RecordMapper {
     List<Item> selectCourses(Pagination pagination);
 
     /**
-     * 查询小结状态总数
+     * 查询视频总时间
      * @param userId
      * @return
      */
-    Integer selectUserSection(@Param("userId") String userId,@Param("coursesId") Integer coursesId);
+    Integer selectUserSection(@Param("userId") String userId,@Param("sectionId") Integer sectionId);
 
     /**
-     * 查询小结已完成数量
+     * 查询视频已观看时间
      * @param userId
      * @return
      */
-    Integer selectUser(@Param("userId") String userId,@Param("coursesId") Integer coursesId);
+    Integer selectUserTime(@Param("userId") String userId,@Param("sectionId") Integer sectionId);
 
     /**
      * 查询课程数量

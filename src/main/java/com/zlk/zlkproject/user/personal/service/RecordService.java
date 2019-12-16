@@ -23,18 +23,18 @@ public interface RecordService {
      */
     List<Item> selectCourses(Pagination pagination);
     /**
-     * 查询小结状态总数
+     * 查询视频总时间
      * @param userId
      * @return
      */
-    Integer selectUserSection(String userId,Integer coursesId);
+    Integer selectUserSection(String userId,Integer sectionId);
 
     /**
-     * 查询小结已完成数量
+     * 查询视频已观看时间
      * @param userId
      * @return
      */
-    Integer selectUser(String userId,Integer coursesId);
+    Integer selectUserTime(String userId,Integer sectionId);
     /**
      * 查询课程数量
      * @param pagination

@@ -80,8 +80,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="userRealname"id="userRealname"  value="${user.userRealname}"  placeholder="请输入你的真实姓名(不能包含空格数字)" autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-                           onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" maxlength="5">
+                <input type="text" name="userRealname"id="userRealname"  value="${user.userRealname}"  placeholder="请输入你的真实姓名(不能包含空格数字)" autocomplete="off" class="layui-input"
+                       onkeyup="value=value.replace(/[\d]/g,'') "onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[\d]/g,''))"
+                       maxlength="5">
             </div>
         </div>
 
@@ -129,11 +130,12 @@
             <%--文件信息反显--%>
         <div class="layui-input-inline" style="margin-bottom:2vw;">
             <div class="layui-upload-list">
-                <img class="layui-upload-img headImage"  src="${user.userImg}"  id="userImg"
-                     style="width: 8vw; height: 8vw;">
+                <img class="layui-upload-img headImage"
+                     style="width: 8vw; height: 8vw;" name="userImg" id="userImg" src="${user.userImg}">
                 <p id="demoText"></p>
             </div>
         </div>
+
             <%--籍贯--%>
         <div class="layui-form-item">
             <label class="layui-form-label">籍贯</label>
@@ -489,7 +491,8 @@
                 $("#userAcademy").val(data.userAcademy);
                 $("#userEducation").val(data.userEducation);
                 $("#userSpecialty").val(data.userSpecialty);
-                $("#userImg").val(data.userImg);
+                //动态获取img信息
+                $("#userImg").attr("src",data.userImg);
                 layer.open({
                     title: "修改",
                     type: 1,
@@ -582,7 +585,7 @@
                 // demoText.html('<span style="color: red;">上传成功!!!</span>');
 
                 //服务器上传成功
-                layer.msg(res.message);
+                layer.msg(res.message,{icon: 1});
                 //获取图片路径URL
                 $("#userImg1").val(res.url);
             }

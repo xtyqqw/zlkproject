@@ -2,6 +2,7 @@ package com.zlk.zlkproject.user.aboutus.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @ClassName： AboutusController
@@ -17,8 +18,11 @@ public class AboutusController {
      * @return
      */
     @RequestMapping("/aboutus")
-    public String aboutus(){
-        return "view/aboutus/aboutus";
+    public ModelAndView toIframe(String typeNum){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("view/aboutus/aboutus");
+        mv.addObject("typeNum",typeNum);
+        return mv;
     }
 
     /**
