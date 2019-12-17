@@ -80,50 +80,50 @@
 <!-- 侧边导航 -->
 <div id="about-nav">
     <ul>
-        <a href="<%=request.getContextPath()%>/aboutus/aboutzlk?typeNum=7"
-           name="dian" class="nodian" target="aboutus-main" id="aboutzlk">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=7"
+           name="dian" class="nodian" id="aboutzlk">
             <li>
                 <span>关于我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/aboutus/teamIntroduce?typeNum=1"
-           name="dian" class="nodian" target="aboutus-main" id="team">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=1"
+           name="dian" class="nodian" id="team">
             <li>
                 <span>团队介绍</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/toCoo?typeNum=2"
-           name="dian" class="nodian" target="aboutus-main" id="coo">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=2"
+           name="dian" class="nodian" id="coo">
             <li>
                 <span>合作企业</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/lecturer/lecturers?typeNum=3"
-           name="dian" class="nodian" id="teacher" target="aboutus-main" id="teacher">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=3"
+           name="dian" class="nodian" id="teacher">
             <li>
                 <span>讲师合作</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/help?typeNum=4"
-           name="dian" class="nodian" target="aboutus-main" id="help">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=4"
+           name="dian" class="nodian" id="help">
             <li>
                 <span>帮助中心</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/coop/tofriends?typeNum=5"
-           name="dian" class="nodian" target="aboutus-main" id="friend">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=5"
+           name="dian" class="nodian" id="friend">
             <li>
                 <span>友情链接</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/contactus/findContactus?typeNum=6"
-           name="dian" class="nodian" target="aboutus-main" id="us">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=6"
+           name="dian" class="nodian" id="us">
             <li>
                 <span>联系我们</span>
             </li>
         </a>
-        <a href="<%=request.getContextPath()%>/opinion/toOpinion"
-           name="dian" class="nodian" target="aboutus-main" id="opinion">
+        <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=8"
+           name="dian" class="nodian" id="opinion">
             <li>
                 <span>意见反馈</span>
             </li>
@@ -139,11 +139,11 @@
 
 <script type="text/javascript">
     /*iframe自适应高度*/
-    $("#aboutus-iframe").load(function () {
+    /*$("#aboutus-iframe").load(function () {
         $("#aboutus-iframe").height(0);
         var height = document.getElementById("aboutus-iframe").contentWindow.document.body.scrollHeight;
         $("#aboutus-iframe").height(height);
-    });
+    });*/
     /*侧边导航点击事件*/
     $(function(){
         $("a[name='dian']").click(function(){
@@ -160,38 +160,51 @@
     $(function () {
         if (typeNum === 1){
             $("#aboutus-iframe").attr("src",basePath+"aboutus/teamIntroduce");
+            $("#aboutus-iframe").css("height","900");
             $("#team").css("background-color","#fff");
             $("#team").css("color","#8C24DD");
         }
         if (typeNum === 2){
             $("#aboutus-iframe").attr("src",basePath+"coop/toCoo");
+            $("#aboutus-iframe").css("height","660");
             $("#coo").css("background-color","#fff");
             $("#coo").css("color","#8C24DD");
         }
         if (typeNum === 3){
             $("#aboutus-iframe").attr("src",basePath+"lecturer/lecturers");
+            $("#aboutus-iframe").css("height","1724");
             $("#teacher").css("background-color","#fff");
             $("#teacher").css("color","#8C24DD");
         }
         if (typeNum === 4){
             $("#aboutus-iframe").attr("src",basePath+"coop/help");
+            $("#aboutus-iframe").css("height","660");
             $("#help").css("background-color","#fff");
             $("#help").css("color","#8C24DD");
         }
         if (typeNum === 5){
             $("#aboutus-iframe").attr("src",basePath+"coop/tofriends");
+            $("#aboutus-iframe").css("height","660");
             $("#friend").css("background-color","#fff");
             $("#friend").css("color","#8C24DD");
         }
         if (typeNum === 6){
             $("#aboutus-iframe").attr("src",basePath+"contactus/findContactus");
+            $("#aboutus-iframe").css("height","708");
             $("#us").css("background-color","#fff");
             $("#us").css("color","#8C24DD");
         }
         if (typeNum === 7){
             $("#aboutus-iframe").attr("src",basePath+"aboutus/aboutzlk");
+            $("#aboutus-iframe").css("height","660");
             $("#aboutzlk").css("background-color","#fff");
             $("#aboutzlk").css("color","#8C24DD");
+        }
+        if (typeNum === 8){
+            $("#aboutus-iframe").attr("src",basePath+"opinion/toOpinion");
+            $("#aboutus-iframe").css("height","485");
+            $("#opinion").css("background-color","#fff");
+            $("#opinion").css("color","#8C24DD");
         }
     })
 </script>

@@ -874,7 +874,7 @@
             <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=1">团队介绍</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=6">联系我们</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=2">合作企业</a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=3">讲师合作</a>
@@ -886,7 +886,7 @@
             <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=5">友情链接</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=2">合作企业</a>
+            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=6">联系我们</a>
         </li>
     </ul>
     <p>

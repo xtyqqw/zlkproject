@@ -21,7 +21,7 @@ public class UserSection {
     /**小节id 主键 对应字段section_id*/
     private Integer sectionId;
     /**小节状态 对应字段state*/
-    private Integer state;
+    private String state;
     /**小节时间记录 对应字段time*/
     private Double time;
     /**小节的个人评分 主键 对应字段section_Grade*/
@@ -30,10 +30,11 @@ public class UserSection {
     public UserSection() {
     }
 
-    public UserSection(String userId, Integer sectionId, Integer state, Double time) {
+    public UserSection(String userId, Integer sectionId, String state, Double time, Integer sectionGrade) {
         this.userId = userId;
         this.sectionId = sectionId;
         this.state = state;
         this.time = time;
+        this.sectionGrade = sectionGrade;
     }
 }

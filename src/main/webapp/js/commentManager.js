@@ -145,24 +145,21 @@ window.onload = function () {
         table.render({
             elem: '#sections_table'
             ,height: 518
-            ,url: basePath+'/SMC/findAllData'
+            ,url: basePath+'/stuComment/findAllFromStuComment'
             ,page: true
             ,toolbar: '#topToolBar'
             ,cols: [[
-                {field: 'courseId', title: '课程识别号', width:100}
-                ,{field: 'chapterId', title: '章节识别号', width:100}
+                {field: 'smId', title: '评论Id', width:100}
                 ,{field: 'sectionId', title: '小节识别号', width:100}
-                ,{field: 'sectionNum', title: '小节序号', width:100}
-                ,{field: 'sectionName', title: '小节名', width:100}
-                ,{field: 'sectionIntro', title: '小节介绍', width: 177}
-                ,{field: 'videoAddr1', title: '普清地址', width: 100}
-                ,{field: 'videoAddr2', title: '超清地址', width: 100}
-                ,{field: 'sectionTime', title: '小节时长', width: 100,templet:function (d) {
-                        return format(d.sectionTime);
-                    }}
+                ,{field: 'replyPerson', title: '回复对象', width:100}
+                ,{field: 'content', title: '评论内容', width:100}
+                ,{field: 'up', title: '点赞数', width: 177}
+                ,{field: 'down', title: '点踩数', width: 100}
+                ,{field: 'date', title: '时间', width: 177}
+                ,{field: 'teacherAnswer', title: '讲师回复', width: 100}
                 ,{fixed: 'right', width:175, align:'center', toolbar: '' +
                         '<div class="layui-btn-group">\n' +
-                            '<button type="button" lay-event="edit" class="layui-btn" style="height: 25px;line-height: normal">编辑</button>\n' +
+                            '<button type="button" lay-event="edit" class="layui-btn" style="height: 25px;line-height: normal">回复</button>\n' +
                             '<button type="button" lay-event="delete" class="layui-btn" style="height: 25px;line-height: normal">删除</button>\n' +
                         '</div>'}
             ]]
@@ -270,9 +267,9 @@ window.onload = function () {
 
         $("#sectionNumEdit").blur(function () {
             if(/^[1-9]\d*$/.test($(this).val())){
-                submitStateEdit = true;
+                submitState = true;
             }else {
-                submitStateEdit = false;
+                submitState = false;
                 layer.msg('小节序号请输入一个非零正整数');
             }
         });
@@ -298,7 +295,7 @@ window.onload = function () {
         //重置页面
         function resetPage(){
             table.reload('sections_table',{
-                url : basePath+'/SMC/findAllData',
+                url : basePath+'/stuComment/findAllFromStuComment',
                 page: {
                     curr: 1
                 }
@@ -375,48 +372,15 @@ window.onload = function () {
         let submitStateEdit = true;
         //编辑弹出层提交按钮点击事件
         $("#editSubmitBtn").click(function () {
-            let courseId = $("#ECB1_courseSelect").val();
-            if (courseId === ''){
-                layer.msg('请选择一个课程');
-                return ;
-            }
-            let chapterId = $("#ECB2_chapterSelect").val();
-            if (chapterId === ''){
-                layer.msg('请选择一个章节');
-                return ;
-            }
-            let sectionNum = $("#sectionNumEdit").val();
-            if (sectionNum === ''){
-                layer.msg('请输入小节序号');
-                return ;
-            }
-            let sectionName = $("#sectionNameEdit").val();
-            if (sectionName === ''){
-                layer.msg('请输入小节名');
-                return ;
-            }
-            let sectionIntro = $("#sectionIntroEdit").val();
-            if (sectionIntro === ''){
-                layer.msg('请输入小节简介');
-                return ;
-            }
+            let data = {
+                'teacherAnswer':$("#sectionIntroEdit").val(),
+                'smId':parseInt($("#sm_id").text())
+            };
 
-            if (submitStateEdit){
-                let data = {
-                    'sectionId':sectionId,
-                    'chapterId':parseInt(chapterId),
-                    'sectionNum':parseInt(sectionNum),
-                    'sectionName':sectionName,
-                    'sectionIntro':sectionIntro,
-                    'sectionTime':parseInt($("#video_time_edit").text()),
-                    'videoPath1':$("#nv_path_edit").text(),
-                    'videoAddr1':$("#nv_url_edit").text(),
-                    'videoPath2':$("#sv_path_edit").text(),
-                    'videoAddr2':$("#sv_url_edit").text()
-                };
+            console.log($("#sectionIntroEdit").text());
                 $.ajax({
                     type: 'POST',
-                    url: basePath+'/SMC/updateData',
+                    url: basePath+'/stuComment/updateTeacherAnswer',
                     data: data,
                     dataType: 'json',
                     success: function (res) {
@@ -427,10 +391,6 @@ window.onload = function () {
                         }
                     }
                 });
-
-            }else{
-                layer.msg('小节序号格式不正确，请输入一个非零正整数');
-            }
 
         });
 
@@ -482,6 +442,7 @@ window.onload = function () {
             if(layEvent === 'edit'){
                 sectionId = parseInt(data.sectionId);
                 editBackFill(data);
+                $("#sm_id").text(data.smId);
                 editContentBox = layer.open({
                     type: 1,
                     area: '500px',
@@ -492,15 +453,16 @@ window.onload = function () {
                     /*obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令*/
-
+                    $("#sm_id").text(data.smId);
                     let sectionId = data.sectionId;
+                    let smId=data.smId;
                     $.ajax({
                         type:'POST',
-                        url : basePath+'/SMC/deleteData',
-                        data : {'sectionId':sectionId},
+                        url : basePath+'/stuComment/deleteStudentComment',
+                        data : {'smId':smId},
                         dataType: "json",
                         success: function (res) {
-                            if (res.res === 1){
+                            if (res === 1){
                                 layer.msg('删除成功');
                                 resetPage();
                             }
@@ -509,30 +471,6 @@ window.onload = function () {
                 });
             }
         });
-
-        //视频时长格式转换函数  hh:mm:ss
-        function format(num) {
-            num = Math.round(num);
-            var hour = parseInt((num / 3600) + '');
-            var minute = parseInt(((num % 3600) / 60) + '');
-            var second = (num % 3600) % 60;
-            if (hour === 0) {
-                hour = '00';
-            } else if (hour > 0 && hour < 10) {
-                hour = '0' + hour;
-            }
-            if (minute === 0) {
-                minute = '00';
-            } else if (minute > 0 && minute < 10) {
-                minute = '0' + minute;
-            }
-            if (second === 0) {
-                second = '00';
-            } else if (second > 0 && second < 10) {
-                second = '0' + second;
-            }
-            return hour + ':' + minute + ':' + second;
-        }
 
     });
 

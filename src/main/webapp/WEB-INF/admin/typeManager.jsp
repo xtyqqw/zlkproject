@@ -94,7 +94,7 @@
             elem: '#demo'
             , url: '<%=request.getContextPath()%>/type/typeManager?condition=${condition}' //数据接口
             , page: true //开启分页
-            , height: $(document).height()-$('#demo').offset().top-20
+            , height: $(document).height()-$('#demo').offset().top-25
             , cols: [[ //表头
                  {field: 'typeId', title: '方向编号', width: 180, sort: true}
                 , {field: 'typeName', title: '方向名称', width: 180, sort: true}

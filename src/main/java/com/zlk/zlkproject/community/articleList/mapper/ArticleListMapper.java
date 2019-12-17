@@ -25,4 +25,6 @@ public interface ArticleListMapper {
     List<Article> findByBrowseCount(Pagination pagination);
     /**查询我的文章*/
     List<Article> findByUserId(Pagination pagination);
+    /**查询我的文章个数*/
+    Integer findArticleId(String userId);
 }

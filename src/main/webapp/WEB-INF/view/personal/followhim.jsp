@@ -142,12 +142,16 @@
             color:#999;
         }
         /*取消关注弹窗*/
+        .att_tan{
+            position: fixed;
+            left: 300px;
+            top: 200px;
+        }
         .att_success1,.att_success2,.att_success3,.att_success4,.att_success5{
             width: 400px;
             height: 70px;
             text-align: center;
             position: fixed;
-            margin-left: 100px;
             box-shadow: 1px 1px 5px 1px #D4D4D4;
             background-color: #FFFFFF;
             border-radius: 3px;
@@ -321,7 +325,7 @@
     });
     /*---------------------------分页-----------------------*/
     var page = 1;
-    var limit = 2;
+    var limit = 4;
     var total;
     var userId1 =${userId};
     function showFollowhim() {
@@ -342,16 +346,29 @@
                 var html = '';
                 for (var i = 0;i<follhim.length;i++){
                     html += '<div class="followhim_main"><div class="main_left">';
-                    html += '<img src="../../img/headimg.jpg" /><p class="name">'+ follhim[i].userRealname+'</p>';
-                    html += '<div class="attention_type">';
+                    if (follhim[i].userImg == null){
+                        html += '<img src="../../../img/headimg.png" />';
+                    }
+                    if (follhim[i].userImg != null){
+                        html += '<img src="'+ follhim[i].userImg +'" />';
+                    }
+                    html += '<p class="name">'+ follhim[i].userRealname+'</p>';
                     if (follhim[i].userId!==userId) {
                         if (follhim[i].followType === 1) {
+                            html += '<div class="attention_type">';
                             html += '<span style="display: none">' + follhim[i].userId + '</span>';
                             html += '<p class="ok">√</p><p class="ok_zi">已关注</p>';
+                            html += '<span style="display: none">' + follhim[i].userId + '</span>';
+                            html += '<p class="jia" style="display: none">+</p>';
+                            html += '<p class="no_zi" style="display: none">加关注</p></div>';
                         }
                         if (follhim[i].followType === 0) {
+                            html += '<div class="attention_type">';
                             html += '<span style="display: none">' + follhim[i].userId + '</span>';
-                            html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
+                            html += '<p class="ok" style="display: none">√</p>';
+                            html += '<p class="ok_zi" style="display: none">已关注</p>';
+                            html += '<span style="display: none">' + follhim[i].userId + '</span>';
+                            html += '<p class="jia">+</p><p class="no_zi">加关注</p></div>';
                         }
                     }
                     html += '<div class="att_tan"><div class="att_success1">';
@@ -364,7 +381,8 @@
                     html += '<p class="att_success_ok2">√</p><p class="att_success_zi4">关注成功!</p>';
                     html += '</div><div class="att_success5">';
                     html += '<p class="att_success_no2">X</p><p class="att_success_zi5">关注失败，请重新操作！</p>';
-                    html += '</div></div></div><p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>';
+                    html += '</div></div>';
+                    html += '<p class="sdf">失败并不可怕，可怕的是你不渴望成功！可怕的是你不渴望成功！</p>';
                     html += '<div class="attention_person">';
                     html += '<a class="attention_him">'+ follhim[i].followedNum+'人关注了ta</a>';
                     html += '<a class="he_attention">ta关注了'+ follhim[i].followerNum+'人</a>';

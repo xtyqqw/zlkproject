@@ -82,7 +82,7 @@
 </style>
 <body>
 <div>
-    <p class="all">全 部</p>
+    <p class="all">个人笔记</p>
     <p class="num">共<span>${noteNum}</span>条笔记</p>
 </div>
 <div class="context">
@@ -148,7 +148,7 @@
                         type: 1
                         , title: '编辑'
                         , btn: false
-                        , area: ['70%', '50%']
+                        , area: ['70%', '60%']
                         , content: $('#demo')
                         , offset: '30px'
                     })
@@ -220,7 +220,7 @@
         })
     })
     var page = 1; //设置首页页码
-    var limit = 9;  //设置一页显示的条数
+    var limit = 6;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({
