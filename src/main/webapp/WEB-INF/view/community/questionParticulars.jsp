@@ -71,6 +71,7 @@
             float: right;
             margin-top: 10px;
             color: #838B8B;
+            margin-right: 85px;
         }
 
         #footer {
@@ -123,7 +124,7 @@
             height: 100px;
             width: 200px;
             margin-top: 40px;
-            margin-right: 120px;
+            margin-right: 155px;
             background-color: #F7F7F7;
         }
         .userTop{
@@ -176,9 +177,7 @@
                 <img style="width: 40px; height: 40px; border-radius: 50%;" src="${question.user.userImg}">
             </div>
             <span class="name">${question.user.userRealname}</span>
-            <img style="height: 12px;width: 12px;float: left;margin-top: 4px;" data-v-fedffd30=""
-                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAASdJREFUOI2Nkb1KA1EQhb+5Gy2jBGwSCcZY+goG7F1i5RsIAbGwE+0UYicpxJcQ/AGxV/AFjASbkESiIsZqmyibHQuNu4Rk955u5sz57oErg7uiMkFOqSmju+5FoS7CMoDCQ2pSeJxeLgsu/IYBBG0Yp9QUs9I0SWFVjMJxZOWJ872dGBzq7WphU2Ap3AS7Wfe1ZwX4vMmkA6UattHb3HrnFMAK0P9K74tI5m/0TYrK0EsEvF/nFxXZCV/nIOu2n6wBvu/URJgCUKjnZltHUT8W0D3PrwHuf3VHN2QV3xqAmFo46GG0uhVARIoAqjxmZ9rVcTdWvyBmUBmtbg9QTnLl5/tJdjxA+Zg23l7cSSxADVtz5Z6XCBBBgUbU8AdBf77cOottCPwAPANaMlmoeCAAAAAASUVORK5CYII="
-                 alt="user-vip" class="user-meta__vip"><br>
+            <img style="height: 12px;width: 12px;float: left;margin-top: 4px;" data-v-fedffd30="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAASdJREFUOI2Nkb1KA1EQhb+5Gy2jBGwSCcZY+goG7F1i5RsIAbGwE+0UYicpxJcQ/AGxV/AFjASbkESiIsZqmyibHQuNu4Rk955u5sz57oErg7uiMkFOqSmju+5FoS7CMoDCQ2pSeJxeLgsu/IYBBG0Yp9QUs9I0SWFVjMJxZOWJ872dGBzq7WphU2Ap3AS7Wfe1ZwX4vMmkA6UattHb3HrnFMAK0P9K74tI5m/0TYrK0EsEvF/nFxXZCV/nIOu2n6wBvu/URJgCUKjnZltHUT8W0D3PrwHuf3VHN2QV3xqAmFo46GG0uhVARIoAqjxmZ9rVcTdWvyBmUBmtbg9QTnLl5/tJdjxA+Zg23l7cSSxADVtz5Z6XCBBBgUbU8AdBf77cOottCPwAPANaMlmoeCAAAAAASUVORK5CYII=" alt="user-vip" class="user-meta__vip"><br>
            <span style="float: left;margin-left: 5px;"><fmt:formatDate value="${question.createTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss" dateStyle="medium"/></span>
         </div>
     </div>
@@ -187,7 +186,6 @@
         <div style="margin-top: 50px;height: 80px;width: auto;">
             <div class="title" style="font-size: 10px;float: left">
                 <div style="background-color: #1E9FFF;height: 20px;width: 50px;padding:1px 2px;border-radius: 8%; ">
-                    <%--    <i style="color: white">${question.solve}</i>--%>
                     <c:if test="${question.solve == 0}">
                         <div class="ui orange basic label" style="font-size: 12px;">待解决</div>
                     </c:if>
@@ -220,7 +218,7 @@
             </div>
         </div>
         <%--问题--%>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;"></fieldset>
+        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;width: 820px;"></fieldset>
         <div id="layout" style="margin-left: -60px;height: auto">
             <div id="test-editormd-view">
                 <textarea id="articleContent" style="display:none;">${question.questionContent}</textarea>
