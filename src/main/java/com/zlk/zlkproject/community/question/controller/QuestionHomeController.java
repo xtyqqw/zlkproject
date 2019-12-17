@@ -25,9 +25,39 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    @RequestMapping("/questionMain")
-    public String test(){
+
+    /*
+     * @descrption 跳转全部提问
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
+    @RequestMapping("/findQuestionAll")
+    public String findQuestionAll(){
         return "/view/community/questionAll";
+    }
+    /*
+     * @descrption 点击按钮跳转登录页面
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
+    @RequestMapping("/test")
+    public String test(){
+        return "/view/signin";
+    }
+    /*
+     * @descrption 跳转我的提问
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
+    @RequestMapping("/findQuestionMy")
+    public String findQuestionMy(){
+        return "/view/community/questionMy";
     }
     /*
      * @descrption 全部问答
@@ -39,26 +69,31 @@ public class QuestionHomeController {
     @RequestMapping(value = "/questionAll")
     @ResponseBody
     public Map<String, Object> questionAll(Pagination pagination) throws Exception {
-        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
+        List<Question> questionAllList = questionHomeService.findAll(pagination);
         Integer count = questionHomeService.findQuestionCount(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("questionAllList", questionAllList);
         map.put("count",count);
         return map;
     }
-/*    @RequestMapping(value = "/questionAll")
+    /*
+     * @descrption 我的问答
+     * @author gby
+     * @param [pagination]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @date 2019/12/10 14:25
+     */
+    @RequestMapping(value = "/questionMy")
     @ResponseBody
-    public Map<String, Object> questionAll(Pagination pagination, HttpServletRequest request,Question question) throws Exception {
-        User user = (User) request.getSession().getAttribute("user");
-        String userId = user.getUserId();
-        pagination.setUserId(userId);
-        List<Question> questionAllList = questionHomeService.findByQuestionTime(pagination);
-        Integer num = questionHomeService.findNumById(question);
+    public Map<String, Object> questionMy(Pagination pagination) throws Exception {
+        List<Question> questionMyList = questionHomeService.findByUserId(pagination);
+        Integer count = questionHomeService.findQuestionCount(pagination);
         Map<String, Object> map = new HashMap<>();
-        map.put("count",num);
-        map.put("questionAllList", questionAllList);
+        map.put("questionMyList", questionMyList);
+        map.put("count",count);
         return map;
-    }*/
+    }
+
 
     /*
      * @descrption 通过问题id查询问题详情
@@ -70,7 +105,6 @@ public class QuestionHomeController {
     @GetMapping(value = "/findQuestion")
     public ModelAndView findQuestion(String questionId) {
         ModelAndView mv = new ModelAndView();
-/*        questionId="1047919253";*/
         Question question = questionHomeService.getAndConvert(questionId);
         mv.addObject("question",question);
         mv.setViewName("/view/community/questionParticulars");

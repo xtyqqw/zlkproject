@@ -11,27 +11,47 @@
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
         <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
-        <result column="user_id" property="userId" javaType="java.lang.String"/>
-        <result column="figures" property="figures" javaType="java.lang.String"/>
-        <result column="figures_real" property="figuresReal" javaType="java.lang.String"/>
-        <result column="user_realname" property="userRealname" javaType="java.lang.String"/>
-        <result column="user_img" property="userImg" javaType="java.lang.String"/>
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
         <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
         <result column="audit" property="audit" javaType="java.lang.String"/>
         <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+        <!--association 是一对一的关键字，collection是一对多的关键字-->
+        <collection property="user" javaType="com.zlk.zlkproject.entity.User">
+            <id column="user_id" property="userId" javaType="java.lang.String"></id>
+            <result column="user_phonenum" property="phonenum" javaType="java.lang.String"></result>
+            <result column="user_pwd" property="userPwd" javaType="java.lang.String"></result>
+            <result column="user_realname" property="userRealname" javaType="java.lang.String"></result>
+            <result column="user_sex" property="userSex" javaType="java.lang.String"></result>
+            <result column="user_birthday" property="userBirthday" javaType="java.util.Date"></result>
+            <result column="user_native" property="userNative" javaType="java.lang.String"></result>
+            <result column="user_marry" property="userMarry" javaType="java.lang.String"></result>
+            <result column="user_city" property="userCity" javaType="java.lang.String"></result>
+            <result column="user_state" property="userState" javaType="java.lang.String"></result>
+            <result column="user_target" property="userTarget" javaType="java.lang.String"></result>
+            <result column="user_industry" property="userIndustry" javaType="java.lang.String"></result>
+            <result column="user_hobby" property="userHobby" javaType="java.lang.String"></result>
+            <result column="user_selfappraise" property="userSelfappraise" javaType="java.lang.String"></result>
+            <result column="user_education" property="userEducation" javaType="java.lang.String"></result>
+            <result column="user_academy" property="userAcademy" javaType="java.lang.String"></result>
+            <result column="user_specialty" property="userSpecialty" javaType="java.lang.String"></result>
+            <result column="user_all_time" property="userAllTime" javaType="java.lang.Integer"></result>
+            <result column="user_date_time" property="userDateTime" javaType="java.lang.Integer"></result>
+            <result column="user_img" property="userImg" javaType="java.lang.String"></result>
+            <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
+        </collection>
     </resultMap>
     <select id="findQuestionCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
         select count(1) from question
     </select>
-    <select id="findByQuestionTime" resultMap="questionEntityMap" >
-        select * from  question order by create_time  DESC  limit  #{startPage},#{limit}
+    <select id="findAll" resultMap="questionEntityMap" >
+        select * from  question  order by question_set_top,create_time  DESC  limit  #{startPage},#{limit}
     </select>
+    <select id="findByUserId" resultMap="questionEntityMap" >
+         select * from  question q,user u  where q.user_id=u.user_id order by q.question_set_top,q.create_time  DESC  limit  #{startPage},#{limit}
+   </select>
 
-    <select id="findByQuestionId" resultMap="questionEntityMap" parameterType="com.zlk.zlkproject.entity.Question">
-        select * from question where question_id=#{questionId}
-    </select>
     <update id="editBrowseCount" parameterType="com.zlk.zlkproject.entity.Question">
         update question  set browse_count=${browseCount}+1 where question_id=${quesitonId}
     </update>
