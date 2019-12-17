@@ -11,7 +11,7 @@
             width: 100%;
             height: auto;
             padding-bottom: 1px;
-            overflow-y: hidden;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;
@@ -81,7 +81,7 @@
             text-decoration:none;
         }
         .figures{
-            margin-left: 644px;
+            margin-left: 804px;
             margin-top: 23px;
             width: 170px;
             height: 95px;
