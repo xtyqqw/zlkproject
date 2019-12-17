@@ -46,14 +46,14 @@
         select count(1) from question
     </select>
     <select id="findAll" resultMap="questionEntityMap" >
-        select * from  question  order by question_set_top,create_time  DESC  limit  #{startPage},#{limit}
+        select * from  question q,user u where q.user_id=u.user_id order by question_set_top,create_time  DESC  limit  #{startPage},#{limit}
     </select>
     <select id="findByUserId" resultMap="questionEntityMap" >
-         select * from  question q,user u  where q.user_id=u.user_id order by q.question_set_top,q.create_time  DESC  limit  #{startPage},#{limit}
+         select * from  question q left join user u on q.user_id=u.user_id where u.user_id=#{userId} limit  #{startPage},#{limit}
    </select>
+    <select id="findQuestionId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from question where user_id=#{userId}
+    </select>
 
-    <update id="editBrowseCount" parameterType="com.zlk.zlkproject.entity.Question">
-        update question  set browse_count=${browseCount}+1 where question_id=${quesitonId}
-    </update>
 </mapper>
 
