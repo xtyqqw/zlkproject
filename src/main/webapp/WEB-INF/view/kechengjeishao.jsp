@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -426,25 +427,25 @@
     </div>
 </div>
 
-<div class="kechengzhu">
-    <div class="xiangmuxiangqing1">
-        <div class="xiangqingbiaoti1">
-            <span class="layui-badge-dot layui-bg-blue xiao1"></span>
-            <span class="layui-badge-dot layui-bg-blue da1"></span>
-            <span class="layui-badge-dot layui-bg-blue xiao1"></span>
-            <b class="xiangqingbiaotineirong1">评论详情</b>
-            <span class="layui-badge-dot layui-bg-blue xiao1"></span>
-            <span class="layui-badge-dot layui-bg-blue da1"></span>
-            <span class="layui-badge-dot layui-bg-blue xiao1"></span>
+
+
+    <c:if test="${user.userId!=null}">
+    <div class="kechengzhu">
+        <div class="xiangmuxiangqing1">
+            <div class="xiangqingbiaoti1">
+                <span class="layui-badge-dot layui-bg-blue xiao1"></span>
+                <span class="layui-badge-dot layui-bg-blue da1"></span>
+                <span class="layui-badge-dot layui-bg-blue xiao1"></span>
+                <b class="xiangqingbiaotineirong1">评论详情</b>
+                <span class="layui-badge-dot layui-bg-blue xiao1"></span>
+                <span class="layui-badge-dot layui-bg-blue da1"></span>
+                <span class="layui-badge-dot layui-bg-blue xiao1"></span>
+            </div>
         </div>
-    </div>
-
     <div style="clear: both"></div>
-    <div id="liu1">
-    </div>
-
-
+    <div id="liu1"></div>
 </div>
+    </c:if>
 
 <jsp:include page="../jsp/footer.jsp"></jsp:include>
 
@@ -512,18 +513,19 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"<%=request.getContextPath()%>/comment/findCommentListByUserId",
+                        url:"<%=request.getContextPath()%>/stuComment/findStuCommentListByUserId",
                         dataType:"json",
                         data:data,
                         success:function(result) {
                             number=result.yeishu;
                             console.log(result.yeishu);
-                            layui.each(result.commentList, function (i, comment) {
+                            console.log(result.stuCommentList);
+                            layui.each(result.stuCommentList, function (i, comment) {
                                 lis.push(
                                     '<div class="div-FAQ1" ><br><br>' +
                                     '<div class="daniu">' +
                                     '<div class="touxiang"> <img id="img1" src="'+comment.userImg+'" style="height: 70px;width: 70px;border-radius:50%;"></div>' +
-                                    '<div class="mingzi">'+comment.userRealname+'</div>'+
+                                    '<div class="mingzi">'+comment.userRealName+'</div>'+
                                     '<div class="daxingxing">'+
                                     '<ul class="kechengxiaojeipingfen_ul">'+
                                     '<li id="xing1">'+
@@ -545,8 +547,7 @@
                                     '</div>'+
                                     '</div>'+
                                     '<div class="you">' +
-
-                                    '<p class="p-FAQ3">'+comment.comments+'</p>'+
+                                    ''+comment.content+'<br><br>'+
                                     '<div class="p-FAQ5"><span class="span-FAQ5">&nbsp;讲师回复</span>' +
                                     '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
                                     '</div>'+
@@ -555,10 +556,10 @@
                                     '<div class="sanjiao"></div>'+
                                     '</div>'+
                                     '<div class="p-ZAN"><i class="iconfont icon-good"></i>' +
-                                        '<p class="p-FAQ6">&nbsp'+comment.like+'</p>'+
+                                        '<p class="p-FAQ6">&nbsp'+comment.up+'</p>'+
                                     '</div>' +
                                     '<div class="p-CAI"><i class="iconfont icon-bad biao1"></i>' +
-                                    '<p class="p-FAQ7">&nbsp'+comment.dislike+'</p>'+
+                                    '<p class="p-FAQ7">&nbsp'+comment.down+'</p>'+
                                     '</div>');
                                 if(comment.flag === "true"){
 
