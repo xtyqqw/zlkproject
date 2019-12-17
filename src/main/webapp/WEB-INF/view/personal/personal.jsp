@@ -117,14 +117,6 @@
     </style>
 </head>
 <body>
-<!-- 侧边导航点击事件 -->
-<script type="text/javascript">
-    $(function(){
-        $("a[name='dian']").click(function(){
-            $(this).addClass("active").siblings().removeClass("active");
-        });
-    })
-</script>
 <!-- 头部 -->
 <jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
 <div id="personal">
@@ -132,63 +124,63 @@
     <div class="personal-nav">
         <ul>
             <%--学习看板--%>
-            <a href="<%=request.getContextPath()%>/duration/select"
-               name="dian" class="nodian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=1"
+               name="dian" class="nodian" id="look">
                 <li>
                     <i class="layui-icon layui-icon-chart-screen" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>学习看板</span>
                 </li>
             </a>
             <%--学习记录--%>
-            <a href="<%=request.getContextPath()%>/courses/gocourses"
-               name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=2"
+               name="dian" id="courses">
                 <li>
                     <i class="layui-icon layui-icon-form" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>学习记录</span>
                 </li>
             </a>
             <%--个人笔记--%>
-            <a href="<%=request.getContextPath()%>/myNote/toMyNote"
-               name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=3"
+               name="dian" id="mynote">
                 <li>
                     <i class="layui-icon layui-icon-edit" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>个人笔记</span>
                 </li>
             </a>
             <%--我的问答--%>
-            <a href="<%=request.getContextPath()%>/myfaqq/faqtest"
-               name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=4"
+               name="dian" id="myfaq">
                 <li>
                     <i class="layui-icon layui-icon-survey" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的问答</span>
                 </li>
             </a>
             <%--我的文章--%>
-            <a href="<%=request.getContextPath()%>/articles/toarticles"
-               name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=5"
+               name="dian" id="myart">
                 <li>
                     <i class="layui-icon layui-icon-list" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的文章</span>
                 </li>
             </a>
             <%--我的关注--%>
-            <a href="<%=request.getContextPath()%>/follow/follower"
-               name="dian" target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=6"
+               name="dian" id="myfollower">
                 <li>
                     <i class="layui-icon layui-icon-rate" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>我的关注</span>
                 </li>
             </a>
             <%--个人信息--%>
-            <a href="<%=request.getContextPath()%>/personal/findUser" name="dian"
-               target="personal-main">
+            <a href="<%=request.getContextPath()%>/personal/person?typeNum=7"
+               name="dian" id="personalmsg">
                 <li>
                     <i class="layui-icon layui-icon-dialogue" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>个人信息</span>
                 </li>
             </a>
             <%--愿望清单--%>
-            <a href="javascript:;" name="dian" target="personal-main">
+            <a href="javascript:;" name="dian">
                 <li>
                     <i class="layui-icon layui-icon-release" style="font-size: 25px;color: #D4D4D4;"></i>
                     <span>愿望清单</span>
@@ -223,23 +215,98 @@
         </div>
 
         <!-- 主体内容 -->
-        <iframe src="<%=request.getContextPath()%>/duration/select"
+        <iframe src="<%=request.getContextPath()%>/duration/select" height="341px"
                 id="personal-iframe" name="personal-main" scrolling="no" frameborder="0"></iframe>
-        <div>
-            <a href="#top" style="position: fixed;margin-left: 68px;margin-top:-110px;z-index: 100;">
-                <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
-            </a>
-        </div>
+
+        <a href="#top" style="position: fixed;top: 550px;right: 30px;z-index: 100;">
+            <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
+        </a>
     </c:if>
 
 <%--iframe自适应高度--%>
 <script type="text/javascript">
-    $(window.parent.document).find("#personal-iframe").load(function(){
+    /*$("#personal-iframe").load(function () {
+        $("#personal-iframe").height(0);
+        var height = document.getElementById("personal-iframe").contentWindow.document.body.scrollHeight;
+        $("#personal-iframe").height(height);
+    });*/
+    /*$(window.parent.document).find("#personal-iframe").load(function(){
         var main = $(window.parent.document).find("#personal-iframe");
-        main.height(710);
+        main.height(800);
         var thisheight = $(document).height();
         main.height(thisheight);
+    });*/
+    /*侧边导航点击事件*/
+    $(function(){
+        $("a[name='dian']").click(function(){
+            $(this).siblings().css("background-color","#8C24DD");
+            $(this).siblings().css("color","#fff");
+            $(this).css("background-color","#fff");
+            $(this).css("color","#8C24DD");
+        });
     });
+    var localObj = window.location;
+    var contextPath = localObj.pathname.split("/")[1];
+    var basePath = localObj.protocol+"//"+localObj.host+"/";
+    var typeNum = ${typeNum};
+    $(function () {
+        $("#personal-iframe").css("height","341");
+        /*学习看板*/
+        if (typeNum === 1){
+            $("#personal-iframe").attr("src",basePath+"duration/select");
+            $("#personal-iframe").css("height","341");
+            $("#look").css("background-color","#fff");
+            $("#look").css("color","#8C24DD");
+        }
+        /*学习记录*/
+        if (typeNum === 2){
+            $("#personal-iframe").attr("src",basePath+"courses/gocourses");
+            $("#personal-iframe").css("height","1087");
+            $("#courses").css("background-color","#fff");
+            $("#courses").css("color","#8C24DD");
+        }
+        /*个人笔记*/
+        if (typeNum === 3){
+            $("#personal-iframe").attr("src",basePath+"myNote/toMyNote");
+            $("#personal-iframe").css("height","800");
+            $("#mynote").css("background-color","#fff");
+            $("#mynote").css("color","#8C24DD");
+        }
+        /*我的问答*/
+        if (typeNum === 4){
+            $("#personal-iframe").attr("src",basePath+"myfaqq/faqtest");
+            $("#personal-iframe").css("height","898");
+            $("#myfaq").css("background-color","#fff");
+            $("#myfaq").css("color","#8C24DD");
+        }
+        /*我的文章*/
+        if (typeNum === 5){
+            $("#personal-iframe").attr("src",basePath+"articles/toarticles");
+            $("#personal-iframe").css("height","1030");
+            $("#myart").css("background-color","#fff");
+            $("#myart").css("color","#8C24DD");
+        }
+        /*我的关注*/
+        if (typeNum === 6){
+            $("#personal-iframe").attr("src",basePath+"follow/follower");
+            $("#personal-iframe").css("height","1109");
+            $("#myfollower").css("background-color","#fff");
+            $("#myfollower").css("color","#8C24DD");
+        }
+        /*个人信息*/
+        if (typeNum === 7){
+            $("#personal-iframe").attr("src",basePath+"personal/findUser");
+            $("#personal-iframe").css("height","915");
+            $("#personalmsg").css("background-color","#fff");
+            $("#personalmsg").css("color","#8C24DD");
+        }
+        /*if (typeNum === 8){
+            $("#personal-iframe").attr("src",basePath+"opinion/toOpinion");
+            $("#personal-iframe").css("height","485");
+            $("#opinion").css("background-color","#fff");
+            $("#opinion").css("color","#8C24DD");
+        }*/
+    })
 </script>
 <%--侧栏--%>
 <jsp:include page="/WEB-INF/jsp/sidebar.jsp"></jsp:include>

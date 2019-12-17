@@ -37,22 +37,8 @@ public class Question {
     private Date createTime;
     /*浏览数*/
     private String browseCount;
-    /**
-     * 问题置顶：0 置顶，1 不置顶
-     */
+    /**问题置顶：0 置顶，1 不置顶*/
     private String questionSetTop;
-    /**
-     * 相对路径
-     */
-    private String figures;
-    /**
-     * 插图相对路径
-     */
-    private String figuresReal;
-    /*用户实际姓名*/
-    private String userRealname;
-    /*用户头像*/
-    private String userImg;
     /*获赞数*/
     private Integer zanCount;
     /*被踩数*/
@@ -65,10 +51,13 @@ public class Question {
     private String typeName;
     /*标签*/
     private String tagName;
-    /*用户*/
-    private String userId;
     /*小节表主键*/
     private String sectionId;
+    /**提问和用户多对一关系*/
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Question() {
     }
 

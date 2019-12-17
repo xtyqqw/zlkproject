@@ -61,7 +61,7 @@
             float: left;
             background-color: 	#F8F8F8;
             width: 68vw;
-            height: 8vw;
+            height: 10vw;
             margin-top: 2vw;
             font-size: 1vw;
         }
@@ -234,7 +234,7 @@
 
         .youce{
             float: left;
-            margin-top:-50.5vw;
+            margin-top:-60vw;
             margin-left: 40vw;
             width: 45vw;
         }
@@ -250,7 +250,7 @@
 </head>
 <body>
 
-
+<%--<div style="font-size: 1.2vw;color: red; display: none; text-align: center;" id="bccg">保存成功</div>--%>
 <!-- 信息完善/账号绑定 -->
 <div class="xxzt">
 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
@@ -335,7 +335,7 @@
                 <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">籍贯</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userNative" value="${user.userNative}"  placeholder="请输入籍贯（与身份证一致）" autocomplete="off" class="layui-input">
+                        <input type="text" name="userNative" value="${user.userNative}"  placeholder="请输入籍贯（与身份证一致，最多10个字）"  maxlength="10" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <%--婚否--%>
@@ -353,7 +353,7 @@
                 <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所在城市</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userCity" value="${user.userCity}" placeholder="请输入所在城市" autocomplete="off" class="layui-input">
+                        <input type="text" name="userCity" value="${user.userCity}" maxlength="20" placeholder="请输入所在城市（最多10个字）" autocomplete="off" class="layui-input" maxlength="10">
                     </div>
                 </div>
                     <%--现状--%>
@@ -450,6 +450,7 @@
                     <div class="layui-input-block" style="margin-top: 50px">
                         <%--保存按钮--%>
                         <button class="layui-btn" type="submit" id="baocun">保存</button>
+
                         <%--重置按钮--%>
                         <button type="reset" id="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
@@ -607,7 +608,7 @@
 <script type="text/javascript">
 
     //
-    //信息完善js
+    //信息完善js, 选项卡切换js
     layui.use('element', function(){
         var $ = layui.jquery
             ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -636,6 +637,7 @@
         var laydate=layui.laydate;
         laydate.render({
             elem: '#userBirthday'
+            //类型
             ,type:'date'
           //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
@@ -667,6 +669,7 @@
     var date = $("#userBirthday").val();
     function formatDate(date){
         date = new Date(date);
+        //获取年月日的值
         var y=date.getFullYear();
         var m=date.getMonth()+1;
         var d=date.getDate();
@@ -720,7 +723,7 @@
 
 
                 //服务器上传成功
-                layer.msg(res.message);
+                layer.msg(res.message,{icon: 1});
                 //获取图片路径URL
                 $("#userImg").val(res.url)
             }
@@ -736,13 +739,26 @@
         });
         element.init();
     });
+
+
+
+
     //保存按钮点击事件,当点击重置按钮时，显示信息
     $("#baocun").click(function () {
-        layer.msg("修改成功");
+        layer.msg('保存成功', {
+            shift: -1
+           , icon: 1,
+            time: 4000 //2秒关闭（如果不配置，默认是3秒）
+        }, function(){
+            location.reload();
+        });
     });
+
+
+
     //重置按钮点击事件,当点击重置按钮时，显示信息
     $("#reset").click(function () {
-        layer.msg("信息已重置");
+        layer.msg("信息已重置",{ icon:6});
     });
 
 
@@ -786,6 +802,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -814,6 +832,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -856,6 +876,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -888,6 +910,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -917,6 +941,8 @@
 
                 layer.open({
                     type: 1
+                    //弹出框置顶
+                    ,offset: ['5vw', '15vw']
                     ,title: false //不显示标题栏
                     ,closeBtn: false
                     ,area: '50vw'
@@ -941,7 +967,6 @@
                     }
                 });
             }
-
             //记号
         };
         //    点击按钮时，弹出框显示
@@ -1046,6 +1071,4 @@
 </script>
 
 </body>
-
-
 </html>

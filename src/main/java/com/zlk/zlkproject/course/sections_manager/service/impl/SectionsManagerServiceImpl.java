@@ -124,4 +124,9 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
     public Integer deleteData(Section section) {
         return sectionsManagerMapper.deleteData(section);
     }
+
+    @Override
+    public Integer findTimeByChapterId(Integer chapterId) {
+        return sectionsManagerMapper.findTimeByChapterId(chapterId);
+    }
 }

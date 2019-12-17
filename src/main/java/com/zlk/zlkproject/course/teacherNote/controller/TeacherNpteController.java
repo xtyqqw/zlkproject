@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.teacherNote.controller;
 
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.teacherNote.service.TeacherNoteService;
 import com.zlk.zlkproject.entity.TeacherNote;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,9 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/teacherNote")
 public class TeacherNpteController {
+
+    @Autowired
+    private LogUtil logUtil;
 
     @Autowired
     private TeacherNoteService teacherNoteService;
@@ -76,8 +81,13 @@ public class TeacherNpteController {
      */
     @RequestMapping("/deleteByTNId")
     @ResponseBody
-    public Integer deleteByTNId(Integer tnId){
-        return teacherNoteService.deleteByTNId(tnId);
+    public String deleteByTNId(Integer tnId, HttpServletRequest request){
+        int i=teacherNoteService.deleteByTNId(tnId);
+        if(i>0){
+            logUtil.setLog(request,"删除了讲师笔记id:"+tnId+"的信息");
+            return "删除成功";
+        }
+        return "删除失败";
     }
 
     /**
@@ -101,9 +111,11 @@ public class TeacherNpteController {
      * @return
      */
     @RequestMapping("/updateTNByTeacherNote")
-    public String updateTNByTeacherNote(TeacherNote teacherNote){
+    public String updateTNByTeacherNote(TeacherNote teacherNote, HttpServletRequest request){
         int i = teacherNoteService.updateTNByTeacherNote(teacherNote);
         if (i>0){
+            logUtil.setLog(request,"修改了讲师笔记id:"+teacherNote.getTnId()+"小节id:"+teacherNote.getSectionId()
+                    +"讲师笔记标题:"+teacherNote.getTitle()+"讲师笔记内容:"+teacherNote.getContent()+"的信息");
             return "/view/toTeacherNoteManager";
         }
         return "修改失败";

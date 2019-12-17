@@ -51,13 +51,16 @@ public class RecordController {
         /*查询项目总数*/
         Integer allList=recordService.findCourses(pagination);
         for(int i=0;i<itemList.size();i++){
-            Integer coursesId=itemList.get(i).getCoursesId();
-            /*查询小节总数*/
-            Integer sum = recordService.selectUserSection(userId,coursesId);
-            /*查询小节已完成数量*/
-            Integer done = recordService.selectUser(userId,coursesId);
+            Integer sectionId=itemList.get(i).getSectionId();
+            /*查询视频总时间*/
+            Integer sum = recordService.selectUserSection(userId,sectionId);
+            /*查询已观看时间*/
+            Integer done = recordService.selectUserTime(userId,sectionId);
             /*已完成多少百分比*/
             long per = Math.round((100 * done) / sum);
+            if(per>=100){
+                per=100;
+            }
             itemList.get(i).setPer(per);
         }
         Map<String,Object> map=new HashMap<>();

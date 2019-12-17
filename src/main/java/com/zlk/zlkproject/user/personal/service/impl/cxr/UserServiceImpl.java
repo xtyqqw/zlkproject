@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * @author 崔新睿
+ * serviceImpl是service方法的实现层
  * @data 2019/11/19 - 14:21
  */
 @Service
@@ -92,4 +93,9 @@ public class UserServiceImpl implements UserService {
     public List<User> selectByUserId(String userId) {
         return userMapper.selectByUserId(userId);
     }
+
+//    @Override
+//    public int updatesUser(User user) {
+//        return userMapper.updateUser(user);
+//    }
 }

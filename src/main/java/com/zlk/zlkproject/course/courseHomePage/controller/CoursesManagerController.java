@@ -156,8 +156,6 @@ public class CoursesManagerController {
         Map<String,Object> map=new HashMap<>();
         String path = commonFileUtil.uploadFile(file);
         String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
-        System.out.println(path);
-        System.out.println(url);
         map.put("url",url);
         map.put("message","上传成功");
         return map;

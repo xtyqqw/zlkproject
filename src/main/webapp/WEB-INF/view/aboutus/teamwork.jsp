@@ -70,7 +70,7 @@
 <div class="layui-collapse" lay-accordion="" style="width: 83%">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
-        <div class="layui-colla-content">
+        <div class="layui-colla-content layui-show">
             <c:forEach items="${list}" var="user">
             <div class="list1">
                 <h3>资深讲师：${user.lecturerName}</h3>
@@ -208,7 +208,7 @@
     }
     //验证身份证号码
     function num() {
-        var regPhone=/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        var regPhone= /^[1-9]\d{5}((((19|[2-9][0-9])\d{2})(0?[13578]|1[02])(0?[1-9]|[12][0-9]|3[01]))|(((19|[2-9][0-9])\d{2})(0?[13456789]|1[012])(0?[1-9]|[12][0-9]|30))|(((19|[2-9][0-9])\d{2})0?2(0?[1-9]|1[0-9]|2[0-8]))|(((1[6-9]|[2-9][0-9])(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))0?229))\d{3}[0-9Xx]$/;
         var num=document.getElementById("recruit_number").value;
         var bool=regPhone.test(num);
         if(bool==true){
@@ -221,7 +221,7 @@
         }
     }
     function check() {
-        var check = phone() && email() && num() && name() && site();
+        var check = name() && num() && phone() && email() && site();
         return check;
     }
 </script>

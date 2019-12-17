@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * @author 崔新睿
+ * service层调用mapper层的方法
  * @data 2019/11/19 - 14:20
  */
 public interface UserService {
@@ -55,5 +56,11 @@ public interface UserService {
      * @return
      */
     public List<User> selectByUserId(String userId);
+//    /***
+//     * 后台修改用户信息方法
+//     * @param user
+//     * @return
+//     */
+//    public int updatesUser(User user);
 
 }

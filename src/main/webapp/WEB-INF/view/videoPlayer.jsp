@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_03zd610p4xl.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_iwhxw2tfbue.css">
 
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/wangEditor.js"></script>
@@ -25,9 +25,10 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/videoPlayer.js"></script>
 </head>
 <body>
-<div class="FS_hidden">
-<jsp:include page="../jsp/header.jsp"></jsp:include>
-</div>
+    <span id="pageType" style="display: none">videoPlayer</span>
+    <div class="FS_hidden">
+        <jsp:include page="../jsp/header.jsp"></jsp:include>
+    </div>
     <div class="layui-container">
         <span id="sectionId" style="display: none">${sectionId}</span>
         <span id="userId" style="display: none">${userId}</span>
@@ -60,6 +61,12 @@
                                 <video id="video1" width="100%" height="100%">
                                     <source id="video_src" src="${addr1}" type="video/mp4" />
                                 </video>
+                                <div id="waitIcon_box">
+                                    <i id="waitIcon" class="iconfont icon-loading_"></i>
+                                </div>
+                                <div id="memoryLoadBox">
+                                    已从上次观看处开始，点击<span id="goHead" style="color: #1E9FFF;text-decoration: underline;cursor: pointer">此处</span>从头开始
+                                </div>
                             </div>
                             <div id="div_controller">
                                 <div id="pg_bg">
@@ -128,7 +135,7 @@
                             </div>
                             <div id="stu_qa_editor">
                                 <div id="toolbar_div" class="toolbar"></div>
-                                <div id="text_div" class="text" onkeyup="checkLength(400);"></div>
+                                <div id="text_div" class="text" <%--onkeyup="checkLength(400);"--%>></div>
                                 <div id="btn_div">
                                     <button type="button" id="btn_submit_wenda">提交</button>
                                     <button type="reset" id="btn_reset_wenda">取消</button>
