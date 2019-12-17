@@ -2180,15 +2180,17 @@ $(document).ready(function () {
                 async: false,
                 url : basePath+"/player/readRecord",
                 success:function (res) {
-                    elem_video1.currentTime = res;
-                    elem_pgBtn.style.left = res/elem_video1.duration * $("#pg_bg").width() + 'px';
-                    elem_pgBar.style.width = res/elem_video1.duration * $("#pg_bg").width() + 'px';
-                    elem_currentTime.innerText = format(res);
-                    $("#memoryLoadBox").css('display','table-cell');
-                    memoryLoadTimeOut = setTimeout(function () {
-                        $("#memoryLoadBox").css('display','none');
-                        clearTimeout(memoryLoadTimeOut);
-                    },10000);
+                    elem_video1.currentTime = res.time;
+                    elem_pgBtn.style.left = res.time/elem_video1.duration * $("#pg_bg").width() + 'px';
+                    elem_pgBar.style.width = res.time/elem_video1.duration * $("#pg_bg").width() + 'px';
+                    elem_currentTime.innerText = format(res.time);
+                    if(res.state !== '未观看'){
+                        $("#memoryLoadBox").css('display','table-cell');
+                        memoryLoadTimeOut = setTimeout(function () {
+                            $("#memoryLoadBox").css('display','none');
+                            clearTimeout(memoryLoadTimeOut);
+                        },10000);
+                    }
                 }
             });
         }
