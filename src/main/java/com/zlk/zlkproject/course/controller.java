@@ -29,9 +29,14 @@ public class controller {
     @RequestMapping(value = "/toVideo")
     public ModelAndView toVideo(HttpServletRequest request, Integer sectionId) throws Exception{
         ModelAndView mv = new ModelAndView();
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null){
+            mv.setViewName("/view/signin");
+            return mv;
+        }
         if (sectionId != null){
             Section section = sectionsManagerService.findDataBySectionId(sectionId);
-            User user = (User) request.getSession().getAttribute("user");
+            user = (User) request.getSession().getAttribute("user");
             String userId = "" + user.getUserId();
             request.getSession().setAttribute("sectionId",sectionId);
             mv.addObject("addr1",section.getVideoAddr1());
@@ -40,7 +45,7 @@ public class controller {
             mv.addObject("userId",userId);
             mv.setViewName("/view/videoPlayer");
         }else {
-            mv.setViewName("/view/videoPlayer");
+            mv.setViewName("");
         }
         return mv;
     }
