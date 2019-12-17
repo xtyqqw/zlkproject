@@ -93,7 +93,7 @@ public class FunctionServiceImpl implements FunctionService {
     public Integer deleteFunction(Integer functionId) {
         Integer flag = functionMapper.deleteFunction(functionId);
         Integer flag1 = functionMapper.deleteFunctionAndRoleByFunctionId(functionId);
-        if(flag>0&&flag1>0){
+        if(flag>0){
             return 1;
         }else {
             return 0;
