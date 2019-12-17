@@ -83,6 +83,10 @@
             margin-top: 20px;
             margin-left: 30px;
             font-weight: bold;
+            width: 900px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .question_waik .from{
             font-size: 14px;
@@ -142,6 +146,11 @@
             margin: 45px 90px 30px 80px;
             font-size: 16px;
             color: #494949;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
         }
         .reply_waik_adopted .reply_adopted_share{
             float: right;
@@ -160,6 +169,11 @@
             margin: 45px 90px 30px 30px;
             font-size: 16px;
             color: #494949;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
         }
         .reply_waik .reply_dian{
             float: right;
@@ -580,7 +594,7 @@
                 ,count: total //数据总数
                 ,theme: '#914FF1'
                 ,limit:limit
-                ,layout: ['prev', 'page', 'next', 'count']
+                ,layout: ['prev', 'page', 'next']
                 ,jump: function(obj,first){
                     page=obj.curr;
                     limit=obj.limit;
@@ -637,7 +651,7 @@
                 ,count: total //数据总数
                 ,theme: '#914FF1'
                 ,limit:limit
-                ,layout: ['prev', 'page', 'next', 'count']
+                ,layout: ['prev', 'page', 'next']
                 ,jump: function(obj,first){
                     page=obj.curr;
                     limit=obj.limit;
@@ -713,7 +727,7 @@
                 ,count: total //数据总数
                 ,theme: '#914FF1'
                 ,limit:limit
-                ,layout: ['prev', 'page', 'next', 'count']
+                ,layout: ['prev', 'page', 'next']
                 ,jump: function(obj,first){
                     page=obj.curr;
                     limit=obj.limit;
@@ -941,7 +955,7 @@
                 type: 1,
                 title: '我要回答',
                 btn: false,
-                area: ['70%','50%'],
+                area: ['70%','60%'],
                 content: $('#demo'),
                 offset: '30px'
             })
