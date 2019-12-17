@@ -1,6 +1,5 @@
 package com.zlk.zlkproject.user.personal.controller;
 
-import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Item;

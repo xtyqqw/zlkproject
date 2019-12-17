@@ -779,13 +779,14 @@ $(document).ready(function () {
                 success:function(index,layero){
                     $(index).on('keyup','#answer-editor',function () {
                         if (checkLength(ans_editor,401)){
-                            layer.alert("输入内容请不要超过200个汉字或400个英文字符");
+                            layer.msg("输入内容请不要超过200个汉字或400个英文字符");
                             isReplay = false;
+                        }else {
+                            isReplay = true;
                         }
                     })
                 },
                 yes: function (index, layero) {
-                    layer.close(index);
                     if (isReplay){
                         var content = ans_editor.txt.html();
                         var data = {"sqaId":sqaId,"pId":pId,"content":content};
@@ -799,6 +800,9 @@ $(document).ready(function () {
                                 stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
                             }
                         });
+                        layer.close(index);
+                    }else {
+                        layer.msg("请确认字数未超过限制");
                     }
                 },
                 end:function () {

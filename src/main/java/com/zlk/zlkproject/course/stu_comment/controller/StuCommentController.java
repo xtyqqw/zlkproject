@@ -159,7 +159,7 @@ public class StuCommentController {
         Integer error = 1;
         if (res == 1)
             error = 0;
-        logUtil.setLog(request,"删除了讲师回复："+teacherAnswer+"的信息");
+        logUtil.setLog(request,"修改了讲师回复："+teacherAnswer+"的信息");
         map.put("error",error);
         map.put("res",res);
         return map;
