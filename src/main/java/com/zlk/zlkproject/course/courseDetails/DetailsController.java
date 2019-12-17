@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -44,9 +45,13 @@ public class DetailsController {
      * @return 课程介绍页面路径
      */
     @RequestMapping("/kecheng/kechengjianjie")
-    public String kechenjianjie(HttpServletRequest request,Integer coursesId){
+    public ModelAndView kechenjianjie(HttpServletRequest request, Integer coursesId){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("/view/kechengjeishao");
+        User user=(User) request.getSession().getAttribute("user");
+        modelAndView.addObject("user",user);
         request.getSession().setAttribute("coursesId",coursesId);
-        return "/view/kechengjeishao";
+        return modelAndView;
     }
 
     /**

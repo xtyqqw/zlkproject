@@ -23,6 +23,12 @@ import java.util.List;
 public class FaqqServiceImpl implements FaqqService {
     @Autowired
     FaqqMapper faqqMapper;
+
+    /**
+     * 方法用途：将我的提问和我的回答查询出并合并为一个集合，通过时间进行排序
+     * 参数类型：String 用途：传入我的用户id
+     * 返回值类型：List 将集合返回
+     * */
     @Override
     public List findAll(String userId) {
         List<MyQuestions> qList = faqqMapper.findQuestion(userId);
@@ -40,6 +46,11 @@ public class FaqqServiceImpl implements FaqqService {
         return allList;
     }
 
+    /**
+     * 方法用途：我的问题查出并通过时间进行排序
+     * 参数类型：String 用途：传入我的用户id
+     * 返回值类型：List 将集合返回
+     * */
     @Override
     public List<MyQuestions> findQuestion(String userId) {
         List<MyQuestions> list = faqqMapper.findQuestion(userId);
@@ -50,6 +61,11 @@ public class FaqqServiceImpl implements FaqqService {
         return list;
     }
 
+    /**
+     * 方法用途：我的回答查出并通过时间进行排序
+     * 参数类型：String 用途：传入我的用户id
+     * 返回值类型：List 将集合返回
+     * */
     @Override
     public List<MyResponse> findResponse(String userId) {
         List<MyResponse> list = faqqMapper.findResponse(userId);
