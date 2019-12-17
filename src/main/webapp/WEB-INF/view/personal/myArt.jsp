@@ -13,14 +13,18 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <style>
     h2{margin: 20px 0;}
 </style>
 <body>
-<form action="<%=request.getContextPath() %>/articles/update" method="post">
+<form action="<%=request.getContextPath() %>/articles/update" method="post" onsubmit="return check()">
     <h2>修改标题：</h2>
     <input class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="title" value="${articles.title}">
+    <h2>修改图片：</h2>
+    <input id="img_edit" class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="figures" value="${articles.figures}">
     <h2>修改内容：</h2>
     <div id="md-content">
         <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
@@ -55,5 +59,22 @@
             saveHTMLToTextarea : true
         });
     });
+    function img() {
+        var id = /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/;
+        var img= $("#img_edit").val();
+        var bool = id.test(img);
+        var layer = layui.layer;
+        if(bool == true){
+            return true;
+        }else{
+            $("#img_edit").css("border-color","red");
+            layer.msg("请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址");
+            return false;
+        }
+    }
+    function check(){
+        var check = img();
+        return check;
+    }
 </script>
 </html>
