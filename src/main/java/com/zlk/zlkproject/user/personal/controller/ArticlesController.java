@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.user.personal.controller;
 
-import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Pagination;
-import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Articles;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
@@ -89,7 +87,7 @@ public class ArticlesController {
         }
     }
     /**
-     * 流加载
+     * 分页
      * */
     @RequestMapping(value = "/flow")
     @ResponseBody
