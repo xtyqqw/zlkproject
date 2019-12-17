@@ -591,6 +591,8 @@
             }
         });
     });
+
+
     $("#liu").on("click",".p-FAQ1",function() {
         if($(this).hasClass("p-FAQ1gai")){
             $(this).removeClass("p-FAQ1gai");

@@ -10,7 +10,8 @@
         .context-div{
             width: 100%;
             height: auto;
-            overflow-y: hidden;
+            padding-bottom: 1px;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;
@@ -81,7 +82,7 @@
 
         }
         .figures{
-            margin-left: 804px;
+            margin-left: 807px;
             margin-top: 23px;
             width: 170px;
             height: 95px;
@@ -89,7 +90,7 @@
             border: none 0;
         }
         .img {
-            width: 100%;
+            width: 95%;
             height: 100%;
             object-fit:cover;
             border-radius: 5px;
@@ -113,13 +114,13 @@
         }
         .icon1{
             float: right;
-            margin-right: -120px;
+            margin-right: -122px;
             margin-top: 39px;
         }
         .commentCount{
             float: right;
-            margin-right: -166px;
-            margin-top: 36px;
+            margin-right: -177px;
+            margin-top: 37px;
         }
         .commentCount a{
             font-size: 16px;
