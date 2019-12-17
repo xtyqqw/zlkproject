@@ -10,7 +10,8 @@
         .context-div{
             width: 100%;
             height: auto;
-            overflow-y: hidden;
+            padding-bottom: 1px;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;
@@ -64,6 +65,19 @@
             display: inline-block;
             vertical-align: middle;
             text-align: left;
+        }
+        .approval{
+            margin-left: 16px;
+            margin-top: 11px;
+            float: left;
+            width: 63px;
+            height: 20px;
+            border-radius: 8%;
+            border: #FF0000 1px solid;
+            color: #FF0000;
+            font-family: Arial;
+            font-size: 15px;
+            text-align: center;
         }
         .articleDigest{
             margin-left: 14px;
@@ -264,6 +278,15 @@
                     }
                     if (article[i].articleSetTop === 1) {
                         html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + article.articleSetTop + '</p></div>';
+                    }
+                    if (article[i].approval === 0){
+                        html += '<div class="approval">审核中</div>';
+                    }
+                    if (article[i].approval === 1){
+                        html += '<div class="approval" style="display: none">审核过</div>';
+                    }
+                    if (article[i].approval === 2){
+                        html += '<div class="approval">审核未过</div>';
                     }
                     html += '<div class="figures" id="figures">' + '<img class="img" src="' + article[i].figures + '"/>' + '</div>';
                     html += '<div class="articleDigest" style="width: 660px">' + article[i].articleDigest + '</div>';

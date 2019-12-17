@@ -32,7 +32,7 @@
 
     <style>
      .layui-tab {
-         width: 1050px;
+         width: 1000px;
          height: 500px;
          position: relative;
          left: 200px;
@@ -45,6 +45,8 @@
      }
      .layui-tab-title{
          color:#000000;
+         left: -25px;
+
      }
      .dt1{
          border: solid 0px;
@@ -166,13 +168,13 @@
      .li1{
          float: left;
          height: 190px;
-         margin-left: 30px;
+         margin-left: 20px;
      }
 
      .h51{
          position: relative;
          top:55px;
-         left:5px;
+         left:0px;
          font-weight:bold;
          color: white;
      }
