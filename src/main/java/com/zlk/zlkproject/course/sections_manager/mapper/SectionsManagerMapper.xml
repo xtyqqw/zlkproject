@@ -91,4 +91,8 @@
     <delete id="deleteData" parameterType="com.zlk.zlkproject.entity.Section">
         DELETE FROM section WHERE section_id = #{sectionId}
     </delete>
+
+    <select id="findTimeByChapterId" resultType="java.lang.Integer">
+        SELECT sum(section_time) FROM section WHERE chapter_id = #{chapterId}
+    </select>
 </mapper>
