@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.articleFollow.mapper.ArticleFollowMapper">
+
+    <!--添加关注-->
+    <insert id="saveFollow" parameterType="java.lang.String">
+        insert into attention (to_user_id,from_user_id)value (#{toUserId},#{fromUserId})
+    </insert>
+
+    <!--取消关注-->
+    <delete id="removeFollow" parameterType="java.lang.String">
+        delete from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId}
+    </delete>
+
+    <!--查询A是否关注了B-->
+    <select id="findFollowStatus" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from attention where to_user_id = #{toUserId} and from_user_id = #{fromUserId}
+    </select>
+</mapper>

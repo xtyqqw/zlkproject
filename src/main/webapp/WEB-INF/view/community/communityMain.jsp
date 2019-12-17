@@ -18,7 +18,7 @@
         }
         .all_body_center{
             width: 90%;
-            height: 1233px;
+            height: 1251px;
             margin-left: 68px;
         }
         .left{

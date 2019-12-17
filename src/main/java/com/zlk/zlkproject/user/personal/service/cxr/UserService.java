@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * @author 崔新睿
+ * service层调用mapper层的方法
  * @data 2019/11/19 - 14:20
  */
 public interface UserService {

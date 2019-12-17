@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     /**
-     * 分页查询所有用户信息
+     * 分页查询所有用户信息，CxrPaging cxrPaging是分页查询辅助类
      * @param cxrPaging
      * @return
      */
