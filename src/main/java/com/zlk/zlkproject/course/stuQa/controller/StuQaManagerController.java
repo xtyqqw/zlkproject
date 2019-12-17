@@ -155,4 +155,5 @@ public class StuQaManagerController {
         map.put("data", stuQaList);
         return map;
     }
+
 }

@@ -55,7 +55,10 @@ public class controller {
         return "view/courseHomePageTag";
     }
 
-
+    @RequestMapping(value = "/commentManager")
+    public String commentManager() throws Exception {//跳转项目页
+        return "admin/commentManager";
+    }
 
     @Autowired
     //对文件进行上传的工具类

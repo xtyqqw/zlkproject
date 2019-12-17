@@ -59,4 +59,8 @@
          from section s left join user_section us on us.section_id=s.section_id
          where us.user_id = #{userId} and s.section_id = #{sectionId}
     </select>
+    <!--根据小节id查找小节名字-->
+    <select id="findNameBySectionId" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select section_name from section where section_id = #{sectionId};
+    </select>
 </mapper>
