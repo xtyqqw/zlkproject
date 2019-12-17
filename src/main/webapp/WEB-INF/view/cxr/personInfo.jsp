@@ -61,7 +61,7 @@
             float: left;
             background-color: 	#F8F8F8;
             width: 68vw;
-            height: 8vw;
+            height: 10vw;
             margin-top: 2vw;
             font-size: 1vw;
         }
