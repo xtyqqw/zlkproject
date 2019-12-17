@@ -51,4 +51,8 @@ public class StuComment {
     private List<StuNoteUpDown> stuUpDownList;
 
     private String flag;
+    /**章节Id*/
+    private int chapterId;
+    /**课程Id*/
+    private int coursesId;
 }
