@@ -12,7 +12,7 @@
         <div class="layui-form-item" style="margin-top: 10px">
             <label class="layui-form-label">小节序号</label>
             <div class="layui-input-block">
-                <input type="text" name="sectionId" id="sectionId" placeholder="请输入讲师笔记所对应的小节序号" class="layui-input">
+                <input type="number" name="sectionId" id="sectionId" placeholder="请输入讲师笔记所对应的小节序号" class="layui-input" maxlength="11">
             </div>
         </div>
         <div class="layui-form-item">
@@ -45,7 +45,7 @@
         <div class="layui-form-item" style="margin-top: 10px">
             <label class="layui-form-label">小节序号</label>
             <div class="layui-input-block">
-                <input type="text" name="sectionId" id="upsectionId" class="layui-input">
+                <input type="number" name="sectionId" id="upsectionId" class="layui-input" maxlength="11">
             </div>
         </div>
         <div class="layui-form-item">

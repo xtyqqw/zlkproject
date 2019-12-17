@@ -28,6 +28,8 @@ public class StuQaController {
 
     @Autowired
     private StuQaService stuQaService;
+    @Autowired
+    private SignService signService;
 
     /**
      *  功能栏问答信息添加
@@ -117,12 +119,12 @@ public class StuQaController {
      */
     @RequestMapping(value = "/updateShareOrReport")
     @ResponseBody
-    public Map<String,Object> updateShareOrReport(@RequestBody StuQa stuQa) throws Exception{
+    public Map<String,Object> updateShareOrReport(StuQa stuQa) throws Exception{
         Integer integer = stuQaService.updateShareOrReportBySqaId(stuQa);
         Map<String,Object> map = new HashMap<>();
         if (integer >0){
             StuQa stuQa1 = stuQaService.findStuQaBySqaId(stuQa.getSqaId());
-            map.put("stuQa",stuQa1);
+            map.put("stuQa1",stuQa1);
         }
         return map;
     }
@@ -171,6 +173,9 @@ public class StuQaController {
         }
         stuQa.setUserId(userId);
         stuQa.setSectionId(sectionId);
+        StuQa stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
+        User user1 = signService.selectNameAndImg(stuQa1.getUserId());
+        stuQa.setReplayPerson(user1.getUserRealname());
         stuQa.setContent(content);
 //        stuQa.setAnswerNum(0);//默认为0
 //        stuQa.setViewNum(0);//默认为0
@@ -184,9 +189,9 @@ public class StuQaController {
             stuQaService.updateAnswerNum(sectionId,sqaId);
         }else {
             stuQaService.updateAnswerNum(sectionId,pId);
-            StuQa stuQa1 = stuQaService.findStuQaBySqaId(sqaId);
-            stuQa1.setAnswerNum(stuQa1.getAnswerNum()+1);
-            stuQaService.updateStuQaBySqaId(stuQa1);
+            StuQa stuQa2 = stuQaService.findStuQaBySqaId(sqaId);
+            stuQa1.setAnswerNum(stuQa2.getAnswerNum()+1);
+            stuQaService.updateStuQaBySqaId(stuQa2);
         }
 
         Map<String,Object> map = new HashMap<>();

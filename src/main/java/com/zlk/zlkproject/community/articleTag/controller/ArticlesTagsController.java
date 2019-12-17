@@ -23,7 +23,7 @@ public class ArticlesTagsController {
     private ArticlesTagsService articlesTagsService;
 
     @GetMapping(value = "/community/tags")
-    public ModelAndView tags(@PageableDefault(page = 0,value = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public ModelAndView tags(@PageableDefault(page = 0,value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                              Integer tagId){
         ModelAndView mv = new ModelAndView();
         /*if (pageable.getPageSize() == 0) {

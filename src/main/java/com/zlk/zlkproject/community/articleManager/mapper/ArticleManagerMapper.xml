@@ -79,16 +79,16 @@
             <if test="caiCount!=null and caiCount!='' ">
                 cai_count=#{caiCount},
             </if>
-            <if test="inform!=null and inform!='' ">
+            <if test="inform!=null">
                 inform=#{inform},
             </if>
-            <if test="createArticleType!=null and createArticleType!='' ">
+            <if test="createArticleType!=null">
                 create_article_type=#{createArticleType},
             </if>
-            <if test="articleSetTop!=null and articleSetTop!='' ">
+            <if test="articleSetTop!=null">
                 article_set_top=#{articleSetTop},
             </if>
-            <if test="approval!=null and approval!='' ">
+            <if test="approval!=null">
                 approval=#{approval},
             </if>
             <if test="typeName!=null and typeName!='' ">

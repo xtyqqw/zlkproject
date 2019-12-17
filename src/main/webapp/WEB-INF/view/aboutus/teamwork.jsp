@@ -70,7 +70,7 @@
 <div class="layui-collapse" lay-accordion="" style="width: 83%">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">合作讲师</h2>
-        <div class="layui-colla-content">
+        <div class="layui-colla-content layui-show">
             <c:forEach items="${list}" var="user">
             <div class="list1">
                 <h3>资深讲师：${user.lecturerName}</h3>
@@ -221,7 +221,7 @@
         }
     }
     function check() {
-        var check = phone() && email() && num() && name() && site();
+        var check = name() && num() && phone() && email() && site();
         return check;
     }
 </script>

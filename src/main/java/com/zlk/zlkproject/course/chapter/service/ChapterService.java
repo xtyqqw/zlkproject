@@ -124,4 +124,14 @@ public interface ChapterService {
      */
     Integer selectSumSectionByCoursesId(Integer coursesId);
 
+    /**
+     *  根据小节id查找当前课程id
+     *@method selectCoursesIdBySectionId
+     *@params [sectionId]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/16  10:22
+     */
+    Integer selectCoursesIdBySectionId(Integer sectionId);
+
 }

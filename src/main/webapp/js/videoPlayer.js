@@ -15,15 +15,16 @@ $(document).ready(function () {
         var tagIdArray = new Array();
         var editorflag = 0;
         var editori = 0;
+        var isSubmit = true;
 
         //弹出层设置
         layer.config({
-            offset: '20%'
+            offset: '35%'
         });
 
 
         /*讲师笔记初加载*/
-        note_flow(sectionId);
+        note_flow(parseInt($("#sectionId").text()));
 
         // $(".w_e_text").attr("placeholder","字数不超过200字");
 
@@ -45,7 +46,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: basePath+'/chapter/findChapters',
-                    data: "",
+                    data: {"sectionId":parseInt($("#sectionId").text())},
                     dataType: "json",
                     success: function (data) {
                         $("#mulu_div").css("display", "block");
@@ -132,7 +133,6 @@ $(document).ready(function () {
             $("#sectionId").text(sectionId);
         });
 
-        /*视频播放按钮点击事件*/
 
         /*功能栏问答点击*/
         $("#icon-wenda").click(function () {
@@ -172,7 +172,7 @@ $(document).ready(function () {
                     var tagId = $(this).find("input").val();
                     tagIdArray.push(tagId);
                 }else {
-                    layer.alert("最多选择3个标签,请先取消1个标签后再选择新标签");
+                    layer.msg("最多选择3个标签,请先取消1个标签后再选择新标签");
                 }
             }else {
                 $(this).css("background-color","grey");
@@ -203,31 +203,33 @@ $(document).ready(function () {
         /*问答提交按钮点击提交事件*/
         $(document).on("click", "#btn_submit_wenda", function () {
             if (tagIdArray.length==0){
-                layer.confirm("至少选择1个标签");
+                layer.msg("至少选择1个标签");
             }else {
-                var content = editor.txt.html();
-                var data = {"content":content,"tagIdArray":tagIdArray};
-                $.ajax({
-                    type:"POST",
-                    url:basePath+"/stuQa/insertStuQa",
-                    data:data,
-                    dataType: "json",
-                    traditional:true,
-                    success:function (result) {
-                        layer.confirm(result.message,function (index,layero) {
-                            layer.close(index);
-                            editor.txt.clear();
-                            $(".tagName").css("background-color","grey");
-                            $(".tagName").attr("isselect","false");
-                            $("#wenda_div").css("display", "none");
-                            tagIdArray.splice(0);
-                        });
-                        /*if(result.message==="添加成功"){
+                if (isSubmit){
+                    var content = editor.txt.html();
+                    var data = {"content":content,"tagIdArray":tagIdArray};
+                    $.ajax({
+                        type:"POST",
+                        url:basePath+"/stuQa/insertStuQa",
+                        data:data,
+                        dataType: "json",
+                        traditional:true,
+                        success:function (result) {
+                            layer.confirm(result.message,function (index,layero) {
+                                layer.close(index);
+                                editor.txt.clear();
+                                $(".tagName").css("background-color","grey");
+                                $(".tagName").attr("isselect","false");
+                                $("#wenda_div").css("display", "none");
+                                tagIdArray.splice(0);
+                            });
+                            /*if(result.message==="添加成功"){
 
-                        }*/
-                    }
-                });
-                stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                            }*/
+                        }
+                    });
+                    stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                }
             }
         });
 
@@ -275,11 +277,13 @@ $(document).ready(function () {
         editor.create();
 
         /*限制字数判断方法*/
-        checkLength = function(maxLength) {
-            var text = editor.txt.html();
+        function checkLength(editor,maxLength) {
+            var text = editor.txt.text();
+            layer.msg(text.length);
             var reTag = /<(?:.|\s)*?>/g;
             var reText = text.replace(reTag,"");
             var l = 0;
+            var isfull = false;
             for (var i = 0; i < reText.length; i++) {
                 if (/[\u4e00-\u9fa5]/.test(reText[i])) {
                     l += 2;
@@ -288,10 +292,18 @@ $(document).ready(function () {
                 }
                 if (l > maxLength) {
                     reText = reText.substr(0, maxLength);
-
+                    isfull = true;
                 }
             }
+            return isfull;
         };
+
+        $("#text_div").keyup(function () {
+            if (checkLength(editor,401)){
+                layer.msg("输入内容请不要超过200个汉字或400个英文字符");
+                istrue = false;
+            }
+        });
 
 
         /*//视频时长格式转换函数  hh:mm:ss
@@ -358,7 +370,7 @@ $(document).ready(function () {
 
         /*学生问答选项卡切换加载*/
         $("#stuQa-tab").click(function () {
-            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         /*学生问答流加载*/
@@ -457,12 +469,12 @@ $(document).ready(function () {
 
         //全部选项卡点击事件
         $("#stuQaall-tab").click(function () {
-            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         //精华选项卡点击事件
         $("#stuQaelite-tab").click(function () {
-            stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",sectionId);
+            stu_qa_flow("#stuQaelite",basePath+"/stuQa/findStuQaListElite",parseInt($("#sectionId").text()));
         });
 
         /*div鼠标移入事件*/
@@ -502,7 +514,7 @@ $(document).ready(function () {
                     contentType:'application/json',
                     data:JSON.stringify(stuQa),
                     success:function (result) {
-                        share = result.stuQa.share;
+
                     }
                 });
                 $(this).text(""+share);
@@ -513,35 +525,37 @@ $(document).ready(function () {
 
         /*举报按钮点击提交事件*/
         $(document).on("click", ".stuQa-report", function () {
-            var thisReport = $(this).text();
+            var report = $(this).text();
             var sqaId = $(this).parent().parent().parent().find("input").val();
-            if (thisReport === "举报"){
+            if (report === "举报"){
                 let report = "已举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
                     url:basePath+"/stuQa/updateShareOrReport",
-                    contentType:'application/json',
-                    data:JSON.stringify(stuQa),
-                    success:function (result) {
-                        thisReport = result.stuQa.report;
+                    /*contentType:'application/json',*/
+                    data:stuQa,
+                    dataType:"json",
+                    success:function (data) {
+
                     }
                 });
-                $(this).text(""+thisReport);
+                $(this).text(""+report);
                 $(this).css("color","#9ea2ea");
-            }else if (thisReport === "已举报"){
+            }else if (report === "已举报"){
                 let report = "举报";
                 var stuQa = {"sqaId":sqaId,"report":report};
                 $.ajax({
                     type:"POST",
                     url:basePath+"/stuQa/updateShareOrReport",
-                    contentType:'application/json',
-                    data:JSON.stringify(stuQa),
-                    success:function (result) {
-                        thisReport = result.stuQa.report;
+                    // contentType:'application/json',
+                    data:stuQa,
+                    dataType:"json",
+                    success:function (data) {
+
                     }
                 });
-                $(this).text(""+thisReport);
+                $(this).text(""+report);
                 $(this).css("color","#ffffff");
             }
         });
@@ -561,7 +575,7 @@ $(document).ready(function () {
 
                 var sqaId = $(this).parent().parent().parent().find("input").val();
                 var id = $(this).parent().next().attr("id");
-                answer(id,sqaId,sectionId);
+                answer(id,sqaId,parseInt($("#sectionId").text()));
 
                 $(this).parent().parent().parent().css("height","auto");
                 $(this).parent().parent().parent().parent().css("height","auto");
@@ -680,6 +694,9 @@ $(document).ready(function () {
                         });
                         str += "</div>";
                         str += "<div class=\"stuQa-content\">";
+                        if (stuQa.replayPerson!= null && stuQa.replayPerson!= ""){
+                            str += "<div class=\"stuQa-replayPerson\" id='stuQa-replayPerson"+editorflag+"'>回复"+stuQa.replayPerson+":</div>";
+                        }
                         str += "<div class=\"stuQa-toolbar\" id='stuQa-answer-toolbar"+editori+"'></div>";
                         str += "<div class=\"stuQa-textEditor\" id='stuQa-answer-textEditor"+editori+"'>"+stuQa.content+"</div>";
                         str += "</div>";
@@ -751,6 +768,8 @@ $(document).ready(function () {
         };
         ans_editor.create();
 
+        var isReplay = true;
+
         //回复点击事件
         $(document).on("click", ".stuQa-reply", function () {
             var sqaId = $(this).parent().parent().parent().find("input").val();
@@ -763,21 +782,33 @@ $(document).ready(function () {
                 area:['500px','350px'],
                 offset:'20%',
                 btn: ['提交'],
+                success:function(index,layero){
+                    $(index).on('keyup','#answer-editor',function () {
+                        if (checkLength(ans_editor,401)){
+                            layer.alert("输入内容请不要超过200个汉字或400个英文字符");
+                            isReplay = false;
+                        }
+                    })
+                },
                 yes: function (index, layero) {
                     layer.close(index);
-                    var content = ans_editor.txt.html();
-                    var data = {"sqaId":sqaId,"pId":pId,"content":content};
-                    $.ajax({
-                        type:"POST",
-                        url:basePath+"/stuQa/insertAnswer",
-                        dataType: "json",
-                        data: data,
-                        success:function (result) {
-                            layer.msg(result.message);
-                            stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
-                        }
-                    });
-
+                    if (isReplay){
+                        var content = ans_editor.txt.html();
+                        var data = {"sqaId":sqaId,"pId":pId,"content":content};
+                        $.ajax({
+                            type:"POST",
+                            url:basePath+"/stuQa/insertAnswer",
+                            dataType: "json",
+                            data: data,
+                            success:function (result) {
+                                layer.msg(result.message);
+                                stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
+                            }
+                        });
+                    }
+                },
+                end:function () {
+                    ans_editor.txt.clear();
                 }
             });
         });
@@ -798,6 +829,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + stu_editor.txt.html();
                 let contentText = '' + stu_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -815,11 +847,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'snSectionId':sectionId, 'snUserId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1287,6 +1319,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + stuCmt_editor.txt.html();
                 let contentText = '' + stuCmt_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -1304,11 +1337,11 @@ $(document).ready(function () {
                 let userId = 1;
                 let data = {'sectionId':sectionId, 'userId':userId, 'content':contentHtml};
                 if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1366,6 +1399,7 @@ $(document).ready(function () {
             let userId = '1';
             //需接入++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             let sectionId =1;
+            let flag = 0;
 
             function cmtFlowLoad(url) {
                 $("#SCS_ul_stream").empty();
@@ -1376,7 +1410,6 @@ $(document).ready(function () {
                         let lis = [];
                         let size = 3;
 
-                        let flag = 0;
                         let data = {"sectionId": sectionId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -1831,6 +1864,7 @@ $(document).ready(function () {
                 let lengthState = true;
                 let contentHtml = '' + replyEditorArr[index].txt.html();
                 let contentText = '' + replyEditorArr[index].txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
@@ -1854,11 +1888,11 @@ $(document).ready(function () {
                 }
 
                 if(contentHtml.length>1024){
-                    alert("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！",{offset:''+ev.clientY});
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -1978,6 +2012,17 @@ $(document).ready(function () {
     var sharpState = false;
     var getSourceLength = false;
     var studyTime = 0;
+    var memoryLoadTimeOut = null;
+
+    // “此处” 点击事件
+    $("#goHead").click(function () {
+        elem_video1.currentTime = 0;
+        $("#memoryLoadBox").css('display','none');
+        elem_pgBtn.style.left = 0 + 'px';
+        elem_pgBar.style.width = 0 + 'px';
+        elem_currentTime.innerText = format(0);
+        resetCache();
+    });
 
     //切换视频函数
     function switchVideo (src,sectionId) {
@@ -1989,6 +2034,7 @@ $(document).ready(function () {
             url : basePath+"/player/recordTimeSwitch",
             data : data,
             success: function () {
+                $("#waitIcon_box").css('display','block');
                 document.getElementById("video_src").src = src;
                 elem_video1.load();
                 clearInterval(interval1);
@@ -1998,6 +2044,8 @@ $(document).ready(function () {
                 elem_currentTime.innerText = '00:00:00';
                 clearInterval(interval_cache);
                 document.getElementById("pg_cache").style.width = 0 + 'px';
+                $("#sharpness_btn").text('普清');
+                $("#speed_btn").text('1.0x');
             }
         });
     }
@@ -2083,14 +2131,18 @@ $(document).ready(function () {
 
     //刷新/关闭 事件监听
     window.onunload = function () {
-        if (isClose){
-            var data = {'time':elem_video1.currentTime};
-            $.ajax({
-                type : "POST",
-                async: false,
-                url : basePath+"/player/recordTime",
-                data : data
-            });
+        let pageType = $("#pageType").text() + '';
+        if (isClose && pageType === 'videoPlayer'){
+            var data = {};
+            if(getSourceLength){
+                data = {'time':elem_video1.currentTime};
+                $.ajax({
+                    type : "POST",
+                    async: false,
+                    url : basePath+"/player/recordTime",
+                    data : data
+                });
+            }
             data = {'studyTime':studyTime};
             $.ajax({
                 type: 'POST',
@@ -2110,11 +2162,13 @@ $(document).ready(function () {
     //视频等待事件监听
     elem_video1.addEventListener("waiting",function () {
         elem_btnPlay.innerHTML = "&#xe652;";
+        $("#waitIcon_box").css('display','block');
     });
 
     //视频播放事件监听
     elem_video1.addEventListener("playing",function () {
         elem_btnPlay.innerHTML = "&#xe651;";
+        $("#waitIcon_box").css('display','none');
     });
 
     //成功获取资源长度事件监听
@@ -2126,10 +2180,17 @@ $(document).ready(function () {
                 async: false,
                 url : basePath+"/player/readRecord",
                 success:function (res) {
-                    elem_video1.currentTime = res;
-                    elem_pgBtn.style.left = res/elem_video1.duration * $("#pg_bg").width() + 'px';
-                    elem_pgBar.style.width = res/elem_video1.duration * $("#pg_bg").width() + 'px';
-                    elem_currentTime.innerText = format(res);
+                    elem_video1.currentTime = res.time;
+                    elem_pgBtn.style.left = res.time/elem_video1.duration * $("#pg_bg").width() + 'px';
+                    elem_pgBar.style.width = res.time/elem_video1.duration * $("#pg_bg").width() + 'px';
+                    elem_currentTime.innerText = format(res.time);
+                    if(res.state !== '未观看'){
+                        $("#memoryLoadBox").css('display','table-cell');
+                        memoryLoadTimeOut = setTimeout(function () {
+                            $("#memoryLoadBox").css('display','none');
+                            clearTimeout(memoryLoadTimeOut);
+                        },10000);
+                    }
                 }
             });
         }
@@ -2143,6 +2204,7 @@ $(document).ready(function () {
             }
         },1000);
         getSourceLength = true;
+        $("#waitIcon_box").css('display','none');
     });
 
     //全屏按钮点击
@@ -2163,8 +2225,10 @@ $(document).ready(function () {
             $(".FS_hidden").css('display','none');
             $("#div_video_all").css("overflow","visible");
             $("#div_all").offset({top:0,left:0});
-            elem_all.style.width = window.document.body.offsetWidth + 'px';
-            elem_all.style.height = window.document.body.offsetHeight + 'px';
+            /*elem_all.style.width = window.document.body.offsetWidth + 'px';
+            elem_all.style.height = window.document.body.offsetHeight + 'px';*/
+            elem_all.style.width = window.screen.width + '';
+            elem_all.style.height = window.screen.height + '';
             elem_all.style.margin = "auto";
             var res = elem_video1.buffered.end(0)/elem_video1.duration * $("#pg_bg").width();
             document.getElementById("pg_cache").style.width = res + 'px';
@@ -2444,9 +2508,11 @@ $(document).ready(function () {
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
             getSourceLength = false;
+            $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
             getSourceLength = false;
+            $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#nv").text();
         }
         elem_video1.load();
