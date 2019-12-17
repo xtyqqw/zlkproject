@@ -1,12 +1,13 @@
 package com.zlk.zlkproject.community.question.service.impl;
 
-import com.zlk.zlkproject.community.question.mapper.QuestionMapper;
+import com.zlk.zlkproject.community.question.dao.QuestionDao;
 import com.zlk.zlkproject.community.question.service.QuestionService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Date;
 
 /**
@@ -18,22 +19,20 @@ import java.util.Date;
 @Service
 public class QuestionServiceImpl implements QuestionService {
     @Autowired
-    private QuestionMapper questionMapper;
-
-    @Override
-    public Integer selectUserId(Question qusetion) {
-        return questionMapper.selectUserId(qusetion);
-    }
-
-    @Override
-    public Integer selectAudit(String userId) {
-        return questionMapper.selectAudit(userId);
-    }
+    private QuestionDao questionDao;
 
     @Transactional
     @Override
-    public Integer addQuestion(Question question) {
-
-        return questionMapper.addQuestion(question);
+    public Question saveQuestion(Question question) {
+        question.setQuestionId(UUIDUtils.getId());
+        question.setCreateTime(new Date());
+        question.setSolve(0);
+        question.setZanCount(0);
+        question.setCaiCount(0);
+        question.setBrowseCount("0");
+        question.setQuestionSetTop("1");
+        question.setResponseCount(0);
+        question.setAudit("1");
+        return questionDao.save(question);
     }
 }
