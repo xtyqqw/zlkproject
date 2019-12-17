@@ -234,11 +234,7 @@
 
         .youce{
             float: left;
-<<<<<<< HEAD
-            margin-top:-60.5vw;
-=======
             margin-top:-60vw;
->>>>>>> b35964f5bfdb0e7c5530c49794250d25e7f0da89
             margin-left: 40vw;
             width: 45vw;
         }
