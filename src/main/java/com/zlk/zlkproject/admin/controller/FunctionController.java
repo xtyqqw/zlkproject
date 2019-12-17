@@ -188,7 +188,7 @@ public class FunctionController {
     public Boolean delete(Integer functionId, HttpServletRequest request) {
         //获取删除前菜单信息
         Function functionByFunctionId = functionService.findFunctionByFunctionId(functionId);
-        //删除权限一并删除角色拥有的该权限
+        //查找该菜单下是否有子菜单
         Integer childrenNumber = functionService.findChildrenNumber(functionId);
         if(childrenNumber==0) {
             Integer flag = functionService.deleteFunction(functionId);

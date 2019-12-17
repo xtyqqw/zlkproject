@@ -42,9 +42,9 @@ public interface PlayerMapper {
      *  读取视频观看位置
      *@method readRecord
      *@params [UserSection]
-     *@return Double
+     *@return UserSection
      *@author hry
      *@time 2019/11/25  15:46
      */
-    public Double readRecord(UserSection userSection);
+    public UserSection readRecord(UserSection userSection);
 }

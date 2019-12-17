@@ -189,7 +189,7 @@
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
-                    <%--<c:if test="${list.size()!=0}">--%>
+                    <%--<c:if test="${list.size()!=0}">
                         <div class="item attention_type">
                             <c:if test="${list.userId!=userId}">
                                 <!-- 已关注 -->
@@ -228,7 +228,7 @@
                                 </div>
                             </div>
                         </div>
-                    <%--</c:if>--%>
+                    </c:if>--%>
                 </div>
             </div>
             <div class="ui attached segment">

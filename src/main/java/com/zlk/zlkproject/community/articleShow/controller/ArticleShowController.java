@@ -33,20 +33,20 @@ public class ArticleShowController {
     public ModelAndView articleShow(HttpServletRequest request, String articleId) {
         ModelAndView mv=new ModelAndView();
         User user = (User) request.getSession().getAttribute("user");
-        List<MyFollower> list=new ArrayList<>();
-        List<User> list1=new ArrayList<>();
+        /*List<MyFollower> list=new ArrayList<>();
+        List<User> list1=new ArrayList<>();*/
         if (user == null) {
             mv.addObject("article", articleShowService.getAndConvert(articleId));
             mv.setViewName("view/community/articleShow");
         }else if (articleId != null) {
-            for (int i = 0;i < list1.size();i++){
+            /*for (int i = 0;i < list1.size();i++){
                 MyFollower mf = new MyFollower();
                 User user1 = list1.get(i);
                 mf.setUserId(user1.getUserId());
                 mf.setFollowType(articleFollowService.findFollowStatus(user.getUserId(),user1.getUserId()));
                 list.add(mf);
-            }
-            mv.addObject("list",list);
+            }*/
+            //mv.addObject("list",list);
             mv.addObject("article", articleShowService.getAndConvert(articleId));
             String userId = "" + user.getUserId();
             request.getSession().setAttribute("articleId",articleId);
