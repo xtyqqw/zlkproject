@@ -2,6 +2,7 @@ package com.zlk.zlkproject.course.stu_comment.service.impl;
 
 import com.zlk.zlkproject.course.stu_comment.mapper.StuCommentMapper;
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,5 +78,42 @@ public class StuCommentServiceImpl implements StuCommentService {
     @Override
     public Integer updateReport(Integer smId, String report) {
         return stuCommentMapper.updateReport(smId,report);
+    }
+
+    @Override
+    public List<StuComment> findAllFromStuComment(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return stuCommentMapper.findAllFromStuComment(pagination);
+    }
+
+    @Override
+    public Integer findStuCommentCount(Pagination pagination) {
+        return stuCommentMapper.findStuCommentCount(pagination);
+    }
+
+    @Override
+    public Integer updateTeacherAnswer(Integer smId, String teacherAnswer) {
+        return stuCommentMapper.updateTeacherAnswer(smId,teacherAnswer);
+    }
+
+    @Override
+    public Integer deleteStudentComment(Integer smId) {
+        return stuCommentMapper.deleteStudentComment(smId);
+    }
+
+    @Override
+    public List<StuComment> findStuCommentListByUserId(StuComment stuComment, Integer page, Integer limit, String userId) {
+        stuComment.getUserRealName();
+
+        Integer startPage = (page-1)*limit;
+        return stuCommentMapper.findStuCommentListByUserId(stuComment,startPage,limit,userId);
+    }
+
+    @Override
+    public Integer findStuCommentCountByUserId(String userId) {
+        return stuCommentMapper.findStuCommentCountByUserId(userId);
     }
 }

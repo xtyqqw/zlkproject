@@ -129,7 +129,9 @@ public class ChapterManagerController {
         Integer count = chapterService.selectAllCount();
         for (Chapter chapter : chapterList) {
             Integer sectionNum = sectionsManagerService.findCountByChapterId(chapter.getChapterId());
+            Integer sectionTimes = sectionsManagerService.findTimeByChapterId(chapter.getChapterId());
             chapter.setSectionNum(sectionNum);
+            chapter.setChapterTime(sectionTimes);
             chapterService.updateChapterByChapterId(chapter);
         }
         Map<String,Object> map = new HashMap<>();

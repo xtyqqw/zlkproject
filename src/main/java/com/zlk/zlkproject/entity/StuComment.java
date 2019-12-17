@@ -37,6 +37,8 @@ public class StuComment {
     private String report;
     /**创建时间 对应字段date*/
     private Date date;
+    /** 对应讲师回复字段*/
+    private String teacherAnswer;
     /**创建时间的字符串*/
     private String dateString;
     /**用户名 对应字段user_realname*/
@@ -47,4 +49,6 @@ public class StuComment {
     private List<StuComment> stuCommentList;
     /**赞踩集合*/
     private List<StuNoteUpDown> stuUpDownList;
+
+    private String flag;
 }

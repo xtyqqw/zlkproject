@@ -219,10 +219,10 @@
                     if (question[i].questionSetTop === 1) {
                         html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    html += '<div class="figures" id="figures">' + '<img class="img" src="/img/headimg.png"/>' + '</div>';
+                    html += '<div class="figures" id="figures">' + '<img class="img" src="/img/0.jpg"/>' + '</div>';
                     html += '<div class="articleDigest" style="width: 660px">' + question[i].questionContent + '</div>';
                     html += '<div>';
-                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + '游客' + '</a></div>';
+                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + '游客可见' + '</a></div>';
                     html += '<div class="little"></div>';
                     html += '<div class="createTime"><span class="timeago" title="' + question[i].createTime + '"></span></div>';
                     html += '</div>';

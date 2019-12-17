@@ -95,6 +95,7 @@
             <button class="layui-btn layui-btn-sm" lay-event="insert">新增</button>
         </div>
     </script>
+
 </div>
 
     <script type="text/javascript" >

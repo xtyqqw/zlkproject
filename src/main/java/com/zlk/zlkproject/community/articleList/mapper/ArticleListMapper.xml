@@ -66,4 +66,7 @@
         left join user u on a.user_id=u.user_id
         where a.user_id=#{userId} limit #{startPage},#{limit}
     </select>
+    <select id="findArticleId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from article where user_id=#{userId}
+    </select>
 </mapper>

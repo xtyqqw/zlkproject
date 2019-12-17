@@ -56,6 +56,7 @@ public class PersonalController {
         return mv;
     }
 
+
     //用户前台信息展示页面
     /**
      * 跳转页面
@@ -72,13 +73,15 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/updateUser")
-    public ModelAndView updateUser(User user){
+    public ModelAndView updateUser(User user,HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         //调用修改方法
         userService.updateUser(user);
         //根据ID查询出user对象，
         User user1=userService.selectUserById(user.getUserId());
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user",user1);
         mv.addObject("user", user1);
         // 设置返回页面
         mv.setViewName("view/cxr/personInfo");
@@ -94,7 +97,7 @@ public class PersonalController {
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
 //        //userId="1"是模拟数据
-//         userId="1";
+//         userId="2";
 //
 //        User user=userService.selectUserById(userId);
 
