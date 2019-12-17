@@ -111,6 +111,7 @@
             </if>
             and pId = 0
         </where>
+        ORDER BY date DESC
         limit #{offset},#{limit}) s
         LEFT JOIN stu_qa_tag sqt ON sqt.sqa_id = s.sqa_id
         LEFT JOIN tag t ON t.tag_id = sqt.tag_id

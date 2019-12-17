@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.user.personal.service.impl;
 
-import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
-import com.zlk.zlkproject.user.entity.FollowerPage;
 import com.zlk.zlkproject.user.entity.Item;
 import com.zlk.zlkproject.user.personal.mapper.RecordMapper;
 import com.zlk.zlkproject.user.personal.service.RecordService;
