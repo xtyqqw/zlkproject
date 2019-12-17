@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

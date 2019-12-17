@@ -471,6 +471,7 @@
 </c:if>
 <script>
     $(function () {
+        updown();
         showFocus();getPage();
         $(".no_zi").click(function () {
             let str = $(this).prev().prev().text() + '';
@@ -482,6 +483,22 @@
         });
         $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     });
+    /*--------------------点击上下箭头显示隐藏动态---------------*/
+    function updown(){
+        $(".down_yes_news:eq(1)").hide();
+        /*$(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
+        //点击向上箭头
+        $(".layui-icon-up").click(function () {
+            $(this).hide();
+            $(this).siblings(".layui-icon-down").show();
+            $(this).parent(".down").find(".down_yes_news:gt(1):lt(5)").slideUp();//动态信息向上隐藏
+        });
+        $(".layui-icon-down").click(function () {
+            $(this).hide();
+            $(this).siblings(".layui-icon-up").show();
+            $(this).parent(".down").find(".down_yes_news").slideDown();//动态信息向下展示
+        });
+    }
     /*----------------------------点击已关注 取消关注---------------------------*/
     $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
     $(".ok_zi").click(function () {
@@ -554,11 +571,16 @@
                 var html = '';
                 for (var i = 0;i<focus.length;i++){
                     html += '<div class="waik"><div class="up"><div class="up_left">';
-                    html += '<img src="../../img/headimg.jpg"/>';
+                    if (focus[i].userImg == null){
+                        html += '<img src="../../../img/headimg.png"/>';
+                    }
+                    if (focus[i].userImg != null){
+                        html += '<img src="'+ focus[i].userImg +'"/>';
+                    }
                     html += '<p class="name">'+ focus[i].userRealname+'</p>';
                     html += '<div class="attention_type">';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
-                    html += '<p class="ok">√</p><p class="ok_zi"">已关注</p>';
+                    html += '<p class="ok">√</p><p class="ok_zi">已关注</p>';
                     html += '<span style="display: none">'+ focus[i].userId+'</span>';
                     html += '<p class="jia">+</p><p class="no_zi">加关注</p>';
                     html += '</div><div class="att_tan"><div class="att_success1">';
@@ -703,24 +725,6 @@
             });
         });
     }
-</script>
-<%--点击上下箭头显示隐藏动态--%>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".down_yes_news:eq(1)").hide();
-        /*$(".down_yes_news").nextAll(".down_yes_news:eq(5)").hide();*/
-        //点击向上箭头
-        $(".layui-icon-up").click(function () {
-            $(this).hide();
-            $(this).siblings(".layui-icon-down").show();
-            $(this).parent(".down").find(".down_yes_news:gt(1):lt(5)").slideUp();//动态信息向上隐藏
-        });
-        $(".layui-icon-down").click(function () {
-            $(this).hide();
-            $(this).siblings(".layui-icon-up").show();
-            $(this).parent(".down").find(".down_yes_news").slideDown();//动态信息向下展示
-        });
-    });
 </script>
 </body>
 </html>
