@@ -166,20 +166,19 @@
                 <textarea id="shurukuang" name="opinionContext" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
             </div>
 
-    <div id="zhuti_wei">
-        <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
-        <button id="quxiao">取消</button>
+            <div id="zhuti_wei">
+                <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
+                <button id="quxiao">取消</button>
+            </div>
 
-
+         </form>
     </div>
-    </form>
-    </div>
+    <%--提交成功提示框--%>
     <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
-
 </div>
 
 
-<%----%>
+<%--提交按钮js--%>
 <script>
     $("#chenggong").hide();
     $('#tijiao').click(function () {
@@ -193,10 +192,8 @@
                 $("#chenggong").hide();
             },5500)
         }
-
     });
 </script>
-
 
 </body>
 </html>

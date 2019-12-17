@@ -302,11 +302,5 @@
         });
     }
 </script>
-<script>
-    /*layer.msg('请先进行登录',{
-        icon: 6,
-        time:2000
-    });*/
-</script>
 </body>
 </html>

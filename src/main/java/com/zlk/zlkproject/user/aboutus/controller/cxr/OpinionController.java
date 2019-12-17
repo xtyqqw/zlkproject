@@ -21,10 +21,22 @@ import java.util.Date;
 public class OpinionController {
     @Autowired
     private OpinionService opinionService;
+
+    /**
+     * 返回意见反馈页面
+     * @return
+     */
     @RequestMapping("/toOpinion")
     public String toOpinion(){
         return "view/cxr/opinion";
     }
+
+    /**
+     * 添加意见反馈方法
+     * @param request
+     * @param opinion
+     * @return
+     */
     @RequestMapping("/addOpinion")
     public ModelAndView addOpinion(HttpServletRequest request, Opinion opinion){
         ModelAndView mv=new ModelAndView();
@@ -42,20 +54,17 @@ public class OpinionController {
             if(a>0){
                 mv.setViewName("view/cxr/opinion");
                 return mv;
-
-
             }else{
                 return null;
             }
+            //  如果user1为空，调用游客新增方法
         }else {
             //  如果user1为空，调用游客新增方法
-
             int i=opinionService.insertOpinion(opinion);
-
+            //对i进行判断，如果i>0，则返回意见反馈页面
             if(i>0){
                 mv.setViewName("view/cxr/opinion");
                 return mv;
-
             }else{
                 return null;
             }
