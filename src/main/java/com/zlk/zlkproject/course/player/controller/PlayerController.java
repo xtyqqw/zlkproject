@@ -78,14 +78,21 @@ public class PlayerController {
 
     @RequestMapping("readRecord")
     @ResponseBody
-    public Double readRecord(HttpServletRequest request){
+    public Map readRecord(HttpServletRequest request){
+        Map map = new HashMap();
         UserSection userSection = new UserSection();
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
         Integer sectionId = (Integer) request.getSession().getAttribute("sectionId");
         userSection.setUserId(userId);
         userSection.setSectionId(sectionId);
-        Double res = playerService.readRecord(userSection);
-        return res;
+        UserSection res = playerService.readRecord(userSection);
+        if(res.getTime() == null){
+            map.put("time",0);
+        }else{
+            map.put("time",res.getTime());
+        }
+        map.put("state",res.getState());
+        return map;
     }
 }

@@ -108,7 +108,9 @@ public class FaqqController {
     }
 
     /**
-     * 我的回答全部分页
+     * 我的问答全部分页
+     * 方法用途：查询出我的提问和我的回答全部信息
+     * 参数类型：FollowerPage 通过前台传回的分页信息进行集合的裁剪
      * @param request
      * @param followerPage
      * @return
@@ -132,7 +134,14 @@ public class FaqqController {
         map.put("list",list1);
         return map;
     }
-
+    /**
+     * 我的提问分页
+     * 方法用途：查询出我的提问全部信息
+     * 参数类型：FollowerPage 通过前台传回的分页信息进行集合的裁剪
+     * @param request
+     * @param followerPage
+     * @return
+     */
     @RequestMapping(value = "faqtestq")
     @ResponseBody
     public Map<String,Object> faqTestQ(HttpServletRequest request,FollowerPage followerPage){
@@ -153,6 +162,14 @@ public class FaqqController {
         return map;
     }
 
+    /**
+     * 我的回答分页
+     * 方法用途：查询出我的回答全部信息
+     * 参数类型：FollowerPage 通过前台传回的分页信息进行集合的裁剪
+     * @param request
+     * @param followerPage
+     * @return
+     */
     @RequestMapping(value = "faqtestr")
     @ResponseBody
     public Map<String,Object> faqTestF(HttpServletRequest request,FollowerPage followerPage){
