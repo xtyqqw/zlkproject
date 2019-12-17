@@ -56,6 +56,7 @@ public class PersonalController {
         return mv;
     }
 
+
     //用户前台信息展示页面
     /**
      * 跳转页面
@@ -96,7 +97,7 @@ public class PersonalController {
     public ModelAndView findUser(HttpServletRequest request, String userId){
         ModelAndView mv = new ModelAndView();
 //        //userId="1"是模拟数据
-//         userId="1";
+//         userId="2";
 //
 //        User user=userService.selectUserById(userId);
 

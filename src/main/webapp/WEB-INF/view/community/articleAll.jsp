@@ -81,7 +81,7 @@
             text-decoration:none;
         }
         .figures{
-            margin-left: 804px;
+            margin-left: 644px;
             margin-top: 23px;
             width: 170px;
             height: 95px;

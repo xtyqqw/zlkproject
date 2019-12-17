@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -76,26 +77,29 @@ public class ArticleListController {
         return map;
     }
     /*@RequestMapping(value = "/findByUserId")
-    public ModelAndView findByUserId(String userId,HttpServletRequest request)throws Exception{
+    public ModelAndView findByUserId(HttpServletRequest request,Pagination pagination,String userId)throws Exception{
         ModelAndView mv=new ModelAndView();
-        userId = (String) request.getSession().getAttribute("userId");
-        List<Article> articleList=articleListService.findByUserId(userId);
-        if (userId == null) {
+        User user = (User) request.getSession().getAttribute("user");
+        List<Article> articleList=articleListService.findByUserId(pagination);
+        Integer count = articleListService.findArticleId(userId);
+        if (user == null) {
             mv.addObject("msg", "请先进行登录");
-            mv.setViewName("");
             return mv;
         }
         mv.addObject("articleList",articleList);
+        mv.addObject("count",count);
         mv.setViewName("view/community/articleMy");
         return mv;
     }*/
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
     public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{
-        User user=new User();
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUser(user);
+        pagination.setUserId(userId);
         List<Article> articleList=articleListService.findByUserId(pagination);
-        Integer count=articleListService.findArticleCount(pagination);
+        Integer count=articleListService.findArticleId(userId);
         Map<String,Object> map=new HashMap<>();
         if (user.getUserId() == null) {
             map.put("msg","请先进行登录");

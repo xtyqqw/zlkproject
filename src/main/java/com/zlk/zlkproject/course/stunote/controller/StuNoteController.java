@@ -36,8 +36,6 @@ public class StuNoteController {
         Map map = new HashMap();
         String path = commonFileUtil.uploadFile(file);
         String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
-        System.out.println(path);
-        System.out.println(url);
         String[] arr = {url};
         map.put("errno",0);
         map.put("data",arr);

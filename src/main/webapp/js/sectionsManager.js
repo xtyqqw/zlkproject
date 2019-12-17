@@ -157,7 +157,9 @@ window.onload = function () {
                 ,{field: 'sectionIntro', title: '小节介绍', width: 177}
                 ,{field: 'videoAddr1', title: '普清地址', width: 100}
                 ,{field: 'videoAddr2', title: '超清地址', width: 100}
-                ,{field: 'sectionTime', title: '小节时长', width: 100}
+                ,{field: 'sectionTime', title: '小节时长', width: 100,templet:function (d) {
+                        return format(d.sectionTime);
+                    }}
                 ,{fixed: 'right', width:175, align:'center', toolbar: '' +
                         '<div class="layui-btn-group">\n' +
                             '<button type="button" lay-event="edit" class="layui-btn" style="height: 25px;line-height: normal">编辑</button>\n' +
@@ -507,6 +509,30 @@ window.onload = function () {
                 });
             }
         });
+
+        //视频时长格式转换函数  hh:mm:ss
+        function format(num) {
+            num = Math.round(num);
+            var hour = parseInt((num / 3600) + '');
+            var minute = parseInt(((num % 3600) / 60) + '');
+            var second = (num % 3600) % 60;
+            if (hour === 0) {
+                hour = '00';
+            } else if (hour > 0 && hour < 10) {
+                hour = '0' + hour;
+            }
+            if (minute === 0) {
+                minute = '00';
+            } else if (minute > 0 && minute < 10) {
+                minute = '0' + minute;
+            }
+            if (second === 0) {
+                second = '00';
+            } else if (second > 0 && second < 10) {
+                second = '0' + second;
+            }
+            return hour + ':' + minute + ':' + second;
+        }
 
     });
 

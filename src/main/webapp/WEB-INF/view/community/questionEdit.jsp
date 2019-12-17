@@ -20,9 +20,9 @@
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
-     /*   body {
-            background: url("/img/12949615.jpg");
-        }*/
+        /*   body {
+               background: url("/img/12949615.jpg");
+           }*/
 
         .top {
             height: auto;
@@ -57,7 +57,8 @@
 <body>
 <div class="top">
     <div class="header">
-        <a class="btn btn-default" id="a1" href="<%=request.getContextPath() %>/question/questionGuide" role="button">
+        <a class="btn btn-default" style="color:#914EF3 " id="a1"
+           href="<%=request.getContextPath() %>/question/questionGuide" role="button">
             &lsaquo;&nbsp;&nbsp;返回</a>
     </div>
     <div style="margin-top: -45px;margin-left: 730px;float: left;">
@@ -80,7 +81,8 @@
                                 <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入20字" maxlength="20">
+                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入20字"
+                               maxlength="20">
                     </div>
                 </div>
 
@@ -116,7 +118,7 @@
                                 <div class="default text">请选择标签</div>
                                 <div class="menu">
                                     <c:forEach items="${tagList}" var="tag">
-                                        <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
+                                        <div class="item">${tag.tagName}</div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -124,7 +126,8 @@
                     </div>
                     <div class="ui error message"></div>
                     <div class="ui right aligned container">
-                        <button type="submit" id="publish-btn"  class="ui violet button">发布问题</button>
+                        <button type="submit" id="publish-btn" onclick="publish()" class="ui violet button">发布问题
+                        </button>
                     </div>
                 </div>
             </form>
@@ -165,46 +168,51 @@
     });
 
     /*表单验证开启*/
-    $('.ui.form').form({
-        inline: true,
-        on: 'blur',
-        fields: {
-            questionTitle: {
-                identifier: 'questionTitle',
-                rules: [{
-                    type: 'empty',
-                    prompt: '文章不能为空呦'
-                }, {
-                    type: 'maxLength[50]',
-                    prompt: '请注意文章标题最大长度不能超过50'
-                }]
+    function publish() {
+        $('.ui.form').form({
+            inline: true,
+            on: 'blur',
+            fields: {
+                questionTitle: {
+                    identifier: 'questionTitle',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '文章不能为空呦'
+                    }, {
+                        type: 'maxLength[50]',
+                        prompt: '请注意文章标题最大长度不能超过50'
+                    }]
+                },
+                questionContent: {
+                    identifier: 'questionContent',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '文章内容不能为空哟'
+                    }]
+                },
+                typeName: {
+                    identifier: 'typeName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '选择一个文章分类吧'
+                    }]
+                },
+                tagName: {
+                    identifier: 'tagName',
+                    rules: [{
+                        type: 'minCount[1]',
+                        prompt: '选择一个文章标签吧'
+                    }, {
+                        type: 'maxCount[3]',
+                        prompt: '最多只能选择三个文章标签呦'
+                    }]
+                }
             },
-            questionContent: {
-                identifier: 'questionContent',
-                rules: [{
-                    type: 'empty',
-                    prompt: '文章内容不能为空哟'
-                }]
+            onSuccess: function () {
+                alert("发布成功");
             },
-            typeName: {
-                identifier: 'typeName',
-                rules: [{
-                    type: 'empty',
-                    prompt: '选择一个文章分类吧'
-                }]
-            },
-            tagName: {
-                identifier: 'tagName',
-                rules: [{
-                    type: 'minCount[1]',
-                    prompt: '选择一个文章标签吧'
-                }, {
-                    type: 'maxCount[3]',
-                    prompt: '最多只能选择三个文章标签呦'
-                }]
-            },
-        }
-    });
+        });
+    }
 </script>
 
 </body>

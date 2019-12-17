@@ -17,22 +17,24 @@ public interface QuestionHomeService {
      */
     Integer findQuestionCount(Pagination pagination);
     /*
-     * @descrption 按照最新发布日期排序（默认）
+     * @descrption 查询全部问题，按照最新发布日期排序（默认）
      * @author gby
      * @param
      * @return
      * @date 2019/12/10 14:15
      */
-    List<Question> findByQuestionTime(Pagination pagination);
+    List<Question> findAll(Pagination pagination);
+
 
     /*
-     * @descrption 根据问题id查询文章
+     * @descrption 按照用户id查找问题，按最新发布日期排序（默认）
      * @author gby
-     * @param [questionId]
-     * @return com.zlk.zlkproject.entity.Question
-     * @date 2019/12/7 18:56
+     * @param
+     * @return
+     * @date 2019/12/10 14:15
      */
-    Question getQuestion(String questionId);
+    List<Question> findByUserId(Pagination pagination);
+
     /*
      * @descrption 查询问答详情转换格式
      * @author gby
