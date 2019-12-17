@@ -22,4 +22,5 @@ public interface SectionsManagerMapper {
     public Integer addData(Section section);
     public Integer updateData(Section section);
     public Integer deleteData(Section section);
+    public Integer findTimeByChapterId(Integer chapterId);
 }
