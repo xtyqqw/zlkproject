@@ -1015,7 +1015,7 @@
                                     '<dl>' +
                                     '<dt>' +
                                     '<a href="<%=request.getContextPath()%>/kecheng/kechengjianjie?coursesId='+courses.coursesId+'">'+
-                                    '<img src="' + courses.coursesName + '" />' +
+                                    '<img src="' + courses.introducePic + '" />' +
                                     '</a>' +
                                     '</dt>' +
                                     '<dd class="studing_ul_f_dd">' +
