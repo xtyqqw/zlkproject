@@ -39,6 +39,7 @@ import java.util.Map;
 public class UsersController {
     @Autowired
     private UserService userService;
+    //LogUtil是记录日志的工具类
     @Autowired
     private LogUtil logUtil;
         //文件上传工具类
@@ -298,7 +299,9 @@ public class UsersController {
 //            userId="1";
 //        //调用查询单个对象的方法
 //        User user=userService.selectUserById(userId);
+//         //将查询出的对象放入到mv里
 //        mv.addObject("user",user);
+            //设置返回页面
 //        mv.setViewName("view/cxr/personInfo");
 //       // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");
 //        return mv;

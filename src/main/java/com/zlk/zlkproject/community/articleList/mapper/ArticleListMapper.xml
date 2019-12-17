@@ -17,6 +17,7 @@
         <result column="user_id" property="userId" javaType="java.lang.String"></result>
         <result column="create_article_type" property="createArticleType" javaType="java.lang.Integer"></result>
         <result column="article_set_top" property="articleSetTop" javaType="java.lang.Integer"></result>
+        <result column="approval" property="approval" javaType="java.lang.Integer"></result>
         <!--association 是一对一的关键字，collection是一对多的关键字-->
         <association property="user" javaType="com.zlk.zlkproject.entity.User">
             <id column="user_id" property="userId" javaType="java.lang.String"></id>
@@ -44,24 +45,24 @@
     </resultMap>
 
     <select id="findArticleCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
-        select count(1) from article
+        select count(1) from article where approval = 1
     </select>
     <select id="findByCreateTime" resultMap="articleListEntityMap">
-        select a.article_id, a.title,a.article_digest,a.figures,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id, a.title,a.article_digest,a.figures,a.browse_count,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,a.approval,u.user_realname
         from article a , user u
-        where a.user_id=u.user_id
+        where a.user_id=u.user_id and a.approval = 1
         order by a.article_set_top,a.create_time DESC
         limit #{startPage},#{limit}
     </select>
     <select id="findByBrowseCount" resultMap="articleListEntityMap">
-        select a.article_id,a.title,a.article_digest,a.browse_count,a.figures,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id,a.title,a.article_digest,a.browse_count,a.figures,a.comment_count,a.create_time,a.create_article_type,a.article_set_top,a.approval,u.user_realname
         from article a , user u
-        where a.user_id=u.user_id
+        where a.user_id=u.user_id and a.approval = 1
         order by a.article_set_top,a.browse_count DESC
         limit #{startPage},#{limit}
     </select>
     <select id="findByUserId" resultMap="articleListEntityMap" parameterType="com.zlk.zlkproject.entity.Pagination">
-        select a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,u.user_realname
+        select a.article_id,a.title,a.browse_count,a.comment_count,a.create_time,a.figures,a.figures,a.article_digest ,a.create_article_type,a.article_set_top,a.approval,u.user_realname
         from article a
         left join user u on a.user_id=u.user_id
         where a.user_id=#{userId} limit #{startPage},#{limit}

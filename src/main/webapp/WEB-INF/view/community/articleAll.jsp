@@ -11,7 +11,7 @@
             width: 100%;
             height: auto;
             padding-bottom: 1px;
-            overflow-y: hidden;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;

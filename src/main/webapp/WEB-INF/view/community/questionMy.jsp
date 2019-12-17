@@ -176,6 +176,7 @@
     </style>
 </head>
 <body>
+<%@ include file="logging.jsp"%>
 <div class="context-div" style="float: left"></div>
 <div id="demo1" style="float: right;margin: 1047px 2px auto"></div>
 <script>
@@ -190,7 +191,7 @@
     function loadData() {
         $.ajax({
             type: "post",
-            url: "<%=request.getContextPath()%>/question/questionAll",
+            url: "<%=request.getContextPath()%>/question/questionMy",
             async: false,
             dataType: 'json',
             data: {
@@ -199,7 +200,7 @@
             },
             success: function (ret) {
                 total = ret.count;  //设置总条数
-                var question = ret.questionAllList;
+                var question = ret.questionMyList;
                 var html = '';
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';
@@ -219,10 +220,10 @@
                     if (question[i].questionSetTop === 1) {
                         html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    html += '<div class="figures" id="figures">' + '<img class="img" src="/img/0.jpg"/>' + '</div>';
+                    html += '<div class="figures" id="figures">' + '<img class="img" src="' + question[i].user.userImg + '"/>' + '</div>';
                     html += '<div class="articleDigest" style="width: 660px">' + question[i].questionContent + '</div>';
                     html += '<div>';
-                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + '游客可见' + '</a></div>';
+                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + question[i].user.userRealname + '</a></div>';
                     html += '<div class="little"></div>';
                     html += '<div class="createTime"><span class="timeago" title="' + question[i].createTime + '"></span></div>';
                     html += '</div>';

@@ -10,7 +10,8 @@
         .context-div{
             width: 100%;
             height: auto;
-            overflow-y: hidden;
+            padding-bottom: 1px;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;
