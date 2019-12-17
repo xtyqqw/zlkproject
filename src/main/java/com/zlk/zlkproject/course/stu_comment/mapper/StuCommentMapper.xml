@@ -17,6 +17,8 @@
         <result property="teacherAnswer" column="teacher_answer" javaType="java.lang.String"/>
         <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
+        <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
+        <result property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
         <collection property="stuCommentList" ofType="com.zlk.zlkproject.entity.StuComment">
             <result property="smId" column="sm_id1" javaType="java.lang.Integer"/>
             <result property="pId" column="pid1" javaType="java.lang.Integer"/>
@@ -102,8 +104,8 @@
     </update>
 
     <insert id="addSuu">
-        INSERT INTO stucmt_user_updown (sm_id,user_id,up_down) VALUES (#{smId},#{userId},#{upOrDown})
-    </insert>
+    INSERT INTO stucmt_user_updown (sm_id,user_id,up_down) VALUES (#{smId},#{userId},#{upOrDown})
+</insert>
 
     <delete id="deleteSuu">
         DELETE FROM stucmt_user_updown WHERE sm_id = #{smId} AND user_id = #{userId}
@@ -119,7 +121,11 @@
 
 
     <select id="findAllFromStuComment" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="stuCmtEntityMap">
-		 select * from stu_comment limit #{startPage},#{limit}
+		  select sc.*,cp.chapter_id,c.courses_id
+      FROM stu_comment sc,chapter cp,courses c,section s
+      WHERE  sc.section_id=s.section_id AND s.chapter_id=cp.chapter_id AND cp.courses_id=c.courses_id
+       ORDER BY sc.up DESC limit  #{startPage},#{limit}
+
 	</select>
 
     <select id="findStuCommentCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
@@ -142,6 +148,6 @@
 
     <select id="findStuCommentCountByUserId" resultType="java.lang.Integer">
         select count(1) from user,stu_comment  where user.user_id = stu_comment.user_id
-       and stu_comment.user_id  = #{userId}
+       and stu_comment.user_id  = #{userId} and stu_comment.teacher_answer!=''
     </select>
 </mapper>

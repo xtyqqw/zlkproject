@@ -43,7 +43,7 @@
     </select>
     <!--根据文章ID修改我的文章-->
     <update id="updateArticles" parameterType="com.zlk.zlkproject.user.entity.Articles">
-        update article set article_content=#{articleContent},title=#{title}
+        update article set article_content=#{articleContent},title=#{title},figures=#{figures}
         where article_id=#{articleId}
     </update>
     <!--根据文章ID删除文章-->

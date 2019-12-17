@@ -9,11 +9,12 @@
     <style type="text/css">
         .context-div{
             overflow-x:hidden;
+            overflow-y:hidden;
             position: absolute;
             margin: auto 0;
             width: 100%;
             height: 78%;
-            z-index: -999;
+
         }
         .all{
             width: 100%;
@@ -40,9 +41,9 @@
             left: 33px;
             top: -3px;
             float: left;
-            width: 35px;
+            width: 55px;
             height: 20px;
-            background-color: #1296db;
+            background-color: #1E9FFF;
             border-radius: 8%;
             font-size: 15px;
             font-family: Arial;
@@ -177,7 +178,7 @@
 </head>
 <body>
 <div class="context-div" style="float: left"></div>
-<div id="demo1" style="float: right;margin: 1047px 2px auto"></div>
+<div id="demo1" style="float: left;margin: 850px 390px auto;"></div>
 <script>
     $(function () {
         loadData();
@@ -185,7 +186,7 @@
         $(".timeago").timeago();
     });
     var page = 1; //设置首页页码
-    var limit = 5;  //设置一页显示的条数
+    var limit = 4;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({
@@ -219,10 +220,10 @@
                     if (question[i].questionSetTop === 1) {
                         html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    html += '<div class="figures" id="figures">' + '<img class="img" src="/img/headimg.png"/>' + '</div>';
+                    html += '<div class="figures" id="figures">' + '<img class="img" src="' + question[i].user.userImg + '"/>' + '</div>';
                     html += '<div class="articleDigest" style="width: 660px">' + question[i].questionContent + '</div>';
                     html += '<div>';
-                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + '游客' + '</a></div>';
+                    html += '<div class="userRealname"><a href="/question/findQuestion?questionId='+question[i].questionId+'" target="_blank">' + question[i].user.userRealname + '</a></div>';
                     html += '<div class="little"></div>';
                     html += '<div class="createTime"><span class="timeago" title="' + question[i].createTime + '"></span></div>';
                     html += '</div>';
