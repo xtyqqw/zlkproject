@@ -77,7 +77,7 @@
             </div>
         </div>
         <%--用户姓名--%>
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="margin-top: 2vw;">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
                 <input type="text" name="userRealname"id="userRealname"  value="${user.userRealname}"  placeholder="请输入你的真实姓名(不能包含空格数字)" autocomplete="off" class="layui-input"
@@ -140,7 +140,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">籍贯</label>
             <div class="layui-input-block">
-                <input type="text" name="userNative" id="userNative" value="${user.userNative}" placeholder="请输入籍贯（与身份证一致）" autocomplete="off" class="layui-input">
+                <input type="text" name="userNative" id="userNative" value="${user.userNative}" placeholder="请输入籍贯（与身份证一致）" autocomplete="off" class="layui-input" maxlength="25">
             </div>
         </div>
         <%--婚否--%>
@@ -158,7 +158,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">所在城市</label>
             <div class="layui-input-block">
-                <input type="text" name="userCity"  value="${user.userCity}" id="userCity" placeholder="请输入所在城市" autocomplete="off" class="layui-input">
+                <input type="text" name="userCity"  value="${user.userCity}" id="userCity" placeholder="请输入所在城市" autocomplete="off" class="layui-input" maxlength="20">
             </div>
         </div>
             <%--现状--%>
@@ -353,6 +353,7 @@
             layer.alert($("#msg").val());
         })
         </c:if>
+        <%--日期js--%>
         // laydate.render({
         //     elem: '#createTime'
         //     , type: 'datetime'
@@ -370,7 +371,7 @@
             , cols: [[ //表头
                 //
                 // {type: 'checkbox'}
-                                    //序号自动排序  type:'numbers'
+                // field:'zizeng',可不写。  序号自动排序  type:'numbers'
                 {field:'zizeng',title:'序号',type:'numbers'}
                 // , {field: 'userId', title: '编号', width: 80, sort: true}
                                     //图片返显至表格：templet:'<div><img src="{{d.userImg}}">'
@@ -401,11 +402,12 @@
                         '</div>'
                 }
             ]]
+            //,limits: [5, 10, 20]是每页显示条数
             , limits: [5, 10, 20]
             , toolbar:
                         //拼接新增按钮
                 // '<div class="layui-btn-group">' +
-                // '<button type="button" class="layui-btn" lay-event="add">增加</button>' +
+                // '<button type="button" class="layui-btn" lay-event="add" style="margin-left:40vw; margin-top:2vw;">增加</button>' +
                     //    拼接模糊查询输入框和按钮
                 '<div class="layui-card search">\n' +
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
@@ -430,6 +432,9 @@
                 '    </div>' +
                 '</div>'
         });
+
+
+
         //头工具栏事件,添加方法
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id);
@@ -447,8 +452,7 @@
                         }
                     });
                     break;
-            }
-            ;
+            };
         });
 
         //监听行工具事件，删除方法
@@ -622,36 +626,36 @@
 
 
 
-    //密码
-    function checkpwd1() {
-        var check = false;
-        //获取密码输入框输入的值
-        var password = document.getElementById("pwd1").value;
-        if (password.length == 6) {
-            document.getElementById("checktext2").innerHTML = "";
-            check = true;
-        } else {
-            document.getElementById("checktext2").innerHTML = "密码必须是六位";
-            check = false;
-        }
-        return check;
-    }
-
-
-    //确认密码
-    function checkpwd2() {
-        var check = false;
-        var pwd1 = document.getElementById("pwd1").value;
-        var pwd2 = document.getElementById("pwd2").value;
-        if (pwd1 != pwd2) {
-            document.getElementById("checktext3").innerHTML = "两次输入密码不一致";
-            check = false;
-        } else {
-            document.getElementById("checktext3").innerHTML = "";
-            check = true;
-        }
-        return check;
-    }
+    // //密码
+    // function checkpwd1() {
+    //     var check = false;
+    //     //获取密码输入框输入的值
+    //     var password = document.getElementById("pwd1").value;
+    //     if (password.length == 6) {
+    //         document.getElementById("checktext2").innerHTML = "";
+    //         check = true;
+    //     } else {
+    //         document.getElementById("checktext2").innerHTML = "密码必须是六位";
+    //         check = false;
+    //     }
+    //     return check;
+    // }
+    //
+    //
+    // //确认密码
+    // function checkpwd2() {
+    //     var check = false;
+    //     var pwd1 = document.getElementById("pwd1").value;
+    //     var pwd2 = document.getElementById("pwd2").value;
+    //     if (pwd1 != pwd2) {
+    //         document.getElementById("checktext3").innerHTML = "两次输入密码不一致";
+    //         check = false;
+    //     } else {
+    //         document.getElementById("checktext3").innerHTML = "";
+    //         check = true;
+    //     }
+    //     return check;
+    // }
 
 </script>
 </body>
