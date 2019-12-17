@@ -1395,6 +1395,7 @@ $(document).ready(function () {
             let flag = 0;
 
             function cmtFlowLoad(url) {
+                flag = 0;
                 $("#SCS_ul_stream").empty();
                 flow.load({
                     elem: '#SCS_ul_stream',//流加载容器
