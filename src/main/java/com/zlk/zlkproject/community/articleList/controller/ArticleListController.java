@@ -92,12 +92,13 @@ public class ArticleListController {
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
     public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{
-        User user=new User();
-        String userId = (String) request.getSession().getAttribute("userId");
+        User user = (User) request.getSession().getAttribute("user");
+        //String userId = "" + user.getUserId();
         List<Article> articleList=articleListService.findByUserId(pagination);
         Integer count=articleListService.findArticleCount(pagination);
+        System.out.println("uid="+user.getUserId());
         Map<String,Object> map=new HashMap<>();
-        if (user.getUserId() == null) {
+        if (user == null) {
             map.put("msg","请先进行登录");
             return map;
         }
