@@ -43,34 +43,18 @@ public class QuestionController {
      * @date 2019/11/27 16:43
      */
     @RequestMapping(value = "/questionGuide")
-    public ModelAndView main(HttpServletRequest request, Question question) throws Exception {
+    public ModelAndView questionGuide(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-      /*  User user = (User) request.getSession().getAttribute("user");
-        String usId = user.getUserId();
-        if (usId != null) {*/
-            mv.addObject("msg", "您已登录成功，请进行操作");
-            mv.setViewName("/view/community/questionGuide");
-      /*      Integer audit1 = questionService.selectAudit(usId);
-            if (audit1 != null) {
-                if (audit1 == 1) {
-                    question.setAudit("1");
-                    mv.addObject("flag", "true");
-                    mv.addObject("msg", "可以发文");
-                    mv.setViewName("/view/community/questionGuide");
-                } else if (audit1 == 0) {
-                    mv.addObject("flag", "true");
-                    mv.addObject("msg", "你之前的提问审核失败，以后发表提问请注意撰文规则，感谢您的配合");
-                    mv.setViewName("/view/community");
-                } else {
-                    mv.addObject("flag", "true");
-                    mv.addObject("msg", "你的提问正在审核中，通过以后才能继续发表提问，我们会尽快处理，给您反馈");
-                    mv.setViewName("/view/community/");
-                }*/
-/*            } else {
-            mv.addObject("msg", "你还没有登录，请先登录");
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            mv.addObject("spanmsg", "你还没有登录，请先登录");
             mv.setViewName("/view/signin");
-        }*/
-        return mv;
+            return mv;
+        } else {
+            mv.addObject("spanmsg", "您已登录成功，请进行操作");
+            mv.setViewName("/view/community/questionGuide");
+            return mv;
+        }
     }
 
     /*
@@ -95,33 +79,16 @@ public class QuestionController {
      * @date 2019/11/27 16:46
      */
     @PostMapping(value = "/addQuestion")
-    public ModelAndView addQuestion(Question question, User user) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        question.setQuestionId(UUIDUtils.getId());
-        question.setCreateTime(new Date());
-        //发布文章的动态的状态为1
-        question.setSolve(0);
-        question.setZanCount(0);
-        question.setCaiCount(0);
-        question.setBrowseCount("0");
-        question.setQuestionSetTop("1");
-        question.setResponseCount(0);
-        question.setAudit("1");
-        question.setUserId(user.getUserRealname());
-        questionService.addQuestion(question);
-        if (question != null) {
-            mv.addObject("flag", "true");
-            mv.addObject("error", "发表成功");
-            mv.setViewName("redirect:/articles/toLogin");
-        } else {
-            mv.addObject("flag", "true");
-            mv.addObject("error", "格式不符合要求");
-            mv.setViewName("redirect:/question/editQuestion");
-        }
-        return mv;
+    public String addQuestion(Question question, HttpServletRequest request) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = "" + user.getUserId();
+        user.setUserId(userId);
+        question.setUser(user);
+        questionService.saveQuestion(question);
+        return "redirect:/CommunityPage";
     }
 
-    //文章编辑页面的图片上传方法
+    //问题编辑页面的图片上传方法
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     public void hello(HttpServletRequest request, HttpServletResponse
             response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach) {

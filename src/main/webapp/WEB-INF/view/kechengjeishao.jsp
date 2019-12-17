@@ -295,7 +295,7 @@
 
 </head>
 <body>
-<jsp:include page="../jsp/header.jsp"></jsp:include>
+<jsp:include page="../view/headerintro.jsp"></jsp:include>
 <div id="kechengzhuti">
     <div id="kechengjeishao">
         <input id="kechengId" type="hidden">

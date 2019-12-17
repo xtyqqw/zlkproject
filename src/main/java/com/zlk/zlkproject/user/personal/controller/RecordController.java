@@ -58,6 +58,9 @@ public class RecordController {
             Integer done = recordService.selectUserTime(userId,sectionId);
             /*已完成多少百分比*/
             long per = Math.round((100 * done) / sum);
+            if(per>=100){
+                per=100;
+            }
             itemList.get(i).setPer(per);
         }
         Map<String,Object> map=new HashMap<>();
