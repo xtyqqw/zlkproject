@@ -335,7 +335,7 @@
                 <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">籍贯</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userNative" value="${user.userNative}"  placeholder="请输入籍贯（与身份证一致）"  maxlength="20" autocomplete="off" class="layui-input">
+                        <input type="text" name="userNative" value="${user.userNative}"  placeholder="请输入籍贯（与身份证一致，最多10个字）"  maxlength="10" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <%--婚否--%>
@@ -353,7 +353,7 @@
                 <div class="layui-form-item" style="margin-bottom: 30px">
                     <label class="layui-form-label">所在城市</label>
                     <div class="layui-input-block">
-                        <input type="text" name="userCity" value="${user.userCity}" maxlength="20" placeholder="请输入所在城市" autocomplete="off" class="layui-input" maxlength="25">
+                        <input type="text" name="userCity" value="${user.userCity}" maxlength="20" placeholder="请输入所在城市（最多10个字）" autocomplete="off" class="layui-input" maxlength="10">
                     </div>
                 </div>
                     <%--现状--%>
