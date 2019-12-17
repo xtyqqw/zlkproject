@@ -14,6 +14,7 @@
         <result property="down" column="down" javaType="java.lang.Integer"/>
         <result property="report" column="report" javaType="java.lang.String"/>
         <result property="date" column="date" javaType="java.util.Date"/>
+        <result property="teacherAnswer" column="teacher_answer" javaType="java.lang.String"/>
         <result property="userRealName" column="user_realname" javaType="java.lang.String"/>
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
         <collection property="stuCommentList" ofType="com.zlk.zlkproject.entity.StuComment">
@@ -116,4 +117,31 @@
         UPDATE stu_comment SET report = #{report} WHERE sm_id = #{smId}
     </update>
 
+
+    <select id="findAllFromStuComment" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="stuCmtEntityMap">
+		 select * from stu_comment limit #{startPage},#{limit}
+	</select>
+
+    <select id="findStuCommentCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
+		select count(1) from stu_comment
+	</select>
+
+    <update id="updateTeacherAnswer">
+        UPDATE stu_comment SET teacher_answer = #{teacherAnswer} WHERE sm_id = #{smId}
+    </update>
+
+    <delete id="deleteStudentComment">
+        DELETE FROM stu_comment WHERE sm_id = #{smId}
+    </delete>
+
+    <select id="findStuCommentListByUserId" parameterType="com.zlk.zlkproject.entity.StuComment" resultMap="stuCmtEntityMap">
+      select  user.user_realname,user.user_realimg,user.user_img,stu_comment.*
+      FROM user,stu_comment WHERE user.user_id = stu_comment.user_id
+      and stu_comment.user_id=#{userId}  and teacher_answer !="" ORDER BY stu_comment.up DESC limit #{startPage},#{limit}
+    </select>
+
+    <select id="findStuCommentCountByUserId" resultType="java.lang.Integer">
+        select count(1) from user,stu_comment  where user.user_id = stu_comment.user_id
+       and stu_comment.user_id  = #{userId}
+    </select>
 </mapper>

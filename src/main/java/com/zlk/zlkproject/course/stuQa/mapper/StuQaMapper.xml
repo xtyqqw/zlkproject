@@ -13,6 +13,7 @@
         <result property="viewNum" column="view_num" javaType="java.lang.Integer"/>
         <result property="share" column="share" javaType="java.lang.String"/>
         <result property="report" column="report" javaType="java.lang.String"/>
+        <result property="replayPerson" column="replay_person" javaType="java.lang.String"/>
         <result property="date" column="date" javaType="java.util.Date"/>
         <collection property="tagList" ofType="com.zlk.zlkproject.entity.Tag">
             <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
@@ -52,6 +53,9 @@
             <if test="report != null and report !=''">
                 report,
             </if>
+            <if test="replayPerson != null and replayPerson !=''">
+                replay_person,
+            </if>
             <if test="date != null">
                 date,
             </if>
@@ -84,6 +88,9 @@
             </if>
             <if test="report != null and report !=''">
                 #{report},
+            </if>
+            <if test="replayPerson != null and replayPerson !=''">
+                #{replayPerson},
             </if>
             <if test="date != null">
                 #{date},
@@ -209,6 +216,9 @@
             </if>
             <if test="report != null and report !=''">
                 report = #{report},
+            </if>
+            <if test="replayPerson != null and replayPerson !=''">
+                replay_person = #{replayPerson},
             </if>
             <if test="date != null">
                 date = #{date},

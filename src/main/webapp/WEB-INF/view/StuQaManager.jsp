@@ -62,9 +62,15 @@
                 ,toolbar: '#toolbarDemo'
                 ,cols: [[
                     {field:'sqaId', width:90, title: '问答ID',sort: true}
-                    ,{field:'pId', width:90, title: '问答父ID', sort: true}
-                    ,{field:'sectionId', width:90, title: '小节ID',sort: true}
-                    ,{field:'userId', width:90, title: '用户ID',sort: true}
+                    ,{field:'pId', width:110, title: '回答对象ID', sort: true}
+                    ,{field:'sectionId', width:90, title: '小节ID',sort: true,hide: true}
+                    ,{field:'sectionName', width:150, title: '小节名称',templet: function (d) {
+                            return findSectionName(d.sectionId);
+                        },sort: true}
+                    ,{field:'userId', width:90, title: '用户ID',sort: true,hide: true}
+                    ,{field:'userRealname', width:150, title: '用户名',templet: function (d) {
+                            return findName(d.userId);
+                        },sort: true}
                     ,{field:'content', width:200,title: '问答内容'}
                     ,{field:'answerNum', width:110, title: '回答数量', sort: true}
                     ,{field:'viewNum', width:110, title: '浏览数量', sort: true}
@@ -95,7 +101,6 @@
 
             //监听select选择事件
             form.on('select(select)',function (data) {
-                alert(data.value);
                 $("#selectInput").attr("name",data.value);
             });
 
@@ -130,7 +135,7 @@
                             url :"<%=request.getContextPath()%>/stuQaManager/deleteStuQa",
                             data: {"sqaId":data.sqaId},
                             success: function (data) {
-                                layer.alert(data.msg);
+                                layer.msg(data.msg);
                                 table.reload('stuQa',{
                                     url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
                                     height:$(document).height()-$('#stuQa').offset().top-20,
@@ -148,7 +153,6 @@
 
             //监听举报操作
             form.on('switch(reportDemo)', function(data){
-                layer.alert(data.value);
                 let report = "";
                 if (data.elem.checked){
                     report = "已举报";
@@ -161,7 +165,7 @@
                     url :"<%=request.getContextPath()%>/stuQaManager/updateReport",
                     data: {"sqaId":data.value,"report":report},
                     success: function (data) {
-                        layer.alert(data.msg);
+                        layer.msg(data.msg);
                         table.reload('stuQa',{
                             url: '<%=request.getContextPath()%>/stuQaManager/selectAllLimit',
                             height:$(document).height()-$('#stuQa').offset().top-20,
@@ -175,6 +179,38 @@
 
                 })
             });
+
+            //根据用户id查找用户名
+            function findName(userId) {
+                var userRealname;
+                $.ajax({
+                    type:"POST",
+                    url:"<%=request.getContextPath()%>/users/selectNameAndImg",
+                    async:false,
+                    data:{"userId":userId},
+                    dataType: "json",
+                    success:function (data) {
+                        userRealname = data.userRealname;
+                    }
+                });
+                return userRealname;
+            }
+
+            //根据小节id查找小节名称
+            function findSectionName(sectionId) {
+                var sectionName;
+                $.ajax({
+                    type:"POST",
+                    url:"<%=request.getContextPath()%>/SMC/findNameBySectionId",
+                    async:false,
+                    data:{"sectionId":sectionId},
+                    dataType: "json",
+                    success:function (data) {
+                        sectionName = data.sectionName;
+                    }
+                });
+                return sectionName;
+            }
 
         })
 

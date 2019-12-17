@@ -48,6 +48,7 @@ public class MyFollower {
     private List<UserAction> list;
 
 
+
     public MyFollower(String userId, String userRealname, Integer userDateTime, Integer userAllTime, String userImg, String userRealimg, Integer followerNum, Integer followedNum, Integer studyPower, Integer studyEfficiency, Integer studyTime, Integer studyGrowup, Integer studyStandard, Integer followType, List<UserAction> list) {
         this.userId = userId;
         this.userRealname = userRealname;

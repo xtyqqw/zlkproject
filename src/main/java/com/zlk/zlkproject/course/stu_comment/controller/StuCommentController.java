@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.course.stu_comment.controller;
 
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 
 import com.zlk.zlkproject.entity.User;
@@ -134,5 +135,68 @@ public class StuCommentController {
         map.put("error",error);
         return map;
     }
+
+    @RequestMapping(value="/findAllFromStuComment")
+    @ResponseBody
+    public Map<String, Object> findAllFromStuComment(Pagination pagination)throws Exception{
+        List<StuComment> list = stuCommentService.findAllFromStuComment(pagination);
+        Integer count = stuCommentService.findStuCommentCount(pagination);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "0");
+        map.put("count", count);
+        map.put("data", list);
+        return map;
+    }
+
+    @RequestMapping("updateTeacherAnswer")
+    @ResponseBody
+    public Map updateTeacherAnswer(@RequestParam("smId") Integer smId,@RequestParam("teacherAnswer") String teacherAnswer){
+        Map map = new HashMap();
+        Integer res = stuCommentService.updateTeacherAnswer(smId,teacherAnswer);
+        Integer error = 1;
+        if (res == 1)
+            error = 0;
+        map.put("error",error);
+        map.put("res",res);
+        return map;
+    }
+    @RequestMapping("deleteStudentComment")
+    @ResponseBody
+    public Integer deleteStudentComment(Integer smId) throws  Exception{
+        Integer flag=stuCommentService.deleteStudentComment(smId);
+        if (flag==1){
+            return flag;
+        }else {
+            return null;
+        }
+    }
+
+
+    @RequestMapping(value = "/findStuCommentListByUserId")
+    @ResponseBody
+    public Map<String,Object> findStuCommentListByUserId(HttpServletRequest request,StuComment stuComment, Integer page, Integer limit)throws Exception{
+        User user=(User) request.getSession().getAttribute("user");
+        String userId=user.getUserId();
+        int yeishu = stuCommentService.findStuCommentCountByUserId(userId)/limit;
+        if(stuCommentService.findStuCommentCountByUserId(userId)%limit!=0){
+            yeishu++;
+        }
+        /*判断前三热门详情*/
+        List<StuComment> stuCommentList=stuCommentService.findStuCommentListByUserId(stuComment,page,limit,userId);
+        if (page==1){
+            for(StuComment stuComment1:stuCommentList){
+                stuComment1.setFlag("true");
+            }
+        }else if (page==2){
+            stuCommentList.get(0).setFlag("true");
+        }
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("stuCommentList",stuCommentList);
+        map.put("yeishu",yeishu);
+        return map;
+    }
+
+
 
 }

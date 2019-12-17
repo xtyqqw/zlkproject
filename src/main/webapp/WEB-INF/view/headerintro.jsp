@@ -150,7 +150,7 @@
             <div>
                 <ul class="layui-nav" style="margin: 0 330px 0 1150px">
                     <li class="layui-nav-item" lay-unselect="" style="margin-top: 10px;text-align: center">
-                        <a href="javascript:;">
+                        <a href="javascript:;" style="margin-top: -1.5vw;">
                             <c:if test="${user.userImg==null}">
                                 <img src="/img/headimg.png" class="layui-nav-img" style="width: 40px;height: 40px;margin: 0 auto">
                             </c:if>
@@ -160,8 +160,8 @@
                             <p class="name" style="">${user.userRealname}</p>
                         </a>
                         <dl class="layui-nav-child">
-                            <a href="<%=request.getContextPath()%>/personal/person">个人中心</a>
-                            <a href="<%=request.getContextPath()%>/users/logout;">退出</a>
+                            <a href="/personal/person">个人中心</a>
+                            <a href="/users/logout;">退出</a>
                         </dl>
                     </li>
                 </ul>

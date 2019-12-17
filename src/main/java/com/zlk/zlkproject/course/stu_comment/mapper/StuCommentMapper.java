@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.stu_comment.mapper;
 
+import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -96,4 +97,61 @@ public interface StuCommentMapper {
      *@time 2019/12/06  16:18
      */
     public Integer updateReport(Integer smId,String report);
+
+    /**
+     *@Author luanke
+     *@Description //查询评论表所有内容
+     *@Date 11:22 2019/12/16
+     *@Param [pagination]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuComment>
+    **/
+    List<StuComment> findAllFromStuComment(Pagination pagination);
+
+
+    /**
+     *@Author luanke
+     *@Description //查询评论表所有数量
+     *@Date 11:22 2019/12/16
+     *@Param [pagination]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuComment>
+     **/
+    Integer findStuCommentCount(Pagination pagination);
+
+
+    /**
+     *@Author luanke
+     *@Description //更改讲师回复
+     *@Date 14:21 2019/12/16
+     *@Param [smId, teacherAnswer]
+     *@return java.lang.Integer
+    **/
+    Integer updateTeacherAnswer(Integer smId, String teacherAnswer);
+
+    /**
+     *@Author luanke
+     *@Description //删除
+     *@Date 14:30 2019/12/16
+     *@Param [smId, userId]
+     *@return java.lang.Integer
+    **/
+    Integer deleteStudentComment(Integer smId);
+
+
+    /**
+     *@Author luanke
+     *@Description //根据userId查询所有
+     *@Date 19:16 2019/11/21
+     *@Param [pagination]
+     *@return java.util.List<com.zlk.zlkproject.entity.Comment>
+     **/
+    List<StuComment> findStuCommentListByUserId(StuComment stuComment,Integer startPage,Integer limit,String userId);
+
+    /**
+     *@Author luanke
+     *@Description //查询userId评论总数
+     *@Date 10:35 2019/12/10
+     *@Param [comment, startPage, limit, commentUserId]
+     *@return java.util.List<com.zlk.zlkproject.entity.Comment>
+     **/
+    Integer findStuCommentCountByUserId(String userId);
 }

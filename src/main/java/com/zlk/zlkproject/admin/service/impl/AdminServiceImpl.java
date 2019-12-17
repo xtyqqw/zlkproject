@@ -135,11 +135,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public Integer deleteAdminByAdminId(String adminId) {
-        //删除用户及用户角色中间表记录
-        Integer flag = adminMapper.deleteAdminByAdminId(adminId);
         //删除用户表记录
+        Integer flag = adminMapper.deleteAdminByAdminId(adminId);
+        //删除用户及用户角色中间表记录
         Integer flag1 = adminMapper.deleteAdminAndRoleByAdminId(adminId);
-        if (flag>0&&flag1>0){
+        if (flag>0){
             return 1;
         }else {
             return 0;

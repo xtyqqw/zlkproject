@@ -35,7 +35,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Double readRecord(UserSection userSection) {
+    public UserSection readRecord(UserSection userSection) {
         return playerMapper.readRecord(userSection);
     }
 }

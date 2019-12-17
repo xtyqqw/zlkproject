@@ -47,10 +47,11 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/person")
-    public ModelAndView jsp(HttpServletRequest request){
+    public ModelAndView jsp(HttpServletRequest request,String typeNum){
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv = new ModelAndView();
         mv.addObject("user",user);
+        mv.addObject("typeNum",typeNum);
         mv.setViewName("view/personal/personal");
         return mv;
     }
@@ -71,13 +72,15 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("/updateUser")
-    public ModelAndView updateUser(User user){
+    public ModelAndView updateUser(User user,HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         //调用修改方法
         userService.updateUser(user);
         //根据ID查询出user对象，
         User user1=userService.selectUserById(user.getUserId());
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user",user1);
         mv.addObject("user", user1);
         // 设置返回页面
         mv.setViewName("view/cxr/personInfo");

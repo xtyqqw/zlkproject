@@ -3,6 +3,7 @@ package com.zlk.zlkproject.course.chapter.controller;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.course.courseHomePage.service.CourseHomePageService;
+import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Courses;
@@ -29,6 +30,8 @@ public class ChapterManagerController {
 
     @Autowired
     private ChapterService chapterService;
+    @Autowired
+    private SectionService sectionService;
     @Autowired
     private LogUtil logUtil;
     @Autowired
@@ -126,7 +129,9 @@ public class ChapterManagerController {
         Integer count = chapterService.selectAllCount();
         for (Chapter chapter : chapterList) {
             Integer sectionNum = sectionsManagerService.findCountByChapterId(chapter.getChapterId());
+            Integer sectionTimes = sectionsManagerService.findTimeByChapterId(chapter.getChapterId());
             chapter.setSectionNum(sectionNum);
+            chapter.setChapterTime(sectionTimes);
             chapterService.updateChapterByChapterId(chapter);
         }
         Map<String,Object> map = new HashMap<>();
@@ -171,4 +176,5 @@ public class ChapterManagerController {
         map.put("data",chapterList);
         return map;
     }
+
 }
