@@ -61,7 +61,7 @@
             float: left;
             background-color: 	#F8F8F8;
             width: 68vw;
-            height: 8vw;
+            height: 10vw;
             margin-top: 2vw;
             font-size: 1vw;
         }
@@ -234,7 +234,7 @@
 
         .youce{
             float: left;
-            margin-top:-50.5vw;
+            margin-top:-60vw;
             margin-left: 40vw;
             width: 45vw;
         }
