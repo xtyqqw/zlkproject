@@ -129,7 +129,7 @@ $(document).ready(function () {
                 }
             });
             note_flow(sectionId);
-            stu_qa_flow(sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
             $("#sectionId").text(sectionId);
         });
 
@@ -159,7 +159,7 @@ $(document).ready(function () {
                     $("#text_div").append(str);
                 }
             })
-
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         /*问答功能中标签点击事件*/
@@ -223,12 +223,9 @@ $(document).ready(function () {
                                 $("#wenda_div").css("display", "none");
                                 tagIdArray.splice(0);
                             });
-                            /*if(result.message==="添加成功"){
-
-                            }*/
+                            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
                         }
                     });
-                    // stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
                 }else {
                     layer.msg("请确认字数未超过限制");
                 }
