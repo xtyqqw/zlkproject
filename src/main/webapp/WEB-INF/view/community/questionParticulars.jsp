@@ -171,7 +171,7 @@
 <body>
 <div class="top">
     <%@include file="../../jsp/header.jsp" %>
-    <%@include file="../../jsp/sidebar.jsp" %>
+    <%--  <%@include file="../../jsp/sidebar.jsp" %>--%>
     <div class="nav2">
         <div class="nav3">
             <h2>${question.questionTitle}</h2>
@@ -199,9 +199,12 @@
             </div>
             <br><br>
             <div style="float: left; margin-top: 10px;">
-                <div style="width: 50px;height:20px;background-color:white;border:1px solid #ccc;border-radius: 8%;">
-                    <p class="tag">${question.tagName}</p>
-                </div>
+                <c:forEach items="${question.tagName}" var="tag">
+                    <div style="width: 50px;height:20px;background-color:white;border:1px solid #ccc;border-radius: 8%;float: left;margin: 2px">
+                        <p class="tag">${tag}</p>
+                    </div>
+                </c:forEach>
+
             </div>
             <div class="span">
                 <small>
@@ -218,42 +221,12 @@
                 <textarea id="articleContent" style="display:none;">${question.questionContent}</textarea>
             </div>
         </div>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
-        <%--回答--%>
-        <div style="height: 25px;">
-            <span style="float: left;font-size: 18px;">回复：</span>
-        </div>
-        <div class="layui-form-item">
-            <form action="<%=request.getContextPath() %>/response/save" method="post" class="form" id="publish">
-                <textarea id="demo" style="display: none;" maxlength="200" placeholder="开始编辑。。。"
-                          name="responseContent"></textarea>
-                <div class="layui-input-block">
-                    <button type="submit" style="float:right;background-color: #914FF1;" class="layui-btn"
-                            lay-submit="sub" onclick="publish()" lay-filter="demo2">提交回复
-                    </button>
-                </div>
-            </form>
-        </div>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px"></fieldset>
-        <%--答复详情--%>
-        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-            <ul class="layui-tab-title">
-                <li class="layui-this">全部</li>
-                <li>最新</li>
-            </ul>
-            <div class="layui-tab-content" style="height: 100px;">
-                <div class="layui-tab-item layui-show">
-                    <li class="show_li1"></li>
-                </div>
-                <div class="layui-tab-item">
-                    <li class="show_li2"></li>
-                </div>
-            </div>
+        <div style="float: right;margin-top: 10px;margin-bottom: 10px;">
+            <p>发布时间：${question.createTime}</p>
         </div>
     </div>
 </div>
-
-
+<%--<%@include file="../../jsp/footer.jsp"%>--%>
 <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
@@ -278,43 +251,6 @@
         })
     })
 </script>
-<script>
-    layui.use('layedit', function () {
-        var layedit = layui.layedit;
-        layedit.set({
-            uploadImage: {
-                url: '/response/responseImg' //接口url
-                , type: 'post' //默认post
-            }
-        });
-        layedit.build('demo'); //建立编辑器
-    });
-
-</script>
-<script type="text/javascript">
-    /*表单验证开启*/
-    function publish() {
-        $('.form').form({
-            inline: true,
-            on: 'blur',
-            fields: {
-                responseContent: {
-                    identifier: 'responseContent',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '内容不能为空呦'
-                    }, {
-                        type: 'maxLength[50]',
-                        prompt: '请注意内容最大长度不能超过200'
-                    }]
-                }
-            },
-            onSuccess: function () {
-                alert("提交成功");
-            },
-        });
-    }
-</script>
 <script type="text/javascript">
     $(function () {
         var testEditormdView;
@@ -326,81 +262,6 @@
             tex: true,  // 默认不解析
             flowChart: true,  // 默认不解析
             sequenceDiagram: true  // 默认不解析
-        });
-    });
-</script>
-<script>
-    layui.use('flow', function () {
-        var flow = layui.flow;
-        var $ = layui.jquery;
-        flow.load({
-            elem: '.show_li1' //流加载容器
-            , isAuto: false
-            , done: function (page, next) { //加载下一页
-                //模拟插入
-                setTimeout(function () {
-                    var lis = [];
-                    var limit = 4;
-                    $.ajax({
-                        url: "/response/responseAll?page=" + page + "&limit=" + limit,
-                        type: 'post',
-                        dataType: "json",
-                        success: function (result) {
-                            layui.each(result.responseAllList, function (i, response) {
-                                var html = '';
-                                html += '<div class="border">' +
-                                    '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
-                                    '<div class="right" id="right">' +
-                                    '<div class="count"><span>' + response.responseContent + '</span></div>' +
-                                    '<div>' + '<div class="zan">' + response.zanCount + '赞' + '</div>' + ' <div class="cai">' + response.caiCount + '踩' + '</div>' + '</div>' +
-                                    '<div class="time">' + response.createTime + '</div>' + '</div>' +
-                                    '</div>';
-                                lis.push(html);
-                            });
-                            next(lis.join(''), page < 2);
-                            $(".timeago").timeago();
-                        }
-                    });
-                }, 500);
-            }
-        });
-    });
-
-</script>
-<script>
-    layui.use('flow', function () {
-        var flow = layui.flow;
-        var $ = layui.jquery;
-        flow.load({
-            elem: '.show_li2' //流加载容器
-            , isAuto: false
-            , done: function (page, next) { //加载下一页
-                //模拟插入
-                setTimeout(function () {
-                    var lis = [];
-                    var limit = 4;
-                    $.ajax({
-                        url: "/response/responseNew?page=" + page + "&limit=" + limit,
-                        type: 'post',
-                        dataType: "json",
-                        success: function (result) {
-                            layui.each(result.responseNewList, function (i, response) {
-                                var html = '';
-                                html += '<div class="border">' +
-                                    '<div class="user" id="user">' + /*'<img class="img" src="'+response.figures+'">' + '<div class="name"> '+ response.userName +'</div>' +*/'</div>' +
-                                    '<div class="right" id="right">' +
-                                    '<div class="count"><span>' + response.responseContent + '</span></div>' +
-                                    '<div>' + '<div class="zan">' + response.zanCount + '赞' + '</div>' + ' <div class="cai">' + response.caiCount + '踩' + '</div>' + '</div>' +
-                                    '<div class="time">' + response.createTime + '</div>' + '</div>' +
-                                    '</div>';
-                                lis.push(html);
-                            });
-                            next(lis.join(''), page < 2);
-                            $(".timeago").timeago();
-                        }
-                    });
-                }, 500);
-            }
         });
     });
 </script>

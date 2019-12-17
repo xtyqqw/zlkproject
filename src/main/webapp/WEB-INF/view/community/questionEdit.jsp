@@ -209,7 +209,7 @@
                 }
             },
             onSuccess: function () {
-                alert("发布成功,请等待审核通过");
+                alert("发布成功");
             },
         });
     }

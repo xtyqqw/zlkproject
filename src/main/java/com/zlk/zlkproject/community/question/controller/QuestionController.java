@@ -43,17 +43,15 @@ public class QuestionController {
      * @date 2019/11/27 16:43
      */
     @RequestMapping(value = "/questionGuide")
-    public ModelAndView main(HttpServletRequest request) throws Exception {
+    public ModelAndView questionGuide(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
         User user = (User) request.getSession().getAttribute("user");
-        String userId = user.getUserId();
-        User uId = questionService.findUserById(userId);
-        if (uId != null) {
-            mv.addObject("msg", "你还没有登录，请先登录");
+        if (user == null) {
+            mv.addObject("spanmsg", "你还没有登录，请先登录");
             mv.setViewName("/view/signin");
             return mv;
         } else {
-            mv.addObject("msg", "您已登录成功，请进行操作");
+            mv.addObject("spanmsg", "您已登录成功，请进行操作");
             mv.setViewName("/view/community/questionGuide");
             return mv;
         }
@@ -83,18 +81,10 @@ public class QuestionController {
     @PostMapping(value = "/addQuestion")
     public String addQuestion(Question question, HttpServletRequest request) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
-        String userId = user.getUserId();
-        question.setQuestionId(UUIDUtils.getId());
-        question.setCreateTime(new Date());
-        question.setSolve(0);
-        question.setZanCount(0);
-        question.setCaiCount(0);
-        question.setBrowseCount("0");
-        question.setQuestionSetTop("1");
-        question.setResponseCount(0);
-        question.setAudit("1");
-        question.setUserId(userId);
-        questionService.addQuestion(question);
+        String userId = "" + user.getUserId();
+        user.setUserId(userId);
+        question.setUser(user);
+        questionService.saveQuestion(question);
         return "redirect:/CommunityPage";
     }
 

@@ -25,15 +25,36 @@ import java.util.Map;
 public class QuestionHomeController {
     @Autowired
     private QuestionHomeService questionHomeService;
-    @RequestMapping("/questionMain")
-    public String questionMain(){
-        return "/view/community/questionMain";
-    }
 
+    /*
+     * @descrption 跳转全部提问
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
     @RequestMapping("/findQuestionAll")
     public String findQuestionAll(){
         return "/view/community/questionAll";
     }
+    /*
+     * @descrption 点击按钮跳转登录页面
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
+    @RequestMapping("/test")
+    public String test(){
+        return "/view/signin";
+    }
+    /*
+     * @descrption 跳转我的提问
+     * @author gby
+     * @param []
+     * @return java.lang.String
+     * @date 2019/12/17 10:35
+     */
     @RequestMapping("/findQuestionMy")
     public String findQuestionMy(){
         return "/view/community/questionMy";
@@ -64,10 +85,8 @@ public class QuestionHomeController {
      */
     @RequestMapping(value = "/questionMy")
     @ResponseBody
-    public Map<String, Object> questionMy(Pagination pagination,HttpServletRequest request,String userId) throws Exception {
-        User user = (User) request.getSession().getAttribute("user");
-        String uId = user.getUserId();
-        List<Question> questionMyList = questionHomeService.findByUserId(pagination,uId);
+    public Map<String, Object> questionMy(Pagination pagination) throws Exception {
+        List<Question> questionMyList = questionHomeService.findByUserId(pagination);
         Integer count = questionHomeService.findQuestionCount(pagination);
         Map<String, Object> map = new HashMap<>();
         map.put("questionMyList", questionMyList);

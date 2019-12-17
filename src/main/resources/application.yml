@@ -11,7 +11,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     #自动建表方式
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     #格式化sql
     properties:
       hibernate:

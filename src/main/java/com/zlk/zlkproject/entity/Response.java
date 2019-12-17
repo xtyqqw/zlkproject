@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -22,8 +24,6 @@ public class Response {
     @Id
     /**主键Id*/
     private String responseId;
-    /**对应问题Id*/
-    private String questionId;
     /**回答内容*/
     private String responseContent;
     /**回答时间*/
@@ -36,6 +36,12 @@ public class Response {
     private Integer caiCount;
     /**评论数*/
     private Integer replyCount;
-    /*用户*/
-    private String userId;
+    /**提问和用户多对一关系*/
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    /**回答和提问多对一关系*/
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 }

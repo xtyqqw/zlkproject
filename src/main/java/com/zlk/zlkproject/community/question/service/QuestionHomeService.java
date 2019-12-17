@@ -33,7 +33,7 @@ public interface QuestionHomeService {
      * @return
      * @date 2019/12/10 14:15
      */
-    List<Question> findByUserId(Pagination pagination,String userId);
+    List<Question> findByUserId(Pagination pagination);
 
     /*
      * @descrption 查询问答详情转换格式

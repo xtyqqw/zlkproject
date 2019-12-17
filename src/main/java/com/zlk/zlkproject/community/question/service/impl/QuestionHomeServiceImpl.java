@@ -43,12 +43,12 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
         return questionHomeMapper.findAll(pagination);
     }
     @Override
-    public List<Question> findByUserId(Pagination pagination,String userId) {
+    public List<Question> findByUserId(Pagination pagination) {
         Integer page = pagination.getPage();
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return questionHomeMapper.findByUserId(pagination,userId);
+        return questionHomeMapper.findByUserId(pagination);
 
     }
 
