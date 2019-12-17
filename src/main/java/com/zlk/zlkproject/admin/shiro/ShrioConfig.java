@@ -51,6 +51,7 @@ public class ShrioConfig {
         filterMap.put("/note/*", "authc");
         filterMap.put("/chapterManager/*", "authc");
         filterMap.put("/SMC/*", "authc");
+        filterMap.put("/commentManager","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
