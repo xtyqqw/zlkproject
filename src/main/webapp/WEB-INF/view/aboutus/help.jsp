@@ -15,7 +15,7 @@
         .about-main{
             margin: 5px;
             border: 1px #FFFFFF;
-            width: 1000px;height: 650px;
+            width: 99%;height: 650px;
             box-shadow: 0px 3px 5px 3px #D4D4D4;
         }
         .about-main .tiao{
