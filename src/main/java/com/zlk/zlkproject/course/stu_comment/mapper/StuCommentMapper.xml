@@ -142,6 +142,6 @@
 
     <select id="findStuCommentCountByUserId" resultType="java.lang.Integer">
         select count(1) from user,stu_comment  where user.user_id = stu_comment.user_id
-       and stu_comment.user_id  = #{userId}
+       and stu_comment.user_id  = #{userId} and stu_comment.teacher_answer!=''
     </select>
 </mapper>

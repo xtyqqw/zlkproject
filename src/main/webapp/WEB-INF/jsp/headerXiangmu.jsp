@@ -29,6 +29,7 @@
             margin-left: 30px;
             padding-top: 10px;
             float: left;
+
         }
         .header .header-nav{
             display: inline;
@@ -113,7 +114,7 @@
 <div class="header">
     <!-- logo -->
     <div class="header-logo">
-        <img src="/img/logo.png" />
+        <img src="/img/logo.png" style="width: 150px;height: 66px;"/>
     </div>
     <!-- 导航 -->
     <div class="header-nav">
