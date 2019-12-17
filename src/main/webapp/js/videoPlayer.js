@@ -228,7 +228,9 @@ $(document).ready(function () {
                             }*/
                         }
                     });
-                    stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                    // stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                }else {
+                    layer.msg("请确认字数未超过限制");
                 }
             }
         });
@@ -300,7 +302,9 @@ $(document).ready(function () {
         $("#text_div").keyup(function () {
             if (checkLength(editor,401)){
                 layer.msg("输入内容请不要超过200个汉字或400个英文字符");
-                istrue = false;
+                isSubmit = false;
+            }else {
+                isSubmit = true;
             }
         });
 
