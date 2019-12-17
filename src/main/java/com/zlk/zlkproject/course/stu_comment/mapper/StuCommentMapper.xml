@@ -137,7 +137,7 @@
     <select id="findStuCommentListByUserId" parameterType="com.zlk.zlkproject.entity.StuComment" resultMap="stuCmtEntityMap">
       select  user.user_realname,user.user_realimg,user.user_img,stu_comment.*
       FROM user,stu_comment WHERE user.user_id = stu_comment.user_id
-      and stu_comment.user_id=#{userId}  ORDER BY stu_comment.up DESC limit #{startPage},#{limit}
+      and stu_comment.user_id=#{userId}  and teacher_answer !="" ORDER BY stu_comment.up DESC limit #{startPage},#{limit}
     </select>
 
     <select id="findStuCommentCountByUserId" resultType="java.lang.Integer">
