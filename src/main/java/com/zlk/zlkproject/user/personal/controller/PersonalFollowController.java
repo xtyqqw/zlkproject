@@ -112,8 +112,8 @@ public class PersonalFollowController {
             User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
-            m.setUserAllTime(user.getUserAllTime()/60);
-            m.setUserDateTime(user.getUserDateTime()/60);
+            m.setUserAllTime(user.getUserAllTime()/3600);
+            m.setUserDateTime(user.getUserDateTime()/3600);
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(user.getUserId()));
@@ -186,8 +186,8 @@ public class PersonalFollowController {
             User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
-            m.setUserAllTime(user.getUserAllTime()/60);
-            m.setUserDateTime(user.getUserDateTime()/60);
+            m.setUserAllTime(user.getUserAllTime()/3600);
+            m.setUserDateTime(user.getUserDateTime()/3600);
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
@@ -234,8 +234,8 @@ public class PersonalFollowController {
             User user = list1.get(i);
             m.setUserId(user.getUserId());
             m.setUserRealname(user.getUserRealname());
-            m.setUserAllTime(user.getUserAllTime()/60);
-            m.setUserDateTime(user.getUserDateTime()/60);
+            m.setUserAllTime(user.getUserAllTime()/3600);
+            m.setUserDateTime(user.getUserDateTime()/3600);
             m.setUserImg(user.getUserImg());
             m.setUserRealimg(user.getUserRealimg());
             m.setFollowedNum(personalFollowService.findFollowedNum(followerPage.getUserId()));
