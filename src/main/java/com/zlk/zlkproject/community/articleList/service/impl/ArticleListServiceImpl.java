@@ -50,4 +50,9 @@ public class ArticleListServiceImpl implements ArticleListService {
         pagination.setStartPage(startPage);
         return articleListMapper.findByUserId(pagination);
     }
+
+    @Override
+    public Integer findArticleId(String userId) {
+        return articleListMapper.findArticleId(userId);
+    }
 }

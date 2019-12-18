@@ -122,6 +122,7 @@
                 url: "<%=request.getContextPath()%>/myNote/delete?snId=" + snId,
                 success: function (msg) {
                     layer.msg(msg);
+                    // 当前页面打开URL页面
                     window.location.href = location.href;
                 }
             });

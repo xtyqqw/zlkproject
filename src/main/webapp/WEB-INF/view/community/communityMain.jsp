@@ -18,7 +18,7 @@
         }
         .all_body_center{
             width: 90%;
-            height: 1233px;
+            height: 1251px;
             margin-left: 68px;
         }
         .left{
@@ -77,7 +77,7 @@
         }
         .tab{
             border: none;
-            width: 282px;
+            width: 450px;
             margin-left: 5px;
             margin-top: 12px;
         }
@@ -154,7 +154,7 @@
             margin-top: -8vw;
         }
         .wz_remen{
-            background-color: #e7e7e7;
+            background-color: rgba(192,192,192,0.1);
             float: left;
             width: 20vw;
             color: black;
@@ -207,11 +207,11 @@
             background-color: white;
         }
         .wz_remen_zt1{
-            background-color: #e7e7e7;
+            background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: -14vw;
+            margin-left: -167vw;
             position: absolute;
-            margin-top: 12.07vw;
+            margin-top: 24.07vw;
         }
         .wz_remen_zt1 ul li{
             width: 20vw;
@@ -223,11 +223,11 @@
         }
         .wz_remen_zt2{
             display: none;
-            background-color: #e7e7e7;
+            background-color: rgba(192,192,192,0.1);
             width: 20vw;
-            margin-left: -14vw;
+            margin-left: -167vw;
             position: absolute;
-            margin-top: 12.07vw;
+            margin-top: 24.07vw;
         }
         .wz_remen_zt2 ul li{
             width: 20vw;
@@ -295,7 +295,9 @@
                 <span>|</span>
                 <a href="<%= request.getContextPath()%>/articles/toArticleMy" target="pageTags">我的文章</a>
                 <span>|</span>
-                <a href="<%= request.getContextPath()%>/question/questionMain" target="pageTags">问答</a>
+                <a href="<%=request.getContextPath()%>/question/findQuestionAll" target="pageTags">全部提问</a>
+                <span>|</span>
+                <a href="<%= request.getContextPath()%>/question/findQuestionMy" target="pageTags">我的提问</a>
             </div>
             <iframe class="iframe" name="pageTags" frameborder="1" src="<%= request.getContextPath()%>/articles/toArticleAll"></iframe>
         </div>
@@ -429,7 +431,7 @@
             }
         });
     });*/
-    var localObj = window.location;
+    /*var localObj = window.location;
     var basePath = localObj.protocol+"//"+localObj.host;
     $("#publish").click(function () {
         $.ajax({
@@ -442,7 +444,7 @@
                 }
             }
         });
-    })
+    })*/
 </script>
 </body>
 </html>

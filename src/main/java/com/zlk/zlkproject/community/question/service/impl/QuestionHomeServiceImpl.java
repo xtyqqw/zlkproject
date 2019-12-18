@@ -33,21 +33,30 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
         return questionHomeMapper.findQuestionCount(pagination);
     }
 
+
     @Override
-    public List<Question> findByQuestionTime(Pagination pagination) {
+    public List<Question> findAll(Pagination pagination) {
         Integer page = pagination.getPage();
         Integer limit = pagination.getLimit();
         Integer startPage = (page-1)*limit;
         pagination.setStartPage(startPage);
-        return questionHomeMapper.findByQuestionTime(pagination);
+        return questionHomeMapper.findAll(pagination);
     }
+    @Override
+    public List<Question> findByUserId(Pagination pagination) {
+        Integer page = pagination.getPage();
+        Integer limit = pagination.getLimit();
+        Integer startPage = (page-1)*limit;
+        pagination.setStartPage(startPage);
+        return questionHomeMapper.findByUserId(pagination);
 
+    }
 
     @Override
-    public Question getQuestion(String questionId) {
-        Optional<Question> question = questionHomeDao.findById(questionId);
-        return question.orElse(null);
+    public Integer findQuestionId(String userId) {
+        return questionHomeMapper.findQuestionId(userId);
     }
+
     @Transactional
     @Override
     public Question getAndConvert(String questionId){

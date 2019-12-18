@@ -129,7 +129,7 @@ $(document).ready(function () {
                 }
             });
             note_flow(sectionId);
-            stu_qa_flow(sectionId);
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
             $("#sectionId").text(sectionId);
         });
 
@@ -159,7 +159,7 @@ $(document).ready(function () {
                     $("#text_div").append(str);
                 }
             })
-
+            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
         });
 
         /*问答功能中标签点击事件*/
@@ -223,12 +223,11 @@ $(document).ready(function () {
                                 $("#wenda_div").css("display", "none");
                                 tagIdArray.splice(0);
                             });
-                            /*if(result.message==="添加成功"){
-
-                            }*/
+                            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",parseInt($("#sectionId").text()));
                         }
                     });
-                    stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                }else {
+                    layer.msg("请确认字数未超过限制");
                 }
             }
         });
@@ -279,7 +278,6 @@ $(document).ready(function () {
         /*限制字数判断方法*/
         function checkLength(editor,maxLength) {
             var text = editor.txt.text();
-            layer.msg(text.length);
             var reTag = /<(?:.|\s)*?>/g;
             var reText = text.replace(reTag,"");
             var l = 0;
@@ -301,7 +299,9 @@ $(document).ready(function () {
         $("#text_div").keyup(function () {
             if (checkLength(editor,401)){
                 layer.msg("输入内容请不要超过200个汉字或400个英文字符");
-                istrue = false;
+                isSubmit = false;
+            }else {
+                isSubmit = true;
             }
         });
 
@@ -426,8 +426,6 @@ $(document).ready(function () {
                                 str += "<div class=\"stuQa-function-div\">";
                                 str += "<div class=\"stuQa-func-tag stuQa-answer\" id='stuQa-answer"+editorflag+"'>回答</div>";
                                 str += "<div class=\"stuQa-func-tag\" id='stuQa-answerNum"+editorflag+"'>"+stuQa.answerNum+"</div>";
-                                str += "<div class=\"stuQa-func-tag\" id='stuQa-view"+editorflag+"'>浏览</div>";
-                                str += "<div class=\"stuQa-func-tag\" id='stuQa-viewNum"+editorflag+"'>"+stuQa.viewNum+"</div>";
                                 str += "<div class=\"stuQa-func-tag stuQa-readMore\" id='stuQa-readMore"+editorflag+"'>查看全文</div>";
                                 if (stuQa.share === "已分享"){
                                     str += "<div class=\"stuQa-func-tag stuQa-share\" style='color: #9ea2ea' id='stuQa-share"+editorflag+"'>"+stuQa.share+"</div>";
@@ -566,7 +564,7 @@ $(document).ready(function () {
         /*回答按钮点击事件*/
         $(document).on("click", ".stuQa-answer", function () {
             if ($(this).text() === "回答"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 height1 = $(this).parent().parent().height(); //功能按钮框的高度
                 height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
                 height7 = $(this).parent().parent().parent().parent().height();//评论块整体高度
@@ -618,7 +616,7 @@ $(document).ready(function () {
         /*查看全文按钮点击提交事件*/
         $(document).on("click", ".stuQa-readMore", function () {
             if ($(this).text() === "查看全文"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 if ($(this).parent().next().css("display")==="none"){
                     height1 = $(this).parent().parent().height(); //功能按钮框的高度
                     height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
@@ -703,10 +701,6 @@ $(document).ready(function () {
                         answerEditorCreate(editori);
                         str += "<div class=\"stuQa-function-box\">";
                         str += "<div class=\"stuQa-function-div\">";
-                        str += "<div class=\"stuQa-func-tag stuQa-answer\" id='stuQa-answer-answer"+editori+"'>回答</div>";
-                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-answerNum"+editori+"'>"+stuQa.answerNum+"</div>";
-                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-view"+editori+"'>浏览</div>";
-                        str += "<div class=\"stuQa-func-tag\" id='stuQa-answer-viewNum"+editori+"'>"+stuQa.viewNum+"</div>";
                         str += "<div class=\"stuQa-func-tag stuQa-readMore\" id='stuQa-answer-readMore"+editori+"'>查看全文</div>";
                         if (stuQa.share === "已分享"){
                             str += "<div class=\"stuQa-func-tag stuQa-share\" style='color: #9ea2ea' id='stuQa-share"+editori+"'>"+stuQa.share+"</div>";
@@ -785,13 +779,14 @@ $(document).ready(function () {
                 success:function(index,layero){
                     $(index).on('keyup','#answer-editor',function () {
                         if (checkLength(ans_editor,401)){
-                            layer.alert("输入内容请不要超过200个汉字或400个英文字符");
+                            layer.msg("输入内容请不要超过200个汉字或400个英文字符");
                             isReplay = false;
+                        }else {
+                            isReplay = true;
                         }
                     })
                 },
                 yes: function (index, layero) {
-                    layer.close(index);
                     if (isReplay){
                         var content = ans_editor.txt.html();
                         var data = {"sqaId":sqaId,"pId":pId,"content":content};
@@ -805,6 +800,9 @@ $(document).ready(function () {
                                 stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
                             }
                         });
+                        layer.close(index);
+                    }else {
+                        layer.msg("请确认字数未超过限制");
                     }
                 },
                 end:function () {
@@ -1402,6 +1400,7 @@ $(document).ready(function () {
             let flag = 0;
 
             function cmtFlowLoad(url) {
+                flag = 0;
                 $("#SCS_ul_stream").empty();
                 flow.load({
                     elem: '#SCS_ul_stream',//流加载容器

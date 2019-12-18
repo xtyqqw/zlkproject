@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.stu_comment.controller;
 
+import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
@@ -23,6 +24,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("stuComment")
 public class StuCommentController {
+    @Autowired
+    private LogUtil logUtil;
     @Autowired
     private CommonFileUtil commonFileUtil;
     @Autowired
@@ -150,21 +153,23 @@ public class StuCommentController {
 
     @RequestMapping("updateTeacherAnswer")
     @ResponseBody
-    public Map updateTeacherAnswer(@RequestParam("smId") Integer smId,@RequestParam("teacherAnswer") String teacherAnswer){
+    public Map updateTeacherAnswer(@RequestParam("smId") Integer smId,@RequestParam("teacherAnswer") String teacherAnswer,HttpServletRequest request){
         Map map = new HashMap();
         Integer res = stuCommentService.updateTeacherAnswer(smId,teacherAnswer);
         Integer error = 1;
         if (res == 1)
             error = 0;
+        logUtil.setLog(request,"修改了讲师回复："+teacherAnswer+"的信息");
         map.put("error",error);
         map.put("res",res);
         return map;
     }
     @RequestMapping("deleteStudentComment")
     @ResponseBody
-    public Integer deleteStudentComment(Integer smId) throws  Exception{
+    public Integer deleteStudentComment(Integer smId,HttpServletRequest request) throws  Exception{
         Integer flag=stuCommentService.deleteStudentComment(smId);
         if (flag==1){
+            logUtil.setLog(request,"删除了评论Id为"+smId+"的信息");
             return flag;
         }else {
             return null;

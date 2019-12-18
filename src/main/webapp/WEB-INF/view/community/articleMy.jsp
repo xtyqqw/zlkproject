@@ -10,7 +10,8 @@
         .context-div{
             width: 100%;
             height: auto;
-            overflow-y: hidden;
+            padding-bottom: 1px;
+            overflow-x: hidden;
         }
         .all{
             width: 100%;
@@ -65,6 +66,19 @@
             vertical-align: middle;
             text-align: left;
         }
+        .approval{
+            margin-left: 16px;
+            margin-top: 11px;
+            float: left;
+            width: 63px;
+            height: 20px;
+            border-radius: 8%;
+            border: #FF0000 1px solid;
+            color: #FF0000;
+            font-family: Arial;
+            font-size: 15px;
+            text-align: center;
+        }
         .articleDigest{
             margin-left: 14px;
             margin-top: -33px;
@@ -81,7 +95,7 @@
 
         }
         .figures{
-            margin-left: 804px;
+            margin-left: 807px;
             margin-top: 23px;
             width: 170px;
             height: 95px;
@@ -89,7 +103,7 @@
             border: none 0;
         }
         .img {
-            width: 100%;
+            width: 95%;
             height: 100%;
             object-fit:cover;
             border-radius: 5px;
@@ -113,13 +127,13 @@
         }
         .icon1{
             float: right;
-            margin-right: -120px;
+            margin-right: -122px;
             margin-top: 39px;
         }
         .commentCount{
             float: right;
-            margin-right: -166px;
-            margin-top: 36px;
+            margin-right: -177px;
+            margin-top: 37px;
         }
         .commentCount a{
             font-size: 16px;
@@ -265,6 +279,15 @@
                     if (article[i].articleSetTop === 1) {
                         html += '<div class="articleSetTop" id="articleSetTop" style="display:none;"><p id="p">' + article.articleSetTop + '</p></div>';
                     }
+                    if (article[i].approval === 0){
+                        html += '<div class="approval">审核中</div>';
+                    }
+                    if (article[i].approval === 1){
+                        html += '<div class="approval" style="display: none">审核过</div>';
+                    }
+                    if (article[i].approval === 2){
+                        html += '<div class="approval">审核未过</div>';
+                    }
                     html += '<div class="figures" id="figures">' + '<img class="img" src="' + article[i].figures + '"/>' + '</div>';
                     html += '<div class="articleDigest" style="width: 660px">' + article[i].articleDigest + '</div>';
                     html += '<div class="userRealname"><a href="/community/article-show?articleId='+article[i].articleId+'" target="_blank">' + article[i].user.userRealname + '</a></div>';
@@ -301,12 +324,6 @@
             });
         });
     }
-</script>
-<script>
-    /*layer.msg('请先进行登录',{
-        icon: 6,
-        time:2000
-    });*/
 </script>
 </body>
 </html>

@@ -45,24 +45,6 @@ public class ArticleAddController {
             mv.setViewName("view/community/articleGuide");
         }
         return mv;
-        //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
-        /*Article approval=articleAddService.getArticleInApproval(article.getApproval());
-        if (approval != null) {
-            if (article.getApproval()==1) {
-                article.setApproval(1);
-                mv.addObject("flag", "true");
-                mv.addObject("msg","可以发文");
-                mv.setViewName("view/community/articleGuide");
-            }else if (article.getApproval()==0){
-                mv.addObject("flag", "true");
-                mv.addObject("msg","你的文章正在审核中，通过以后才能继续发表文章，我们会尽快处理，给您反馈");
-                mv.setViewName("view/community/communityMain");
-            }else {
-                mv.addObject("flag", "true");
-                mv.addObject("msg","你之前的文章审核失败，以后发表文章请注意撰文规则，感谢您的配合");
-                mv.setViewName("view/community/communityMain");
-            }
-        }*/
     }
 
     //给暂无更多文章提示页面提供接口
