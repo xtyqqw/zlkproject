@@ -41,4 +41,22 @@ public interface StuNoteAdminService {
      * @return 影响行数
      */
     Integer deleteStuNoteBySnId(Integer snId);
+
+    /**
+     * 根据小节Id查询并分页
+     *
+     * @param snSectionId 小节ID
+     * @param page 页数
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    List<StuNote> selectSNBySectionIdLimit(int snSectionId, int page,int limit);
+
+    /**
+     * 根据小节Id查询总条数
+     *
+     * @param snSectionId 小节ID
+     * @return 所有条数
+     */
+    Integer selectCountBySectionId(int snSectionId);
 }
