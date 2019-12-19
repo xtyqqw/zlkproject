@@ -161,6 +161,7 @@ public class RoleController {
             //修改角色信息
             Integer flag = roleService.updateRoleByRoleId(role,functionId);
             if(flag==1){
+                logUtil.setLog(request,"修改了原角色名为："+roleByRoleId.getRoleName()+"的信息");
                 mv.addObject("flag", "true");
                 mv.addObject("msg", "修改成功");
                 mv.setViewName("admin/roleManager");

@@ -20,6 +20,7 @@ layui.use(['table','form','layer'], function(){
     var layer = layui.layer;
     table.render({
         elem: '#StuNote'
+        ,toolbar: '#query'
         ,url:basePath+'/note/selectStuNoteAllByLimit'
         ,height: $(document).height()-$('#StuNote').offset().top-20
         ,cols: [[
@@ -42,6 +43,22 @@ layui.use(['table','form','layer'], function(){
         console.log(obj.field); //当前编辑的字段名
         console.log(obj.data); //所在行的所有相关数据
     });
+    //头工具栏事件
+    table.on('toolbar(test)', function(obj){
+        var evend = obj.event;
+        if(evend==="submit"){
+            var snSectionId = $("#snSectionId").val();
+            table.reload('StuNote',{
+                url: basePath+'/note/selectSNBySectionIdLimit?snSectionId='+snSectionId,
+                toolbar: '#query',
+                height: $(document).height()-$('#StuNote').offset().top-20,
+                page:{
+                    curr:1
+                }
+            });
+        }
+    });
+    //行工具栏事件
     table.on('tool(test)',function (obj) {
         console.log(obj);
         var snId=obj.data.snId;
@@ -60,6 +77,7 @@ layui.use(['table','form','layer'], function(){
                             layer.msg("删除成功");
                             table.reload('StuNote',{
                                 url: basePath+'/note/selectStuNoteAllByLimit',
+                                toolbar: '#query',
                                 height: $(document).height()-$('#StuNote').offset().top-20,
                                 page:{
                                     curr:1

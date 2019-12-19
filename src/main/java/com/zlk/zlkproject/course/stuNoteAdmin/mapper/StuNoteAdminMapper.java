@@ -46,4 +46,22 @@ public interface StuNoteAdminMapper {
      * @return 影响行数
      */
     Integer deleteStuNoteBySnId(Integer snId);
+
+    /**
+     * 根据小节Id查询并分页
+     *
+     * @param snSectionId 小节ID
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    List<StuNote> selectSNBySectionIdLimit(@Param("snSectionId") int snSectionId,@Param("offset") int offset, @Param("limit") int limit);
+
+    /**
+     * 根据小节Id查询总条数
+     *
+     * @param snSectionId 小节ID
+     * @return 所有条数
+     */
+    Integer selectCountBySectionId(int snSectionId);
 }
