@@ -150,6 +150,8 @@ window.onload = function () {
             ,toolbar: '#topToolBar'
             ,cols: [[
                 {field: 'smId', title: '评论Id', width:100}
+                ,{field: 'coursesId', title: '课程识别号', width:100}
+                ,{field: 'chapterId', title: '章节识别号', width:100}
                 ,{field: 'sectionId', title: '小节识别号', width:100}
                 ,{field: 'replyPerson', title: '回复对象', width:100}
                 ,{field: 'content', title: '评论内容', width:100}
