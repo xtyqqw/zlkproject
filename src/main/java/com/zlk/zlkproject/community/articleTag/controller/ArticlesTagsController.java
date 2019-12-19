@@ -1,6 +1,8 @@
 package com.zlk.zlkproject.community.articleTag.controller;
 
 import com.zlk.zlkproject.community.articleTag.service.ArticlesTagsService;
+import com.zlk.zlkproject.entity.Article;
+import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,15 +25,17 @@ public class ArticlesTagsController {
     private ArticlesTagsService articlesTagsService;
 
     @GetMapping(value = "/community/tags")
-    public ModelAndView tags(@PageableDefault(page = 0,value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public ModelAndView tags(@PageableDefault(page = 0, value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                              Integer tagId){
         ModelAndView mv = new ModelAndView();
-        /*if (pageable.getPageSize() == 0) {
+        if (tagId!=10) {
+            mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
+            mv.addObject("activeTagId",tagId);
+            mv.setViewName("view/community/articlesTags");
+            return mv;
+        } else {
             mv.setViewName("view/community/articleNo");
-        }*/
-        mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
-        mv.addObject("activeTagId",tagId);
-        mv.setViewName("view/community/articlesTags");
-        return mv;
+            return mv;
+        }
     }
 }
