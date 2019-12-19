@@ -74,4 +74,21 @@ public class StuNoteAdminController {
         }
         return "删除失败";
     }
+
+    /**
+     *  分页查询所有数据
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("/note/selectSNBySectionIdLimit")
+    @ResponseBody
+    public Map selectSNBySectionIdLimit(int snSectionId,int page, int limit){
+        Map map = new HashMap();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",stuNoteAdminService.selectCountBySectionId(snSectionId));
+        map.put("data",stuNoteAdminService.selectSNBySectionIdLimit(snSectionId, page, limit));
+        return map;
+    }
 }

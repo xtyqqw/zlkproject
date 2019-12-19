@@ -52,6 +52,11 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
 
     }
 
+    @Override
+    public Integer findQuestionId(String userId) {
+        return questionHomeMapper.findQuestionId(userId);
+    }
+
     @Transactional
     @Override
     public Question getAndConvert(String questionId){

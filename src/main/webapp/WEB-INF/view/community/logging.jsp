@@ -11,8 +11,8 @@
     <title>Title</title>
 </head>
 <% if (session.getAttribute("user") == null) {%>
-<h1 style="margin-left: 300px;margin-top: 200px;margin-bottom: 20px">您还没有登录！</h1>
-<p style="margin-left: 300px">
+<h1 style="margin-left: 450px;margin-top: 120px;margin-bottom: 20px">您还没有登录！</h1>
+<p style="margin-left: 450px">
     请点击
     <button style="color: #007bff">
         <a href="<%=request.getContextPath()%>/question/test" target="_blank" style="color: red">
