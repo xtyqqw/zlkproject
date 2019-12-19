@@ -10,125 +10,146 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/layui/css/layui.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
+    <style>
+        .header {
+            width: auto;
+            height: 60px;
+            background-color: #F5F5F5;
+        }
+        .header #a1 {
+            float: left;
+            width: 80px;
+            padding: 10px;
+            margin-left: 67px;
+            margin-top: 9px;
+        }
+        .header #a2 {
+            text-decoration:none !important;
+            color: #8D8D8D;
+            font-size: 25px;
+            float: right;
+            margin-top: 9px;
+            margin-right: 67px;
+        }
+    </style>
 </head>
-<style>
-
-</style>
 <body>
 <div>
-<form action="<%=request.getContextPath()%>/article/update" class="form" method="post">
-    <input type="hidden" name="articleId" id="articleId" value="${articles.articleId}"><br>
-
-    <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
-        <tr>
-            <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" valign="bottom">文章标题</td>
-            <td><input type="text" required id="title" placeholder="请输入文章标题(不超过20个字)" name="title" value="${articles.title}" maxlength="20"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">浏览数</td>
-            <td><input type="text" required id="browseCount" placeholder="请输入浏览数" name="browseCount" value="${articles.browseCount}" oninput = "value=value.replace(/[^\d]/g,'')"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">评论数</td>
-            <td><input type="text" required id="commentCount" placeholder="请输入浏览数" name="commentCount" value="${articles.commentCount}" oninput = "value=value.replace(/[^\d]/g,'')"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">发布时间</td>
-            <td><input type="text" required id="createTime" placeholder="请输入发布时间" name="createTime" value="${articles.createTime}"></td>
-        </tr>
-        <tr>
-            <td valign="bottom">更新时间</td>
-            <td><input type="text" required id="updateTime" placeholder="请输入更新时间" name="updateTime" value="${articles.updateTime}"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">插图相对路径</td>
-            <td><input type="text" required id="figures" placeholder="请输入插图相对路径" name="figures" value="${articles.figures}"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">赞数</td>
-            <td><input type="text" required id="zanCount" placeholder="请输入赞数" name="zanCount" value="${articles.zanCount}" oninput = "value=value.replace(/[^\d]/g,'')"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">踩数</td>
-            <td><input type="text" required id="caiCount" placeholder="请输入踩数" name="caiCount" value="${articles.caiCount}" oninput = "value=value.replace(/[^\d]/g,'')"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;text-align: center;" valign="bottom">举报</td>
-            <td><select type="text" required id="inform" placeholder="请输入举报" name="inform" value="${articles.inform}">
-                <option value="0">是</option>
-                <option value="1">否</option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">发文类型</td>
-            <td><select type="text" required id="createArticleType" placeholder="请输入发文类型" name="createArticleType" value="${articles.createArticleType}">
-                <option value="0">原创</option>
-                <option value="1">转载</option>
-                <option value="2">翻译</option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">文章置顶</td>
-            <td><select type="text" required id="articleSetTop" placeholder="请输入文章置顶" name="articleSetTop" value="${articles.articleSetTop}">
-                <option value="0">置顶</option>
-                <option value="1">不置顶</option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">审核</td>
-            <td><select type="text" required id="approval" placeholder="请输入审核状态" name="approval" value="${articles.approval}">
-                <option value="0">审核中</option>
-                <option value="1">审核过</option>
-                <option value="2">审核未过</option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 100px;" valign="bottom">文章方向</td>
-            <td><input type="text" required readonly id="typeName" placeholder="请输入文章方向" name="typeName" value="${articles.typeName}"></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
-            <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest" value="${articles.articleDigest}"></textarea><br></td>
-        </tr>
-        <%--<tr>
-            <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">HTML格式文章内容</td>
-            <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
-        </tr>
-        <tr>
-            <td style="width: 100px;">文章内容</td>
-            <td><pre required id="articleContent" name="articleContent"><code class="language-css"></code></pre><br></td>
-        </tr>--%>
-    </table>
-
-    <div id="md-content">
-        <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
-        <textarea class="editormd-html-textarea" name="articleContentHtml" style="display: none">${articles.articleContentHtml}</textarea>
+    <%--顶部内容--%>
+    <div class="header">
+        <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
+        <%--<a href="javascript:void(0)" id="a2">我的文章</a>--%>
     </div>
+    <!--中间内容-->
+    <div  class="m-container m-padded-tb-big">
+        <div class="ui container">
+            <form action="<%=request.getContextPath() %>/article/toUpdate" method="post" class="ui form">
+                <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}"/>
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <div class="ui selection compact basic dropdown violet label">
+                            <input type="hidden" value="原创" name="createArticleType">
+                            <i class="dropdown icon"></i>
+                            <div class="text">原创</div>
+                            <div class="menu">
+                                <div class="item" data-value="0">原创</div>
+                                <div class="item" data-value="1">转载</div>
+                                <div class="item" data-value="2">翻译</div>
+                            </div>
+                        </div>
+                        <input type="text" name="title" placeholder="简明扼要的描述你的标题" value="${articles.title}">
+                    </div>
+                </div>
 
-    <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
-</form>
+                <div class="required field">
+                    <div id="md-content" style="z-index: 1 !important;">
+                        <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
+                        <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
+                        <textarea class="editormd-html-textarea" name="articleContentHtml" style="display: none">${articles.articleContentHtml}</textarea>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact basic violet label">方向</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="typeName" value="${articles.typeName}">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择方向</div>
+                                <div class="menu">
+                                    <div class="item" data-value="java">JAVA</div>
+                                    <div class="item" data-value="linux">Linux</div>
+                                    <div class="item" data-value="html">HTML</div>
+                                    <div class="item" data-value="mysql">MYSQL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact basic violet label">标签</label>
+                            <div class="ui fluid selection multiple search dropdown">
+                                <input type="hidden" name="tagIds">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择标签&nbsp;&nbsp;&nbsp;1&nbsp;/&nbsp;3</div>
+                                <div class="menu">
+                                    <c:forEach items="${tags}" var="tag">
+                                        <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic violet label">摘要</label>
+                        <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic violet label">首图</label>
+                        <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等" value="${articles.figures}">
+                    </div>
+                </div>
+
+                <div class="ui right aligned container">
+                    <button type="reset" class="ui reset secondary button">重置</button>
+                    <button type="submit" onclick="publish()" class="ui button violet">提交</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
-<script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+<%--受js文件运行机制所致，引用时一定要注意顺序--%>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
 <script type="text/javascript">
     /*MarkDown组件*/
     var testEditor;
     $(function() {
         testEditor = editormd("md-content", {
-            width : "80%",
+            width : "100%",
             height : 640,
+            placeholder : "开始撰写...",
             syncScrolling : "single",
             //你的lib目录的路径
-            path : "<%=request.getContextPath() %>/editormd/lib/",
+            path : "../editormd/lib/",
+            emoji: false,
+            toolbarIcons: function () {  //自定义工具栏
+                return editormd.toolbarModes['simple']; // full, simple, mini
+            },
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL : "/uploadfile",
@@ -137,8 +158,81 @@
         });
     });
 
+    /*下拉框渲染开启*/
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
 
+    /*表单验证开启*/
+    function publish() {
+        $('.ui.form').form({
+            inline: true,
+            on: 'blur',
+            fields: {
+                title: {
+                    identifier: 'title',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请注意文章标题不能为空'
+                    }, {
+                        type: 'maxLength[50]',
+                        prompt: '请注意文章标题最大字数不能超过50'
+                    }]
+                },
+                articleContent: {
+                    identifier: 'articleContent',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请注意文章内容不能为空'
+                    }]
+                },
+                typeName: {
+                    identifier: 'typeName',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请选择一个文章方向'
+                    }]
+                },
+                tagIds: {
+                    identifier: 'tagIds',
+                    rules: [{
+                        type: 'minCount[1]',
+                        prompt: '请至少选择一个文章标签'
+                    }, {
+                        type: 'maxCount[3]',
+                        prompt: '请最多选择三个文章标签,你可以先删除多余标签,再重新选择'
+                    }]
+                },
+                figures: {
+                    identifier: 'figures',
+                    rules: [{
+                        type: 'regExp',
+                        value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
+                        prompt: '如需要添加首图,请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址'
+                    }]
+                },
+                articleDigest: {
+                    identifier: 'articleDigest',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '请注意文章摘要不能为空'
+                    }, {
+                        type: 'maxLength[150]',
+                        prompt: '请注意文章摘要最大字数不能超过150'
+                    }]
+                }
+            },
+            onSuccess: function () {
+                alert("编辑成功");
+            },
+            /*onFailure: function() {
+                alert("发布失败,请确认发布内容");
+            }*/
+        });
+    }
 </script>
-
 </body>
 </html>

@@ -123,6 +123,11 @@ public class ArticleManagerController {
     @RequestMapping(value = "/update")
     public ModelAndView update( Article article, HttpServletRequest request, Action action){
         ModelAndView mv=new ModelAndView();
+
+        /*Article articles1 = articleManagerService.selectArticleByArticleId(article.getArticleId());
+        mv.addObject("articles",articles1);
+        mv.setViewName("admin/articleManager");*/
+
         /**判断文章是否更改，更改后判断更改后的文章是否存在*/
         List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
@@ -134,10 +139,6 @@ public class ArticleManagerController {
             return mv;
         }
         /**修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败*/
-        /*Article articles1 = articleManagerService.selectArticleByArticleId(article.getArticleId());
-        mv.addObject("articles",articles1);
-        mv.setViewName("admin/articleManagerEdit");*/
-
         Integer flag = articleManagerService.updateArticleByArticleId(article);
         if(flag == 1){
             mv.addObject("flag","true");
@@ -161,10 +162,11 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/toUpdate")
-    public ModelAndView updateBtu(Article articles){
+    public ModelAndView updateBtu(Article articles,HttpServletRequest request, String articleId){
         ModelAndView mv=new ModelAndView();
         Article articles1 = articleManagerService.selectArticleByArticleId(articles.getArticleId());
         mv.addObject("articles",articles1);
+        request.getSession().setAttribute("articleId",articleId);
         mv.setViewName("admin/articleManagerEdit");
         return mv;
     }
