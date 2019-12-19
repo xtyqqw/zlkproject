@@ -43,7 +43,7 @@ public class DurationController {
         /*用户已完成视频数量*/
         Integer finish=durationService.selectSection(user.getUserId());
         /*学习力*/
-        long ability = Math.round(finish / sectionAll);
+        long ability = Math.round((finish*100 )/ sectionAll);
         /*学习成长量*/
         Integer ad = Arith.plus(lists.getUserDateTime());
         Integer all=durationService.findUser();
