@@ -234,7 +234,6 @@
                 jump: function(obj, first){
                     page=obj.curr;
                     limit=obj.limit;
-                    console.log(obj);
                     if(!first){
                         loadData()
                     }
