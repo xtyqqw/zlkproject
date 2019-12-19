@@ -63,8 +63,8 @@
             padding-top: 10px;
         }
 
-        /*取消关注弹窗*/
-        .att_tan{
+        /*关注弹窗*/
+        /*.att_tan{
             position: fixed;
             left: 300px;
             top: 200px;
@@ -163,7 +163,7 @@
             color: #999999;
             float: left;
             padding-left: 7px;
-        }
+        }*/
     </style>
 </head>
 <body>
@@ -340,13 +340,13 @@
     <script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
 
     <script>
-        $(function () {
-            /*点击已关注 取消关注*/
+        /*$(function () {
+            /!*点击已关注 取消关注*!/
             $(".ok_zi").click(function () {
                 let str = $(this).prev().prev().text() + '';
                 nofollow(str,$(this));
             });
-            /*点击加关注*/
+            /!*点击加关注*!/
             $(".no_zi").click(function () {
                 let str = $(this).prev().prev().text() + '';
                 jiafollow(str,$(this));
@@ -354,7 +354,7 @@
             $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
         });
 
-        /*点击已关注 取消关注*/
+        /!*点击已关注 取消关注*!/
         function nofollow(userId,mythis){
             $.ajax({
                 url:"/removeFollow?userId="+userId,
@@ -377,7 +377,7 @@
             });
         }
 
-        /*点击加关注*/
+        /!*点击加关注*!/
         function jiafollow(userId,mythis){
             $.ajax({
                 url:"/saveFollow?userId="+userId,
@@ -397,7 +397,7 @@
                     mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
                 }
             });
-        }
+        }*/
     </script>
 </body>
 </html>

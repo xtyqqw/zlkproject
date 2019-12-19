@@ -299,7 +299,7 @@
             font-weight:bold;
             word-break: break-all;
             color: #333436;
-            height: 68px;
+            height: 77px;
         }
     </style>
 

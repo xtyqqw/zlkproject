@@ -431,7 +431,7 @@
             }
         });
     });*/
-    var localObj = window.location;
+    /*var localObj = window.location;
     var basePath = localObj.protocol+"//"+localObj.host;
     $("#publish").click(function () {
         $.ajax({
@@ -444,7 +444,7 @@
                 }
             }
         });
-    })
+    })*/
 </script>
 </body>
 </html>

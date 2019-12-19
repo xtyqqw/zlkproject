@@ -564,7 +564,7 @@ $(document).ready(function () {
         /*回答按钮点击事件*/
         $(document).on("click", ".stuQa-answer", function () {
             if ($(this).text() === "回答"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 height1 = $(this).parent().parent().height(); //功能按钮框的高度
                 height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
                 height7 = $(this).parent().parent().parent().parent().height();//评论块整体高度
@@ -616,7 +616,7 @@ $(document).ready(function () {
         /*查看全文按钮点击提交事件*/
         $(document).on("click", ".stuQa-readMore", function () {
             if ($(this).text() === "查看全文"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 if ($(this).parent().next().css("display")==="none"){
                     height1 = $(this).parent().parent().height(); //功能按钮框的高度
                     height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
