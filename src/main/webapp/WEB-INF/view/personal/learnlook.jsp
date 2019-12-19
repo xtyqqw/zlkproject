@@ -127,7 +127,6 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     var num = ${ability};
-    alert(num);
     // 指定图表的配置项和数据
     var option = {
         tooltip : {
@@ -143,13 +142,13 @@
             {
                 name: '业务指标',
                 type: 'gauge',
-                detail: {formatter:'{value}%'},
+                detail: {formatter:'${ability}%'},
                 data: [{value: 50}]
             }
         ]
     };
     setInterval(function () {
-        option.series[0].data[0].value = (num * 100).toFixed(2) - 0;
+        option.series[0].data[0].value = num.toFixed(2) - 0;
         myChart.setOption(option, true);
     },2000);
 
