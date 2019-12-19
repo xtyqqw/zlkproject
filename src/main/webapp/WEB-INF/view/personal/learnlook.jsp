@@ -83,7 +83,7 @@
         #main{
             width: 600px;
             height: 300px;
-            margin-left: -50px;
+            margin-left: -90px;
             margin-top: -20px;
         }
     </style>
