@@ -10,6 +10,7 @@
 <head>
     <title>学习看板</title>
     <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <script src="../../../js/echarts.min.js"></script>
     <style type="text/css">
         body{margin: 0;}
         .xuexili{
@@ -79,6 +80,12 @@
             color: #999999;
             font-size: 13px;
         }
+        #main{
+            width: 600px;
+            height: 300px;
+            margin-left: -50px;
+            margin-top: -20px;
+        }
     </style>
 </head>
 <body>
@@ -90,8 +97,9 @@
     </div>
     <!-- 学习力指针图 -->
     <div class="pointer">
-        <p>501</p>
-        <img src="/img/poor-good.png">
+        <%--<p>501</p>--%>
+        <%--<img src="/img/poor-good.png">--%>
+        <div id="main"></div>
     </div>
     <!-- 今日学习情况 -->
     <div class="today-learn-case">
@@ -109,11 +117,43 @@
             </li>
             <li>
                 <span class="font1">技能水平</span><br />
-                <i>${addd}</i>
+                <i>${skills}</i>
                 <p>已超过${rankall}%的同学</p>
             </li>
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var num = ${ability};
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip : {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '业务指标',
+                type: 'gauge',
+                detail: {formatter:'num%'},
+                data: [{value: 50}]
+            }
+        ]
+    };
+    setInterval(function () {
+        option.series[0].data[0].value = (num * 100).toFixed(2) - 0;
+        myChart.setOption(option, true);
+    },2000);
+
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+</script>
 </body>
 </html>
