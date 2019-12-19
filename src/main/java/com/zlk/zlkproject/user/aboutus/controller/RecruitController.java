@@ -35,20 +35,11 @@ public class RecruitController {
     @ResponseBody
     public Map<String,Object> addrecruit(Recruit recruit){
         Integer flag=recruitService.addRecruit(recruit);
-        List<Lecturer> list=lecturerService.selectLecturer();
-       /* ModelAndView mv=new ModelAndView();
-        mv.addObject("list",list);*/
         Map<String,Object> map=new HashMap<>();
-
         if(flag==1){
-            /*map.put("list",list);*/
             map.put("msg","提交完成");
-            /*mv.addObject("msg","提交成功");·
-            mv.setViewName("view/aboutus/teamwork");*/
             return map;
         }else{
-            /*mv.addObject("msg","提交失败");
-            mv.setViewName("view/aboutus/teamwork");*/
             map.put("msg","提交失败");
             return map;
         }

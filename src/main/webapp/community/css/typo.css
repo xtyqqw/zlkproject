@@ -150,7 +150,7 @@
 
 /* 标记，类似于手写的荧光笔的作用 */
 .typo mark {
-  background: #ff0000;
+  background: #fffdd1;
   border-bottom: 1px solid #ffedce;
   padding: 2px;
   margin: 0 5px;
@@ -162,7 +162,7 @@
 }
 
 .typo pre {
-  background: #ff0000;
+  background: #f8f8f8;
   border: 1px solid #ddd;
   padding: 1em 1.5em;
   display: block;
@@ -292,11 +292,11 @@
 }
 
 .typo table th, .typo-table th {
-  background: #ff0000;
+  background: #fbfbfb;
 }
 
 .typo table thead th, .typo-table thead th {
-  background: #ff0000;
+  background: #f1f1f1;
 }
 
 .typo table caption {
@@ -332,4 +332,7 @@
 /* Responsive images */
 .typo img {
   max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }

@@ -160,7 +160,7 @@
             position: relative;
             width: 7%;
             left:230px ;
-            top: 20px;
+            top: 35px;
             border-radius:5px ;
             color: grey;
             height: 30px;
@@ -169,7 +169,7 @@
             position: relative;
             width: 7%;
             left:330px;
-            top: -10px;
+            top: 5px;
             border-radius:5px ;
             color: grey;
             height: 30px;
@@ -200,7 +200,7 @@
             width: 100%;
             position: relative;
             border-radius:5px;
-            height: 200px;
+            height: 230px;
             background: url("img/remenpinglun.png") no-repeat right top #ffffff;
         }
         .sanjiao{
@@ -279,17 +279,27 @@
 
             height: 70px;
             width:70px;
-            position: relative;
-            top: -204px;
-            left: 86.5%;
+            position: absolute;
+            top: 0px;
+            right: 0px;
         }
         .img1:hover{
             height: 70px;
             width:70px;
-            position: relative;
-            top: -204px;
-            left: 86.5%;
+            position: absolute;
+            top: 0px;
+            right: 0px;
             background:url("img/remenpinglunbai.png");
+        }
+        
+        .p-content{
+            overflow: hidden;
+            text-align: left;
+            width:89%;
+            font-weight:bold;
+            word-break: break-all;
+            color: #333436;
+            height: 77px;
         }
     </style>
 
@@ -549,7 +559,7 @@
                                     '</div>'+
                                     '</div>'+
                                     '<div class="you">' +
-                                    ''+comment.content+'<br><br>'+
+                                    '<div class="p-content">'+comment.content+'</div>'+
                                     '<div class="p-FAQ5"><span class="span-FAQ5">&nbsp;讲师回复</span>' +
                                     '<p class="p-FAQ4">'+comment.teacherAnswer+'</p><br>'+
                                     '</div>'+

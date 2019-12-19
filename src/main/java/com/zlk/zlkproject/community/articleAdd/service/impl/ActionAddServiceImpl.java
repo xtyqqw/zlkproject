@@ -26,16 +26,10 @@ public class ActionAddServiceImpl implements ActionAddService {
     @Transactional
     @Override
     public Action saveAction(Action action) {
-        //Article article=new Article();
-        //User user=new User();
-        action.setActionId(UUIDUtils.getId());
-        //发布文章的动态的状态为1
+        //发布文章的动态的值为1
         action.setActionType("1");
-        //action.setArticleId(article.getArticleId());
         //发布文章的动态的时间
         action.setCreateTime(new Date());
-        //action.setUserId(user.getUserId());
-        //增加一条发文的动态
         return actionAddRepository.save(action);
     }
 }

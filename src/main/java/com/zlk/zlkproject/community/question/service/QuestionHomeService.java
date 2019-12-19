@@ -36,6 +36,15 @@ public interface QuestionHomeService {
     List<Question> findByUserId(Pagination pagination);
 
     /*
+     * @descrption 查询我的提问个数
+     * @author gby
+     * @param [userId]
+     * @return java.lang.Integer
+     * @date 2019/12/17 11:49
+     */
+    Integer findQuestionId(String userId);
+
+    /*
      * @descrption 查询问答详情转换格式
      * @author gby
      * @param [questionId]
