@@ -27,7 +27,6 @@ public interface QuestionHomeMapper {
      */
     List<Question> findAll(Pagination pagination);
 
-
     /*
      * @descrption 按照用户id查找问题，按最新发布日期排序（默认）
      * @author gby
@@ -36,5 +35,14 @@ public interface QuestionHomeMapper {
      * @date 2019/12/10 14:15
      */
     List<Question> findByUserId(Pagination pagination);
+
+    /*
+     * @descrption 查询我的提问个数
+     * @author gby
+     * @param [userId]
+     * @return java.lang.Integer
+     * @date 2019/12/17 11:49
+     */
+    Integer findQuestionId(String userId);
 
 }

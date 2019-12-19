@@ -85,9 +85,13 @@ public class QuestionHomeController {
      */
     @RequestMapping(value = "/questionMy")
     @ResponseBody
-    public Map<String, Object> questionMy(Pagination pagination) throws Exception {
+    public Map<String, Object> questionMy(Pagination pagination,HttpServletRequest request) throws Exception {
+        User user = (User) request.getSession().getAttribute("user");
+        String userId = user.getUserId();
+        pagination.setUser(user);
+        pagination.setUserId(userId);
         List<Question> questionMyList = questionHomeService.findByUserId(pagination);
-        Integer count = questionHomeService.findQuestionCount(pagination);
+        Integer count = questionHomeService.findQuestionId(userId);
         Map<String, Object> map = new HashMap<>();
         map.put("questionMyList", questionMyList);
         map.put("count",count);
@@ -103,10 +107,12 @@ public class QuestionHomeController {
      * @date 2019/11/26 10:07
      */
     @GetMapping(value = "/findQuestion")
-    public ModelAndView findQuestion(String questionId) {
+    public ModelAndView findQuestion(String questionId,HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        Question question = questionHomeService.getAndConvert(questionId);
-        mv.addObject("question",question);
+        User user = (User) request.getSession().getAttribute("user");
+        request.getSession().setAttribute("questionId",questionId);
+        mv.addObject("question", questionHomeService.getAndConvert(questionId));
+        mv.addObject("user",user);
         mv.setViewName("/view/community/questionParticulars");
         return mv;
     }

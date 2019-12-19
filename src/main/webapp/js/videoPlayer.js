@@ -564,7 +564,7 @@ $(document).ready(function () {
         /*回答按钮点击事件*/
         $(document).on("click", ".stuQa-answer", function () {
             if ($(this).text() === "回答"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 height1 = $(this).parent().parent().height(); //功能按钮框的高度
                 height2 = $(this).parent().parent().parent().find("div").eq(0).height();//标签框的高度
                 height7 = $(this).parent().parent().parent().parent().height();//评论块整体高度
@@ -616,7 +616,7 @@ $(document).ready(function () {
         /*查看全文按钮点击提交事件*/
         $(document).on("click", ".stuQa-readMore", function () {
             if ($(this).text() === "查看全文"){
-                height = $(this).parent().parent().prev().find("div").eq(1).height();//富文本框编辑器的高度
+                height = $(this).parent().parent().prev().find(".stuQa-textEditor").height();//富文本框编辑器的高度
                 if ($(this).parent().next().css("display")==="none"){
                     height1 = $(this).parent().parent().height(); //功能按钮框的高度
                     height3 = $(this).parent().parent().parent().parent().height();//评论块整体高度
@@ -779,13 +779,14 @@ $(document).ready(function () {
                 success:function(index,layero){
                     $(index).on('keyup','#answer-editor',function () {
                         if (checkLength(ans_editor,401)){
-                            layer.alert("输入内容请不要超过200个汉字或400个英文字符");
+                            layer.msg("输入内容请不要超过200个汉字或400个英文字符");
                             isReplay = false;
+                        }else {
+                            isReplay = true;
                         }
                     })
                 },
                 yes: function (index, layero) {
-                    layer.close(index);
                     if (isReplay){
                         var content = ans_editor.txt.html();
                         var data = {"sqaId":sqaId,"pId":pId,"content":content};
@@ -799,6 +800,9 @@ $(document).ready(function () {
                                 stu_qa_flow("#"+Id,basePath+"/stuQa/findStuQaList",sectionId);
                             }
                         });
+                        layer.close(index);
+                    }else {
+                        layer.msg("请确认字数未超过限制");
                     }
                 },
                 end:function () {
