@@ -17,7 +17,7 @@ window.onload = function () {
 
             if(data.value === ''){
                 table.reload('sections_table',{
-                    url : basePath+'/SMC/findAllData',
+                    url : basePath+'/stuComment/findAllFromStuComment',
                     page: {
                         curr: 1
                     }
@@ -28,7 +28,7 @@ window.onload = function () {
             }else {
                 let ajaxData = {'courseId': data.value};
                 table.reload('sections_table',{
-                    url : basePath+'/SMC/findDataByCourseId',
+                    url : basePath+'/stuComment/findStuCommentByCoursesId',
                     where: {
                         courseId: data.value
                     },
@@ -58,14 +58,14 @@ window.onload = function () {
             if(data.value === ''){
                 if ($("#courseSelect").val() == ''){
                     table.reload('sections_table',{
-                        url : basePath+'/SMC/findAllData',
+                        url : basePath+'/stuComment/findAllFromStuComment',
                         page: {
                             curr: 1
                         }
                     });
                 }else {
                     table.reload('sections_table',{
-                        url : basePath+'/SMC/findDataByCourseId',
+                        url : basePath+'/stuComment/findStuCommentByCoursesId',
                         where: {
                             courseId: $("#courseSelect").val()
                         },
@@ -76,7 +76,7 @@ window.onload = function () {
                 }
             }else {
                 table.reload('sections_table',{
-                    url : basePath+'/SMC/findDataByChapterId',
+                    url : basePath+'/stuComment/findStuCommentByCoursesIdAndChapterId',
                     where: {
                         chapterId: data.value
                     },
@@ -156,7 +156,7 @@ window.onload = function () {
                 ,{field: 'replyPerson', title: '回复对象', width:100}
                 ,{field: 'content', title: '评论内容', width:100}
                 ,{field: 'up', title: '点赞数', width: 177}
-                ,{field: 'down', title: '点踩数', width: 100}
+                    ,{field: 'down', title: '点踩数', width: 100}
                 ,{field: 'date', title: '时间', width: 177}
                 ,{field: 'teacherAnswer', title: '讲师回复', width: 100}
                 ,{fixed: 'right', width:175, align:'center', toolbar: '' +
