@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_iwhxw2tfbue.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/wangEditor.js"></script>
@@ -255,23 +255,44 @@
         <button class="layui-btn" id="answer-submit" style="display: none">提交</button>
     </div>
 
-    <%------------------------------------------------------------------------%>
-    <%--<div class="SCS_content" style="width: 96%">
-        <div class="SCS_c_lbox" style="height: 200px">
-            <div class="SCS_userBox">
-                <div class="SCS_headPhoto_box" style="width: 7vw;height: 7vw">
-                    <img style="width: 100%;height: 100%">
+    <div id="exercises" hidden="hidden">
+        <div class="exercises_box">
+            <span style="display: none">2</span>
+            <div class="exercise_title">1. 1 + 1 = ?</div>
+            <div class="exercise_answer">
+                <div class="answer_box">
+                    <div class="select_box">
+                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
+                    </div>
+                    <span style="display: none">1</span>
+                    A. 1
                 </div>
-                <div class="SCS_userName_box" style="width: 7vw;height: 20px"></div>
+                <div class="answer_space"></div>
+                <div class="answer_box">
+                    <div class="select_box">
+                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
+                    </div>
+                    <span style="display: none">2</span>
+                    B. 2
+                </div>
+                <div class="answer_space"></div>
+                <div class="answer_box">
+                    <div class="select_box">
+                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
+                    </div>
+                    <span style="display: none">3</span>
+                    C. 3
+                </div>
+                <div class="answer_space"></div>
+                <div class="answer_box">
+                    <div class="select_box">
+                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
+                    </div>
+                    <span style="display: none">4</span>
+                    D. 4
+                </div>
             </div>
         </div>
-        <div class="SCS_c_rbox">
-            <div class="SCS_toolBar" style="display: none"></div>
-            <div class="SCS_textEditor" style="height: 150px;display: block"></div>
-            <div class="SCS_replyEditor" style="height: 100px;display: none"></div>
-            <div class="SCS_cmt_toolBox"></div>
-        </div>
-    </div>--%>
-    <%------------------------------------------------------------------------%>
+    </div>
 </body>
 </html>

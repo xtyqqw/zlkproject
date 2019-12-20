@@ -6,11 +6,12 @@ $(document).ready(function () {
     var basePath = localObj.protocol+"//"+localObj.host;
     var server_context=basePath;
 
-    layui.use(['element', 'flow','layer'], function () {
+    layui.use(['element', 'flow', 'layer', 'form'], function () {
         var element = layui.element,
             $ = layui.jquery,
             flow = layui.flow,
             layer = layui.layer,
+            form = layui.form,
             sectionId = parseInt($("#sectionId").text());
         var tagIdArray = new Array();
         var editorflag = 0;
@@ -2252,11 +2253,6 @@ $(document).ready(function () {
         }
     });
 
-    /*//监听成功获取资源长度事件
-    elem_video1.addEventListener('loadedmetadata',function () {
-        elem_totalTime.innerText = format(elem_video1.duration);
-    });*/
-
     //进度条点击
     elem_pgBg.onmousedown = function (ev) {
         move = ev.clientX - $("#pg_bg").offset().left;
@@ -2396,6 +2392,13 @@ $(document).ready(function () {
                         elem_pgBtn.style.left = 0 + 'px';
                         elem_pgBar.style.width = 0 + 'px';
                         elem_currentTime.innerText = '00:00:00';
+                        layer.open({
+                            type: 1,
+                            area: ['800px','600px'],
+                            content: $('#exercises'),
+                            offset: '50px',
+                            title: ['课后习题']
+                        })
                     }
                 },1000);
             }else{
@@ -2532,5 +2535,26 @@ $(document).ready(function () {
     /*--------清晰度 end-----------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------播放器 end------------------------------------------------------------------*/
+
+/*-----------------------------------------课后习题 begin--------------------------------------------------------------*/
+    $(".select_box").click(function () {
+        let truth = $(this).parent().parent().parent().children().eq(0).text() + '';
+        let answer = $(this).next().text() + '';
+        $(this).children().eq(0).removeClass('icon-weixuanzhong');
+        if (answer === truth){
+            $(this).children().eq(0).addClass('icon-chenggong');
+        }else {
+            $(this).children().eq(0).addClass('icon-shibai');
+        }
+        let arr = $(this).parent().siblings(".answer_box");
+        for (let i=0;i<arr.length;i++){
+            $(arr[i]).children().eq(0).empty();
+            $(arr[i]).children().eq(0).append('<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>');
+        }
+        $.ajax({
+
+        });
+    });
+/*-----------------------------------------课后习题 end----------------------------------------------------------------*/
 });
-})
+});

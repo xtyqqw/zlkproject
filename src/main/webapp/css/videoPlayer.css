@@ -1199,4 +1199,48 @@ button{
     overflow-y: auto !important;
 }
 /*-------------------------学生问答end-----------------------------------------------*/
-
+/*-------------------------习题 begin------------------------------------------------*/
+#exercises{
+    padding: 20px;
+}
+.exercises_box{
+    width: 100%;
+    margin: 0 0 15px 0;
+}
+.exercise_title{
+    width: 100%;
+    padding: 5px 0;
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+.exercise_answer{
+    /*background-color: #eb7350;*/
+    width: 100%;
+    font-size: 0;
+}
+.answer_box{
+    width: 22%;
+    /*background-color: #009f95;*/
+    display: inline-block;
+    vertical-align: top;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+.answer_space{
+    width: 4%;
+    display: inline-block;
+    vertical-align: top;
+}
+.select_box{
+    /*background-color: #FFB94F;*/
+    display: inline-block;
+    cursor: pointer;
+}
+.icon-chenggong{
+    color: #5FB878;
+}
+.icon-shibai{
+    color: #A60000;
+}
+/*-------------------------习题 end--------------------------------------------------*/
