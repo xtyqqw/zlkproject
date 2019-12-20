@@ -24,4 +24,21 @@ public interface DurationService {
      * @return
      */
     Integer findUserById(String userId);
+    /**
+     * 技能水平
+     * @param userId
+     * @return
+     */
+    Integer findCourses(String userId);
+    /**
+     * 查询项目
+     * @return
+     */
+    Integer selectSections();
+    /**
+     * 根据UserId查询用户已完成哪些视频
+     * @param userId
+     * @return
+     */
+    Integer selectSection(String userId);
 }

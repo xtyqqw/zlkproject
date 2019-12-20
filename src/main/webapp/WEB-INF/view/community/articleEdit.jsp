@@ -116,7 +116,7 @@
                     <div class="field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">首图</label>
-                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等">
+                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面">
                         </div>
                     </div>
 
@@ -135,7 +135,7 @@
     <%--受js文件运行机制所致，引用时一定要注意顺序--%>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+    <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
     <script type="text/javascript">
         /*MarkDown组件*/
         var testEditor;
@@ -153,7 +153,7 @@
                 },
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/uploadfile",
+                imageUploadURL : "/uploadMarkdown",
                 //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
                 saveHTMLToTextarea : true
             });

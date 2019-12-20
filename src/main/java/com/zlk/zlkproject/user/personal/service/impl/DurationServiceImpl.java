@@ -49,4 +49,33 @@ public class DurationServiceImpl implements DurationService {
         return durationMapper.findUserById(userId);
     }
 
+    /**
+     * 技能水平
+     * @param userId
+     * @return
+     */
+    @Override
+    public Integer findCourses(String userId){
+        return durationMapper.findCourses(userId);
+    }
+
+    /**
+     * 查询视频总数
+     * @return
+     */
+    @Override
+    public Integer selectSections(){
+        return durationMapper.selectSections();
+    }
+
+    /**
+     * 查询用户已完成哪些视频
+     * @param userId
+     * @return
+     */
+    @Override
+    public Integer selectSection(String userId){
+        return durationMapper.selectSection(userId);
+    }
+
 }
