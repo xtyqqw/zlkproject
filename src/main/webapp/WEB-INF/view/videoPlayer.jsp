@@ -258,7 +258,10 @@
     <div id="exercises" hidden="hidden">
         <div class="exercises_box">
             <span style="display: none">2</span>
-            <div class="exercise_title">1. 1 + 1 = ?</div>
+            <div class="exercise_title">
+                <span id="exercise_num" style="display: none">1</span>
+                1. 1 + 1 = ?
+            </div>
             <div class="exercise_answer">
                 <div class="answer_box">
                     <div class="select_box">
