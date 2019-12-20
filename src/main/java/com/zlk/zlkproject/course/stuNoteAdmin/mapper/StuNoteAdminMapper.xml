@@ -12,6 +12,17 @@
         <result property="report" column="report" javaType="java.lang.String"/>
         <result property="date" column="sn_date" javaType="java.util.Date"/>
     </resultMap>
+    <!--根据小节Id查询并分页-->
+    <select id="selectSNBySectionIdLimit" resultMap="StuNoteMap">
+        select sn_id,sn_section_id,sn_user_id,content,up,down,report,sn_date from stu_note
+        where sn_section_id=#{snSectionId}
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--根据小节Id查询总条数-->
+    <select id="selectCountBySectionId" resultType="java.lang.Integer">
+        select count(1) from stu_note where sn_section_id=#{snSectionId}
+    </select>
 
     <!--分页查询数据-->
     <select id="selectAllByLimit" resultMap="StuNoteMap">

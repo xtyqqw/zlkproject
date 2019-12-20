@@ -55,4 +55,6 @@ public class StuComment {
     private int chapterId;
     /**课程Id*/
     private int coursesId;
+    /**课程名称*/
+    private String coursesName;
 }

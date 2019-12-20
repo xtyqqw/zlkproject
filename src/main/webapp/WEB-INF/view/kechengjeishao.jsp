@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1355944_zfigtx3pcpa.css">
 
 
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/kechengjeishao.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/courseDetails.css">
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="/css/kechengjeishao.css">
+    <link rel="stylesheet" href="/css/courseDetails.css">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">

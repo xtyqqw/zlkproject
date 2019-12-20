@@ -1,10 +1,14 @@
 package com.zlk.zlkproject.community.articleAdd.controller;
 
+import com.zlk.zlkproject.community.articleAdd.service.ActionAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.Action;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +36,12 @@ public class ArticleAddController {
     private ArticleAddService articleAddService;
     @Autowired
     private ArticleAddTagService articleAddTagService;
+    @Autowired
+    private ActionAddService actionAddService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
@@ -76,12 +86,30 @@ public class ArticleAddController {
     }
 
     //文章编辑页面的图片上传方法
-    @RequestMapping(value="/uploadfile",method= RequestMethod.POST)
+    @RequestMapping(value = "/uploadMarkdown",method= RequestMethod.POST)
+    public void uploadMarkdown(HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        try {
+            String path = commonFileUtil.uploadFile(file);
+            String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+            System.out.println(path);
+            System.out.println(url);
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    //文章编辑页面的图片上传方法,测试用
+    @RequestMapping(value="/uploadFile",method= RequestMethod.POST)
     public void hello(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
         try {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
-            String rootPath = request.getSession().getServletContext().getRealPath("upload");
+            String rootPath = request.getSession().getServletContext().getRealPath("uploadFolder");
             //文件路径不存在则需要创建文件路径
             File filePath=new File(rootPath);
             if(!filePath.exists()){
@@ -91,7 +119,7 @@ public class ArticleAddController {
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
             //下面response返回的json格式是editor.md所限制的,规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/uploadFolder/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {
                 response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );

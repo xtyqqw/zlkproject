@@ -29,9 +29,7 @@ public class FaqController {
     public Map<String,Object> findFaqList(Pagination pagination)throws Exception{
 
         List<Faq> faqList=faqService.findFaqerList(pagination);
-        for(Faq faq:faqList){
-            System.out.println(faq.getCoursesId());
-        }
+
         Map<String,Object> map=new HashMap<>();
         map.put("faqList",faqList);
         return map;
