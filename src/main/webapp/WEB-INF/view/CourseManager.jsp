@@ -320,10 +320,11 @@
                                 $.ajax({
                                     type: "POST",
                                     url:"<%=request.getContextPath()%>/courseManager/updateCourses",
+                                    async: false,
                                     data:data.field,
                                     dataType:"json",
                                     success:function (result) {
-                                        layer.msg("修改成功");
+                                        layer.msg("mmm");
                                     }
                                 })
                             })

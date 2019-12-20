@@ -137,4 +137,24 @@ public interface ChapterMapper {
      *@time 2019/12/16  10:22
      */
     Integer selectCoursesIdBySectionId(Integer sectionId);
+
+    /**
+     *  查找当前课程全部章节序号
+     *@method selectChapterNumByCoursesId
+     *@params [coursesId]
+     *@return java.util.List<java.lang.Integer>
+     *@author zhang
+     *@time 2019/12/19  15:29
+     */
+    List<Integer> selectChapterNumByCoursesId(Integer coursesId);
+
+    /**
+     *  将两个章节的序号互换
+     *@method updateLastChapterNum
+     *@params [chapter]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/19  17:59
+     */
+    Integer updateLastChapterNum(Chapter chapter);
 }

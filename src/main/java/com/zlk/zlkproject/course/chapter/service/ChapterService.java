@@ -134,4 +134,14 @@ public interface ChapterService {
      */
     Integer selectCoursesIdBySectionId(Integer sectionId);
 
+    /**
+     *  查找当前课程全部章节序号
+     *@method selectChapterNumByCoursesId
+     *@params [coursesId]
+     *@return java.util.List<java.lang.Integer>
+     *@author zhang
+     *@time 2019/12/19  15:29
+     */
+    List<Integer> selectChapterNumByCoursesId(Integer coursesId);
+
 }

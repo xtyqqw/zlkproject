@@ -177,4 +177,23 @@ public class ChapterManagerController {
         return map;
     }
 
+    /**
+     *  根据课程id查找章节序号
+     *@method selectChapterNum
+     *@params [coursesId]
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     *@author zhang
+     *@time 2019/12/19  15:33
+     */
+    @RequestMapping(value = "/selectChapterNum",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> selectChapterNum(@RequestParam Integer coursesId) throws Exception{
+        List<Integer> chapterNumList = chapterService.selectChapterNumByCoursesId(coursesId);
+        Integer count = chapterService.selectCountByCoursesId(coursesId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("chapterNumList",chapterNumList);
+        map.put("count",count);
+        return map;
+    }
+
 }
