@@ -114,23 +114,51 @@ $(document).ready(function () {
 
         /*小节视频点击更换*/
         $(document).on("click", ".section", function () {
-            let sectionId = $(this).find("input").val();
-            let state = $(this).find("input").eq(1).val();
-            let currentSectionId = parseInt($("#sectionId").text());
-            $.ajax({
-                type: "POST",
-                url: basePath+"/section/findVideoAddr?sectionId=" + sectionId,
-                success: function (data) {
-                    var src = data.section.videoAddr1;
-                    switchVideo(src,currentSectionId);
-                    $("#mulu_div").css("display", "none");
-                    $("#nv").text(data.section.videoAddr1);
-                    $("#sv").text(data.section.videoAddr2);
+            let state;
+            let canPlay = true;
+            let index = $(this).parent().children("li").index(this);
+            if (index==0){
+                let index1 = $(this).parent().index();
+                if (index1 == 0){
+                    canPlay = true;
+                }else {
+                    state = $(this).parent().prev().children("li").last().find(".sectionState").val();
+                    if (state ==="已完成"){
+                        canPlay = true;
+                    }else {
+                        canPlay = false;
+                    }
                 }
-            });
-            note_flow(sectionId);
-            stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
-            $("#sectionId").text(sectionId);
+
+            }else {
+                state = $(this).prev().find(".sectionState").val();
+                if (state ==="已完成"){
+                    canPlay = true;
+                }else {
+                    canPlay = false;
+                }
+            }
+
+            let sectionId = $(this).find("input").val();
+            let currentSectionId = parseInt($("#sectionId").text());
+            if (canPlay){
+                $.ajax({
+                    type: "POST",
+                    url: basePath+"/section/findVideoAddr?sectionId=" + sectionId,
+                    success: function (data) {
+                        var src = data.section.videoAddr1;
+                        switchVideo(src,currentSectionId);
+                        $("#mulu_div").css("display", "none");
+                        $("#nv").text(data.section.videoAddr1);
+                        $("#sv").text(data.section.videoAddr2);
+                    }
+                });
+                note_flow(sectionId);
+                stu_qa_flow("#stuQaall",basePath+"/stuQa/findStuQaList",sectionId);
+                $("#sectionId").text(sectionId);
+            }else {
+                layer.msg("请按顺序观看");
+            }
         });
 
 
@@ -628,7 +656,7 @@ $(document).ready(function () {
 
                 height4 = $(this).parent().parent().prev().height();//内容部分高度
                 height5 = $(this).parent().parent().parent().prev().find("div").eq(0).height();//用户部分高度
-                if (height <= 200){
+                if (height <= 120){
                     $(this).text("收起");
                 }else {
                     $(this).parent().parent().css("height",height1);

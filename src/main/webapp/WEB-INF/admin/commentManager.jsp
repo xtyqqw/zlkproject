@@ -19,12 +19,12 @@
 </head>
 <body>
     <div id="main_body">
-        <%--<div id="top_select">
+        <div id="top_select">
             <div id="ts_1" class="layui-form" lay-filter="course_select_box">
-                <select id="courseSelect" name="course" lay-filter="course_select" lay-search>
+                <select id="courseSelect" name="courses" lay-filter="course_select" lay-search>
                     <option value="">请选择一个课程</option>
-                    <c:forEach items="${CourseAndChapter}" var="course">
-                        <option value="${course.coursesId}">(ID:${course.coursesId}) ${course.coursesName}</option>
+                    <c:forEach items="${CoursesAndChapter}" var="courses">
+                        <option value="${courses.coursesId}">(ID:${courses.coursesId}) ${courses.coursesName}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -34,7 +34,7 @@
                     <option value="">请选择一个章节（请先选择一个课程）</option>
                 </select>
             </div>
-        </div>--%>
+        </div>
         <table id="sections_table" lay-filter="sectionsTable"></table>
         <div id="editContentBox" hidden="hidden">
             <span id="sm_id" style="display: none"></span>
