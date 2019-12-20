@@ -61,8 +61,6 @@ public class CourseHomePageController {
             sectionCount = 0;
             ratio = 0;
         }
-
-
         map.put("courses",courses);
         map.put("ratio",(int)ratio);
         map.put("starSum",starSum);
@@ -74,9 +72,7 @@ public class CourseHomePageController {
     public Map<String,Object> findCoursesList(Pagination pagination)throws Exception{
 
         List<Courses> coursesList=courseHomePageService.findCoursesList(pagination);
-        for(Courses courses:coursesList){
-            System.out.println(courses.getCoursesId());
-        }
+
         Map<String,Object> map=new HashMap<>();
         map.put("coursesList",coursesList);
         return map;
@@ -120,8 +116,20 @@ public class CourseHomePageController {
      */
     @RequestMapping(value = "/findAllByTag")
     @ResponseBody
-    public Map<String,Object> findAllByTag(Courses courses,String tagName,Integer page,Integer limit,HttpServletRequest request)throws Exception{
-        tagName = (String) request.getSession().getAttribute("tagName");
+        public Map<String,Object> findAllByTag(Courses courses,String tagName,Integer page,Integer limit,HttpServletRequest request)throws Exception{
+        //tagName = (String) request.getSession().getAttribute("tagName");
+        List<Courses> allListTag=courseHomePageService.findAllByTag(courses,tagName,page,limit);
+        Map<String,Object> map=new HashMap<>();
+        map.put("allListTag",allListTag);
+        return map;
+    }
+
+    @RequestMapping(value = "/findAllByTag1")
+    @ResponseBody
+    public Map<String,Object> findAllByTag1(Courses courses,HttpServletRequest request,Integer page,Integer limit)throws Exception{
+        String tagName = (String) request.getSession().getAttribute("tagName");
+        /*int page =1;
+        int limit=8;*/
         List<Courses> allListTag=courseHomePageService.findAllByTag(courses,tagName,page,limit);
         Map<String,Object> map=new HashMap<>();
         map.put("allListTag",allListTag);

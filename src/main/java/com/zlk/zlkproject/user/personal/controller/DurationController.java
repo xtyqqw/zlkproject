@@ -34,8 +34,16 @@ public class DurationController {
         User user = (User) request.getSession().getAttribute("user");
         User lists=durationService.selectDuration(user.getUserId());
         ModelAndView mv=new ModelAndView();
-        /*技能水平*/
-        Integer addd= Arith.ride(lists.getUserDateTime());
+        /*查询的技能水平*/
+        Integer skill=durationService.findCourses(user.getUserId());
+        /*技能水平值*/
+        Integer skills=Arith.ride(skill);
+        /*总视频数量*/
+        Integer sectionAll=durationService.selectSections();
+        /*用户已完成视频数量*/
+        Integer finish=durationService.selectSection(user.getUserId());
+        /*学习力*/
+        long ability = Math.round((finish*100 )/ sectionAll);
         /*学习成长量*/
         Integer ad = Arith.plus(lists.getUserDateTime());
         Integer all=durationService.findUser();
@@ -44,8 +52,9 @@ public class DurationController {
         Integer rankall=Arith.divide(rank,all);
         mv.addObject("rankall",rankall);
         mv.addObject("ad",ad);
-        mv.addObject("addd",addd);
+        mv.addObject("skills",skills);
         mv.addObject("lists",lists);
+        mv.addObject("ability",ability);
         mv.setViewName("view/personal/learnlook");
         return mv;
     }

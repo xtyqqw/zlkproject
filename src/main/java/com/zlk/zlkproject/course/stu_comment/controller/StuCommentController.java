@@ -1,11 +1,15 @@
 package com.zlk.zlkproject.course.stu_comment.controller;
 
 import com.zlk.zlkproject.admin.util.LogUtil;
+import com.zlk.zlkproject.course.section.service.SectionService;
+import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.until.LeaveTime;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -32,6 +37,8 @@ public class StuCommentController {
     private FdfsConfig fdfsConfig;
     @Autowired
     private StuCommentService stuCommentService;
+    @Autowired
+    private SectionsManagerService sectionsManagerService;
 
     @RequestMapping("uploadPic")
     @ResponseBody
@@ -144,6 +151,7 @@ public class StuCommentController {
     public Map<String, Object> findAllFromStuComment(Pagination pagination)throws Exception{
         List<StuComment> list = stuCommentService.findAllFromStuComment(pagination);
         Integer count = stuCommentService.findStuCommentCount(pagination);
+
         Map<String, Object> map = new HashMap<>();
         map.put("code", "0");
         map.put("count", count);
@@ -203,5 +211,40 @@ public class StuCommentController {
     }
 
 
+
+    @RequestMapping(value="/findStuCommentByCoursesId")
+    @ResponseBody
+    public Map<String, Object> findStuCommentByCoursesId(@RequestParam("page") Integer page
+            , @RequestParam("limit") Integer size,@RequestParam("courseId") Integer courseId)throws Exception{
+        List<StuComment> list = stuCommentService.findStuCommentByCoursesName(page,size,courseId);
+        Integer count = stuCommentService.findStuCommentCountByCoursesId(courseId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "0");
+        map.put("count", count);
+        map.put("data", list);
+        return map;
+    }
+
+    @RequestMapping(value="/findStuCommentByCoursesIdAndChapterId")
+    @ResponseBody
+    public Map<String, Object> findStuCommentByCoursesIdAndChapterId(@RequestParam("page") Integer page
+            , @RequestParam("limit") Integer size,@RequestParam("chapterId") Integer chapterId)throws Exception{
+        List<StuComment> list = stuCommentService.findStuCommentByCoursesIdAndChapterId(page,size,chapterId);
+        Integer count = stuCommentService.findStuCommentCountByCoursesIdAndChapterId(chapterId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "0");
+        map.put("count", count);
+        map.put("data", list);
+        return map;
+    }
+
+    @RequestMapping(value = "/commentManager")
+    public ModelAndView toCommentManager() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<Courses> res = sectionsManagerService.findAllCourseAndChapter();
+        mv.addObject("CoursesAndChapter",res);
+        mv.setViewName("admin/commentManager");
+        return mv;
+    }
 
 }

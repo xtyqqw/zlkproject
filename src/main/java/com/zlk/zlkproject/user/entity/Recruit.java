@@ -1,13 +1,21 @@
 package com.zlk.zlkproject.user.entity;
 
 public class Recruit {
+    /*招聘信息人id*/
     private Integer recruitId;
+    /*名字*/
     private String recruitName;
+    /*学历*/
     private String recruitBac;
+    /*身份证号码*/
     private String recruitNumber;
+    /*手机号码*/
     private String recruitPhone;
+    /*电子邮箱*/
     private String recruitMail;
+    /*地址*/
     private String recruitSite;
+    /*性别*/
     private String recruitSex;
 
     public Recruit(Integer recruitId, String recruitName, String recruitBac, String recruitNumber, String recruitPhone, String recruitMail, String recruitSite, String recruitSex) {
