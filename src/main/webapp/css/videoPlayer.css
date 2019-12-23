@@ -1234,13 +1234,22 @@ button{
 }
 .select_box{
     /*background-color: #FFB94F;*/
-    display: inline-block;
+    display: inline-flex;
     cursor: pointer;
+    width: 18px;
+    height: 20px;
+    vertical-align: top;
+    align-items: center;
+    justify-content: center;
 }
 .icon-chenggong{
     color: #5FB878;
 }
 .icon-shibai{
     color: #A60000;
+}
+@keyframes a1 {
+    from {font-size: 10px;}
+    to {font-size: 18px;}
 }
 /*-------------------------习题 end--------------------------------------------------*/

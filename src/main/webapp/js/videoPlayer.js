@@ -2574,15 +2574,18 @@ $(document).ready(function () {
 
 /*-----------------------------------------课后习题 begin--------------------------------------------------------------*/
 
-    function bindClick() {
+    function bindEvent() {
         $(".select_box").click(function () {
             let truth = $(this).parent().parent().parent().children().eq(0).text() + '';
             let answer = $(this).next().text() + '';
             $(this).children().eq(0).removeClass('icon-weixuanzhong');
             if (answer === truth){
                 $(this).children().eq(0).addClass('icon-chenggong');
+                $(this).children().eq(0).css('animation','a1 0.2s linear');
             }else {
                 $(this).children().eq(0).addClass('icon-shibai');
+                $(this).children().eq(0).css('color','#A60000');
+                $(this).children().eq(0).css('animation','a1 0.2s linear');
             }
             let arr = $(this).parent().siblings(".answer_box");
             for (let i=0;i<arr.length;i++){
@@ -2607,6 +2610,18 @@ $(document).ready(function () {
                     }
                 }
             });
+        });
+
+        $(".select_box").mouseover(function () {
+            if ($(this).children().hasClass('icon-weixuanzhong')){
+                $(this).children().css('color','#5FB878');
+            }
+        });
+
+        $(".select_box").mouseout(function () {
+            if ($(this).children().hasClass('icon-weixuanzhong')){
+                $(this).children().css('color','black');
+            }
         });
     }
 
@@ -2688,7 +2703,7 @@ $(document).ready(function () {
             $("#exercises").append(str);
             str = '';
         }
-        bindClick();
+        bindEvent();
     }
 /*-----------------------------------------课后习题 end----------------------------------------------------------------*/
 });

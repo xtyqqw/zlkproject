@@ -255,47 +255,6 @@
         <button class="layui-btn" id="answer-submit" style="display: none">提交</button>
     </div>
 
-    <div id="exercises" hidden="hidden">
-        <div class="exercises_box">
-            <span style="display: none">2</span>
-            <div class="exercise_title">
-                <span id="exercise_num" style="display: none">1</span>
-                1. 1 + 1 = ?
-            </div>
-            <div class="exercise_answer">
-                <div class="answer_box">
-                    <div class="select_box">
-                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
-                    </div>
-                    <span style="display: none">1</span>
-                    A. 1
-                </div>
-                <div class="answer_space"></div>
-                <div class="answer_box">
-                    <div class="select_box">
-                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
-                    </div>
-                    <span style="display: none">2</span>
-                    B. 2
-                </div>
-                <div class="answer_space"></div>
-                <div class="answer_box">
-                    <div class="select_box">
-                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
-                    </div>
-                    <span style="display: none">3</span>
-                    C. 3
-                </div>
-                <div class="answer_space"></div>
-                <div class="answer_box">
-                    <div class="select_box">
-                        <i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>
-                    </div>
-                    <span style="display: none">4</span>
-                    D. 4
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="exercises" hidden="hidden"></div>
 </body>
 </html>
