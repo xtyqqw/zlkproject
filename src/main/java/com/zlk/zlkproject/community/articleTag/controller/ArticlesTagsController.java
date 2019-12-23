@@ -1,8 +1,6 @@
 package com.zlk.zlkproject.community.articleTag.controller;
 
 import com.zlk.zlkproject.community.articleTag.service.ArticlesTagsService;
-import com.zlk.zlkproject.entity.Article;
-import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,6 +22,7 @@ public class ArticlesTagsController {
     @Autowired
     private ArticlesTagsService articlesTagsService;
 
+    //点标签查询文章的请求方法
     @GetMapping(value = "/community/tags")
     public ModelAndView tags(@PageableDefault(page = 0, value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                              Integer tagId){

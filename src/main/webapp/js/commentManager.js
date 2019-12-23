@@ -9,6 +9,7 @@ window.onload = function () {
         var layer = layui.layer;
         var upload = layui.upload;
 
+        /*12-89为二级联动js事件*/
         //顶部课程下拉框选择事件
         form.on('select(course_select)', function(data){
             /*console.log(data.elem); //得到select原始DOM对象
@@ -86,6 +87,8 @@ window.onload = function () {
                 });
             }
         });
+
+
 
         //新增弹出层课程下拉框选择事件
         form.on('select(ACB1_course_select)', function(data){

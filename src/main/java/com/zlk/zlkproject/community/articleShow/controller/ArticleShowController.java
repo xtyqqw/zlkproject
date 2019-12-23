@@ -39,6 +39,7 @@ public class ArticleShowController {
         }else if (articleId != null) {
             mv.addObject("article", articleShowService.getAndConvert(articleId));
             String userId = "" + user.getUserId();
+            //把articleId保存到Session中备用
             request.getSession().setAttribute("articleId",articleId);
             mv.addObject("userId",userId);
             mv.setViewName("view/community/articleShow");
