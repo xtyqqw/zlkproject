@@ -1,10 +1,13 @@
 package com.zlk.zlkproject.community.articleAdd.controller;
 
+import com.zlk.zlkproject.community.articleAdd.service.ActionAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +35,12 @@ public class ArticleAddController {
     private ArticleAddService articleAddService;
     @Autowired
     private ArticleAddTagService articleAddTagService;
+    @Autowired
+    private ActionAddService actionAddService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     //给发文规则提示页面提供接口
     @RequestMapping(value = "/community/article-guide")
@@ -39,30 +48,12 @@ public class ArticleAddController {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv=new ModelAndView();
         if (user == null){
-            mv.addObject("msg","未登录");
-            mv.setViewName("redirect:/CommunityPage");
+            mv.addObject("spanmsg", "发表文章前，请先登录");
+            mv.setViewName("/view/signin");
         }else {
             mv.setViewName("view/community/articleGuide");
         }
         return mv;
-        //进入发文提示页面前先判断当前用户下发表的所有文章的审核状态
-        /*Article approval=articleAddService.getArticleInApproval(article.getApproval());
-        if (approval != null) {
-            if (article.getApproval()==1) {
-                article.setApproval(1);
-                mv.addObject("flag", "true");
-                mv.addObject("msg","可以发文");
-                mv.setViewName("view/community/articleGuide");
-            }else if (article.getApproval()==0){
-                mv.addObject("flag", "true");
-                mv.addObject("msg","你的文章正在审核中，通过以后才能继续发表文章，我们会尽快处理，给您反馈");
-                mv.setViewName("view/community/communityMain");
-            }else {
-                mv.addObject("flag", "true");
-                mv.addObject("msg","你之前的文章审核失败，以后发表文章请注意撰文规则，感谢您的配合");
-                mv.setViewName("view/community/communityMain");
-            }
-        }*/
     }
 
     //给暂无更多文章提示页面提供接口
@@ -94,12 +85,52 @@ public class ArticleAddController {
     }
 
     //文章编辑页面的图片上传方法
-    @RequestMapping(value="/uploadfile",method= RequestMethod.POST)
+    @RequestMapping(value = "/uploadMarkdown",method= RequestMethod.POST)
+    public void uploadMarkdown(HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        try {
+            String path = commonFileUtil.uploadFile(file);
+            String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+            System.out.println(path);
+            System.out.println(url);
+            //下面response返回的json格式是editor.md所规范的
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    @RequestMapping("/uploadFigures")
+    @ResponseBody
+    public Map uploadFigures(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map<String,Object> map=new HashMap<>();
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        // url是最终访问文件资源的地址，
+        // fdfsConfig.getResHost()是获取服务器ip，
+        // fdfsConfig.getStoragePort()获取服务器端口
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
+        System.out.println(path);
+        //最终访问文件资源的地址
+        System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
+        map.put("url",url);
+        map.put("message","上传成功");
+        //返回map集合
+        return map;
+    }
+
+    //文章编辑页面的图片上传方法,测试用
+    @RequestMapping(value="/uploadFile",method= RequestMethod.POST)
     public void hello(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
         try {
             request.setCharacterEncoding( "utf-8" );
             response.setHeader( "Content-Type" , "text/html" );
-            String rootPath = request.getSession().getServletContext().getRealPath("upload");
+            String rootPath = request.getSession().getServletContext().getRealPath("uploadFolder");
             //文件路径不存在则需要创建文件路径
             File filePath=new File(rootPath);
             if(!filePath.exists()){
@@ -109,7 +140,7 @@ public class ArticleAddController {
             File realFile=new File(rootPath+File.separator+attach.getOriginalFilename());
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
             //下面response返回的json格式是editor.md所限制的,规范输出就OK
-            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/upload/" + attach.getOriginalFilename() + "\"}" );
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"/uploadFolder/" + attach.getOriginalFilename() + "\"}" );
         } catch (Exception e) {
             try {
                 response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );

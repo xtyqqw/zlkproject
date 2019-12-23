@@ -1,10 +1,15 @@
 package com.zlk.zlkproject.user.entity;
 
 public class Lecturer {
+    /*讲师id*/
     private Integer lecturerId;
+    /*讲师名字*/
     private String lecturerName;
+    /*讲师内容*/
     private String lecturerIntro;
+    /*图片绝对路径*/
     private String lecturerPhotoa;
+    /*相对路径*/
     private String lecturerPhotor;
 
     public Lecturer(Integer lecturerId, String lecturerName, String lecturerIntro, String lecturerPhotoa, String lecturerPhotor) {

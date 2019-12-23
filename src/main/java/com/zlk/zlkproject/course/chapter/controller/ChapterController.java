@@ -3,6 +3,7 @@ package com.zlk.zlkproject.course.chapter.controller;
 import com.zlk.zlkproject.course.chapter.service.ChapterService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Pagination;
+import com.zlk.zlkproject.entity.Section;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: zlkproject
@@ -45,6 +44,13 @@ public class ChapterController {
 //        Integer coursesId = (Integer) request.getSession().getAttribute("coursesId");
         Integer coursesId = chapterService.selectCoursesIdBySectionId(sectionId);
         List<Chapter> chapters = chapterService.findChapterByCoursesId(coursesId);
+        for (Chapter chapter : chapters) {
+            Collections.sort(chapter.getSectionList(), new Comparator<Section>(){
+                public int compare(Section s1,Section s2){
+                    return s1.getSectionNum().compareTo(s2.getSectionNum());
+                }
+            });
+        }
         Map<String,Object> map = new HashMap<>();
         map.put("msg","查找成功");
         map.put("chapters",chapters);

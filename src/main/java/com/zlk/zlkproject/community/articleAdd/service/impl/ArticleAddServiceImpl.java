@@ -39,11 +39,4 @@ public class ArticleAddServiceImpl implements ArticleAddService {
         article.setArticleSetTop(1);
         return articleAddRepository.save(article);
     }
-
-    @Transactional
-    @Override
-    public Article getArticleInApproval(Integer approval) {
-        return articleAddRepository.findArticleByApprovalIsTrue(approval);
-    }
-
 }

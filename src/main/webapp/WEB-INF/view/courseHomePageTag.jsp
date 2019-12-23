@@ -10,7 +10,7 @@
 <html lang="zh-CN">
 <head>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layuiXingxing.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <link rel="stylesheet" href=" http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <meta charset="utf-8">

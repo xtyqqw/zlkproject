@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.course.stu_comment.service;
 
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 
@@ -111,4 +112,41 @@ public interface StuCommentService {
      *@return java.util.List<com.zlk.zlkproject.entity.Comment>
      **/
     Integer findStuCommentCountByUserId(String userId);
+
+    /**
+     *@Author luanke
+     *@Description //根据coursesId查询内容
+     *@Date 11:51 2019/12/19
+     *@Param [pagination, coursesId]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuComment>
+     **/
+    List<StuComment> findStuCommentByCoursesName(Integer page,Integer size,Integer courseId);
+
+    /**
+     *@Author luanke
+     *@Description //根据coursesId查询的数量
+     *@Date 11:55 2019/12/19
+     *@Param [pagination, coursesId]
+     *@return java.lang.Integer
+    **/
+    Integer findStuCommentCountByCoursesId(Integer courseId);
+
+    /**
+     *@Author luanke
+     *@Description //根据chapterId查询内容
+     *@Date 11:51 2019/12/19
+     *@Param [pagination, coursesId]
+     *@return java.util.List<com.zlk.zlkproject.entity.StuComment>
+     **/
+    List<StuComment> findStuCommentByCoursesIdAndChapterId(Integer page,Integer size,Integer chapterId);
+
+    /**
+     *@Author luanke
+     *@Description //根据chapterId查询的数量
+     *@Date 12:02 2019/12/19
+     *@Param [pagination, coursesId]
+     *@return java.lang.Integer
+     **/
+    Integer findStuCommentCountByCoursesIdAndChapterId(Integer chapterId);
+
 }

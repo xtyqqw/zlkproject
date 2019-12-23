@@ -53,7 +53,7 @@ public class StuNoteAdminController {
     public String updateStuNoteByStuNote(StuNote stuNote, HttpServletRequest request){
         int i = stuNoteAdminService.updateStuNoteByStuNote(stuNote);
         if(i>0){
-            logUtil.setLog(request,"修改了笔记内容为"+stuNote+"的信息");
+            logUtil.setLog(request,"修改了笔记id:"+stuNote.getSnId()+"举报状态:"+stuNote.getReport()+"的信息");
             return "/view/toNoteManager";
         }
         return "修改失败";
@@ -73,5 +73,22 @@ public class StuNoteAdminController {
             return "删除成功";
         }
         return "删除失败";
+    }
+
+    /**
+     *  分页查询所有数据
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("/note/selectSNBySectionIdLimit")
+    @ResponseBody
+    public Map selectSNBySectionIdLimit(int snSectionId,int page, int limit){
+        Map map = new HashMap();
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",stuNoteAdminService.selectCountBySectionId(snSectionId));
+        map.put("data",stuNoteAdminService.selectSNBySectionIdLimit(snSectionId, page, limit));
+        return map;
     }
 }

@@ -22,16 +22,19 @@ public class ArticlesTagsController {
     @Autowired
     private ArticlesTagsService articlesTagsService;
 
+    //点标签查询文章的请求方法
     @GetMapping(value = "/community/tags")
-    public ModelAndView tags(@PageableDefault(page = 0,value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public ModelAndView tags(@PageableDefault(page = 0, value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                              Integer tagId){
         ModelAndView mv = new ModelAndView();
-        /*if (pageable.getPageSize() == 0) {
+        if (tagId!=10) {
+            mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
+            mv.addObject("activeTagId",tagId);
+            mv.setViewName("view/community/articlesTags");
+            return mv;
+        } else {
             mv.setViewName("view/community/articleNo");
-        }*/
-        mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
-        mv.addObject("activeTagId",tagId);
-        mv.setViewName("view/community/articlesTags");
-        return mv;
+            return mv;
+        }
     }
 }
