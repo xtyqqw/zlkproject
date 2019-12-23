@@ -55,6 +55,17 @@
             border-style:none;
         }
 
+
+        .layui-form-label {
+            float: left;
+            display: block;
+             padding: 10px 0px;
+            width: 80px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+        }
+
     </style>
 
 </head>
@@ -413,9 +424,9 @@
                 '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                 '            <div class="layui-form-item">' +
                                 //模糊查询的表单
-                '               <form type="post" action="/user/toUserManager" style="margin-top:0vw;margin-left:-2vw;"> \n' +
+                '               <form type="post" action="/user/toUserManager" style="margin-top:0vw;margin-left:-5vw;"> \n' +
                 '                <div class="layui-inline">\n' +
-                '                    <label class="layui-form-label hint">姓名查询</label>\n' +
+                '                    <label class="layui-form-label hint" style="margin-left:1vw;">姓名查询</label>\n' +
 
                 '                    <div class="layui-input-block">\n' +
                 '                        <input type="text" id="condition" name="condition" value="${condition}"  placeholder="请输入要查询的用户名称" autocomplete="off" class="layui-input">\n' +

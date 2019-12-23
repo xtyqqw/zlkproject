@@ -1,7 +1,9 @@
 package com.zlk.zlkproject.course.stu_comment.service.impl;
 
+import com.zlk.zlkproject.course.sections_manager.mapper.SectionsManagerMapper;
 import com.zlk.zlkproject.course.stu_comment.mapper.StuCommentMapper;
 import com.zlk.zlkproject.course.stu_comment.service.StuCommentService;
+import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.StuComment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import java.util.List;
 public class StuCommentServiceImpl implements StuCommentService {
     @Autowired
     private StuCommentMapper stuCommentMapper;
+
 
     @Override
     public Integer addStuCmt(StuComment stuComment) {
@@ -115,5 +118,38 @@ public class StuCommentServiceImpl implements StuCommentService {
     @Override
     public Integer findStuCommentCountByUserId(String userId) {
         return stuCommentMapper.findStuCommentCountByUserId(userId);
+    }
+
+    @Override
+    public List<StuComment> findStuCommentByCoursesName(Integer page, Integer size, Integer courseId) {
+        page = (page - 1) * size;
+        List<StuComment> list = stuCommentMapper.findStuCommentByCoursesName(page, size, courseId);
+        return list;
+    }
+
+    @Override
+    public Integer findStuCommentCountByCoursesId(Integer courseId) {
+        /*Courses courses = sectionsManagerMapper.findCourseAndChapterById(courseId);
+        List<Integer> list = new ArrayList<>();
+        for(Chapter c:courses.getChapterList()){
+            list.add(c.getChapterId());
+        }
+        if (list.size() == 0){
+            return 0;
+        }
+        Integer res = stuCommentMapper.findStuCommentCountByCoursesId(courseId);*/
+        return stuCommentMapper.findStuCommentCountByCoursesId(courseId);
+    }
+
+    @Override
+    public List<StuComment> findStuCommentByCoursesIdAndChapterId(Integer page, Integer size, Integer chapterId) {
+        page = (page - 1) * size;
+        return stuCommentMapper.findStuCommentByCoursesIdAndChapterId(page,size,chapterId);
+
+    }
+
+    @Override
+    public Integer findStuCommentCountByCoursesIdAndChapterId( Integer chapterId) {
+        return stuCommentMapper.findStuCommentCountByCoursesIdAndChapterId(chapterId);
     }
 }

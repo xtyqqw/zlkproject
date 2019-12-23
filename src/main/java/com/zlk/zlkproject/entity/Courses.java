@@ -25,7 +25,7 @@ public class Courses {
     /**课程名称*/
     private String coursesName;
     /**学习人数*/
-    private Integer studentNum;
+        private Integer studentNum;
     /**章节数量*/
     private Integer chapterNum;
     /**小节数量*/
@@ -61,7 +61,7 @@ public class Courses {
     /**标签 Id*/
     private int tagId;
     /**标签名字*/
-    private String tagName;
+        private String tagName;
     /**标签属性Id*/
     private String tagTypeId;
 

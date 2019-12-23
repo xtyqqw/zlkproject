@@ -28,9 +28,6 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Transactional
     @Override
     public Article saveArticle(Article article) {
-        article.setArticleId(UUIDUtils.getId());
-        article.setCreateTime(new Date());
-        article.setUpdateTime(new Date());
         article.setApproval(0);
         article.setCommentCount(0);
         article.setBrowseCount(0);
@@ -39,11 +36,4 @@ public class ArticleAddServiceImpl implements ArticleAddService {
         article.setArticleSetTop(1);
         return articleAddRepository.save(article);
     }
-
-    @Transactional
-    @Override
-    public Article getArticleInApproval(Integer approval) {
-        return articleAddRepository.findArticleByApprovalIsTrue(approval);
-    }
-
 }

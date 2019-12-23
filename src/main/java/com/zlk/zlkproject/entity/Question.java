@@ -38,13 +38,13 @@ public class Question {
     /*浏览数*/
     private String browseCount;
     /**问题置顶：0 置顶，1 不置顶*/
-    private String questionSetTop;
+    private Integer questionSetTop;
     /*获赞数*/
     private Integer zanCount;
     /*被踩数*/
     private Integer caiCount;
     /*审核：0 审核中，1 审核过，2 审核未过*/
-    private String audit;
+    private Integer audit;
     /*回答数*/
     private Integer responseCount;
     /*分类*/

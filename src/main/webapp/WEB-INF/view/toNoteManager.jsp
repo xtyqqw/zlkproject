@@ -33,6 +33,21 @@
     </form>
 </div>
     <table class="layui-hide" id="StuNote" lay-filter="test"></table>
+<script type="text/html" id="query">
+    <div class="layui-input-inline">
+        <form>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="width: auto">小节ID:</label>
+                <div class="layui-input-block">
+                    <input type="number" class="layui-input" name="snSectionId" id="snSectionId" placeholder="请输入想查询的小节ID">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" lay-event="submit" id="seek">查询</button>
+            </div>
+        </form>
+    </div>
+</script>
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-xs" lay-event="edit">编辑</button>

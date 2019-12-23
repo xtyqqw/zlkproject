@@ -13,8 +13,4 @@ import org.springframework.transaction.annotation.Transactional;
  * @date: 2019/12/3 13:33
  */
 public interface ArticleAddRepository extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
-
-    @Transactional
-    @Query(value="select a.article_id,a.user_id,a.approval,u.user_id from article a , user u where a.user_id=u.user_id", nativeQuery=true)
-    Article findArticleByApprovalIsTrue(Integer approval);
 }

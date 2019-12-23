@@ -21,6 +21,7 @@ public interface SectionsManagerMapper {
     public Courses findCourseAndChapterById(Integer courseId);
     public Integer addData(Section section);
     public Integer updateData(Section section);
+    public Integer updateDataLast(Section section);
     public Integer deleteData(Section section);
     public Integer findTimeByChapterId(Integer chapterId);
 }

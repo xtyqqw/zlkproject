@@ -11,7 +11,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-    <title>文章详情</title>
+    <title>${article.title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css" />
@@ -62,108 +62,6 @@
             text-align: center;
             padding-top: 10px;
         }
-
-        /*关注弹窗*/
-        /*.att_tan{
-            position: fixed;
-            left: 300px;
-            top: 200px;
-        }
-        .att_success1,.att_success2,.att_success3,.att_success4,.att_success5{
-            width: 400px;
-            height: 70px;
-            text-align: center;
-            position: fixed;
-            box-shadow: 1px 1px 5px 1px #D4D4D4;
-            background-color: #FFFFFF;
-            border-radius: 3px;
-        }
-        .att_success_zi1,.att_success_zi2,.att_success_zi3,.att_success_zi4,.att_success_zi5{
-            font-size: 18px;
-            position: fixed;
-        }
-        .att_success_zi1{
-            margin: 23px 160px;
-        }
-        .att_success_zi2{
-            margin: 23px 100px;
-        }
-        .att_success_zi3{
-            margin: 23px 120px;
-        }
-        .att_success_zi4{
-            margin: 23px 170px;
-        }
-        .att_success_zi5{
-            margin: 23px 130px;
-        }
-        .att_success_ok1,.att_success_ok2,.att_success_no1,.att_success_no2,.att_success_noo{
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 1;
-            color: #fff;
-            font-size: 20px;
-            float: left;
-            position: fixed;
-            margin: 25px 20px 25px 90px;
-        }
-        .att_success_ok1,.att_success_ok2{
-            border: 1px solid #5ab62f;
-            background-color: #5ab62f;
-        }
-        .att_success_ok1{
-            margin-left: 130px;
-        }
-        .att_success_ok2{
-            margin-left: 135px;
-        }
-        .att_success_no1,.att_success_no2{
-            border: 1px solid #d34748;
-            background-color: #d34748;
-            margin-left: 60px;
-        }
-        .att_success_no1{
-            margin-left: 60px;
-        }
-        .att_success_no2{
-            margin-left: 100px;
-        }
-        .att_success_noo{
-            border: 1px solid #f5bb29;
-            background-color: #f5bb29;
-            margin-left: 85px;
-        }
-        .attention_type{
-            float: left;
-            margin: 13px auto;
-            cursor: pointer;
-        }
-        .attention_type .ok,.jia{
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 1;
-            color: #fff;
-            font-size: 20px;
-            float: left;
-        }
-        .attention_type .ok{
-            border: 1px solid #5ab62f;
-            background-color: #5ab62f;
-        }
-        .main_left .attention_type .jia{
-            border: 1px solid #343434;
-            background-color: #343434;
-        }
-        .attention_type .ok_zi,.no_zi{
-            font-size: 14px;
-            color: #999999;
-            float: left;
-            padding-left: 7px;
-        }*/
     </style>
 </head>
 <body>
@@ -184,51 +82,11 @@
                         <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header" style="box-shadow: none;height: auto;">${article.user.userRealname}</a></div>
                     </div>
                     <div class="item">
-                        <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                        <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
                     </div>
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
-                    <%--<c:if test="${list.size()!=0}">
-                        <div class="item attention_type">
-                            <c:if test="${list.userId!=userId}">
-                                <!-- 已关注 -->
-                                <c:if test="${list.followType==1}">
-                                    <span style="display: none">${list.userId}</span>
-                                    <p class="ok">√</p>
-                                    <p class="ok_zi">已关注</p>
-                                </c:if>
-                                <!-- 加关注 -->
-                                <c:if test="${list.followType==0}">
-                                    <span style="display: none">${list.userId}</span>
-                                    <p class="jia">+</p>
-                                    <p class="no_zi">加关注</p>
-                                </c:if>
-                            </c:if>
-                            <div class="att_tan">
-                                <div class="att_success1">
-                                    <p class="att_success_ok1">√</p>
-                                    <p class="att_success_zi1">取消关注成功!</p>
-                                </div>
-                                <div class="att_success2">
-                                    <p class="att_success_no1">X</p>
-                                    <p class="att_success_zi2">取消关注失败，请重新操作！</p>
-                                </div>
-                                <div class="att_success3">
-                                    <p class="att_success_noo">!</p>
-                                    <p class="att_success_zi3">加载超时，请稍后再试！</p>
-                                </div>
-                                <div class="att_success4">
-                                    <p class="att_success_ok2">√</p>
-                                    <p class="att_success_zi4">关注成功!</p>
-                                </div>
-                                <div class="att_success5">
-                                    <p class="att_success_no2">X</p>
-                                    <p class="att_success_zi5">关注失败，请重新操作！</p>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>--%>
                 </div>
             </div>
             <div class="ui attached segment">
@@ -338,66 +196,5 @@
     <script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
     <script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
     <script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
-
-    <script>
-        /*$(function () {
-            /!*点击已关注 取消关注*!/
-            $(".ok_zi").click(function () {
-                let str = $(this).prev().prev().text() + '';
-                nofollow(str,$(this));
-            });
-            /!*点击加关注*!/
-            $(".no_zi").click(function () {
-                let str = $(this).prev().prev().text() + '';
-                jiafollow(str,$(this));
-            });
-            $(".att_success1,.att_success2,.att_success3,.att_success4,.att_success5").hide();
-        });
-
-        /!*点击已关注 取消关注*!/
-        function nofollow(userId,mythis){
-            $.ajax({
-                url:"/removeFollow?userId="+userId,
-                type:"GET",
-                dataType:"json",
-                context: userId,
-                success:function (data) {
-                    if (data.code === '1'){
-                        mythis.hide();
-                        mythis.siblings(".ok").hide();
-                        mythis.siblings(".jia,.no_zi").show();
-                        mythis.parents().siblings(".att_tan").children(".att_success1").show().delay(2000).hide(300);
-                    } else {
-                        mythis.parents().siblings(".att_tan").children(".att_success2").show().delay(2000).hide(300);
-                    }
-                },
-                error:function () {
-                    mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
-                }
-            });
-        }
-
-        /!*点击加关注*!/
-        function jiafollow(userId,mythis){
-            $.ajax({
-                url:"/saveFollow?userId="+userId,
-                type:"GET",
-                dataType:"json",
-                success:function (data) {
-                    if (data.code === '1'){
-                        mythis.hide();
-                        mythis.siblings(".jia").hide();
-                        mythis.siblings(".ok,.ok_zi").show();
-                        mythis.parents().siblings(".att_tan").children(".att_success4").show().delay(2000).hide(300);
-                    } else {
-                        mythis.parents().siblings(".att_tan").children(".att_success5").show().delay(2000).hide(300);
-                    }
-                },
-                error:function () {
-                    mythis.parents().siblings(".att_tan").children(".att_success3").show().delay(2000).hide(300);
-                }
-            });
-        }*/
-    </script>
 </body>
 </html>

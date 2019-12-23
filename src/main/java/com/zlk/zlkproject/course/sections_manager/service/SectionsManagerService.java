@@ -20,6 +20,6 @@ public interface SectionsManagerService {
     public File multipartFileToFile(MultipartFile file);
     public Integer addData(Section section);
     public Integer updateData(Section section);
-    public Integer deleteData(Section section);
+    public Integer deleteData(Section section) throws Exception;
     public Integer findTimeByChapterId(Integer chapterId);
 }

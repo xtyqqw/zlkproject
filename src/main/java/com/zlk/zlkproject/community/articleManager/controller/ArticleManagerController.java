@@ -9,17 +9,19 @@ import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Action;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,10 @@ public class ArticleManagerController {
     private LogUtil logUtil;
     @Autowired
     private ActionAddService actionAddService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     /**
      * 跳转到文章管理页面
@@ -121,23 +127,19 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/update")
-    public ModelAndView update( Article article, HttpServletRequest request, Action action){
+    public ModelAndView update( Article article, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        /*User user1=new User();
-        User user=(User) request.getSession().getAttribute("user");
-        String userId="" + user.getUserId();
-        user1.setUserId(userId);
-        articleId=(String) request.getSession().getAttribute("articleId");*/
-        /**判断文章是否更改，更改后判断更改后的文章是否存在*/
+        //判断文章是否更改，更改后判断更改后的文章是否存在
         List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
-        if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
+
+        /*if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","文章已存在");
             mv.setViewName("admin/articleManager");
             return mv;
-        }
-        /**修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败*/
+        }*/
+        //修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败
         Integer flag = articleManagerService.updateArticleByArticleId(article);
         if(flag == 1){
             mv.addObject("flag","true");
@@ -145,15 +147,70 @@ public class ArticleManagerController {
             mv.setViewName("admin/articleManager");
             //日志记录修改文章
             logUtil.setLog(request," 修改文章标题为"+articleByArticleId.getTitle()+"的信息");
-            /*article.setUser(user1);
-            article.setArticleId(articleId);
-            actionAddService.saveAction(action);*/
+
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","修改失败");
             mv.setViewName("admin/articleManager");
             return mv;
+        }
+    }
+
+    /**
+     * 通过文章id修改文章内容
+     * 点击跳转回显文章内容，展示markdown
+     * @param article
+     * @return
+     */
+    @RequestMapping(value = "/toUpdate")
+    public ModelAndView updateBtu(Article article, HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+        /**获取当前文章信息*/
+        Article articles = articleManagerService.selectArticleByArticleId(article.getArticleId());
+        mv.addObject("articles",articles);
+        mv.setViewName("admin/articleManagerEdit");
+        return mv;
+
+    }
+
+    @RequestMapping("/managerFigures")
+    @ResponseBody
+    public Map managerFigures(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map<String,Object> map=new HashMap<>();
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        // url是最终访问文件资源的地址，
+        // fdfsConfig.getResHost()是获取服务器ip，
+        // fdfsConfig.getStoragePort()获取服务器端口
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
+        System.out.println(path);
+        //最终访问文件资源的地址
+        System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
+        map.put("url",url);
+        map.put("message","上传成功");
+        //返回map集合
+        return map;
+    }
+
+    //文章编辑页面的图片上传方法
+    @RequestMapping(value = "/uploadManager",method= RequestMethod.POST)
+    public void uploadManager(HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        try {
+            String path = commonFileUtil.uploadFile(file);
+            String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+            System.out.println(path);
+            System.out.println(url);
+            //下面response返回的json格式是editor.md所规范的
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
