@@ -106,9 +106,8 @@ fdfs:
   #tracker地址
   tracker-list:
   #通过nginx 访问地址
-
   resHost:
-  storagePort: /
+  storagePort: 8888/
   #缩略图配置
   thumb-image:
     height: 150
