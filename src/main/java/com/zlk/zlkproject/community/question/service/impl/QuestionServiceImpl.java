@@ -24,8 +24,6 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     @Override
     public Question saveQuestion(Question question) {
-        question.setQuestionId(UUIDUtils.getId());
-        question.setCreateTime(new Date());
         question.setSolve(0);
         question.setZanCount(0);
         question.setCaiCount(0);

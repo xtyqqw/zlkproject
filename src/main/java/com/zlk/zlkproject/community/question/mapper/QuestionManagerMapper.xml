@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.QuestionManagerMapper">
+    <resultMap id="questionEntityMap" type="com.zlk.zlkproject.entity.Question">
+        <id column="question_id" property="questionId" javaType="java.lang.String"/>
+        <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
+        <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="solve" property="solve" javaType="java.lang.Integer"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
+        <result column="question_set_top" property="questionSetTop" javaType="java.lang.Integer"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="audit" property="audit" javaType="java.lang.Integer"/>
+        <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
+        <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+        <result column="section_id" property="sectionId" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findCountByTitle" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from question
+        <if test="condition!='' and condition!=null">
+            where quesoin_title like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+    <select id="findQuestionByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="questionEntityMap">
+        select * from question
+        <if test="condition!='' and condition!=null">
+            where question_title like CONCAT('%',#{condition},'%')
+        </if>
+        order by question_id limit #{startPage},#{limit}
+    </select>
+    <select id="findById" parameterType="java.lang.String" resultMap="questionEntityMap">
+        select * from question where question_id=#{questionId}
+    </select>
+
+</mapper>

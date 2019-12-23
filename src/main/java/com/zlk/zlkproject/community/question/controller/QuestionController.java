@@ -91,6 +91,8 @@ public class QuestionController {
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
         user.setUserId(userId);
+        question.setQuestionId(UUIDUtils.getId());
+        question.setCreateTime(new Date());
         question.setUser(user);
         questionService.saveQuestion(question);
         return "redirect:/CommunityPage";
@@ -114,7 +116,7 @@ public class QuestionController {
             }
         }
     }
-    //问题编辑页面的图片本地上传方法
+    /*//问题编辑页面的图片本地上传方法
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     public void hello(HttpServletRequest request, HttpServletResponse
             response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach) {
@@ -122,9 +124,9 @@ public class QuestionController {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
             String rootPath = request.getSession(). getServletContext().getRealPath("upload");
-            /**
+            *//**
              * 文件路径不存在则需要创建文件路径
-             */
+             *//*
             File filePath = new File(rootPath);
             if (!filePath.exists()) {
                 filePath.mkdirs();
@@ -141,5 +143,5 @@ public class QuestionController {
                 e1.printStackTrace();
             }
         }
-    }
+    }*/
 }
