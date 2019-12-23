@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.css" />
     <style>
@@ -81,13 +82,6 @@
                     </div>
                 </div>
 
-                <div class="field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic violet label">首图</label>
-                        <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等" value="${articles.figures}">
-                    </div>
-                </div>
-
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
@@ -96,29 +90,33 @@
                         </div>
                     </div>
                     <div class="required field">
-                        <div class="ui left labeled input">
-                            <label class="ui basic violet label">评论数</label>
-                            <input type="text" name="commentCount" placeholder="请输入评论数" value="${articles.commentCount}">
+                        <div>
+                            <div class="layui-inline">
+                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">发布时间</span></label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="createTime" value="${articles.createTime}" id="createTime" autocomplete="off" class="layui-input"
+                                           style="margin-top: -35px;margin-left: -29px;width: 39.3vw;">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="two fields">
                     <div class="required field">
-                        <div class="ui calendar" id="example1">
-                            <div class="ui input right icon">
-                                <i class="calendar icon"></i>
-                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">发布时间</span></label>
-                                <input type="text" name="createTime" placeholder="请输入发布时间" value="${articles.createTime}">
-                            </div>
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">评论数</label>
+                            <input type="text" name="commentCount" placeholder="请输入评论数" value="${articles.commentCount}">
                         </div>
                     </div>
                     <div class="required field">
-                        <div class="ui calendar" id="example2">
-                            <div class="ui input right icon">
-                                <i class="calendar icon"></i>
+                        <div>
+                            <div class="layui-inline">
                                 <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">更新时间</span></label>
-                                <input type="text" name="updateTime" placeholder="请输入更新时间" value="${articles.updateTime}">
+                                <div class="layui-input-block">
+                                    <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input"
+                                           style="margin-top: -35px;margin-left: -29px;width: 39.3vw;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -131,15 +129,6 @@
                             <input type="text" name="zanCount" placeholder="请输入赞数" value="${articles.zanCount}">
                         </div>
                     </div>
-                    <div class="required field">
-                        <div class="ui left labeled input">
-                            <label class="ui basic violet label">踩数</label>
-                            <input type="text" name="caiCount" placeholder="请输入踩数" value="${articles.caiCount}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
                             <label class="ui compact basic violet label">文章方向</label>
@@ -154,6 +143,15 @@
                                     <div class="item" data-value="mysql">MYSQL</div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">踩数</label>
+                            <input type="text" name="caiCount" placeholder="请输入踩数" value="${articles.caiCount}">
                         </div>
                     </div>
                     <div class="required field">
@@ -196,8 +194,8 @@
                                 <div class="default text">请选择审核状态</div>
                                 <div class="menu">
                                     <div class="item" data-value="0">审核中</div>
-                                    <div class="item" data-value="1">审核过</div>
-                                    <div class="item" data-value="2">审核未过</div>
+                                    <div class="item" data-value="1">已审核</div>
+                                    <div class="item" data-value="2">审核未通过</div>
                                 </div>
                             </div>
                         </div>
@@ -222,6 +220,27 @@
                     </div>
                 </div>--%>
 
+                <div class="two fields">
+                    <div class="field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">首图</label>
+                            <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;">
+                                <div class="visible content">上传图片</div>
+                                <div class="hidden content">
+                                    可以是相关的代码截图或是引人注目的封面
+                                </div>
+                            </div>
+                            <input type="hidden" name="figures" id="figures" value="${articles.figures}">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left labeled input" style="width: 100%;height: 215px;">
+                            <label class="ui basic violet label" style="height: 3vw;">示例</label>
+                            <img class="ui medium rounded image" name="figures" src="${articles.figures}" id="figuresURL" style="width: 90%;">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="ui right aligned container">
                     <button type="submit" onclick="publish()" class="ui button violet">提交</button>
                 </div>
@@ -236,15 +255,100 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+<script src="<%=request.getContextPath() %>/layui/layui.js"></script>
 <script type="text/javascript">
-    $('#example1').calendar({
+    //日期js
+    layui.use('laydate',function(){
+        var laydate=layui.laydate;
+        laydate.render({
+            elem: '#createTime'
+            //类型
+            ,type:'datetime'
+            //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
+        });
+    });
+    layui.use('laydate',function(){
+        var laydate=layui.laydate;
+        laydate.render({
+            elem: '#updateTime'
+            //类型
+            ,type:'datetime'
+            //  设置选择日期不能超过当前日期
+            ,max : getNowFormatDate()
+        });
+    });
+
+    //  设置选择日期不能超过当前日期
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month
+            + seperator1 + strDate + " " + date.getHours() + seperator2
+            + date.getMinutes() + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
+
+    //转换日期格式
+    var date = $("#createTime").val();
+    function formatDate(date){
+        date = new Date(date);
+        //获取年月日,时分秒的值
+        var y=date.getFullYear();
+        var m=date.getMonth()+1;
+        var d=date.getDate();
+        var H=date.getHours();
+        var m1=date.getMinutes();
+        var s=date.getSeconds();
+        m = m<10?("0"+m):m;
+        d = d<10?("0"+d):d;
+        H = H<10?("0"+H):H;
+        m1 = m1<10?("0"+m1):m1;
+        s = s<10?("0"+s):s;
+        return y+"-"+m+"-"+d+"  "+H+":"+m1+":"+s;
+    }
+    date = formatDate(date);
+    $("#createTime").val(date);
+
+    //转换日期格式
+    var date = $("#updateTime").val();
+    function formatDate(date){
+        date = new Date(date);
+        //获取年月日,时分秒的值
+        var y=date.getFullYear();
+        var m=date.getMonth()+1;
+        var d=date.getDate();
+        var H=date.getHours();
+        var m1=date.getMinutes();
+        var s=date.getSeconds();
+        m = m<10?("0"+m):m;
+        d = d<10?("0"+d):d;
+        H = H<10?("0"+H):H;
+        m1 = m1<10?("0"+m1):m1;
+        s = s<10?("0"+s):s;
+        return y+"-"+m+"-"+d+"  "+H+":"+m1+":"+s;
+    }
+    date = formatDate(date);
+    $("#updateTime").val(date);
+
+    /*$('#example1').calendar({
         ampm: false,
         type: 'datatime'
     });
     $('#example2').calendar({
         ampm: false,
         type: 'datatime'
-    });
+    });*/
 
     /*$('.example1').calendar({
         type: 'datetime',//datatime年月日时分  data就是年月日
@@ -289,17 +393,44 @@
             placeholder : "开始撰写...",
             syncScrolling : "single",
             //你的lib目录的路径
-            path : "../editormd/lib/",
+            path : "<%=request.getContextPath() %>/editormd/lib/",
             emoji: false,
             toolbarIcons: function () {  //自定义工具栏
                 return editormd.toolbarModes['simple']; // full, simple, mini
             },
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/uploadfile",
+            imageUploadURL : "/uploadMarkdown",
             //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
             saveHTMLToTextarea : true
         });
+    });
+
+    layui.use(["jquery", "upload", "layer", "element"], function () {
+        var $ = layui.$,
+            element = layui.element,
+            layer = layui.layer,
+            upload = layui.upload;
+        //拖拽上传
+        var uploadInst = upload.render({
+            elem: '#figuresBtn',
+            url: '<%=request.getContextPath() %>/uploadFigures',
+            size: 1024,
+            before: function (obj) {
+                //预读本地文件,回显用
+                obj.preview(function (index, file, result) {
+                    //图片链接
+                    $('#figuresURL').attr('src', result);
+                });
+            },
+            done: function (res) {
+                //服务器上传成功
+                layer.msg(res.message,{icon: 1});
+                //获取图片路径URL
+                $("#figures").val(res.url)
+            }
+        });
+        element.init();
     });
 
     /*下拉框渲染开启*/

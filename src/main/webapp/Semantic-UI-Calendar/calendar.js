@@ -1040,6 +1040,7 @@
             mode === 'day' ? settings.formatter.dayHeader(date, settings) :
               mode === 'hour' ? settings.formatter.hourHeader(date, settings) :
                 settings.formatter.minuteHeader(date, settings);
+                settings.formatter.secondHeader(date, settings);
       },
       yearHeader: function (date, settings) {
         var decadeYear = Math.ceil(date.getFullYear() / 10) * 10;
@@ -1059,6 +1060,9 @@
       minuteHeader: function (date, settings) {
         return settings.formatter.date(date, settings);
       },
+      secondHeader: function (date, settings) {
+        return settings.formatter.date(date, settings);
+      },
       dayColumnHeader: function (day, settings) {
         return settings.text.days[day];
       },
@@ -1076,7 +1080,8 @@
           return '';
         }
         var day = date.getDate();
-        var month = settings.text.months[date.getMonth()];
+        //var month = settings.text.months[date.getMonth()];
+        var month = date.getMonth();
         var year = date.getFullYear();
         return settings.type === 'year' ? year :
           settings.type === 'month' ? month + ' ' + year :
