@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <%--受js文件运行机制所致，引用时一定要注意顺序--%>
+    <%--受js文件运行机制所致,引用时一定要注意顺序--%>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
@@ -181,6 +181,7 @@
             });
         });
 
+        /*上传图片功能*/
         layui.use(["jquery", "upload", "layer", "element"], function () {
             var $ = layui.$,
                 element = layui.element,

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: kaiguan
@@ -7,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
@@ -51,7 +51,7 @@
                                                     <div class="content"><a href="<%=request.getContextPath() %>/community/article-show?articleId=${articlesTags.articleId}" target="_blank" class="header">${articlesTags.user.userRealname}</a></div>
                                                 </div>
                                                 <div class="item">
-                                                    <i class="calendar icon"></i><span><fmt:formatDate value="${articlesTags.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                                                    <i class="calendar icon"></i> <span><fmt:formatDate value="${articlesTags.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
                                                 </div>
                                                 <div class="item">
                                                     <i class="eye icon"></i> <span>${articlesTags.browseCount}</span>
