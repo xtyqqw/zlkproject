@@ -106,7 +106,6 @@ public class PersonalController {
 
        //调用查询单个对象的方法
         User user=userService.selectUserById(user1.getUserId());
-
         mv.addObject("user",user);
         mv.setViewName("view/cxr/personInfo");
         // logUtil.setLog(request,"修改了后台用户"+user.getUserRealname()+"的信息");
