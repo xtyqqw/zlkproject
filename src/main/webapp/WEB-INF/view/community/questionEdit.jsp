@@ -11,16 +11,11 @@
 <head>
     <title>提问编辑页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
-        <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-        <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg" type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <style>
-        /*   body {
-               background: url("/img/12949615.jpg");
-           }*/
-
         .top {
             height: auto;
             width: auto;
@@ -54,7 +49,7 @@
 <body>
 <div class="top">
     <div class="header">
-        <a class="btn btn-default" style="color:#914EF3 " id="a1"
+        <a class="btn btn-default" style="color:#914EF3;border: 1px solid #ccc;" id="a1"
            href="<%=request.getContextPath() %>/question/questionGuide" role="button">
             &lsaquo;&nbsp;&nbsp;返回</a>
     </div>
@@ -135,7 +130,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
     /*MarkDown组件*/
     var testEditor;
@@ -147,11 +142,13 @@
             syncScrolling: "single",
             //你的lib目录的路径
             path: "../editormd/lib/",
-            image: "添加图片",
+            emoji: false,
+            toolbarIcons: function () {  //自定义工具栏
+                return editormd.toolbarModes['simple']; // full, simple, mini
+            },
             imageUpload: true,
-            uploadButton: "本地上传",
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/question/uploadImg"
+            imageUploadURL: "/question/uploadMarkdownImg",
 
         });
     });

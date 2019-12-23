@@ -61,7 +61,7 @@ spring:
         # 登录密码
         login-password: admin
     username: root
-    password:
+    password: root
     url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -105,9 +105,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list:
+  tracker-list: 47.98.183.4:22122
   #通过nginx 访问地址
-  resHost:
+  resHost: http://47.98.183.4
   storagePort: 8888/
   #缩略图配置
   thumb-image:
