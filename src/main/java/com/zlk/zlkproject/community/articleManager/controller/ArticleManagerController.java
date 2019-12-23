@@ -9,17 +9,19 @@ import com.zlk.zlkproject.community.articleManager.service.ArticleManagerService
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Action;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,10 @@ public class ArticleManagerController {
     private LogUtil logUtil;
     @Autowired
     private ActionAddService actionAddService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     /**
      * 跳转到文章管理页面
@@ -166,6 +172,46 @@ public class ArticleManagerController {
         mv.setViewName("admin/articleManagerEdit");
         return mv;
 
+    }
+
+    @RequestMapping("/managerFigures")
+    @ResponseBody
+    public Map managerFigures(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map<String,Object> map=new HashMap<>();
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        // url是最终访问文件资源的地址，
+        // fdfsConfig.getResHost()是获取服务器ip，
+        // fdfsConfig.getStoragePort()获取服务器端口
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
+        System.out.println(path);
+        //最终访问文件资源的地址
+        System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
+        map.put("url",url);
+        map.put("message","上传成功");
+        //返回map集合
+        return map;
+    }
+
+    //文章编辑页面的图片上传方法
+    @RequestMapping(value = "/uploadManager",method= RequestMethod.POST)
+    public void uploadManager(HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        try {
+            String path = commonFileUtil.uploadFile(file);
+            String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+            System.out.println(path);
+            System.out.println(url);
+            //下面response返回的json格式是editor.md所规范的
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     /**

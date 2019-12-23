@@ -16,37 +16,10 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.css" />
-    <style>
-        .header {
-            width: auto;
-            height: 60px;
-            background-color: #F5F5F5;
-        }
-        .header #a1 {
-            float: left;
-            width: 80px;
-            padding: 10px;
-            margin-left: 24px;
-            margin-top: 9px;
-        }
-        .header #a2 {
-            text-decoration:none !important;
-            color: #8D8D8D;
-            font-size: 25px;
-            float: right;
-            margin-top: 9px;
-            margin-right: 67px;
-        }
-    </style>
+    
 </head>
 <body>
 <div>
-    <%--顶部内容--%>
-    <div class="header">
-        <button id="a1" type="button" class="ui blue button" onclick="window.history.go(-1)">返回</button>
-        <%--<a href="javascript:void(0)" id="a2">我的文章</a>--%>
-    </div>
-    <!--中间内容-->
     <div  class="m-container m-padded-tb-big">
         <div class="ui container">
             <form action="<%=request.getContextPath() %>/article/update" method="post" class="ui form">
@@ -90,14 +63,9 @@
                         </div>
                     </div>
                     <div class="required field">
-                        <div>
-                            <div class="layui-inline">
-                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">发布时间</span></label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="createTime" value="${articles.createTime}" id="createTime" autocomplete="off" class="layui-input"
-                                           style="margin-top: -35px;margin-left: -29px;width: 39.3vw;">
-                                </div>
-                            </div>
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">发布时间</label>
+                            <input type="text" name="createTime" value="${articles.createTime}" id="createTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -110,14 +78,9 @@
                         </div>
                     </div>
                     <div class="required field">
-                        <div>
-                            <div class="layui-inline">
-                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">更新时间</span></label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input"
-                                           style="margin-top: -35px;margin-left: -29px;width: 39.3vw;">
-                                </div>
-                            </div>
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">更新时间</label>
+                            <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>
@@ -400,7 +363,7 @@
             },
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/uploadMarkdown",
+            imageUploadURL : "/article/uploadManager",
             //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
             saveHTMLToTextarea : true
         });
@@ -414,7 +377,7 @@
         //拖拽上传
         var uploadInst = upload.render({
             elem: '#figuresBtn',
-            url: '<%=request.getContextPath() %>/uploadFigures',
+            url: '<%=request.getContextPath() %>/article/managerFigures',
             size: 1024,
             before: function (obj) {
                 //预读本地文件,回显用
