@@ -25,6 +25,8 @@ public class Chapter {
     private Integer chapterTime;
     /**章节序号 对应字段chapter_num*/
     private Integer chapterNum;
+    /**章节前序号*/
+    private Integer chapterLastNum;
     /**小节数目 对应字段section_num*/
     private Integer sectionNum;
     /**小节列表*/
