@@ -94,7 +94,7 @@
             <if test="typeName!=null and typeName!='' ">
                 type_name=#{typeName},
             </if>
-         </set>
+        </set>
         where article_id=#{articleId}
     </update>
     <select id="selectArticleByTitle" parameterType="java.lang.String" resultMap="articleEntityMap">

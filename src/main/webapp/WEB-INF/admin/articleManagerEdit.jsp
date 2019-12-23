@@ -7,13 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.css" />
     <style>
         .header {
             width: auto;
@@ -24,7 +25,7 @@
             float: left;
             width: 80px;
             padding: 10px;
-            margin-left: 67px;
+            margin-left: 24px;
             margin-top: 9px;
         }
         .header #a2 {
@@ -47,12 +48,12 @@
     <!--中间内容-->
     <div  class="m-container m-padded-tb-big">
         <div class="ui container">
-            <form action="<%=request.getContextPath() %>/article/toUpdate" method="post" class="ui form">
-                <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}"/>
+            <form action="<%=request.getContextPath() %>/article/update" method="post" class="ui form">
+                <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}">
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact basic dropdown violet label">
-                            <input type="hidden" value="原创" name="createArticleType">
+                            <input type="hidden" value="${articles.createArticleType}" name="createArticleType">
                             <i class="dropdown icon"></i>
                             <div class="text">原创</div>
                             <div class="menu">
@@ -66,6 +67,13 @@
                 </div>
 
                 <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic violet label">摘要</label>
+                        <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
+                    </div>
+                </div>
+
+                <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
                         <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
                         <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
@@ -73,14 +81,72 @@
                     </div>
                 </div>
 
+                <div class="field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic violet label">首图</label>
+                        <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等" value="${articles.figures}">
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">浏览数</label>
+                            <input type="text" name="browseCount" placeholder="请输入浏览数" value="${articles.browseCount}">
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">评论数</label>
+                            <input type="text" name="commentCount" placeholder="请输入评论数" value="${articles.commentCount}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui calendar" id="example1">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">发布时间</span></label>
+                                <input type="text" name="createTime" placeholder="请输入发布时间" value="${articles.createTime}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui calendar" id="example2">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <label class="ui basic violet label"><span style="font-size: 1.2vw;vertical-align: -1.4vw;">更新时间</span></label>
+                                <input type="text" name="updateTime" placeholder="请输入更新时间" value="${articles.updateTime}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">赞数</label>
+                            <input type="text" name="zanCount" placeholder="请输入赞数" value="${articles.zanCount}">
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic violet label">踩数</label>
+                            <input type="text" name="caiCount" placeholder="请输入踩数" value="${articles.caiCount}">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">方向</label>
+                            <label class="ui compact basic violet label">文章方向</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName" value="${articles.typeName}">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">请选择方向</div>
+                                <div class="default text">请选择文章方向</div>
                                 <div class="menu">
                                     <div class="item" data-value="java">JAVA</div>
                                     <div class="item" data-value="linux">Linux</div>
@@ -90,6 +156,55 @@
                             </div>
                         </div>
                     </div>
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact basic violet label">文章置顶</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="articleSetTop" value="${articles.articleSetTop}">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择文章是否置顶</div>
+                                <div class="menu">
+                                    <div class="item" data-value="0">置顶</div>
+                                    <div class="item" data-value="1">不置顶</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact basic violet label">举报</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="inform" value="${articles.inform}">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择是否举报</div>
+                                <div class="menu">
+                                    <div class="item" data-value="0">举报</div>
+                                    <div class="item" data-value="1">不举报</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="required field">
+                        <div class="ui left labeled action input">
+                            <label class="ui compact basic violet label">审核状态</label>
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="approval" value="${articles.approval}">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">请选择审核状态</div>
+                                <div class="menu">
+                                    <div class="item" data-value="0">审核中</div>
+                                    <div class="item" data-value="1">审核过</div>
+                                    <div class="item" data-value="2">审核未过</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--<div class="required field">
                     <div class="required field">
                         <div class="ui left labeled action input">
                             <label class="ui compact basic violet label">标签</label>
@@ -105,24 +220,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic violet label">摘要</label>
-                        <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic violet label">首图</label>
-                        <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等" value="${articles.figures}">
-                    </div>
-                </div>
+                </div>--%>
 
                 <div class="ui right aligned container">
-                    <button type="reset" class="ui reset secondary button">重置</button>
                     <button type="submit" onclick="publish()" class="ui button violet">提交</button>
                 </div>
 
@@ -130,12 +230,56 @@
         </div>
     </div>
 </div>
-
+</body>
 <%--受js文件运行机制所致，引用时一定要注意顺序--%>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+<script src="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.js"></script>
+<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
+    $('#example1').calendar({
+        ampm: false,
+        type: 'datatime'
+    });
+    $('#example2').calendar({
+        ampm: false,
+        type: 'datatime'
+    });
+
+    /*$('.example1').calendar({
+        type: 'datetime',//datatime年月日时分  data就是年月日
+        ampm: false,//默认会有 上午，下午，或者AM PM，false就会没有默认的PM AM上午下午；文档写的是中文要在text里设置，但是我写的时候本地好好的是英文，但是一上线就成了中文，如 9:00 上午，所以该处设置成了false
+        endCalendar: $('.example2'),//开始时间选好后，会调起结束时间，而且结束时间不会大于开始时间
+        formatter: { // 自定义日期的格式
+            date: function(date, settings) {
+                if (!date) return '';
+                var year  = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day   = date.getDate();
+                month = month < 10 ? '0'+month : month;
+                day   = day   < 10 ? '0'+day : day;
+                return year + '-' + month + '-' + day;//不写时分hours minute也会返回
+            }
+        }
+    });
+
+    $('.example2').calendar({
+        type: 'datetime',//datatime年月日时分  data就是年月日
+        ampm: false,//默认会有 上午，下午，或者AM PM，false就会没有默认的PM AM上午下午；文档写的是中文要在text里设置，但是我写的时候本地好好的是英文，但是一上线就成了中文，如 9:00 上午，所以该处设置成了false
+        startCalendar: $('.example1'),//开始时间选好后，会调起结束时间，而且结束时间不会大于开始时间
+        formatter: { // 自定义日期的格式
+            date: function(date, settings) {
+                if (!date) return '';
+                var year  = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day   = date.getDate();
+                month = month < 10 ? '0'+month : month;
+                day   = day   < 10 ? '0'+day : day;
+                return year + '-' + month + '-' + day;//不写时分hours minute也会返回
+            }
+        }
+    });*/
+
     /*MarkDown组件*/
     var testEditor;
     $(function() {
@@ -225,14 +369,16 @@
                     }]
                 }
             },
-            onSuccess: function () {
+            /*onSuccess: function () {
                 alert("编辑成功");
             },
-            /*onFailure: function() {
+            onFailure: function() {
                 alert("发布失败,请确认发布内容");
             }*/
         });
     }
+
+
 </script>
-</body>
+
 </html>

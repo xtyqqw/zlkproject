@@ -54,11 +54,11 @@
 <div id="editForm" class="layui-table-view" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/update" class="form" method="post">
         <input type="hidden" name="articleId" id="articleId">
-        <div id="md-content">
+        <%--<div id="md-content">
             <textarea class="editormd-markdown-textarea" name="articleContent" id="articleContent" data-value="${articles.articleContent}"></textarea>
-            <%--<textarea id="articleContent" name="articleContent"></textarea>--%>
-            <%--<textarea class="editormd-html-textarea" name="articleContentHtml" id="articleContentHtml"></textarea>--%>
-        </div>
+            &lt;%&ndash;<textarea id="articleContent" name="articleContent"></textarea>&ndash;%&gt;
+            &lt;%&ndash;<textarea class="editormd-html-textarea" name="articleContentHtml" id="articleContentHtml"></textarea>&ndash;%&gt;
+        </div>--%>
 
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
@@ -135,14 +135,14 @@
                 <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">文章摘要</td>
                 <td><textarea rows="5" cols="69" required id="articleDigest" name="articleDigest"></textarea><br></td>
             </tr>
-            <%--<tr>
+            <tr>
                 <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">HTML格式文章内容</td>
                 <td><textarea rows="5" cols="69" required id="articleContentHtml" name="articleContentHtml"></textarea><br></td>
             </tr>
             <tr>
                 <td style="width: 100px;">文章内容</td>
                 <td><pre required id="articleContent" name="articleContent"><code class="language-css"></code></pre><br></td>
-            </tr>--%>
+            </tr>
 
         </table>
 
@@ -156,6 +156,11 @@
 <script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
 <%--<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>--%>
+<script type="text/html" id="bar">
+    <button type="button" class="layui-btn" lay-event="edit">编辑</button>
+    <button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>
+
+</script>
 <script type="text/javascript">
     //后台文章管理页面中，文章标题的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
@@ -191,7 +196,7 @@
         });
     });
 
-    /*//MarkDown组件
+    //MarkDown组件
     $(function() {
         var editorMdView;
         editorMdView = editormd.markdownToHTML("articleContent", {
@@ -203,26 +208,6 @@
             tex : true,  // 默认不解析
             flowChart : true,  // 默认不解析
             sequenceDiagram : true // 默认不解析
-        });
-    });*/
-
-    /*MarkDown组件*/
-    var testEditor;
-    $(function() {
-        testEditor = editormd("md-content", {
-            width : "90%",
-            height : 640,
-            markdown: "",
-            codeFold: true,
-            syncScrolling : "single",
-            //watch : false,                // 关闭实时预览
-            htmlDecode: "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
-            path : "../editormd/lib/",
-            /*imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/uploadfile",*/
-            //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
-            saveHTMLToTextarea : true,
         });
     });
 
@@ -284,12 +269,8 @@
                     , {field: 'approval', title: '审核', width: 60}
                     , {field: 'typeName', title: '文章方向', width: 90}
                     , {
-                        title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
-                            '<div class="layui-btn-group">' +
-                            /*'<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +*/
-                            '<a type="button" class="layui-btn" href="toUpdate?articleId=${articles.articleId}">编辑</a>' +
-                            '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
-                            '</div>'
+                        title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
+
                     }
                 ]]
                 , limits: [5, 10, 20]
@@ -389,8 +370,7 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {//编辑
-                var editormd=$("#md").val(marked(data.articleContent));
-                alert(data.articleContent);
+                window.location.href="<%=request.getContextPath()%>/article/toUpdate?articleId="+id;
                 $("#articleId").val(data.articleId);
                 $("#title").val(data.title);
                 $("#browseCount").val(data.browseCount);
@@ -399,9 +379,9 @@
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
                 $("#articleDigest").val(data.articleDigest);
-                /*$("#articleContent").html(marked(data.articleContent));*/// 将数据库中存储的.md文件转换成html文件
-                $("#articleContent").val(data.articleContent);
-                /*$("#articleContentHtml").val(data.articleContentHtml);*/
+                $("#articleContent").html(marked(data.articleContent));// 将数据库中存储的.md文件转换成html文件
+                /*$("#articleContent").val(data.articleContent);*/
+                $("#articleContentHtml").val(data.articleContentHtml);
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);
