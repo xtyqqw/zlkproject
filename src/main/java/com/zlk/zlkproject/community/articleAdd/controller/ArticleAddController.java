@@ -6,7 +6,6 @@ import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
-import com.zlk.zlkproject.user.entity.Action;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.apache.commons.io.FileUtils;
@@ -49,8 +48,8 @@ public class ArticleAddController {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mv=new ModelAndView();
         if (user == null){
-            mv.addObject("msg","未登录");
-            mv.setViewName("redirect:/CommunityPage");
+            mv.addObject("spanmsg", "发表文章前，请先登录");
+            mv.setViewName("/view/signin");
         }else {
             mv.setViewName("view/community/articleGuide");
         }
@@ -93,6 +92,7 @@ public class ArticleAddController {
             String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
             System.out.println(path);
             System.out.println(url);
+            //下面response返回的json格式是editor.md所规范的
             response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
         } catch (Exception e) {
             try {
@@ -101,6 +101,27 @@ public class ArticleAddController {
                 e1.printStackTrace();
             }
         }
+    }
+
+    @RequestMapping("/uploadFigures")
+    @ResponseBody
+    public Map uploadFigures(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map<String,Object> map=new HashMap<>();
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        // url是最终访问文件资源的地址，
+        // fdfsConfig.getResHost()是获取服务器ip，
+        // fdfsConfig.getStoragePort()获取服务器端口
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
+        System.out.println(path);
+        //最终访问文件资源的地址
+        System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
+        map.put("url",url);
+        map.put("message","上传成功");
+        //返回map集合
+        return map;
     }
 
     //文章编辑页面的图片上传方法,测试用
