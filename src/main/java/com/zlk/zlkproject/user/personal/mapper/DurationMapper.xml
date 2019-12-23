@@ -43,4 +43,16 @@
         (SELECT * FROM user ORDER BY user_all_time DESC) AS t
         ) AS b WHERE b.user_id = #{userId};
     </select>
+    <!--技能水平-->
+    <select id="findCourses" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(courses_id) FROM user_courses WHERE user_id=#{userId}
+    </select>
+    <!--查询总视频-->
+    <select id="selectSections" resultType="java.lang.Integer">
+        select count(*) from section
+    </select>
+    <!--查询用户已观看哪些视频-->
+    <select id="selectSection" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(section_id) from user_section where user_id=#{userId} and state='已完成'
+    </select>
 </mapper>

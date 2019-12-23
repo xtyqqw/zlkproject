@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <style>
         .header {
@@ -113,10 +114,30 @@
                         </div>
                     </div>
 
-                    <div class="field">
+                    <%--<div class="field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">首图</label>
-                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面等等">
+                            <input type="text" name="figures" placeholder="首图引用地址,可以是相关的代码截图或是引人注目的封面">
+                        </div>
+                    </div>--%>
+                    <div class="two fields">
+                        <div class="field">
+                            <div class="ui left labeled input">
+                                <label class="ui basic violet label">首图</label>
+                                <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;">
+                                    <div class="visible content">上传图片</div>
+                                    <div class="hidden content">
+                                        可以是相关的代码截图或是引人注目的封面
+                                    </div>
+                                </div>
+                                <input type="hidden" name="figures" id="figures">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled input" style="width: 100%;height: 215px;">
+                                <label class="ui basic violet label">示例</label>
+                                <img class="ui medium rounded image" name="figures" src="${figures}" id="figuresURL" style="width: 100%;">
+                            </div>
                         </div>
                     </div>
 
@@ -135,7 +156,8 @@
     <%--受js文件运行机制所致，引用时一定要注意顺序--%>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
+    <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+    <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
     <script type="text/javascript">
         /*MarkDown组件*/
         var testEditor;
@@ -153,10 +175,37 @@
                 },
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                imageUploadURL : "/uploadfile",
+                imageUploadURL : "/uploadMarkdown",
                 //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
                 saveHTMLToTextarea : true
             });
+        });
+
+        layui.use(["jquery", "upload", "layer", "element"], function () {
+            var $ = layui.$,
+                element = layui.element,
+                layer = layui.layer,
+                upload = layui.upload;
+            //拖拽上传
+            var uploadInst = upload.render({
+                elem: '#figuresBtn',
+                url: '<%=request.getContextPath() %>/uploadFigures',
+                size: 1024,
+                before: function (obj) {
+                    //预读本地文件,回显用
+                    obj.preview(function (index, file, result) {
+                        //图片链接
+                        $('#figuresURL').attr('src', result);
+                    });
+                },
+                done: function (res) {
+                    //服务器上传成功
+                    layer.msg(res.message,{icon: 1});
+                    //获取图片路径URL
+                    $("#figures").val(res.url)
+                }
+            });
+            element.init();
         });
 
         /*下拉框渲染开启*/
@@ -207,12 +256,19 @@
                             prompt: '请最多选择三个文章标签,你可以先删除多余标签,再重新选择'
                         }]
                     },
-                    figures: {
+                    /*figures: {
                         identifier: 'figures',
                         rules: [{
                             type: 'regExp',
                             value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
                             prompt: '如需要添加首图,请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址'
+                        }]
+                    },*/
+                    figures: {
+                        identifier: 'figures',
+                        rules: [{
+                            type: 'empty',
+                            prompt: '请注意添加首图为必选项'
                         }]
                     },
                     articleDigest: {
