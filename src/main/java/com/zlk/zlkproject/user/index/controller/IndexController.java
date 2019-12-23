@@ -109,7 +109,7 @@ public class IndexController {
     @ResponseBody
     public Map<String, Object> findCoursesList(Pagination pagination) throws Exception {
         List<Courses> coursesList = indexService.findCoursesList(pagination);
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(16);
         map.put("coursesList", coursesList);
         return map;
     }
@@ -133,11 +133,10 @@ public class IndexController {
             } else {
                 resultMap.put("result", "true");
             }
-            return resultMap;
         }else {
             resultMap.put("result", "null");
-            return resultMap;
         }
+        return resultMap;
     }
     /**
      *签到方法

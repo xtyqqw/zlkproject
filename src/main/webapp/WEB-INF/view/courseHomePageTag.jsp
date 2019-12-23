@@ -9,10 +9,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>../layui/css/layuiXingxing.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%> http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
-    <script src="<%=request.getContextPath()%>../layui/layui.js"></script>
-    <script src="<%=request.getContextPath()%>../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layuiXingxing.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1523298_ebdj0htk708.css">
+    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,13 +20,13 @@
     <title>Bootstrap 101 Template</title>
 
 
-    <link rel="stylesheet" href="<%=request.getContextPath()%>https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%> https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="<%=request.getContextPath()%>https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 
@@ -617,7 +617,7 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"<%=request.getContextPath()%>/courseHomePage/findAllByTag",
+                        url:"<%=request.getContextPath()%>/courseHomePage/findAllByTag1",
                         dataType:"json",
                         data:data,
                         success:function(result) {
