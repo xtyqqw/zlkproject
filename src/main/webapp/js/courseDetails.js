@@ -26,6 +26,7 @@ layui.use('flow', function(){
                         /*循环遍历数据*/
                         layui.each(result.sectionDetailsList, function (index, courses) {
                             lis.push('<li  class="xiangqingneirong_li">'+
+                                '<input type="hidden" class="state" value="'+courses.state+'">'+
                                 '<div class="tishi">'+
                                 '<div class="shuxian"></div>');
                             /*判断观看状态*/
@@ -177,20 +178,38 @@ layui.use('flow', function(){
 $("#xiangqingneirong").on("click",".xiangmuxiangqing_kechengneirong", function(){
     var sectionId = $(this).children().first().val();
     var kechengId = $("#kechengId").val();
+    var state = $(this).parent().prev().find(".state").val();
     $.ajax({
         type : "POST",
         url :basePath+"/kecheng/seleUserCoursesByUserCourses",
         data:{"coursesId":kechengId},
         success: function (bool) {
             if (bool=="已参加"){
-                $.ajax({
-                    type : "POST",
-                    url :basePath+"/toVideo",
-                    data:{"sectionId":sectionId},
-                    success: function (data) {
-                        window.location.href = basePath+"/toVideo?sectionId="+sectionId;
-                    }
-                });
+                if(state===undefined){
+                    $.ajax({
+                        type : "POST",
+                        url :basePath+"/toVideo",
+                        data:{"sectionId":sectionId},
+                        success: function (data) {
+                            window.location.href = basePath+"/toVideo?sectionId="+sectionId;
+                        }
+                    });
+                }else if(state==="已完成"){
+                    $.ajax({
+                        type : "POST",
+                        url :basePath+"/toVideo",
+                        data:{"sectionId":sectionId},
+                        success: function (data) {
+                            window.location.href = basePath+"/toVideo?sectionId="+sectionId;
+                        }
+                    });
+                }else{
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('请先看完前一个项目');
+                    });
+                }
+                /**/
             }else {
 
                 layui.use('layer', function(){

@@ -26,7 +26,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">课程名称:</label>
-                <div class="layui-input-block">
+                <div class="layui-input-block" lay-filter="coursesNameDiv">
                     <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search>
                         <option value="">请选择课程</option>
                         <c:forEach items="${coursesList}" var="course">
@@ -41,11 +41,23 @@
                     <input type="text" name="chapterName" id="chapterName" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="chapterNumInputDiv">
                 <label class="layui-form-label">章节序号</label>
                 <div class="layui-input-block">
-                    <input type="number" name="chapterNum" id="chapterNum" class="layui-input">
+                    <input type="text" class="layui-input" name="chapterNum" id="chapterNumInput" readonly="readonly">
                 </div>
+            </div>
+            <div class="layui-form-item layui-form" lay-filter="chapterNumDiv" id="chapterNumSelectDiv">
+                <label class="layui-form-label">章节序号</label>
+                <div class="layui-input-block">
+                    <select class="layui-select" name="chapterNum" id="chapterNumSelect" lay-filter="chapterNumSelect">
+                        <option value="">请选择章节序号</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="display: none">
+                <input type="text" class="layui-input" name="chapterLastNum" id="chapterLastNum">
             </div>
             <div class="layui-form-item" style="display: none">
                 <label class="layui-form-label">小节数</label>
@@ -71,7 +83,7 @@
 
     <div class="layui-form" id="select_box">
         <label class="layui-form-label">课程名称:</label>
-        <div class="layui-input-block">
+        <div class="layui-input-block" lay-filter="coursesNameDiv">
             <select class="layui-select" name="coursesName" id="coursesNameSelect" lay-filter="coursesName" lay-search>
                 <option value="">请选择课程</option>
                 <c:forEach items="${coursesList}" var="course">
@@ -159,7 +171,8 @@
                         content: $("#insertChapterDiv"),
                         btn:['提交'],
                         success:function(index,layero){
-                            // clear();
+                            $("#chapterNumSelect").attr("disabled","disabled");
+                            $("#chapterNumSelectDiv").css("display","none");
                             form.on('submit(submit)',function (data) {
                                 $.ajax({
                                     type: "POST",
@@ -221,7 +234,22 @@
                     $("#coursesNameInsertSelect").val(data.coursesId);
                     form.render('select');
                     $("#chapterName").val(data.chapterName);
-                    $("#chapterNum").val(data.chapterNum);
+                    $.ajax({
+                        type:"POST",
+                        url:"<%=request.getContextPath()%>/chapterManager/selectChapterNum",
+                        data:{"coursesId":data.coursesId},
+                        dataType:"json",
+                        success:function (res) {
+                            $("#chapterNumSelect").empty();
+                            $("#chapterNumSelect").append('<option value="">请选择章节序号</option>');
+                            $.each(res.chapterNumList,function (i, chapterNum) {
+                                $("#chapterNumSelect").append('<option value="'+chapterNum+'">'+chapterNum+'</option>');
+                            });
+                            $("#chapterNumSelect").val(data.chapterNum);
+                            form.render('select','chapterNumDiv');
+                        }
+                    });
+                    $("#chapterLastNum").val(data.chapterNum);
                     $("#chapterTime").val(data.chapterTime);
                     $("#sectionNum").val(data.sectionNum);
                     layer.open({
@@ -231,6 +259,8 @@
                         content: $("#insertChapterDiv"),
                         btn: ['提交'],
                         success: function (index, layero) {
+                            $("#chapterNumInput").attr("disabled","disabled");
+                            $("#chapterNumInputDiv").css("display","none");
                             form.on('submit(submit)', function (data) {
                                 $.ajax({
                                     type: "POST",
@@ -263,7 +293,7 @@
                 }
             });
 
-            //下拉框监听事件
+            //页面下拉框监听事件
             form.on('select(coursesName)', function (data) {
                 let coursesId = data.value;
                 table.reload('chapter', {
@@ -280,12 +310,38 @@
                 });
             });
 
+            //弹窗下拉框监听事件
+            form.on('select(coursesNameSelect)', function (data) {
+                let coursesId = data.value;
+                $.ajax({
+                    type:"POST",
+                    url:"<%=request.getContextPath()%>/chapterManager/selectChapterNum",
+                    data:{"coursesId":coursesId},
+                    dataType:"json",
+                    success:function (res) {
+                        $("#chapterNumSelect").empty();
+                        $("#chapterNumSelect").append('<option value="">请选择章节序号</option>');
+                        $.each(res.chapterNumList,function (i, chapterNum) {
+                            $("#chapterNumSelect").append('<option value="'+chapterNum+'">'+chapterNum+'</option>');
+                        });
+                        form.render('select','chapterNumDiv');
+                        $("#chapterNumInput").val(res.count+1);
+                    }
+                })
+            });
+
             //清空表单数据
             function clear() {
                 $("#chapterId").val("");
                 $("#coursesNameInsertSelect").val("");
                 $("#chapterName").val("");
-                $("#chapterNum").val("");
+                $("#chapterNumInput").val("");
+                $("#chapterNumInput").removeAttr("disabled");
+                $("#chapterNumInputDiv").css("display","block");
+                $("#chapterNumSelect").val("");
+                $("#chapterNumSelect").removeAttr("disabled");
+                $("#chapterNumSelectDiv").css("display","block");
+                $("#chapterLastNum").val("");
                 $("#chapterTime").val("");
                 $("#sectionNum").val("");
                 form.render();

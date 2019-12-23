@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">小节序号</label>
                 <div class="layui-input-block">
-                    <input type="text" id="sectionNum" required  lay-verify="number" placeholder="请输入小节序号" autocomplete="off" class="layui-input">
+                    <input type="text" id="sectionNum" required readonly lay-verify="number" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -108,12 +108,23 @@
                 </select>
             </div>
             <div class="spaceDiv"></div>
-            <div class="layui-form-item">
+            <%--<div class="layui-form-item">
                 <label class="layui-form-label">小节序号</label>
                 <div class="layui-input-block">
                     <input type="text" id="sectionNumEdit" required  lay-verify="number" placeholder="请输入小节序号" autocomplete="off" class="layui-input">
                 </div>
+            </div>--%>
+            <span id="lastSectionNum" style="display: none"></span>
+            <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">小节序号</label>
+                <div class="layui-input-block" lay-filter="sectionNumEdit_select_box">
+                    <select id="sectionNumEdit" lay-verify="required">
+                        <option value=""></option>
+                    </select>
+                </div>
             </div>
+            </form>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">小节名</label>
