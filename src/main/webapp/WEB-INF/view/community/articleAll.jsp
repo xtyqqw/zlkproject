@@ -159,7 +159,7 @@
             display: inline;
         }
         .all a:hover{
-            color: #1296db;
+            color: #914ff1;
             text-decoration:none;
         }
     </style>
