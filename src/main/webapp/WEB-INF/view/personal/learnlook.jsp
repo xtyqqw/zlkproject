@@ -140,7 +140,7 @@
         },
         series: [
             {
-                name: '业务指标',
+                name: '学习力',
                 type: 'gauge',
                 detail: {formatter:'${ability}%'},
                 data: [{value: 50}]
