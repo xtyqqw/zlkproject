@@ -33,6 +33,8 @@ public class Section {
     private String videoPath2;
     /**小节视频时长 对应字段section_time*/
     private Integer sectionTime;
+    /**修改前小节序号*/
+    private Integer lastSectionNum;
     /**小节序号 对应字段section_num*/
     private Integer sectionNum;
     /**小节简介 对应数据库的 section_intro字段*/

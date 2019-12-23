@@ -35,11 +35,15 @@ public class Exercises {
     private String answerD;
     /** 正确答案 对应数据库字段 truth*/
     private String truth;
+    /** 用户Id 对应数据库字段 user_id*/
+    private String userId;
+    /** 用户回答 对应数据库字段 answer*/
+    private String userAnswer;
 
     public Exercises() {
     }
 
-    public Exercises(Integer eId, Integer sectionId, String type, Integer exerciseNum, String title, String answerA, String answerB, String answerC, String answerD, String truth) {
+    public Exercises(Integer eId, Integer sectionId, String type, Integer exerciseNum, String title, String answerA, String answerB, String answerC, String answerD, String truth, String userId, String userAnswer) {
         this.eId = eId;
         this.sectionId = sectionId;
         this.type = type;
@@ -50,5 +54,7 @@ public class Exercises {
         this.answerC = answerC;
         this.answerD = answerD;
         this.truth = truth;
+        this.userId = userId;
+        this.userAnswer = userAnswer;
     }
 }
