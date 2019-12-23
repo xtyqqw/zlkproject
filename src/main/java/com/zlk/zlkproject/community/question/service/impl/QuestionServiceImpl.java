@@ -30,9 +30,9 @@ public class QuestionServiceImpl implements QuestionService {
         question.setZanCount(0);
         question.setCaiCount(0);
         question.setBrowseCount("0");
-        question.setQuestionSetTop("1");
+        question.setQuestionSetTop(1);
         question.setResponseCount(0);
-        question.setAudit("1");
+        question.setAudit(1);
         return questionDao.save(question);
     }
 }

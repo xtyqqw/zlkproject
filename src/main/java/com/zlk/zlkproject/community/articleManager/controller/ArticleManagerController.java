@@ -121,23 +121,19 @@ public class ArticleManagerController {
      * @return
      */
     @RequestMapping(value = "/update")
-    public ModelAndView update( Article article, HttpServletRequest request, Action action){
+    public ModelAndView update( Article article, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        /*User user1=new User();
-        User user=(User) request.getSession().getAttribute("user");
-        String userId="" + user.getUserId();
-        user1.setUserId(userId);
-        articleId=(String) request.getSession().getAttribute("articleId");*/
-        /**判断文章是否更改，更改后判断更改后的文章是否存在*/
+        //判断文章是否更改，更改后判断更改后的文章是否存在
         List<Article> articleByTitle = articleManagerService.selectArticleByTitle(article.getTitle());
         Article articleByArticleId = articleManagerService.selectArticleByArticleId(article.getArticleId());
-        if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
+
+        /*if(!article.getTitle().equals(articleByArticleId.getTitle())&&articleByTitle!=null){
             mv.addObject("flag","true");
             mv.addObject("msg","文章已存在");
             mv.setViewName("admin/articleManager");
             return mv;
-        }
-        /**修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败*/
+        }*/
+        //修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败
         Integer flag = articleManagerService.updateArticleByArticleId(article);
         if(flag == 1){
             mv.addObject("flag","true");
@@ -145,9 +141,7 @@ public class ArticleManagerController {
             mv.setViewName("admin/articleManager");
             //日志记录修改文章
             logUtil.setLog(request," 修改文章标题为"+articleByArticleId.getTitle()+"的信息");
-            /*article.setUser(user1);
-            article.setArticleId(articleId);
-            actionAddService.saveAction(action);*/
+
             return mv;
         }else {
             mv.addObject("flag","true");
@@ -155,6 +149,23 @@ public class ArticleManagerController {
             mv.setViewName("admin/articleManager");
             return mv;
         }
+    }
+
+    /**
+     * 通过文章id修改文章内容
+     * 点击跳转回显文章内容，展示markdown
+     * @param article
+     * @return
+     */
+    @RequestMapping(value = "/toUpdate")
+    public ModelAndView updateBtu(Article article, HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+        /**获取当前文章信息*/
+        Article articles = articleManagerService.selectArticleByArticleId(article.getArticleId());
+        mv.addObject("articles",articles);
+        mv.setViewName("admin/articleManagerEdit");
+        return mv;
+
     }
 
     /**

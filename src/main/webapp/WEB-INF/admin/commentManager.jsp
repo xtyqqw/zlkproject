@@ -19,6 +19,7 @@
 </head>
 <body>
     <div id="main_body">
+        <%--顶部二级联动--%>
         <div id="top_select">
             <div id="ts_1" class="layui-form" lay-filter="course_select_box">
                 <select id="courseSelect" name="courses" lay-filter="course_select" lay-search>

@@ -1,84 +1,38 @@
 <%--
   Created by IntelliJ IDEA.
-  User: gby
-  Date: 2019/12/11
-  Time: 20:36
+  User: kaiguan
+  Date: 2019/12/2
+  Time: 11:09
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <title>问答详情</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/article.css">
+    <title>${question.questionTitle}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/articleShow.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/layui.js">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
     <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
           type="image/x-icon"/>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
     <style type="text/css">
-        .editormd-html-preview {
-            width: 90%;
-            margin: 0 auto;
-        }
-    </style>
-    <style type="text/css">
-        .top {
-            height: auto;
-            width: 100%;
-            left: 0;
-            top: 0; /*离顶部的距离为0*/
-        }
-
-        /*导航栏变异部分*/
-        .nav2 {
-            font-size: 20px;
-            top: 0px;
-            height: 60px;
-            width: 100%;
-            background-color: white;
-        }
-
-        .nav3 {
-            float: left;
-            margin-left: 252px;
-            margin-top: 15px;
-        }
-
-        .fixnav {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-        }
-
-        .div1 {
-            width: 900px;
-            margin-left: 250px;
-        }
-
-        .div2 {
-            margin-top: -24px;
-            float: left;
-            margin-left: 55px;
-        }
-
-        .span {
-            float: right;
-            margin-top: 10px;
-            color: #838B8B;
-            margin-right: 85px;
+        /*底部样式*/
+        body {
+            margin: 0;
         }
 
         #footer {
             background-color: #333C4D;
             height: 130px;
             width: 100%;
-            margin-top: 500px;
+            margin-top: 50px;
             margin-bottom: 0;
             position: absolute;
         }
@@ -118,110 +72,62 @@
             text-align: center;
             padding-top: 10px;
         }
-
-        .user {
-            float: right;
-            height: 100px;
-            width: 200px;
-            margin-top: 40px;
-            margin-right: 155px;
-            background-color: #F7F7F7;
-        }
-        .userTop{
-            margin: 10px;
-            font-weight:bold;
-            float: left;
-        }
-        .img{
-            width: 40px;
-            float: left;
-            margin-left: 10px;
-        }
-        .log{
-            height: 50px;
-            width: 200px;
-            margin-top: 50px;
-        }
-        .name{
-            float: left;
-            margin-left: 5px;
-            margin-right: 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            font-size: 17px;
-            font-family: Arial;
-            color:  #707070;
-            text-decoration:none;
-        }
-
     </style>
 </head>
-
 <body>
-<div class="top">
-    <%@include file="../../jsp/header.jsp" %>
-    <div class="nav2">
-        <div class="nav3">
-            <h2>${question.questionTitle}</h2>
-        </div>
-    </div>
-    <div class="user">
-        <span class="userTop">
-            提问者
-        </span>
-        <div class="log">
-            <div class="img">
-                <img style="width: 40px; height: 40px; border-radius: 50%;" src="${question.user.userImg}">
-            </div>
-            <span class="name">${question.user.userRealname}</span>
-            <img style="height: 12px;width: 12px;float: left;margin-top: 4px;" data-v-fedffd30="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAASdJREFUOI2Nkb1KA1EQhb+5Gy2jBGwSCcZY+goG7F1i5RsIAbGwE+0UYicpxJcQ/AGxV/AFjASbkESiIsZqmyibHQuNu4Rk955u5sz57oErg7uiMkFOqSmju+5FoS7CMoDCQ2pSeJxeLgsu/IYBBG0Yp9QUs9I0SWFVjMJxZOWJ872dGBzq7WphU2Ap3AS7Wfe1ZwX4vMmkA6UattHb3HrnFMAK0P9K74tI5m/0TYrK0EsEvF/nFxXZCV/nIOu2n6wBvu/URJgCUKjnZltHUT8W0D3PrwHuf3VHN2QV3xqAmFo46GG0uhVARIoAqjxmZ9rVcTdWvyBmUBmtbg9QTnLl5/tJdjxA+Zg23l7cSSxADVtz5Z6XCBBBgUbU8AdBf77cOottCPwAPANaMlmoeCAAAAAASUVORK5CYII=" alt="user-vip" class="user-meta__vip"><br>
-           <span style="float: left;margin-left: 5px;"><fmt:formatDate value="${question.createTime}" type="date" pattern="yyyy-MM-dd HH:mm:ss" dateStyle="medium"/></span>
-        </div>
-    </div>
-    <div class="div1">
-        <%--文章标题及特征--%>
-        <div style="margin-top: 50px;height: 80px;width: auto;">
-            <div class="title" style="font-size: 10px;float: left">
-                <div style="background-color: #1E9FFF;height: 20px;width: 50px;padding:1px 2px;border-radius: 8%; ">
-                    <c:if test="${question.solve == 0}">
-                        <div class="ui orange basic label" style="font-size: 12px;">待解决</div>
-                    </c:if>
-                    <c:if test="${question.solve == 1}">
-                        <div class="ui orange basic label" style="font-size: 12px">已解决</div>
-                    </c:if>
-                    <c:if test="${question.solve == 2}">
-                        <div class="ui orange basic label" style="font-size: 12px">未解决</div>
-                    </c:if>
+<%--导航栏--%>
+<%@include file="../../jsp/header.jsp" %>
+
+<!--中间内容-->
+<div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+        <%--顶部--%>
+        <div class="ui top attached segment">
+            <div class="ui horizontal link list">
+                <div class="item">
+                    <img src="${question.user.userImg}" alt="" class="ui avatar image">
+                    <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header"
+                                            style="box-shadow: none;height: auto;">${question.user.userRealname}</a>
+                    </div>
                 </div>
-                <div class="div2">
-                    <h2> ${question.questionTitle}</h2>
+                <div class="item">
+                    <i class="calendar icon"></i> <span><fmt:formatDate value="${question.createTime}"
+                                                                        pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i> <span>${question.browseCount}</span>
                 </div>
             </div>
-            <br><br>
-            <div style="float: left; margin-top: 10px;">
+        </div>
+        <div class="ui attached padded segment">
+            <!--内容-->
+            <div class="ui right aligned basic segment field">
+                <div class="ui violet basic label">${question.typeName}</div>
+                <c:if test="${question.solve == 0}">
+                    <div class="ui orange basic label">待解决</div>
+                </c:if>
+                <c:if test="${question.solve == 1}">
+                    <div class="ui orange basic label">已解决</div>
+                </c:if>
+                <c:if test="${question.solve == 2}">
+                    <div class="ui orange basic label">未解决</div>
+                </c:if>
+            </div>
+            <h2 class="ui center aligned header" style="box-shadow: none;">
+                ${question.questionTitle}
+            </h2>
+            <br>
+            <!--中间主要内容部分-->
+            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
+                <pre>${question.questionContent}</pre>
+            </div>
+            <!--标签-->
+            <div class="m-padded-lr-responsive" style="margin-bottom: 55px;margin-top: -20px;">
                 <c:forEach items="${question.tagName}" var="tag">
-                    <div style="width: 50px;height:20px;background-color:white;border:1px solid #ccc;border-radius: 8%;float: left;margin: 2px">
-                        <p class="tag">${tag}</p>
+                    <div class="column" style="margin-right: 15px;float: left;">
+                        <div class="ui basic teal left pointing label">${tag}</div>
                     </div>
                 </c:forEach>
-
-            </div>
-            <div class="span">
-                <small>
-                    <span>浏览：${question.browseCount}</span>
-                    &nbsp;<i>|</i>&nbsp;
-                    <span>分类：${question.typeName}</span>
-                </small>
-            </div>
-        </div>
-        <%--问题--%>
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 10px;width: 820px;"></fieldset>
-        <div id="layout" style="margin-left: -60px;height: auto">
-            <div id="test-editormd-view">
-                <textarea id="articleContent" style="display:none;">${question.questionContent}</textarea>
             </div>
         </div>
     </div>
@@ -234,25 +140,25 @@
 <div id="footer">
     <ul>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=7">关于我们</a>
+            <a href="/aboutus/aboutus">关于我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=1">团队介绍</a>
+            <a href="/aboutus/aboutus">加入我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=2">合作企业</a>
+            <a href="/aboutus/aboutus">联系我们</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=3">讲师合作</a>
+            <a href="/aboutus/aboutus">讲师合作</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=4">帮助中心</a>
+            <a href="/aboutus/aboutus">帮助中心</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=5">友情链接</a>
+            <a href="/aboutus/aboutus">友情链接</a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/aboutus/aboutus?typeNum=6">联系我们</a>
+            <a href="/aboutus/aboutus">合作企业</a>
         </li>
     </ul>
     <p>
@@ -260,43 +166,16 @@
     </p>
 </div>
 
-<script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
-<script type="text/javascript">
-    document.title = "${question.questionTitle}"
-    $(function () {
-        $(".nav2").hide();
-        $(window).scroll(function () {
-            if ($(document).scrollTop() > 50) {
-                $(".nav2").addClass("fixnav").slideDown();
-            } else {
-                $(".nav2").hide();
-            }
-        })
-    })
-</script>
-<script type="text/javascript">
-    $(function () {
-        var testEditormdView;
-        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-            htmlDecode: "style,script,iframe",  // you can filter tags decode
-            emoji: true,
-            markdown: "",
-            taskList: true,
-            tex: true,  // 默认不解析
-            flowChart: true,  // 默认不解析
-            sequenceDiagram: true  // 默认不解析
-        });
-    });
-</script>
+<script src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+<script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
+<script src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
+
+<script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
+<script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
+<script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
 </body>
 </html>
