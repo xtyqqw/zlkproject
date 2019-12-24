@@ -82,7 +82,7 @@
                         <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header" style="box-shadow: none;height: auto;">${article.user.userRealname}</a></div>
                     </div>
                     <div class="item">
-                        <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                        <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
                     </div>
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
