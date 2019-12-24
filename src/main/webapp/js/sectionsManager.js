@@ -139,6 +139,9 @@ window.onload = function () {
                 $("#ECB2_chapterSelect").empty();
                 $("#ECB2_chapterSelect").append('<option value="">请选择一个章节（请先选择一个课程）</option>');
                 form.render('select','ECB2_chapter_select_box');
+                $("#sectionNumEdit").empty();
+                $("#sectionNumEdit").append('<option value="">请选择一个序号</option>');
+                form.render('select');
             }else {
                 let ajaxData = {'courseId': data.value};
                 $.ajax({
@@ -157,6 +160,37 @@ window.onload = function () {
                 });
             }
 
+        });
+
+        //编辑弹出层章节下拉框选择事件
+        form.on('select(ECB1_chapter_select)', function(data){
+            if(data.value === ''){
+                $("#sectionNumEdit").empty();
+                $("#sectionNumEdit").append('<option value="">请选择一个序号</option>');
+                form.render('select');
+            }else {
+                let ajaxData = {'chapterId':parseInt(data.value)};
+                $.ajax({
+                    type : 'POST',
+                    url : basePath+'/SMC/findCourseAndChapterById',
+                    data : ajaxData,
+                    dataType: "json",
+                    success : function (res) {
+                        $("#sectionNumEdit").empty();
+                        $("#sectionNumEdit").append('<option value="">请选择一个序号</option>');
+                        if (parseInt(data.value) === parseInt($("#lastChapterId").text())){
+                            for(let i=1;i<=res.sectionsNum;i++){
+                                $("#sectionNumEdit").append('<option value="'+ i +'">'+ i +'</option>');
+                            }
+                        }else {
+                            for(let i=1;i<=res.sectionsNum + 1;i++){
+                                $("#sectionNumEdit").append('<option value="'+ i +'">'+ i +'</option>');
+                            }
+                        }
+                        form.render('select');
+                    }
+                });
+            }
         });
 
 
@@ -247,7 +281,23 @@ window.onload = function () {
                 layer.load(); //上传loading
             }
             ,done: function(res){
-                layer.closeAll('loading'); //关闭loading
+                let ajaxData = {
+                    'sectionId':parseInt($("#sectionId").text()),
+                    'oldPath':$("#nv_path_edit").text() + '',
+                    'videoAddr1':res.url,
+                    'videoPath1':res.path,
+                    'videoTime':res.time
+                };
+                $.ajax({
+                    type : 'POST',
+                    url : basePath+'/SMC/changeVideo1',
+                    data : ajaxData,
+                    dataType : 'json',
+                    success : function (res) {
+                        resetPage();
+                        layer.closeAll('loading'); //关闭loading
+                    }
+                });
                 $("#video_time_edit").text(res.time);
                 $("#nv_path_edit").text(res.path);
                 $("#nv_url_edit").text(res.url);
@@ -285,7 +335,23 @@ window.onload = function () {
                 layer.load(); //上传loading
             }
             ,done: function(res){
-                layer.closeAll('loading'); //关闭loading
+                let ajaxData = {
+                    'sectionId':parseInt($("#sectionId").text()),
+                    'oldPath':$("#sv_path_edit").text() + '',
+                    'videoAddr2':res.url,
+                    'videoPath2':res.path,
+                    'videoTime':res.time
+                };
+                $.ajax({
+                    type : 'POST',
+                    url : basePath+'/SMC/changeVideo2',
+                    data : ajaxData,
+                    dataType : 'json',
+                    success : function (res) {
+                        resetPage();
+                        layer.closeAll('loading'); //关闭loading
+                    }
+                });
                 $("#video_time_edit").text(res.time);
                 $("#sv_path_edit").text(res.path);
                 $("#sv_url_edit").text(res.url);
@@ -482,8 +548,9 @@ window.onload = function () {
                 let data = {
                     'sectionId':sectionId,
                     'chapterId':parseInt(chapterId),
-                    'lastSectionNum':parseInt($("#lastSectionNum").text()),
+                    'lastChapterId':parseInt($("#lastChapterId").text()),
                     'sectionNum':parseInt(sectionNum),
+                    'lastSectionNum':parseInt($("#lastSectionNum").text()),
                     'sectionName':sectionName,
                     'sectionIntro':sectionIntro,
                     'sectionTime':parseInt($("#video_time_edit").text()),
@@ -492,20 +559,35 @@ window.onload = function () {
                     'videoPath2':$("#sv_path_edit").text(),
                     'videoAddr2':$("#sv_url_edit").text()
                 };
-                $.ajax({
-                    type: 'POST',
-                    url: basePath+'/SMC/updateData',
-                    data: data,
-                    dataType: 'json',
-                    success: function (res) {
-                        if (res.res === 1){
-                            layer.msg('提交成功');
-                            layer.close(editContentBox);
-                            resetPage();
+                if(parseInt(chapterId) === parseInt($("#lastChapterId").text())){
+                    $.ajax({
+                        type: 'POST',
+                        url: basePath+'/SMC/updateData',
+                        data: data,
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.res === 1){
+                                layer.msg('提交成功');
+                                layer.close(editContentBox);
+                                resetPage();
+                            }
                         }
-                    }
-                });
-
+                    });
+                }else {
+                    $.ajax({
+                        type: 'POST',
+                        url: basePath+'/SMC/updateDataChangeChapter',
+                        data: data,
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.res === 1){
+                                layer.msg('提交成功');
+                                layer.close(editContentBox);
+                                resetPage();
+                            }
+                        }
+                    });
+                }
             }else{
                 layer.msg('小节序号格式不正确，请输入一个非零正整数');
             }
@@ -572,6 +654,8 @@ window.onload = function () {
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
 
             if(layEvent === 'edit'){
+                $("#sectionId").text(data.sectionId);
+                $("#lastChapterId").text(data.chapterId);
                 clearEditContent();
                 sectionId = parseInt(data.sectionId);
                 editBackFill(data);

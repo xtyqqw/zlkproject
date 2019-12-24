@@ -74,20 +74,22 @@
                     <textarea id="sectionIntro" placeholder="请输入介绍内容" class="layui-textarea"></textarea>
                 </div>
             </div>
-            <span id="video_time" style="display: none">0</span>
-            <button type="button" class="layui-btn" id="normalVideo_btn">
-                <span id="nv_path" style="display: none"></span>
-                <span id="nv_url" style="display: none"></span>
-                <i class="layui-icon">&#xe67c;</i>上传普清视频
-            </button>
-            <span id="nv_retmsg">尚未上传</span>
-            <div class="spaceDiv"></div>
-            <button type="button" class="layui-btn" id="supperVideo_btn">
-                <span id="sv_path" style="display: none"></span>
-                <span id="sv_url" style="display: none"></span>
-                <i class="layui-icon">&#xe67c;</i>上传超清视频
-            </button>
-            <span id="sv_retmsg">尚未上传</span>
+            <div style="display: none">
+                <span id="video_time" style="display: none">0</span>
+                <button type="button" class="layui-btn" id="normalVideo_btn">
+                    <span id="nv_path" style="display: none"></span>
+                    <span id="nv_url" style="display: none"></span>
+                    <i class="layui-icon">&#xe67c;</i>上传普清视频
+                </button>
+                <span id="nv_retmsg">尚未上传</span>
+                <div class="spaceDiv"></div>
+                <button type="button" class="layui-btn" id="supperVideo_btn">
+                    <span id="sv_path" style="display: none"></span>
+                    <span id="sv_url" style="display: none"></span>
+                    <i class="layui-icon">&#xe67c;</i>上传超清视频
+                </button>
+                <span id="sv_retmsg">尚未上传</span>
+            </div>
             <div class="spaceDiv"></div>
             <div id="addSubmitBtn" class="myBtn" style="left: 396px">提交</div>
         </div>
@@ -106,6 +108,7 @@
                 <select id="ECB2_chapterSelect" name="chapter" lay-filter="ECB1_chapter_select" lay-search>
                     <option value="">请选择一个章节（请先选择一个课程）</option>
                 </select>
+                <span id="lastChapterId" style="display: none"></span>
             </div>
             <div class="spaceDiv"></div>
             <%--<div class="layui-form-item">
@@ -155,6 +158,7 @@
             <div class="spaceDiv"></div>
             <div id="editSubmitBtn" class="myBtn" style="left: 396px">提交</div>
         </div>
+        <span id="sectionId" style="display: none"></span>
     </div>
 </body>
 </html>
