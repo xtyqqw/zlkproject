@@ -52,8 +52,8 @@ public class Arith {
         }
     }
     public static double toHour(int a){
-        double a1 = a;
-        double b = a1/3600;
-        return b;
+            double a1 = a;
+            double b = a1/3600;
+            return b;
     }
 }

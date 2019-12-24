@@ -158,53 +158,69 @@
     var basePath = localObj.protocol+"//"+localObj.host+"/";
     var typeNum = ${typeNum};
     $(function () {
+        /*团队介绍*/
         if (typeNum === 1){
             $("#aboutus-iframe").attr("src",basePath+"aboutus/teamIntroduce");
             $("#aboutus-iframe").css("height","900");
             $("#team").css("background-color","#fff");
             $("#team").css("color","#8C24DD");
+            document.title = '团队介绍';
         }
+        /*合作企业*/
         if (typeNum === 2){
             $("#aboutus-iframe").attr("src",basePath+"coop/toCoo");
             $("#aboutus-iframe").css("height","660");
             $("#coo").css("background-color","#fff");
             $("#coo").css("color","#8C24DD");
+            document.title = '合作企业';
         }
+        /*合作企业*/
         if (typeNum === 3){
             $("#aboutus-iframe").attr("src",basePath+"lecturer/lecturers");
             $("#aboutus-iframe").css("height","1724");
             $("#teacher").css("background-color","#fff");
             $("#teacher").css("color","#8C24DD");
+            document.title = '合作企业';
         }
+        /*帮助中心*/
         if (typeNum === 4){
             $("#aboutus-iframe").attr("src",basePath+"coop/help");
             $("#aboutus-iframe").css("height","660");
             $("#help").css("background-color","#fff");
             $("#help").css("color","#8C24DD");
+            document.title = '帮助中心';
         }
+        /*友情链接*/
         if (typeNum === 5){
             $("#aboutus-iframe").attr("src",basePath+"coop/tofriends");
             $("#aboutus-iframe").css("height","660");
             $("#friend").css("background-color","#fff");
             $("#friend").css("color","#8C24DD");
+            document.title = '友情链接';
         }
+        /*联系我们*/
         if (typeNum === 6){
             $("#aboutus-iframe").attr("src",basePath+"contactus/findContactus");
             $("#aboutus-iframe").css("height","708");
             $("#us").css("background-color","#fff");
             $("#us").css("color","#8C24DD");
+            document.title = '联系我们';
         }
+        /*关于我们*/
         if (typeNum === 7){
             $("#aboutus-iframe").attr("src",basePath+"aboutus/aboutzlk");
             $("#aboutus-iframe").css("height","660");
             $("#aboutzlk").css("background-color","#fff");
             $("#aboutzlk").css("color","#8C24DD");
+            document.title = '关于我们';
         }
+        /*意见反馈*/
         if (typeNum === 8){
             $("#aboutus-iframe").attr("src",basePath+"opinion/toOpinion");
             $("#aboutus-iframe").css("height","485");
             $("#opinion").css("background-color","#fff");
             $("#opinion").css("color","#8C24DD");
+            document.title = '意见反馈';
         }
     })
 </script>

@@ -3,9 +3,11 @@ package com.zlk.zlkproject.community.articleAdd.controller;
 import com.zlk.zlkproject.community.articleAdd.service.ActionAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 import com.zlk.zlkproject.community.articleAdd.service.ArticleAddTagService;
+import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.user.entity.Action;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
 import org.apache.commons.io.FileUtils;
@@ -74,17 +76,30 @@ public class ArticleAddController {
 
     //创建文章的请求方法
     @PostMapping(value = "/articles")
-    public String post(Article article, HttpServletRequest request) throws Exception {
+    public String post(Article article, HttpServletRequest request, Action action) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
         user.setUserId(userId);
+        //初始化文章关键信息
         article.setUser(user);
+        article.setArticleId(UUIDUtils.getId());
+        article.setCreateTime(new Date());
+        article.setUpdateTime(new Date());
+        //初始化发文动态关键信息
+        action.setActionId(UUIDUtils.getId());
+        action.setUserId(userId);
+        action.setArticleId(article.getArticleId());
+        action.setCreateTime(article.getCreateTime());
+        //发文动态的状态值为1
+        action.setActionType("1");
+        //保存发文添加的标签
         article.setTags(articleAddTagService.listTags(article.getTagIds()));
         Article a=articleAddService.saveArticle(article);
+        Action b=actionAddService.saveAction(action);
         return "redirect:/CommunityPage";
     }
 
-    //文章编辑页面的图片上传方法
+    //文章编辑页面的Markdown图片上传方法
     @RequestMapping(value = "/uploadMarkdown",method= RequestMethod.POST)
     public void uploadMarkdown(HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
         try {
@@ -103,29 +118,24 @@ public class ArticleAddController {
         }
     }
 
+    //文章编辑页面的图片上传方法
     @RequestMapping("/uploadFigures")
     @ResponseBody
     public Map uploadFigures(@RequestParam(name = "file") MultipartFile file) throws Exception{
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
         //path是文件上传到服务器上的路径
         String path = commonFileUtil.uploadFile(file);
-        // url是最终访问文件资源的地址，
-        // fdfsConfig.getResHost()是获取服务器ip，
-        // fdfsConfig.getStoragePort()获取服务器端口
+        //url是最终访问文件资源的地址
         String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
-        //打印服务器上的路径
         System.out.println(path);
-        //最终访问文件资源的地址
         System.out.println(url);
-        //把URL和上传成功的信息放入到map集合里
         map.put("url",url);
-        map.put("message","上传成功");
-        //返回map集合
+        map.put("message","上传图片成功");
         return map;
     }
 
-    //文章编辑页面的图片上传方法,测试用
-    @RequestMapping(value="/uploadFile",method= RequestMethod.POST)
+    //文章编辑页面的Markdown图片上传方法,测试用
+    /*@RequestMapping(value="/uploadFile",method= RequestMethod.POST)
     public void hello(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach){
         try {
             request.setCharacterEncoding( "utf-8" );
@@ -148,5 +158,5 @@ public class ArticleAddController {
                 e1.printStackTrace();
             }
         }
-    }
+    }*/
 }

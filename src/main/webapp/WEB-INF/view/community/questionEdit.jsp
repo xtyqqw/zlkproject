@@ -93,10 +93,10 @@
                                 <i class="dropdown icon"></i>
                                 <div class="default text">请选择问答分类</div>
                                 <div class="menu">
-                                    <div class="item" data-value="java">java</div>
-                                    <div class="item" data-value="linux">linux</div>
-                                    <div class="item" data-value="html">html</div>
-                                    <div class="item" data-value="mysql">mysql</div>
+                                    <div class="item" data-value="JAVA">JAVA</div>
+                                    <div class="item" data-value="Linux">Linux</div>
+                                    <div class="item" data-value="HTML">HTML</div>
+                                    <div class="item" data-value="MASQL">MYSQL</div>
                                 </div>
                             </div>
                         </div>

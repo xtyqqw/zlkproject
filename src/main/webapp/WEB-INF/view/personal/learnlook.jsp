@@ -106,19 +106,19 @@
         <ul>
             <li>
                 <span class="font1">学习时长</span><br />
-                <i>${lists.userDateTime}</i>
+                <i>${times}</i>
                 <span style="font-size: 13px;color: #999999;">小时</span>
-                <p>已超过${rankall}%的同学</p>
+                <p>已超过${rankAll}%的同学</p>
             </li>
             <li>
                 <span class="font1">学习成长量</span><br />
-                <i>${ad}</i>
-                <p>已超过${rankall}%的同学</p>
+                <i>${grow}</i>
+                <p>已超过${rankAll}%的同学</p>
             </li>
             <li>
                 <span class="font1">技能水平</span><br />
-                <i>${skills}</i>
-                <p>已超过${rankall}%的同学</p>
+                <i>${level}</i>
+                <p>已超过${rankAll}%的同学</p>
             </li>
         </ul>
     </div>
@@ -140,7 +140,7 @@
         },
         series: [
             {
-                name: '业务指标',
+                name: '学习力',
                 type: 'gauge',
                 detail: {formatter:'${ability}%'},
                 data: [{value: 50}]

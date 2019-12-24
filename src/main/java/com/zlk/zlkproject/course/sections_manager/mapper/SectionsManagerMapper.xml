@@ -90,6 +90,10 @@
         , section_time = #{sectionTime}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
     </update>
 
+    <update id="updateDataChangeChapter" parameterType="com.zlk.zlkproject.entity.Section">
+        UPDATE section SET chapter_id = #{chapterId}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
+    </update>
+
     <update id="updateDataLast" parameterType="com.zlk.zlkproject.entity.Section">
         UPDATE section SET section_num = #{lastSectionNum} WHERE chapter_id = #{chapterId} AND section_num = #{sectionNum}
     </update>
@@ -101,4 +105,12 @@
     <select id="findTimeByChapterId" resultType="java.lang.Integer">
         SELECT sum(section_time) FROM section WHERE chapter_id = #{chapterId}
     </select>
+
+    <update id="changeVideo1">
+        UPDATE section SET video_addr1 = #{videoAddr1}, video_path1 = #{videoPath1}, section_time = #{videoTime} WHERE section_id = #{sectionId}
+    </update>
+
+    <update id="changeVideo2">
+        UPDATE section SET video_addr2 = #{videoAddr2}, video_path2 = #{videoPath2}, section_time = #{videoTime} WHERE section_id = #{sectionId}
+    </update>
 </mapper>
