@@ -90,6 +90,11 @@ public class ArticleManagerServiceImpl implements ArticleManagerService {
         return articleManagerMapperMapper.selectArticleByArticleId(articleId);
     }
 
+    @Override
+    public List<Article> findArticleToArticleEdit(Article article) {
+        return articleManagerMapperMapper.findArticleToArticleEdit(article);
+    }
+
     /**
      * 文章管理的分页查询
      * @param pagination

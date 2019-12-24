@@ -26,10 +26,6 @@ public class ActionAddServiceImpl implements ActionAddService {
     @Transactional
     @Override
     public Action saveAction(Action action) {
-        //发布文章的动态的值为1
-        action.setActionType("1");
-        //发布文章的动态的时间
-        action.setCreateTime(new Date());
         return actionAddRepository.save(action);
     }
 }
