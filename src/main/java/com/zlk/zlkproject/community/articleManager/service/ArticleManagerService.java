@@ -56,6 +56,12 @@ public interface ArticleManagerService {
      */
     Article selectArticleByArticleId(String articleId);
     /**
+     * 查询文章
+     * @param article
+     * @return
+     */
+    List<Article> findArticleToArticleEdit(Article article);
+    /**
      * 分页查询文章
      * @param pagination
      * @return
