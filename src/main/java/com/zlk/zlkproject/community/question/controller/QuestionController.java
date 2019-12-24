@@ -93,6 +93,7 @@ public class QuestionController {
         user.setUserId(userId);
         question.setQuestionId(UUIDUtils.getId());
         question.setCreateTime(new Date());
+        question.setUpdateTime(new Date());
         question.setUser(user);
         questionService.saveQuestion(question);
         return "redirect:/CommunityPage";

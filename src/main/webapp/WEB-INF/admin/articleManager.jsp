@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/community/css/typo.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/style.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
-    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <script src="<%=request.getContextPath()%>/community/prism/prism.js"></script>
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
@@ -53,7 +53,13 @@
 <input type="hidden" value="${msg}" id="msg">
 <div id="editForm" class="layui-table-view" hidden="hidden">
     <form action="<%=request.getContextPath()%>/article/update" class="form" method="post">
-        <input type="hidden" name="articleId" id="articleId"><br>
+        <input type="hidden" name="articleId" id="articleId">
+        <%--<div id="md-content">
+            <textarea class="editormd-markdown-textarea" name="articleContent" id="articleContent" data-value="${articles.articleContent}"></textarea>
+            &lt;%&ndash;<textarea id="articleContent" name="articleContent"></textarea>&ndash;%&gt;
+            &lt;%&ndash;<textarea class="editormd-html-textarea" name="articleContentHtml" id="articleContentHtml"></textarea>&ndash;%&gt;
+        </div>--%>
+
         <table class="editorTable" align="center" style="margin: auto;border-collapse: separate;border-spacing: 20px;">
             <tr>
                 <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" valign="bottom">文章标题</td>
@@ -137,9 +143,9 @@
                 <td style="width: 100px;">文章内容</td>
                 <td><pre required id="articleContent" name="articleContent"><code class="language-css"></code></pre><br></td>
             </tr>
+
         </table>
 
-    </select><br>
         <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
     </form>
 </div>
@@ -147,15 +153,14 @@
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
 
+<script src="<%=request.getContextPath() %>/js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/marked.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/prettify.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/raphael.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/underscore.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/sequence-diagram.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/lib/jquery.flowchart.min.js"></script>
-<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
+<%--<script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>--%>
+<script type="text/html" id="bar">
+    <button type="button" class="layui-btn" lay-event="edit">编辑</button>
+    <button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>
+
+</script>
 <script type="text/javascript">
     //后台文章管理页面中，文章标题的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
@@ -239,62 +244,59 @@
         form.render();
         //第一个实例
         var renderTable = function() {
-        table.render({
-            elem: '#demo'
-            , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
-            , page: true //开启分页
-            , height: $(document).height()-$('#demo').offset().top-20
-            , cols: [[ //表头
-                {type: 'checkbox', fixed: 'left'}
-                , {field: 'articleId', title: '文章ID', width: 80, sort: true}
-                , {field: 'title', title: '文章标题', width: 100, sort: true}
-                , {field: 'browseCount', title: '浏览数', width: 75}
-                , {field: 'commentCount', title: '评论数', width: 75}
-                , {field: 'createTime',title: '发布时间',width: 90}
-                , {field: 'updateTime',title: '更新时间',width: 90}
-                , {field: 'figures', title: '插图相对路径', width: 130}
-                , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
-                , {field: 'articleDigest', title: '文章摘要', width: 90}
-                , {field: 'articleContent', title: '文章内容', width: 90}
-                , {field: 'zanCount', title: '赞数', width: 60}
-                , {field: 'caiCount', title: '踩数', width: 60}
-                , {field: 'inform', title: '举报', width: 60}
-                , {field: 'createArticleType', title: '发文类型', width: 90}
-                , {field: 'articleSetTop', title: '文章置顶', width: 90}
-                , {field: 'approval', title: '审核', width: 60}
-                , {field: 'typeName', title: '文章方向', width: 90}
-                , {
-                    title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '' +
-                        '<div class="layui-btn-group">' +
-                        '<button type="button" class="layui-btn" lay-event="edit">编辑</button>' +
-                        '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
-                        '</div>'
-                }
-            ]]
-            , limits: [5, 10, 20]
-            , toolbar: '<div class="layui-btn-group">' +
-                '<button type="button" class="layui-btn del" lay-event="delete">批量删除</button>' +
-                '<div class="layui-card search">\n' +
-                '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
-                '            <div class="layui-form-item">' +
-                '               <form type="post" action="<%=request.getContextPath()%>/article/toArticleManager"> \n' +
-                '                <div class="layui-inline">\n' +
-                '                    <label class="layui-form-label hint">文章标题</label>\n' +
-                '                    <div class="layui-input-block">\n' +
-                '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入文章标题名称" autocomplete="off" class="layui-input">\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '                <div class="layui-inline">\n' +
-                '                    <button type="submit" class="layui-btn layuiadmin-btn-useradmin" id="sel">\n' +
-                '                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
-                '                    </button>\n' +
-                '                </div>' +
-                '               </form>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>' +
-                '</div>'
-        });
+            table.render({
+                elem: '#demo'
+                , url: '<%=request.getContextPath()%>/article/articleManager?condition=${condition}' //数据接口
+                , page: true //开启分页
+                , height: $(document).height()-$('#demo').offset().top-20
+                , cols: [[ //表头
+                    {type: 'checkbox', fixed: 'left'}
+                    , {field: 'articleId', title: '文章ID', width: 80, sort: true}
+                    , {field: 'title', title: '文章标题', width: 100, sort: true}
+                    , {field: 'browseCount', title: '浏览数', width: 75}
+                    , {field: 'commentCount', title: '评论数', width: 75}
+                    , {field: 'createTime',title: '发布时间',width: 90}
+                    , {field: 'updateTime',title: '更新时间',width: 90}
+                    , {field: 'figures', title: '插图相对路径', width: 130}
+                    , {field: 'articleContentHtml', title: 'HTML格式文章内容', width: 110}
+                    , {field: 'articleDigest', title: '文章摘要', width: 90}
+                    , {field: 'articleContent', title: '文章内容', width: 90}
+                    , {field: 'zanCount', title: '赞数', width: 60}
+                    , {field: 'caiCount', title: '踩数', width: 60}
+                    , {field: 'inform', title: '举报', width: 60}
+                    , {field: 'createArticleType', title: '发文类型', width: 90}
+                    , {field: 'articleSetTop', title: '文章置顶', width: 90}
+                    , {field: 'approval', title: '审核', width: 60}
+                    , {field: 'typeName', title: '文章方向', width: 90}
+                    , {
+                        title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
+
+                    }
+                ]]
+                , limits: [5, 10, 20]
+                , toolbar: '<div class="layui-btn-group">' +
+                    '<button type="button" class="layui-btn del" lay-event="delete">批量删除</button>' +
+                    '<div class="layui-card search">\n' +
+                    '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
+                    '            <div class="layui-form-item">' +
+                    '               <form type="post" action="<%=request.getContextPath()%>/article/toArticleManager"> \n' +
+                    '                <div class="layui-inline">\n' +
+                    '                    <label class="layui-form-label hint">文章标题</label>\n' +
+                    '                    <div class="layui-input-block">\n' +
+                    '                        <input type="text" id="condition" name="condition" value="${condition}" placeholder="请输入文章标题名称" autocomplete="off" class="layui-input">\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '                <div class="layui-inline">\n' +
+                    '                    <button type="submit" class="layui-btn layuiadmin-btn-useradmin" id="sel">\n' +
+                    '                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
+                    '                    </button>\n' +
+                    '                </div>' +
+                    '               </form>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>' +
+                    '</div>'
+            });
         };
         //头工具栏事件
         table.on('toolbar(test)', function (obj) {
@@ -312,8 +314,7 @@
                         }
                     });
                     break;
-            }
-            ;
+            };
         });
 
         renderTable();
@@ -344,7 +345,7 @@
                             layer.close(index);
                         });
                     }
-                break;
+                    break;
             };
         });
 
@@ -368,6 +369,7 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {//编辑
+                window.location.href="<%=request.getContextPath()%>/article/toUpdate?articleId="+id;
                 $("#articleId").val(data.articleId);
                 $("#title").val(data.title);
                 $("#browseCount").val(data.browseCount);
@@ -375,9 +377,10 @@
                 $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#figures").val(data.figures);
-                $("#articleContentHtml").val(data.articleContentHtml);
                 $("#articleDigest").val(data.articleDigest);
                 $("#articleContent").html(marked(data.articleContent));// 将数据库中存储的.md文件转换成html文件
+                /*$("#articleContent").val(data.articleContent);*/
+                $("#articleContentHtml").val(data.articleContentHtml);
                 $("#zanCount").val(data.zanCount);
                 $("#caiCount").val(data.caiCount);
                 $("#inform").val(data.inform);

@@ -28,6 +28,13 @@ public class QuestionManagerServiceImpl implements QuestionManagerService {
 
     @Override
     public List<Question> findQuestionByLimit(Pagination pagination) {
+        if (pagination.getLimit() == null) {
+            pagination.setLimit(10);
+        }
+        if (pagination.getPage() == null) {
+            pagination.setPage(1);
+        }
+        pagination.setStartPage((pagination.getPage() - 1) * pagination.getLimit());
         return questionManagerMapper.findQuestionByLimit(pagination);
     }
 
@@ -35,4 +42,20 @@ public class QuestionManagerServiceImpl implements QuestionManagerService {
     public Question findById(String questionId) {
         return questionManagerMapper.findById(questionId);
     }
+
+    @Override
+    public Integer deleteById(String questionId) {
+        return questionManagerMapper.deleteById(questionId);
+    }
+
+    @Override
+    public Integer deletesById(List<Question> questionList) {
+        return questionManagerMapper.deletesById(questionList);
+    }
+
+    @Override
+    public Integer updateById(Question question) {
+        return questionManagerMapper.updateById(question);
+    }
+
 }
