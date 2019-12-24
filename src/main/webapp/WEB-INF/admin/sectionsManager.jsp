@@ -55,12 +55,22 @@
                 </select>
             </div>
             <div class="spaceDiv"></div>
-            <div class="layui-form-item">
+            <%--<div class="layui-form-item">
                 <label class="layui-form-label">小节序号</label>
                 <div class="layui-input-block">
                     <input type="text" id="sectionNum" required readonly lay-verify="number" autocomplete="off" class="layui-input">
                 </div>
-            </div>
+            </div>--%>
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">小节序号</label>
+                    <div class="layui-input-block" lay-filter="sectionNum_select_box">
+                        <select id="sectionNum" lay-verify="required">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </form>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">小节名</label>
