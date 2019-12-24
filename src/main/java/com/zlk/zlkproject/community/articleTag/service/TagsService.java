@@ -13,7 +13,7 @@ import java.util.List;
 public interface TagsService {
 
     /**
-     * @description: 通过类别Id查询所有类别
+     * @description: 通过标签Id查询展示所有标签
      * @param tag
      * @return: java.util.List<com.zlk.zlkproject.entity.Tag>
      * @author: QianKeQin

@@ -19,6 +19,7 @@
         <result property="userImg" column="user_img" javaType="java.lang.String"/>
         <result property="chapterId" column="chapter_id" javaType="java.lang.Integer"/>
         <result property="coursesId" column="courses_id" javaType="java.lang.Integer"/>
+        <result property="coursesName" column="courses_name" javaType="java.lang.String"/>
         <collection property="stuCommentList" ofType="com.zlk.zlkproject.entity.StuComment">
             <result property="smId" column="sm_id1" javaType="java.lang.Integer"/>
             <result property="pId" column="pid1" javaType="java.lang.Integer"/>
@@ -150,4 +151,35 @@
         select count(1) from user,stu_comment  where user.user_id = stu_comment.user_id
        and stu_comment.user_id  = #{userId} and stu_comment.teacher_answer!=''
     </select>
+
+
+    <select id="findStuCommentByCoursesName"  resultMap="stuCmtEntityMap">
+      select sc.*,cp.chapter_id,c.courses_id
+      FROM stu_comment sc,chapter cp,courses c,section s
+      WHERE  sc.section_id=s.section_id AND s.chapter_id=cp.chapter_id AND cp.courses_id=c.courses_id
+      And c.courses_id=#{courseId}
+      limit #{page},#{size}
+    </select>
+
+    <select id="findStuCommentCountByCoursesId" resultType="java.lang.Integer">
+        select count(1) FROM stu_comment sc,chapter cp,courses c,section s
+      WHERE  sc.section_id=s.section_id AND s.chapter_id=cp.chapter_id AND cp.courses_id=c.courses_id
+      And c.courses_id=#{courseId}
+    </select>
+
+    <select id="findStuCommentByCoursesIdAndChapterId" parameterType="com.zlk.zlkproject.entity.Pagination" resultMap="stuCmtEntityMap">
+      select sc.*,cp.chapter_id,c.courses_id
+      FROM stu_comment sc,chapter cp,courses c,section s
+      WHERE  sc.section_id=s.section_id AND s.chapter_id=cp.chapter_id AND cp.courses_id=c.courses_id
+      And  cp.chapter_id=#{chapterId}
+       limit #{page},#{size}
+    </select>
+
+    <select id="findStuCommentCountByCoursesIdAndChapterId" resultType="java.lang.Integer">
+        select count(1) FROM stu_comment sc,chapter cp,courses c,section s
+      WHERE  sc.section_id=s.section_id AND s.chapter_id=cp.chapter_id AND cp.courses_id=c.courses_id
+       AND cp.chapter_id=#{chapterId}
+
+    </select>
+
 </mapper>

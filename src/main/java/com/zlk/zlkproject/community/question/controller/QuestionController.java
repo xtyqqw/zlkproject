@@ -6,6 +6,8 @@ import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author gby
@@ -34,6 +38,10 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private QuestionTagService questionTagService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     /*
      * @descrption 提问提示页面
@@ -88,14 +96,32 @@ public class QuestionController {
         return "redirect:/CommunityPage";
     }
 
-    //问题编辑页面的图片上传方法
+    /*makedown图片上传到服务器*/
+    @RequestMapping(value = "/uploadMarkdownImg",method= RequestMethod.POST)
+    public void uploadMarkdown(HttpServletResponse response,@RequestParam(value = "editormd-image-file", required = false) MultipartFile file) {
+        try {
+            String path = commonFileUtil.uploadFile(file);
+            String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+            System.out.println(path);
+            System.out.println(url);
+            //下面response返回的json格式是editor.md所规范的
+            response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + url + "\"}" );
+        } catch (Exception e) {
+            try {
+                response.getWriter().write( "{\"success\":0, \"message\":\"上传失败\"}" );
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    //问题编辑页面的图片本地上传方法
     @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
     public void hello(HttpServletRequest request, HttpServletResponse
             response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach) {
         try {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
-            String rootPath = request.getSession().getServletContext().getRealPath("upload");
+            String rootPath = request.getSession(). getServletContext().getRealPath("upload");
             /**
              * 文件路径不存在则需要创建文件路径
              */

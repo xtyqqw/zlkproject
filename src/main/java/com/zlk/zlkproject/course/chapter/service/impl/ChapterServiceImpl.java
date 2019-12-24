@@ -6,6 +6,7 @@ import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,7 +38,9 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
+    @Transactional
     public Integer updateChapterByChapterId(Chapter chapter) {
+        chapterMapper.updateLastChapterNum(chapter);
         return chapterMapper.updateChapterByChapterId(chapter);
     }
 
@@ -91,4 +94,10 @@ public class ChapterServiceImpl implements ChapterService {
     public Integer selectCoursesIdBySectionId(Integer sectionId) {
         return chapterMapper.selectCoursesIdBySectionId(sectionId);
     }
+
+    @Override
+    public List<Integer> selectChapterNumByCoursesId(Integer coursesId) {
+        return chapterMapper.selectChapterNumByCoursesId(coursesId);
+    }
+
 }
