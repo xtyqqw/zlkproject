@@ -96,8 +96,8 @@
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">评论数</label>
-                            <input type="text" name="responseCount" placeholder="请输入评论数" value="${questions.responseCount}">
+                            <label class="ui basic violet label">回答数</label>
+                            <input type="text" name="responseCount" placeholder="请输入回答数" value="${questions.responseCount}">
                         </div>
                     </div>
                     <div class="required field">

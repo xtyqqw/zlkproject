@@ -145,14 +145,14 @@
                     , {field: 'questionId', title: '问题ID', width: 80, sort: true}
                     , {field: 'questionTitle', title: '问题标题', width: 100, sort: true}
                     , {field: 'questionContent', title: '问题内容', width: 130}
-                    , {field: 'solve', title: '评论数', width: 80}
+                    , {field: 'solve', title: '问题状态', width: 90}
+                    , {field: 'browseCount', title: '浏览数', width: 80}
                     , {field: 'createTime', title: '发布时间', width: 90}
                     , {field: 'updateTime', title: '更新时间', width: 90}
-                    , {field: 'browseCount', title: '浏览数', width: 80}
                     , {field: 'questionSetTop', title: '置顶', width: 60}
+                    , {field: 'audit', title: '审核', width: 60}
                     , {field: 'zanCount', title: '赞数', width: 60}
                     , {field: 'caiCount', title: '踩数', width: 60}
-                    , {field: 'audit', title: '审核', width: 60}
                     , {field: 'responseCount', title: '回答数', width: 80}
                     , {field: 'typeName', title: '分类', width: 80}
                     , {field: 'tagName', title: '标签', width: 90}
@@ -235,7 +235,8 @@
                         });
                     }
                     break;
-            };
+            }
+            ;
         });
         //监听行工具事件
         table.on('tool(test)', function (obj) {//注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -257,7 +258,7 @@
                     layer.close(index);
                 });
             } else if (obj.event === 'edit') {//编辑
-                window.location.href="<%=request.getContextPath()%>/question/toUpdate?questionId="+id;
+                window.location.href = "<%=request.getContextPath()%>/question/toUpdate?questionId=" + id;
                 $("#questionId").val(data.questionId);
                 $("#questionIitle").val(data.questionIitle);
                 $("#questionContent").val(data.questionContent);
