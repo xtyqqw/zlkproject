@@ -81,7 +81,7 @@ public class User {
     private List<Article> articles=new ArrayList<>();
 
 
-    public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
+    public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime,Double userAllTimeDou,Double userDateTimeDou) {
         this.userId = userId;
         this.phonenum = phonenum;
         this.userPwd = userPwd;
@@ -101,6 +101,8 @@ public class User {
         this.userSpecialty = userSpecialty;
         this.userAllTime = userAllTime;
         this.userDateTime = userDateTime;
+        this.userDateTimeDou=userDateTimeDou;
+        this.userAllTimeDou=userAllTimeDou;
     }
 
     public User() {
