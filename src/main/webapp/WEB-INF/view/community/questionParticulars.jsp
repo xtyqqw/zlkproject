@@ -130,6 +130,40 @@
                 </c:forEach>
             </div>
         </div>
+        <div class="ui bottom attached segment">
+            <!--留言区域列表-->
+            <div class="ui form" id="div_stuCmt">
+                <div id="stuCmt_titleBox">
+                    <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
+                </div>
+                <div style="border: 0px solid white !important;">
+                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;">
+                        <div id="cmt-content-box">
+                            <ul id="art-cmt-ul-stream"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="art-cmt-textBox" class="field violet"
+                     style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                    <div id="div-artCmt-toolBar" class="toolbar violet"></div>
+                    <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
+                </div>
+                <div id="art-cmt-btnBox" class="fields">
+                    <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
+                        <div class="ui left">
+                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet">
+                                <i class="edit icon"></i>发布
+                            </button>
+                        </div>
+                    </div>
+                    <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
+                        <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">
+                            <i class="eye icon"></i>查看
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div>

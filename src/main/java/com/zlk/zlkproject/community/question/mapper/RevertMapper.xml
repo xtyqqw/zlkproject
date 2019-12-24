@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.RevertMapper">
+    <resultMap id="revertEntityMap" type="com.zlk.zlkproject.entity.Revert">
+        <id column="revert_id" property="revertId" javaType="java.lang.String"/>
+        <result column="revert_content" property="revertContent" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
+        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="rrevert_count" property="revertCount" javaType="java.lang.Integer"/>
+        <result column="accep" property="accep" javaType="java.lang.String"/>
+        <result column="question_id" property="questionId" javaType="java.lang.String"/>
+        <result column="user_id" property="userId" javaType="java.lang.String"/>
+    </resultMap>
+    <insert id="addRevert" parameterType="com.zlk.zlkproject.entity.Revert">
+        insert into revert (revert_id,revert_content,create_time,zan_count,cai_count,revert_count,accep,question_id,user_id)
+        VALUES (#{revertId},#{revertContent},#{createTime},#{zanCount},#{caiCount},#{revertCount},#{accep},#{questionId},#{userId})
+    </insert>
+
+
+</mapper>
