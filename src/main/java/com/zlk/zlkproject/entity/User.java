@@ -65,10 +65,12 @@ public class User {
     private String userSpecialty;
     /**用户总学习时间(小时数)*/
     private Integer userAllTime;
+    /*使用该注解不会在数据库中创建该字段*/
     @Transient
     private Double userAllTimeDou;
     /**用户每日学习时长*/
     private Integer userDateTime;
+    /*使用该注解不会在数据库中创建该字段*/
     @Transient
     private Double userDateTimeDou;
     /**头像图片相对路径*/
