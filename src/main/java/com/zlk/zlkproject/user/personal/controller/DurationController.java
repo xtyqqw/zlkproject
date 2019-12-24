@@ -51,10 +51,10 @@ public class DurationController {
         /*超过多少学生，百分比*/
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
-        Integer rankall=Arith.divide(rank,all);
+        Integer rankAll=Arith.divide(rank,all);
         ModelAndView mv=new ModelAndView();
         /*超过多少学生*/
-        mv.addObject("rankall",rankall);
+        mv.addObject("rankall",rankAll);
         mv.addObject("lists",lists);
         /*每日学习时长*/
         mv.addObject("times",times);
