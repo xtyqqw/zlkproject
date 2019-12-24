@@ -119,7 +119,7 @@
         }
         .user1{
             height: 30px;
-            width: 200px;
+            width: 300px;
             float: left;
             margin-left: 15px;
             margin-top: 40px;
@@ -155,7 +155,6 @@
             color:  #989898;
             font-family: Arial;
             position: relative;
-            top: -2px;
             float: left;
             display: inline;
             left: 10px;
@@ -164,6 +163,18 @@
         a:hover {
             color: #1296db;
             text-decoration: none;
+        }
+        .audit{
+            margin-left: 40px;
+            float: left;
+            width: 63px;
+            height: 19px;
+            border-radius: 6%;
+            border: #FF0000 1px solid;
+            color: #FF0000;
+            font-family: Arial;
+            font-size: 15px;
+            text-align: center;
         }
     </style>
 </head>
@@ -197,20 +208,29 @@
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';
                     html += '<div class="title"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].questionTitle + '</a></div>';
-                    if (question[i].solve === 0) {
+                    if (question[i].solve === "0") {
                         html += '<div class="solve">待解决</div>';
                     }
-                    if (question[i].solve === 1) {
+                    if (question[i].solve === "1") {
                         html += '<div class="solve">已解决</div>';
                     }
-                    if (question[i].solve === 2) {
+                    if (question[i].solve === "2") {
                         html += '<div class="solve">未解决</div>';
                     }
-                    if (question[i].questionSetTop === 0) {
+                    if (question[i].questionSetTop === "0") {
                         html += '<div class="questionSetTop" id="questionSetTop"><p id="p">置顶</p></div>';
                     }
-                    if (question[i].questionSetTop === 1) {
+                    if (question[i].questionSetTop === "1") {
                         html += '<div class="questionSetTop" id="questionSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
+                    }
+                    if (question[i].audit === "0"){
+                        html += '<div class="audit">审核中</div>';
+                    }
+                    if (question[i].audit === "1"){
+                        html += '<div class="audit" style="display: none">审核过</div>';
+                    }
+                    if (question[i].audit === "2"){
+                        html += '<div class="audit">审核未过</div>';
                     }
                     html += '<div class="questionContent" style="width: 660px"><span>' + question[i].questionContent + '</span></div>';
                     html += '<div class="user1">';

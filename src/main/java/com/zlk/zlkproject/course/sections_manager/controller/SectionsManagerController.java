@@ -60,7 +60,25 @@ public class SectionsManagerController {
         return map;
     }
 
-    @RequestMapping(value = "/deleteVideo")
+    @RequestMapping("/changeVideo1")
+    @ResponseBody
+    public Map changeVideo1(Integer sectionId,String oldPath,String videoAddr1,String videoPath1,Integer videoTime){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.changeVideo1(sectionId, oldPath, videoAddr1, videoPath1, videoTime);
+        map.put("res",res);
+        return map;
+    }
+
+    @RequestMapping("/changeVideo2")
+    @ResponseBody
+    public Map changeVideo2(Integer sectionId,String oldPath,String videoAddr2,String videoPath2,Integer videoTime){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.changeVideo2(sectionId, oldPath, videoAddr2, videoPath2, videoTime);
+        map.put("res",res);
+        return map;
+    }
+
+    /*@RequestMapping(value = "/deleteVideo")
     @ResponseBody
     public Map deleteVideo(@RequestParam(name = "file") MultipartFile file) throws Exception{
         Map map = new HashMap();
@@ -80,7 +98,7 @@ public class SectionsManagerController {
         map.put("url",url);
         map.put("retmsg","上传完成");
         return map;
-    }
+    }*/
 
     @RequestMapping(value = "/toSectionsManager")
     public ModelAndView toSectionsManager() throws Exception {
@@ -131,7 +149,7 @@ public class SectionsManagerController {
 
     @RequestMapping("/findCourseAndChapterById")
     @ResponseBody
-    public Map findCourseAndChapterById(@RequestParam("courseId") Integer courseId
+    public Map findCourseAndChapterById(/*@RequestParam("courseId")*/ Integer courseId
                                         ,/*@RequestParam("chapterId") */Integer chapterId){
         Map map = new HashMap();
         Courses res = sectionsManagerService.findCourseAndChapterById(courseId);
@@ -169,6 +187,27 @@ public class SectionsManagerController {
         if (res == 1){
             logUtil.setLog(request,"修改了小节(ID:"+ section.getSectionId() +")的信息");
         }
+        map.put("res",res);
+        return map;
+    }
+
+    @RequestMapping("/updateDataChangeChapter")
+    @ResponseBody
+    public Map updateDataChangeChapter(Section section, HttpServletRequest request){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.updateDataChangeChapter(section);
+        if (res == 1){
+            logUtil.setLog(request,"修改了小节(ID:"+ section.getSectionId() +")的信息");
+        }
+        map.put("res",res);
+        return map;
+    }
+
+    @RequestMapping("/updateDeleteVideo")
+    @ResponseBody
+    public Map updateDeleteVideo(Section section, @RequestParam("oldPath") String oldPath, HttpServletRequest request){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.updateData(section);
         map.put("res",res);
         return map;
     }

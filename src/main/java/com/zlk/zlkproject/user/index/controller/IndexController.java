@@ -2,8 +2,12 @@ package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.*;
 import com.zlk.zlkproject.user.entity.Signin;
+import com.zlk.zlkproject.user.index.config.RedisConfig;
 import com.zlk.zlkproject.user.index.service.IndexService;
+import com.zlk.zlkproject.user.personal.service.DurationService;
 import com.zlk.zlkproject.user.until.Arith;
+import com.zlk.zlkproject.user.until.ObjectConvertUtils;
+import com.zlk.zlkproject.user.until.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -23,14 +28,23 @@ import java.util.*;
 @Controller
 public class IndexController {
     @Autowired
+    private DurationService durationService;
+    @Autowired
     private IndexService indexService;
-
+    /**
+     * redis过期时间
+     */
+    private static int ExpireTime = 3600;
+    @Resource
+    private RedisUtil redisUtil;
+    @Autowired
+    private RedisConfig redisConfig;
     @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<User> userList = indexService.findUsersByAllTime();
         for(User user:userList){
-            user.setUserAllTime(Arith.toHour(user.getUserAllTime()));
+            user.setUserAllTimeDou(Arith.toHour(user.getUserAllTime()));
         }
         List<Type> typeList = indexService.findTypeAll();
         List<Tag> tags = indexService.findTagsById(typeList.get(0).getTypeId());
@@ -76,12 +90,20 @@ public class IndexController {
             Integer rank = indexService.findUserRankById(userId);
             Integer count = indexService.findUserCount();
             Integer rankBai = Arith.divide(rank, count);
-            Integer userDtime = Arith.toHour(user.getUserDateTime());
-            user.setUserDateTime(userDtime);
-            Integer userAtime = Arith.toHour(user.getUserAllTime());
-            user.setUserAllTime(userAtime);
-            Integer jiNeng = Arith.ride(userDtime);
-            Integer xueXi = Arith.plus(userDtime);
+            Double userDtime = Arith.toHour(user.getUserDateTime());
+            user.setUserDateTimeDou(userDtime);
+            Double userDtimes = (double) Math.round(userDtime*100)/100;
+            long xueXi = (long) Math.ceil(userDtimes / 10);
+            Double userAtime = Arith.toHour(user.getUserAllTime());
+            user.setUserAllTimeDou(userAtime);
+            Integer ful=durationService.findWanCheng(userId);
+            Integer sum=durationService.findSectionAll(userId);
+            long jiNeng;
+            if (sum!=0){
+                jiNeng=Math.round((ful*100)/sum);
+            }else {
+                jiNeng= 0;
+            }
             mv.addObject("userList", userList);
             mv.addObject("userId",userId);
             mv.addObject("user1", user);
@@ -92,6 +114,12 @@ public class IndexController {
             mv.addObject("today", today);
             mv.addObject("signNum", signNum);
         }
+//        if (redisUtil.hasKey("typeList")){
+//           List<Object> typeL = redisUtil.lGet("typeList",0,-1);
+//        }else{
+//
+//        }
+//        redisUtil.set("typeList",typeList,ExpireTime);
         mv.addObject("typeList", typeList);
         mv.addObject("courses", courses);
         mv.addObject("courses2", courses2);

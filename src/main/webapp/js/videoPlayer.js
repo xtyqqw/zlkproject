@@ -1973,8 +1973,18 @@ $(document).ready(function () {
                 if('false' === state){
                     $(this).prev().text('true');
                     let height = $(this).parent().parent().prev().prev().children().eq(0).height();
-                    if(height > 220){
-                        $(this).parent().parent().prev().prev().css('height','auto');
+                    if(type === 'normal'){
+                        if(height > 150){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else if (type === 'short'){
+                        if(height > 131){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else {
+                        if(height > 220){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
                     }
                 }else {
                     $(this).prev().text('false');
