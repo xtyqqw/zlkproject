@@ -31,7 +31,7 @@ public class IndexController {
     private static int ExpireTime = 3600;
     @Resource
     private RedisUtil redisUtil;
-
+    
     @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
