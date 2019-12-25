@@ -314,8 +314,7 @@
                         }
                     });
                     break;
-            }
-            ;
+            };
         });
 
         renderTable();
