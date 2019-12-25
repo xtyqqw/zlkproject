@@ -60,11 +60,10 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-   username: root
+    username: root
     password:
-   url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
@@ -108,7 +107,7 @@ fdfs:
   tracker-list:
   #通过nginx 访问地址
   resHost:
-  storagePort:
+  storagePort: 8888/
   #缩略图配置
   thumb-image:
     height: 150

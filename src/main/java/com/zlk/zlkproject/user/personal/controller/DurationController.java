@@ -38,16 +38,26 @@ public class DurationController {
         Double times = (double) Math.round(time*100)/100;
         /*学习成长量*/
         long grow = (long) Math.ceil(times / 10);
-        /*查询技能水平*/
+        /*技能水平*/
         Integer ful=durationService.findWanCheng(user.getUserId());
         Integer sum=durationService.findSectionAll(user.getUserId());
-        long level=Math.round((ful*100)/sum);
+        long level;
+        if(sum!=0){
+            level=Math.round((ful*100)/sum);
+        }else {
+            level = 0;
+        }
         /*查询用户学习总时长*/
         Integer sectionAll=durationService.selectAllTime(user.getUserId());
         /*用户参加项目的所有视频的总时长*/
         Integer finish=durationService.selectSection(user.getUserId());
         /*学习力*/
-        long ability = Math.round((sectionAll*100 )/ finish);
+        long ability;
+        if(finish!=0){
+            ability = Math.round((sectionAll*100 )/ finish);
+        }else {
+            ability=0;
+        }
         /*超过多少学生，百分比*/
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
