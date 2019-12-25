@@ -104,9 +104,9 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list:
+  tracker-list: 
   #通过nginx 访问地址
-  resHost: 
+  resHost:
   storagePort: 8888/
   #缩略图配置
   thumb-image:
