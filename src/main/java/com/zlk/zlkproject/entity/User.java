@@ -6,10 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,9 +65,13 @@ public class User {
     private String userSpecialty;
     /**用户总学习时间(小时数)*/
     private Integer userAllTime;
+    /*使用该注解不会在数据库中创建该字段*/
+    @Transient
     private Double userAllTimeDou;
     /**用户每日学习时长*/
     private Integer userDateTime;
+    /*使用该注解不会在数据库中创建该字段*/
+    @Transient
     private Double userDateTimeDou;
     /**头像图片相对路径*/
     private String userImg;
@@ -81,7 +82,7 @@ public class User {
     private List<Article> articles=new ArrayList<>();
 
 
-    public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime) {
+    public User(String userId, String phonenum, String userPwd, String userRealname, String userSex, Date userBirthday, String userNative, String userMarry, String userCity, String userState, String userTarget, String userIndustry, String userHobby, String userSelfappraise, String userEducation, String userAcademy, String userSpecialty, Integer userAllTime, Integer userDateTime,Double userAllTimeDou,Double userDateTimeDou) {
         this.userId = userId;
         this.phonenum = phonenum;
         this.userPwd = userPwd;
@@ -101,6 +102,8 @@ public class User {
         this.userSpecialty = userSpecialty;
         this.userAllTime = userAllTime;
         this.userDateTime = userDateTime;
+        this.userDateTimeDou=userDateTimeDou;
+        this.userAllTimeDou=userAllTimeDou;
     }
 
     public User() {

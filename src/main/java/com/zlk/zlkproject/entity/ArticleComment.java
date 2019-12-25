@@ -53,4 +53,6 @@ public class ArticleComment {
     private List<ArticleComment> articleCommentList;
     /**赞踩集合*/
     private List<ArticleCommentZanCai> articleCommentZanCaiList;
+
+    private String flag;
 }

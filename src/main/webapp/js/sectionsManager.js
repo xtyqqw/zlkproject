@@ -117,7 +117,9 @@ window.onload = function () {
         //新增弹出层章节下拉框选择事件
         form.on('select(ACB1_chapter_select)', function(data){
             if(data.value === ''){
-                $("#sectionNum").val('');
+                $("#sectionNum").empty();
+                $("#sectionNum").append('<option value="">请选择一个序号</option>');
+                form.render('select');
             }else{
                 let ajaxData = {'chapterId': data.value};
                 $.ajax({
@@ -126,7 +128,13 @@ window.onload = function () {
                     data : ajaxData,
                     dataType: "json",
                     success : function (res) {
+                        $("#sectionNum").empty();
+                        $("#sectionNum").append('<option value="">请选择一个序号</option>');
+                        for(let i=1;i<=res.res + 1;i++){
+                            $("#sectionNum").append('<option value="'+ i +'">'+ i +'</option>');
+                        }
                         $("#sectionNum").val(res.res + 1);
+                        form.render('select');
                     }
                 });
             }
@@ -232,7 +240,13 @@ window.onload = function () {
                     data : ajaxData,
                     dataType: "json",
                     success : function (res) {
+                        $("#sectionNum").empty();
+                        $("#sectionNum").append('<option value="">请选择一个序号</option>');
+                        for(let i=1;i<=res.res + 1;i++){
+                            $("#sectionNum").append('<option value="'+ i +'">'+ i +'</option>');
+                        }
                         $("#sectionNum").val(res.res + 1);
+                        form.render('select');
                     }
                 });
             }
@@ -387,7 +401,9 @@ window.onload = function () {
             $("#ACB1_courseSelect").val('');
             form.render('select','ACB1_course_select_box');
             form.render('select','ACB2_chapter_select_box');
-            $("#sectionNum").val('');
+            $("#sectionNum").empty();
+            $("#sectionNum").append('<option value="">请选择一个序号</option>');
+            form.render('select');
             $("#sectionName").val('');
             $("#sectionIntro").val('');
             $("#nv_retmsg").text('尚未上传');

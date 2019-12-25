@@ -2,12 +2,12 @@ package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.*;
 import com.zlk.zlkproject.user.entity.Signin;
-/*import com.zlk.zlkproject.user.index.config.RedisConfig;*/
+import com.zlk.zlkproject.user.index.config.RedisConfig;
 import com.zlk.zlkproject.user.index.service.IndexService;
 import com.zlk.zlkproject.user.personal.service.DurationService;
 import com.zlk.zlkproject.user.until.Arith;
-/*import com.zlk.zlkproject.user.until.ObjectConvertUtils;*/
-/*import com.zlk.zlkproject.user.until.RedisUtil;*/
+import com.zlk.zlkproject.user.until.ObjectConvertUtils;
+import com.zlk.zlkproject.user.until.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +35,10 @@ public class IndexController {
      * redis过期时间
      */
     private static int ExpireTime = 3600;
-    /*@Resource
+    @Resource
     private RedisUtil redisUtil;
     @Autowired
-    private RedisConfig redisConfig;*/
+    private RedisConfig redisConfig;
     @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -98,7 +98,12 @@ public class IndexController {
             user.setUserAllTimeDou(userAtime);
             Integer ful=durationService.findWanCheng(userId);
             Integer sum=durationService.findSectionAll(userId);
-            long jiNeng=Math.round((ful*100)/sum);
+            long jiNeng;
+            if (sum!=0){
+                jiNeng=Math.round((ful*100)/sum);
+            }else {
+                jiNeng= 0;
+            }
             mv.addObject("userList", userList);
             mv.addObject("userId",userId);
             mv.addObject("user1", user);

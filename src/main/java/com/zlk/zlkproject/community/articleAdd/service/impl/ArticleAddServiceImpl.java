@@ -5,12 +5,9 @@ import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 
 import com.zlk.zlkproject.entity.Article;
 
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 /**
  * @program: ArticleAddServiceImpl
