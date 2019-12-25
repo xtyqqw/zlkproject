@@ -220,7 +220,7 @@
 <div class="hefollows">
     <div class="hefollows_top"></div>
     <div class="hefollows_title">
-        <p>TA关注的人</p>
+        <p>关注TA的人</p>
     </div>
     <%--返回上一页--%>
     <a href="javascript:history.go(-1)" style="margin-left: 30px;margin-top: -30px;position: fixed">

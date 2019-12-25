@@ -118,7 +118,17 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
     }
 
     @Override
+    @Transactional
     public Integer addData(Section section) {
+        Integer sectionsCount = sectionsManagerMapper.findCountByChapterId(section.getChapterId());
+        Integer sectionNum = section.getSectionNum();
+        Section param = new Section();
+        param.setChapterId(section.getChapterId());
+        for (int i = sectionsCount;i >= sectionNum;i--){
+            param.setLastSectionNum(i+1);
+            param.setSectionNum(i);
+            sectionsManagerMapper.updateDataLast(param);
+        }
         return sectionsManagerMapper.addData(section);
     }
 
