@@ -8,9 +8,12 @@ import java.util.List;
 public interface ChapterService {
 
     /**
-     * 根据课程id查找对应章节信息
-     * @param coursesId
-     * @return
+     *  根据课程id查找章节信息
+     *@method selectChapterByCoursesId
+     *@params [coursesId]
+     *@return java.util.List<com.zlk.zlkproject.entity.Chapter>
+     *@author zhang
+     *@time 2019/12/20  15:53
      */
     List<Chapter> selectChapterByCoursesId(Integer coursesId);
 
