@@ -25,7 +25,10 @@
     <!--通过课程id查找章节信息-->
     <select id="selectChapterByCoursesId" resultMap="chapterEntityMap">
         select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
-        from chapter where courses_id = #{coursesId};
+        from chapter
+        <if test="coursesId != null">
+            where courses_id = #{coursesId}
+        </if>
     </select>
     <!--通过课程id查找章节信息-->
     <select id="findChapterByCoursesId" parameterType="java.lang.Integer" resultMap="chapterEntityMap">
@@ -106,7 +109,11 @@
     <!--根据课程id查找全部章节并分页显示-->
     <select id="selectChapterByCoursesIdAndLimit" parameterType="java.lang.Integer" resultMap="chapterEntityMap">
         select chapter_id,courses_id,chapter_name,chapter_time,chapter_num,section_num
-        from chapter where courses_id = #{coursesId} limit #{startPage},#{limit};
+        from chapter
+        <if test="coursesId != null">
+            where courses_id = #{coursesId}
+        </if>
+        limit #{startPage},#{limit};
     </select>
     <!--查询全部章节数量-->
     <select id="selectAllCount" resultType="java.lang.Integer">

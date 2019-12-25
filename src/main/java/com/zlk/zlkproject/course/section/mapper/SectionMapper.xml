@@ -39,7 +39,10 @@
     </select>
 
     <select id="findSectionByChapterId" parameterType="java.lang.Integer" resultMap="sectionEntityMap">
-        select section_id,chapter_id,section_name,video_addr,section_time,section_num from section where chapter_id = #{chapterId};
+        select section_id,chapter_id,section_name,video_addr1,video_addr2,section_time,section_num from section
+        <if test="chapterId != null">
+            where chapter_id = #{chapterId}
+        </if>
     </select>
     <select id="findStateById" resultType="java.lang.String">
         select state from user_section where section_id = #{sectionId} and user_id = #{userId}
@@ -54,7 +57,7 @@
     </select>
 
     <select id="findSectionBySectionIdAndUserId" resultMap="sectionEntityMap">
-        select s.section_id,s.chapter_id,s.section_name,s.video_addr,s.section_time,s.section_num,
+        select s.section_id,s.chapter_id,s.section_name,s.video_addr1,s.video_addr2,s.section_time,s.section_num,
                 us.user_id,us.section_id,us.state,us.time
          from section s left join user_section us on us.section_id=s.section_id
          where us.user_id = #{userId} and s.section_id = #{sectionId}
@@ -62,5 +65,10 @@
     <!--根据小节id查找小节名字-->
     <select id="findNameBySectionId" parameterType="java.lang.Integer" resultType="java.lang.String">
         select section_name from section where section_id = #{sectionId};
+    </select>
+    <!--根据小节id查找本章节下全部的小节id和名称-->
+    <select id="findAllIdBySectionId" parameterType="java.lang.Integer" resultMap="sectionEntityMap">
+        select section_id,section_name from section where chapter_id =
+        (select chapter_id from  section where section_id = #{sectionId});
     </select>
 </mapper>
