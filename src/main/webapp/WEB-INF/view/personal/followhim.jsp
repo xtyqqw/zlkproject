@@ -225,10 +225,10 @@
     <a href="javascript:history.go(-1)" style="margin-left: 30px;margin-top: -30px;position: fixed">
         <i class="layui-icon layui-icon-return" style="font-size: 20px"></i>
     </a>
-    <c:if test="${list.size()==0}">
-        <p class="noperson">没有任何人关注ta</p>
+    <c:if test="${count==0}">
+        <p class="noperson">ta没有关注任何人</p>
     </c:if>
-    <c:if test="${list.size()!=0}">
+    <c:if test="${count!=0}">
         <div class="main"></div>
         <%--<c:forEach items="${list}" var="list">
             <div class="followhim_main">
