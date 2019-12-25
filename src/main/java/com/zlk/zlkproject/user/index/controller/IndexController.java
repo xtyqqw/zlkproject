@@ -2,20 +2,17 @@ package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.*;
 import com.zlk.zlkproject.user.entity.Signin;
-import com.zlk.zlkproject.user.index.config.RedisConfig;
 import com.zlk.zlkproject.user.index.service.IndexService;
 import com.zlk.zlkproject.user.personal.service.DurationService;
 import com.zlk.zlkproject.user.until.Arith;
-import com.zlk.zlkproject.user.until.ObjectConvertUtils;
 import com.zlk.zlkproject.user.until.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -31,14 +28,10 @@ public class IndexController {
     private DurationService durationService;
     @Autowired
     private IndexService indexService;
-    /**
-     * redis过期时间
-     */
     private static int ExpireTime = 3600;
     @Resource
     private RedisUtil redisUtil;
-    @Autowired
-    private RedisConfig redisConfig;
+    
     @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
