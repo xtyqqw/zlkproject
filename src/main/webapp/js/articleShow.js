@@ -33,12 +33,12 @@ $(document).ready(function () {
                 let articleId = '1';
                 let userId = '1';
                 let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
-                if(contentHtml.length>512){
-                    layer.msg("内容超出最大长度限制！");
-                    lengthState = false;
-                }
                 if (isEmpty){
                     layer.msg("内容为空无法提交！");
+                }
+                if(contentHtml.length>256){
+                    layer.msg("内容超出最大长度限制！");
+                    lengthState = false;
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -50,6 +50,10 @@ $(document).ready(function () {
                             if (res.retmsg === '评论成功'){
                                 artCmt_editor.txt.clear();
                             }
+                        },
+                        error : function () {
+                            layer.msg('发表评论前，请先登录！');
+                            artCmt_editor.txt.clear();
                         }
                     });
                 }
@@ -69,7 +73,6 @@ $(document).ready(function () {
         }
 
         {
-
             let userId = '1';
             let articleId = '1';
             let flag = 0;
@@ -82,7 +85,6 @@ $(document).ready(function () {
                     done: function (page, next) { //加载下一页
                         let lis = [];
                         let size = 3;
-
                         let data = {"articleId": articleId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -102,7 +104,6 @@ $(document).ready(function () {
                                     str1 = '';
                                     let len = comment.articleCommentList.length;
                                     for (let i=0;i<len;i++){
-
                                         zanCaiState = 'none';
                                         zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                         caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
@@ -162,10 +163,10 @@ $(document).ready(function () {
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="ART_flexBtn" data_type="'+ data_type +'" style="cursor: pointer">展开/收起</span>' +
                                                                 '</div>' +
-                                                                '<div class="ART_c_t_box" style="float: left;width: 65px">' +
+                                                                /*'<div class="ART_c_t_box" style="float: left;width: 65px">' +
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="ART_reportBtn">举报</span>' +
-                                                                '</div>' +
+                                                                '</div>' +*/
                                                                 '<div class="ART_c_t_box" style="float: left;width: 50px">' +
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="replyBtn" style="cursor: pointer">回复</span>' +
@@ -245,10 +246,10 @@ $(document).ready(function () {
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="ART_flexBtn" style="cursor: pointer">展开/收起</span>' +
                                                     '</div>' +
-                                                    '<div class="ART_c_t_box" style="float: left;width: 65px">' +
+                                                    /*'<div class="ART_c_t_box" style="float: left;width: 65px">' +
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="ART_reportBtn">举报</span>' +
-                                                    '</div>' +
+                                                    '</div>' +*/
                                                     '<div class="ART_c_t_box" style="float: left;width: 50px">' +
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="replyBtn" style="cursor: pointer">回复</span>' +
@@ -291,6 +292,9 @@ $(document).ready(function () {
                                 });
                                 next(lis.join(''), page < result.pages);
                             }
+                            /*,error : function () {
+                                layer.msg('查看评论前，请先登录！');
+                            }*/
                         });
                     }
                 });
@@ -303,7 +307,7 @@ $(document).ready(function () {
             });
 
             //举报点击事件
-            $("#ART_contentBox").on('click','.ART_reportBtn',function () {
+            /*$("#ART_contentBox").on('click','.ART_reportBtn',function () {
                 let articleCommentId = parseInt($(this).parent().parent().parent().prev().prev().text());
                 let type = $(this).prev().text();
                 let data;
@@ -339,7 +343,7 @@ $(document).ready(function () {
                         }
                     });
                 }
-            });
+            });*/
 
             //赞踩按钮点击事件
             $("#ART_contentBox").on('click','.ART_ZCbtn',function () {
@@ -519,8 +523,7 @@ $(document).ready(function () {
                 }else {
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid};
                 }
-
-                if(contentHtml.length>1024){
+                if(contentHtml.length>256){
                     layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
