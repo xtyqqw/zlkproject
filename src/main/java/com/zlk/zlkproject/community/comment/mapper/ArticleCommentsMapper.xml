@@ -44,8 +44,8 @@
     </resultMap>
 
     <insert id="addArtCmt" parameterType="com.zlk.zlkproject.entity.ArticleComment">
-        INSERT INTO article_comment (pid,article_id,user_id,reply_person,content,date)
-        VALUES (#{pId},#{articleId},#{userId},#{replyPerson},#{content},#{date})
+        INSERT INTO article_comment (pid,article_id,user_id,reply_person,content,date,zan,cai,inform)
+        VALUES (#{pId},#{articleId},#{userId},#{replyPerson},#{content},#{date},#{zan},#{cai},#{inform})
     </insert>
 
     <select id="findArtCmt" resultMap="artCmtEntityMap">
