@@ -718,7 +718,7 @@
                                     <dl>
                                         <dt>${user.userRealname}</dt>
                                         <dd>
-                                            <span>练习时长：${user.userAllTime}h</span>
+                                            <span>练习时长：${user.userAllTimeDou}h</span>
                                         </dd>
                                     </dl>
                                 </li>
@@ -734,7 +734,7 @@
                                     <dl>
                                         <dt>${user.userRealname}</dt>
                                         <dd>
-                                            <span>练习时长：${user.userAllTime}h</span>
+                                            <span>练习时长：${user.userAllTimeDou}h</span>
                                         </dd>
                                     </dl>
                                 </li>
@@ -750,7 +750,7 @@
                                     <dl>
                                         <dt>${user.userRealname}</dt>
                                         <dd>
-                                            <span>练习时长：${user.userAllTime}h</span>
+                                            <span>练习时长：${user.userAllTimeDou}h</span>
                                         </dd>
                                     </dl>
                                 </li>
@@ -766,7 +766,7 @@
                                 <dl>
                                     <dt>${user1.userRealname}</dt>
                                     <dd>
-                                        <span>练习时长：${user1.userAllTime}h</span>
+                                        <span>练习时长：${user1.userAllTimeDou}h</span>
                                     </dd>
                                 </dl>
                             </li>
@@ -787,7 +787,7 @@
                                                 <dl>
                                                     <dt>${user.userRealname}</dt>
                                                     <dd>
-                                                        <span>练习时长：${user.userAllTime}h</span>
+                                                        <span>练习时长：${user.userAllTimeDou}h</span>
                                                     </dd>
                                                 </dl>
                                             </li>
@@ -804,7 +804,7 @@
                             <ul>
                                 <li>
                                     <h3>学习时长</h3>
-                                    <p><span>${user1.userDateTime}</span>小时</p>
+                                    <p><span>${user1.userDateTimeDou}</span>小时</p>
                                     <p>已超过<span>${rankBai}</span>%的同学</p>
                                 </li>
                                 <li>

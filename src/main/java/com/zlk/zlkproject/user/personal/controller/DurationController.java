@@ -55,6 +55,9 @@ public class DurationController {
         long ability;
         if(finish!=0){
             ability = Math.round((sectionAll*100 )/ finish);
+            if(ability>=100){
+                ability=100;
+            }
         }else {
             ability=0;
         }
@@ -64,7 +67,7 @@ public class DurationController {
         Integer rankAll=Arith.divide(rank,all);
         ModelAndView mv=new ModelAndView();
         /*超过多少学生*/
-        mv.addObject("rankall",rankAll);
+        mv.addObject("rankAll",rankAll);
         mv.addObject("lists",lists);
         /*每日学习时长*/
         mv.addObject("times",times);
