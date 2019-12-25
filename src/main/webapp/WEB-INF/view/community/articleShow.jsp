@@ -75,7 +75,7 @@
                 <div class="ui horizontal link list">
                     <div class="item">
                         <img src="${article.user.userImg}" alt="" class="ui avatar image">
-                        <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header" style="box-shadow: none;height: auto;">${article.user.userRealname}</a></div>
+                        <div class="content"><a href="javascript:void(0)" class="header" style="box-shadow: none;height: auto;">${article.user.userRealname}</a></div>
                     </div>
                     <div class="item">
                         <i class="calendar icon"></i> <span><fmt:formatDate value="${article.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
@@ -143,7 +143,7 @@
                             </div>
                         </div>
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                            <button id="look_artCmt" type="button" class="ui button m-mobile-wide violet"><i class="eye icon"></i>查看</button>
+                            <button id="look_artCmt" type="button" class="ui button m-mobile-wide violet"><i class="external share icon"></i>查看</button>
                         </div>
                     </div>
                 </div>

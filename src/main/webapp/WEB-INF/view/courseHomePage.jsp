@@ -336,7 +336,7 @@
 <body>
 
 <jsp:include page="../jsp/headerXiangmu.jsp"></jsp:include>
-<div class="layui-tab layui-tab-brief" >
+<div class="layui-tab layui-tab-brief" style="left: 0;margin: auto;">
     <ul class="layui-tab-title">
         <li class="layui-this" >全部内容</li>
 
