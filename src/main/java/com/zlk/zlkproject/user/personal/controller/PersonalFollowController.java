@@ -76,8 +76,16 @@ public class PersonalFollowController {
      * @return
      */
     @RequestMapping(value = "/follower")
-    public String follower(){
-        return "view/personal/myfocus";
+    public ModelAndView follower(HttpServletRequest request,FollowerPage followerPage){
+        ModelAndView mv = new ModelAndView();
+        User user1 = (User) request.getSession().getAttribute("user");
+        followerPage.setUserId(user1.getUserId());
+        followerPage.setLimit(10);
+        followerPage.setPage(1);
+        List<User> followerList = personalFollowService.findFollower(followerPage);
+        mv.setViewName("view/personal/myfocus");
+        mv.addObject("count",followerList.size());
+        return mv;
     }
 
     /**
@@ -138,8 +146,10 @@ public class PersonalFollowController {
     @RequestMapping("/hefollows")
     public ModelAndView hefollows(String userId){
         ModelAndView mv = new ModelAndView();
+        Integer count = personalFollowService.findFollowedNum(userId);
         mv.setViewName("view/personal/hefollows");
         mv.addObject("userId",userId);
+        mv.addObject("count",count);
         return mv;
     }
 
@@ -151,7 +161,9 @@ public class PersonalFollowController {
     @RequestMapping("/followshim")
     public ModelAndView followshim(String userId){
         ModelAndView mv = new ModelAndView();
+        Integer count = personalFollowService.findFollowerNum(userId);
         mv.setViewName("view/personal/followhim");
+        mv.addObject("count",count);
         mv.addObject("userId",userId);
         return mv;
     }
