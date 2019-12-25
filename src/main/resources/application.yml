@@ -92,7 +92,7 @@ spring:
         max-active: 100
         max-idle: 20
         max-wait: 30000
-        min-idle: 0
+        min-idle: 10
 
 #FastDfs的配置
 fdfs:
@@ -103,7 +103,7 @@ fdfs:
   tracker-list: 
   #通过nginx 访问地址
   resHost: 
-  storagePort: 8888/
+  storagePort: 
   #缩略图配置
   thumb-image:
     height: 150
