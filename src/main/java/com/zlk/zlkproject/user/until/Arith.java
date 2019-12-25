@@ -56,4 +56,11 @@ public class Arith {
             double b = a1/3600;
             return b;
     }
+    public static double toHourTwo(int a){
+        double a1 = a;
+        double b = a1/3600;
+        BigDecimal dou = new BigDecimal(b);
+        double f1 = dou.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return f1;
+    }
 }

@@ -1,21 +1,8 @@
 server:
   port: 8080
 
+
 spring:
-  jpa:
-    #是否显示sql
-    show-sql: true
-    #指定数据库类型
-    database: mysql
-    #方言
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #自动建表方式
-    hibernate:
-      ddl-auto: none
-    #格式化sql
-    properties:
-      hibernate:
-        format-sql: true
   messages:
     basename: message/msg
   datasource:
@@ -60,11 +47,11 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-   username: root
-    password:
-   url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
+    username: root
+    password:
+    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
@@ -78,18 +65,14 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
-  #  resources:
-  #    chain:
-  #      strategy:
-  #        content:
-  #          enabled: true
-  #          paths: /**
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
+
   main:
     allow-bean-definition-overriding: true
+
   jmx:
     enabled: false
 
@@ -109,7 +92,8 @@ spring:
         max-active: 100
         max-idle: 20
         max-wait: 30000
-        min-idle: 0
+        min-idle: 10
+
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
