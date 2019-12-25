@@ -255,13 +255,13 @@
 <iframe name="attention" style="border: 1px solid #fff;width: 1000px;margin: 50px 22px;
 			float: left;display: none;height: 800px;"></iframe>
 <%--没有关注信息--%>
-<c:if test="${list.size() == 0}">
+<c:if test="${count == 0}">
     <div class="nomain">
         <h2>对不起，你当前暂无任何关注信息</h2>
     </div>
 </c:if>
 <%--有关注信息--%>
-<c:if test="${list.size()!= 0}">
+<c:if test="${count!= 0}">
     <div class="main">
         <%--<c:forEach items="${list}" var="bignum" >
             <div class="waik">
