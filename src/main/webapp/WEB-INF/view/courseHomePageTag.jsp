@@ -165,8 +165,8 @@
 
         .li1{
             float: left;
-            height: 190px;
-            margin-left: 30px;
+            height: 200px;
+            margin-left: 20px;
         }
 
         .h51{
@@ -175,6 +175,10 @@
             left:5px;
             font-weight:bold;
             color: white;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 180px;
         }
 
         .dd2{
@@ -188,7 +192,7 @@
             2px 0 3px -1px  #ebebeb;
             height: 80px;
             position: relative;
-            top: -55px;
+            top: -45px;
             width:212px;
         }
 
@@ -330,7 +334,7 @@
 <body>
 
 <jsp:include page="../jsp/headerXiangmu.jsp"></jsp:include>
-<div class="layui-tab layui-tab-brief" >
+<div class="layui-tab layui-tab-brief" style="left: 0;margin: auto;">
     <ul class="layui-tab-title">
         <li class="layui-this" >全部内容</li>
 
@@ -477,7 +481,7 @@
                                         '<li class="li1">' +
                                         '<dl class="dl1">' +
                                         '<dt class="dt1">' +
-                                        '<img id="img1" src="'+coursesTag.introducePic+'" style="height: 90px;width: 213px ">' +
+                                        '<img id="img1" src="'+coursesTag.introducePic+'" style="height: 100px;width: 213px ">' +
                                         '</dt>' +
                                         '<dd class="dd2">' +
                                         '<h5 class="h51">'+coursesTag.coursesName+'</h5>' +
