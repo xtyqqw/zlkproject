@@ -118,7 +118,17 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
     }
 
     @Override
+    @Transactional
     public Integer addData(Section section) {
+        Integer sectionsCount = sectionsManagerMapper.findCountByChapterId(section.getChapterId());
+        Integer sectionNum = section.getSectionNum();
+        Section param = new Section();
+        param.setChapterId(section.getChapterId());
+        for (int i = sectionsCount;i >= sectionNum;i--){
+            param.setLastSectionNum(i+1);
+            param.setSectionNum(i);
+            sectionsManagerMapper.updateDataLast(param);
+        }
         return sectionsManagerMapper.addData(section);
     }
 
@@ -129,6 +139,30 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
         if (res == 0)
             return res;
         return sectionsManagerMapper.updateData(section);
+    }
+
+    @Override
+    @Transactional
+    public Integer updateDataChangeChapter(Section section) {
+        Integer sectionsCount = sectionsManagerMapper.findCountByChapterId(section.getChapterId());
+        Integer sectionNum = section.getSectionNum();
+        Section param = new Section();
+        param.setChapterId(section.getChapterId());
+        for (int i = sectionsCount;i >= sectionNum;i--){
+            param.setLastSectionNum(i+1);
+            param.setSectionNum(i);
+            sectionsManagerMapper.updateDataLast(param);
+        }
+
+        sectionsCount = sectionsManagerMapper.findCountByChapterId(section.getLastChapterId());
+        sectionNum = section.getLastSectionNum();
+        param.setChapterId(section.getLastChapterId());
+        for (int i = sectionNum;i < sectionsCount;i++){
+            param.setLastSectionNum(i);
+            param.setSectionNum(i+1);
+            sectionsManagerMapper.updateDataLast(param);
+        }
+        return sectionsManagerMapper.updateDataChangeChapter(section);
     }
 
     @Override
@@ -154,5 +188,19 @@ public class SectionsManagerServiceImpl implements SectionsManagerService {
     @Override
     public Integer findTimeByChapterId(Integer chapterId) {
         return sectionsManagerMapper.findTimeByChapterId(chapterId);
+    }
+
+    @Override
+    public Integer changeVideo1(Integer sectionId, String oldPath, String videoAddr1, String videoPath1, Integer videoTime) {
+        if (!"".equals(oldPath))
+            commonFileUtil.deleteFile(oldPath);
+        return sectionsManagerMapper.changeVideo1(sectionId,videoAddr1,videoPath1,videoTime);
+    }
+
+    @Override
+    public Integer changeVideo2(Integer sectionId, String oldPath, String videoAddr2, String videoPath2, Integer videoTime) {
+        if (!"".equals(oldPath))
+            commonFileUtil.deleteFile(oldPath);
+        return sectionsManagerMapper.changeVideo2(sectionId,videoAddr2,videoPath2,videoTime);
     }
 }

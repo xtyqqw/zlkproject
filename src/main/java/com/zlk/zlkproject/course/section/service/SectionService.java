@@ -80,4 +80,14 @@ public interface SectionService {
      *@time 2019/12/16  11:40
      */
     String findNameBySectionId(Integer sectionId);
+
+    /**
+     * 根据小节id查找本章节小的全部小节id和名称
+     *@method findAllIdBySectionId
+     *@params [sectionId]
+     *@return java.util.List<com.zlk.zlkproject.entity.Section>
+     *@author zhang
+     *@time 2019/12/23  10:45
+     */
+    List<Section> findAllIdBySectionId(Integer sectionId);
 }

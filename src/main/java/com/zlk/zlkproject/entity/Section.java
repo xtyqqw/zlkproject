@@ -19,6 +19,8 @@ public class Section {
     private Integer sectionId;
     /**章节id 对应字段chapter_id*/
     private Integer chapterId;
+    /**修改前章节id*/
+    private Integer lastChapterId;
     /**课程id*/
     private Integer courseId;
     /**章节id 对应字段section_name*/
@@ -45,13 +47,18 @@ public class Section {
     public Section() {
     }
 
-    public Section(Integer sectionId, Integer chapterId, String sectionName, String videoAddr1, String videoAddr2, Integer sectionTime, Integer sectionNum, String sectionIntro, List<UserSection> userSectionList) {
+    public Section(Integer sectionId, Integer chapterId, Integer lastChapterId, Integer courseId, String sectionName, String videoAddr1, String videoPath1, String videoAddr2, String videoPath2, Integer sectionTime, Integer lastSectionNum, Integer sectionNum, String sectionIntro, List<UserSection> userSectionList) {
         this.sectionId = sectionId;
         this.chapterId = chapterId;
+        this.lastChapterId = lastChapterId;
+        this.courseId = courseId;
         this.sectionName = sectionName;
         this.videoAddr1 = videoAddr1;
+        this.videoPath1 = videoPath1;
         this.videoAddr2 = videoAddr2;
+        this.videoPath2 = videoPath2;
         this.sectionTime = sectionTime;
+        this.lastSectionNum = lastSectionNum;
         this.sectionNum = sectionNum;
         this.sectionIntro = sectionIntro;
         this.userSectionList = userSectionList;

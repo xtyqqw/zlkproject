@@ -1973,8 +1973,18 @@ $(document).ready(function () {
                 if('false' === state){
                     $(this).prev().text('true');
                     let height = $(this).parent().parent().prev().prev().children().eq(0).height();
-                    if(height > 220){
-                        $(this).parent().parent().prev().prev().css('height','auto');
+                    if(type === 'normal'){
+                        if(height > 150){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else if (type === 'short'){
+                        if(height > 131){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else {
+                        if(height > 220){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
                     }
                 }else {
                     $(this).prev().text('false');
@@ -2381,6 +2391,7 @@ $(document).ready(function () {
                         }
                     });
                 }
+                resetCache();
                 elem_video1.play();
                 elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
                 elem_totalTime.innerText = format(elem_video1.duration);
@@ -2393,6 +2404,7 @@ $(document).ready(function () {
                     elem_currentTime.innerText = format(elem_video1.currentTime);
                     CTrecord = elem_video1.currentTime;
                     if(elem_video1.ended) {
+                        resetCache();
                         let data = {'state':'已完成'};
                         $.ajax({
                             type: 'POST',

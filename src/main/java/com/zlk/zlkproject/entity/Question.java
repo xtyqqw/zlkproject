@@ -30,11 +30,15 @@ public class Question {
     /*问题内容*/
     private String questionContent;
     /*是否解决：0待解决，1已解决，2未解决*/
-    private Integer solve;
+    private String solve;
     /*发布时间*/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    /**更新时间*/
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
     /*浏览数*/
     private String browseCount;
     /**问题置顶：0 置顶，1 不置顶*/

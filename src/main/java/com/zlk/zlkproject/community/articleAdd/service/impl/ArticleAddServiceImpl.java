@@ -5,12 +5,9 @@ import com.zlk.zlkproject.community.articleAdd.service.ArticleAddService;
 
 import com.zlk.zlkproject.entity.Article;
 
-import com.zlk.zlkproject.community.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 /**
  * @program: ArticleAddServiceImpl
@@ -28,9 +25,6 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Transactional
     @Override
     public Article saveArticle(Article article) {
-        article.setArticleId(UUIDUtils.getId());
-        article.setCreateTime(new Date());
-        article.setUpdateTime(new Date());
         article.setApproval(0);
         article.setCommentCount(0);
         article.setBrowseCount(0);

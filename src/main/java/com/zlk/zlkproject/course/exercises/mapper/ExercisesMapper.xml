@@ -41,13 +41,19 @@
         WHERE user_id = #{userId} AND section_id = #{sectionId} AND exercise_num = #{exerciseNum}
     </update>
 
-    <select id="findExercisesBySectionIdAndUserId" resultMap="ExercisesMap">
+    <!--<select id="findExercisesBySectionIdAndUserId" resultMap="ExercisesMap">
         SELECT e.*,ue.user_id,ue.answer
         FROM exercises e
         LEFT JOIN (
                     SELECT * FROM user_exercises WHERE user_id = #{userId}
                   ) ue
         ON e.section_id = ue.section_id AND e.exercise_num = ue.exercise_num
+        WHERE e.section_id = #{sectionId} ORDER BY e.exercise_num
+    </select>-->
+
+    <select id="findExercisesBySectionIdAndUserId" resultMap="ExercisesMap">
+        SELECT *
+        FROM exercises e
         WHERE e.section_id = #{sectionId} ORDER BY e.exercise_num
     </select>
 </mapper>
