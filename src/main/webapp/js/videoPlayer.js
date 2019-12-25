@@ -2391,6 +2391,7 @@ $(document).ready(function () {
                         }
                     });
                 }
+                resetCache();
                 elem_video1.play();
                 elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
                 elem_totalTime.innerText = format(elem_video1.duration);
@@ -2403,6 +2404,7 @@ $(document).ready(function () {
                     elem_currentTime.innerText = format(elem_video1.currentTime);
                     CTrecord = elem_video1.currentTime;
                     if(elem_video1.ended) {
+                        resetCache();
                         let data = {'state':'已完成'};
                         $.ajax({
                             type: 'POST',
