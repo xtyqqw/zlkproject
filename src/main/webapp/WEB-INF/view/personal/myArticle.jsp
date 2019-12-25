@@ -306,7 +306,7 @@
         });
     }
     function getPage(){
-        layui.use('laypage', function(){
+        layui.use('3', function(){
             var laypage = layui.laypage;
             laypage.render({
                 elem: 'test1'

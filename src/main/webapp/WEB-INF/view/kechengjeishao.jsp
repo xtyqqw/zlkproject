@@ -525,7 +525,7 @@
                     console.log(data);
                     $.ajax({
                         type :"POST",
-                        url:"<%=request.getContextPath()%>/stuComment/findStuCommentListByUserId",
+                        url:"<%=request.getContextPath()%>/comment/findStuCommentListByUserId",
                         dataType:"json",
                         data:data,
                         success:function(result) {

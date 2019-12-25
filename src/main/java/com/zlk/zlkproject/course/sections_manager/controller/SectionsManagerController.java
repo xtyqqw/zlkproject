@@ -3,7 +3,6 @@ package com.zlk.zlkproject.course.sections_manager.controller;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
-import com.zlk.zlkproject.entity.Admin;
 import com.zlk.zlkproject.entity.Courses;
 import com.zlk.zlkproject.entity.Section;
 import com.zlk.zlkproject.utils.CommonFileUtil;
@@ -61,6 +60,46 @@ public class SectionsManagerController {
         return map;
     }
 
+    @RequestMapping("/changeVideo1")
+    @ResponseBody
+    public Map changeVideo1(Integer sectionId,String oldPath,String videoAddr1,String videoPath1,Integer videoTime){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.changeVideo1(sectionId, oldPath, videoAddr1, videoPath1, videoTime);
+        map.put("res",res);
+        return map;
+    }
+
+    @RequestMapping("/changeVideo2")
+    @ResponseBody
+    public Map changeVideo2(Integer sectionId,String oldPath,String videoAddr2,String videoPath2,Integer videoTime){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.changeVideo2(sectionId, oldPath, videoAddr2, videoPath2, videoTime);
+        map.put("res",res);
+        return map;
+    }
+
+    /*@RequestMapping(value = "/deleteVideo")
+    @ResponseBody
+    public Map deleteVideo(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map map = new HashMap();
+        File resFile = sectionsManagerService.multipartFileToFile(file);
+        Encoder encoder = new Encoder();
+        MultimediaInfo m = encoder.getInfo(resFile);
+        long ms = m.getDuration();
+        int time = (int) (ms/1000);
+
+        String path = commonFileUtil.uploadFile(file);
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        System.out.println(path);
+        System.out.println(url);
+        map.put("code",0);
+        map.put("time",time);
+        map.put("path",path);
+        map.put("url",url);
+        map.put("retmsg","上传完成");
+        return map;
+    }*/
+
     @RequestMapping(value = "/toSectionsManager")
     public ModelAndView toSectionsManager() throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -110,9 +149,23 @@ public class SectionsManagerController {
 
     @RequestMapping("/findCourseAndChapterById")
     @ResponseBody
-    public Map findCourseAndChapterById(@RequestParam("courseId") Integer courseId){
+    public Map findCourseAndChapterById(/*@RequestParam("courseId")*/ Integer courseId
+                                        ,/*@RequestParam("chapterId") */Integer chapterId){
         Map map = new HashMap();
         Courses res = sectionsManagerService.findCourseAndChapterById(courseId);
+        Integer sectionsNum = sectionsManagerService.findCountByChapterId(chapterId);
+        if (sectionsNum == null)
+            sectionsNum = 0;
+        map.put("res",res);
+        map.put("sectionsNum",sectionsNum);
+        return map;
+    }
+
+    @RequestMapping("/findSectionNumsByChapterId")
+    @ResponseBody
+    public Map findSectionNumsByChapterId(@RequestParam("chapterId") Integer chapterId){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.findCountByChapterId(chapterId);
         map.put("res",res);
         return map;
     }
@@ -138,11 +191,39 @@ public class SectionsManagerController {
         return map;
     }
 
+    @RequestMapping("/updateDataChangeChapter")
+    @ResponseBody
+    public Map updateDataChangeChapter(Section section, HttpServletRequest request){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.updateDataChangeChapter(section);
+        if (res == 1){
+            logUtil.setLog(request,"修改了小节(ID:"+ section.getSectionId() +")的信息");
+        }
+        map.put("res",res);
+        return map;
+    }
+
+    @RequestMapping("/updateDeleteVideo")
+    @ResponseBody
+    public Map updateDeleteVideo(Section section, @RequestParam("oldPath") String oldPath, HttpServletRequest request){
+        Map map = new HashMap();
+        Integer res = sectionsManagerService.updateData(section);
+        map.put("res",res);
+        return map;
+    }
+
     @RequestMapping("/deleteData")
     @ResponseBody
     public Map deleteData(Section section, HttpServletRequest request){
         Map map = new HashMap();
-        Integer res = sectionsManagerService.deleteData(section);
+        Integer res = null;
+        try {
+            res = sectionsManagerService.deleteData(section);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("res",0);
+            return map;
+        }
         if (res == 1){
             logUtil.setLog(request,"删除了小节(ID:"+ section.getSectionId() +")的信息");
         }

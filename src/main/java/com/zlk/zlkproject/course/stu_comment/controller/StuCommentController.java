@@ -185,7 +185,7 @@ public class StuCommentController {
     }
 
 
-    @RequestMapping(value = "/findStuCommentListByUserId")
+   /* @RequestMapping(value = "/findStuCommentListByUserId")
     @ResponseBody
     public Map<String,Object> findStuCommentListByUserId(HttpServletRequest request,StuComment stuComment, Integer page, Integer limit)throws Exception{
         User user=(User) request.getSession().getAttribute("user");
@@ -194,7 +194,7 @@ public class StuCommentController {
         if(stuCommentService.findStuCommentCountByUserId(userId)%limit!=0){
             yeishu++;
         }
-        /*判断前三热门详情*/
+        *//*判断前三热门详情*//*
         List<StuComment> stuCommentList=stuCommentService.findStuCommentListByUserId(stuComment,page,limit,userId);
         if (page==1){
             for(StuComment stuComment1:stuCommentList){
@@ -208,7 +208,7 @@ public class StuCommentController {
         map.put("stuCommentList",stuCommentList);
         map.put("yeishu",yeishu);
         return map;
-    }
+    }*/
 
 
 

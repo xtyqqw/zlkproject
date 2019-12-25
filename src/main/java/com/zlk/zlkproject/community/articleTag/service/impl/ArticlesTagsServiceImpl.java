@@ -25,9 +25,11 @@ public class ArticlesTagsServiceImpl implements ArticlesTagsService {
     private ArticlesTagsRepository articlesTagsRepository;
 
     @Override
+    //Pageable是Spring Data库中定义的一个接口,用于构造分页查询
     public Page<Article> listArticles(Integer tagId, Pageable pageable) {
         return articlesTagsRepository.findAll(new Specification<Article>() {
             @Override
+            //只需在方法的参数中直接定义一个pageable类型的参数,当Spring发现这个参数时,其会自动的根据request的参数来组装该pageable对象
             public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 Join join = root.join("tags");
                 return cb.equal(join.get("tagId"),tagId);

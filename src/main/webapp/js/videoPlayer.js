@@ -6,11 +6,12 @@ $(document).ready(function () {
     var basePath = localObj.protocol+"//"+localObj.host;
     var server_context=basePath;
 
-    layui.use(['element', 'flow','layer'], function () {
+    layui.use(['element', 'flow', 'layer', 'form'], function () {
         var element = layui.element,
             $ = layui.jquery,
             flow = layui.flow,
             layer = layui.layer,
+            form = layui.form,
             sectionId = parseInt($("#sectionId").text());
         var tagIdArray = new Array();
         var editorflag = 0;
@@ -1972,8 +1973,18 @@ $(document).ready(function () {
                 if('false' === state){
                     $(this).prev().text('true');
                     let height = $(this).parent().parent().prev().prev().children().eq(0).height();
-                    if(height > 220){
-                        $(this).parent().parent().prev().prev().css('height','auto');
+                    if(type === 'normal'){
+                        if(height > 150){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else if (type === 'short'){
+                        if(height > 131){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
+                    }else {
+                        if(height > 220){
+                            $(this).parent().parent().prev().prev().css('height','auto');
+                        }
                     }
                 }else {
                     $(this).prev().text('false');
@@ -2280,11 +2291,6 @@ $(document).ready(function () {
         }
     });
 
-    /*//监听成功获取资源长度事件
-    elem_video1.addEventListener('loadedmetadata',function () {
-        elem_totalTime.innerText = format(elem_video1.duration);
-    });*/
-
     //进度条点击
     elem_pgBg.onmousedown = function (ev) {
         move = ev.clientX - $("#pg_bg").offset().left;
@@ -2424,6 +2430,21 @@ $(document).ready(function () {
                         elem_pgBtn.style.left = 0 + 'px';
                         elem_pgBar.style.width = 0 + 'px';
                         elem_currentTime.innerText = '00:00:00';
+
+                        $.ajax({
+                            type : 'POST',
+                            url : basePath + '/exercises/readExercisesAndAnswer',
+                            success : function (res) {
+                                loadExercises(res.res);
+                            }
+                        });
+                        layer.open({
+                            type: 1,
+                            area: ['800px','600px'],
+                            content: $('#exercises'),
+                            offset: '50px',
+                            title: ['课后习题']
+                        })
                     }
                 },1000);
             }else{
@@ -2560,5 +2581,140 @@ $(document).ready(function () {
     /*--------清晰度 end-----------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------播放器 end------------------------------------------------------------------*/
+
+/*-----------------------------------------课后习题 begin--------------------------------------------------------------*/
+
+    function bindEvent() {
+        $(".select_box").click(function () {
+            let truth = $(this).parent().parent().parent().children().eq(0).text() + '';
+            let answer = $(this).next().text() + '';
+            $(this).children().eq(0).removeClass('icon-weixuanzhong');
+            if (answer === truth){
+                $(this).children().eq(0).addClass('icon-chenggong');
+                $(this).children().eq(0).css('animation','a1 0.2s linear');
+            }else {
+                $(this).children().eq(0).addClass('icon-shibai');
+                $(this).children().eq(0).css('color','#A60000');
+                $(this).children().eq(0).css('animation','a1 0.2s linear');
+            }
+            let arr = $(this).parent().siblings(".answer_box");
+            for (let i=0;i<arr.length;i++){
+                $(arr[i]).children().eq(0).empty();
+                $(arr[i]).children().eq(0).append('<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>');
+            }
+            let ajaxData = {
+                'exerciseNum' : parseInt($(this).parent().parent().parent().children().eq(1).children().eq(0).text()),
+                'answer' : $(this).next().text() + ''
+            };
+            $.ajax({
+                type : 'POST',
+                url : basePath + '/exercises/recordAnswer',
+                data : ajaxData,
+                dataType : 'json',
+                success : function (res) {
+                    if (res.retmsg !== undefined){
+                        layer.msg(res.retmsg);
+                    }
+                    if (res.res === 0){
+                        layer.msg('回答记录失败！');
+                    }
+                }
+            });
+        });
+
+        $(".select_box").mouseover(function () {
+            if ($(this).children().hasClass('icon-weixuanzhong')){
+                $(this).children().css('color','#5FB878');
+            }
+        });
+
+        $(".select_box").mouseout(function () {
+            if ($(this).children().hasClass('icon-weixuanzhong')){
+                $(this).children().css('color','black');
+            }
+        });
+    }
+
+    function loadExercises(data) {
+        $("#exercises").empty();
+        let str = '';
+        for (let i=0;i<data.length;i++){
+            let selectA = '<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>\n';
+            let selectB = '<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>\n';
+            let selectC = '<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>\n';
+            let selectD = '<i class="iconfont icon-weixuanzhong" style="font-size: 18px"></i>\n';
+
+            if (data[i].userAnswer === data[i].answerA){
+                if (data[i].userAnswer === data[i].truth){
+                    selectA = '<i class="iconfont icon-chenggong" style="font-size: 18px"></i>\n';
+                }else {
+                    selectA = '<i class="iconfont icon-shibai" style="font-size: 18px"></i>\n';
+                }
+            }else if (data[i].userAnswer === data[i].answerB){
+                if (data[i].userAnswer === data[i].truth){
+                    selectB = '<i class="iconfont icon-chenggong" style="font-size: 18px"></i>\n';
+                }else {
+                    selectB = '<i class="iconfont icon-shibai" style="font-size: 18px"></i>\n';
+                }
+            }else if (data[i].userAnswer === data[i].answerC){
+                if (data[i].userAnswer === data[i].truth){
+                    selectC = '<i class="iconfont icon-chenggong" style="font-size: 18px"></i>\n';
+                }else {
+                    selectC = '<i class="iconfont icon-shibai" style="font-size: 18px"></i>\n';
+                }
+            }else if (data[i].userAnswer === data[i].answerD){
+                if (data[i].userAnswer === data[i].truth){
+                    selectD = '<i class="iconfont icon-chenggong" style="font-size: 18px"></i>\n';
+                }else {
+                    selectD = '<i class="iconfont icon-shibai" style="font-size: 18px"></i>\n';
+                }
+            }
+
+            str='<div class="exercises_box">\n' +
+                    '<span style="display: none">'+ data[i].truth +'</span>\n' +
+                    '<div class="exercise_title">\n' +
+                        '<span id="exercise_num" style="display: none">'+ data[i].exerciseNum +'</span>\n' +
+                        data[i].exerciseNum +'. '+ data[i].title +
+                    '</div>\n' +
+                    '<div class="exercise_answer">\n' +
+                        '<div class="answer_box">\n' +
+                            '<div class="select_box">\n' +
+                                selectA +
+                            '</div>\n' +
+                            '<span style="display: none">'+ data[i].answerA +'</span>\n' +
+                            'A. '+ data[i].answerA +
+                        '</div>\n' +
+                        '<div class="answer_space"></div>\n' +
+                        '<div class="answer_box">\n' +
+                            '<div class="select_box">\n' +
+                                selectB +
+                            '</div>\n' +
+                            '<span style="display: none">'+ data[i].answerB +'</span>\n' +
+                            'B. '+ data[i].answerB +
+                        '</div>\n' +
+                        '<div class="answer_space"></div>\n' +
+                        '<div class="answer_box">\n' +
+                            '<div class="select_box">\n' +
+                                selectC +
+                            '</div>\n' +
+                            '<span style="display: none">'+ data[i].answerC +'</span>\n' +
+                            'C. '+ data[i].answerC +
+                        '</div>\n' +
+                        '<div class="answer_space"></div>\n' +
+                        '<div class="answer_box">\n' +
+                            '<div class="select_box">\n' +
+                                selectD +
+                            '</div>\n' +
+                            '<span style="display: none">'+ data[i].answerD +'</span>\n' +
+                            'D. '+ data[i].answerD +
+                        '</div>\n' +
+                    '</div>\n' +
+                '</div>';
+            $("#exercises").append(str);
+            str = '';
+        }
+        bindEvent();
+    }
+/*-----------------------------------------课后习题 end----------------------------------------------------------------*/
 });
-})
+});
