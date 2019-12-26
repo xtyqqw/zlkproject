@@ -2099,6 +2099,7 @@ $(document).ready(function () {
 
     //重置缓冲条函数
     function resetCache () {
+        clearInterval(delay_cache);
         delay_cache = setInterval(function () {
             clearInterval(interval_cache);
             var clickVideoTime = elem_video1.duration * cache_res/$("#pg_bg").width();
@@ -2391,7 +2392,6 @@ $(document).ready(function () {
                         }
                     });
                 }
-                resetCache();
                 elem_video1.play();
                 elem_video1.volume = parseInt(elem_volumeNum.innerText)/100;
                 elem_totalTime.innerText = format(elem_video1.duration);
@@ -2399,11 +2399,17 @@ $(document).ready(function () {
                 interval1 = setInterval(function () {
                     studyTime ++ ;
                     res = elem_video1.currentTime/elem_video1.duration * $("#pg_bg").width();
-                    elem_pgBtn.style.left = res + 'px';
+                    if (res < $("#pg_bg").width() - 16){
+                        elem_pgBtn.style.left = res + 'px';
+                    }else {
+                        elem_pgBtn.style.left = $("#pg_bg").width() - 16 + 'px';
+                    }
                     elem_pgBar.style.width = res + 'px';
                     elem_currentTime.innerText = format(elem_video1.currentTime);
                     CTrecord = elem_video1.currentTime;
                     if(elem_video1.ended) {
+                        elem_video1.currentTime = 0;
+                        cache_res = 0;
                         resetCache();
                         let data = {'state':'已完成'};
                         $.ajax({
@@ -2557,10 +2563,12 @@ $(document).ready(function () {
         clearInterval(delay_cache);
         clearInterval(interval_cache);
         if('超清'===$(this).text()){
+            $("#speed_btn").text('1.0x');
             getSourceLength = false;
             $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#sv").text();
         }else if('普清'===$(this).text()){
+            $("#speed_btn").text('1.0x');
             getSourceLength = false;
             $("#waitIcon_box").css('display','block');
             document.getElementById("video_src").src = '' + $("#nv").text();
