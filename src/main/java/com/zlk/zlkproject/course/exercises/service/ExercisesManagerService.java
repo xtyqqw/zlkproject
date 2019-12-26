@@ -124,5 +124,12 @@ public interface ExercisesManagerService {
      *@author zhang
      *@time 2019/12/23  16:27
      */
-    List<Integer> selectExerciseNumBySectionId(Integer sectionId);
+    List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
+
+    /**
+     * 根据习题Id查询单个记录
+     * @param eId
+     * @return
+     */
+    Exercises selectExercisesByEId(Integer eId);
 }

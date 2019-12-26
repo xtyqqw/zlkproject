@@ -31,7 +31,7 @@ public class StuNoteServiceImpl implements StuNoteService {
     public List<StuNoteRes> findStuNote(String userId, Integer sectionId, Integer page, Integer size) {
         page = (page -1) * size;
         List<StuNoteRes> list = stuNoteMapper.findStuNote(userId, sectionId, page, size);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for(StuNoteRes s: list) {
             s.setDateString(sdf.format(s.getDate()));
         }
@@ -42,7 +42,7 @@ public class StuNoteServiceImpl implements StuNoteService {
     public List<StuNoteRes> findStuNoteUp(String userId, Integer sectionId, Integer page, Integer size) {
         page = (page -1) * size;
         List<StuNoteRes> list = stuNoteMapper.findStuNoteUp(userId, sectionId, page, size);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for(StuNoteRes s: list) {
             s.setDateString(sdf.format(s.getDate()));
         }
