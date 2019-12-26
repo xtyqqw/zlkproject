@@ -82,10 +82,10 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">请选择方向</div>
                                     <div class="menu">
-                                        <div class="item" data-value="java">JAVA</div>
-                                        <div class="item" data-value="linux">Linux</div>
-                                        <div class="item" data-value="html">HTML</div>
-                                        <div class="item" data-value="mysql">MYSQL</div>
+                                        <div class="item" data-value="JAVA">JAVA</div>
+                                        <div class="item" data-value="Linux">Linux</div>
+                                        <div class="item" data-value="HTML">HTML</div>
+                                        <div class="item" data-value="MYSQL">MYSQL</div>
                                     </div>
                                 </div>
                             </div>

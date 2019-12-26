@@ -25,7 +25,7 @@ public class ArticleAddServiceImpl implements ArticleAddService {
     @Transactional
     @Override
     public Article saveArticle(Article article) {
-        article.setApproval(0);
+        article.setApproval(1);
         article.setCommentCount(0);
         article.setBrowseCount(0);
         article.setCaiCount(0);
