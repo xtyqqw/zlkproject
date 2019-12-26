@@ -24,13 +24,13 @@
 
     <style type="text/css">
         .outer{
-            background-color: #393D49;
+            background-color: #4E5465;
             /*background-image:url(<%=request.getContextPath()%>/img/admin/login_bg.jpg);*/
         }
 
         .top {
             width: 100%;
-            height: 16%;
+            height: 13%;
             background-image:url(<%=request.getContextPath()%>/img/admin/admin_logo.png);
             background-repeat:no-repeat;
             background-position: 30px center;
@@ -38,14 +38,14 @@
 
         .top span {
             position: relative;
-            margin-top: 25px;
+            margin-top: 15px;
             right: 40px;
             float: right;
             color: white;
         }
 
         .main {
-            width: 85%;
+            width: 86%;
             margin: 0;
             padding: 0;
         }
@@ -59,9 +59,9 @@
 
         #logout{
             color: white;
-            position: relative;
-            margin-top: 25px;
-            right: -178px;
+            position: absolute;
+            margin-top: 15px;
+            right: 40px;
             float: right;
         }
 
@@ -76,7 +76,7 @@
             -ms-scrollbar-track-color: transparent;
             width: 100%;
             height: 100%;
-            background-color: #23262E;
+            background-color: #393D49;
         }
 
         /* 设置滚动条的样式 */
@@ -93,27 +93,21 @@
         /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
             border-radius:10px;
-            background:black;
+            background:#393D49;
         }
 
         ::-webkit-scrollbar {
             width: 6px;
-            background-color: #181c32;
+            background-color: #393D49;
         }
 
         ::-webkit-scrollbar-thumb {
             background-color: #5a76cd;
         }
 
-        #tree {
-            padding-left: 40px;
-            padding-top: 28px;
-            font-size: 25px;
-        }
-
         .bottom {
             width: 100%;
-            height: 83%;
+            height: 86.9%;
         }
 
         .bottom div {
@@ -122,7 +116,7 @@
         }
 
         .leftOuter{
-            width: 14.9%;
+            width: 13.9%;
             height: 100%;
         }
     </style>
@@ -153,7 +147,8 @@
             dataType: JSON
         },
         view: {
-            showIcon: false
+            showIcon: false,
+            showLine: false
         },
         data: {
             simpleData: {
