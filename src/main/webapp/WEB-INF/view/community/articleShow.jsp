@@ -70,7 +70,7 @@
     <!--中间内容-->
     <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
         <div class="ui container">
-            <%--顶部--%>
+            <!--顶部-->
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">

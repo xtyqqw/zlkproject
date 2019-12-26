@@ -269,181 +269,191 @@
             float: left;
             margin-top: 25px;
         }*/
+        .main .nomore{
+            font-size: 24px;margin: 50px auto;text-align: center;
+            color: #999999;letter-spacing: 5px;
+        }
     </style>
 </head>
 <body>
 <div class="main">
-    <div class="nav">
-        <ul class="nav_ul">
-            <li class="nav_li1" onclick="diannav1()">全部</li>
-            <li class="nav_li2" onclick="diannav2()">我的提问</li>
-            <li class="nav_li3" onclick="diannav3()">我的回答</li>
-        </ul>
-        <ul class="main_ul">
-            <%--全部--%>
-            <li class="main_li_show">
-                <p class="count">共${allCount}条记录</p><br>
-                <div class="lay_flow1"></div>
-                <div id="allpage" style="float: right;"></div>
-                <%--<c:forEach items="${list}" var="all">
-                    &lt;%&ndash;我的提问&ndash;%&gt;
-                    <c:if test="${all.type==0}">
-                        <div class="question_waik">
-                            <ul class="head_lebel">
-                                <c:forEach items="${all.tagList}" var="tag">
-                                    <li class="lebel_li">${tag.tagName}</li>
-                                </c:forEach>
-                            </ul><br />
-                            <p class="title">
-                                <a href="javascript:;">${all.questionTitle}</a>
-                            </p>
-                            <p class="from">来自：${all.typeName}</p>
-                            <p class="question_num">回答 ${all.responseCount}</p>
-                            <p class="look_num">浏览 ${all.browseCount}</p>
-                            <p class="question_share">分享</p>
-                            <p class="question_date">${all.formatDate}</p>
-                        </div>
-                    </c:if>
-                    <!-- 我的回答 已采纳 -->
-                    <c:if test="${all.type==1&&all.accept==1}">
-                        <div class="reply_waik_adopted">
-                            <p class="reply_date">${all.formatDate}</p>
-                            <p class="adopted">已采纳</p>
-                            <p class="reply_adopted_msg">
-                                <a href="javascript:;">${all.responseContent}</a>
-                            </p>
-                            <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
-                            <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
-                            <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
-                            <p class="reply_adopted_share">分享</p>
-                        </div>
-                    </c:if>
-                    <!-- 我的回答 未采纳 -->
-                    <c:if test="${all.type==1&&all.accept==0}">
-                        <div class="reply_waik">
-                            <p class="reply_date">${all.formatDate}</p>
-                            <p class="reply_msg">
-                                <a href="javascript:;">${all.responseContent}</a>
-                            </p>
-                            <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
-                            <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
-                            <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
-                            <p class="reply_dian">...</p>
-                            <p class="reply_delete" onclick="delNote(${all.responseId})">删除</p>
-                            <p class="reply_edit" onclick="editNote('${all.responseContent}',${all.responseId})">编辑</p>
-                            <p class="reply_share">分享</p>
-                        </div>
-                    </c:if>
-                </c:forEach>--%>
-                <div style="clear: both"></div>
-            </li>
-            <%--我的提问--%>
-            <li class="main_li2">
-                <p class="count">共${qCount}条笔记</p><br>
-                <div class="lay_flow2"></div>
-                <div><div id="quespage" style="float: right;"></div></div>
-                <%--<c:forEach items="${qList}" var="question">
-                    <div class="question_waik">
-                        <ul class="head_lebel">
-                            <c:forEach items="${question.tagList}" var="tag1">
-                                <li class="lebel_li">${tag1.tagName}</li>
-                            </c:forEach>
-                        </ul><br />
-                        <p class="title">
-                             <a href="javascript:;">${question.questionTitle}</a>
-                        </p>
-                        <p class="from">来自：${question.typeName}</p>
-                        <p class="question_num">回答 ${question.responseCount}</p>
-                        <p class="look_num">浏览 ${question.browseCount}</p>
-                        <p class="question_share">分享</p>
-                        <p class="question_date">${question.formatDate}</p>
-                    </div>
-                </c:forEach>--%>
-            </li>
-            <%--我的回答--%>
-            <li class="main_li3">
-                <p class="count">共${rCount}条笔记</p><br>
-                <div class="lay_flow3"></div>
-                <div><div id="replypage" style="float: right;"></div></div>
-                <%--<c:forEach items="${rList}" var="response">
-                    <!-- 我的回答 已采纳 -->
-                    <c:if test="${response.accept==1}">
-                        <div class="reply_waik_adopted">
-                            <p class="reply_date">${response.formatDate}</p>
-                            <p class="adopted">已采纳</p>
-                            <p class="reply_adopted_msg">
-                                 <a href="javascript:;">${response.responseContent}</a>
-                            </p>
-                            <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
-                            <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
-                            <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
-                            <p class="reply_adopted_share">分享</p>
-                        </div>
-                    </c:if>
-                    <!-- 我的回答 未采纳 -->
-                    <c:if test="${response.accept==0}">
-                        <div class="reply_waik">
-                            <p class="reply_date">${response.formatDate}</p>
-                            <p class="reply_msg">
-                                 <a href="javascript:;">${response.responseContent}</a>
-                            </p>
-                            <i class="layui-icon layui-icon-praise"
-                               style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
-                            <i class="layui-icon layui-icon-tread"
-                               style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
-                            <i class="layui-icon layui-icon-dialogue"
-                               style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
-                            <p class="reply_dian">...</p>
-                            <p class="reply_delete" onclick="delNote(${response.responseId})">删除</p>
-                            <p class="reply_edit"
-                               onclick="editNote('${response.responseContent}',${response.responseId})">编辑</p>
-                            <p class="reply_share">分享</p>
-                        </div>
-                    </c:if>
-                </c:forEach>--%>
-            </li>
-            <%--富文本编辑框--%>
-            <div hidden="hidden" id="demo" style="padding: 25px">
-                <form action="<%=request.getContextPath()%>/myfaqq/updateResponse" method="post">
+    <c:if test="${allCount==0}">
+        <p class="nomore">目前没有问答，快去社区提问吧！</p>
+    </c:if>
+    <c:if test="${allCount!=0}">
+        <div class="nav">
+            <ul class="nav_ul">
+                <li class="nav_li1" onclick="diannav1()">全部</li>
+                <li class="nav_li2" onclick="diannav2()">我的提问</li>
+                <li class="nav_li3" onclick="diannav3()">我的回答</li>
+            </ul>
+            <ul class="main_ul">
+                    <%--全部--%>
+                <li class="main_li_show">
+                    <p class="count">共${allCount}条记录</p><br>
+                    <div class="lay_flow1"></div>
+                    <div id="allpage" style="float: right;"></div>
+                        <%--<c:forEach items="${list}" var="all">
+                            &lt;%&ndash;我的提问&ndash;%&gt;
+                            <c:if test="${all.type==0}">
+                                <div class="question_waik">
+                                    <ul class="head_lebel">
+                                        <c:forEach items="${all.tagList}" var="tag">
+                                            <li class="lebel_li">${tag.tagName}</li>
+                                        </c:forEach>
+                                    </ul><br />
+                                    <p class="title">
+                                        <a href="javascript:;">${all.questionTitle}</a>
+                                    </p>
+                                    <p class="from">来自：${all.typeName}</p>
+                                    <p class="question_num">回答 ${all.responseCount}</p>
+                                    <p class="look_num">浏览 ${all.browseCount}</p>
+                                    <p class="question_share">分享</p>
+                                    <p class="question_date">${all.formatDate}</p>
+                                </div>
+                            </c:if>
+                            <!-- 我的回答 已采纳 -->
+                            <c:if test="${all.type==1&&all.accept==1}">
+                                <div class="reply_waik_adopted">
+                                    <p class="reply_date">${all.formatDate}</p>
+                                    <p class="adopted">已采纳</p>
+                                    <p class="reply_adopted_msg">
+                                        <a href="javascript:;">${all.responseContent}</a>
+                                    </p>
+                                    <i class="layui-icon layui-icon-praise"
+                                       style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
+                                    <i class="layui-icon layui-icon-tread"
+                                       style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
+                                    <i class="layui-icon layui-icon-dialogue"
+                                       style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
+                                    <p class="reply_adopted_share">分享</p>
+                                </div>
+                            </c:if>
+                            <!-- 我的回答 未采纳 -->
+                            <c:if test="${all.type==1&&all.accept==0}">
+                                <div class="reply_waik">
+                                    <p class="reply_date">${all.formatDate}</p>
+                                    <p class="reply_msg">
+                                        <a href="javascript:;">${all.responseContent}</a>
+                                    </p>
+                                    <i class="layui-icon layui-icon-praise"
+                                       style="margin-left: 30px;color: #494949;"> ${all.zanCount}</i>
+                                    <i class="layui-icon layui-icon-tread"
+                                       style="margin-left: 20px;color: #494949;"> ${all.caiCount}</i>
+                                    <i class="layui-icon layui-icon-dialogue"
+                                       style="margin-left: 20px;color: #494949;"> ${all.replyCount}</i>
+                                    <p class="reply_dian">...</p>
+                                    <p class="reply_delete" onclick="delNote(${all.responseId})">删除</p>
+                                    <p class="reply_edit" onclick="editNote('${all.responseContent}',${all.responseId})">编辑</p>
+                                    <p class="reply_share">分享</p>
+                                </div>
+                            </c:if>
+                        </c:forEach>--%>
+                    <div style="clear: both"></div>
+                </li>
+                    <%--我的提问--%>
+                <li class="main_li2">
+                    <p class="count">共${qCount}条笔记</p><br>
+                    <div class="lay_flow2"></div>
+                    <div><div id="quespage" style="float: right;"></div></div>
+                        <%--<c:forEach items="${qList}" var="question">
+                            <div class="question_waik">
+                                <ul class="head_lebel">
+                                    <c:forEach items="${question.tagList}" var="tag1">
+                                        <li class="lebel_li">${tag1.tagName}</li>
+                                    </c:forEach>
+                                </ul><br />
+                                <p class="title">
+                                     <a href="javascript:;">${question.questionTitle}</a>
+                                </p>
+                                <p class="from">来自：${question.typeName}</p>
+                                <p class="question_num">回答 ${question.responseCount}</p>
+                                <p class="look_num">浏览 ${question.browseCount}</p>
+                                <p class="question_share">分享</p>
+                                <p class="question_date">${question.formatDate}</p>
+                            </div>
+                        </c:forEach>--%>
+                </li>
+                    <%--我的回答--%>
+                <li class="main_li3">
+                    <p class="count">共${rCount}条笔记</p><br>
+                    <div class="lay_flow3"></div>
+                    <div><div id="replypage" style="float: right;"></div></div>
+                        <%--<c:forEach items="${rList}" var="response">
+                            <!-- 我的回答 已采纳 -->
+                            <c:if test="${response.accept==1}">
+                                <div class="reply_waik_adopted">
+                                    <p class="reply_date">${response.formatDate}</p>
+                                    <p class="adopted">已采纳</p>
+                                    <p class="reply_adopted_msg">
+                                         <a href="javascript:;">${response.responseContent}</a>
+                                    </p>
+                                    <i class="layui-icon layui-icon-praise"
+                                       style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
+                                    <i class="layui-icon layui-icon-tread"
+                                       style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
+                                    <i class="layui-icon layui-icon-dialogue"
+                                       style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
+                                    <p class="reply_adopted_share">分享</p>
+                                </div>
+                            </c:if>
+                            <!-- 我的回答 未采纳 -->
+                            <c:if test="${response.accept==0}">
+                                <div class="reply_waik">
+                                    <p class="reply_date">${response.formatDate}</p>
+                                    <p class="reply_msg">
+                                         <a href="javascript:;">${response.responseContent}</a>
+                                    </p>
+                                    <i class="layui-icon layui-icon-praise"
+                                       style="margin-left: 30px;color: #494949;"> ${response.zanCount}</i>
+                                    <i class="layui-icon layui-icon-tread"
+                                       style="margin-left: 20px;color: #494949;"> ${response.caiCount}</i>
+                                    <i class="layui-icon layui-icon-dialogue"
+                                       style="margin-left: 20px;color: #494949;"> ${response.replyCount}</i>
+                                    <p class="reply_dian">...</p>
+                                    <p class="reply_delete" onclick="delNote(${response.responseId})">删除</p>
+                                    <p class="reply_edit"
+                                       onclick="editNote('${response.responseContent}',${response.responseId})">编辑</p>
+                                    <p class="reply_share">分享</p>
+                                </div>
+                            </c:if>
+                        </c:forEach>--%>
+                </li>
+                    <%--富文本编辑框--%>
+                <div hidden="hidden" id="demo" style="padding: 25px">
+                    <form action="<%=request.getContextPath()%>/myfaqq/updateResponse" method="post">
                     <textarea id="content" name="responseContent" maxlength="120"
                               onkeydown="checknum()" onkeyup="checknum()"></textarea>
-                    <input type="text" id="input_hid" hidden="hidden" name="responseId">
-                    <input type="text" id="in" style="margin-top: 10px;color: #999;border: #fff;width: 200px">
-                    <input type="submit" class="layui-btn" style="float: right;" value="提交">
-                </form>
-                <%--<div>
-                    <textarea id="content" name="responseContent"></textarea>
-                    <input type="text" id="input_hid" style="display: none"  name="responseId">
-                    <input type="submit" class="layui-btn" style="float: right;"
-                           onclick="submit()" value="提交">
+                        <input type="text" id="input_hid" hidden="hidden" name="responseId">
+                        <input type="text" id="in" style="margin-top: 10px;color: #999;border: #fff;width: 200px">
+                        <input type="submit" class="layui-btn" style="float: right;" value="提交">
+                    </form>
+                        <%--<div>
+                            <textarea id="content" name="responseContent"></textarea>
+                            <input type="text" id="input_hid" style="display: none"  name="responseId">
+                            <input type="submit" class="layui-btn" style="float: right;"
+                                   onclick="submit()" value="提交">
+                        </div>
+                        <div class="answer_tan">
+                            <div class="answer_succ1">
+                                <p class="att_succ_ok">√</p>
+                                <p class="att_succ_zi1">答案提交已成功！</p>
+                            </div>
+                            <div class="answer_succ2">
+                                <p class="att_succ_no">X</p>
+                                <p class="att_succ_zi2">提交失败，请重新操作！</p>
+                            </div>
+                            <div class="answer_succ3">
+                                <p class="att_succ_noo">!</p>
+                                <p class="att_succ_zi3">加载超时，请稍后再试！</p>
+                            </div>
+                        </div>--%>
                 </div>
-                <div class="answer_tan">
-                    <div class="answer_succ1">
-                        <p class="att_succ_ok">√</p>
-                        <p class="att_succ_zi1">答案提交已成功！</p>
-                    </div>
-                    <div class="answer_succ2">
-                        <p class="att_succ_no">X</p>
-                        <p class="att_succ_zi2">提交失败，请重新操作！</p>
-                    </div>
-                    <div class="answer_succ3">
-                        <p class="att_succ_noo">!</p>
-                        <p class="att_succ_zi3">加载超时，请稍后再试！</p>
-                    </div>
-                </div>--%>
-            </div>
-        </ul>
-        <%--<div id="demo7" style="float: right;margin: 50px 20px auto"></div>--%>
-    </div>
+            </ul>
+                <%--<div id="demo7" style="float: right;margin: 50px 20px auto"></div>--%>
+        </div>
+    </c:if>
+
 </div>
 <%--富文本文字长度 并没有什么用--%>
 <script type="text/javascript">

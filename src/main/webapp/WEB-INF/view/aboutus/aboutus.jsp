@@ -174,13 +174,13 @@
             $("#coo").css("color","#8C24DD");
             document.title = '合作企业';
         }
-        /*合作企业*/
+        /*讲师合作*/
         if (typeNum === 3){
             $("#aboutus-iframe").attr("src",basePath+"lecturer/lecturers");
             $("#aboutus-iframe").css("height","1724");
             $("#teacher").css("background-color","#fff");
             $("#teacher").css("color","#8C24DD");
-            document.title = '合作企业';
+            document.title = '讲师合作';
         }
         /*帮助中心*/
         if (typeNum === 4){

@@ -59,6 +59,17 @@ public class IndexController {
                 courses2 = (ArrayList<Courses>) courses2s;
                 courses3 = (ArrayList<Courses>) courses3s;
                 courses4 = (ArrayList<Courses>) courses4s;
+            }else {
+                typeList = indexService.findTypeAll();
+                redisUtil.set("typeList",typeList,ExpireTime);
+                courses = indexService.findCoursesByTypeId(typeList.get(0).getTypeId());
+                courses2 = indexService.findCoursesByTypeId(typeList.get(1).getTypeId());
+                courses3 = indexService.findCoursesByTypeId(typeList.get(2).getTypeId());
+                courses4 = indexService.findCoursesByTypeId(typeList.get(3).getTypeId());
+                redisUtil.set("tags",courses,ExpireTime);
+                redisUtil.set("tags2",courses2,ExpireTime);
+                redisUtil.set("tags3",courses3,ExpireTime);
+                redisUtil.set("tags4",courses4,ExpireTime);
             }
         }else {
             typeList = indexService.findTypeAll();
@@ -148,6 +159,12 @@ public class IndexController {
         return mv;
     }
 
+    /**
+     * 首页流加载
+     * @param pagination
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/index/toFlow")
     @ResponseBody
     public Map<String, Object> findCoursesList(Pagination pagination) throws Exception {
@@ -157,6 +174,9 @@ public class IndexController {
             coursesLists = redisUtil.get("coursesList");
             if (coursesLists instanceof ArrayList<?> ) {
                 coursesList = (ArrayList<Courses>) coursesLists;
+            }else {
+                coursesList = indexService.findCoursesList(pagination);
+                redisUtil.set("coursesList",coursesList,ExpireTime);
             }
         }else {
             coursesList = indexService.findCoursesList(pagination);

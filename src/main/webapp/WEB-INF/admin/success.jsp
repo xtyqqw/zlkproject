@@ -45,7 +45,7 @@
         }
 
         .main {
-            width: 87%;
+            width: 86%;
             margin: 0;
             padding: 0;
         }
@@ -116,7 +116,7 @@
         }
 
         .leftOuter{
-            width: 12.9%;
+            width: 13.9%;
             height: 100%;
         }
     </style>
