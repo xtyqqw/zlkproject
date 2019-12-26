@@ -103,4 +103,9 @@ public class SectionServiceImpl implements SectionService {
     public String findNameBySectionId(Integer sectionId) {
         return sectionMapper.findNameBySectionId(sectionId);
     }
+
+    @Override
+    public List<Section> findAllIdBySectionId(Integer sectionId) {
+        return sectionMapper.findAllIdBySectionId(sectionId);
+    }
 }

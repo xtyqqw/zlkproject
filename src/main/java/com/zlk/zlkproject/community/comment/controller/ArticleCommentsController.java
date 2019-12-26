@@ -1,7 +1,6 @@
 package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
-import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,9 @@ public class ArticleCommentsController {
     @ResponseBody
     public Map submit(ArticleComment articleComment, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
+        HashMap map = new HashMap<>();
         String userId = "" + user.getUserId();
         String articleId = (String) request.getSession().getAttribute("articleId");
-
-        HashMap map = new HashMap<>();
         articleComment.setArticleId(articleId);
         articleComment.setUserId(userId);
         articleComment.setPId(0);
@@ -59,7 +57,6 @@ public class ArticleCommentsController {
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
         String articleId = (String) request.getSession().getAttribute("articleId");
-
         HashMap map = new HashMap<>();
         articleComment.setArticleId(articleId);
         articleComment.setUserId(userId);
@@ -100,12 +97,12 @@ public class ArticleCommentsController {
                         @RequestParam("type") String type, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         userId = "" + user.getUserId();
-
         Map map = new HashMap();
         Integer res = articleCommentsService.updateZC(userId, articleCommentId, type);
         Integer error = 1;
-        if (res == 1)
+        if (res == 1) {
             error = 0;
+        }
         map.put("error",error);
         return map;
     }
@@ -117,8 +114,9 @@ public class ArticleCommentsController {
         Map map = new HashMap();
         Integer res = articleCommentsService.updateArtCmtInform(articleCommentId, inform);
         Integer error = 1;
-        if (res == 1)
+        if (res == 1) {
             error = 0;
+        }
         map.put("error",error);
         return map;
     }

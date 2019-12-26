@@ -23,6 +23,9 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
 
     @Override
     public Integer addArtCmt(ArticleComment articleComment) {
+        articleComment.setZan(0);
+        articleComment.setCai(0);
+        articleComment.setInform("false");
         return articleCommentsMapper.addArtCmt(articleComment);
     }
 

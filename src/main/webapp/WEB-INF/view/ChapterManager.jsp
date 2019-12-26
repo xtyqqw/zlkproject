@@ -11,6 +11,7 @@
         #select_box{
             width: 50%;
             margin: 20px 0;
+            word-wrap: break-word;
         }
     </style>
 </head>
@@ -28,7 +29,7 @@
                 <label class="layui-form-label">课程名称:</label>
                 <div class="layui-input-block" lay-filter="coursesNameDiv">
                     <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search>
-                        <option value="">请选择课程</option>
+                        <option value="">请选择一个课程</option>
                         <c:forEach items="${coursesList}" var="course">
                             <option value="${course.coursesId}">(ID:${course.coursesId}) ${course.coursesName}</option>
                         </c:forEach>
