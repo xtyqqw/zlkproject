@@ -67,21 +67,23 @@ public class DurationServiceImpl implements DurationService {
     @Override
     public Integer findWanCheng(String userId){return durationMapper.findWanCheng(userId);}
     /**
-     * 查询视频总数
+     * 查询用户观看视频时间
      * @return
      */
     @Override
     public Integer selectAllTime(String userId){
+
         return durationMapper.selectAllTime(userId);
     }
 
     /**
-     * 查询用户已完成哪些视频
+     * 查询用户参加项目视频时间总时间
      * @param userId
      * @return
      */
     @Override
     public Integer selectSection(String userId){
+
         return durationMapper.selectSection(userId);
     }
 
