@@ -229,8 +229,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[50]',
-                            prompt: '请注意文章标题最大字数不能超过50'
+                            type: 'maxLength[30]',
+                            prompt: '请注意文章标题最大字数不能超过30'
                         }]
                     },
                     articleContent: {

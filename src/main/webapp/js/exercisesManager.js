@@ -34,6 +34,15 @@ window.onload = function () {
         table.on('toolbar(exercises)', function(obj){
             var event = obj.event;
             if (event==="insert"){
+                $("#sectionDiv").empty();
+                $("#sectionDiv").append('<label class="layui-form-label">小节名称:</label>\n' +
+                    '                    <div class="layui-input-block layui-form" lay-filter="sectionNameInsertDiv">\n' +
+                    '                        <select class="layui-select" name="sectionId" id="sectionNameInsertSelect" lay-filter="sectionNameSelect" lay-search>\n' +
+                    '                            <option value="">请选择一个小节(请先选择一个章节)</option>\n' +
+                    '\n' +
+                    '                        </select>\n' +
+                    '                    </div>');
+                form.render('select');
                 layer.open({
                     title: "新增",
                     type: 1,
