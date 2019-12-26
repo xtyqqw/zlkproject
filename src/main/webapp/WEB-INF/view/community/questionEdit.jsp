@@ -11,7 +11,8 @@
 <head>
     <title>提问编辑页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg" type="image/x-icon"/>
+    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
+          type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
@@ -72,25 +73,35 @@
                                 <div class="item" data-value="1">已解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="标题：简短描述标题,以问号结尾,最多只能输入50字"
-                               maxlength="50">
+                        <input type="text" name="questionTitle" placeholder="标题：简短描述标题,以问号结尾,最多只能输入30字"
+                               maxlength="30">
                     </div>
                 </div>
 
                 <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
-                        <textarea name="questionContent" style="display: none"></textarea>
+                        <textarea class="editormd-markdown-textarea" name="questionContent"
+                                  style="display: none"></textarea>
+                        <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
+                        <textarea class="editormd-html-textarea" name="questionContentHtml"
+                                  style="display: none"></textarea>
                     </div>
                 </div>
 
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic violet label">问题摘要</label>
+                        <input type="text" name="questionSynopsis" placeholder="请输入一些问题摘要,这样能方便他人快捷的了解你的问题,注意字数不要过多">
+                    </div>
+                </div>
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact violet basic label" placeholder="">分类</label>
+                            <label class="ui compact violet basic label" placeholder="">问题类别</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">请选择问答分类</div>
+                                <div class="default text">请选择问答类别</div>
                                 <div class="menu">
                                     <div class="item" data-value="JAVA">JAVA</div>
                                     <div class="item" data-value="Linux">Linux</div>
@@ -102,7 +113,7 @@
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact violet basic label">标签</label>
+                            <label class="ui compact violet basic label">问题标签</label>
                             <div class="ui fluid selection multiple search dropdown">
                                 <input type="hidden" name="tagName">
                                 <i class="dropdown icon"></i>
@@ -115,11 +126,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ui error message"></div>
-                    <div class="ui right aligned container">
-                        <button type="submit" id="publish-btn" onclick="publish()" class="ui violet button">发布问题
-                        </button>
-                    </div>
+                </div>
+                <div class="ui right aligned container">
+                    <button type="submit" id="publish-btn" onclick="publish()" class="ui violet button">发布问题
+                    </button>
                 </div>
             </form>
         </div>
@@ -131,6 +141,7 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script type="text/javascript">
+
     /*MarkDown组件*/
     var testEditor;
     $(function () {
@@ -148,7 +159,8 @@
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL: "/question/uploadMarkdownImg",
-
+            //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
+            saveHTMLToTextarea: true
         });
     });
 
@@ -183,11 +195,18 @@
                         prompt: '问题内容不能为空哟'
                     }]
                 },
+                questionSynopsis: {
+                    identifier: 'questionSynopsis',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '简要内容不能为空哟'
+                    }]
+                },
                 typeName: {
                     identifier: 'typeName',
                     rules: [{
                         type: 'empty',
-                        prompt: '选择一个问题分类吧'
+                        prompt: '选择一个问题类别吧'
                     }]
                 },
                 tagName: {

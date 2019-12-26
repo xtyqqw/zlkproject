@@ -4,22 +4,6 @@ server:
 spring:
   messages:
     basename: message/msg
-
-  jpa:
-    #是否显示sql
-    show-sql: true
-    #指定数据库类型
-    database: mysql
-    #方言
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #自动建表方式
-    hibernate:
-      ddl-auto: none
-    #格式化sql
-    properties:
-      hibernate:
-        format-sql: true
-
   datasource:
     druid:
       # 连接池的配置信息
@@ -62,13 +46,12 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-    username: user1
-    password: liutonghui
-    url: jdbc:mysql://193.112.82.60/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  #  thymeleaf:192.168.124.17
+      username: user1
+      password: liutonghui
+      url: jdbc:mysql://193.112.82.60/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
-  #    mode: HTML5
   #    #编码 可不用配置
   #    encoding: UTF-8
   #    #开发配置为false,避免修改模板还要重启服务器
@@ -79,7 +62,6 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
-
   mvc:
     view:
       prefix: /WEB-INF/
@@ -98,7 +80,6 @@ spring:
       max-request-size: 2048MB
   #redis配置
   redis:
-
     host: 193.112.82.60
     port: 6379
     password: liutonghui89

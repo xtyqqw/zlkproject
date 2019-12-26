@@ -60,47 +60,22 @@
                     <input type="text" name="title" placeholder="简明扼要的描述你的标题" value="${questions.questionTitle}">
                 </div>
             </div>
-
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui basic teal label">问题摘要</label>
+                    <input type="text" name="questionSynopsis" placeholder="请输入一些问题摘要,这样能方便他人快捷的了解你的问题,注意字数不要过多"
+                           value="${questions.questionSynopsis}">
+                </div>
+            </div>
             <div class="required field">
                 <div id="md-content" style="z-index: 1 !important;">
-                        <textarea class="editormd-markdown-textarea" name="questionContent"
-                                  style="display: none">${questions.questionContent}</textarea>
+                    <textarea class="editormd-markdown-textarea" name="questionContent"
+                              style="display: none">${questions.questionContent}</textarea>
+                    <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
+                    <textarea class="editormd-html-textarea" name="questionContentHtml"
+                              style="display: none">${questions.questionContentHtml}</textarea>
                 </div>
             </div>
-
-            <div class="two fields">
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">浏览次数</label>
-                        <input type="text" name="browseCount" placeholder="请输入浏览数" value="${questions.browseCount}">
-                    </div>
-                </div>
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">发布时间</label>
-                        <input type="text" name="createTime" value="${questions.createTime}" id="createTime"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </div>
-
-            <div class="two fields">
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">回答数量</label>
-                        <input type="text" name="responseCount" placeholder="请输入回答数"
-                               value="${questions.responseCount}">
-                    </div>
-                </div>
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">更新时间</label>
-                        <input type="text" name="updateTime" value="${questions.updateTime}" id="updateTime"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </div>
-
             <div class="two fields">
                 <div class="required field">
                     <div class="ui left labeled action input">
@@ -117,27 +92,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="required field">
-                    <div class="ui left labeled action input">
-                        <label class="ui compact basic teal label">问题分类</label>
-                        <div class="ui fluid selection dropdown">
-                            <input type="hidden" name="typeName" value="${questions.typeName}">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">请选择问题分类</div>
-                            <div class="menu">
-                                <div class="item" data-value="JAVA">JAVA</div>
-                                <div class="item" data-value="Linux">Linux</div>
-                                <div class="item" data-value="HTML">HTML</div>
-                                <div class="item" data-value="MYSQL">MYSQL</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="two fields">
-
                 <div class="required field">
                     <div class="ui left labeled action input">
                         <label class="ui compact basic teal label">问题置顶</label>
@@ -148,6 +102,24 @@
                             <div class="menu">
                                 <div class="item" data-value="0">置顶</div>
                                 <div class="item" data-value="1">不置顶</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact basic teal label">问题类别</label>
+                        <div class="ui fluid selection dropdown">
+                            <input type="hidden" name="typeName" value="${questions.typeName}">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">请选择问题类别</div>
+                            <div class="menu">
+                                <div class="item" data-value="JAVA">JAVA</div>
+                                <div class="item" data-value="Linux">Linux</div>
+                                <div class="item" data-value="HTML">HTML</div>
+                                <div class="item" data-value="MYSQL">MYSQL</div>
                             </div>
                         </div>
                     </div>
@@ -168,27 +140,25 @@
                     </div>
                 </div>
             </div>
-
             <div class="two fields">
-
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic teal label">问题赞数</label>
-                        <input type="text" name="zanCount" placeholder="请输入赞数" value="${questions.zanCount}">
+                        <label class="ui basic teal label">发布时间</label>
+                        <input type="text" name="createTime" value="${questions.createTime}" id="createTime"
+                               autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic teal label">问题踩数</label>
-                        <input type="text" name="caiCount" placeholder="请输入踩数" value="${questions.caiCount}">
+                        <label class="ui basic teal label">更新时间</label>
+                        <input type="text" name="updateTime" value="${questions.updateTime}" id="updateTime"
+                               autocomplete="off" class="layui-input">
                     </div>
                 </div>
-
             </div>
             <div class="ui right aligned container">
                 <button type="submit" onclick="publish()" class="ui button teal">提交</button>
             </div>
-
         </form>
     </div>
 </div>
@@ -304,7 +274,7 @@
             },
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: "/uploadMarkdown",
+            imageUploadURL: "/question/uploadMarkdownImg",
             //这个配置是为了能够提交表单,使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中,方便post提交表单
             saveHTMLToTextarea: true
         });
