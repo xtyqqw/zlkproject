@@ -50,7 +50,7 @@ spring:
 
     username: root
     password:
-    url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:/div?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
@@ -100,10 +100,10 @@ fdfs:
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: 
+  tracker-list:
   #通过nginx 访问地址
-  resHost: 
-  storagePort:
+  resHost:
+  storagePort: 8888/
   #缩略图配置
   thumb-image:
     height: 150
