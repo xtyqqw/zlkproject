@@ -25,7 +25,7 @@ public class DurationServiceImpl implements DurationService {
     @Override
     public User selectDuration(String userId){
         User user=durationMapper.selectDuration(userId);
-        user.setUserDateTime(Arith.toHour(user.getUserDateTime()));
+        /*user.setUserDateTime(Arith.toHour(user.getUserDateTime()));*/
         return user;
 
     }
@@ -50,22 +50,29 @@ public class DurationServiceImpl implements DurationService {
     }
 
     /**
-     * 技能水平
+     * 查询用户参加项目中所有的视频
      * @param userId
      * @return
      */
     @Override
-    public Integer findCourses(String userId){
-        return durationMapper.findCourses(userId);
+    public Integer findSectionAll(String userId){
+        return durationMapper.findSectionAll(userId);
     }
 
+    /**
+     * 查询用户已完成视频
+     * @param userId
+     * @return
+     */
+    @Override
+    public Integer findWanCheng(String userId){return durationMapper.findWanCheng(userId);}
     /**
      * 查询视频总数
      * @return
      */
     @Override
-    public Integer selectSections(){
-        return durationMapper.selectSections();
+    public Integer selectAllTime(String userId){
+        return durationMapper.selectAllTime(userId);
     }
 
     /**
