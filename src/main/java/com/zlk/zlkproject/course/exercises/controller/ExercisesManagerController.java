@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,14 @@ public class ExercisesManagerController {
     @RequestMapping(value = "/deleteExercises",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> deleteExercises(HttpServletRequest request, Integer eId) throws Exception{
+        Exercises exercises = exercisesManagerService.selectExercisesByEId(eId);
+        List<Exercises> exercisesList = exercisesManagerService.selectExerciseNumBySectionId(exercises.getSectionId());
+        for (Exercises exe:exercisesList){
+            if(exercises.getExerciseNum()<exe.getExerciseNum()){
+                exe.setExerciseNum(exe.getExerciseNum()-1);
+                exercisesManagerService.updateExercisesByEId(exe);
+            }
+        }
         Integer integer = exercisesManagerService.deleteByEId(eId);
         String message = "";
         if (integer >0){
@@ -265,7 +274,11 @@ public class ExercisesManagerController {
     @RequestMapping(value = "/selectExerciseNumBySectionId",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> selectExerciseNumBySectionId(@RequestParam Integer sectionId) throws Exception{
-        List<Integer> exerciseNumList = exercisesManagerService.selectExerciseNumBySectionId(sectionId);
+        List<Exercises> exercisesList = exercisesManagerService.selectExerciseNumBySectionId(sectionId);
+        List<Integer> exerciseNumList = new ArrayList<>();
+        for (Exercises exercises:exercisesList ){
+            exerciseNumList.add(exercises.getExerciseNum());
+        }
         Integer count = exercisesManagerService.selectCountBySectionId(sectionId);
         Map<String,Object> map = new HashMap<>();
         map.put("exerciseNumList",exerciseNumList);

@@ -80,7 +80,12 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
     }
 
     @Override
-    public List<Integer> selectExerciseNumBySectionId(Integer sectionId) {
+    public List<Exercises> selectExerciseNumBySectionId(Integer sectionId) {
         return exercisesManagerMapper.selectExerciseNumBySectionId(sectionId);
+    }
+
+    @Override
+    public Exercises selectExercisesByEId(Integer eId) {
+        return exercisesManagerMapper.selectExercisesByEId(eId);
     }
 }
