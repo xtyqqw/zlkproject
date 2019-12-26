@@ -30,7 +30,7 @@
                 <div class="layui-form-item" id="coursesDiv">
                     <label class="layui-form-label">课程名称:</label>
                     <div class="layui-input-block" lay-filter="coursesNameInsertDiv">
-                        <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search disabled="disabled">
+                        <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search >
                             <option value="">请选择一个课程</option>
                             <c:forEach items="${coursesList}" var="course">
                                 <option value="${course.coursesId}">(ID:${course.coursesId}) ${course.coursesName}</option>
@@ -41,7 +41,7 @@
                 <div class="layui-form-item" id="chapterDiv">
                     <label class="layui-form-label">章节名称:</label>
                     <div class="layui-input-block layui-form" lay-filter="chapterNameInsertDiv">
-                        <select class="layui-select" name="chapterId" id="chapterNameInsertSelect" lay-filter="chapterNameSelect" lay-search disabled="disabled">
+                        <select class="layui-select" name="chapterId" id="chapterNameInsertSelect" lay-filter="chapterNameSelect" lay-search >
                             <option value="">请选择一个章节(请先选择一个课程)</option>
 
                         </select>
