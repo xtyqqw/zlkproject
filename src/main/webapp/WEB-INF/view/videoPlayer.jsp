@@ -82,9 +82,9 @@
                                     <div id="mid" class="time">/</div>
                                     <div id="total_time" class="time">--:--:--</div>
                                 </div>
-                                <div class="div_btn float_right" style="padding: 2px 0 0 0;">
-                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
-                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+                                <div class="div_btn float_right" style="padding: 2px 0 0 0;width: 30px">
+                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="font-size: 25px;color: white;display: block"></i>
+                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="font-size: 25px;color: white;display: none"></i>
                                 </div>
                                 <div id="div_sharpness" class="div_btn float_right">
                                     <span id="nv" style="display: none">${addr1}</span>

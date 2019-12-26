@@ -2,6 +2,7 @@ package com.zlk.zlkproject.user.until;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundListOperations;
+import org.springframework.data.redis.core.RedisConnectionUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -89,7 +90,10 @@ public class RedisUtil {
      * @return 值
      */
     public Object get(String key){
-        return key==null?null:redisTemplate.opsForValue().get(key);
+        Object o = key==null?null:redisTemplate.opsForValue().get(key);
+        RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());
+        return o;
+
     }
 
     /**
@@ -105,6 +109,8 @@ public class RedisUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally {
+            RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());
         }
     }
 

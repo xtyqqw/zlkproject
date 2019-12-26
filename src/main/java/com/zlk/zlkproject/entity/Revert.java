@@ -26,7 +26,7 @@ public class Revert {
     /*回复内容*/
     private String revertContent;
     /*回复时间*/
-    private Date createTime;
+    private Date date;
     /**回复时间的字符串*/
     private String dateString;
     /*赞*/

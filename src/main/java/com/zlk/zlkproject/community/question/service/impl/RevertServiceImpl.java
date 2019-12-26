@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import static org.springframework.data.redis.core.query.SortQueryBuilder.sort;
-
 /**
  * @author gby
  * @ClassName RevertServiceImpl
@@ -32,9 +30,9 @@ public class RevertServiceImpl implements RevertService {
         List<Revert> list = revertMapper.findRevert(questionId, page, size);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         for (Revert a : list) {
-            a.setDateString(sdf.format(a.getCreateTime()));
+            a.setDateString(sdf.format(a.getDate()));
             for (Revert aa : a.getRevertList()) {
-                aa.setDateString(sdf.format(aa.getCreateTime()));
+                aa.setDateString(sdf.format(aa.getDate()));
             }
         }
         return list;

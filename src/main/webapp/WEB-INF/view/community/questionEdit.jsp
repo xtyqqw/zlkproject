@@ -203,7 +203,7 @@
                 }
             },
             onSuccess: function () {
-                alert("发布成功");
+                alert("发布成功,请耐心等待审核");
             },
         });
     }

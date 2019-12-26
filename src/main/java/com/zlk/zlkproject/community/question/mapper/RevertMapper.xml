@@ -8,7 +8,7 @@
         <result column="rid" property="rid" javaType="java.lang.Integer"/>
         <result column="revert_person" property="revertPerson" javaType="java.lang.String"/>
         <result column="revert_content" property="revertContent" javaType="java.lang.String"/>
-        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="date" property="date" javaType="java.util.Date"/>
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
         <result column="cai_ount" property="caiCount" javaType="java.lang.Integer"/>
         <result column="report" property="report" javaType="java.lang.Integer"/>
@@ -22,7 +22,7 @@
             <result column="rid" property="rid" javaType="java.lang.Integer"/>
             <result column="revert_person" property="revertPerson" javaType="java.lang.String"/>
             <result column="revert_content" property="revertContent" javaType="java.lang.String"/>
-            <result column="create_time" property="createTime" javaType="java.util.Date"/>
+            <result column="date" property="date" javaType="java.util.Date"/>
             <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
             <result column="cai_ount" property="caiCount" javaType="java.lang.Integer"/>
             <result column="report" property="report" javaType="java.lang.Integer"/>
@@ -43,18 +43,18 @@
         </collection>
     </resultMap>
     <insert id="addRevert" parameterType="com.zlk.zlkproject.entity.Revert">
-        insert into revert (rid,revert_person,revert_content,create_time,question_id,user_id)
-        VALUES (#{rid},#{revertPerson},#{revertContent},#{createTime},#{questionId},#{userId})
+        insert into revert (rid,revert_person,revert_content,date,question_id,user_id)
+        VALUES (#{rid},#{revertPerson},#{revertContent},#{date},#{questionId},#{userId})
     </insert>
     <select id="findRevert" resultMap="revertEntityMap">
         SELECT a.*,b.revert_id revert_id1,b.rid rid1,b.question_id question_id1,b.user_id user_id1,b.revert_person revert_person1
-               ,b.revert_content revert_content1,b.zan_count zan_count1,b.cai_count cai_count1,b.report report1,b.create_time create_time1,b.user_realname user_realname1
+               ,b.revert_content revert_content1,b.zan_count zan_count1,b.cai_count cai_count1,b.report report1,b.date date1,b.user_realname user_realname1
                ,b.user_img user_img1,b.user_id3,b.cai_zan3,c.user_id user_id2,c.cai_zan cai_zan2
         FROM (
                 SELECT r.*,s.user_realname,s.user_img
 		        FROM revert r
 				     ,(SELECT user_id,user_realname,user_img FROM user) s
-			    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid = 0 ORDER BY create_time DESC
+			    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid = 0 ORDER BY date DESC
 			          LIMIT #{page}, #{size}
 			 ) a
         LEFT JOIN (
@@ -63,7 +63,7 @@
 				            SELECT r.*,s.user_realname,s.user_img
 						    FROM revert r
 							     ,(SELECT user_id,user_realname,user_img FROM user) s
-						    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid != 0 ORDER BY create_time
+						    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid != 0 ORDER BY date
 						 ) q
 					LEFT JOIN question_revert_cz qrc
 					ON q.revert_id = qrc.revert_id

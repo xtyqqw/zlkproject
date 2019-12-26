@@ -2,20 +2,17 @@ package com.zlk.zlkproject.user.index.controller;
 
 import com.zlk.zlkproject.entity.*;
 import com.zlk.zlkproject.user.entity.Signin;
-import com.zlk.zlkproject.user.index.config.RedisConfig;
 import com.zlk.zlkproject.user.index.service.IndexService;
 import com.zlk.zlkproject.user.personal.service.DurationService;
 import com.zlk.zlkproject.user.until.Arith;
-import com.zlk.zlkproject.user.until.ObjectConvertUtils;
 import com.zlk.zlkproject.user.until.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -31,30 +28,54 @@ public class IndexController {
     private DurationService durationService;
     @Autowired
     private IndexService indexService;
-    /**
-     * redis过期时间
-     */
     private static int ExpireTime = 3600;
     @Resource
     private RedisUtil redisUtil;
-    @Autowired
-    private RedisConfig redisConfig;
+
     @RequestMapping("/")
     public ModelAndView toIndex(HttpServletRequest httpServletRequest) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<User> userList = indexService.findUsersByAllTime();
         for(User user:userList){
-            user.setUserAllTimeDou(Arith.toHour(user.getUserAllTime()));
+            user.setUserAllTimeDou(Arith.toHourTwo(user.getUserAllTime()));
         }
-        List<Type> typeList = indexService.findTypeAll();
+        List<Type> typeList = null;
+        List<Courses> courses = null;
+        Object tList,coursess,courses2s,courses3s,courses4s;
+        List<Courses> courses2 = null;
+        List<Courses> courses3 = null;
+        List<Courses> courses4 = null;
+        if (redisUtil.get("typeList")!=null && redisUtil.get("tags")!=null){
+            tList = redisUtil.get("typeList");
+            coursess = redisUtil.get("tags");
+            courses2s = redisUtil.get("tags2");
+            courses3s = redisUtil.get("tags3");
+            courses4s = redisUtil.get("tags4");
+            if (tList instanceof ArrayList<?> && coursess instanceof ArrayList<?>
+                    && courses2s instanceof ArrayList<?> && courses3s instanceof ArrayList<?>
+                    && courses4s instanceof ArrayList<?>) {
+                typeList = (ArrayList<Type>) tList;
+                courses = (ArrayList<Courses>) coursess;
+                courses2 = (ArrayList<Courses>) courses2s;
+                courses3 = (ArrayList<Courses>) courses3s;
+                courses4 = (ArrayList<Courses>) courses4s;
+            }
+        }else {
+            typeList = indexService.findTypeAll();
+            redisUtil.set("typeList",typeList,ExpireTime);
+            courses = indexService.findCoursesByTypeId(typeList.get(0).getTypeId());
+            courses2 = indexService.findCoursesByTypeId(typeList.get(1).getTypeId());
+            courses3 = indexService.findCoursesByTypeId(typeList.get(2).getTypeId());
+            courses4 = indexService.findCoursesByTypeId(typeList.get(3).getTypeId());
+            redisUtil.set("tags",courses,ExpireTime);
+            redisUtil.set("tags2",courses2,ExpireTime);
+            redisUtil.set("tags3",courses3,ExpireTime);
+            redisUtil.set("tags4",courses4,ExpireTime);
+        }
         List<Tag> tags = indexService.findTagsById(typeList.get(0).getTypeId());
         List<Tag> tags2 = indexService.findTagsById(typeList.get(1).getTypeId());
         List<Tag> tags3 = indexService.findTagsById(typeList.get(2).getTypeId());
         List<Tag> tags4 = indexService.findTagsById(typeList.get(3).getTypeId());
-        List<Courses> courses = indexService.findCoursesByTypeId(typeList.get(0).getTypeId());
-        List<Courses> courses2 = indexService.findCoursesByTypeId(typeList.get(1).getTypeId());
-        List<Courses> courses3 = indexService.findCoursesByTypeId(typeList.get(2).getTypeId());
-        List<Courses> courses4 = indexService.findCoursesByTypeId(typeList.get(3).getTypeId());
         User user2 = (User) httpServletRequest.getSession().getAttribute("user");
         if (user2 != null){
             String userId = user2.getUserId();
@@ -90,11 +111,11 @@ public class IndexController {
             Integer rank = indexService.findUserRankById(userId);
             Integer count = indexService.findUserCount();
             Integer rankBai = Arith.divide(rank, count);
-            Double userDtime = Arith.toHour(user.getUserDateTime());
+            Double userDtime = Arith.toHourTwo(user.getUserDateTime());
             user.setUserDateTimeDou(userDtime);
             Double userDtimes = (double) Math.round(userDtime*100)/100;
             long xueXi = (long) Math.ceil(userDtimes / 10);
-            Double userAtime = Arith.toHour(user.getUserAllTime());
+            Double userAtime = Arith.toHourTwo(user.getUserAllTime());
             user.setUserAllTimeDou(userAtime);
             Integer ful=durationService.findWanCheng(userId);
             Integer sum=durationService.findSectionAll(userId);
@@ -114,12 +135,6 @@ public class IndexController {
             mv.addObject("today", today);
             mv.addObject("signNum", signNum);
         }
-//        if (redisUtil.hasKey("typeList")){
-//           List<Object> typeL = redisUtil.lGet("typeList",0,-1);
-//        }else{
-//
-//        }
-//        redisUtil.set("typeList",typeList,ExpireTime);
         mv.addObject("typeList", typeList);
         mv.addObject("courses", courses);
         mv.addObject("courses2", courses2);
@@ -136,7 +151,17 @@ public class IndexController {
     @RequestMapping("/index/toFlow")
     @ResponseBody
     public Map<String, Object> findCoursesList(Pagination pagination) throws Exception {
-        List<Courses> coursesList = indexService.findCoursesList(pagination);
+        List<Courses> coursesList = null;
+        Object coursesLists;
+        if (redisUtil.get("coursesList")!=null){
+            coursesLists = redisUtil.get("coursesList");
+            if (coursesLists instanceof ArrayList<?> ) {
+                coursesList = (ArrayList<Courses>) coursesLists;
+            }
+        }else {
+            coursesList = indexService.findCoursesList(pagination);
+            redisUtil.set("coursesList",coursesList,ExpireTime);
+        }
         Map<String, Object> map = new HashMap<>(16);
         map.put("coursesList", coursesList);
         return map;

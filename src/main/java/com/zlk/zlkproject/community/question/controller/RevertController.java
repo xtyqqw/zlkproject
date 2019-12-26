@@ -42,7 +42,7 @@ public class RevertController {
         revert.setUserId(userId);
         revert.setQuestionId(questionId);
         revert.setRid(0);
-        revert.setCreateTime(new Date());
+        revert.setDate(new Date());
         Integer reverts = revertService.addRevert(revert);
         String retmsg;
         if(reverts == 1){
@@ -63,7 +63,7 @@ public class RevertController {
         HashMap map = new HashMap<>();
         Revert.setQuestionId(questionId);
         Revert.setUserId(userId);
-        Revert.setCreateTime(new Date());
+        Revert.setDate(new Date());
         Integer res = revertService.addRevert(Revert);
         String retmsg;
         if (res == 1) {
