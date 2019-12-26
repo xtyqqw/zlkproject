@@ -83,9 +83,9 @@ spring:
       max-request-size: 2048MB
   #redis配置
   redis:
-    host: 
+    host:
     port: 6379
-    password: 
+    password:
     timeout: 3000
     jedis:
       pool:
