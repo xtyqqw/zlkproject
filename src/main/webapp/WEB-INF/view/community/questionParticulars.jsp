@@ -109,9 +109,6 @@
                 <c:if test="${question.solve == 1}">
                     <div class="ui orange basic label">已解决</div>
                 </c:if>
-                <c:if test="${question.solve == 2}">
-                    <div class="ui orange basic label">未解决</div>
-                </c:if>
             </div>
             <h2 class="ui center aligned header" style="box-shadow: none;">
                 ${question.questionTitle}
@@ -130,39 +127,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui bottom attached segment">
-            <!--留言区域列表-->
-            <h3 class="ui dividing header" style="box-shadow: none;height: 1.5vw;border-bottom: none;">评论区</h3>
-            <div id="comment-container" class="ui teal segment">
-                <div id="art-cmt-textBox" class="field violet"
-                     style="border: 1px solid #00B5AD; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                    <div id="div_revert_toolBar" class="toolbar"></div>
-                    <div id="div_revert_text" class="text" style="height: 159px; border: 1px solid #00B5AD;"></div>
-                </div>
-                <div id="art-cmt-btnBox" class="fields">
-                    <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                        <button id="revert_btn" type="button" style="float: right"
-                                class="ui button m-mobile-wide violet">
-                            <i class="edit icon"></i>评论
-                        </button>
-                    </div>
-                    <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                        <button id="look_artCmt" type="button" style="float: right"
-                                class="ui button m-mobile-wide violet">
-                            <i class="eye icon"></i>查看
-                        </button>
-                    </div>
-                </div>
-                <div class="ui divider" style="margin: 3em;"></div>
-                <div class="ui threaded comments" style="margin-left: 3em;">
-                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid #00B5AD !important;">
-                        <div id="ART_contentBox">
-                            <ul id="art_cmt_stream"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

@@ -12,7 +12,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/zTreeStyle/zTreeStyle1.css" type="text/css">
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.ztree.excheck.js"></script>

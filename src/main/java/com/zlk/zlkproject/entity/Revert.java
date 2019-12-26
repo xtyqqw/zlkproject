@@ -6,6 +6,7 @@ import lombok.ToString;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * @author gby
  * @ClassName Reply
@@ -44,10 +45,11 @@ public class Revert {
     /**用户头像*/
     private String userImg;
     /**子评论集合*/
-    private List<Revert> RevertList;
+    private List<Revert> revertList;
     /**赞踩集合*/
     private List<QuestionRevert> questionZanCaiList;
 
+    private String flag;
     public Revert() {
     }
 }

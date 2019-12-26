@@ -76,6 +76,46 @@
             height: 35px;
             padding-bottom: 100px;
         }
+        /*底部样式*/
+        body{margin: 0;}
+        #footer{
+            background-color: #333C4D;
+            height: 130px;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 0;
+            position: absolute;
+        }
+        #footer ul{
+            padding-top: 30px;
+            width: 800px;
+            height: 60px;
+            margin: 0 auto;
+            border-bottom: 1px solid #999999;
+        }
+        #footer ul li{
+            float: left;
+            list-style: none;
+            padding-left: 30px;
+        }
+        #footer ul li a{
+            color: #989898;
+            text-decoration: none;
+            float: left;
+            padding-left: 20px;
+        }
+        #footer ul li a:hover{
+            color: #F2F2F2;
+        }
+        #footer hr{
+            width: 800px;
+            color: #989898;
+        }
+        #footer p{
+            color: #989898;
+            text-align: center;
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +162,34 @@
             <a href="<%=request.getContextPath() %>/question/editQuestion" role="button"
                class="btn btn-info col-md-4" >知道了，开始提问</a>
         </div>
+    </div>
+    <div id="footer">
+        <ul>
+            <li>
+                <a href="/aboutus/aboutus">关于我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">加入我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">联系我们</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">讲师合作</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">帮助中心</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">友情链接</a>
+            </li>
+            <li>
+                <a href="/aboutus/aboutus">合作企业</a>
+            </li>
+        </ul>
+        <p>
+            copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
+        </p>
     </div>
 </div>
 </body>

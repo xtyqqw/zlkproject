@@ -70,7 +70,6 @@
                             <div class="menu">
                                 <div class="item" data-value="0">待解决</div>
                                 <div class="item" data-value="1">已解决</div>
-                                <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
                         <input type="text" name="questionTitle" placeholder="标题：简短描述标题,以问号结尾,最多只能输入50字"
@@ -96,7 +95,7 @@
                                     <div class="item" data-value="JAVA">JAVA</div>
                                     <div class="item" data-value="Linux">Linux</div>
                                     <div class="item" data-value="HTML">HTML</div>
-                                    <div class="item" data-value="MASQL">MYSQL</div>
+                                    <div class="item" data-value="MYSQL">MYSQL</div>
                                 </div>
                             </div>
                         </div>

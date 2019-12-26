@@ -203,9 +203,7 @@
                     if (question[i].solve === "1") {
                         html += '<div class="solve">已解决</div>';
                     }
-                    if (question[i].solve === "2") {
-                        html += '<div class="solve">未解决</div>';
-                    }
+
                     if (question[i].questionSetTop === "0") {
                         html += '<div class="questionSetTop" id="questionSetTop"><p id="p">置顶</p></div>';
                     }

@@ -393,7 +393,7 @@
     <c:if test="${count==0}">
         <p class="noperson">没有任何人关注ta</p>
     </c:if>
-    <%--<c:if test="${count!=0}">--%>
+    <c:if test="${count!=0}">
         <div class="main"></div>
         <%--<c:forEach items="${list}" var="list">
             <div class="hefollows_main">
@@ -467,7 +467,7 @@
             </div>
         </c:forEach>--%>
         <div id="demo7" style="float: right;margin: 50px 20px auto"></div>
-    <%--</c:if>--%>
+    </c:if>
     <input id="user_id" value="${userId}" style="display: none">
 </div>
 <%--分页--%>

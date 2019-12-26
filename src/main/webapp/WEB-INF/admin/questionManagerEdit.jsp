@@ -48,14 +48,13 @@
             <input type="text" name="questionId" hidden="hidden" value="${questions.questionId}">
             <div class="required field">
                 <div class="ui left labeled input">
-                    <div class="ui selection compact basic dropdown violet label">
+                    <div class="ui selection compact basic dropdown teal label">
                         <input type="hidden" value="${questions.solve}" name="solve">
                         <i class="dropdown icon"></i>
                         <div class="text">待解决</div>
                         <div class="menu">
                             <div class="item" data-value="0">待解决</div>
                             <div class="item" data-value="1">已解决</div>
-                            <div class="item" data-value="2">未解决</div>
                         </div>
                     </div>
                     <input type="text" name="title" placeholder="简明扼要的描述你的标题" value="${questions.questionTitle}">
@@ -72,13 +71,13 @@
             <div class="two fields">
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">浏览次数</label>
+                        <label class="ui basic teal label">浏览次数</label>
                         <input type="text" name="browseCount" placeholder="请输入浏览数" value="${questions.browseCount}">
                     </div>
                 </div>
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">发布时间</label>
+                        <label class="ui basic teal label">发布时间</label>
                         <input type="text" name="createTime" value="${questions.createTime}" id="createTime"
                                autocomplete="off" class="layui-input">
                     </div>
@@ -88,14 +87,14 @@
             <div class="two fields">
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">回答数量</label>
+                        <label class="ui basic teal label">回答数量</label>
                         <input type="text" name="responseCount" placeholder="请输入回答数"
                                value="${questions.responseCount}">
                     </div>
                 </div>
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">更新时间</label>
+                        <label class="ui basic teal label">更新时间</label>
                         <input type="text" name="updateTime" value="${questions.updateTime}" id="updateTime"
                                autocomplete="off" class="layui-input">
                     </div>
@@ -105,7 +104,7 @@
             <div class="two fields">
                 <div class="required field">
                     <div class="ui left labeled action input">
-                        <label class="ui compact basic violet label">审核状态</label>
+                        <label class="ui compact basic teal label">审核状态</label>
                         <div class="ui fluid selection dropdown">
                             <input type="hidden" name="audit" value="${questions.audit}">
                             <i class="dropdown icon"></i>
@@ -121,7 +120,7 @@
 
                 <div class="required field">
                     <div class="ui left labeled action input">
-                        <label class="ui compact basic violet label">问题分类</label>
+                        <label class="ui compact basic teal label">问题分类</label>
                         <div class="ui fluid selection dropdown">
                             <input type="hidden" name="typeName" value="${questions.typeName}">
                             <i class="dropdown icon"></i>
@@ -141,7 +140,7 @@
 
                 <div class="required field">
                     <div class="ui left labeled action input">
-                        <label class="ui compact basic violet label">问题置顶</label>
+                        <label class="ui compact basic teal label">问题置顶</label>
                         <div class="ui fluid selection dropdown">
                             <input type="hidden" name="questionSetTop" value="${questions.questionSetTop}">
                             <i class="dropdown icon"></i>
@@ -155,7 +154,7 @@
                 </div>
                 <div class="required field">
                     <div class="ui left labeled action input">
-                        <label class="ui compact violet basic label">问题标签</label>
+                        <label class="ui compact teal basic label">问题标签</label>
                         <div class="ui fluid selection multiple search dropdown">
                             <input type="hidden" name="tagName" value="${questions.tagName}">
                             <i class="dropdown icon"></i>
@@ -174,20 +173,20 @@
 
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">问题赞数</label>
+                        <label class="ui basic teal label">问题赞数</label>
                         <input type="text" name="zanCount" placeholder="请输入赞数" value="${questions.zanCount}">
                     </div>
                 </div>
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <label class="ui basic violet label">问题踩数</label>
+                        <label class="ui basic teal label">问题踩数</label>
                         <input type="text" name="caiCount" placeholder="请输入踩数" value="${questions.caiCount}">
                     </div>
                 </div>
 
             </div>
             <div class="ui right aligned container">
-                <button type="submit" onclick="publish()" class="ui button violet">提交</button>
+                <button type="submit" onclick="publish()" class="ui button teal">提交</button>
             </div>
 
         </form>

@@ -98,6 +98,7 @@ spring:
       max-request-size: 2048MB
   #redis配置
   redis:
+
     host: 193.112.82.60
     port: 6379
     password: liutonghui89
