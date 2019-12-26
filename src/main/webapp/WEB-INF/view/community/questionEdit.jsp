@@ -73,8 +73,8 @@
                                 <div class="item" data-value="2">未解决</div>
                             </div>
                         </div>
-                        <input type="text" name="questionTitle" placeholder="标题：一句话描述清楚问题,以问号结尾,最多只能输入20字"
-                               maxlength="20">
+                        <input type="text" name="questionTitle" placeholder="标题：简短描述标题,以问号结尾,最多只能输入50字"
+                               maxlength="50">
                     </div>
                 </div>
 
@@ -171,34 +171,34 @@
                     identifier: 'questionTitle',
                     rules: [{
                         type: 'empty',
-                        prompt: '文章不能为空呦'
+                        prompt: '问题不能为空呦'
                     }, {
                         type: 'maxLength[50]',
-                        prompt: '请注意文章标题最大长度不能超过50'
+                        prompt: '请注意问题标题最大长度不能超过50'
                     }]
                 },
                 questionContent: {
                     identifier: 'questionContent',
                     rules: [{
                         type: 'empty',
-                        prompt: '文章内容不能为空哟'
+                        prompt: '问题内容不能为空哟'
                     }]
                 },
                 typeName: {
                     identifier: 'typeName',
                     rules: [{
                         type: 'empty',
-                        prompt: '选择一个文章分类吧'
+                        prompt: '选择一个问题分类吧'
                     }]
                 },
                 tagName: {
                     identifier: 'tagName',
                     rules: [{
                         type: 'minCount[1]',
-                        prompt: '选择一个文章标签吧'
+                        prompt: '选择一个问题标签吧'
                     }, {
                         type: 'maxCount[3]',
-                        prompt: '最多只能选择三个文章标签呦'
+                        prompt: '最多只能选择三个问题标签呦'
                     }]
                 }
             },

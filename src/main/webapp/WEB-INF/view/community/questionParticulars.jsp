@@ -19,9 +19,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
           type="image/x-icon"/>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
     <style type="text/css">
         /*底部样式*/
         body {
@@ -72,12 +72,12 @@
             text-align: center;
             padding-top: 10px;
         }
+
     </style>
 </head>
 <body>
 <%--导航栏--%>
 <%@include file="../../jsp/header.jsp" %>
-
 <!--中间内容-->
 <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
     <div class="ui container">
@@ -132,40 +132,40 @@
         </div>
         <div class="ui bottom attached segment">
             <!--留言区域列表-->
-            <div class="ui form" id="div_stuCmt">
-                <div id="stuCmt_titleBox">
-                    <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
-                </div>
-                <div style="border: 0px solid white !important;">
-                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;">
-                        <div id="cmt-content-box">
-                            <ul id="art-cmt-ul-stream"></ul>
-                        </div>
-                    </div>
-                </div>
+            <h3 class="ui dividing header" style="box-shadow: none;height: 1.5vw;border-bottom: none;">评论区</h3>
+            <div id="comment-container" class="ui teal segment">
                 <div id="art-cmt-textBox" class="field violet"
-                     style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                    <div id="div-artCmt-toolBar" class="toolbar violet"></div>
-                    <div id="div-artCmt-text" class="text" style="height: 10vw;"></div>
+                     style="border: 1px solid #00B5AD; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                    <div id="div_revert_toolBar" class="toolbar"></div>
+                    <div id="div_revert_text" class="text" style="height: 159px; border: 1px solid #00B5AD;"></div>
                 </div>
                 <div id="art-cmt-btnBox" class="fields">
                     <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                        <div class="ui left">
-                            <button id="artCmt-btn" type="button" class="ui button m-mobile-wide violet">
-                                <i class="edit icon"></i>发布
-                            </button>
-                        </div>
+                        <button id="revert_btn" type="button" style="float: right"
+                                class="ui button m-mobile-wide violet">
+                            <i class="edit icon"></i>评论
+                        </button>
                     </div>
                     <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
-                        <button id="selection_stuCmt" type="button" class="ui button m-mobile-wide violet">
+                        <button id="look_artCmt" type="button" style="float: right"
+                                class="ui button m-mobile-wide violet">
                             <i class="eye icon"></i>查看
                         </button>
+                    </div>
+                </div>
+                <div class="ui divider" style="margin: 3em;"></div>
+                <div class="ui threaded comments" style="margin-left: 3em;">
+                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid #00B5AD !important;">
+                        <div id="ART_contentBox">
+                            <ul id="art_cmt_stream"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div>
     <a href="#top" style="position: fixed;top: 550px;right: 30px;z-index: 100;">
         <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
@@ -199,17 +199,16 @@
         copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
     </p>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
-<script src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+<script src="<%=request.getContextPath() %>/js/questionShow.js"></script>
 <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
 <script src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
-
 <script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
 <script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
 <script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
+
 </body>
 </html>

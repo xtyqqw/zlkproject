@@ -3,7 +3,7 @@ var replyEditorArr = [];
 $(document).ready(function () {
 
     var localObj = window.location;
-    var basePath = localObj.protocol+"//"+localObj.host;
+    var basePath = localObj.protocol + "//" + localObj.host;
 
     layui.use(['element', 'flow', 'layer', 'form'], function () {
         var element = layui.element,
@@ -11,7 +11,7 @@ $(document).ready(function () {
             flow = layui.flow,
             layer = layui.layer,
             form = layui.form,
-            articleId = parseInt($("#articleId").text());
+            questionId = parseInt($("#quesitonId").text());
 
         //弹出层设置
         layer.config({
@@ -19,36 +19,36 @@ $(document).ready(function () {
         });
 
         {
-            $("#artCmt_btn").click(function () {
+            $("#revert_btn").click(function () {
                 let isEmpty = true;
                 let lengthState = true;
-                let contentHtml = '' + artCmt_editor.txt.html();
-                let contentText = '' + artCmt_editor.txt.text();
-                contentHtml = contentHtml.replace(/'/g,"\\\'");
-                if (contentText === ''){
+                let contentHtml = '' + revert_editor.txt.html();
+                let contentText = '' + revert_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g, "\\\'");
+                if (contentText === '') {
                     isEmpty = true;
-                }else {
+                } else {
                     isEmpty = false;
                 }
-                let articleId = '1';
+                let questionId = '1';
                 let userId = '1';
-                let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
-                if(contentHtml.length>512){
+                let data = {'questionId': questionId, 'userId': userId, 'revertContent': contentHtml};
+                if (contentHtml.length > 512) {
                     layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
-                if (isEmpty){
+                if (isEmpty) {
                     layer.msg("内容为空无法提交！");
                 }
-                if(lengthState && !isEmpty){
+                if (lengthState && !isEmpty) {
                     $.ajax({
-                        type : "POST",
-                        url : basePath+"/artComment/submit",
-                        data : data,
-                        success : function (res) {
+                        type: "POST",
+                        url: basePath + "/revert/addRevert",
+                        data: data,
+                        success: function (res) {
                             layer.msg(res.retmsg);
-                            if (res.retmsg === '评论成功'){
-                                artCmt_editor.txt.clear();
+                            if (res.retmsg === '评论成功') {
+                                revert_editor.txt.clear();
                             }
                         }
                     });
@@ -56,22 +56,22 @@ $(document).ready(function () {
                 lengthState = true;
             });
 
-            let artCmtE = window.wangEditor;
-            let artCmt_editor = new artCmtE('#div_artCmt_toolBar', '#div_artCmt_text');
-            artCmt_editor.customConfig.menus = [
+            let revCmtE = window.wangEditor;
+            let revert_editor = new revCmtE('#div_revert_toolBar', '#div_revert_text');
+            revert_editor.customConfig.menus = [
                 'bold',
                 'italic',
                 'underline',
                 'code'
             ];
-            artCmt_editor.customConfig.showLinkImg = false;
-            artCmt_editor.create();
+            revert_editor.customConfig.showLinkImg = false;
+            revert_editor.create();
         }
 
         {
 
             let userId = '1';
-            let articleId = '1';
+            let questionId = '1';
             let flag = 0;
             function cmtFlowLoad(url) {
                 flag = 0;
@@ -83,7 +83,7 @@ $(document).ready(function () {
                         let lis = [];
                         let size = 3;
 
-                        let data = {"articleId": articleId, "page": page, "size": size};
+                        let data = {"questionId": questionId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
                             url: ""+url,
@@ -98,26 +98,26 @@ $(document).ready(function () {
                                 let zanCaiState = "";
                                 let zanStr = '';
                                 let caiStr = '';
-                                layui.each(result.comments, function (i, comment) {
+                                layui.each(result.reverts, function (i, revert) {
                                     str1 = '';
-                                    let len = comment.articleCommentList.length;
+                                    let len = revert.revertList.length;
                                     for (let i=0;i<len;i++){
 
                                         zanCaiState = 'none';
-                                        zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
-                                        caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
-                                        for (let l=0;l<comment.articleCommentList[i].articleCommentZanCaiList.length;l++){
-                                            if(comment.articleCommentList[i].articleCommentZanCaiList[l].userId === $("#userId").text() + ''){
-                                                zanCaiState = comment.articleCommentList[i].articleCommentZanCaiList[l].zanCai;
-                                                if (zanCaiState === 'zan')
-                                                    zanStr = '<i class="iconfont icon-dianzan ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
-                                                else if (zanCaiState === 'cai')
-                                                    caiStr = '<i class="iconfont icon-dianzan_active ART_ZCbtn" data_name="cai" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                        zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zanCount" style="font-size: 20px;color: rgb(121,121,121)"></i>';
+                                        caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="caiCount" style="font-size: 18px;color: rgb(121,121,121)"></i>';
+                                        for (let l=0;l<revert.revertList[i].questionZanCaiList.length;l++){
+                                            if(revert.revertList[i].questionZanCaiList[l].userId === $("#userId").text() + ''){
+                                                zanCaiState = revert.revertList[i].questionZanCaiList[l].caiZan;
+                                                if (zanCaiState === 'caiCount')
+                                                    zanStr = '<i class="iconfont icon-dianzan ART_ZCbtn" data_name="zanCount" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                                else if (zanCaiState === 'caiCount')
+                                                    caiStr = '<i class="iconfont icon-dianzan_active ART_ZCbtn" data_name="caiCount" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                             }
                                         }
 
-                                        if(comment.articleCommentList[i].replyPerson != null){
-                                            replyStr = '回复 '+ comment.articleCommentList[i].replyPerson +' :';
+                                        if(revert.revertList[i].replyPerson != null){
+                                            replyStr = '回复 '+ revert.revertList[i].replyPerson +' :';
                                             heightStr = '131px';
                                             data_type = 'short';
                                         }else {
@@ -126,13 +126,13 @@ $(document).ready(function () {
                                             data_type = 'normal';
                                         }
                                         str1=str1 + '<div class="ART_content" style="width: 96%">\n' +
-                                                        '<span style="display:none;">'+ comment.articleCommentList[i].articleCommentId +'</span>' +
+                                                        '<span style="display:none;">'+ revert.revertList[i].revertId +'</span>' +
                                                         '<div class="ART_c_lbox" style="height: 200px">\n' +
                                                             '<div class="ART_user_Box">\n' +
                                                                 '<div class="ART_headPhoto_Box" style="width: 7vw;height: 7vw">\n' +
-                                                                    '<img src="'+ comment.articleCommentList[i].userImg +'" style="width: 100%;height: 100%">\n' +
+                                                                    '<img src="'+ revert.revertList[i].userImg +'" style="width: 100%;height: 100%">\n' +
                                                                 '</div>\n' +
-                                                                '<div class="ART_userName_Box" style="width: 7vw;height: 20px;font-size: 16px">'+ comment.articleCommentList[i].userRealName +'</div>\n' +
+                                                                '<div class="ART_userName_Box" style="width: 7vw;height: 20px;font-size: 16px">'+ revert.revertList[i].userRealName +'</div>\n' +
                                                             '</div>\n' +
                                                         '</div>\n' +
                                                         '<div class="ART_c_rbox">\n' +
@@ -144,7 +144,7 @@ $(document).ready(function () {
                                                                 '<div id="ART_reply_Editor'+ flag +'" class="ART_replyEditor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
                                                                 '<div class="ART_replyBtn" data_type="son">回复</div>' +
-                                                                '<span style="display: none">'+ comment.articleCommentId +'</span>' +
+                                                                '<span style="display: none">'+ revert.revertId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="ART_cmt_toolBox">' +
                                                                 '<span style="display: none">'+ zanCaiState +'</span>' +
@@ -153,11 +153,11 @@ $(document).ready(function () {
                                                                 '<div class="ART_c_t_box" style="float: left;width: 30px">' +
                                                                     zanStr +
                                                                 '</div>' +
-                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].zan +'</div>' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ revert.revertList[i].zanCount +'</div>' +
                                                                 '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                                     caiStr +
                                                                 '</div>' +
-                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].cai +'</div>' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ revert.revertList[i].caiCount +'</div>' +
                                                                 '<div class="ART_c_t_box" style="float: left">' +
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="ART_flexBtn" data_type="'+ data_type +'" style="cursor: pointer">展开/收起</span>' +
@@ -171,7 +171,7 @@ $(document).ready(function () {
                                                                     '<span class="replyBtn" style="cursor: pointer">回复</span>' +
                                                                 '</div>' +
                                                                 '<div class="ART_c_t_box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
-                                                                    comment.articleCommentList[i].dateString +
+                                            revert.revertList[i].dateString +
                                                                 '</div>' +
                                                             '</div>\n' +
                                                         '</div>\n' +
@@ -180,7 +180,7 @@ $(document).ready(function () {
                                                     'let ART_r_E = window.wangEditor;\n' +
                                                     'let ART_r_editor'+ flag +' = new ART_r_E(\'#ART_r_toolBar'+ flag +'\', \'#ART_r_textEditor'+ flag +'\');\n' +
                                                     'ART_r_editor'+ flag +'.create();\n' +
-                                                    'ART_r_editor'+ flag +'.txt.html(\''+ comment.articleCommentList[i].content +'\');\n' +
+                                                    'ART_r_editor'+ flag +'.txt.html(\''+ revert.revertList[i].revertContent +'\');\n' +
                                                     'ART_r_editor'+ flag +'.$textElem.attr(\'contenteditable\', false);\n' +
 
                                                     'let ART_reply_E = window.wangEditor;\n' +
@@ -200,9 +200,9 @@ $(document).ready(function () {
                                     zanCaiState = 'none';
                                     zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
                                     caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
-                                    for (let i=0;i<comment.articleCommentZanCaiList.length;i++){
-                                        if(comment.articleCommentZanCaiList[i].userId === $("#userId").text() + ''){
-                                            zanCaiState = comment.articleCommentZanCaiList[i].zanCai;
+                                    for (let i=0;i<revert.questionZanCaiList.length;i++){
+                                        if(revert.questionZanCaiList[i].userId === $("#userId").text() + ''){
+                                            zanCaiState = revert.questionZanCaiList[i].zanCai;
                                             if (zanCaiState === 'zan')
                                                 zanStr = '<i class="iconfont icon-dianzan ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                             else if (zanCaiState === 'cai')
@@ -210,13 +210,13 @@ $(document).ready(function () {
                                         }
                                     }
                                     str='<div class="ART_content">\n' +
-                                            '<span style="display: none">'+ comment.articleCommentId +'</span>' +
+                                            '<span style="display: none">'+ revert.revertId +'</span>' +
                                             '<div class="ART_c_lbox">\n' +
                                                 '<div class="ART_user_Box">\n' +
                                                     '<div class="ART_headPhoto_Box">\n' +
-                                                        '<img src="'+ comment.userImg +'" style="width: 100%;height: 100%">\n' +
+                                                        '<img src="'+ revert.userImg +'" style="width: 100%;height: 100%">\n' +
                                                     '</div>\n' +
-                                                    '<div class="ART_userName_Box">'+ comment.userRealName +'</div>\n' +
+                                                    '<div class="ART_userName_Box">'+ revert.userRealName +'</div>\n' +
                                                 '</div>\n' +
                                             '</div>\n' +
                                             '<div class="ART_c_rbox">\n' +
@@ -227,7 +227,7 @@ $(document).ready(function () {
                                                     '<div id="ART_replyEditor'+ flag +'" class="ART_replyEditor"></div>\n' +
                                                     '<span style="display: none">'+ flag +'</span>' +
                                                     '<div class="ART_replyBtn">回复</div>' +
-                                                    '<span style="display: none">'+ comment.articleCommentId +'</span>' +
+                                                    '<span style="display: none">'+ revert.revertId +'</span>' +
                                                 '</div>\n' +
                                                 '<div class="ART_cmt_toolBox">' +
                                                     '<span style="display: none">'+ zanCaiState +'</span>' +
@@ -236,11 +236,11 @@ $(document).ready(function () {
                                                     '<div class="ART_c_t_box" style="float: left;width: 30px">' +
                                                         zanStr +
                                                     '</div>' +
-                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.zan +'</div>' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ revert.zanCount +'</div>' +
                                                     '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                         caiStr +
                                                     '</div>' +
-                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.cai +'</div>' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ revert.caiCount +'</div>' +
                                                     '<div class="ART_c_t_box" style="float: left">' +
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="ART_flexBtn" style="cursor: pointer">展开/收起</span>' +
@@ -254,14 +254,14 @@ $(document).ready(function () {
                                                         '<span class="replyBtn" style="cursor: pointer">回复</span>' +
                                                     '</div>' +
                                                     '<div class="ART_c_t_box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
-                                                        comment.dateString +
+                                        revert.dateString +
                                                     '</div>' +
                                                 '</div>\n' +
                                                 '<div class="ART_reply_toolBox">' +
                                                     '<div class="ART_spaceDiv" style="float: left"></div>' +
-                                                    '<div class="ART_r_t_box" style="float: left">回复：'+ comment.articleCommentList.length +'</div>' +
+                                                    '<div class="ART_r_t_box" style="float: left">回复：'+ revert.revertList.length +'</div>' +
                                                     '<div class="ART_spaceDiv" style="float: right"></div>' +
-                                                    '<span style="display: none">'+ comment.articleCommentList.length +'</span>' +
+                                                    '<span style="display: none">'+ revert.revertList.length +'</span>' +
                                                     '<div class="ART_r_t_box replyFlex" style="float: right;text-align: right;cursor: pointer">收起/展开</div>' +
                                                     '<span style="display: none">false</span>' +
                                                 '</div>\n' +
@@ -272,7 +272,7 @@ $(document).ready(function () {
                                         'let ART_E = window.wangEditor;\n' +
                                         'let ART_editor'+ flag +' = new ART_E(\'#ART_toolBar'+ flag +'\', \'#ART_textEditor'+ flag +'\');\n' +
                                         'ART_editor'+ flag +'.create();\n' +
-                                        'ART_editor'+ flag +'.txt.html(\''+ comment.content +'\');\n' +
+                                        'ART_editor'+ flag +'.txt.html(\''+ revert.revertContent +'\');\n' +
                                         'ART_editor'+ flag +'.$textElem.attr(\'contenteditable\', false);\n' +
                                         'let ART_reply_E = window.wangEditor;\n' +
                                         'let ART_reply_editor'+ flag +' = new ART_reply_E(\'#ART_replyToolBar'+ flag +'\', \'#ART_replyEditor'+ flag +'\');\n' +
@@ -296,24 +296,24 @@ $(document).ready(function () {
                 });
             }
 
-            //文章评论选项卡 点击事件
+            //问题评论选项卡 点击事件
             $("#look_artCmt").click(function () {
                 replyEditorArr.length = 0;
-                cmtFlowLoad(basePath+"/artComment/findArtCmt");
+                cmtFlowLoad(basePath+"/revert/findRevert");
             });
 
             //举报点击事件
             $("#ART_contentBox").on('click','.ART_reportBtn',function () {
-                let articleCommentId = parseInt($(this).parent().parent().parent().prev().prev().text());
+                let revertId = parseInt($(this).parent().parent().parent().prev().prev().text());
                 let type = $(this).prev().text();
                 let data;
                 let thisObj = $(this);
                 if(type === 'false'){
                     $(this).prev().text('true');
-                    data = {'articleCommentId':articleCommentId,'inform':'true'};
+                    data = {'revertId':revertId,'inform':'true'};
                     $.ajax({
                         type: "POST",
-                        url: basePath+"/artComment/updateInform",
+                        url: basePath+"/revert/updateInform",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -325,10 +325,10 @@ $(document).ready(function () {
                     });
                 }else {
                     $(this).prev().text('false');
-                    data = {'articleCommentId':articleCommentId,'inform':'false'};
+                    data = {'revertId':revertId,'inform':'false'};
                     $.ajax({
                         type: "POST",
-                        url: basePath+"/artComment/updateInform",
+                        url: basePath+"/revert/updateInform",
                         dataType: "json",
                         data: data,
                         success:function (res) {
@@ -344,7 +344,7 @@ $(document).ready(function () {
             //赞踩按钮点击事件
             $("#ART_contentBox").on('click','.ART_ZCbtn',function () {
                 let ZCState = $(this).parent().parent().children().eq(0).text();
-                let articleCommentId = parseInt($(this).parent().parent().parent().prev().prev().text());
+                let revertId = parseInt($(this).parent().parent().parent().prev().prev().text());
                 let type = $(this).attr('data_name');
                 let data;
                 let thisObj = $(this);
@@ -353,10 +353,10 @@ $(document).ready(function () {
                     thisObj.parent().parent().children().eq(1).text('no');
                     if (type === 'zan'){
                         if(ZCState === 'zan'){
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinus'};
+                            data = {'userId':userId,'revertId':revertId,'type':'ZanMinus'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success:function (res) {
@@ -373,10 +373,10 @@ $(document).ready(function () {
                                 }
                             });
                         }else if(ZCState === 'none'){
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAdd'};
+                            data = {'userId':userId,'revertId':revertId,'type':'ZanAdd'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success:function (res) {
@@ -393,10 +393,10 @@ $(document).ready(function () {
                                 }
                             });
                         }else {
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanAddCaiMinus'};
+                            data = {'userId':userId,'revertId':revertId,'type':'ZanAddCaiMinus'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success: function (res) {
@@ -422,10 +422,10 @@ $(document).ready(function () {
                         }
                     }else {
                         if(ZCState === 'cai'){
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiMinus'};
+                            data = {'userId':userId,'revertId':revertId,'type':'CaiMinus'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success:function (res) {
@@ -443,10 +443,10 @@ $(document).ready(function () {
                                 }
                             });
                         }else if (ZCState === 'none'){
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'CaiAdd'};
+                            data = {'userId':userId,'revertId':revertId,'type':'CaiAdd'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success:function (res) {
@@ -464,10 +464,10 @@ $(document).ready(function () {
                                 }
                             });
                         }else {
-                            data = {'userId':userId,'articleCommentId':articleCommentId,'type':'ZanMinusCaiAdd'};
+                            data = {'userId':userId,'revertId':revertId,'type':'ZanMinusCaiAdd'};
                             $.ajax({
                                 type: "POST",
-                                url: basePath+"/artComment/updateZC",
+                                url: basePath+"/revert/updateZC",
                                 dataType: "json",
                                 data: data,
                                 success:function (res) {
@@ -530,13 +530,13 @@ $(document).ready(function () {
                 if(lengthState && !isEmpty){
                     $.ajax({
                         type : "POST",
-                        url : basePath+"/artComment/replySubmit",
+                        url : basePath+"/revert/replySubmit",
                         data : data,
                         success : function (res) {
                             layer.msg(res.retmsg,{offset:''+ev.clientY});
                             if (res.retmsg === '回复成功'){
                                 replyEditorArr.length = 0;
-                                cmtFlowLoad(basePath+"/artComment/findArtCmt");
+                                cmtFlowLoad(basePath+"/revert/findArtCmt");
                             }
                         }
                     });

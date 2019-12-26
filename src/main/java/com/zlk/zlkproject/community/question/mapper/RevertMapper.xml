@@ -4,20 +4,78 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zlk.zlkproject.community.question.mapper.RevertMapper">
     <resultMap id="revertEntityMap" type="com.zlk.zlkproject.entity.Revert">
-        <id column="revert_id" property="revertId" javaType="java.lang.String"/>
+        <id column="revert_id" property="revertId" javaType="java.lang.Integer"/>
+        <result column="rid" property="rid" javaType="java.lang.Integer"/>
+        <result column="revert_person" property="revertPerson" javaType="java.lang.String"/>
         <result column="revert_content" property="revertContent" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
-        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
-        <result column="rrevert_count" property="revertCount" javaType="java.lang.Integer"/>
-        <result column="accep" property="accep" javaType="java.lang.String"/>
+        <result column="cai_ount" property="caiCount" javaType="java.lang.Integer"/>
+        <result column="report" property="report" javaType="java.lang.Integer"/>
+        <result column="user_real_name" property="userRealName" javaType="java.lang.String"/>
+        <result column="user_img" property="userImg" javaType="java.lang.String"/>
         <result column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="user_id" property="userId" javaType="java.lang.String"/>
+        <!--association 是一对一的关键字，collection是一对多的关键字-->
+        <collection property="RevertList" javaType="com.zlk.zlkproject.entity.Revert">
+            <id column="revert_id" property="revertId" javaType="java.lang.Integer"/>
+            <result column="rid" property="rid" javaType="java.lang.Integer"/>
+            <result column="revert_person" property="revertPerson" javaType="java.lang.String"/>
+            <result column="revert_content" property="revertContent" javaType="java.lang.String"/>
+            <result column="create_time" property="createTime" javaType="java.util.Date"/>
+            <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
+            <result column="cai_ount" property="caiCount" javaType="java.lang.Integer"/>
+            <result column="report" property="report" javaType="java.lang.Integer"/>
+            <result column="user_real_name" property="userRealName" javaType="java.lang.String"/>
+            <result column="user_img" property="userImg" javaType="java.lang.String"/>
+            <result column="question_id" property="questionId" javaType="java.lang.String"/>
+            <result column="user_id" property="userId" javaType="java.lang.String"/>
+
+            <collection property="questionZanCaiList" ofType="com.zlk.zlkproject.entity.QuestionRevert">
+                <result property="userId" column="user_id3" javaType="java.lang.String"/>
+                <result property="caiZan" column="cai_zan3" javaType="java.lang.String"/>
+            </collection>
+        </collection>
+
+        <collection property="questionZanCaiList" ofType="com.zlk.zlkproject.entity.QuestionRevert">
+            <result property="userId" column="user_id2" javaType="java.lang.String"/>
+            <result property="caiZan" column="cai_zan2" javaType="java.lang.String"/>
+        </collection>
     </resultMap>
     <insert id="addRevert" parameterType="com.zlk.zlkproject.entity.Revert">
-        insert into revert (revert_id,revert_content,create_time,zan_count,cai_count,revert_count,accep,question_id,user_id)
-        VALUES (#{revertId},#{revertContent},#{createTime},#{zanCount},#{caiCount},#{revertCount},#{accep},#{questionId},#{userId})
+        insert into revert (rid,revert_person,revert_content,create_time,question_id,user_id)
+        VALUES (#{rid},#{revertPerson},#{revertContent},#{createTime},#{questionId},#{userId})
     </insert>
+    <select id="findRevert" resultMap="revertEntityMap">
+        SELECT a.*,b.revert_id revert_id1,b.rid rid1,b.question_id question_id1,b.user_id user_id1,b.revert_person revert_person1
+               ,b.revert_content revert_content1,b.zan_count zan_count1,b.cai_count cai_count1,b.report report1,b.create_time create_time1,b.user_realname user_realname1
+               ,b.user_img user_img1,b.user_id3,b.cai_zan3,c.user_id user_id2,c.cai_zan cai_zan2
+        FROM (
+                SELECT r.*,s.user_realname,s.user_img
+		        FROM revert r
+				     ,(SELECT user_id,user_realname,user_img FROM user) s
+			    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid = 0 ORDER BY create_time DESC
+			          LIMIT #{page}, #{size}
+			 ) a
+        LEFT JOIN (
+                    SELECT q.*,qrc.user_id user_id3,qrc.cai_zan cai_zan3
+				    FROM (
+				            SELECT r.*,s.user_realname,s.user_img
+						    FROM revert r
+							     ,(SELECT user_id,user_realname,user_img FROM user) s
+						    WHERE r.user_id = s.user_id AND r.question_id = #{questionId} AND r.rid != 0 ORDER BY create_time
+						 ) q
+					LEFT JOIN question_revert_cz qrc
+					ON q.revert_id = qrc.revert_id
+				  ) b
+        ON a.revert_id = b.rid
+        LEFT JOIN question_revert_cz c
+        ON a.revert_id = c.revert_id
+    </select>
+
+    <select id="findRevertCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM revert WHERE question_id = #{questionId} AND rid = 0
+    </select>
 
 
 </mapper>
