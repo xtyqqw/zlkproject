@@ -53,7 +53,7 @@ public class DurationController {
         Integer finish=durationService.selectSection(user.getUserId());
         /*学习力*/
         long ability;
-        if(finish!=0){
+        if(finish!=null){
             ability = Math.round((sectionAll*100 )/ finish);
             if(ability>=100){
                 ability=100;
@@ -61,6 +61,7 @@ public class DurationController {
         }else {
             ability=0;
         }
+
         /*超过多少学生，百分比*/
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
