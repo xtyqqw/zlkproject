@@ -78,7 +78,11 @@
         .today-learn-case p{
             margin: 0;
             color: #999999;
-            font-size: 13px;
+            font-size: 12px;
+        }
+        .today-learn-case .persent{
+            color: #713ED7;
+            font-size: 15px;
         }
         #main{
             width: 600px;
@@ -108,17 +112,17 @@
                 <span class="font1">学习时长</span><br />
                 <i>${times}</i>
                 <span style="font-size: 13px;color: #999999;">小时</span>
-                <p>已超过${rankAll}%的同学</p>
+                <p>已超过<span class="persent">${rankAll}</span>%的同学</p>
             </li>
             <li>
                 <span class="font1">学习成长量</span><br />
                 <i>${grow}</i>
-                <p>已超过${rankAll}%的同学</p>
+                <p>已超过<span class="persent">${rankAll}</span>%的同学</p>
             </li>
             <li>
                 <span class="font1">技能水平</span><br />
                 <i>${level}</i>
-                <p>已超过${rankAll}%的同学</p>
+                <p>已超过<span class="persent">${rankAll}</span>%的同学</p>
             </li>
         </ul>
     </div>
