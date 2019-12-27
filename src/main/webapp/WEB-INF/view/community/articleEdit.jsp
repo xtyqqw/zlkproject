@@ -121,10 +121,10 @@
                         </div>
                     </div>--%>
                     <div class="two fields">
-                        <div class="field">
+                        <div class="required field">
                             <div class="ui left labeled input">
                                 <label class="ui basic violet label">首图</label>
-                                <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;">
+                                <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;z-index: auto;">
                                     <div class="visible content">上传图片</div>
                                     <div class="hidden content">
                                         可以是相关的代码截图或是引人注目的封面

@@ -36,7 +36,7 @@ $(document).ready(function () {
                 if (isEmpty){
                     layer.msg("内容为空无法提交！");
                 }
-                if(contentHtml.length>256){
+                if(contentHtml.length>200){
                     layer.msg("内容超出最大长度限制！");
                     lengthState = false;
                 }
@@ -523,7 +523,7 @@ $(document).ready(function () {
                 }else {
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid};
                 }
-                if(contentHtml.length>256){
+                if(contentHtml.length>200){
                     layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
