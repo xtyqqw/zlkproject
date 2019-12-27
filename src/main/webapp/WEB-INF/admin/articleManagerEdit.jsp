@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.css" />
-
 </head>
 <body>
 <div>
