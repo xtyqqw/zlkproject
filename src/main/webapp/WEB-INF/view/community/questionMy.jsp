@@ -177,9 +177,9 @@
             clear: both;
         }
         .audit{
-            margin-left: 35px;
+            margin-left: 45px;
             float: left;
-            width: 55px;
+            width: 65px;
             height: 19px;
             border-radius: 6%;
             border: #FF0000 1px solid;
@@ -219,25 +219,25 @@
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';
                     html += '<div class="title"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].questionTitle + '</a></div>';
-                    if (question[i].solve === "0") {
+                    if (question[i].solve === "待解决") {
                         html += '<div class="solve">待解决</div>';
                     }
-                    if (question[i].solve === "1") {
+                    if (question[i].solve === "已解决") {
                         html += '<div class="solve">已解决</div>';
                     }
-                    if (question[i].questionSetTop === "0") {
+                    if (question[i].questionSetTop === "置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop"><p id="p">置顶</p></div>';
                     }
-                    if (question[i].questionSetTop === "1") {
+                    if (question[i].questionSetTop === "不置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    if (question[i].audit === "0"){
-                        html += '<div class="audit">审核中</div>';
+                    if (question[i].audit === "正在审核"){
+                        html += '<div class="audit">正在审核</div>';
                     }
-                    if (question[i].audit === "1"){
-                        html += '<div class="audit" style="display: none">审核过</div>';
+                    if (question[i].audit === "审核通过"){
+                        html += '<div class="audit" style="display: none">审核通过</div>';
                     }
-                    if (question[i].audit === "2"){
+                    if (question[i].audit === "审核未过"){
                         html += '<div class="audit">审核未过</div>';
                     }
                     html += '<div class="questionContent"><span>' + question[i].questionSynopsis + '</span></div>';

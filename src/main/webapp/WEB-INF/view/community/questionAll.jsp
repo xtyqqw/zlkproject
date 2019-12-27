@@ -208,17 +208,16 @@
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';
                     html += '<div class="title"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].questionTitle + '</a></div>';
-                    if (question[i].solve === "0") {
+                    if (question[i].solve === "待解决") {
                         html += '<div class="solve">待解决</div>';
                     }
-                    if (question[i].solve === "1") {
+                    if (question[i].solve === "已解决") {
                         html += '<div class="solve">已解决</div>';
                     }
-
-                    if (question[i].questionSetTop === "0") {
+                    if (question[i].questionSetTop === "置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop"><p id="p">置顶</p></div>';
                     }
-                    if (question[i].questionSetTop === "1") {
+                    if (question[i].questionSetTop === "不置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
                     html += '<div class="questionContent"><span>' + question[i].questionSynopsis + '</span></div>';

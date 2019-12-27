@@ -280,11 +280,13 @@ public class ExercisesManagerController {
             exerciseNumList.add(exercises.getExerciseNum());
         }
         Integer count = exercisesManagerService.selectCountBySectionId(sectionId);
+        Integer count1 = count + 1;
         Map<String,Object> map = new HashMap<>();
         map.put("exerciseNumList",exerciseNumList);
-        map.put("count",count);
+        map.put("count1",count1);
         return map;
     }
+
 
 
 }

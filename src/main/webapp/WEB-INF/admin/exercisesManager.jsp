@@ -65,21 +65,22 @@
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item" id="exerciseNumInputDiv">
+                <%--<div class="layui-form-item" id="exerciseNumInputDiv">
                     <label class="layui-form-label">习题序号</label>
                     <div class="layui-input-block">
                         <input type="text" class="layui-input" name="exerciseNum" id="exerciseNumInput" readonly="readonly">
                     </div>
-                </div>
+                </div>--%>
                 <div class="layui-form-item layui-form" lay-filter="exerciseNumDiv" id="exerciseNumSelectDiv">
                     <label class="layui-form-label">习题序号</label>
                     <div class="layui-input-block">
-                        <select class="layui-select" name="exerciseNum" id="exerciseNumSelect" lay-filter="exerciseNumSelect">
+                        <%--<select class="layui-select" name="exerciseNum" id="exerciseNumSelect" lay-filter="exerciseNumSelect">
                             <option value="">请选择习题序号</option>
-
-                        </select>
+                        </select>--%>
+                        <input type="text" name="exerciseNum" id="exerciseNum" class="layui-input" disabled="true">
                     </div>
                 </div>
+
                 <div class="layui-form-item" style="display: none">
                     <input type="text" class="layui-input" name="exercisesLastNum" id="exercisesLastNum">
                 </div>

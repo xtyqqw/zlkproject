@@ -175,8 +175,8 @@
                     , {field: 'browseCount', title: '浏览数', width: 80}
                     , {field: 'createTime', title: '发布时间', width: 90}
                     , {field: 'updateTime', title: '更新时间', width: 90}
-                    , {field: 'questionSetTop', title: '置顶', width: 60}
-                    , {field: 'audit', title: '审核', width: 60}
+                    , {field: 'questionSetTop', title: '置顶', width: 80}
+                    , {field: 'audit', title: '审核', width: 90}
                     , {field: 'typeName', title: '类别', width: 80}
                     , {field: 'tagName', title: '标签', width: 90}
                     , {

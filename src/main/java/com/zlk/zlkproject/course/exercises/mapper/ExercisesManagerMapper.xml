@@ -195,4 +195,7 @@
             where e.section_id = #{sectionId}
         </if>
     </select>
+    <select id="selectExerciseCount"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM exercises WHERE exercises.section_id=#{sectionId}
+    </select>
 </mapper>
