@@ -17,12 +17,14 @@
         }
 
         .all {
-            width: 680px;
+            width: 100%;
             height: 178px;
             background-color: #FFFFFF;
             border-bottom: 1px solid #F0F0F0;
             position: relative;
-            margin-top: 40px;
+            margin-top: 30px;
+            float: left;
+            margin-left: 0;
         }
 
         .title {
@@ -47,7 +49,7 @@
             width: 55px;
             height: 20px;
             background-color: #1E9FFF;
-            border-radius: 8%;
+            border-radius: 6%;
             font-size: 15px;
             font-family: Arial;
             color: #FFFFFF;
@@ -62,7 +64,7 @@
             width: 35px;
             height: 20px;
             background-color: #FF0000;
-            border-radius: 8%;
+            border-radius: 6%;
             text-align: center;
         }
 
@@ -79,30 +81,31 @@
         }
 
         .questionContent {
+            width: 90%;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             font-size: 16px;
             font-family: Arial;
             color: #707070;
             text-decoration: none;
-            float: right;
-            margin-top: 30px;
-            height: 45px;
+            margin-top: 40px;
+            height: 65px;
+            margin-left: 1em;
         }
 
         .icon {
             position: absolute;
-            left: 585px;
-            bottom: 12px;
+            left: 875px;
+            bottom: 17px;
         }
 
         .browseCount {
             position: absolute;
-            left: 610px;
-            bottom: 12px;
+            left: 905px;
+            bottom: 17px;
         }
 
         .browseCount a {
@@ -119,12 +122,13 @@
             color: #989898;
             text-decoration: none;
         }
-        .user1{
+
+        .user1 {
             height: 30px;
             width: 300px;
             float: left;
             margin-left: 15px;
-            margin-top: 40px;
+            margin-top: 32px;
         }
 
         .userRealname {
@@ -154,7 +158,7 @@
 
         .createTime {
             font-size: 16px;
-            color:  #989898;
+            color: #989898;
             font-family: Arial;
             position: relative;
             float: left;
@@ -166,11 +170,18 @@
             color: #1296db;
             text-decoration: none;
         }
+
+        .demo1 {
+            float: right;
+            margin: 850px 120px auto;
+            clear: both;
+        }
+
     </style>
 </head>
 <body>
-<div class="context-div" style="float: left"></div>
-<div id="demo1" style="float: left;margin: 900px 200px auto;clear: both"></div>
+<div class="context-div"></div>
+<div id="demo1" class="demo1"></div>
 <script>
     $(function () {
         loadData();
@@ -197,26 +208,23 @@
                 for (var i = 0; i < question.length; i++) {
                     html += '<div class="all" >';
                     html += '<div class="title"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].questionTitle + '</a></div>';
-                    if (question[i].solve === "0") {
+                    if (question[i].solve === "待解决") {
                         html += '<div class="solve">待解决</div>';
                     }
-                    if (question[i].solve === "1") {
+                    if (question[i].solve === "已解决") {
                         html += '<div class="solve">已解决</div>';
                     }
-                    if (question[i].solve === "2") {
-                        html += '<div class="solve">未解决</div>';
-                    }
-                    if (question[i].questionSetTop === "0") {
+                    if (question[i].questionSetTop === "置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop"><p id="p">置顶</p></div>';
                     }
-                    if (question[i].questionSetTop === "1") {
+                    if (question[i].questionSetTop === "不置顶") {
                         html += '<div class="questionSetTop" id="questionSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    html += '<div class="questionContent" style="width: 660px"><span>' + question[i].questionContent + '</span></div>';
+                    html += '<div class="questionContent"><span>' + question[i].questionSynopsis + '</span></div>';
                     html += '<div class="user1">';
                     html += '<div class="userRealname"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].user.userRealname + '</a></div>';
                     html += '<div class="little"></div>';
-                    html += '<div class="createTime"><span class="timeago" title="' + question[i].createTime + '"></span></div>';
+                    html += '<div class="createTime"><span class="timeago" title="' + question[i].updateTime + '"></span></div>';
                     html += '</div>';
                     html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
                     html += '<div class="browseCount"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].browseCount + '浏览' + '</a></div>';

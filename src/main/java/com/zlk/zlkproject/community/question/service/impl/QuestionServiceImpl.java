@@ -24,13 +24,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     @Override
     public Question saveQuestion(Question question) {
-        question.setSolve("0");
-        question.setZanCount(0);
-        question.setCaiCount(0);
+        question.setSolve("待解决");
         question.setBrowseCount("0");
-        question.setQuestionSetTop("1");
-        question.setResponseCount(0);
-        question.setAudit("0");
+        question.setQuestionSetTop("不置顶");
+        question.setAudit("审核中");
         return questionDao.save(question);
     }
 }

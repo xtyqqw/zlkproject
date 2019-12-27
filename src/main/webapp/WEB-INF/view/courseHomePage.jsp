@@ -635,7 +635,7 @@ $.ajax({
                     '<li class="li1">' +
                     '<dl class="dl1">' +
                     '<dt class="dt1">' +
-                    '<img id="img1" src="'+courses.introducePic+'" style="height: 90px;width: 213px ">' +
+                    '<img id="img1" src="'+courses.introducePic+'" style="height: 100px;width: 213px ">' +
                     '</dt>' +
                     '<dd class="dd2">' +
                     '<h5 class="h51">'+courses.coursesName+'</h5>' +

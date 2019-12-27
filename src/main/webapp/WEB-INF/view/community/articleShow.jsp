@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <style type="text/css">
@@ -70,7 +70,7 @@
     <!--中间内容-->
     <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
         <div class="ui container">
-            <%--顶部--%>
+            <!--顶部-->
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">

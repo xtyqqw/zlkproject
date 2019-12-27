@@ -15,13 +15,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/articleShow.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/questionShow.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
+
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
     <style type="text/css">
         /*底部样式*/
         body {
@@ -72,12 +71,12 @@
             text-align: center;
             padding-top: 10px;
         }
+
     </style>
 </head>
 <body>
 <%--导航栏--%>
 <%@include file="../../jsp/header.jsp" %>
-
 <!--中间内容-->
 <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
     <div class="ui container">
@@ -86,13 +85,12 @@
             <div class="ui horizontal link list">
                 <div class="item">
                     <img src="${question.user.userImg}" alt="" class="ui avatar image">
-                    <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header"
+                    <div class="content"><a href="javascript:void(0)" class="header"
                                             style="box-shadow: none;height: auto;">${question.user.userRealname}</a>
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i> <span><fmt:formatDate value="${question.createTime}"
-                                                                        pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                    <i class="calendar icon"></i> <span><fmt:formatDate value="${question.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
                 </div>
                 <div class="item">
                     <i class="eye icon"></i> <span>${question.browseCount}</span>
@@ -103,15 +101,7 @@
             <!--内容-->
             <div class="ui right aligned basic segment field">
                 <div class="ui violet basic label">${question.typeName}</div>
-                <c:if test="${question.solve == 0}">
-                    <div class="ui orange basic label">待解决</div>
-                </c:if>
-                <c:if test="${question.solve == 1}">
-                    <div class="ui orange basic label">已解决</div>
-                </c:if>
-                <c:if test="${question.solve == 2}">
-                    <div class="ui orange basic label">未解决</div>
-                </c:if>
+                <div class="ui orange basic label">${question.solve}</div>
             </div>
             <h2 class="ui center aligned header" style="box-shadow: none;">
                 ${question.questionTitle}
@@ -130,8 +120,10 @@
                 </c:forEach>
             </div>
         </div>
+
     </div>
 </div>
+
 <div>
     <a href="#top" style="position: fixed;top: 550px;right: 30px;z-index: 100;">
         <i class="layui-icon layui-icon-top" style="font-size: 45px;margin-left: 5px;"></i>
@@ -165,17 +157,16 @@
         copyright&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;&nbsp;&nbsp;&nbsp;北京智量酷教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;京ICP备09076312号
     </p>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
-<script src="<%=request.getContextPath() %>/js/articleShow.js"></script>
+<script src="<%=request.getContextPath() %>/js/questionShow.js"></script>
 <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
 <script src="<%=request.getContextPath() %>/js/wangEditor.js"></script>
-
 <script src="<%=request.getContextPath() %>/community/prism/prism.js"></script>
 <script src="<%=request.getContextPath() %>/community/tocbot/tocbot.min.js"></script>
 <script src="<%=request.getContextPath() %>/community/waypoints/jquery.waypoints.min.js"></script>
+
 </body>
 </html>

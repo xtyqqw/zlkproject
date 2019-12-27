@@ -395,7 +395,6 @@
         });
         element.init();
     });
-
     /*下拉框渲染开启*/
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');

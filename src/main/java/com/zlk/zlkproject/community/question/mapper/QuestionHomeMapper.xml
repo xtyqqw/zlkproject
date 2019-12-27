@@ -7,15 +7,14 @@
         <id column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
         <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="question_content_html" property="questionContentHtml" javaType="java.lang.String"/>
         <result column="solve" property="solve" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="update_time" property="updateTime" javaType="java.util.Date"/>
         <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
         <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
-        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
-        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
         <result column="audit" property="audit" javaType="java.lang.String"/>
-        <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
+        <result column="question_synopsis" property="questionSynopsis" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
         <!--association 是一对一的关键字，collection是一对多的关键字-->
@@ -47,7 +46,7 @@
         select count(1) from question where audit = '1'
     </select>
     <select id="findAll" resultMap="questionEntityMap" >
-        select * from  question q,user u where q.user_id=u.user_id and audit = '1' order by question_set_top,create_time  DESC  limit  #{startPage},#{limit}
+        select * from  question q,user u where q.user_id=u.user_id and audit = '审核通过' order by question_set_top,create_time  DESC  limit  #{startPage},#{limit}
     </select>
     <select id="findByUserId" resultMap="questionEntityMap" >
          select * from  question q left join user u on q.user_id=u.user_id where u.user_id=#{userId} order by question_set_top,create_time  DESC limit  #{startPage},#{limit}

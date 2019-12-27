@@ -101,7 +101,7 @@
                 <span id="sv_retmsg">尚未上传</span>
             </div>
             <div class="spaceDiv"></div>
-            <div id="addSubmitBtn" class="myBtn" style="left: 396px">提交</div>
+            <div id="addSubmitBtn" class="myBtn" style="margin: 0 0 0 auto">提交</div>
         </div>
 
         <div id="editContentBox" hidden="hidden">
@@ -166,7 +166,7 @@
             </button>
             <span id="sv_retmsg_edit">尚未上传</span>
             <div class="spaceDiv"></div>
-            <div id="editSubmitBtn" class="myBtn" style="left: 396px">提交</div>
+            <div id="editSubmitBtn" class="myBtn" style="margin: 0 0 0 auto">提交</div>
         </div>
         <span id="sectionId" style="display: none"></span>
     </div>
