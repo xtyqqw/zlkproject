@@ -116,16 +116,8 @@ public interface ExercisesManagerService {
      */
     Integer selectCountBySectionId(Integer sectionId);
 
-    /**
-     *  根据小节id查找习题数量
-     *@method selectExerciseNumBySectionId
-     *@params [sectionId]
-     *@return java.util.List<java.lang.Integer>
-     *@author zhang
-     *@time 2019/12/23  16:27
-     */
-<<<<<<< HEAD
-    List<Integer> selectExerciseNumBySectionId(Integer sectionId);
+
+    List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
 
     /**
      *@Author luanke
@@ -135,8 +127,7 @@ public interface ExercisesManagerService {
      *@return
      **/
     Integer selectExerciseCount(Integer sectionId);
-=======
-    List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
+
 
     /**
      * 根据习题Id查询单个记录
@@ -144,5 +135,4 @@ public interface ExercisesManagerService {
      * @return
      */
     Exercises selectExercisesByEId(Integer eId);
->>>>>>> 1a20b6458aacec3312fc24e1c810fd6ae3fba897
 }

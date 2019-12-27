@@ -85,12 +85,12 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
     }
 
     @Override
-<<<<<<< HEAD
     public Integer selectExerciseCount(Integer sectionId) {
         return exercisesManagerMapper.selectExerciseCount(sectionId);
-=======
+    }
+
+
     public Exercises selectExercisesByEId(Integer eId) {
         return exercisesManagerMapper.selectExercisesByEId(eId);
->>>>>>> 1a20b6458aacec3312fc24e1c810fd6ae3fba897
     }
 }
