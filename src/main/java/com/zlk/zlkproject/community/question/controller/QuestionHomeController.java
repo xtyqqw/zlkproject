@@ -113,7 +113,7 @@ public class QuestionHomeController {
         request.getSession().setAttribute("questionId",questionId);
         mv.addObject("question", questionHomeService.getAndConvert(questionId));
         mv.addObject("user",user);
-        mv.setViewName("view/community/questionParticulars");
+        mv.setViewName("/view/community/questionParticulars");
         return mv;
     }
 }

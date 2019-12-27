@@ -117,6 +117,13 @@
     <delete id="deleteByEId" parameterType="com.zlk.zlkproject.entity.Exercises">
         delete from exercises where e_id = #{eId};
     </delete>
+
+    <!--根据习题Id查询一条记录-->
+    <select id="selectExercisesByEId" resultMap="ExercisesManagerMap">
+        select e_id,section_id,type,exercise_num,title,answer_A,answer_B,answer_C,
+        answer_D,truth from exercises where e_id = #{eId};
+    </select>
+
     <!--查询全部信息并分页显示-->
     <select id="selectAllAndLimit" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
         select e_id,section_id,type,exercise_num,title,answer_A,answer_B,answer_C,answer_D,truth
@@ -181,10 +188,14 @@
         </if>
     </select>
     <!--查找当前小节下的所有问题的序号-->
-    <select id="selectExerciseNumBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select e.exercise_num from exercises e
+    <select id="selectExerciseNumBySectionId" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e.e_id,e.section_id,e.type,e.exercise_num,e.title,e.answer_A,e.answer_B,
+        e.answer_C,e.answer_D,e.truth from exercises e
         <if test="sectionId != null">
             where e.section_id = #{sectionId}
         </if>
+    </select>
+    <select id="selectExerciseCount"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM exercises WHERE exercises.section_id=#{sectionId}
     </select>
 </mapper>

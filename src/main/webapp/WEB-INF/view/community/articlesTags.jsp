@@ -42,7 +42,7 @@
                                         </c:if>
                                     </div>
                                 </div>
-                                <p class="m-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;">${articlesTags.articleDigest}</p>
+                                <p class="m-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">${articlesTags.articleDigest}</p>
                                 <div class="ui grid">
                                     <div class="row">
                                         <div class="eleven wide column">

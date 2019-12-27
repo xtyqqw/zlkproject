@@ -29,6 +29,10 @@ public class Question {
     private String questionTitle;
     /*问题内容*/
     private String questionContent;
+    /*问题Html格式*/
+    private String questionContentHtml;
+    /*问题简要*/
+    private String questionSynopsis;
     /*是否解决：0待解决，1已解决，2未解决*/
     private String solve;
     /*发布时间*/
@@ -43,15 +47,9 @@ public class Question {
     private String browseCount;
     /**问题置顶：0 置顶，1 不置顶*/
     private String questionSetTop;
-    /*获赞数*/
-    private Integer zanCount;
-    /*被踩数*/
-    private Integer caiCount;
     /*审核：0 审核中，1 审核过，2 审核未过*/
     private String audit;
-    /*回答数*/
-    private Integer responseCount;
-    /*分类*/
+    /*类别*/
     private String typeName;
     /*标签*/
     private String tagName;
