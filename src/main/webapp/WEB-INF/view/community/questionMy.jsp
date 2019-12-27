@@ -85,14 +85,14 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             font-size: 16px;
             font-family: Arial;
             color: #707070;
             text-decoration: none;
             margin-top: 40px;
-            height: 43px;
+            height: 65px;
             margin-left: 1em;
         }
 
@@ -104,7 +104,7 @@
 
         .browseCount {
             position: absolute;
-            left: 900px;
+            left: 905px;
             bottom: 17px;
         }
 
@@ -128,7 +128,7 @@
             width: 300px;
             float: left;
             margin-left: 15px;
-            margin-top: 55px;
+            margin-top: 32px;
         }
 
         .userRealname {
@@ -191,7 +191,6 @@
     </style>
 </head>
 <body>
-<%@ include file="logging.jsp" %>
 <div class="context-div"></div>
 <div id="demo1" class="demo1"></div>
 <script>
@@ -245,13 +244,15 @@
                     html += '<div class="user1">';
                     html += '<div class="userRealname"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].user.userRealname + '</a></div>';
                     html += '<div class="little"></div>';
-                    html += '<div class="createTime"><span class="timeago" title="' + question[i].createTime + '"></span></div>';
+                    html += '<div class="createTime"><span class="timeago" title="' + question[i].updateTime + '"></span></div>';
                     html += '</div>';
                     html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
                     html += '<div class="browseCount"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].browseCount + '浏览' + '</a></div>';
                     html += '</div>';
                 }
                 $(".context-div").empty().append(html);
+            },error:function () {
+                alert("登录后才可以看个人的提问呦");
             }
         });
     }

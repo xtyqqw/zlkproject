@@ -243,7 +243,7 @@
                         layer.confirm('是否确认删除', function (index) {
                             var data1 = JSON.stringify(data);
                             $.ajax({
-                                url: "<%=request.getContextPath()%>/question/toUpdate",
+                                url: "<%=request.getContextPath()%>/question/deleteList",
                                 contentType: "application/json;charset=UTF-8",
                                 data: {"data": data1},
                                 success: function () {

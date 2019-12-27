@@ -11,8 +11,6 @@
 <head>
     <title>提问编辑页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
@@ -199,7 +197,10 @@
                     identifier: 'questionSynopsis',
                     rules: [{
                         type: 'empty',
-                        prompt: '简要内容不能为空哟'
+                        prompt: '问题摘要内容不能为空哟'
+                    }, {
+                        type: 'maxLength[150]',
+                        prompt: '请注意问题摘要最大长度不能超过150'
                     }]
                 },
                 typeName: {
