@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <style type="text/css">

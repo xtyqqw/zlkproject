@@ -15,12 +15,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/typo.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/animate.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/articleShow.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/questionShow.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
+
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
     <style type="text/css">
         /*底部样式*/
@@ -86,13 +85,12 @@
             <div class="ui horizontal link list">
                 <div class="item">
                     <img src="${question.user.userImg}" alt="" class="ui avatar image">
-                    <div class="content"><a href="<%=request.getContextPath() %>/personal/person" class="header"
+                    <div class="content"><a href="javascript:void(0)" class="header"
                                             style="box-shadow: none;height: auto;">${question.user.userRealname}</a>
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i> <span><fmt:formatDate value="${question.createTime}"
-                                                                        pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                    <i class="calendar icon"></i> <span><fmt:formatDate value="${question.updateTime}" type="both" dateStyle="long" timeStyle="short"/></span>
                 </div>
                 <div class="item">
                     <i class="eye icon"></i> <span>${question.browseCount}</span>
