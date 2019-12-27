@@ -10,7 +10,6 @@
 <head>
     <title>发文须知</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
     <script src="<%=request.getContextPath() %>/layui/layui.all.js"></script>
     <style type="text/css">
@@ -51,11 +50,6 @@
         }
         .ag-content {
             margin-left: 310px;
-        }
-        .ag-main a {
-            background-color: #1296db;
-            margin-left: 550px;
-            margin-top: 20px;
         }
         /*底部样式*/
         body{margin: 0;}
@@ -129,7 +123,7 @@
                 <li>&nbsp;&nbsp;&nbsp;•&nbsp;恶意谩骂攻击他人</li>
             </ul>
         </div>
-        <a href="<%=request.getContextPath() %>/community/article-edit" role="button" class="btn btn-info col-md-2">知道了，开始撰写</a>
+        <a href="<%=request.getContextPath() %>/community/article-edit" class="ui blue button fluid" style="margin-left: 525px;margin-top: 20px;width: 20%;">知道了，开始撰写</a>
     </div>
     <div id="footer">
         <ul>
