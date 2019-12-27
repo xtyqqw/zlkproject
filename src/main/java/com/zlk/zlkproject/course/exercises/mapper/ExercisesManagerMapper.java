@@ -128,7 +128,7 @@ public interface ExercisesManagerMapper {
      *@author zhang
      *@time 2019/12/23  16:27
      */
-    List<Integer> selectExerciseNumBySectionId(Integer sectionId);
+    List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
 
     /**
      *@Author luanke
