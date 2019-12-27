@@ -122,26 +122,9 @@
         .continue-learn:hover{
             box-shadow: 1px 1px 5px 1px #D4D4D4;
         }
-        /*.continue-learn{display: none;}
-        .continue-learn.active{display: block}*/
     </style>
 </head>
 <body>
-<!-- 鼠标移入移出显示隐藏继续学习 -->
-<%--<script type="text/javascript">
-    $(function(){
-        $(".learn-main").mouseenter(function(){
-            var index = $(this).index();
-            /*$(this).addClass("main").siblings().removeClass("main");
-            $(".continue-learn").eq(index).addClass("active").siblings().removeClass("active");*/
-            $(this).$(".continue-learn").show()/*.siblings().removeClass("continue-learn")*/;
-            $(this).$(".yuan").css("background-color","#914FF1");
-        });
-        $('.learn-main').mouseleave(function() {
-            $(".continue-learn").removeClass("active").siblings().removeClass("active");
-        });
-    })
-</script>--%>
 <div class="learnrecord">
     <%--<c:forEach items="${itemList}" var="item">
         <div class="timeline">
