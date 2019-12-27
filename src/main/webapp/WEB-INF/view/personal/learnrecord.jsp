@@ -265,8 +265,6 @@
         showRecord();
         getPage();
         percent();
-        /*$(window).scrollTop(0);*/
-        document.documentElement.scrollTop=document.body.scrollTop=0;
     })
 </script>
 <%--流加载--%>
