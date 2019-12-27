@@ -293,7 +293,6 @@
                     , {field: 'typeName', title: '文章方向', width: 90,align:'center'}
                     , {
                         title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
-
                     }
                 ]]
                 , limits: [5, 10, 20]
@@ -337,7 +336,7 @@
                         }
                     });
                     break;
-            };
+            }
         });
 
         renderTable();
@@ -369,7 +368,7 @@
                         });
                     }
                     break;
-            };
+            }
         });
 
         //监听行工具事件
