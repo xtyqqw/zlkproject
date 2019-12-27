@@ -67,8 +67,8 @@
                             <i class="dropdown icon"></i>
                             <div class="text">待解决</div>
                             <div class="menu">
-                                <div class="item" data-value="待解决">待解决</div>
-                                <div class="item" data-value="已解决">已解决</div>
+                                <div class="item" data-value="0">待解决</div>
+                                <div class="item" data-value="1">已解决</div>
                             </div>
                         </div>
                         <input type="text" name="questionTitle" placeholder="标题：简短描述标题,以问号结尾,最多只能输入30字"
