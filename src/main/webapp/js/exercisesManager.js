@@ -42,6 +42,15 @@ window.onload = function () {
                     '\n' +
                     '                        </select>\n' +
                     '                    </div>');
+
+                $("#exerciseNumSelectDiv").empty();
+                $("#exerciseNumSelectDiv").append(' <label class="layui-form-label">习题序号</label>\n' +
+                    '                   <div class="layui-input-block">\n' +
+                    '                       <select class="layui-select" name="exerciseNum" id="exerciseNumSelect" lay-filter="exerciseNumSelect">\n' +
+                    '                           <option value="">请选择习题序号</option>\n' +
+                    '                        </select>\n' +
+                    '                    </div>');
+
                 form.render('select');
                 layer.open({
                     title: "新增",
@@ -133,18 +142,25 @@ window.onload = function () {
                     type:"POST",
                     url:basePath+"/exercisesManager/selectExerciseNumBySectionId",
                     data:{"eId":data.eid},
+                    data:{"sectionId":data.sectionId},
                     dataType:"json",
                     success:function (res) {
                         $("#exerciseNumSelect").empty();
-                        $("#exerciseNumSelect").append('<option value="">请选择习题序号</option>');
-                        $.each(res.exerciseNumList,function (i, exerciseNum) {
+                        $("#exerciseNumSelect").append(
+                            '<input type="text" name="exerciseNum" id="exerciseNum" class="layui-input" disabled="true">'
+                        );
+
+
+                        /*$("#exerciseNumSelect").append('<option value="'+res.count1+'">'+res.count1+'</option>');*/
+                        /*$.each(res.exerciseNumList,function (i, exerciseNum) {
                             $("#exerciseNumSelect").append('<option value="'+exerciseNum+'">'+exerciseNum+'</option>');
-                        });
+                        });*/
                         $("#exerciseNumSelect").val(data.exercisesNum);
                         form.render('select','exerciseNumDiv');
                     }
                 });
                 $("#chapterLastNum").val(data.chapterNum);
+                $("#exerciseNum").val(data.exerciseNum)
                 $("#title").val(data.title);
                 $("#answerA").val(data.answerA);
                 $("#answerB").val(data.answerB);

@@ -83,4 +83,9 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
     public List<Integer> selectExerciseNumBySectionId(Integer sectionId) {
         return exercisesManagerMapper.selectExerciseNumBySectionId(sectionId);
     }
+
+    @Override
+    public Integer selectExerciseCount(Integer sectionId) {
+        return exercisesManagerMapper.selectExerciseCount(sectionId);
+    }
 }

@@ -129,4 +129,13 @@ public interface ExercisesManagerMapper {
      *@time 2019/12/23  16:27
      */
     List<Integer> selectExerciseNumBySectionId(Integer sectionId);
+
+    /**
+     *@Author luanke
+     *@Description //查询小节此题数量
+     *@Date 10:41 2019/12/26
+     *@Param
+     *@return
+    **/
+    Integer selectExerciseCount(Integer sectionId);
 }
