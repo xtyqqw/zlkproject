@@ -1,9 +1,9 @@
-    <%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/12/16
-  Time: 19:10
-  To change this template use File | Settings | File Templates.
+<%--
+Created by IntelliJ IDEA.
+User: Administrator
+Date: 2019/12/16
+Time: 19:10
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -15,7 +15,6 @@
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.css" />
 </head>
 <body>
 <div>
@@ -186,7 +185,7 @@
                     <div class="field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">首图</label>
-                            <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;">
+                            <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;z-index: auto;">
                                 <div class="visible content">上传图片</div>
                                 <div class="hidden content">
                                     可以是相关的代码截图或是引人注目的封面
@@ -215,7 +214,6 @@
 <%--受js文件运行机制所致，引用时一定要注意顺序--%>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="<%=request.getContextPath() %>/Semantic-UI-Calendar/calendar.js"></script>
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
 <script type="text/javascript">
@@ -238,6 +236,7 @@
             ,type:'datetime'
             //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
+            ,value: new Date()
         });
     });
 

@@ -27,6 +27,7 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
 
     @Override
     public Integer updateExercisesByEId(Exercises exercises) {
+        exercisesManagerMapper.updateLastExerciseNum(exercises);
         return exercisesManagerMapper.updateExercisesByEId(exercises);
     }
 
