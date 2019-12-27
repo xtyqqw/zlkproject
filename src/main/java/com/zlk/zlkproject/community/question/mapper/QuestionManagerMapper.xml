@@ -7,15 +7,14 @@
         <id column="question_id" property="questionId" javaType="java.lang.String"/>
         <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
         <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="question_content_html" property="questionContentHtml" javaType="java.lang.String"/>
         <result column="solve" property="solve" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="update_time" property="updateTime" javaType="java.util.Date"/>
         <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
         <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
-        <result column="zan_count" property="zanCount" javaType="java.lang.Integer"/>
-        <result column="cai_count" property="caiCount" javaType="java.lang.Integer"/>
         <result column="audit" property="audit" javaType="java.lang.String"/>
-        <result column="response_count" property="responseCount" javaType="java.lang.Integer"/>
+        <result column="question_synopsis" property="questionSynopsis" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
         <result column="tag_name" property="tagName" javaType="java.lang.String"/>
     </resultMap>
@@ -55,6 +54,9 @@
             <if test="questionContent!=null and questionContent!='' ">
                 question_content=#{questionContent},
             </if>
+            <if test="questionContentHtml!=null and questionContentHtml!='' ">
+                question_content_html=#{questionContentHtml},
+            </if>
             <if test="solve!=null and solve!='' ">
                 solve=#{solve},
             </if>
@@ -70,17 +72,11 @@
             <if test="questionSetTop!=null and questionSetTop!='' ">
                 question_set_top=#{questionSetTop},
             </if>
-            <if test="zanCount!=null and zanCount!='' ">
-                zan_count=#{zanCount},
-            </if>
-            <if test="caiCount!=null and caiCount!='' ">
-                cai_count=#{caiCount},
-            </if>
             <if test="audit!=null and audit!='' ">
                 audit=#{audit},
             </if>
-            <if test="responseCount!=null and responseCount!='' ">
-                response_count=#{responseCount},
+            <if test="questionSynopsis!=null and questionSynopsis!='' ">
+                question_synopsis=#{questionSynopsis},
             </if>
             <if test="typeName!=null and typeName!='' ">
                 type_name=#{typeName},

@@ -33,7 +33,7 @@ public class StuCommentServiceImpl implements StuCommentService {
     public List<StuComment> findStuCmt(Integer sectionId, Integer page, Integer size) {
         page = (page - 1) * size;
         List<StuComment> list = stuCommentMapper.findStuCmt(sectionId, page, size);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for(StuComment s: list) {
             s.setDateString(sdf.format(s.getDate()));
             for (StuComment ss:s.getStuCommentList()){

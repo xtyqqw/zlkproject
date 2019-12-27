@@ -230,12 +230,6 @@
         var height = document.getElementById("personal-iframe").contentWindow.document.body.scrollHeight;
         $("#personal-iframe").height(height);
     });*/
-    /*$(window.parent.document).find("#personal-iframe").load(function(){
-        var main = $(window.parent.document).find("#personal-iframe");
-        main.height(800);
-        var thisheight = $(document).height();
-        main.height(thisheight);
-    });*/
     /*侧边导航点击事件*/
     $(function(){
         $("a[name='dian']").click(function(){

@@ -56,7 +56,8 @@ public class RecordController {
             /*查询已观看时间*/
             Integer done = recordService.selectUserTime(userId,sectionId);
             /*已完成多少百分比*/
-            long per = Math.round((100 * done) / sum);
+            long per;
+            per = Math.round((100 * done) / sum);
             if(per>=100){
                 per=100;
             }

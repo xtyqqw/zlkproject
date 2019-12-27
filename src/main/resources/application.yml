@@ -1,7 +1,6 @@
 server:
   port: 8080
 
-
 spring:
   messages:
     basename: message/msg
@@ -48,13 +47,13 @@ spring:
         # 登录密码
         login-password: admin
 
-    username: root
-    password: 6666
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+      username: user1
+      password:
+      url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
-  #    mode: HTML5
   #    #编码 可不用配置
   #    encoding: UTF-8
   #    #开发配置为false,避免修改模板还要重启服务器
@@ -83,10 +82,12 @@ spring:
       max-request-size: 2048MB
   #redis配置
   redis:
-    host: 193.112.82.60
-    port: 6379
-    password: liutonghui89
+
+    host:
+    port:
+    password:
     timeout: 3000
+
     jedis:
       pool:
         max-active: 100
@@ -102,8 +103,8 @@ fdfs:
   #tracker地址
   tracker-list: 193.112.82.60:22122
   #通过nginx 访问地址
-  resHost: http://193.112.82.60
-  storagePort: 8888/
+  resHost: 4
+  storagePort:
   #缩略图配置
   thumb-image:
     height: 150

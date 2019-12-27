@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
 import com.zlk.zlkproject.community.question.service.QuestionManagerService;
+import com.zlk.zlkproject.community.question.service.QuestionTagService;
 import com.zlk.zlkproject.entity.Question;
+import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +32,8 @@ public class QuestionManager {
     private QuestionManagerService questionManagerService;
     @Autowired
     private LogUtil logUtil;
+    @Autowired
+    private QuestionTagService questionTagService;
     /*
      * @descrption
      * @author gby
@@ -40,11 +45,11 @@ public class QuestionManager {
     public ModelAndView testQuestion(String condition) throws Exception{
         ModelAndView mv = new ModelAndView();
         mv.addObject("condition",condition);
-        mv.setViewName("/view/community/questionManager");
+        mv.setViewName("admin/questionManager");
         return mv;
     }
     /**
-     * 文章管理接口
+     * 问题管理接口
      * @param pagination
      * @return
      */
@@ -74,7 +79,7 @@ public class QuestionManager {
         questionManagerService.deleteById(questionId);
         //日志记录删除问题
         logUtil.setLog(request,"删除问题标题为"+questionByQuestionId.getQuestionTitle()+"的信息");
-        return "/view/community/questionManager";
+        return "admin/questionManager";
     }
 
     /**
@@ -97,13 +102,13 @@ public class QuestionManager {
      * @date 2019/12/23 21:47
      */
     @RequestMapping(value = "/toUpdate")
-    public ModelAndView updateBtu(Question question){
-        ModelAndView mv=new ModelAndView();
-        /**获取当前文章信息*/
+    public String updateBtu(Question question,Model model,Tag tag){
+        /**获取当前问题及标签信息*/
         Question questions = questionManagerService.findById(question.getQuestionId());
-        mv.addObject("questions",questions);
-        mv.setViewName("/view/community/questionManagerEdit");
-        return mv;
+        List<Tag> tagList = questionTagService.listByTag(tag);
+        model.addAttribute("tagList", tagList);
+        model.addAttribute("questions",questions);
+        return "admin/questionManagerEdit";
 
     }
     /*
@@ -116,22 +121,22 @@ public class QuestionManager {
     @RequestMapping(value = "/update")
     public ModelAndView update( Question question, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        //判断文章是否更改，更改后判断更改后的文章是否存在
+        //判断问题是否更改，更改后判断更改后的问题是否存在
           Question questionById = questionManagerService.findById(question.getQuestionId());
-        //修改文章信息，修改完成提交，提示:修改成功；否则，提示：修改失败
+        //修改问题信息，修改完成提交，提示:修改成功；否则，提示：修改失败
         Integer flag = questionManagerService.updateById(question);
         if(flag == 1){
             mv.addObject("flag","true");
             mv.addObject("msg","修改成功");
-            mv.setViewName("/view/community/questionManager");
-            //日志记录修改文章
+            mv.setViewName("admin/questionManager");
+            //日志记录修改问题
             logUtil.setLog(request," 修改问题标题为"+questionById.getQuestionTitle()+"的信息");
 
             return mv;
         }else {
             mv.addObject("flag","true");
             mv.addObject("msg","修改失败");
-            mv.setViewName("/view/community/questionManager");
+            mv.setViewName("admin/questionManager");
             return mv;
         }
     }
