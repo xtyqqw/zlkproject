@@ -284,10 +284,10 @@
                     }
                 },
                 onSuccess: function () {
-                    alert("发布成功,请等待审核通过");
-                },
-                /*onFailure: function() {
-                    alert("发布失败,请确认发布内容");
+                    alert("发布成功，请等待审核通过！");
+                }
+                /*,onFailure: function() {
+                    alert("发布失败，请确认发布内容！");
                 }*/
             });
         }
