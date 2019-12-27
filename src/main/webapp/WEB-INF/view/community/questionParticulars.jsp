@@ -101,7 +101,12 @@
             <!--内容-->
             <div class="ui right aligned basic segment field">
                 <div class="ui violet basic label">${question.typeName}</div>
-                <div class="ui orange basic label">${question.solve}</div>
+                <c:if test="${question.solve == 0}">
+                    <div class="ui orange basic label">待解决</div>
+                </c:if>
+                <c:if test="${question.solve == 1}">
+                    <div class="ui orange basic label">已解决</div>
+                </c:if>
             </div>
             <h2 class="ui center aligned header" style="box-shadow: none;">
                 ${question.questionTitle}

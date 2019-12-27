@@ -171,12 +171,39 @@
                     , {field: 'questionContent', title: '问题内容', width: 130}
                     , {field: 'questionContentHtml', title: 'html问题内容', width: 130}
                     , {field: 'questionSynopsis', title: '简要', width: 100}
-                    , {field: 'solve', title: '问题状态', width: 90}
+                    , {
+                        field: 'solve', title: '问题状态', width: 90,
+                        templet: function (data) {// 替换数据
+                            if (data.solve == "0") {
+                                return "待解决";
+                            } else if (data.solve == "1") {
+                                return "已解决";
+                            }
+                        }
+                    }
                     , {field: 'browseCount', title: '浏览数', width: 80}
                     , {field: 'createTime', title: '发布时间', width: 90}
                     , {field: 'updateTime', title: '更新时间', width: 90}
-                    , {field: 'questionSetTop', title: '置顶', width: 80}
-                    , {field: 'audit', title: '审核', width: 90}
+                    , {field: 'questionSetTop', title: '置顶', width: 80,
+                        templet: function (data) {// 替换数据
+                            if (data.questionSetTop == "0") {
+                                return "置顶";
+                            } else if (data.questionSetTop == "1") {
+                                return "不置顶";
+                            }
+                        }
+                    }
+                    , {field: 'audit', title: '审核', width: 90,
+                        templet: function (data) {// 替换数据
+                            if (data.audit == 0) {
+                                return "正在审核";
+                            } else if (data.audit == "1") {
+                                return "审核通过";
+                            } else if (data.audit == "2") {
+                                return "审核未过";
+                            }
+                        }
+                    }
                     , {field: 'typeName', title: '类别', width: 80}
                     , {field: 'tagName', title: '标签', width: 90}
                     , {
