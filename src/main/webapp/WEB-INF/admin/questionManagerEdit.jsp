@@ -85,9 +85,9 @@
                             <i class="dropdown icon"></i>
                             <div class="default text">请选择审核状态</div>
                             <div class="menu">
-                                <div class="item" data-value="0">审核中</div>
-                                <div class="item" data-value="1">已审核</div>
-                                <div class="item" data-value="2">审核未通过</div>
+                                <div class="item" data-value="0">正在审核</div>
+                                <div class="item" data-value="1">审核通过</div>
+                                <div class="item" data-value="2">审核未过</div>
                             </div>
                         </div>
                     </div>

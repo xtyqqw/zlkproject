@@ -163,8 +163,8 @@
         order by chapter_num;
     </select>
     <!--更改章节序号-->
-    <select id="updateLastChapterNum" resultType="java.lang.Integer">
+    <update id="updateLastChapterNum">
         update chapter set chapter_num = #{chapterLastNum}
         where chapter_num = #{chapterNum} and courses_id = #{coursesId};
-    </select>
+    </update>
 </mapper>
