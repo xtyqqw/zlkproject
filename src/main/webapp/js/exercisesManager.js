@@ -43,14 +43,6 @@ window.onload = function () {
                     '                        </select>\n' +
                     '                    </div>');
 
-                $("#exerciseNumSelectDiv").empty();
-                $("#exerciseNumSelectDiv").append(' <label class="layui-form-label">习题序号</label>\n' +
-                    '                   <div class="layui-input-block">\n' +
-                    '                       <select class="layui-select" name="exerciseNum" id="exerciseNumSelect" lay-filter="exerciseNumSelect">\n' +
-                    '                           <option value="">请选择习题序号</option>\n' +
-                    '                        </select>\n' +
-                    '                    </div>');
-
                 form.render('select');
                 layer.open({
                     title: "新增",
