@@ -204,6 +204,7 @@ To change this template use File | Settings | File Templates.
 
                 <div class="ui right aligned container">
                     <button type="submit" onclick="publish()" class="ui button violet">提交</button>
+                    <button type="button" onclick="window.history.go(-1)" class="ui button violet">返回</button>
                 </div>
 
             </form>
