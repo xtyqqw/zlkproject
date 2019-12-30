@@ -629,9 +629,6 @@
     });
 
 
-
-
-
     //日期js
     layui.use('laydate',function(){
         var laydate=layui.laydate;
@@ -669,7 +666,7 @@
     var date = $("#userBirthday").val();
     function formatDate(date){
         date = new Date(date);
-        //获取年月日的值
+        //获取年月日,时分秒的值
         var y=date.getFullYear();
         var m=date.getMonth()+1;
         var d=date.getDate();

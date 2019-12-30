@@ -35,8 +35,10 @@ public class Item {
     private Integer sectionGrade;
     /*小节Id*/
     private Integer sectionId;
+    /*状态*/
+    private String state;
 
-    public Item(Integer coursesId, String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime, String stuTime, long per, Integer sectionGrade, Integer sectionId) {
+    public Item(Integer coursesId, String coursesName, String coverPic, String chapterName, String sectionName, Date studyTime, String stuTime, long per, Integer sectionGrade, Integer sectionId, String state) {
         this.coursesId = coursesId;
         this.coursesName = coursesName;
         this.coverPic = coverPic;
@@ -47,6 +49,7 @@ public class Item {
         this.per = per;
         this.sectionGrade = sectionGrade;
         this.sectionId = sectionId;
+        this.state = state;
     }
 
     public Item() {

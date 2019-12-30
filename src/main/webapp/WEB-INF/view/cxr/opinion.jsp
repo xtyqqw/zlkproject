@@ -163,7 +163,7 @@
         </div>
         <form action="<%=request.getContextPath()%>/opinion/addOpinion" method="post">
             <div id="shuru">
-                <textarea id="shurukuang" name="opinionContext" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
+                <textarea id="shurukuang" name="opinionContext" required="required" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
             </div>
 
             <div id="zhuti_wei">
@@ -171,7 +171,7 @@
                 <button id="quxiao">取消</button>
             </div>
 
-         </form>
+        </form>
     </div>
     <%--提交成功提示框--%>
     <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
