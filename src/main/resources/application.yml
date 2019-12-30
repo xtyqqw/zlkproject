@@ -1,5 +1,6 @@
 server:
   port: 8080
+  max-http-header-size: 102400
 
 spring:
   jpa:
@@ -110,7 +111,6 @@ spring:
         max-wait: 30000
         min-idle: 10
 
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
@@ -128,3 +128,4 @@ fdfs:
   #获取连接池最大数量
   pool:
     max-total: 200
+
