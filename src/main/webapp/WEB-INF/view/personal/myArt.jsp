@@ -29,7 +29,7 @@
             <i class="layui-icon"></i>
             <p style="font-size: 1vw;">点击上传图片</p>
         </div>
-        <input type="hidden" name="figures" id="userImg"  >
+        <input type="hidden" name="figures" id="userImg" value="${articles.figures}">
     </div>
     <div class="layui-input-inline" style="margin:0 0 3vw 3vw;">
         <div class="layui-upload-list">

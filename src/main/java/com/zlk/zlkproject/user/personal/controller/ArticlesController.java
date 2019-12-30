@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class ArticlesController {
     @RequestMapping(value = "update")
     public ModelAndView updateArticles(Articles articles)throws Exception{
         ModelAndView mv = new ModelAndView();
+        articles.setUpdateTime(new Date());
         Integer flag=articlesService.updateArticles(articles);
         mv.setViewName("redirect:/articles/toarticles");
         if(flag == 1){
