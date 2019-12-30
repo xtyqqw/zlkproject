@@ -1,5 +1,6 @@
 server:
   port: 8080
+  max-http-header-size: 102400
 
 spring:
   jpa:
@@ -60,9 +61,9 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
-      username: user1
-      password: liutonghui
-      url: jdbc:mysql://193.112.82.60/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password:
+      url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
       driver-class-name: com.mysql.cj.jdbc.Driver
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
@@ -101,7 +102,7 @@ spring:
   redis:
     host: 193.112.82.60
     port: 6379
-    password: liutonghui89
+    password:
     timeout: 3000
     jedis:
       pool:
@@ -110,16 +111,15 @@ spring:
         max-wait: 30000
         min-idle: 10
 
-
 #FastDfs的配置
 fdfs:
   #读取inputsream阻塞时间
   connect-timeout: 600
   so-timeout: 1500
   #tracker地址
-  tracker-list: 47.98.183.4:22122
+  tracker-list:
   #通过nginx 访问地址
-  resHost: http://47.98.183.4
+  resHost:
   storagePort: 8888/
   #缩略图配置
   thumb-image:

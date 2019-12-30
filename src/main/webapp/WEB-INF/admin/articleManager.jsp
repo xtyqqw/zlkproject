@@ -183,7 +183,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [1, '#009688'],
+            tips: [3, '#009688'],
             time: 2000
         });
     });
@@ -191,8 +191,8 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
-            area: ['auto', 'auto'],
+            tips: [2, '#009688'],
+            area: ['500px','auto'],
             time: 2000
         });
     });
@@ -269,7 +269,6 @@
                     , {field: 'figures', title: '插图相对路径', width: 130,align:'center'}
                     , {field: 'articleContentHtml', title: '文章内容', width: 110,align:'center'}
                     , {field: 'articleDigest', title: '文章摘要', width: 90,align:'center'}
-                    , {field: 'articleContent', title: '文章内容', width: 90,align:'center'}
                     , {field: 'zanCount', title: '赞数', width: 60,align:'center'}
                     , {field: 'caiCount', title: '踩数', width: 60,align:'center'}
                     , {field: 'inform', title: '举报', width: 60,align:'center',templet:function (d) {
