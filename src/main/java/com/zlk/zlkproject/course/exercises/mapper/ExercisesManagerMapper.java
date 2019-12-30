@@ -120,6 +120,7 @@ public interface ExercisesManagerMapper {
      */
     Integer selectCountBySectionId(Integer sectionId);
 
+
     /**
      *  根据小节id查找习题数量
      *@method selectExerciseNumBySectionId
@@ -130,6 +131,10 @@ public interface ExercisesManagerMapper {
      */
     List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
 
+
+
+
+
     /**
      *@Author luanke
      *@Description //查询小节此题数量
@@ -138,4 +143,12 @@ public interface ExercisesManagerMapper {
      *@return
     **/
     Integer selectExerciseCount(Integer sectionId);
+
+    /**
+     * 根据习题Id查询单个记录
+     * @param eId
+     * @return
+     */
+    Exercises selectExercisesByEId(Integer eId);
+
 }

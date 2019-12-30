@@ -116,6 +116,7 @@ public interface ExercisesManagerService {
      */
     Integer selectCountBySectionId(Integer sectionId);
 
+
     /**
      *  根据小节id查找习题数量
      *@method selectExerciseNumBySectionId
@@ -124,6 +125,7 @@ public interface ExercisesManagerService {
      *@author zhang
      *@time 2019/12/23  16:27
      */
+
     List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
 
     /**
@@ -134,4 +136,14 @@ public interface ExercisesManagerService {
      *@return
      **/
     Integer selectExerciseCount(Integer sectionId);
+
+
+
+    /**
+     * 根据习题Id查询单个记录
+     * @param eId
+     * @return
+     */
+    Exercises selectExercisesByEId(Integer eId);
+
 }

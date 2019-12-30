@@ -16,6 +16,23 @@
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <%--<style>
+    #zhang1{
+        position: absolute;
+        top: 0px;
+        left: 26%;
+    }
+    #ke1{
+        width: 160px;
+    }
+
+        #jie1{
+            position: absolute;
+            top: 0px;
+            left: 55%;
+        }
+
+    </style>--%>
 </head>
 <body>
     <div>
@@ -133,7 +150,7 @@
         <div class="layui-form" id="select_box">
             <div class="layui-form-item">
                 <label class="layui-form-label">课程名称:</label>
-                <div class="layui-input-block" lay-filter="coursesNameDiv">
+                <div class="layui-input-block" lay-filter="coursesNameDiv" id="ke1">
                     <select class="layui-select" name="coursesId" id="coursesNameSelect" lay-filter="coursesName" lay-search>
                         <option value="">请选择一个课程</option>
                         <c:forEach items="${coursesList}" var="course">
@@ -142,7 +159,7 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="zhang1">
                 <label class="layui-form-label">章节名称:</label>
                 <div class="layui-input-block layui-form" lay-filter="chapterNameDiv">
                     <select class="layui-select" name="chapterId" id="chapterNameSelect" lay-filter="chapterName" lay-search>
@@ -151,7 +168,7 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div class="layui-form-item" id="jie1">
                 <label class="layui-form-label">小节名称:</label>
                 <div class="layui-input-block layui-form" lay-filter="sectionNameDiv">
                     <select class="layui-select" name="sectionId" id="sectionNameSelect" lay-filter="sectionName" lay-search>
