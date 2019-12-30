@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <style type="text/css">
@@ -83,6 +83,9 @@
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
+                    <div class="item">
+                        <i class="comments outline icon"></i> <span>${article.commentCount}</span>
+                    </div>
                 </div>
             </div>
             <div class="ui attached segment">
@@ -132,8 +135,8 @@
                             <ul id="art_cmt_stream"></ul>
                         </div>
                     </div>
-                    <div id="art-cmt-textBox" class="field violet" style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                        <div id="div_artCmt_toolBar" class="toolbar"></div>
+                    <div id="art-cmt-textBox" class="field violet" style="border: 1px solid #777777; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                        <div id="div_artCmt_toolBar" class="toolbar" style="border-bottom: 1px solid #777777;"></div>
                         <div id="div_artCmt_text" class="text" style="height: 10vw;"></div>
                     </div>
                     <div id="art-cmt-btnBox" class="fields">

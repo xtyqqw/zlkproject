@@ -11,7 +11,7 @@
         <result column="solve" property="solve" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" javaType="java.util.Date"/>
         <result column="update_time" property="updateTime" javaType="java.util.Date"/>
-        <result column="browse_count" property="browseCount" javaType="java.lang.String"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.Integer"/>
         <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
         <result column="audit" property="audit" javaType="java.lang.String"/>
         <result column="question_synopsis" property="questionSynopsis" javaType="java.lang.String"/>

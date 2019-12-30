@@ -42,7 +42,7 @@
                                         </c:if>
                                     </div>
                                 </div>
-                                <p class="m-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;">${articlesTags.articleDigest}</p>
+                                <p class="m-text" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">${articlesTags.articleDigest}</p>
                                 <div class="ui grid">
                                     <div class="row">
                                         <div class="eleven wide column">
@@ -55,6 +55,9 @@
                                                 </div>
                                                 <div class="item">
                                                     <i class="eye icon"></i> <span>${articlesTags.browseCount}</span>
+                                                </div>
+                                                <div class="item">
+                                                    <i class="comments outline icon"></i> <span>${articlesTags.commentCount}</span>
                                                 </div>
                                             </div>
                                         </div>

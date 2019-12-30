@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.comment.service.impl;
 
 import com.zlk.zlkproject.community.comment.mapper.ArticleCommentsMapper;
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,10 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
     @Override
     public Integer updateArtCmtInform(Integer articleCommentId, String inform) {
         return articleCommentsMapper.updateArtCmtInform(articleCommentId,inform);
+    }
+
+    @Override
+    public Integer countByArticle(Article article) {
+        return articleCommentsMapper.countByArticle(article);
     }
 }

@@ -151,4 +151,14 @@ public interface ExercisesManagerMapper {
      */
     Exercises selectExercisesByEId(Integer eId);
 
+    /**
+     *  更换习题号码
+     *@method updateLastExerciseNum
+     *@params [exercises]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/27  14:38
+     */
+    Integer updateLastExerciseNum(Exercises exercises);
+
 }

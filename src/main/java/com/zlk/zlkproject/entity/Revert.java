@@ -1,5 +1,7 @@
 package com.zlk.zlkproject.entity;
 
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +19,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Revert {
-
     /*回答用户id*/
     private Integer revertId;
     /*父id*/
@@ -31,11 +32,11 @@ public class Revert {
     /**回复时间的字符串*/
     private String dateString;
     /*赞*/
-    private Integer zanCount;
+    private Integer zan;
     /*踩*/
-    private Integer caiCount;
+    private Integer cai;
     /**举报**/
-    private Integer report;
+    private String report;
     /*问题id*/
     private String questionId;
     /*用户id*/
@@ -48,8 +49,8 @@ public class Revert {
     private List<Revert> revertList;
     /**赞踩集合*/
     private List<QuestionRevert> questionZanCaiList;
-
     private String flag;
+
     public Revert() {
     }
 }

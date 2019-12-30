@@ -93,6 +93,10 @@ public class QuestionHomeController {
         List<Question> questionMyList = questionHomeService.findByUserId(pagination);
         Integer count = questionHomeService.findQuestionId(userId);
         Map<String, Object> map = new HashMap<>();
+        if (user.getUserId() == null) {
+            map.put("msg","请先进行登录");
+            return map;
+        }
         map.put("questionMyList", questionMyList);
         map.put("count",count);
         return map;

@@ -42,6 +42,11 @@ public class Section {
     /**小节简介 对应数据库的 section_intro字段*/
     private String sectionIntro;
 
+    /**
+     * 本小节对应的章节
+     */
+    private String chapterName;
+
     private List<UserSection> userSectionList;
 
     public Section() {

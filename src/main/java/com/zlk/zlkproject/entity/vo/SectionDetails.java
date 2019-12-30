@@ -30,4 +30,9 @@ public class SectionDetails {
 
     /**小节的个人评分 */
     private Integer sectionGrade;
+
+    /**
+     * 本小节对应的章节
+     */
+    private String chapterName;
 }
