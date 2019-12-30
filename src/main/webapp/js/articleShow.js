@@ -412,6 +412,7 @@ $(document).ready(function () {
                                         let num = parseInt(thisObj.parent().next().text());
                                         num ++;
                                         thisObj.parent().next().text(num);
+                                        
                                         thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
                                         thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
                                         thisObj.parent().next().next().children().eq(0).css('font-size','18px');
@@ -483,8 +484,8 @@ $(document).ready(function () {
                                         thisObj.css('color','rgb(102,71,238)');
                                         let num = parseInt(thisObj.parent().next().text());
                                         num ++;
-
                                         thisObj.parent().next().text(num);
+
                                         thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
                                         thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
                                         thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');

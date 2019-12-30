@@ -137,9 +137,9 @@
                     </div>
                     <div id="art-cmt-textBox" class="field violet" style="border: 1px solid #777777; height: 12vw;border-radius: 4px;margin-top: 1vw;">
                         <div id="div_artCmt_toolBar" class="toolbar" style="border-bottom: 1px solid #777777;"></div>
-                        <div id="div_artCmt_text" class="text" style="height: 10vw;"></div>
+                        <div id="div_artCmt_text" class="text" style="height: 8vw;"></div>
                     </div>
-                    <div id="art-cmt-btnBox" class="fields">
+                    <div id="art-cmt-btnBox" class="fields" style="margin-top: 4px;margin-bottom: 4px;">
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
                             <div class="ui left">
                                 <button id="artCmt_btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>
