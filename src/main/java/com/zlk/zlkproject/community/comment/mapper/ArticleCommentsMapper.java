@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.comment.mapper;
 
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -104,4 +105,13 @@ public interface ArticleCommentsMapper {
      * @date: 2019/12/8 9:45
      */
     Integer updateArtCmtInform(Integer articleCommentId, String inform);
+
+    /**
+     * @description: 更新评论数
+     * @param article
+     * @return: java.lang.Integer
+     * @author: QianKeQin
+     * @date: 2019/12/30 14:07
+     */
+    Integer countByArticle(Article article);
 }

@@ -83,6 +83,9 @@
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
                     </div>
+                    <div class="item">
+                        <i class="comments outline icon"></i> <span>${article.commentCount}</span>
+                    </div>
                 </div>
             </div>
             <div class="ui attached segment">

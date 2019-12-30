@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.articleShow.controller;
 
 import com.zlk.zlkproject.community.articleFollow.service.ArticleFollowService;
 import com.zlk.zlkproject.community.articleShow.service.ArticleShowService;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.MyFollower;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class ArticleShowController {
             String userId = "" + user.getUserId();
             //把articleId保存到Session中备用
             request.getSession().setAttribute("articleId",articleId);
+            request.getSession().setAttribute("article",articleShowService.getAndConvert(articleId));
             mv.addObject("userId",userId);
             mv.setViewName("view/community/articleShow");
         }
