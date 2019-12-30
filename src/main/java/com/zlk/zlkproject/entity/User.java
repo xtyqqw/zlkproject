@@ -7,9 +7,12 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
+
 
 /**
  * @program: User
@@ -105,7 +108,12 @@ public class User {
         this.userDateTimeDou=userDateTimeDou;
         this.userAllTimeDou=userAllTimeDou;
     }
-
+//    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+//    public Date getBirthday() {
+//        return userBirthday;
+//    }
     public User() {
     }
+
+
 }

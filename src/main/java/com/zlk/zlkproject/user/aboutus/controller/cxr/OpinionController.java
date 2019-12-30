@@ -50,6 +50,7 @@ public class OpinionController {
         if(user1!=null){
             //获取用户id，将ID放入对象中。
             opinion.setOpinionUserId(user1.getUserId());
+
             int a=opinionService.addOpinion(opinion);
             if(a>0){
                 mv.setViewName("view/cxr/opinion");
