@@ -190,6 +190,7 @@
             , type: 'datetime'
             //  设置选择日期不能超过当前日期
             , max: getNowFormatDate()
+            , value: new Date()
         });
     });
 
