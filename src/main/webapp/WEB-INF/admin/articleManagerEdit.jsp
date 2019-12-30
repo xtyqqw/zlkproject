@@ -226,6 +226,7 @@ To change this template use File | Settings | File Templates.
             ,type:'datetime'
             //  设置选择日期不能超过当前日期
             ,max : getNowFormatDate()
+            ,value: new Date()
         });
     });
     layui.use('laydate',function(){
@@ -413,8 +414,8 @@ To change this template use File | Settings | File Templates.
                         type: 'empty',
                         prompt: '请注意文章标题不能为空'
                     }, {
-                        type: 'maxLength[50]',
-                        prompt: '请注意文章标题最大字数不能超过50'
+                        type: 'maxLength[30]',
+                        prompt: '请注意文章标题最大字数不能超过30'
                     }]
                 },
                 articleContent: {
@@ -441,14 +442,14 @@ To change this template use File | Settings | File Templates.
                         prompt: '请最多选择三个文章标签,你可以先删除多余标签,再重新选择'
                     }]
                 },
-                figures: {
+                /*figures: {
                     identifier: 'figures',
                     rules: [{
                         type: 'regExp',
                         value: /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/,
                         prompt: '如需要添加首图,请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址'
                     }]
-                },
+                },*/
                 articleDigest: {
                     identifier: 'articleDigest',
                     rules: [{
