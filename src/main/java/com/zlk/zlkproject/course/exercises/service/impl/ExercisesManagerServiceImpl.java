@@ -27,6 +27,7 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
 
     @Override
     public Integer updateExercisesByEId(Exercises exercises) {
+        exercisesManagerMapper.updateLastExerciseNum(exercises);
         return exercisesManagerMapper.updateExercisesByEId(exercises);
     }
 
@@ -80,7 +81,17 @@ public class ExercisesManagerServiceImpl implements ExercisesManagerService {
     }
 
     @Override
-    public List<Integer> selectExerciseNumBySectionId(Integer sectionId) {
+    public List<Exercises> selectExerciseNumBySectionId(Integer sectionId) {
         return exercisesManagerMapper.selectExerciseNumBySectionId(sectionId);
+    }
+
+    @Override
+    public Integer selectExerciseCount(Integer sectionId) {
+        return exercisesManagerMapper.selectExerciseCount(sectionId);
+    }
+
+
+    public Exercises selectExercisesByEId(Integer eId) {
+        return exercisesManagerMapper.selectExercisesByEId(eId);
     }
 }
