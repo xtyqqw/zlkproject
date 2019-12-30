@@ -31,6 +31,7 @@ public class ArticleAddServiceImpl implements ArticleAddService {
         article.setCaiCount(0);
         article.setZanCount(0);
         article.setArticleSetTop(1);
+        article.setInform(1);
         return articleAddRepository.save(article);
     }
 }

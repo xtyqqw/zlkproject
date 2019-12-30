@@ -56,6 +56,9 @@
                                                 <div class="item">
                                                     <i class="eye icon"></i> <span>${articlesTags.browseCount}</span>
                                                 </div>
+                                                <div class="item">
+                                                    <i class="comments outline icon"></i> <span>${articlesTags.commentCount}</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="right aligned five wide column">

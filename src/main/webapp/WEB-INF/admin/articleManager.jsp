@@ -191,7 +191,7 @@
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [2, '#009688'],
-            area: ['500px','auto'],
+            area: ['520px','auto'],
             time: 2000
         });
     });

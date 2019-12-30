@@ -120,4 +120,8 @@
     <update id="updateArtCmtInform">
         UPDATE article_comment SET inform = #{inform} WHERE article_comment_id = #{articleCommentId}
     </update>
+
+    <update id="countByArticle">
+        UPDATE article SET comment_count = #{commentCount} WHERE article_id = #{articleId}
+    </update>
 </mapper>

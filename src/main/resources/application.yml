@@ -1,5 +1,6 @@
 server:
   port: 8080
+  #请求头长度
   max-http-header-size: 102400
 
 spring:
@@ -128,4 +129,3 @@ fdfs:
   #获取连接池最大数量
   pool:
     max-total: 200
-
