@@ -11,6 +11,7 @@
         #select_box{
             width: 50%;
             margin: 20px 0;
+            word-wrap: break-word;
         }
     </style>
 </head>
@@ -28,7 +29,7 @@
                 <label class="layui-form-label">课程名称:</label>
                 <div class="layui-input-block" lay-filter="coursesNameDiv">
                     <select class="layui-select" name="coursesId" id="coursesNameInsertSelect" lay-filter="coursesNameSelect" lay-search>
-                        <option value="">请选择课程</option>
+                        <option value="">请选择一个课程</option>
                         <c:forEach items="${coursesList}" var="course">
                             <option value="${course.coursesId}">(ID:${course.coursesId}) ${course.coursesName}</option>
                         </c:forEach>
@@ -207,14 +208,14 @@
             //监听行工具事件
             table.on('tool(chapter)', function(obj){
                 var data = obj.data;
-                console.log(obj);
                 if(obj.event === 'del'){
                     layer.confirm('真的删除行么', function(index){
                         $.ajax({
                             type : "POST",
                             async: false,
                             url :"<%=request.getContextPath()%>/chapterManager/deleteChapter",
-                            data: {"chapterId":data.chapterId},
+                            contentType: "application/json;charset=UTF-8",
+                            data: JSON.stringify(data),
                             success: function (result) {
                                 layer.msg(result.msg);
                                 table.reload('chapter',{

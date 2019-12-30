@@ -27,7 +27,7 @@ public class ArticlesTagsController {
     public ModelAndView tags(@PageableDefault(page = 0, value = 4, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                              Integer tagId){
         ModelAndView mv = new ModelAndView();
-        if (tagId!=10) {
+        if (tagId != null) {
             mv.addObject("pages", articlesTagsService.listArticles(tagId, pageable));
             mv.addObject("activeTagId",tagId);
             mv.setViewName("view/community/articlesTags");

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1515327_e9zpgf0s8tn.css">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_iwhxw2tfbue.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <%--引入wangEditor富文本编辑器--%>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/wangEditor.js"></script>
@@ -82,9 +82,9 @@
                                     <div id="mid" class="time">/</div>
                                     <div id="total_time" class="time">--:--:--</div>
                                 </div>
-                                <div class="div_btn float_right" style="padding: 2px 0 0 0;">
-                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: block"></i>
-                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="width: 100%;height: 100%;font-size: 25px;color: white;display: none"></i>
+                                <div class="div_btn float_right" style="padding: 2px 0 0 0;width: 30px">
+                                    <i id="fscreen" class="iconfont icon-quanping enableClk" style="font-size: 25px;color: white;display: block"></i>
+                                    <i id="escreen" class="iconfont icon-tuichuquanping enableClk" style="font-size: 25px;color: white;display: none"></i>
                                 </div>
                                 <div id="div_sharpness" class="div_btn float_right">
                                     <span id="nv" style="display: none">${addr1}</span>
@@ -255,23 +255,6 @@
         <button class="layui-btn" id="answer-submit" style="display: none">提交</button>
     </div>
 
-    <%------------------------------------------------------------------------%>
-    <%--<div class="SCS_content" style="width: 96%">
-        <div class="SCS_c_lbox" style="height: 200px">
-            <div class="SCS_userBox">
-                <div class="SCS_headPhoto_box" style="width: 7vw;height: 7vw">
-                    <img style="width: 100%;height: 100%">
-                </div>
-                <div class="SCS_userName_box" style="width: 7vw;height: 20px"></div>
-            </div>
-        </div>
-        <div class="SCS_c_rbox">
-            <div class="SCS_toolBar" style="display: none"></div>
-            <div class="SCS_textEditor" style="height: 150px;display: block"></div>
-            <div class="SCS_replyEditor" style="height: 100px;display: none"></div>
-            <div class="SCS_cmt_toolBox"></div>
-        </div>
-    </div>--%>
-    <%------------------------------------------------------------------------%>
+    <div id="exercises" hidden="hidden"></div>
 </body>
 </html>

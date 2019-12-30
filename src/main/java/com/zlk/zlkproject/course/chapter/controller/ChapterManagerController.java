@@ -7,6 +7,7 @@ import com.zlk.zlkproject.course.section.service.SectionService;
 import com.zlk.zlkproject.course.sections_manager.service.SectionsManagerService;
 import com.zlk.zlkproject.entity.Chapter;
 import com.zlk.zlkproject.entity.Courses;
+import com.zlk.zlkproject.entity.Exercises;
 import com.zlk.zlkproject.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,7 +103,14 @@ public class ChapterManagerController {
      */
     @RequestMapping(value = "/deleteChapter",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> deleteChapter(HttpServletRequest request, Chapter chapter) throws Exception{
+    public Map<String,Object> deleteChapter(HttpServletRequest request,@RequestBody Chapter chapter) throws Exception{
+        List<Chapter> chapterList = chapterService.selectChapterByCoursesId(chapter.getCoursesId());
+        for (Chapter chapter1:chapterList){
+            if(chapter.getChapterNum()<chapter1.getChapterNum()){
+                chapter1.setChapterNum(chapter1.getChapterNum()-1);
+                chapterService.updateChapterByChapterId(chapter1);
+            }
+        }
         Integer integer = chapterService.deleteByChapterId(chapter);
         String message = "";
         if (integer >0){
@@ -195,5 +203,6 @@ public class ChapterManagerController {
         map.put("count",count);
         return map;
     }
+
 
 }

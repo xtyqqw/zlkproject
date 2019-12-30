@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zlk.zlkproject.course.chapter.mapper.ChapterMapper">
-    <resultMap id="ExercisesMap" type="com.zlk.zlkproject.course.exercises">
+<mapper namespace="com.zlk.zlkproject.course.exercises.mapper.ExercisesMapper">
+    <resultMap id="ExercisesMap" type="com.zlk.zlkproject.entity.Exercises">
         <id property="eId" column="e_id" javaType="java.lang.Integer"/>
         <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
         <result property="type" column="type" javaType="java.lang.String"/>
@@ -14,5 +14,46 @@
         <result property="answerC" column="answer_C" javaType="java.lang.String"/>
         <result property="answerD" column="answer_D" javaType="java.lang.String"/>
         <result property="truth" column="truth" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="userAnswer" column="answer" javaType="java.lang.String"/>
     </resultMap>
+
+    <resultMap id="UserAnswerMap" type="com.zlk.zlkproject.entity.UserAnswer">
+        <id property="ueId" column="ue_id" javaType="java.lang.Integer"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+        <result property="exerciseNum" column="exercise_num" javaType="java.lang.Integer"/>
+        <result property="answer" column="answer" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="findUserAnswer" resultMap="UserAnswerMap">
+        SELECT * FROM user_exercises
+        WHERE user_id = #{userId} AND section_id = #{sectionId} AND exercise_num = #{exerciseNum}
+    </select>
+
+    <insert id="addUserAnswer">
+        INSERT INTO user_exercises (user_id, section_id, exercise_num, answer)
+        VALUES (#{userId}, #{sectionId}, #{exerciseNum}, #{answer})
+    </insert>
+
+    <update id="updateUserAnswer">
+        UPDATE user_exercises SET answer = #{answer}
+        WHERE user_id = #{userId} AND section_id = #{sectionId} AND exercise_num = #{exerciseNum}
+    </update>
+
+    <!--<select id="findExercisesBySectionIdAndUserId" resultMap="ExercisesMap">
+        SELECT e.*,ue.user_id,ue.answer
+        FROM exercises e
+        LEFT JOIN (
+                    SELECT * FROM user_exercises WHERE user_id = #{userId}
+                  ) ue
+        ON e.section_id = ue.section_id AND e.exercise_num = ue.exercise_num
+        WHERE e.section_id = #{sectionId} ORDER BY e.exercise_num
+    </select>-->
+
+    <select id="findExercisesBySectionIdAndUserId" resultMap="ExercisesMap">
+        SELECT *
+        FROM exercises e
+        WHERE e.section_id = #{sectionId} ORDER BY e.exercise_num
+    </select>
 </mapper>

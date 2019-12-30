@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.course.exercises.mapper.ExercisesManagerMapper">
+    <resultMap id="ExercisesManagerMap" type="com.zlk.zlkproject.entity.Exercises">
+        <id property="eId" column="e_id" javaType="java.lang.Integer"/>
+        <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+        <result property="type" column="type" javaType="java.lang.String"/>
+        <result property="exerciseNum" column="exercise_num" javaType="java.lang.Integer"/>
+        <result property="title" column="title" javaType="java.lang.String"/>
+        <result property="answerA" column="answer_A" javaType="java.lang.String"/>
+        <result property="answerB" column="answer_B" javaType="java.lang.String"/>
+        <result property="answerC" column="answer_C" javaType="java.lang.String"/>
+        <result property="answerD" column="answer_D" javaType="java.lang.String"/>
+        <result property="truth" column="truth" javaType="java.lang.String"/>
+    </resultMap>
+
+    <!--添加新的习题-->
+    <insert id="insertExercises" useGeneratedKeys="true" keyProperty="eId" parameterType="com.zlk.zlkproject.entity.Exercises">
+        insert into exercises
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sectionId != null">
+                section_id,
+            </if>
+            <if test="type != null and type != ''">
+                type,
+            </if>
+            <if test="exerciseNum != null">
+                exercise_num,
+            </if>
+            <if test="title != null and title != ''">
+                title,
+            </if>
+            <if test="answerA != null and answerA != ''">
+                answer_A,
+            </if>
+            <if test="answerB != null and answerB != ''">
+                answer_B,
+            </if>
+            <if test="answerC != null and answerC != ''">
+                answer_C,
+            </if>
+            <if test="answerD != null and answerD != ''">
+                answer_D,
+            </if>
+            <if test="truth != null and truth != ''">
+                truth,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sectionId != null">
+                #{sectionId},
+            </if>
+            <if test="type != null and type != ''">
+                #{type},
+            </if>
+            <if test="exerciseNum != null">
+                #{exerciseNum},
+            </if>
+            <if test="title != null and title != ''">
+                #{title},
+            </if>
+            <if test="answerA != null and answerA != ''">
+                #{answerA},
+            </if>
+            <if test="answerB != null and answerB != ''">
+                #{answerB},
+            </if>
+            <if test="answerC != null and answerC != ''">
+                #{answerC},
+            </if>
+            <if test="answerD != null and answerD != ''">
+                #{answerD},
+            </if>
+            <if test="truth != null and truth != ''">
+                #{truth},
+            </if>
+        </trim>
+    </insert>
+    <!--根据chapterId修改章节信息-->
+    <update id="updateExercisesByEId" parameterType="com.zlk.zlkproject.entity.Exercises">
+        update exercises
+        <set>
+            <if test="sectionId != null">
+                section_id = #{sectionId},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="exerciseNum != null">
+                exercise_num = #{exerciseNum},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="answerA != null and answerA != ''">
+                answer_A = #{answerA},
+            </if>
+            <if test="answerB != null and answerB != ''">
+                answer_B = #{answerB},
+            </if>
+            <if test="answerC != null and answerC != ''">
+                answer_C = #{answerC},
+            </if>
+            <if test="answerD != null and answerD != ''">
+                answer_D = #{answerD},
+            </if>
+            <if test="truth != null and truth != ''">
+                truth = #{truth},
+            </if>
+        </set>
+        where e_id = #{eId};
+    </update>
+    <!--根据id删除章节-->
+    <delete id="deleteByEId" parameterType="com.zlk.zlkproject.entity.Exercises">
+        delete from exercises where e_id = #{eId};
+    </delete>
+
+    <!--根据习题Id查询一条记录-->
+    <select id="selectExercisesByEId" resultMap="ExercisesManagerMap">
+        select e_id,section_id,type,exercise_num,title,answer_A,answer_B,answer_C,
+        answer_D,truth from exercises where e_id = #{eId};
+    </select>
+
+    <!--查询全部信息并分页显示-->
+    <select id="selectAllAndLimit" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e_id,section_id,type,exercise_num,title,answer_A,answer_B,answer_C,answer_D,truth
+        from exercises limit #{startPage},#{limit};
+    </select>
+    <!--查询全部数量-->
+    <select id="selectAllCount" resultType="java.lang.Integer">
+        select count(1) from exercises;
+    </select>
+    <!--查找当前课程下的所有问题-->
+    <select id="selectByCoursesId" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e.e_id,e.section_id,e.type,e.exercise_num,e.title,e.answer_A,e.answer_B,
+        e.answer_C,e.answer_D,e.truth from exercises e
+        left join section s on e.section_id = s.section_id
+        left join chapter c on s.chapter_id = c.chapter_id
+        <if test="coursesId != null">
+            where c.courses_id = #{coursesId}
+        </if>
+        limit #{startPage},#{limit};
+    </select>
+    <!--查找当前课程下的所有问题的数量-->
+    <select id="selectCountByCoursesId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from exercises e
+        left join section s on e.section_id = s.section_id
+        left join chapter c on s.chapter_id = c.chapter_id
+        <if test="coursesId != null">
+            where c.courses_id = #{coursesId}
+        </if>
+    </select>
+    <!--查找当前章节下的所有问题-->
+    <select id="selectByChapterId" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e.e_id,e.section_id,e.type,e.exercise_num,e.title,e.answer_A,e.answer_B,
+        e.answer_C,e.answer_D,e.truth from exercises e
+        left join section s on e.section_id = s.section_id
+        <if test="chapterId != null">
+            where s.chapter_id = #{chapterId}
+        </if>
+        limit #{startPage},#{limit};
+    </select>
+    <!--查找当前章节下的所有问题的数量-->
+    <select id="selectCountByChapterId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from exercises e
+        left join section s on e.section_id = s.section_id
+        <if test="chapterId != null">
+            where s.chapter_id = #{chapterId}
+        </if>
+    </select>
+    <!--查找当前小节下的所有问题-->
+    <select id="selectBySectionId" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e.e_id,e.section_id,e.type,e.exercise_num,e.title,e.answer_A,e.answer_B,
+        e.answer_C,e.answer_D,e.truth from exercises e
+        <if test="sectionId != null">
+            where e.section_id = #{sectionId}
+        </if>
+        limit #{startPage},#{limit};
+    </select>
+    <!--查找当前小节下的所有问题的数量-->
+    <select id="selectCountBySectionId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from exercises e
+        <if test="sectionId != null">
+            where e.section_id = #{sectionId}
+        </if>
+    </select>
+    <!--查找当前小节下的所有问题的序号-->
+    <select id="selectExerciseNumBySectionId" parameterType="java.lang.Integer" resultMap="ExercisesManagerMap">
+        select e.e_id,e.section_id,e.type,e.exercise_num,e.title,e.answer_A,e.answer_B,
+        e.answer_C,e.answer_D,e.truth from exercises e
+        <if test="sectionId != null">
+            where e.section_id = #{sectionId}
+        </if>
+    </select>
+    <select id="selectExerciseCount"  resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM exercises WHERE exercises.section_id=#{sectionId}
+    </select>
+    <!--互换习题序号-->
+    <update id="updateLastExerciseNum">
+        update exercises set exercise_num = #{exerciseLastNum}
+        where exercise_num = #{exerciseNum} and section_id = #{sectionId};
+    </update>
+</mapper>

@@ -10,7 +10,9 @@
         <result property="sectionName" column="section_name" javaType="java.lang.String"/>
         <result property="sectionIntro" column="section_intro" javaType="java.lang.String"/>
         <result property="videoAddr1" column="video_addr1" javaType="java.lang.String"/>
+        <result property="videoPath1" column="video_path1" javaType="java.lang.String"/>
         <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"/>
+        <result property="videoPath2" column="video_path2" javaType="java.lang.String"/>
         <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
         <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
     </resultMap>
@@ -88,6 +90,14 @@
         , section_time = #{sectionTime}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
     </update>
 
+    <update id="updateDataChangeChapter" parameterType="com.zlk.zlkproject.entity.Section">
+        UPDATE section SET chapter_id = #{chapterId}, section_num = #{sectionNum} WHERE section_id = #{sectionId}
+    </update>
+
+    <update id="updateDataLast" parameterType="com.zlk.zlkproject.entity.Section">
+        UPDATE section SET section_num = #{lastSectionNum} WHERE chapter_id = #{chapterId} AND section_num = #{sectionNum}
+    </update>
+
     <delete id="deleteData" parameterType="com.zlk.zlkproject.entity.Section">
         DELETE FROM section WHERE section_id = #{sectionId}
     </delete>
@@ -95,4 +105,12 @@
     <select id="findTimeByChapterId" resultType="java.lang.Integer">
         SELECT sum(section_time) FROM section WHERE chapter_id = #{chapterId}
     </select>
+
+    <update id="changeVideo1">
+        UPDATE section SET video_addr1 = #{videoAddr1}, video_path1 = #{videoPath1}, section_time = #{videoTime} WHERE section_id = #{sectionId}
+    </update>
+
+    <update id="changeVideo2">
+        UPDATE section SET video_addr2 = #{videoAddr2}, video_path2 = #{videoPath2}, section_time = #{videoTime} WHERE section_id = #{sectionId}
+    </update>
 </mapper>

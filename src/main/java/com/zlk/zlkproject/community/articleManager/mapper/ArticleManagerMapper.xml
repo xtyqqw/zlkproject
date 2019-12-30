@@ -94,7 +94,7 @@
             <if test="typeName!=null and typeName!='' ">
                 type_name=#{typeName},
             </if>
-         </set>
+        </set>
         where article_id=#{articleId}
     </update>
     <select id="selectArticleByTitle" parameterType="java.lang.String" resultMap="articleEntityMap">
@@ -109,6 +109,9 @@
     </select>
     <select id="selectArticleByArticleId" parameterType="java.lang.String" resultMap="articleEntityMap">
         select * from article where article_id=#{articleId}
+    </select>
+    <select id="findArticleToArticleEdit" parameterType="java.lang.String" resultMap="articleEntityMap">
+        select * from article
     </select>
     <select id="selectArticleByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="articleEntityMap">
         select * from article

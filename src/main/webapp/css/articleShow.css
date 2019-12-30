@@ -9,12 +9,12 @@
     width: 100%;
     height: 100%;
 }
-#div-artCmt-text{
+#div_artCmt_text{
     width: 100%;
-    height: 320px;
+    /*height: 320px;*/
     background-color: white;
-    border-radius: 3px;
-    border: solid 1px #777777;
+    /*border-radius: 4px;*/
+    /*border: solid 1px #777777;*/
 }
 #art-cmt-btnBox{
     position: relative;
@@ -24,12 +24,12 @@
     margin: 0 auto;
 }
 /*--------------------------------------------------------------------------------------*/
-#cmt-content-box{
+#ART_contentBox{
     width: 100%;
     height: auto;
     padding: 10px 0 0 0;
 }
-.cmt-content{
+.ART_content{
     background-color: rgb(245,245,245);
     width: 90%;
     height: auto;
@@ -38,14 +38,14 @@
     border-radius: 5px;
     overflow: hidden;
 }
-.cmt-c-lbox{
+.ART_c_lbox{
     width: 20%;
     height: 300px;
     display: inline-block;
     vertical-align: top;
     font-size: 10px;
 }
-.cmt-c-rbox{
+.ART_c_rbox{
     width: 80%;
     height: auto;
     padding: 5px 0;
@@ -53,28 +53,28 @@
     vertical-align: top;
     font-size: 14px;
 }
-.cmt-user-box{
+.ART_user_Box{
     position: relative;
     width: auto;
     height: auto;
     margin: 0 auto;
     top: 25px;
 }
-.cmt-head-photo-box{
+.ART_headPhoto_Box{
     width: 9vw;
     height: 9vw;
     margin: 0 auto;
     border-radius: 50%;
     overflow: hidden;
 }
-.cmt-user-name-box{
+.ART_userName_Box{
     width: 9vw;
     height: 30px;
     margin: 10px auto;
     font-size: 24px;
     text-align: center;
 }
-.cmt-text-editor{
+.ART_textEditor{
     width: 98%;
     height: 220px;
     margin: 0 auto 5px auto !important;
@@ -83,24 +83,24 @@
     background-color: white;
     border-radius: 5px;
 }
-.cmt-text-editor div{
+.ART_textEditor div{
     height: auto !important;
     overflow-y: hidden;
     word-wrap: break-word;
 }
-.cmt-c-reply-box{
+.ART_c_replyBox{
     width: 98%;
     height: auto;
     margin: 0 auto 5px auto;
     display: none;
 }
-.cmt-reply-toolBar{
+.ART_replyToolBar{
     background-color: white;
     border-radius: 3px 3px 0 0;
     border: 1px solid #8D8D8D;
     border-bottom: none;
 }
-.cmt-reply-editor{
+.ART_replyEditor{
     background-color: white;
     width: 100%;
     height: 100px;
@@ -109,17 +109,17 @@
     margin: 0 auto 5px auto;
     display: block;
 }
-.cmt-reply-editor .w-e-panel-container{
+.ART_replyEditor .w-e-panel-container{
     height: 150px !important;
     overflow-y: auto !important;
 }
-.cmt-reply-editor .w-e-panel-tab-content{
+.ART_replyEditor .w-e-panel-tab-content{
     height: 100px !important;
 }
 .w-e-panel-tab-content textarea{
     height: 69px !important;
 }
-.cmt-reply-editor .w-e-text{
+.ART_replyEditor .w-e-text{
     overflow-y: auto !important;
     word-wrap: break-word;
 }
@@ -136,46 +136,51 @@
     text-align: center;
     cursor: pointer;
 }
-.art-cmt-toolBox{
+.ART_cmt_toolBox{
     width: 98%;
     height: 30px;
     margin: 0 auto 5px auto;
     border-radius: 4px;
     background-color: white;
 }
-.cmt-reply-toolBox{
+.ART_reply_toolBox{
     width: 98%;
     height: 30px;
     margin: 0 auto;
     border-radius: 4px;
     background-color: white;
 }
-.cmt-reply-box{
+.ART_replyBox{
     width: 98%;
     height: auto;
     padding: 5px 0;
     margin: 0 auto;
     display: none;
 }
-.cmt-c-t-box{
+.ART_c_t_box{
     width: 100px;
     height: 27px;
     padding: 3px 0 0 0;
     font-size: 17px;
 }
-.cmt-r-t-box{
+.ART_r_t_box{
     width: 100px;
     height: 27px;
     padding: 3px 0 0 0;
     font-size: 17px;
 }
-.cmt-space-div{
+.ART_spaceDiv{
     width: 10px;
     height: 100%;
 }
-.cmt-ZCbtn{
+.ART_ZCbtn{
     cursor: pointer;
 }
-.cmt-report-btn{
+.ART_reportBtn{
     cursor: pointer;
+}
+.w-e-text {
+    padding: 0 10px;
+    overflow-y: auto !important;
+    word-wrap: break-word;
 }

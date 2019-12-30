@@ -29,20 +29,27 @@ public interface DurationMapper {
     Integer findUserById(String userId);
 
     /**
-     * 技能水平
+     * 查询用户参加的项目下所有视频的数量
      * @param userId
      * @return
      */
-    Integer findCourses(String userId);
+    Integer findSectionAll(String userId);
 
     /**
-     * 查询视频总数
+     * 查询已完成视频数量
+     * @param userId
      * @return
      */
-    Integer selectSections();
+    Integer findWanCheng(String userId);
 
     /**
-     * 根据UserId查询用户已完成哪些视频
+     * 查询学习总时长
+     * @return
+     */
+    Integer selectAllTime(String userId);
+
+    /**
+     * 根据UserId查询用户参与项目的所有视频总时间
      * @param userId
      * @return
      */

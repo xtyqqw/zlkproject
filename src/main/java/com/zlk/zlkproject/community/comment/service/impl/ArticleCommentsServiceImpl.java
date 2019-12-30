@@ -23,6 +23,9 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
 
     @Override
     public Integer addArtCmt(ArticleComment articleComment) {
+        articleComment.setZan(0);
+        articleComment.setCai(0);
+        articleComment.setInform("false");
         return articleCommentsMapper.addArtCmt(articleComment);
     }
 
@@ -30,7 +33,7 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
     public List<ArticleComment> findArtCmt(String articleId, Integer page, Integer size) {
         page = (page - 1) * size;
         List<ArticleComment> list = articleCommentsMapper.findArtCmt(articleId, page, size);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (ArticleComment a : list) {
             a.setDateString(sdf.format(a.getDate()));
             for (ArticleComment aa : a.getArticleCommentList()) {

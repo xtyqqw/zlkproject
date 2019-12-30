@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlk.zlkproject.community.question.mapper.QuestionManagerMapper">
+    <resultMap id="questionEntityMap" type="com.zlk.zlkproject.entity.Question">
+        <id column="question_id" property="questionId" javaType="java.lang.String"/>
+        <result column="question_title" property="questionTitle" javaType="java.lang.String"/>
+        <result column="question_content" property="questionContent" javaType="java.lang.String"/>
+        <result column="question_content_html" property="questionContentHtml" javaType="java.lang.String"/>
+        <result column="solve" property="solve" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" javaType="java.util.Date"/>
+        <result column="browse_count" property="browseCount" javaType="java.lang.Integer"/>
+        <result column="question_set_top" property="questionSetTop" javaType="java.lang.String"/>
+        <result column="audit" property="audit" javaType="java.lang.String"/>
+        <result column="question_synopsis" property="questionSynopsis" javaType="java.lang.String"/>
+        <result column="type_name" property="typeName" javaType="java.lang.String"/>
+        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+    </resultMap>
+    <select id="findQuestionByLimit" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultMap="questionEntityMap">
+        select * from question
+        <if test="condition!='' and condition!=null">
+            where question_title like CONCAT('%',#{condition},'%')
+        </if>
+        order by question_id limit #{startPage},#{limit}
+    </select>
+    <select id="findCountByTitle" parameterType="com.zlk.zlkproject.admin.util.Pagination" resultType="java.lang.Integer">
+        select count(*) from question
+        <if test="condition!='' and condition!=null">
+            where question_title like CONCAT('%',#{condition},'%')
+        </if>
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="questionEntityMap">
+        select * from question where question_id=#{questionId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from question where question_id=#{questionId}
+    </delete>
+    <delete id="deletesById">
+        delete from question where question_id in
+        <foreach collection="questionList" item="questionList" open="(" separator="," close=")">
+            #{questionList.questionId}
+        </foreach>
+    </delete>
+
+    <update id="updateById" parameterType="com.zlk.zlkproject.entity.Question">
+        update question
+        <set>
+            <if test="questionTitle!=null and questionTitle!='' ">
+                question_title=#{questionTitle},
+            </if>
+            <if test="questionContent!=null and questionContent!='' ">
+                question_content=#{questionContent},
+            </if>
+            <if test="questionContentHtml!=null and questionContentHtml!='' ">
+                question_content_html=#{questionContentHtml},
+            </if>
+            <if test="solve!=null and solve!='' ">
+                solve=#{solve},
+            </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="browseCount!=null">
+                browse_count=#{browseCount},
+            </if>
+            <if test="questionSetTop!=null and questionSetTop!='' ">
+                question_set_top=#{questionSetTop},
+            </if>
+            <if test="audit!=null and audit!='' ">
+                audit=#{audit},
+            </if>
+            <if test="questionSynopsis!=null and questionSynopsis!='' ">
+                question_synopsis=#{questionSynopsis},
+            </if>
+            <if test="typeName!=null and typeName!='' ">
+                type_name=#{typeName},
+            </if>
+            <if test="tagName!=null">
+                tag_name=#{tagName},
+            </if>
+        </set>
+        where question_id=#{questionId}
+    </update>
+
+</mapper>

@@ -33,27 +33,50 @@ public class DurationController {
     public ModelAndView list(HttpServletRequest request, String userId){
         User user = (User) request.getSession().getAttribute("user");
         User lists=durationService.selectDuration(user.getUserId());
-        ModelAndView mv=new ModelAndView();
-        /*查询的技能水平*/
-        Integer skill=durationService.findCourses(user.getUserId());
-        /*技能水平值*/
-        Integer skills=Arith.ride(skill);
-        /*总视频数量*/
-        Integer sectionAll=durationService.selectSections();
-        /*用户已完成视频数量*/
+        /*每日学习时长*/
+        Double time=Arith.toHour(lists.getUserDateTime());
+        Double times = (double) Math.round(time*100)/100;
+        /*学习成长量*/
+        long grow = (long) Math.ceil(times / 10);
+        /*技能水平*/
+        Integer ful=durationService.findWanCheng(user.getUserId());
+        Integer sum=durationService.findSectionAll(user.getUserId());
+        long level;
+        if(sum!=0){
+            level=Math.round((ful*100)/sum);
+        }else {
+            level = 0;
+        }
+        /*查询用户学习总时长*/
+        Integer sectionAll=durationService.selectAllTime(user.getUserId());
+        /*用户参加项目的所有视频的总时长*/
         Integer finish=durationService.selectSection(user.getUserId());
         /*学习力*/
-        long ability = Math.round((finish*100 )/ sectionAll);
-        /*学习成长量*/
-        Integer ad = Arith.plus(lists.getUserDateTime());
+        long ability;
+        if(finish!=null){
+            ability = Math.round((sectionAll*100 )/ finish);
+            if(ability>=100){
+                ability=100;
+            }
+        }else {
+            ability=0;
+        }
+
+        /*超过多少学生，百分比*/
         Integer all=durationService.findUser();
         Integer rank=durationService.findUserById(lists.getUserId());
-        /*超过多少学生，百分比*/
-        Integer rankall=Arith.divide(rank,all);
-        mv.addObject("rankall",rankall);
-        mv.addObject("ad",ad);
-        mv.addObject("skills",skills);
+        Integer rankAll=Arith.divide(rank,all);
+        ModelAndView mv=new ModelAndView();
+        /*超过多少学生*/
+        mv.addObject("rankAll",rankAll);
         mv.addObject("lists",lists);
+        /*每日学习时长*/
+        mv.addObject("times",times);
+        /*学习成长量*/
+        mv.addObject("grow",grow);
+        /*技能水平*/
+        mv.addObject("level",level);
+        /*学习力*/
         mv.addObject("ability",ability);
         mv.setViewName("view/personal/learnlook");
         return mv;

@@ -5,32 +5,40 @@ $(document).ready(function () {
     var localObj = window.location;
     var basePath = localObj.protocol+"//"+localObj.host;
 
-    layui.use(['element','flow','layer'], function () {
+    layui.use(['element', 'flow', 'layer', 'form'], function () {
         var element = layui.element,
             $ = layui.jquery,
             flow = layui.flow,
             layer = layui.layer,
+            form = layui.form,
             articleId = parseInt($("#articleId").text());
 
+        //弹出层设置
+        layer.config({
+            offset: '35%'
+        });
+
         {
-            $("#artCmt-btn").click(function () {
+            $("#artCmt_btn").click(function () {
                 let isEmpty = true;
                 let lengthState = true;
                 let contentHtml = '' + artCmt_editor.txt.html();
                 let contentText = '' + artCmt_editor.txt.text();
+                contentHtml = contentHtml.replace(/'/g,"\\\'");
                 if (contentText === ''){
                     isEmpty = true;
                 }else {
                     isEmpty = false;
                 }
+                let articleId = '1';
                 let userId = '1';
                 let data = {'articleId':articleId, 'userId':userId, 'content':contentHtml};
-                if(contentHtml.length>512){
-                    alert("内容超出最大长度限制！");
-                    lengthState = false;
-                }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！");
+                }
+                if(contentHtml.length>200){
+                    layer.msg("内容超出最大长度限制！");
+                    lengthState = false;
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -42,14 +50,18 @@ $(document).ready(function () {
                             if (res.retmsg === '评论成功'){
                                 artCmt_editor.txt.clear();
                             }
+                        },
+                        error : function () {
+                            layer.msg('发表评论前，请先登录！');
+                            artCmt_editor.txt.clear();
                         }
                     });
                 }
                 lengthState = true;
             });
 
-            let artCmt = window.wangEditor;
-            let artCmt_editor = new artCmt('#div-artCmt-toolBar', '#div-artCmt-text');
+            let artCmtE = window.wangEditor;
+            let artCmt_editor = new artCmtE('#div_artCmt_toolBar', '#div_artCmt_text');
             artCmt_editor.customConfig.menus = [
                 'bold',
                 'italic',
@@ -61,19 +73,18 @@ $(document).ready(function () {
         }
 
         {
-
-            /*let userId = '1';
-            let articleId ='1546605080';*/
+            let userId = '1';
+            let articleId = '1';
             let flag = 0;
             function cmtFlowLoad(url) {
-                $("#art-cmt-ul-stream").empty();
+                flag = 0;
+                $("#art_cmt_stream").empty();
                 flow.load({
-                    elem: '#art-cmt-ul-stream',//流加载容器
+                    elem: '#art_cmt_stream',//流加载容器
                     isAuto: false,
                     done: function (page, next) { //加载下一页
                         let lis = [];
                         let size = 3;
-
                         let data = {"articleId": articleId, "page": page, "size": size};
                         $.ajax({
                             type: "POST",
@@ -94,15 +105,15 @@ $(document).ready(function () {
                                     let len = comment.articleCommentList.length;
                                     for (let i=0;i<len;i++){
                                         zanCaiState = 'none';
-                                        zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
-                                        caiStr = '<i class="iconfont icon-qinziAPPtubiao- cmt-ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
+                                        zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
+                                        caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                         for (let l=0;l<comment.articleCommentList[i].articleCommentZanCaiList.length;l++){
                                             if(comment.articleCommentList[i].articleCommentZanCaiList[l].userId === $("#userId").text() + ''){
                                                 zanCaiState = comment.articleCommentList[i].articleCommentZanCaiList[l].zanCai;
                                                 if (zanCaiState === 'zan')
-                                                    zanStr = '<i class="iconfont icon-dianzan cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                                    zanStr = '<i class="iconfont icon-dianzan ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                                 else if (zanCaiState === 'cai')
-                                                    caiStr = '<i class="iconfont icon-dianzan_active cmt-ZCbtn" data_name="cai" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                                    caiStr = '<i class="iconfont icon-dianzan_active ART_ZCbtn" data_name="cai" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                             }
                                         }
 
@@ -115,52 +126,52 @@ $(document).ready(function () {
                                             heightStr = '150px';
                                             data_type = 'normal';
                                         }
-                                        str1=str1 + '<div class="cmt-content" style="width: 96%">\n' +
+                                        str1=str1 + '<div class="ART_content" style="width: 96%">\n' +
                                                         '<span style="display:none;">'+ comment.articleCommentList[i].articleCommentId +'</span>' +
-                                                        '<div class="cmt-c-lbox" style="height: 200px">\n' +
-                                                            '<div class="cmt-user-box">\n' +
-                                                                '<div class="cmt-head-photo-box" style="width: 7vw;height: 7vw">\n' +
+                                                        '<div class="ART_c_lbox" style="height: 200px">\n' +
+                                                            '<div class="ART_user_Box">\n' +
+                                                                '<div class="ART_headPhoto_Box" style="width: 7vw;height: 7vw">\n' +
                                                                     '<img src="'+ comment.articleCommentList[i].userImg +'" style="width: 100%;height: 100%">\n' +
                                                                 '</div>\n' +
-                                                                '<div class="cmt-user-name-box" style="width: 7vw;height: 20px;font-size: 16px">'+ comment.articleCommentList[i].userRealName +'</div>\n' +
+                                                                '<div class="ART_userName_Box" style="width: 7vw;height: 20px;font-size: 16px">'+ comment.articleCommentList[i].userRealName +'</div>\n' +
                                                             '</div>\n' +
                                                         '</div>\n' +
-                                                        '<div class="cmt-c-rbox">\n' +
-                                                            '<div id="SCS_r_toolBar'+ flag +'" class="SCS_toolBar" style="display: none"></div>\n' +
+                                                        '<div class="ART_c_rbox">\n' +
+                                                            '<div id="ART_r_toolBar'+ flag +'" class="ART_toolBar" style="display: none"></div>\n' +
                                                             replyStr +
-                                                            '<div id="ART_r_textEditor'+ flag +'" class="cmt-text-editor" style="height: '+ heightStr +';display: block"></div>\n' +
-                                                            '<div class="cmt-c-reply-box">' +
-                                                                '<div id="ART_reply_ToolBar'+ flag +'" class="cmt-reply-toolBar"></div>\n' +
-                                                                '<div id="ART-reply-Editor'+ flag +'" class="cmt-reply-editor"></div>\n' +
+                                                            '<div id="ART_r_textEditor'+ flag +'" class="ART_textEditor" style="height: '+ heightStr +';display: block"></div>\n' +
+                                                            '<div class="ART_c_replyBox">' +
+                                                                '<div id="ART_reply_ToolBar'+ flag +'" class="ART_replyToolBar"></div>\n' +
+                                                                '<div id="ART_reply_Editor'+ flag +'" class="ART_replyEditor"></div>\n' +
                                                                 '<span style="display: none">'+ flag +'</span>' +
                                                                 '<div class="ART_replyBtn" data_type="son">回复</div>' +
                                                                 '<span style="display: none">'+ comment.articleCommentId +'</span>' +
                                                             '</div>\n' +
-                                                            '<div class="art-cmt-toolBox">' +
+                                                            '<div class="ART_cmt_toolBox">' +
                                                                 '<span style="display: none">'+ zanCaiState +'</span>' +
                                                                 '<span style="display: none">yes</span> ' +
-                                                                '<div class="cmt-space-div" style="float: left"></div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 30px">' +
+                                                                '<div class="ART_spaceDiv" style="float: left"></div>' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 30px">' +
                                                                     zanStr +
                                                                 '</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].zan +'</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].zan +'</div>' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                                     caiStr +
                                                                 '</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].cai +'</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left">' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].cai +'</div>' +
+                                                                '<div class="ART_c_t_box" style="float: left">' +
                                                                     '<span style="display: none">false</span>' +
-                                                                    '<span class="cmt-flex-btn" data_type="'+ data_type +'" style="cursor: pointer">展开/收起</span>' +
+                                                                    '<span class="ART_flexBtn" data_type="'+ data_type +'" style="cursor: pointer">展开/收起</span>' +
                                                                 '</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 65px">' +
+                                                                /*'<div class="ART_c_t_box" style="float: left;width: 65px">' +
                                                                     '<span style="display: none">false</span>' +
-                                                                    '<span class="cmt-report-btn">举报</span>' +
-                                                                '</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: left;width: 50px">' +
+                                                                    '<span class="ART_reportBtn">举报</span>' +
+                                                                '</div>' +*/
+                                                                '<div class="ART_c_t_box" style="float: left;width: 50px">' +
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="replyBtn" style="cursor: pointer">回复</span>' +
                                                                 '</div>' +
-                                                                '<div class="cmt-c-t-box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
+                                                                '<div class="ART_c_t_box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
                                                                     comment.articleCommentList[i].dateString +
                                                                 '</div>' +
                                                             '</div>\n' +
@@ -168,13 +179,13 @@ $(document).ready(function () {
                                                     '</div>' +
                                                     '<script>' +
                                                     'let ART_r_E = window.wangEditor;\n' +
-                                                    'let ART_r_editor'+ flag +' = new ART_r_E(\'#ART_r_tooBar'+ flag +'\', \'#ART_r_textEditor'+ flag +'\');\n' +
+                                                    'let ART_r_editor'+ flag +' = new ART_r_E(\'#ART_r_toolBar'+ flag +'\', \'#ART_r_textEditor'+ flag +'\');\n' +
                                                     'ART_r_editor'+ flag +'.create();\n' +
                                                     'ART_r_editor'+ flag +'.txt.html(\''+ comment.articleCommentList[i].content +'\');\n' +
                                                     'ART_r_editor'+ flag +'.$textElem.attr(\'contenteditable\', false);\n' +
 
                                                     'let ART_reply_E = window.wangEditor;\n' +
-                                                    'let ART_reply_editors'+ flag +' = new ART_reply_E(\'#ART_reply_ToolBar'+ flag +'\', \'#ART-reply-Editor'+ flag +'\');\n' +
+                                                    'let ART_reply_editors'+ flag +' = new ART_reply_E(\'#ART_reply_ToolBar'+ flag +'\', \'#ART_reply_Editor'+ flag +'\');\n' +
                                                     'replyEditorArr.push(ART_reply_editors'+ flag +');' +
                                                     'ART_reply_editors'+ flag +'.customConfig.menus = [\n' +
                                                         '\'bold\',\n' +
@@ -188,84 +199,84 @@ $(document).ready(function () {
                                         flag++;
                                     }
                                     zanCaiState = 'none';
-                                    zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
-                                    caiStr = '<i class="iconfont icon-qinziAPPtubiao- cmt-ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
+                                    zanStr = '<i class="iconfont icon-qinziAPPtubiao-1 ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(121,121,121)"></i>';
+                                    caiStr = '<i class="iconfont icon-qinziAPPtubiao- ART_ZCbtn" data_name="cai" style="font-size: 18px;color: rgb(121,121,121)"></i>';
                                     for (let i=0;i<comment.articleCommentZanCaiList.length;i++){
                                         if(comment.articleCommentZanCaiList[i].userId === $("#userId").text() + ''){
                                             zanCaiState = comment.articleCommentZanCaiList[i].zanCai;
                                             if (zanCaiState === 'zan')
-                                                zanStr = '<i class="iconfont icon-dianzan cmt-ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                                zanStr = '<i class="iconfont icon-dianzan ART_ZCbtn" data_name="zan" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                             else if (zanCaiState === 'cai')
-                                                caiStr = '<i class="iconfont icon-dianzan_active cmt-ZCbtn" data_name="cai" style="font-size: 20px;color: rgb(102,71,238);"></i>';
+                                                caiStr = '<i class="iconfont icon-dianzan_active ART_ZCbtn" data_name="cai" style="font-size: 20px;color: rgb(102,71,238);"></i>';
                                         }
                                     }
-                                    str='<div class="cmt-content">\n' +
+                                    str='<div class="ART_content">\n' +
                                             '<span style="display: none">'+ comment.articleCommentId +'</span>' +
-                                            '<div class="cmt-c-lbox">\n' +
-                                                '<div class="cmt-user-box">\n' +
-                                                    '<div class="cmt-head-photo-box">\n' +
+                                            '<div class="ART_c_lbox">\n' +
+                                                '<div class="ART_user_Box">\n' +
+                                                    '<div class="ART_headPhoto_Box">\n' +
                                                         '<img src="'+ comment.userImg +'" style="width: 100%;height: 100%">\n' +
                                                     '</div>\n' +
-                                                    '<div class="cmt-user-name-box">'+ comment.userRealName +'</div>\n' +
+                                                    '<div class="ART_userName_Box">'+ comment.userRealName +'</div>\n' +
                                                 '</div>\n' +
                                             '</div>\n' +
-                                            '<div class="cmt-c-rbox">\n' +
-                                                '<div id="SCS_toolBar'+ flag +'" style="display: none"></div>\n' +
-                                                '<div id="cmt-text-editor'+ flag +'" class="cmt-text-editor"></div>\n' +
-                                                '<div class="cmt-c-reply-box">' +
-                                                    '<div id="cmt-reply-toolBar'+ flag +'" class="cmt-reply-toolBar"></div>\n' +
-                                                    '<div id="cmt-reply-editor'+ flag +'" class="cmt-reply-editor"></div>\n' +
+                                            '<div class="ART_c_rbox">\n' +
+                                                '<div id="ART_toolBar'+ flag +'" style="display: none"></div>\n' +
+                                                '<div id="ART_textEditor'+ flag +'" class="ART_textEditor"></div>\n' +
+                                                '<div class="ART_c_replyBox">' +
+                                                    '<div id="ART_replyToolBar'+ flag +'" class="ART_replyToolBar"></div>\n' +
+                                                    '<div id="ART_replyEditor'+ flag +'" class="ART_replyEditor"></div>\n' +
                                                     '<span style="display: none">'+ flag +'</span>' +
                                                     '<div class="ART_replyBtn">回复</div>' +
                                                     '<span style="display: none">'+ comment.articleCommentId +'</span>' +
                                                 '</div>\n' +
-                                                '<div class="art-cmt-toolBox">' +
+                                                '<div class="ART_cmt_toolBox">' +
                                                     '<span style="display: none">'+ zanCaiState +'</span>' +
                                                     '<span style="display: none">yes</span>' +
-                                                    '<div class="cmt-space-div" style="float: left"></div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 30px">' +
+                                                    '<div class="ART_spaceDiv" style="float: left"></div>' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 30px">' +
                                                         zanStr +
                                                     '</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.zan +'</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.zan +'</div>' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                         caiStr +
                                                     '</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.cai +'</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left">' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.cai +'</div>' +
+                                                    '<div class="ART_c_t_box" style="float: left">' +
                                                         '<span style="display: none">false</span>' +
-                                                        '<span class="cmt-flex-btn" style="cursor: pointer">展开/收起</span>' +
+                                                        '<span class="ART_flexBtn" style="cursor: pointer">展开/收起</span>' +
                                                     '</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 65px">' +
+                                                    /*'<div class="ART_c_t_box" style="float: left;width: 65px">' +
                                                         '<span style="display: none">false</span>' +
-                                                        '<span class="cmt-report-btn">举报</span>' +
-                                                    '</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: left;width: 50px">' +
+                                                        '<span class="ART_reportBtn">举报</span>' +
+                                                    '</div>' +*/
+                                                    '<div class="ART_c_t_box" style="float: left;width: 50px">' +
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="replyBtn" style="cursor: pointer">回复</span>' +
                                                     '</div>' +
-                                                    '<div class="cmt-c-t-box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
+                                                    '<div class="ART_c_t_box" style="float: right;width: 150px;font-size: 15px;padding: 7px 0 0 0;height: 23px">'+
                                                         comment.dateString +
                                                     '</div>' +
                                                 '</div>\n' +
-                                                '<div class="cmt-reply-toolBox">' +
-                                                    '<div class="cmt-space-div" style="float: left"></div>' +
-                                                    '<div class="cmt-r-t-box" style="float: left">回复：'+ comment.articleCommentList.length +'</div>' +
-                                                    '<div class="cmt-space-div" style="float: right"></div>' +
+                                                '<div class="ART_reply_toolBox">' +
+                                                    '<div class="ART_spaceDiv" style="float: left"></div>' +
+                                                    '<div class="ART_r_t_box" style="float: left">回复：'+ comment.articleCommentList.length +'</div>' +
+                                                    '<div class="ART_spaceDiv" style="float: right"></div>' +
                                                     '<span style="display: none">'+ comment.articleCommentList.length +'</span>' +
-                                                    '<div class="cmt-r-t-box replyFlex" style="float: right;text-align: right;cursor: pointer">收起/展开</div>' +
+                                                    '<div class="ART_r_t_box replyFlex" style="float: right;text-align: right;cursor: pointer">收起/展开</div>' +
                                                     '<span style="display: none">false</span>' +
                                                 '</div>\n' +
-                                                '<div class="cmt-reply-box">'+ str1 +'</div>\n' +
+                                                '<div class="ART_replyBox">'+ str1 +'</div>\n' +
                                             '</div>\n' +
                                         '</div>' +
                                         '<script>' +
                                         'let ART_E = window.wangEditor;\n' +
-                                        'let ART_editor'+ flag +' = new ART_E(\'#SCS_tooBar'+ flag +'\', \'#cmt-text-editor'+ flag +'\');\n' +
+                                        'let ART_editor'+ flag +' = new ART_E(\'#ART_toolBar'+ flag +'\', \'#ART_textEditor'+ flag +'\');\n' +
                                         'ART_editor'+ flag +'.create();\n' +
                                         'ART_editor'+ flag +'.txt.html(\''+ comment.content +'\');\n' +
                                         'ART_editor'+ flag +'.$textElem.attr(\'contenteditable\', false);\n' +
                                         'let ART_reply_E = window.wangEditor;\n' +
-                                        'let ART_reply_editor'+ flag +' = new ART_reply_E(\'#cmt-reply-toolBar'+ flag +'\', \'#cmt-reply-editor'+ flag +'\');\n' +
+                                        'let ART_reply_editor'+ flag +' = new ART_reply_E(\'#ART_replyToolBar'+ flag +'\', \'#ART_replyEditor'+ flag +'\');\n' +
                                         'replyEditorArr.push(ART_reply_editor'+ flag +')\n' +
                                         'ART_reply_editor'+ flag +'.customConfig.menus = [\n' +
                                             '\'bold\',\n' +
@@ -281,19 +292,22 @@ $(document).ready(function () {
                                 });
                                 next(lis.join(''), page < result.pages);
                             }
+                            /*,error : function () {
+                                layer.msg('查看评论前，请先登录！');
+                            }*/
                         });
                     }
                 });
             }
 
             //文章评论选项卡 点击事件
-            $("#selection_stuCmt").click(function () {
+            $("#look_artCmt").click(function () {
                 replyEditorArr.length = 0;
                 cmtFlowLoad(basePath+"/artComment/findArtCmt");
             });
 
             //举报点击事件
-            $("#cmt-content-box").on('click','.cmt-report-btn',function () {
+            /*$("#ART_contentBox").on('click','.ART_reportBtn',function () {
                 let articleCommentId = parseInt($(this).parent().parent().parent().prev().prev().text());
                 let type = $(this).prev().text();
                 let data;
@@ -329,10 +343,10 @@ $(document).ready(function () {
                         }
                     });
                 }
-            });
+            });*/
 
             //赞踩按钮点击事件
-            $("#cmt-content-box").on('click','.cmt-ZCbtn',function () {
+            $("#ART_contentBox").on('click','.ART_ZCbtn',function () {
                 let ZCState = $(this).parent().parent().children().eq(0).text();
                 let articleCommentId = parseInt($(this).parent().parent().parent().prev().prev().text());
                 let type = $(this).attr('data_name');
@@ -469,6 +483,7 @@ $(document).ready(function () {
                                         thisObj.css('color','rgb(102,71,238)');
                                         let num = parseInt(thisObj.parent().next().text());
                                         num ++;
+
                                         thisObj.parent().next().text(num);
                                         thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
                                         thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
@@ -483,11 +498,10 @@ $(document).ready(function () {
                         }
                     }
                 }
-
             });
 
             //回复富文本编辑器 回复按钮点击事件
-            $("#cmt-content-box").on('click','.ART_replyBtn',function (ev) {
+            $("#ART_contentBox").on('click','.ART_replyBtn',function (ev) {
                 let index = parseInt($(this).prev().text());
                 let pid = parseInt($(this).next().text());
                 let replyPerson = $(this).parent().parent().prev().children().eq(0).children().eq(1).text();
@@ -501,20 +515,20 @@ $(document).ready(function () {
                 }else {
                     isEmpty = false;
                 }
-                /*let userId = "1";*/
+                let articleId = '1';
+                let userId = '1';
                 let data;
                 if (type === 'son'){
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid, 'replyPerson':replyPerson};
                 }else {
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid};
                 }
-
-                if(contentHtml.length>1024){
-                    alert("内容超出最大长度限制！");
+                if(contentHtml.length>200){
+                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){
-                    alert("内容为空无法提交！");
+                    layer.msg("内容为空无法提交！",{offset:''+ev.clientY});
                 }
                 if(lengthState && !isEmpty){
                     $.ajax({
@@ -534,7 +548,7 @@ $(document).ready(function () {
             });
 
             //回复工具栏 收起/展开 按钮点击事件
-            $("#cmt-content-box").on('click','.replyFlex',function () {
+            $("#ART_contentBox").on('click','.replyFlex',function () {
                 let state = $(this).next().text();
                 if('false' === state){
                     $(this).next().text('true');
@@ -549,7 +563,7 @@ $(document).ready(function () {
             });
 
             //评论工具栏 回复 按钮点击事件
-            $("#cmt-content-box").on('click','.replyBtn',function () {
+            $("#ART_contentBox").on('click','.replyBtn',function () {
                 let state = $(this).prev().text();
                 if('false' === state){
                     $(this).prev().text('true');
@@ -561,7 +575,7 @@ $(document).ready(function () {
             });
 
             //评论工具栏 展开/收起 按钮点击事件
-            $("#cmt-content-box").on('click','.cmt-flex-btn',function () {
+            $("#ART_contentBox").on('click','.ART_flexBtn',function () {
                 let state = $(this).prev().text();
                 let type = $(this).attr("data_type");
                 if('false' === state){
@@ -582,7 +596,7 @@ $(document).ready(function () {
                 }
             });
 
-            $("#cmt-content-box").on("mouseover",".cmt-content",function () {
+            $("#ART_contentBox").on("mouseover",".ART_content",function () {
                 $(this).css("background-color",'rgb(255,255,255)');
                 $(this).css('box-shadow','0 0 15px rgb(181,179,180)');
                 $(this).children().eq(2).children().eq(1).css('background-color','rgb(245,245,245)');
@@ -590,7 +604,7 @@ $(document).ready(function () {
                 $(this).children().eq(2).children().eq(4).css('background-color','rgb(245,245,245)');
             });
 
-            $("#cmt-content-box").on("mouseout",".cmt-content",function () {
+            $("#ART_contentBox").on("mouseout",".ART_content",function () {
                 $(this).css("background-color",'rgb(245,245,245)');
                 $(this).css('box-shadow','0 0 0 rgb(255,255,255)');
                 $(this).children().eq(2).children().eq(1).css('background-color','rgb(255,255,255)');

@@ -230,12 +230,6 @@
         var height = document.getElementById("personal-iframe").contentWindow.document.body.scrollHeight;
         $("#personal-iframe").height(height);
     });*/
-    /*$(window.parent.document).find("#personal-iframe").load(function(){
-        var main = $(window.parent.document).find("#personal-iframe");
-        main.height(800);
-        var thisheight = $(document).height();
-        main.height(thisheight);
-    });*/
     /*侧边导航点击事件*/
     $(function(){
         $("a[name='dian']").click(function(){
@@ -257,6 +251,7 @@
             $("#personal-iframe").css("height","341");
             $("#look").css("background-color","#fff");
             $("#look").css("color","#8C24DD");
+            document.title = '个人中心-学习看板';
         }
         /*学习记录*/
         if (typeNum === 2){
@@ -264,6 +259,7 @@
             $("#personal-iframe").css("height","1087");
             $("#courses").css("background-color","#fff");
             $("#courses").css("color","#8C24DD");
+            document.title = '个人中心-学习记录';
         }
         /*个人笔记*/
         if (typeNum === 3){
@@ -271,6 +267,7 @@
             $("#personal-iframe").css("height","800");
             $("#mynote").css("background-color","#fff");
             $("#mynote").css("color","#8C24DD");
+            document.title = '个人中心-个人笔记';
         }
         /*我的问答*/
         if (typeNum === 4){
@@ -278,6 +275,7 @@
             $("#personal-iframe").css("height","898");
             $("#myfaq").css("background-color","#fff");
             $("#myfaq").css("color","#8C24DD");
+            document.title = '个人中心-我的问答';
         }
         /*我的文章*/
         if (typeNum === 5){
@@ -285,6 +283,7 @@
             $("#personal-iframe").css("height","1030");
             $("#myart").css("background-color","#fff");
             $("#myart").css("color","#8C24DD");
+            document.title = '个人中心-我的文章';
         }
         /*我的关注*/
         if (typeNum === 6){
@@ -292,6 +291,7 @@
             $("#personal-iframe").css("height","1109");
             $("#myfollower").css("background-color","#fff");
             $("#myfollower").css("color","#8C24DD");
+            document.title = '个人中心-我的关注';
         }
         /*个人信息*/
         if (typeNum === 7){
@@ -299,6 +299,7 @@
             $("#personal-iframe").css("height","915");
             $("#personalmsg").css("background-color","#fff");
             $("#personalmsg").css("color","#8C24DD");
+            document.title = '个人中心-个人信息';
         }
         /*if (typeNum === 8){
             $("#personal-iframe").attr("src",basePath+"opinion/toOpinion");

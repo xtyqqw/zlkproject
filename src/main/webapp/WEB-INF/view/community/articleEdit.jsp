@@ -82,10 +82,10 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">请选择方向</div>
                                     <div class="menu">
-                                        <div class="item" data-value="java">JAVA</div>
-                                        <div class="item" data-value="linux">Linux</div>
-                                        <div class="item" data-value="html">HTML</div>
-                                        <div class="item" data-value="mysql">MYSQL</div>
+                                        <div class="item" data-value="JAVA">JAVA</div>
+                                        <div class="item" data-value="Linux">Linux</div>
+                                        <div class="item" data-value="HTML">HTML</div>
+                                        <div class="item" data-value="MYSQL">MYSQL</div>
                                     </div>
                                 </div>
                             </div>
@@ -121,10 +121,10 @@
                         </div>
                     </div>--%>
                     <div class="two fields">
-                        <div class="field">
+                        <div class="required field">
                             <div class="ui left labeled input">
                                 <label class="ui basic violet label">首图</label>
-                                <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;">
+                                <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;z-index: auto;">
                                     <div class="visible content">上传图片</div>
                                     <div class="hidden content">
                                         可以是相关的代码截图或是引人注目的封面
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <%--受js文件运行机制所致，引用时一定要注意顺序--%>
+    <%--受js文件运行机制所致,引用时一定要注意顺序--%>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
     <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
@@ -181,6 +181,7 @@
             });
         });
 
+        /*上传图片功能*/
         layui.use(["jquery", "upload", "layer", "element"], function () {
             var $ = layui.$,
                 element = layui.element,
@@ -228,8 +229,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[50]',
-                            prompt: '请注意文章标题最大字数不能超过50'
+                            type: 'maxLength[30]',
+                            prompt: '请注意文章标题最大字数不能超过30'
                         }]
                     },
                     articleContent: {
@@ -283,10 +284,10 @@
                     }
                 },
                 onSuccess: function () {
-                    alert("发布成功,请等待审核通过");
-                },
-                /*onFailure: function() {
-                    alert("发布失败,请确认发布内容");
+                    alert("发布成功，请等待审核通过！");
+                }
+                /*,onFailure: function() {
+                    alert("发布失败，请确认发布内容！");
                 }*/
             });
         }
