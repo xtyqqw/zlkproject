@@ -122,19 +122,6 @@
             line-height: 3.5vw;
             text-align: center;
         }
-        #yijianzhuti #chenggong1{
-            position: fixed;
-            top: 25%;
-            left:35%;
-            font-size: 1.3vw;
-            color: white;
-            border-radius: 0.4vw;
-            background-color:  #713ED7;
-            width: 12vw;
-            height: 3.5vw;
-            line-height: 3.5vw;
-            text-align: center;
-        }
         #yijianzhuti #chongxin{
             position: fixed;
             top: 45%;
@@ -176,27 +163,24 @@
         </div>
         <form action="<%=request.getContextPath()%>/opinion/addOpinion" method="post">
             <div id="shuru">
-                <textarea id="shurukuang" name="opinionContext" required placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
+                <textarea id="shurukuang" name="opinionContext" required="required" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
             </div>
-<%-- required属性为必填--%>
+
             <div id="zhuti_wei">
                 <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
                 <button id="quxiao">取消</button>
             </div>
 
-         </form>
+        </form>
     </div>
     <%--提交成功提示框--%>
     <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
-    <%--&lt;%&ndash;提交成功提示框&ndash;%&gt;--%>
-    <%--<div id="chenggong1"><i class="layui-icon layui-icon-auz"></i>输入框不能为空</div>--%>
 </div>
 
 
 <%--提交按钮js--%>
 <script>
     $("#chenggong").hide();
-    // $("#chenggong1").hide();
     $('#tijiao').click(function () {
         //获取输入框的值
         var shuru = $('#shurukuang').val();
@@ -208,12 +192,6 @@
                 $("#chenggong").hide();
             },5500)
         }
-        // else if(shuru.length==0){
-        //     $("#chenggong1").show();
-        //     setTimeout(function () {
-        //         $("#chenggong1").hide();
-        //     },5500)
-        // }
     });
 </script>
 
