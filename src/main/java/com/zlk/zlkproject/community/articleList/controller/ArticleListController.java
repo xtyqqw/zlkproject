@@ -54,6 +54,12 @@ public class ArticleListController {
         return "view/community/articleMy";
     }
 
+    /**
+     * 按照更新时间倒叙查找文章列表
+     * @param pagination
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/findByCreateTime")
     @ResponseBody
     public Map<String,Object> findByCreateTime(Pagination pagination)throws Exception{
@@ -65,6 +71,12 @@ public class ArticleListController {
         return map;
     }
 
+    /**
+     * 按照阅读量倒叙查找文章列表
+     * @param pagination
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/findByBrowseCount")
     @ResponseBody
     public Map<String,Object> findByBrowseCount(Pagination pagination)throws Exception{
@@ -90,6 +102,14 @@ public class ArticleListController {
         mv.setViewName("view/community/articleMy");
         return mv;
     }*/
+
+    /**
+     * 查找我的文章列表
+     * @param request
+     * @param pagination
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/findByUserId")
     @ResponseBody
     public Map<String,Object> findByUserId(HttpServletRequest request,Pagination pagination)throws Exception{

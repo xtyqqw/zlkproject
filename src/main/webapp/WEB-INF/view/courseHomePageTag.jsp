@@ -632,7 +632,7 @@
                                     '<li class="li1">' +
                                     '<dl class="dl1">' +
                                     '<dt class="dt1">' +
-                                    '<img id="img1" src="'+coursesTag.introducePic+'" style="height: 90px;width: 213px ">' +
+                                    '<img id="img1" src="'+coursesTag.introducePic+'" style="height: 100px;width: 213px ">' +
                                     '</dt>' +
                                     '<dd class="dd2">' +
                                     '<h5 class="h51">'+coursesTag.coursesName+'</h5>' +

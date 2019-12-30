@@ -39,6 +39,8 @@ public class Exercises {
     private String userId;
     /** 用户回答 对应数据库字段 answer*/
     private String userAnswer;
+    /** 练习题原序号*/
+    private Integer exerciseLastNum;
 
     public Exercises() {
     }

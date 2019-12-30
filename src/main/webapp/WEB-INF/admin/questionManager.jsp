@@ -82,9 +82,33 @@
             time: 2000
         });
     });
+    //后台问题管理页面中，问题内容的移入事件，显示具体内容
+    $('body').on('mouseenter', '.layui-table-view td[data-field = "questionContentHtml"]', function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this, {
+            tips: [1, '#009688'],
+            time: 2000
+        });
+    });
+    //后台问题管理页面中，问题内容的移入事件，显示具体内容
+    $('body').on('mouseenter', '.layui-table-view td[data-field = "questionSynopsis"]', function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this, {
+            tips: [1, '#009688'],
+            time: 2000
+        });
+    });
 
     //后台问题管理页面中，问题发布时间的移入事件，显示具体内容
     $('body').on('mouseenter', '.layui-table-view td[data-field = "createTime"]', function () {
+        var msg = $(this).find('div').text();
+        tipsInx = layer.tips(msg, this, {
+            tips: [3, '#009688'],
+            time: 2000
+        });
+    });
+    //后台问题管理页面中，问题发布时间的移入事件，显示具体内容
+    $('body').on('mouseenter', '.layui-table-view td[data-field = "updateTime"]', function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this, {
             tips: [3, '#009688'],
@@ -145,16 +169,42 @@
                     , {field: 'questionId', title: '问题ID', width: 80, sort: true}
                     , {field: 'questionTitle', title: '问题标题', width: 100, sort: true}
                     , {field: 'questionContent', title: '问题内容', width: 130}
-                    , {field: 'solve', title: '问题状态', width: 90}
+                    , {field: 'questionContentHtml', title: 'html问题内容', width: 130}
+                    , {field: 'questionSynopsis', title: '简要', width: 100}
+                    , {
+                        field: 'solve', title: '问题状态', width: 90,
+                        templet: function (data) {// 替换数据
+                            if (data.solve == "0") {
+                                return "待解决";
+                            } else if (data.solve == "1") {
+                                return "已解决";
+                            }
+                        }
+                    }
                     , {field: 'browseCount', title: '浏览数', width: 80}
                     , {field: 'createTime', title: '发布时间', width: 90}
                     , {field: 'updateTime', title: '更新时间', width: 90}
-                    , {field: 'questionSetTop', title: '置顶', width: 60}
-                    , {field: 'audit', title: '审核', width: 60}
-                    , {field: 'zanCount', title: '赞数', width: 60}
-                    , {field: 'caiCount', title: '踩数', width: 60}
-                    , {field: 'responseCount', title: '回答数', width: 80}
-                    , {field: 'typeName', title: '分类', width: 80}
+                    , {field: 'questionSetTop', title: '置顶', width: 80,
+                        templet: function (data) {// 替换数据
+                            if (data.questionSetTop == "0") {
+                                return "置顶";
+                            } else if (data.questionSetTop == "1") {
+                                return "不置顶";
+                            }
+                        }
+                    }
+                    , {field: 'audit', title: '审核', width: 90,
+                        templet: function (data) {// 替换数据
+                            if (data.audit == 0) {
+                                return "正在审核";
+                            } else if (data.audit == "1") {
+                                return "审核通过";
+                            } else if (data.audit == "2") {
+                                return "审核未过";
+                            }
+                        }
+                    }
+                    , {field: 'typeName', title: '类别', width: 80}
                     , {field: 'tagName', title: '标签', width: 90}
                     , {
                         title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
@@ -220,7 +270,7 @@
                         layer.confirm('是否确认删除', function (index) {
                             var data1 = JSON.stringify(data);
                             $.ajax({
-                                url: "<%=request.getContextPath()%>/question/toUpdate",
+                                url: "<%=request.getContextPath()%>/question/deleteList",
                                 contentType: "application/json;charset=UTF-8",
                                 data: {"data": data1},
                                 success: function () {
@@ -262,15 +312,14 @@
                 $("#questionId").val(data.questionId);
                 $("#questionIitle").val(data.questionIitle);
                 $("#questionContent").val(data.questionContent);
+                $("#questionContentHtml").val(data.questionContentHtml);
+                $("#questionSynopsis").val(data.questionSynopsis);
                 $("#solve").val(data.solve);
                 $("#createTime").val(data.createTime);
                 $("#updateTime").val(data.updateTime);
                 $("#browseCount").val(data.browseCount);
                 $("#questionSetTop").val(data.questionSetTop);
-                $("#zanCount").val(data.zanCount);
-                $("#caiCount").val(data.caiCount);
                 $("#audit").val(data.audit);
-                $("#responseCount").val(data.responseCount);
                 $("#typeName").val(data.typeName);
                 $("#tagName").val(data.tagName);
                 layer.open({
