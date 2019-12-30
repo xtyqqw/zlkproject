@@ -214,7 +214,7 @@
                     html += '<span class="time">'+data1[i].createDate+'</span></p>';
                     html += '<p class="title">'+data1[i].title+'</p>';
                     html += '<p class="type">'+data1[i].typeName+'</p>';
-                    html += '<p class="con con_p">'+data1[i].articleContent+'</p>';
+                    html += '<p class="con con_p">'+data1[i].articleDigest+'</p>';
                     html += '<div class="bom"><i class="layui-icon layui-icon-praise"></i>';
                     html += '<span class="span_w">'+data1[i].zanCount+'</span><i class="layui-icon layui-icon-tread"></i>';
                     html += '<span class="span_w">'+data1[i].caiCount+'</span><span>浏览量</span>';
