@@ -20,11 +20,24 @@
     h2{margin: 20px 0;}
 </style>
 <body>
-<form action="<%=request.getContextPath() %>/articles/update" method="post" onsubmit="return check()">
+<form action="<%=request.getContextPath() %>/articles/update" method="post">
     <h2>修改标题：</h2>
     <input class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="title" value="${articles.title}">
     <h2>修改图片：</h2>
-    <input id="img_edit" class="layui-text" style="margin-left: 23px;width: 800px;height: 40px;line-height: 40px;" type="text" name="figures" value="${articles.figures}">
+    <div class="layui-input-inline uploadHeadImage" style="margin-bottom:2vw;">
+        <div class="layui-upload-drag"  id="headImg">
+            <i class="layui-icon"></i>
+            <p style="font-size: 1vw;">点击上传图片</p>
+        </div>
+        <input type="hidden" name="figures" id="userImg"  >
+    </div>
+    <div class="layui-input-inline" style="margin:0 0 3vw 3vw;">
+        <div class="layui-upload-list">
+            <img class="layui-upload-img headImage" name="figures" src="${articles.figures}"   id="demo1"
+                 style="width: 10vw; height: 10vw;">
+            <p id="demoText"></p>
+        </div>
+    </div>
     <h2>修改内容：</h2>
     <div id="md-content">
         <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
@@ -59,22 +72,42 @@
             saveHTMLToTextarea : true
         });
     });
-    function img() {
-        var id = /^(https?|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|].+(.GIF|.PNG|.DMP|.gif|.png|.bmp|.JPEG|.jpeg|.JPG|.jpg)$/;
-        var img= $("#img_edit").val();
-        var bool = id.test(img);
-        var layer = layui.layer;
-        if(bool == true){
-            return true;
-        }else{
-            $("#img_edit").css("border-color","red");
-            layer.msg("请输入正确的图片URL格式,如后缀为.png .jpg .bmp .jpeg .gif的图片网址");
-            return false;
-        }
-    }
-    function check(){
-        var check = img();
-        return check;
-    }
+
+    layui.use(["jquery", "upload", "form", "layer", "element"], function () {
+        var $ = layui.$,
+            element = layui.element,
+            layer = layui.layer,
+            upload = layui.upload,
+            form = layui.form;
+        //拖拽上传
+        var uploadInst = upload.render({
+            elem: '#headImg'
+            //文件上传地址
+            , url: '<%=request.getContextPath()%>/articles/uploadImg'
+            , size: 500
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //服务器上传成功
+                layer.msg(res.message,{icon: 1});
+                //获取图片路径URL
+                $("#userImg").val(res.url)
+            }
+            //错误重新上传
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+        element.init();
+    });
 </script>
 </html>

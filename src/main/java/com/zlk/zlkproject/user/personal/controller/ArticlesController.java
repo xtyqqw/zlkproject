@@ -4,10 +4,14 @@ import com.zlk.zlkproject.entity.Pagination;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.user.entity.Articles;
 import com.zlk.zlkproject.user.personal.service.ArticlesService;
+import com.zlk.zlkproject.utils.CommonFileUtil;
+import com.zlk.zlkproject.utils.FdfsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +30,10 @@ import java.util.Map;
 public class ArticlesController {
     @Autowired(required = false)
     private ArticlesService articlesService;
+    @Autowired
+    private CommonFileUtil commonFileUtil;
+    @Autowired
+    private FdfsConfig fdfsConfig;
 
     /**
      * 根据userid查询user文章的集合
@@ -105,4 +113,21 @@ public class ArticlesController {
 
     }
 
+    @RequestMapping("/uploadImg")
+    @ResponseBody
+    public Map<String,Object> uploadImg(@RequestParam(name = "file") MultipartFile file) throws Exception{
+        Map<String,Object> map=new HashMap<>();
+        //path是文件上传到服务器上的路径
+        String path = commonFileUtil.uploadFile(file);
+        String url = fdfsConfig.getResHost()+":"+fdfsConfig.getStoragePort()+path;
+        //打印服务器上的路径
+        System.out.println(path);
+        //最终访问文件资源的地址，
+        System.out.println(url);
+        //把URL和上传成功的信息放入到map集合里
+        map.put("url",url);
+        map.put("message","上传成功");
+        //返回map集合
+        return map;
+    }
 }
