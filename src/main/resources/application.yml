@@ -1,8 +1,21 @@
 server:
   port: 8080
 
-
 spring:
+  jpa:
+    #是否显示sql
+    show-sql: true
+    #指定数据库类型
+    database: mysql
+    #方言
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #自动建表方式
+    hibernate:
+      ddl-auto: none
+    #格式化sql
+    properties:
+      hibernate:
+        format-sql: true
   messages:
     basename: message/msg
   datasource:
@@ -48,10 +61,11 @@ spring:
         # 登录密码
         login-password: admin
 
-    username: root
-    password:
-    url: jdbc:mysql://localhost:/div?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+      username: user1
+      password:
+      url: jdbc:mysql://localhost/zlk?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
   #  thymeleaf:
   #    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
   #    mode: HTML5
@@ -65,14 +79,18 @@ spring:
   #      #内容类别,可不用配置
   #      content-type: text/html
   #    suffix: .html
+  #  resources:
+  #    chain:
+  #      strategy:
+  #        content:
+  #          enabled: true
+  #          paths: /**
   mvc:
     view:
       prefix: /WEB-INF/
       suffix: .jsp
-
   main:
     allow-bean-definition-overriding: true
-
   jmx:
     enabled: false
 
@@ -81,18 +99,20 @@ spring:
     multipart:
       max-file-size: 2048MB
       max-request-size: 2048MB
+
   #redis配置
   redis:
     host:
     port: 6379
     password:
-    timeout: 30000
+    timeout: 3000
     jedis:
       pool:
         max-active: 100
         max-idle: 20
         max-wait: 30000
         min-idle: 10
+
 
 #FastDfs的配置
 fdfs:
@@ -102,7 +122,9 @@ fdfs:
   #tracker地址
   tracker-list:
   #通过nginx 访问地址
+
   resHost:
+
   storagePort: 8888/
   #缩略图配置
   thumb-image:
