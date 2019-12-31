@@ -46,7 +46,7 @@
             <a href="javascript:void(0)" id="a2">我的文章</a>
         </div>
         <!--中间内容-->
-        <div  class="m-container m-padded-tb-big">
+        <div class="m-container m-padded-tb-big">
             <div class="ui container">
                 <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
