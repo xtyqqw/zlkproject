@@ -179,14 +179,14 @@
         });
     });
     //后台文章管理页面中，文章内容的移入事件，显示具体内容
-    $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
+    /*$('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [2, '#009688'],
             area: ['520px','auto'],
             time: 2000
         });
-    });
+    });*/
     //后台文章管理页面中，文章内容的移入事件，显示具体内容
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
         var msg = $(this).find('div').text();
@@ -260,37 +260,37 @@
                 , height: $(document).height()-$('#demo').offset().top-20
                 , cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'articleId', title: '文章ID', width: 80, sort: true,align:'center'}
-                    , {field: 'title', title: '文章标题', width: 100, sort: true,align:'center'}
-                    , {field: 'browseCount', title: '浏览数', width: 75,align:'center'}
-                    , {field: 'commentCount', title: '评论数', width: 75,align:'center'}
-                    , {field: 'createTime',title: '发布时间',width: 90,align:'center'}
-                    , {field: 'updateTime',title: '更新时间',width: 90,align:'center'}
+                    , {field: 'articleId', title: '文章ID', width: 120, sort: true,align:'center'}
+                    , {field: 'title', title: '文章标题', width: 120, sort: true,align:'center'}
+                    , {field: 'browseCount', title: '浏览数', width: 120,align:'center'}
+                    , {field: 'commentCount', title: '评论数', width: 120,align:'center'}
+                    , {field: 'createTime',title: '发布时间',width: 120,align:'center'}
+                    , {field: 'updateTime',title: '更新时间',width: 120,align:'center'}
                     , {field: 'figures', title: '插图相对路径', width: 130,align:'center'}
-                    , {field: 'articleContentHtml', title: 'html文章内容', width: 110,align:'center'}
-                    , {field: 'articleDigest', title: '文章摘要', width: 90,align:'center'}
-                    , {field: 'articleContent', title: '文章内容', width: 110,align:'center'}
-                    , {field: 'zanCount', title: '赞数', width: 60,align:'center'}
-                    , {field: 'caiCount', title: '踩数', width: 60,align:'center'}
-                    , {field: 'inform', title: '举报', width: 60,align:'center',templet:function (d) {
+                    , {field: 'articleContentHtml', title: '文章内容', width: 120,align:'center'}
+                    , {field: 'articleDigest', title: '文章摘要', width: 120,align:'center'}
+                    /*, {field: 'articleContent', title: '文章内容', width: 110,align:'center'}*/
+                    , {field: 'zanCount', title: '赞数', width: 120,align:'center'}
+                    , {field: 'caiCount', title: '踩数', width: 120,align:'center'}
+                    , {field: 'inform', title: '举报', width: 120,align:'center',templet:function (d) {
                             if(d.inform == '0')return '是';
                             else if(d.inform == '1')return '否';
                         }}
-                    , {field: 'createArticleType', title: '发文类型', width: 90,align:'center',templet:function (d) {
+                    , {field: 'createArticleType', title: '发文类型', width: 120,align:'center',templet:function (d) {
                             if(d.createArticleType == '0') return '原创';
                             else if (d.createArticleType == '1') return '转载';
                             else if(d.createArticleType == '2') return '翻译';
                         }}
-                    , {field: 'articleSetTop', title: '文章置顶', width: 90,align:'center',templet:function (d) {
+                    , {field: 'articleSetTop', title: '文章置顶', width: 120,align:'center',templet:function (d) {
                             if(d.articleSetTop == '0') return '置顶';
                             else if(d.articleSetTop == '1') return '不置顶';
                         }}
-                    , {field: 'approval', title: '审核', width: 90,align:'center',templet:function (d) {
+                    , {field: 'approval', title: '审核', width: 120,align:'center',templet:function (d) {
                             if(d.approval == '0') return '审核中';
                             else if (d.approval == '1') return '已审核';
                             else if(d.approval == '2') return '审核未过';
                         }}
-                    , {field: 'typeName', title: '文章方向', width: 90,align:'center'}
+                    , {field: 'typeName', title: '文章方向', width: 120,align:'center'}
                     , {title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'}
                 ]]
                 , limits: [5, 10, 20]
