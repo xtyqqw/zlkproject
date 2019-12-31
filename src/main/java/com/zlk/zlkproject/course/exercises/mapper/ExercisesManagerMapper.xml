@@ -17,7 +17,7 @@
     </resultMap>
 
     <!--添加新的习题-->
-    <insert id="insertExercises" useGeneratedKeys="true" keyProperty="chapterId" parameterType="com.zlk.zlkproject.entity.Exercises">
+    <insert id="insertExercises" useGeneratedKeys="true" keyProperty="eId" parameterType="com.zlk.zlkproject.entity.Exercises">
         insert into exercises
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="sectionId != null">
@@ -198,4 +198,9 @@
     <select id="selectExerciseCount"  resultType="java.lang.Integer">
         SELECT COUNT(1) FROM exercises WHERE exercises.section_id=#{sectionId}
     </select>
+    <!--互换习题序号-->
+    <update id="updateLastExerciseNum">
+        update exercises set exercise_num = #{exerciseLastNum}
+        where exercise_num = #{exerciseNum} and section_id = #{sectionId};
+    </update>
 </mapper>

@@ -107,9 +107,7 @@
 <script>
     layui.use(['table', 'laydate', 'form', 'util', 'layer','jquery'], function () {
         var table = layui.table;
-        var laydate = layui.laydate;
         var layer = layui.layer;
-        var util = layui.util;
         var form = layui.form;
         var $ = layui.jquery;
         <c:if test="${flag}">
@@ -121,12 +119,6 @@
             });
         })
         </c:if>
-        laydate.render({
-            elem: '#createTime'
-            , type: 'datetime'
-            , format: 'yyyy-MM-dd HH:mm:ss'
-        });
-        form.render();
         //第一个实例
         table.render({
             elem: '#demo'

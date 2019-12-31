@@ -36,8 +36,8 @@ $(document).ready(function () {
                 if (isEmpty){
                     layer.msg("内容为空无法提交！");
                 }
-                if(contentHtml.length>256){
-                    layer.msg("内容超出最大长度限制！");
+                if(contentHtml.length>200){
+                    layer.msg("内容超出最大长度限制，最大长度为200！");
                     lengthState = false;
                 }
                 if(lengthState && !isEmpty){
@@ -52,7 +52,7 @@ $(document).ready(function () {
                             }
                         },
                         error : function () {
-                            layer.msg('发表评论前，请先登录！');
+                            layer.msg('发表与查看评论前，请先登录！');
                             artCmt_editor.txt.clear();
                         }
                     });
@@ -412,6 +412,7 @@ $(document).ready(function () {
                                         let num = parseInt(thisObj.parent().next().text());
                                         num ++;
                                         thisObj.parent().next().text(num);
+                                        
                                         thisObj.parent().next().next().children().eq(0).removeClass('icon-dianzan_active');
                                         thisObj.parent().next().next().children().eq(0).addClass('icon-qinziAPPtubiao-');
                                         thisObj.parent().next().next().children().eq(0).css('font-size','18px');
@@ -483,8 +484,8 @@ $(document).ready(function () {
                                         thisObj.css('color','rgb(102,71,238)');
                                         let num = parseInt(thisObj.parent().next().text());
                                         num ++;
-
                                         thisObj.parent().next().text(num);
+
                                         thisObj.parent().prev().prev().children().eq(0).removeClass('icon-dianzan');
                                         thisObj.parent().prev().prev().children().eq(0).addClass('icon-qinziAPPtubiao-1');
                                         thisObj.parent().prev().prev().children().eq(0).css('color','rgb(121,121,121)');
@@ -523,8 +524,8 @@ $(document).ready(function () {
                 }else {
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid};
                 }
-                if(contentHtml.length>256){
-                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
+                if(contentHtml.length>200){
+                    layer.msg("内容超出最大长度限制，最大长度为200！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){

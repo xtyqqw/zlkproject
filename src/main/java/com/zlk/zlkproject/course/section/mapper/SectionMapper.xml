@@ -13,6 +13,7 @@
         <result property="videoAddr2" column="video_addr2" javaType="java.lang.String"/>
         <result property="sectionTime" column="section_time" javaType="java.lang.Integer"/>
         <result property="sectionNum" column="section_num" javaType="java.lang.Integer"/>
+        <result property="chapterName" column="chapter_name" javaType="java.lang.String"/>
         <collection property="userSectionList" ofType="com.zlk.zlkproject.entity.UserSection">
             <id property="userId" column="user_id" javaType="java.lang.String"></id>
             <id property="sectionId" column="section_id" javaType="java.lang.Integer"></id>
@@ -27,7 +28,7 @@
     </select>
     <!--根据课程id查询这个课程下的小节并分页-->
     <select id="findSectionByCourseIdLimit" resultMap="sectionEntityMap" >
-        select s.section_id,s.section_name,s.section_time,s.section_intro
+        select s.section_id,s.section_name,s.section_time,s.section_intro,c.chapter_name
         from section s,chapter c,courses co  where co.courses_id = c.courses_id
         and c.chapter_id = s.chapter_id and co.courses_id = #{courseId} limit #{offset}, #{limit}
     </select>

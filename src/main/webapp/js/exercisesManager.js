@@ -15,17 +15,17 @@ window.onload = function () {
             ,method:'POST'
             ,toolbar: '#toolbarDemo'
             ,cols: [[
-                {field:'eid', width:100, title: '习题ID',sort: true}
-                ,{field:'sectionId', width:100, title: '小节ID', sort: true}
+                {field:'eid', width:90, title: '习题ID',sort: true}
+                ,{field:'sectionId', width:90, title: '小节ID', sort: true}
                 ,{field:'type', width:100, title: '题型'}
-                ,{field:'exerciseNum', width:100, title: '练习题序号'}
-                ,{field:'title', width:100, title: '题目内容'}
-                ,{field:'answerA', width:100, title: '备选答案A'}
-                ,{field:'answerB', width:100, title: '备选答案B'}
-                ,{field:'answerC', width:100, title: '备选答案C'}
-                ,{field:'answerD', width:100, title: '备选答案D'}
-                ,{field:'truth', width:100, title: '正确答案'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ,{field:'exerciseNum', width:90, title: '练习题序号'}
+                ,{field:'title', title: '题目内容'}
+                ,{field:'answerA', title: '备选答案A'}
+                ,{field:'answerB',  title: '备选答案B'}
+                ,{field:'answerC',  title: '备选答案C'}
+                ,{field:'answerD',  title: '备选答案D'}
+                ,{field:'truth',  title: '正确答案'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:120}
             ]]
             ,page: true
         });
@@ -34,16 +34,6 @@ window.onload = function () {
         table.on('toolbar(exercises)', function(obj){
             var event = obj.event;
             if (event==="insert"){
-                $("#sectionDiv").empty();
-                $("#sectionDiv").append('<label class="layui-form-label">小节名称:</label>\n' +
-                    '                    <div class="layui-input-block layui-form" lay-filter="sectionNameInsertDiv">\n' +
-                    '                        <select class="layui-select" name="sectionId" id="sectionNameInsertSelect" lay-filter="sectionNameSelect" lay-search>\n' +
-                    '                            <option value="">请选择一个小节(请先选择一个章节)</option>\n' +
-                    '\n' +
-                    '                        </select>\n' +
-                    '                    </div>');
-
-                form.render('select');
                 layer.open({
                     title: "新增",
                     type: 1,
@@ -51,11 +41,15 @@ window.onload = function () {
                     content: $("#insertExercisesDiv"),
                     btn:['提交'],
                     success:function(index,layero){
+                        $("#exerciseNumSelectDiv").css("display","none");
                         form.on('submit(submit)',function (data) {
+                            $("#coursesNameInsertSelect").attr("disabled","disabled");
+                            $("#chapterNameInsertSelect").attr("disabled","disabled");
+                            $("#exerciseNumSelect").attr("disabled","disabled");
                             $.ajax({
                                 type: "POST",
                                 url: basePath+"/exercisesManager/insertExercises",
-                                data: data.field,
+                                data: $("#insertExercisesForm").serialize(),
                                 dataType:"json",
                                 success:function (result) {
                                     layer.msg(result.msg);
@@ -132,27 +126,20 @@ window.onload = function () {
                 form.render('select');
                 $.ajax({
                     type:"POST",
-                    url:basePath+"/exercisesManager/selectExerciseNumBySectionId",
-                    data:{"eId":data.eid},
+                    url: basePath+"/exercisesManager/selectExerciseNumBySectionId",
                     data:{"sectionId":data.sectionId},
                     dataType:"json",
                     success:function (res) {
                         $("#exerciseNumSelect").empty();
-                        $("#exerciseNumSelect").append(
-                            '<input type="text" name="exerciseNum" id="exerciseNum" class="layui-input" disabled="true">'
-                        );
-
-
-                        /*$("#exerciseNumSelect").append('<option value="'+res.count1+'">'+res.count1+'</option>');*/
-                        /*$.each(res.exerciseNumList,function (i, exerciseNum) {
+                        $("#exerciseNumSelect").append('<option value="">请选择习题序号(请先选择一个小节)</option>');
+                        $.each(res.exerciseNumList,function (i, exerciseNum) {
                             $("#exerciseNumSelect").append('<option value="'+exerciseNum+'">'+exerciseNum+'</option>');
-                        });*/
-                        $("#exerciseNumSelect").val(data.exercisesNum);
+                        });
+                        $("#exerciseNumSelect").val(data.exerciseNum);
                         form.render('select','exerciseNumDiv');
                     }
                 });
-                $("#chapterLastNum").val(data.chapterNum);
-                $("#exerciseNum").val(data.exerciseNum)
+                $("#exerciseLastNum").val(data.exerciseNum);
                 $("#title").val(data.title);
                 $("#answerA").val(data.answerA);
                 $("#answerB").val(data.answerB);
@@ -168,8 +155,10 @@ window.onload = function () {
                     success: function (index, layero) {
                         $("#coursesDiv").css("display","none");
                         $("#chapterDiv").css("display","none");
+                        $("#exerciseNumInput").attr("disabled","disabled");
+                        $("#exerciseNumInputDiv").css("display","none");
                         form.on('submit(submit)', function (data) {
-                            $("#sectionNameInsertSelect").removeAttr("disabled","disabled");
+                            $("#sectionNameInsertSelect").removeAttr("disabled");
                             $.ajax({
                                 type: "POST",
                                 async: false,
@@ -350,21 +339,22 @@ window.onload = function () {
             let sectionId = data.value;
             if (sectionId === ''){
                 $("#exerciseNumSelect").empty();
-                $("#exerciseNumSelect").append('<option value="">请选择习题序号(请先选择一个章节)</option>');
+                $("#exerciseNumSelect").append('<option value="">请选择习题序号(请先选择一个小节)</option>');
                 form.render('select','sectionNameInsertDiv');
             }else {
                 $.ajax({
                     type:"POST",
-                    url: basePath+"/exercisesManager/",
+                    url: basePath+"/exercisesManager/selectExerciseNumBySectionId",
                     data:{"sectionId":sectionId},
                     dataType:"json",
                     success:function (res) {
-                        $("#sectionNameInsertSelect").empty();
-                        $("#sectionNameInsertSelect").append('<option value="">请选择一个小节(请先选择一个章节)</option>');
-                        $.each(res.sectionList,function (i, section) {
-                            $("#sectionNameInsertSelect").append('<option value="'+section.sectionId+'">'+section.sectionName+'</option>');
+                        $("#exerciseNumSelect").empty();
+                        $("#exerciseNumSelect").append('<option value="">请选择习题序号(请先选择一个小节)</option>');
+                        $.each(res.exerciseNumList,function (i, exerciseNum) {
+                            $("#exerciseNumSelect").append('<option value="'+exerciseNum+'">'+exerciseNum+'</option>');
                         });
-                        form.render('select','sectionNameInsertDiv');
+                        form.render('select','exerciseNumDiv');
+                        $("#exerciseNumInput").val(res.count1);
                     }
                 });
             }
@@ -375,6 +365,8 @@ window.onload = function () {
             $("#eId").val("");
             $("#sectionNameInsertSelect").val("");
             $("#type").val("");
+            $("#exerciseNumSelect").removeAttr("disabled");
+            $("#exerciseNumInput").removeAttr("disabled");
             form.render('select');
             $("#title").val("");
             $("#answerA").val("");

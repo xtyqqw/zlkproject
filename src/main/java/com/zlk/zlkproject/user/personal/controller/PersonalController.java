@@ -77,7 +77,7 @@ public class PersonalController {
 
         ModelAndView mv = new ModelAndView();
         //调用修改方法
-        userService.updateUser(user);
+         userService.updateUser(user);
         //根据ID查询出user对象，
         User user1=userService.selectUserById(user.getUserId());
         request.getSession().removeAttribute("user");

@@ -1,6 +1,7 @@
 package com.zlk.zlkproject.community.comment.controller;
 
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import com.zlk.zlkproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,14 @@ public class ArticleCommentsController {
         HashMap map = new HashMap<>();
         String userId = "" + user.getUserId();
         String articleId = (String) request.getSession().getAttribute("articleId");
+        Article article = (Article) request.getSession().getAttribute("article");
+        Integer articleCommentCount = article.getCommentCount();
+        article.setCommentCount(articleCommentCount+1);
         articleComment.setArticleId(articleId);
         articleComment.setUserId(userId);
         articleComment.setPId(0);
         articleComment.setDate(new Date());
+        Integer count = articleCommentsService.countByArticle(article);
         Integer res = articleCommentsService.addArtCmt(articleComment);
         String retmsg;
         if (res == 1) {
@@ -47,6 +52,7 @@ public class ArticleCommentsController {
         }else {
             retmsg = "评论失败";
         }
+        map.put("count",count);
         map.put("retmsg",retmsg);
         return map;
     }
@@ -57,10 +63,14 @@ public class ArticleCommentsController {
         User user = (User) request.getSession().getAttribute("user");
         String userId = "" + user.getUserId();
         String articleId = (String) request.getSession().getAttribute("articleId");
+        Article article = (Article) request.getSession().getAttribute("article");
         HashMap map = new HashMap<>();
+        Integer articleCommentCount = article.getCommentCount();
+        article.setCommentCount(articleCommentCount+1);
         articleComment.setArticleId(articleId);
         articleComment.setUserId(userId);
         articleComment.setDate(new Date());
+        Integer count = articleCommentsService.countByArticle(article);
         Integer res = articleCommentsService.addArtCmt(articleComment);
         String retmsg;
         if (res == 1) {
@@ -68,6 +78,7 @@ public class ArticleCommentsController {
         }else {
             retmsg = "回复失败";
         }
+        map.put("count",count);
         map.put("retmsg",retmsg);
         return map;
     }
