@@ -84,7 +84,7 @@ public class ArticleAddController {
         article.setUser(user);
         article.setArticleId(UUIDUtils.getId());
         article.setCreateTime(new Date());
-        /*article.setUpdateTime(new Date());*/
+        article.setUpdateTime(new Date());
         //初始化发文动态关键信息
         action.setActionId(UUIDUtils.getId());
         action.setUserId(userId);
