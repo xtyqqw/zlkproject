@@ -113,12 +113,12 @@
                         <div class="ui left labeled action input">
                             <label class="ui compact violet basic label">问题标签</label>
                             <div class="ui fluid selection multiple search dropdown">
-                                <input type="hidden" name="tagName">
+                                <input type="hidden" name="tagIds">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">请选择标签</div>
                                 <div class="menu">
-                                    <c:forEach items="${tagList}" var="tag">
-                                        <div class="item">${tag.tagName}</div>
+                                    <c:forEach items="${tags}" var="tag">
+                                        <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -182,8 +182,8 @@
                         type: 'empty',
                         prompt: '问题不能为空呦'
                     }, {
-                        type: 'maxLength[50]',
-                        prompt: '请注意问题标题最大长度不能超过50'
+                        type: 'maxLength[30]',
+                        prompt: '请注意问题标题最大长度不能超过30'
                     }]
                 },
                 questionContent: {
@@ -207,17 +207,17 @@
                     identifier: 'typeName',
                     rules: [{
                         type: 'empty',
-                        prompt: '选择一个问题类别吧'
+                        prompt: '请选择一个问题类别'
                     }]
                 },
                 tagName: {
-                    identifier: 'tagName',
+                    identifier: 'tagIds',
                     rules: [{
                         type: 'minCount[1]',
-                        prompt: '选择一个问题标签吧'
+                        prompt: '请选择一个问题标签'
                     }, {
                         type: 'maxCount[3]',
-                        prompt: '最多只能选择三个问题标签呦'
+                        prompt: '最多只能选择三个问题标签'
                     }]
                 }
             },

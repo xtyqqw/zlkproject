@@ -33,8 +33,15 @@ public class Tag {
     private Integer tagTypeId;
 
     private String tagTypeName;
+
+
     /**标签和文章多对多关系*/
     @ManyToMany(mappedBy = "tags")
     private List<Article> articles=new ArrayList<>();
+
+
+    /**标签和问题多对多关系*/
+    @ManyToMany(mappedBy = "tags")
+    private List<Question> questions=new ArrayList<>();
 
 }

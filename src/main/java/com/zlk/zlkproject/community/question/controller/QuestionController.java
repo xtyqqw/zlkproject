@@ -1,14 +1,13 @@
 package com.zlk.zlkproject.community.question.controller;
 
+import com.zlk.zlkproject.community.question.service.QuestionAddTagService;
 import com.zlk.zlkproject.community.question.service.QuestionService;
-import com.zlk.zlkproject.community.question.service.QuestionTagService;
 import com.zlk.zlkproject.community.util.UUIDUtils;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import com.zlk.zlkproject.entity.User;
 import com.zlk.zlkproject.utils.CommonFileUtil;
 import com.zlk.zlkproject.utils.FdfsConfig;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author gby
@@ -37,7 +33,7 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
     @Autowired
-    private QuestionTagService questionTagService;
+    private QuestionAddTagService questionAddTagService;
     @Autowired
     private CommonFileUtil commonFileUtil;
     @Autowired
@@ -73,9 +69,9 @@ public class QuestionController {
      * @date 2019/12/3 14:20
      */
     @RequestMapping(value = "/editQuestion")
-    public String edit(Model model, Tag tag) throws Exception {
-        List<Tag> tagList = questionTagService.listByTag(tag);
-        model.addAttribute("tagList", tagList);
+    public String edit(Model model) throws Exception {
+        List<Tag> tagList = questionAddTagService.listTag();
+        model.addAttribute("tags", tagList);
         return "/view/community/questionEdit";
     }
 
@@ -95,6 +91,7 @@ public class QuestionController {
         question.setCreateTime(new Date());
         question.setUpdateTime(new Date());
         question.setUser(user);
+        question.setTags(questionAddTagService.listTags(question.getTagIds()));
         questionService.saveQuestion(question);
         return "redirect:/CommunityPage";
     }

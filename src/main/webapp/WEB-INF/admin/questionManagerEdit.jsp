@@ -107,6 +107,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic teal label">发布时间</label>
+                        <input type="text" name="createTime" value="${questions.createTime}" id="createTime"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui basic teal label">更新时间</label>
+                        <input type="text" name="updateTime" value="${questions.updateTime}" id="updateTime"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
             <div class="two fields">
                 <div class="required field">
                     <div class="ui left labeled action input">
@@ -124,39 +141,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="required field">
-                    <div class="ui left labeled action input">
-                        <label class="ui compact teal basic label">问题标签</label>
-                        <div class="ui fluid selection multiple search dropdown">
-                            <input type="hidden" name="tagName" value="${questions.tagName}">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">请选择标签</div>
-                            <div class="menu">
-                                <c:forEach items="${tagList}" var="tag">
-                                    <div class="item">${tag.tagName}</div>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="two fields">
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">发布时间</label>
-                        <input type="text" name="createTime" value="${questions.createTime}" id="createTime"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">更新时间</label>
-                        <input type="text" name="updateTime" value="${questions.updateTime}" id="updateTime"
-                               autocomplete="off" class="layui-input">
-                    </div>
-                </div>
             </div>
             <div class="ui right aligned container">
+                <button type="submit" onclick="window.history.go(-1)" class="ui button teal">返回</button>
                 <button type="submit" onclick="publish()" class="ui button teal">提交</button>
             </div>
         </form>
@@ -190,6 +177,7 @@
             , type: 'datetime'
             //  设置选择日期不能超过当前日期
             , max: getNowFormatDate()
+            , value: new Date()
         });
     });
 
@@ -328,7 +316,7 @@
                         prompt: '请注意问题标题不能为空'
                     }, {
                         type: 'maxLength[50]',
-                        prompt: '请注意问题标题最大字数不能超过50'
+                        prompt: '请注意问题标题最大字数不能超过30'
                     }]
                 },
                 questionContent: {
@@ -336,6 +324,16 @@
                     rules: [{
                         type: 'empty',
                         prompt: '请注意问题内容不能为空'
+                    }]
+                },
+                questionSynopsis: {
+                    identifier: 'questionSynopsis',
+                    rules: [{
+                        type: 'empty',
+                        prompt: '问题摘要内容不能为空哟'
+                    }, {
+                        type: 'maxLength[150]',
+                        prompt: '请注意问题摘要最大长度不能超过150'
                     }]
                 },
                 typeName: {

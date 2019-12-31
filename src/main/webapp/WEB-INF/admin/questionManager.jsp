@@ -168,8 +168,7 @@
                     {type: 'checkbox', fixed: 'left'}
                     , {field: 'questionId', title: '问题ID', width: 80, sort: true}
                     , {field: 'questionTitle', title: '问题标题', width: 100, sort: true}
-                    , {field: 'questionContent', title: '问题内容', width: 130}
-                    , {field: 'questionContentHtml', title: 'html问题内容', width: 130}
+                    , {field: 'questionContentHtml', title: '问题内容', width: 130}
                     , {field: 'questionSynopsis', title: '简要', width: 100}
                     , {
                         field: 'solve', title: '问题状态', width: 90,
@@ -182,6 +181,7 @@
                         }
                     }
                     , {field: 'browseCount', title: '浏览数', width: 80}
+                    , {field: 'responseCount', title: '回答数', width: 80}
                     , {field: 'createTime', title: '发布时间', width: 90}
                     , {field: 'updateTime', title: '更新时间', width: 90}
                     , {field: 'questionSetTop', title: '置顶', width: 80,
@@ -205,7 +205,6 @@
                         }
                     }
                     , {field: 'typeName', title: '类别', width: 80}
-                    , {field: 'tagName', title: '标签', width: 90}
                     , {
                         title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
 
@@ -321,7 +320,6 @@
                 $("#questionSetTop").val(data.questionSetTop);
                 $("#audit").val(data.audit);
                 $("#typeName").val(data.typeName);
-                $("#tagName").val(data.tagName);
                 layer.open({
                     title: "编辑",
                     type: 1,

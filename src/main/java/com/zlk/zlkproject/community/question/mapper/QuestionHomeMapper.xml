@@ -16,7 +16,13 @@
         <result column="audit" property="audit" javaType="java.lang.String"/>
         <result column="question_synopsis" property="questionSynopsis" javaType="java.lang.String"/>
         <result column="type_name" property="typeName" javaType="java.lang.String"/>
-        <result column="tag_name" property="tagName" javaType="java.lang.String"/>
+        <result property="responseCount" column="response_count" javaType="java.lang.Integer"/>
+        <collection property="tags" ofType="com.zlk.zlkproject.entity.Tag" javaType="java.util.List">
+            <id property="tagId" column="tag_id" javaType="java.lang.Integer"/>
+            <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+            <result property="tagTypeId" column="tag_type_id" javaType="java.lang.Integer"/>
+            <result property="tagTypeName" column="tag_type_name" javaType="java.lang.String"/>
+        </collection>
         <!--association 是一对一的关键字，collection是一对多的关键字-->
         <collection property="user" javaType="com.zlk.zlkproject.entity.User">
             <id column="user_id" property="userId" javaType="java.lang.String"></id>
@@ -42,6 +48,7 @@
             <result column="user_realimg" property="userRealimg" javaType="java.lang.String"></result>
         </collection>
     </resultMap>
+
     <select id="findQuestionCount" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
         select count(1) from question where audit = "1"
     </select>
