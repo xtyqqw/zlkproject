@@ -118,6 +118,19 @@
             line-height: 3.5vw;
             text-align: center;
         }
+        #yijianzhuti #quxiao1{
+            position: fixed;
+            top: 25%;
+            left:35%;
+            font-size: 1.3vw;
+            color: white;
+            border-radius: 0.4vw;
+            background-color:  #713ED7;
+            width: 12vw;
+            height: 3.5vw;
+            line-height: 3.5vw;
+            text-align: center;
+        }
         #yijianzhuti #chongxin{
             position: fixed;
             top: 45%;
@@ -184,6 +197,8 @@
     </div>
     <%--提交成功提示框--%>
     <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
+    <%--取消提示框--%>
+    <div id="quxiao1"><i class="layui-icon layui-icon-auz"></i>信息已重置</div>
 </div>
 
 <script>
@@ -199,6 +214,16 @@
                 $("#chenggong").hide();
             },5500)
         }
+    });
+</script>
+<script>
+    // 取消按钮事件
+    $("#quxiao1").hide();
+    $('#quxiao').click(function () {
+        $("#quxiao1").show();
+        setTimeout(function () {
+            $("#quxiao1").hide();
+        },2000)
     });
 </script>
 
