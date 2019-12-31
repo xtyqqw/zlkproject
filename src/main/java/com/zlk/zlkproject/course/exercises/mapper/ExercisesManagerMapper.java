@@ -121,7 +121,18 @@ public interface ExercisesManagerMapper {
     Integer selectCountBySectionId(Integer sectionId);
 
 
+    /**
+     *  根据小节id查找习题数量
+     *@method selectExerciseNumBySectionId
+     *@params [sectionId]
+     *@return java.util.List<java.lang.Integer>
+     *@author zhang
+     *@time 2019/12/23  16:27
+     */
     List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
+
+
+
 
 
     /**
