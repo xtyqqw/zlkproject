@@ -250,18 +250,11 @@
                         }
                     });
                     if (treeNode.length > 0) {
-
-                        //获取ztree对象
-                        //var treeObj = $.fn.zTree.getZTreeObj("menuTree");
-
-                        //alert("findByPidIsNull:menus:===treeNode:==="+JSON.stringify(treeNode))
                         //遍历勾选角色关联的菜单数据
                         for (var i = 0; i < treeNode.length; i++) {
-
                             if (treeNode[i].url!=null && treeNode[i].url!=''  ) { //==###=排除选中父节点。
                                 //根据角色菜单节点数据的属性搜索，获取与完整菜单树完全匹配的节点JSON对象集合
                                 var nodes = zTree.getNodesByParam("id", treeNode[i].id, null);
-
                                 //勾选当前选中的节点
                                 zTree.checkNode(nodes[0],true,true);
                             }
@@ -328,10 +321,7 @@
 <script>
     layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
         var table = layui.table;
-        var laydate = layui.laydate;
         var layer = layui.layer;
-        var util = layui.util;
-        var form = layui.form;
         <c:if test="${flag}">
         $(function () {
             var index=layer.msg($("#msg").val());
@@ -341,12 +331,6 @@
             });
         })
         </c:if>
-        laydate.render({
-            elem: '#createTime'
-            , type: 'datetime'
-            , format: 'yyyy-MM-dd HH:mm:ss'
-        });
-        form.render();
         //第一个实例
         table.render({
             elem: '#demo'

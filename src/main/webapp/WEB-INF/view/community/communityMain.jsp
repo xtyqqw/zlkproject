@@ -100,7 +100,7 @@
         }
         iframe{
             width: 100%;
-            height: 94%;
+            height: 90%;
             display: inline-block;
             border: none 0;
         }

@@ -37,7 +37,7 @@ $(document).ready(function () {
                     layer.msg("内容为空无法提交！");
                 }
                 if(contentHtml.length>200){
-                    layer.msg("内容超出最大长度限制！");
+                    layer.msg("内容超出最大长度限制，最大长度为200！");
                     lengthState = false;
                 }
                 if(lengthState && !isEmpty){
@@ -52,7 +52,7 @@ $(document).ready(function () {
                             }
                         },
                         error : function () {
-                            layer.msg('发表评论前，请先登录！');
+                            layer.msg('发表与查看评论前，请先登录！');
                             artCmt_editor.txt.clear();
                         }
                     });
@@ -525,7 +525,7 @@ $(document).ready(function () {
                     data = {'articleId':articleId, 'userId':userId, 'content':contentHtml, 'pId':pid};
                 }
                 if(contentHtml.length>200){
-                    layer.msg("内容超出最大长度限制！",{offset:''+ev.clientY});
+                    layer.msg("内容超出最大长度限制，最大长度为200！",{offset:''+ev.clientY});
                     lengthState = false;
                 }
                 if (isEmpty){

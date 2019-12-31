@@ -7,7 +7,8 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
@@ -22,6 +23,7 @@ To change this template use File | Settings | File Templates.
         <div class="ui container">
             <form action="<%=request.getContextPath() %>/article/update" method="post" class="ui form">
                 <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}">
+                <input type="text" name="updateTime" id="updateTime" hidden="hidden" value="${articles.updateTime}">
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact basic dropdown teal label">
@@ -35,13 +37,6 @@ To change this template use File | Settings | File Templates.
                             </div>
                         </div>
                         <input type="text" name="title" placeholder="简明扼要的描述你的标题" value="${articles.title}">
-                    </div>
-                </div>
-
-                <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic teal label">摘要</label>
-                        <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
                     </div>
                 </div>
 
@@ -63,7 +58,7 @@ To change this template use File | Settings | File Templates.
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui basic teal label">发布时间</label>
-                            <input type="text" name="createTime" value="${articles.createTime}" id="createTime" autocomplete="off" class="layui-input">
+                            <input type="text" readonly name="createTime" value="<fmt:formatDate value="${articles.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>">
                         </div>
                     </div>
                 </div>
@@ -75,10 +70,16 @@ To change this template use File | Settings | File Templates.
                             <input type="text" name="commentCount" placeholder="请输入评论数" value="${articles.commentCount}">
                         </div>
                     </div>
-                    <div class="required field">
+                    <%--<div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui basic teal label">更新时间</label>
                             <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>--%>
+                    <div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic teal label">摘要</label>
+                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
                         </div>
                     </div>
                 </div>
@@ -218,8 +219,17 @@ To change this template use File | Settings | File Templates.
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
 <script type="text/javascript">
-    //日期js
     layui.use('laydate',function(){
+        var laydate=layui.laydate;
+        laydate.render({
+            elem: '#updateTime'
+            //类型
+            ,type:'datetime'
+            ,value: new Date()
+        });
+    });
+    //日期js
+    /*layui.use('laydate',function(){
         var laydate=layui.laydate;
         laydate.render({
             elem: '#createTime'
@@ -230,17 +240,7 @@ To change this template use File | Settings | File Templates.
             ,value: new Date()
         });
     });
-    layui.use('laydate',function(){
-        var laydate=layui.laydate;
-        laydate.render({
-            elem: '#updateTime'
-            //类型
-            ,type:'datetime'
-            //  设置选择日期不能超过当前日期
-            ,max : getNowFormatDate()
-            ,value: new Date()
-        });
-    });
+
 
     //  设置选择日期不能超过当前日期
     function getNowFormatDate() {
@@ -259,11 +259,11 @@ To change this template use File | Settings | File Templates.
             + seperator1 + strDate + " " + date.getHours() + seperator2
             + date.getMinutes() + seperator2 + date.getSeconds();
         return currentdate;
-    }
+    }*/
 
 
     //转换日期格式
-    var date = $("#createTime").val();
+    /*var date = $("#createTime").val();
     function formatDate(date){
         date = new Date(date);
         //获取年月日,时分秒的值
@@ -302,7 +302,7 @@ To change this template use File | Settings | File Templates.
         return y+"-"+m+"-"+d+"  "+H+":"+m1+":"+s;
     }
     date = formatDate(date);
-    $("#updateTime").val(date);
+    $("#updateTime").val(date);*/
 
     /*$('#example1').calendar({
         ampm: false,
@@ -461,7 +461,7 @@ To change this template use File | Settings | File Templates.
                         prompt: '请注意文章摘要最大字数不能超过150'
                     }]
                 }
-            },
+            }
             /*onSuccess: function () {
                 alert("编辑成功");
             },
