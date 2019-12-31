@@ -10,14 +10,10 @@
 <html>
 <head>
     <title>意见反馈</title>
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/layui.all.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
-    <script type="text/javascript">
-        $("#tijiao").click(function () {
-            layer.msg("提交成功");
-        });
-    </script>
+
 
 
     <style type="text/css">
@@ -149,6 +145,20 @@
 
 
     </style>
+
+    <%--提交按钮js--%>
+    <%--<script src="<%=request.getContextPath()%>/layui/lay/dest/layui.all.js/layui.js"></script>--%>
+    <script src="<%=request.getContextPath()%>/layui/layui.all.js"></script>
+    <script>
+
+
+        //    取消按钮事件
+        //重置按钮点击事件,当点击重置按钮时，显示信息
+        $("#quxiao").click(function () {
+            layer.msg("信息已重置",{ icon:6});
+        });
+    </script>
+
 </head>
 <body style="width:90%;">
 
@@ -168,17 +178,14 @@
 
             <div id="zhuti_wei">
                 <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
-                <button id="quxiao">取消</button>
+                <button type="reset" id="quxiao" onclick="quxiao()">取消</button>
             </div>
-
         </form>
     </div>
     <%--提交成功提示框--%>
     <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
 </div>
 
-
-<%--提交按钮js--%>
 <script>
     $("#chenggong").hide();
     $('#tijiao').click(function () {
@@ -194,6 +201,8 @@
         }
     });
 </script>
+
+
 
 </body>
 </html>
