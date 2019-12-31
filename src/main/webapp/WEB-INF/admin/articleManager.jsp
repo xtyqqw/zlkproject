@@ -285,8 +285,8 @@
                         }}
                     , {field: 'approval', title: '审核', width: 90,align:'center',templet:function (d) {
                             if(d.approval == '0') return '审核中';
-                            else if (d.approval == '1') return '审核通过';
-                            else if(d.approval == '2') return '审核不过';
+                            else if (d.approval == '1') return '已审核';
+                            else if(d.approval == '2') return '审核未过';
                         }}
                     , {field: 'typeName', title: '文章方向', width: 90,align:'center'}
                     , {
