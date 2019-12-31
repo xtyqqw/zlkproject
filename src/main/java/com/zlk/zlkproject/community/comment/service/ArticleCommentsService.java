@@ -1,5 +1,6 @@
 package com.zlk.zlkproject.community.comment.service;
 
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 
 import java.util.List;
@@ -61,4 +62,13 @@ public interface ArticleCommentsService {
      * @date: 2019/12/8 9:45
      */
     Integer updateArtCmtInform(Integer articleCommentId, String inform);
+
+    /**
+     * @description: 更新评论数
+     * @param article
+     * @return: java.lang.Integer
+     * @author: QianKeQin
+     * @date: 2019/12/30 14:06
+     */
+    Integer countByArticle(Article article);
 }

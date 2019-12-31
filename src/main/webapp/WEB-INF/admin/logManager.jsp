@@ -47,38 +47,13 @@
 </head>
 <body>
 <input type="hidden" value="${msg}" id="msg">
-<div id="addForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/dept/insert" class="form">
-        部门名称 <input type="text" required placeholder="请输入部门名称" name="deptName"><br>
-        部门代码 <input type="text" required placeholder="请输入部门代码" name="deptCode"><br>
-        <input type="submit" hidden="hidden" id="insertSubmit" value="确认">
-    </form>
-</div>
-<div id="editForm" hidden="hidden">
-    <form action="<%=request.getContextPath()%>/dept/update" class="form">
-        <input type="hidden" name="deptId" id="deptId"><br>
-        部门名称 <input type="text" required id="deptName" placeholder="请输入部门名称" name="deptName"><br>
-        部门代码 <input type="text" required id="deptCode" placeholder="请输入部门代码" name="deptCode"><br>
-        <input type="submit" hidden="hidden" id="updateSubmit" value="确认">
-    </form>
-</div>
 <div class="layui-fluid">
     <table class="layui-table" id="demo" lay-filter="test"></table>
 </div>
 <script>
     layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
         var table = layui.table;
-        var laydate = layui.laydate;
         var layer = layui.layer;
-        var util = layui.util;
-        var form = layui.form;
-
-        laydate.render({
-            elem: '#createTime'
-            , type: 'datetime'
-            , format: 'yyyy-MM-dd HH:mm:ss'
-        });
-        form.render();
         //第一个实例
         var renderTable = function () {
             table.render({
@@ -99,17 +74,11 @@
                         title: '操作时间',
                         templet: '<div>{{ layui.util.toDateString(d.time,"yyyy-MM-dd HH:mm:ss") }}</div>',
                         width: 170
-                    }/*
-                    , {
-                        title: '操作', align: 'center', toolbar: '' +
-                            '<div class="layui-btn-group">' +
-                            '<button type="button" class="layui-btn layui-btn-danger" lay-event="del">删除</button>' +
-                            '</div>'
-                    }*/
+                    }
                 ]]
                 , limits: [24,50, 100]
                 , toolbar: '<div class="layui-btn-group">' +
-                    '<button type="hidden" class="layui-btn layui-btn-danger" lay-event="add">批量删除</button>' +
+                    '<button type="hidden" class="layui-btn layui-btn-danger" lay-event="del">批量删除</button>' +
                     '<div class="layui-card search">\n' +
                     '        <div class="layui-form layui-card-header layuiadmin-card-header-auto" >\n' +
                     '            <div class="layui-form-item">' +
@@ -141,7 +110,7 @@
             var data = checkStatus.data;
             var data2 = data.logId;
             switch (obj.event) {
-                case 'add':
+                case 'del':
                     if (data.length === 0) {
                         layer.msg("请至少选择一条日志");
                     }else {

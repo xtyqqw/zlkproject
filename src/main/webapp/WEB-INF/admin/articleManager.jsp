@@ -174,8 +174,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
-            area: ['auto', 'auto'],
+            tips: [2, '#009688'],
             time: 2000
         });
     });
@@ -183,7 +182,8 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [1, '#009688'],
+            tips: [2, '#009688'],
+            area: ['520px','auto'],
             time: 2000
         });
     });
@@ -191,8 +191,8 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContentHtml"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
-            area: ['auto', 'auto'],
+            tips: [2, '#009688'],
+            area: ['520px','auto'],
             time: 2000
         });
     });
@@ -200,7 +200,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [2, '#009688'],
             time: 2000
         });
     });
@@ -267,9 +267,9 @@
                     , {field: 'createTime',title: '发布时间',width: 90,align:'center'}
                     , {field: 'updateTime',title: '更新时间',width: 90,align:'center'}
                     , {field: 'figures', title: '插图相对路径', width: 130,align:'center'}
-                    , {field: 'articleContentHtml', title: '文章内容', width: 110,align:'center'}
+                    , {field: 'articleContentHtml', title: 'html文章内容', width: 110,align:'center'}
                     , {field: 'articleDigest', title: '文章摘要', width: 90,align:'center'}
-                    , {field: 'articleContent', title: '文章内容', width: 90,align:'center'}
+                    , {field: 'articleContent', title: '文章内容', width: 110,align:'center'}
                     , {field: 'zanCount', title: '赞数', width: 60,align:'center'}
                     , {field: 'caiCount', title: '踩数', width: 60,align:'center'}
                     , {field: 'inform', title: '举报', width: 60,align:'center',templet:function (d) {
@@ -287,13 +287,11 @@
                         }}
                     , {field: 'approval', title: '审核', width: 90,align:'center',templet:function (d) {
                             if(d.approval == '0') return '审核中';
-                            else if (d.approval == '1') return '审核通过';
-                            else if(d.approval == '2') return '审核不过';
+                            else if (d.approval == '1') return '已审核';
+                            else if(d.approval == '2') return '审核未过';
                         }}
                     , {field: 'typeName', title: '文章方向', width: 90,align:'center'}
-                    , {
-                        title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
-                    }
+                    , {title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'}
                 ]]
                 , limits: [5, 10, 20]
                 , toolbar: '<div class="layui-btn-group">' +

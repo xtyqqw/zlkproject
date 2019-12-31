@@ -2,6 +2,7 @@ package com.zlk.zlkproject.community.comment.service.impl;
 
 import com.zlk.zlkproject.community.comment.mapper.ArticleCommentsMapper;
 import com.zlk.zlkproject.community.comment.service.ArticleCommentsService;
+import com.zlk.zlkproject.entity.Article;
 import com.zlk.zlkproject.entity.ArticleComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,28 +53,34 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
     public Integer updateZC(String userId, Integer articleCommentId, String type) {
         if("ZanAdd".equals(type)){
             Integer res = articleCommentsMapper.addArtCmtUserZC(articleCommentId, userId, "zan");
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }else if ("ZanMinus".equals(type)){
             Integer res = articleCommentsMapper.deleteArtCmtUserZC(articleCommentId, userId);
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }else if ("CaiAdd".equals(type)){
             Integer res = articleCommentsMapper.addArtCmtUserZC(articleCommentId, userId, "cai");
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }else if ("CaiMinus".equals(type)){
             Integer res = articleCommentsMapper.deleteArtCmtUserZC(articleCommentId, userId);
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }else if ("ZanAddCaiMinus".equals(type)){
             Integer res = articleCommentsMapper.updateArtCmtUserZC(articleCommentId, userId, "zan");
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }else if ("ZanMinusCaiAdd".equals(type)){
             Integer res = articleCommentsMapper.updateArtCmtUserZC(articleCommentId, userId, "cai");
-            if(res != 1)
+            if(res != 1) {
                 return 0;
+            }
         }
         return articleCommentsMapper.updateZanCaiNumByArticleCommentId(articleCommentId,type);
     }
@@ -81,5 +88,10 @@ public class ArticleCommentsServiceImpl implements ArticleCommentsService {
     @Override
     public Integer updateArtCmtInform(Integer articleCommentId, String inform) {
         return articleCommentsMapper.updateArtCmtInform(articleCommentId,inform);
+    }
+
+    @Override
+    public Integer countByArticle(Article article) {
+        return articleCommentsMapper.countByArticle(article);
     }
 }
