@@ -205,6 +205,7 @@
     $("#chenggong").hide();
     $('#tijiao').click(function () {
         //获取输入框的值
+        // alert("1111");
         var shuru = $('#shurukuang').val();
         //对输入框的值得长度进行判断，
         // 如果20<长度<100时。该提示信息显示
@@ -220,10 +221,15 @@
     // 取消按钮事件
     $("#quxiao1").hide();
     $('#quxiao').click(function () {
-        $("#quxiao1").show();
-        setTimeout(function () {
-            $("#quxiao1").hide();
-        },2000)
+        // alert("2222");
+        var shuru = $('#shurukuang').val();
+        if(shuru.length>0){
+            $("#quxiao1").show();
+            setTimeout(function () {
+                $("#quxiao1").hide();
+            },2000)
+        }
+
     });
 </script>
 
