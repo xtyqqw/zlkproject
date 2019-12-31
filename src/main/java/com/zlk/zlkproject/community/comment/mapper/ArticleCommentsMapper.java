@@ -37,7 +37,7 @@ public interface ArticleCommentsMapper {
     List<ArticleComment> findArtCmt(String articleId, Integer page, Integer size);
 
     /**
-     * @description: 查询评论总条数
+     * @description: 查询评论pid=0的条数
      * @param articleId
      * @return: java.lang.Integer
      * @author: QianKeQin
