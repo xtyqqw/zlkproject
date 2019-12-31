@@ -70,10 +70,7 @@
 <script>
     layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
         var table = layui.table;
-        var laydate = layui.laydate;
         var layer = layui.layer;
-        var util = layui.util;
-        var form = layui.form;
         <c:if test="${flag}">
         $(function () {
             var index=layer.msg($("#msg").val());
@@ -83,12 +80,6 @@
             });
         })
         </c:if>
-        laydate.render({
-            elem: '#createTime'
-            , type: 'datetime'
-            , format: 'yyyy-MM-dd HH:mm:ss'
-        });
-        form.render();
         //第一个实例
         table.render({
             elem: '#demo'
