@@ -120,6 +120,7 @@ public interface ExercisesManagerMapper {
      */
     Integer selectCountBySectionId(Integer sectionId);
 
+
     /**
      *  根据小节id查找习题数量
      *@method selectExerciseNumBySectionId
@@ -128,5 +129,36 @@ public interface ExercisesManagerMapper {
      *@author zhang
      *@time 2019/12/23  16:27
      */
-    List<Integer> selectExerciseNumBySectionId(Integer sectionId);
+    List<Exercises> selectExerciseNumBySectionId(Integer sectionId);
+
+
+
+
+
+    /**
+     *@Author luanke
+     *@Description //查询小节此题数量
+     *@Date 10:41 2019/12/26
+     *@Param
+     *@return
+    **/
+    Integer selectExerciseCount(Integer sectionId);
+
+    /**
+     * 根据习题Id查询单个记录
+     * @param eId
+     * @return
+     */
+    Exercises selectExercisesByEId(Integer eId);
+
+    /**
+     *  更换习题号码
+     *@method updateLastExerciseNum
+     *@params [exercises]
+     *@return java.lang.Integer
+     *@author zhang
+     *@time 2019/12/27  14:38
+     */
+    Integer updateLastExerciseNum(Exercises exercises);
+
 }

@@ -39,7 +39,7 @@ public class ExercisesServiceImpl implements ExercisesService {
         String filed = userAnswer.getExerciseNum() + "";
         String value = userAnswer.getAnswer();
         redisTemplate.opsForHash().put(key,filed,value);
-        RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());
+        /*RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());*/
         return 1;
     }
 
@@ -48,7 +48,7 @@ public class ExercisesServiceImpl implements ExercisesService {
         List<Exercises> res = exercisesMapper.findExercisesBySectionIdAndUserId(sectionId, userId);
         String key = userId + ":" + sectionId;
         Map<Object, Object> entries = redisTemplate.opsForHash().entries(key);
-        RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());
+        /*RedisConnectionUtils.unbindConnection(redisTemplate.getConnectionFactory());*/
         String answer;
         for (Exercises e : res){
             answer = (String) entries.get(e.getExerciseNum() + "");

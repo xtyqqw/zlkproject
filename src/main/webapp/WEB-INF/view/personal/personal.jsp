@@ -230,12 +230,6 @@
         var height = document.getElementById("personal-iframe").contentWindow.document.body.scrollHeight;
         $("#personal-iframe").height(height);
     });*/
-    /*$(window.parent.document).find("#personal-iframe").load(function(){
-        var main = $(window.parent.document).find("#personal-iframe");
-        main.height(800);
-        var thisheight = $(document).height();
-        main.height(thisheight);
-    });*/
     /*侧边导航点击事件*/
     $(function(){
         $("a[name='dian']").click(function(){
@@ -286,7 +280,7 @@
         /*我的文章*/
         if (typeNum === 5){
             $("#personal-iframe").attr("src",basePath+"articles/toarticles");
-            $("#personal-iframe").css("height","1030");
+            $("#personal-iframe").css("height","1150");
             $("#myart").css("background-color","#fff");
             $("#myart").css("color","#8C24DD");
             document.title = '个人中心-我的文章';

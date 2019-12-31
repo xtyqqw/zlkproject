@@ -38,11 +38,7 @@ public class RecordServiceImpl implements RecordService {
         int s=list.size();
         for(int i=0;i<s;i++){
             Item item=list.get(i);
-            if(item.getStudyTime()!=null){
                 item.setStuTime(LeaveTime.alterDate(item.getStudyTime()));
-            }else{
-                item.setStuTime("未观看");
-            }
 
             list.set(i,item);
         }

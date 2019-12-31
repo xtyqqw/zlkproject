@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/prism/prism.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/tocbot/tocbot.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1517658_our4ohnho6.css">
 
     <style type="text/css">
@@ -70,7 +70,7 @@
     <!--中间内容-->
     <div id="waypoint" class="m-container-small m-padded-tb-big animated fadeIn">
         <div class="ui container">
-            <%--顶部--%>
+            <!--顶部-->
             <div class="ui top attached segment">
                 <div class="ui horizontal link list">
                     <div class="item">
@@ -82,6 +82,9 @@
                     </div>
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
+                    </div>
+                    <div class="item">
+                        <i class="comments outline icon"></i> <span>${article.commentCount}</span>
                     </div>
                 </div>
             </div>
@@ -132,11 +135,11 @@
                             <ul id="art_cmt_stream"></ul>
                         </div>
                     </div>
-                    <div id="art-cmt-textBox" class="field violet" style="border: 1px solid; height: 12vw;border-radius: 4px;margin-top: 1vw;">
-                        <div id="div_artCmt_toolBar" class="toolbar"></div>
-                        <div id="div_artCmt_text" class="text" style="height: 10vw;"></div>
+                    <div id="art-cmt-textBox" class="field violet" style="border: 1px solid #777777; height: 12vw;border-radius: 4px;margin-top: 1vw;">
+                        <div id="div_artCmt_toolBar" class="toolbar" style="border-bottom: 1px solid #777777;"></div>
+                        <div id="div_artCmt_text" class="text" style="height: 8vw;"></div>
                     </div>
-                    <div id="art-cmt-btnBox" class="fields">
+                    <div id="art-cmt-btnBox" class="fields" style="margin-top: 4px;margin-bottom: 4px;">
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
                             <div class="ui left">
                                 <button id="artCmt_btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>

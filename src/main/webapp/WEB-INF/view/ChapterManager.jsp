@@ -208,14 +208,14 @@
             //监听行工具事件
             table.on('tool(chapter)', function(obj){
                 var data = obj.data;
-                console.log(obj);
                 if(obj.event === 'del'){
                     layer.confirm('真的删除行么', function(index){
                         $.ajax({
                             type : "POST",
                             async: false,
                             url :"<%=request.getContextPath()%>/chapterManager/deleteChapter",
-                            data: {"chapterId":data.chapterId},
+                            contentType: "application/json;charset=UTF-8",
+                            data: JSON.stringify(data),
                             success: function (result) {
                                 layer.msg(result.msg);
                                 table.reload('chapter',{

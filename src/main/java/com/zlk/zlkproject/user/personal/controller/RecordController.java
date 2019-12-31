@@ -49,6 +49,7 @@ public class RecordController {
         List<Item> itemList = recordService.selectCourses(pagination);
         /*查询项目总数*/
         Integer allList=recordService.findCourses(pagination);
+
         for(int i=0;i<itemList.size();i++){
             Integer sectionId=itemList.get(i).getSectionId();
             /*查询视频总时间*/
@@ -56,9 +57,14 @@ public class RecordController {
             /*查询已观看时间*/
             Integer done = recordService.selectUserTime(userId,sectionId);
             /*已完成多少百分比*/
-            long per = Math.round((100 * done) / sum);
-            if(per>=100){
-                per=100;
+            long per;
+            if ("已完成".equals(itemList.get(i).getState())) {
+                per = 100;
+            }else {
+                per = Math.round((100 * done) / sum);
+                if (per >= 100) {
+                    per = 100;
+                }
             }
             itemList.get(i).setPer(per);
         }

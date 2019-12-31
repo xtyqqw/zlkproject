@@ -10,12 +10,13 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/sectionsManager.css" type="text/css">
+<%--    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/sectionsManager.css" type="text/css">--%>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/exercisesManager.js"></script>
     <%--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--%>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
     <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    
 </head>
 <body>
     <div>
@@ -76,12 +77,12 @@
                     <div class="layui-input-block">
                         <select class="layui-select" name="exerciseNum" id="exerciseNumSelect" lay-filter="exerciseNumSelect">
                             <option value="">请选择习题序号</option>
-
                         </select>
                     </div>
                 </div>
+
                 <div class="layui-form-item" style="display: none">
-                    <input type="text" class="layui-input" name="exercisesLastNum" id="exercisesLastNum">
+                    <input type="text" class="layui-input" name="exerciseLastNum" id="exerciseLastNum">
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">习题内容:</label>
@@ -129,10 +130,10 @@
         </div>
 
 
-        <div class="layui-form" id="select_box">
-            <div class="layui-form-item">
+        <div class="layui-form layui-row" id="select_box" style="margin: 20px auto">
+            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
                 <label class="layui-form-label">课程名称:</label>
-                <div class="layui-input-block" lay-filter="coursesNameDiv">
+                <div class="layui-input-block" lay-filter="coursesNameDiv" id="ke1">
                     <select class="layui-select" name="coursesId" id="coursesNameSelect" lay-filter="coursesName" lay-search>
                         <option value="">请选择一个课程</option>
                         <c:forEach items="${coursesList}" var="course">
@@ -141,7 +142,8 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
+
+            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
                 <label class="layui-form-label">章节名称:</label>
                 <div class="layui-input-block layui-form" lay-filter="chapterNameDiv">
                     <select class="layui-select" name="chapterId" id="chapterNameSelect" lay-filter="chapterName" lay-search>
@@ -150,7 +152,8 @@
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
+
+            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
                 <label class="layui-form-label">小节名称:</label>
                 <div class="layui-input-block layui-form" lay-filter="sectionNameDiv">
                     <select class="layui-select" name="sectionId" id="sectionNameSelect" lay-filter="sectionName" lay-search>

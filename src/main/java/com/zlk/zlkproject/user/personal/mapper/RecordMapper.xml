@@ -43,6 +43,7 @@
             <result property="studyTime" column="study_time" javaType="java.util.Date"/>
             <result property="sectionGrade" column="section_grade" javaType="java.lang.Integer"/>
             <result property="sectionId" column="section_id" javaType="java.lang.Integer"/>
+            <result property="state" column="state" javaType="java.lang.String"/>
     </resultMap>
     <!--查询学习记录-->
     <select id="selectCourses" resultMap="ItemMap" parameterType="com.zlk.zlkproject.entity.Pagination">
@@ -56,16 +57,17 @@
 		s.section_name,
 		s.section_id,
 		us.study_time,
-		us.section_grade
+		us.section_grade,
+		us.state
         from user u
         JOIN user_courses uc on u.user_id=uc.user_id
         JOIN courses c on c.courses_id=uc.courses_id
         JOIN chapter ch on ch.courses_id=c.courses_id
 		JOIN section s on s.chapter_id=ch.chapter_id
-		JOIN user_section us on us.section_id=s.section_id
-        where u.user_id=#{userId} ORDER BY us.study_time DESC limit #{startPage},#{limit}
+		JOIN user_section us on us.section_id=s.section_id and us.user_id=u.user_id
+        where u.user_id=#{userId} and us.state !='未观看' ORDER BY us.study_time DESC limit #{startPage},#{limit}
     </select>
-    <!--查询视频已观看时间-->
+    <!--查询视频总时间-->
     <select id="selectUserSection" resultType="java.lang.Integer">
         SELECT s.section_time FROM section s
         LEFT JOIN user_section us on us.section_id=s.section_id
@@ -77,9 +79,16 @@
         WHERE us.user_id=#{userId} AND us.section_id =#{sectionId}
 
     </select>
-    <!--查询课程数量-->
+    <!--查询学习记录数量-->
     <select id="findCourses" parameterType="com.zlk.zlkproject.entity.Pagination" resultType="java.lang.Integer">
-        select count(*) from user_courses
-        WHERE user_id=#{userId}
+        select
+        count(*)
+        from user u
+        JOIN user_courses uc on u.user_id=uc.user_id
+        JOIN courses c on c.courses_id=uc.courses_id
+        JOIN chapter ch on ch.courses_id=c.courses_id
+		JOIN section s on s.chapter_id=ch.chapter_id
+		JOIN user_section us on us.section_id=s.section_id and us.user_id=u.user_id
+        where u.user_id=#{userId} and us.state !='未观看'
     </select>
 </mapper>
