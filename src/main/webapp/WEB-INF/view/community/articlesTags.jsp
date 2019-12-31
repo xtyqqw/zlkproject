@@ -78,7 +78,7 @@
 
                             <div class="five wide column">
                                 <a href="<%=request.getContextPath() %>/community/article-show?articleId=${articlesTags.articleId}" target="_blank">
-                                    <img src="${articlesTags.figures}" alt="" class="ui rounded image">
+                                    <img src="${articlesTags.figures}" alt="" class="ui rounded image" style="height: 125px;width: 100%;">
                                 </a>
                             </div>
                         </div>

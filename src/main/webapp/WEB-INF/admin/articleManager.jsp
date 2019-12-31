@@ -174,8 +174,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "title"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
-            area: ['auto', 'auto'],
+            tips: [2, '#009688'],
             time: 2000
         });
     });
@@ -183,7 +182,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleContent"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [2, '#009688'],
             time: 2000
         });
     });
@@ -192,7 +191,7 @@
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
             tips: [2, '#009688'],
-            area: ['500px','auto'],
+            area: ['520px','auto'],
             time: 2000
         });
     });
@@ -200,7 +199,7 @@
     $('body').on('mouseenter','.layui-table-view td[data-field = "articleDigest"]',function () {
         var msg = $(this).find('div').text();
         tipsInx = layer.tips(msg, this,{
-            tips: [3, '#009688'],
+            tips: [2, '#009688'],
             time: 2000
         });
     });
