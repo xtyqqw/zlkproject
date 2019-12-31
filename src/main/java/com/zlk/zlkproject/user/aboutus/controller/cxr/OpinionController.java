@@ -51,9 +51,12 @@ public class OpinionController {
             //获取用户id，将ID放入对象中。
             opinion.setOpinionUserId(user1.getUserId());
 
-            int a=opinionService.addOpinion(opinion);
-            if(a>0){
+            int flag=opinionService.addOpinion(opinion);
+            if(flag==1){
+                mv.addObject("flag","true");
+                mv.addObject("msg","提交已成功");
                 mv.setViewName("view/cxr/opinion");
+
                 return mv;
             }else{
                 return null;
@@ -61,10 +64,14 @@ public class OpinionController {
             //  如果user1为空，调用游客新增方法
         }else {
             //  如果user1为空，调用游客新增方法
-            int i=opinionService.insertOpinion(opinion);
+            int flag=opinionService.insertOpinion(opinion);
             //对i进行判断，如果i>0，则返回意见反馈页面
-            if(i>0){
+            if(flag==1){
+                mv.addObject("flag","true");
+
+                mv.addObject("msg","提交已成功");
                 mv.setViewName("view/cxr/opinion");
+
                 return mv;
             }else{
                 return null;
