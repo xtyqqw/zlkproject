@@ -63,6 +63,13 @@
             text-align: center;
             padding-top: 10px;
         }
+        #res_allBox{
+            margin-top: 60px;
+            margin-bottom: 15px;
+            border: 0px solid white !important;
+            width: 90%;
+            margin-left: 42px;
+        }
     </style>
 </head>
 <body>
@@ -130,7 +137,7 @@
                     <div id="stuCmt_titleBox">
                         <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
                     </div>
-                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid white !important;">
+                    <div id="res_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid white !important;">
                         <div id="ART_contentBox">
                             <ul id="art_cmt_stream"></ul>
                         </div>

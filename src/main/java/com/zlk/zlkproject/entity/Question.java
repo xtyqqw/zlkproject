@@ -3,7 +3,7 @@ package com.zlk.zlkproject.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -51,10 +51,18 @@ public class Question {
     private String audit;
     /*类别*/
     private String typeName;
-    /*标签*/
-    private String tagName;
-    /*小节表主键*/
-    private String sectionId;
+    /*回答数*/
+    private Integer responseCount;
+    /**添加文章时此属性做标签多选用，且不会在数据库中创建该字段*/
+    @Transient
+    private String tagIds;
+
+    /**问题和标签多对多关系*/
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "question_tag",joinColumns = {@JoinColumn(name = "question_id",referencedColumnName = "questionId")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
+    private List<Tag> tags=new ArrayList<>();
+
     /**提问和用户多对一关系*/
     @ManyToOne
     @JoinColumn(name = "user_id")

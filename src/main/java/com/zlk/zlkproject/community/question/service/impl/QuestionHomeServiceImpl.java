@@ -28,6 +28,7 @@ public class QuestionHomeServiceImpl implements QuestionHomeService {
     @Autowired
     private QuestionHomeDao questionHomeDao;
 
+
     @Override
     public Integer findQuestionCount(Pagination pagination) {
         return questionHomeMapper.findQuestionCount(pagination);
