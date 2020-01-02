@@ -148,7 +148,7 @@ $(document).ready(function () {
                                                                 '<span style="display: none">'+ comment.articleCommentId +'</span>' +
                                                             '</div>\n' +
                                                             '<div class="ART_cmt_toolBox">' +
-                                                                '<span style="display: none">'+ zanCaiState +'</span>' +
+                                                                /*'<span style="display: none">'+ zanCaiState +'</span>' +
                                                                 '<span style="display: none">yes</span> ' +
                                                                 '<div class="ART_spaceDiv" style="float: left"></div>' +
                                                                 '<div class="ART_c_t_box" style="float: left;width: 30px">' +
@@ -158,7 +158,7 @@ $(document).ready(function () {
                                                                 '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                                     caiStr +
                                                                 '</div>' +
-                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].cai +'</div>' +
+                                                                '<div class="ART_c_t_box" style="float: left;width: 40px;padding: 5px 0 0 0">'+ comment.articleCommentList[i].cai +'</div>' +*/
                                                                 '<div class="ART_c_t_box" style="float: left">' +
                                                                     '<span style="display: none">false</span>' +
                                                                     '<span class="ART_flexBtn" data_type="'+ data_type +'" style="cursor: pointer">展开/收起</span>' +
@@ -231,7 +231,7 @@ $(document).ready(function () {
                                                     '<span style="display: none">'+ comment.articleCommentId +'</span>' +
                                                 '</div>\n' +
                                                 '<div class="ART_cmt_toolBox">' +
-                                                    '<span style="display: none">'+ zanCaiState +'</span>' +
+                                                    /*'<span style="display: none">'+ zanCaiState +'</span>' +
                                                     '<span style="display: none">yes</span>' +
                                                     '<div class="ART_spaceDiv" style="float: left"></div>' +
                                                     '<div class="ART_c_t_box" style="float: left;width: 30px">' +
@@ -241,7 +241,7 @@ $(document).ready(function () {
                                                     '<div class="ART_c_t_box" style="float: left;width: 30px;padding: 6px 0 0 0">' +
                                                         caiStr +
                                                     '</div>' +
-                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.cai +'</div>' +
+                                                    '<div class="ART_c_t_box" style="float: left;width: 60px;padding: 5px 0 0 0">'+ comment.cai +'</div>' +*/
                                                     '<div class="ART_c_t_box" style="float: left">' +
                                                         '<span style="display: none">false</span>' +
                                                         '<span class="ART_flexBtn" style="cursor: pointer">展开/收起</span>' +

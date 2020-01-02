@@ -61,7 +61,7 @@
                                     <div class="item" data-value="2">翻译</div>
                                 </div>
                             </div>
-                            <input type="text" name="title" placeholder="简明扼要的描述你的标题且字数不能超过30">
+                            <input type="text" name="title" placeholder="简明扼要的描述你的标题且字数不能超过20">
                         </div>
                     </div>
 
@@ -229,8 +229,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[30]',
-                            prompt: '请注意文章标题最大字数不能超过30'
+                            type: 'maxLength[20]',
+                            prompt: '请注意文章标题最大字数不能超过20'
                         }]
                     },
                     articleContent: {
