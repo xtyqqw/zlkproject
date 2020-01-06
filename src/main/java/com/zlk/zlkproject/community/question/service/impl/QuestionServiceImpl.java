@@ -25,9 +25,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question saveQuestion(Question question) {
         question.setSolve("0");
-        question.setBrowseCount("0");
+        question.setBrowseCount(0);
         question.setQuestionSetTop("1");
         question.setAudit("0");
+        question.setResponseCount(0);
         return questionDao.save(question);
     }
 }

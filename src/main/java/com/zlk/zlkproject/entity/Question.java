@@ -3,7 +3,7 @@ package com.zlk.zlkproject.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class Question {
     private String questionContentHtml;
     /*问题简要*/
     private String questionSynopsis;
-    /*是否解决：0待解决，1已解决，2未解决*/
+    /*是否解决：0待解决，1已解决*/
     private String solve;
     /*发布时间*/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -44,17 +44,25 @@ public class Question {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     /*浏览数*/
-    private String browseCount;
-    /**问题置顶：0 置顶，1 不置顶*/
+    private Integer browseCount;
+    /**问题置顶： 1置顶，0不置顶*/
     private String questionSetTop;
-    /*审核：0 审核中，1 审核过，2 审核未过*/
+    /*审核： 0 正在审核， 1 审核通过，2 审核未过*/
     private String audit;
     /*类别*/
     private String typeName;
-    /*标签*/
-    private String tagName;
-    /*小节表主键*/
-    private String sectionId;
+    /*回答数*/
+    private Integer responseCount;
+    /**添加文章时此属性做标签多选用，且不会在数据库中创建该字段*/
+    @Transient
+    private String tagIds;
+
+    /**问题和标签多对多关系*/
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "question_tag",joinColumns = {@JoinColumn(name = "question_id",referencedColumnName = "questionId")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id",referencedColumnName = "tagId")})
+    private List<Tag> tags=new ArrayList<>();
+
     /**提问和用户多对一关系*/
     @ManyToOne
     @JoinColumn(name = "user_id")

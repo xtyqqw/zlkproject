@@ -105,7 +105,6 @@ public class SectionController {
         }else {
             userId="";
         }
-
         coureseId = (Integer) request.getSession().getAttribute("coursesId");
         sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);
         return sectionService.findSectionByCourseIdLimit(userId,coureseId,page,limit);

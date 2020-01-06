@@ -11,8 +11,6 @@
 <head>
     <title>提问编辑页面</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css"/>
-    <link rel="shortcut icon" href="https://gper.club/server-img/avatars/000/00/35/user_origin_3553.jpg"
-          type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/community/css/me.css"/>
@@ -115,12 +113,12 @@
                         <div class="ui left labeled action input">
                             <label class="ui compact violet basic label">问题标签</label>
                             <div class="ui fluid selection multiple search dropdown">
-                                <input type="hidden" name="tagName">
+                                <input type="hidden" name="tagIds">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">请选择标签</div>
                                 <div class="menu">
-                                    <c:forEach items="${tagList}" var="tag">
-                                        <div class="item">${tag.tagName}</div>
+                                    <c:forEach items="${tags}" var="tag">
+                                        <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -184,8 +182,8 @@
                         type: 'empty',
                         prompt: '问题不能为空呦'
                     }, {
-                        type: 'maxLength[50]',
-                        prompt: '请注意问题标题最大长度不能超过50'
+                        type: 'maxLength[30]',
+                        prompt: '请注意问题标题最大长度不能超过30'
                     }]
                 },
                 questionContent: {
@@ -199,24 +197,27 @@
                     identifier: 'questionSynopsis',
                     rules: [{
                         type: 'empty',
-                        prompt: '简要内容不能为空哟'
+                        prompt: '问题摘要内容不能为空哟'
+                    }, {
+                        type: 'maxLength[150]',
+                        prompt: '请注意问题摘要最大长度不能超过150'
                     }]
                 },
                 typeName: {
                     identifier: 'typeName',
                     rules: [{
                         type: 'empty',
-                        prompt: '选择一个问题类别吧'
+                        prompt: '请选择一个问题类别'
                     }]
                 },
                 tagName: {
-                    identifier: 'tagName',
+                    identifier: 'tagIds',
                     rules: [{
                         type: 'minCount[1]',
-                        prompt: '选择一个问题标签吧'
+                        prompt: '请选择一个问题标签'
                     }, {
                         type: 'maxCount[3]',
-                        prompt: '最多只能选择三个问题标签呦'
+                        prompt: '最多只能选择三个问题标签'
                     }]
                 }
             },

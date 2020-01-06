@@ -9,6 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface QuestionHomeMapper {
+
     /*
      * @descrption 查询总数
      * @author gby

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public interface QuestionHomeService {
+
     /*
      * @descrption 查询总数
      * @author gby

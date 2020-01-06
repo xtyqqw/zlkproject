@@ -166,19 +166,44 @@
                 , height: $(document).height() - $('#demo').offset().top - 20
                 , cols: [[ //表头
                     {type: 'checkbox', fixed: 'left'}
-                    , {field: 'questionId', title: '问题ID', width: 80, sort: true}
-                    , {field: 'questionTitle', title: '问题标题', width: 100, sort: true}
-                    , {field: 'questionContent', title: '问题内容', width: 130}
-                    , {field: 'questionContentHtml', title: 'html问题内容', width: 130}
-                    , {field: 'questionSynopsis', title: '简要', width: 100}
-                    , {field: 'solve', title: '问题状态', width: 90}
-                    , {field: 'browseCount', title: '浏览数', width: 80}
-                    , {field: 'createTime', title: '发布时间', width: 90}
-                    , {field: 'updateTime', title: '更新时间', width: 90}
-                    , {field: 'questionSetTop', title: '置顶', width: 60}
-                    , {field: 'audit', title: '审核', width: 60}
-                    , {field: 'typeName', title: '类别', width: 80}
-                    , {field: 'tagName', title: '标签', width: 90}
+                    , {field: 'questionId', title: '问题ID', width: 120, sort: true,align:'center'}
+                    , {field: 'questionTitle', title: '问题标题', width: 120, sort: true,align:'center'}
+                    , {field: 'questionContentHtml', title: '问题内容', width: 120,align:'center'}
+                    , {field: 'questionSynopsis', title: '简要', width: 120,align:'center'}
+                    , {
+                        field: 'solve', title: '问题状态',align:'center', width: 120,
+                        templet: function (data) {// 替换数据
+                            if (data.solve == "0") {
+                                return "待解决";
+                            } else if (data.solve == "1") {
+                                return "已解决";
+                            }
+                        }
+                    }
+                    , {field: 'browseCount', title: '浏览数', width: 120,align:'center'}
+                    , {field: 'createTime', title: '发布时间', width: 120,align:'center'}
+                    , {field: 'updateTime', title: '更新时间', width: 120,align:'center'}
+                    , {field: 'questionSetTop', title: '置顶',align:'center', width: 120,
+                        templet: function (data) {// 替换数据
+                            if (data.questionSetTop == "0") {
+                                return "置顶";
+                            } else if (data.questionSetTop == "1") {
+                                return "不置顶";
+                            }
+                        }
+                    }
+                    , {field: 'audit', title: '审核',align:'center', width: 120,
+                        templet: function (data) {// 替换数据
+                            if (data.audit == 0) {
+                                return "正在审核";
+                            } else if (data.audit == "1") {
+                                return "审核通过";
+                            } else if (data.audit == "2") {
+                                return "审核未过";
+                            }
+                        }
+                    }
+                    , {field: 'typeName', title: '类别',align:'center', width: 120}
                     , {
                         title: '操作', width: 180, align: 'center', fixed: 'right', toolbar: '#bar'
 
@@ -243,7 +268,7 @@
                         layer.confirm('是否确认删除', function (index) {
                             var data1 = JSON.stringify(data);
                             $.ajax({
-                                url: "<%=request.getContextPath()%>/question/toUpdate",
+                                url: "<%=request.getContextPath()%>/question/deleteList",
                                 contentType: "application/json;charset=UTF-8",
                                 data: {"data": data1},
                                 success: function () {
@@ -294,7 +319,6 @@
                 $("#questionSetTop").val(data.questionSetTop);
                 $("#audit").val(data.audit);
                 $("#typeName").val(data.typeName);
-                $("#tagName").val(data.tagName);
                 layer.open({
                     title: "编辑",
                     type: 1,
