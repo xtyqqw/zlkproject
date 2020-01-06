@@ -29,12 +29,14 @@ public class LeaveTime {
         String n = sdf.format(date);
         return n;
     }
-    public static String alterDate(Date date){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
-        String n = sdf.format(date);
-        return n;
+    public static String alterDate(Date date) {
+        if (date!=null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+            String n = sdf.format(date);
+            return n;
+        }
+        return "未知时间";
     }
-
     public static List byTime(List list){
         Collections.sort(list, new Comparator() {
             public int compare(Object o1, Object o2) {
