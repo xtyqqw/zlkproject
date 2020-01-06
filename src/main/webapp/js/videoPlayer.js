@@ -2386,10 +2386,7 @@ $(document).ready(function () {
                         type:"POST",
                         url:basePath+'/player/recordState',
                         data: data,
-                        dataType: 'json',
-                        success: function () {
-
-                        }
+                        dataType: 'json'
                     });
                 }
                 elem_video1.play();
@@ -2455,6 +2452,13 @@ $(document).ready(function () {
                         })
                     }
                 },1000);
+                let ajaxData = {'time':elem_video1.currentTime};
+                $.ajax({
+                    type : "POST",
+                    async: false,
+                    url : basePath+"/player/recordTime",
+                    data : ajaxData
+                });
             }else{
                 elem_video1.pause();
                 elem_btnPlay.innerHTML = "&#xe652;";

@@ -46,7 +46,7 @@
             <a href="javascript:void(0)" id="a2">我的文章</a>
         </div>
         <!--中间内容-->
-        <div  class="m-container m-padded-tb-big">
+        <div class="m-container m-padded-tb-big">
             <div class="ui container">
                 <form action="<%=request.getContextPath() %>/articles" method="post" class="ui form">
                     <div class="required field">
@@ -61,7 +61,7 @@
                                     <div class="item" data-value="2">翻译</div>
                                 </div>
                             </div>
-                            <input type="text" name="title" placeholder="简明扼要的描述你的标题">
+                            <input type="text" name="title" placeholder="简明扼要的描述你的标题且字数不能超过20">
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@
                                 <div class="ui fluid selection multiple search dropdown">
                                     <input type="hidden" name="tagIds">
                                     <i class="dropdown icon"></i>
-                                    <div class="default text">请选择标签&nbsp;&nbsp;&nbsp;1&nbsp;/&nbsp;3</div>
+                                    <div class="default text">请选择标签&nbsp;&nbsp;&nbsp;1&nbsp;/&nbsp;3&nbsp;&nbsp;&nbsp;或点击下拉按钮以关闭下拉选择框</div>
                                     <div class="menu">
                                         <c:forEach items="${tags}" var="tag">
                                             <div class="item" data-value="${tag.tagId}">${tag.tagName}</div>
@@ -110,7 +110,7 @@
                     <div class="required field">
                         <div class="ui left labeled input">
                             <label class="ui basic violet label">摘要</label>
-                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多">
+                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要，这样能方便其他同学快捷的了解你的文章，且字数不能超过150">
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                     <%--<div class="ui error message"></div>--%>
 
                     <div class="ui right aligned container">
-                        <button type="reset" class="ui reset secondary button">重置</button>
+                        <%--<button type="reset" class="ui reset secondary button">重置</button>--%>
                         <button type="submit" onclick="publish()" class="ui button violet">发布</button>
                     </div>
 
@@ -229,8 +229,8 @@
                             type: 'empty',
                             prompt: '请注意文章标题不能为空'
                         }, {
-                            type: 'maxLength[30]',
-                            prompt: '请注意文章标题最大字数不能超过30'
+                            type: 'maxLength[20]',
+                            prompt: '请注意文章标题最大字数不能超过20'
                         }]
                     },
                     articleContent: {

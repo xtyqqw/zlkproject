@@ -3,8 +3,8 @@ package com.zlk.zlkproject.community.question.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.zlk.zlkproject.admin.util.LogUtil;
 import com.zlk.zlkproject.admin.util.Pagination;
+import com.zlk.zlkproject.community.question.service.QuestionAddTagService;
 import com.zlk.zlkproject.community.question.service.QuestionManagerService;
-import com.zlk.zlkproject.community.question.service.QuestionTagService;
 import com.zlk.zlkproject.entity.Question;
 import com.zlk.zlkproject.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,8 @@ public class QuestionManager {
     @Autowired
     private LogUtil logUtil;
     @Autowired
-    private QuestionTagService questionTagService;
+    private QuestionAddTagService questionAddTagService;
+
     /*
      * @descrption
      * @author gby
@@ -102,10 +103,10 @@ public class QuestionManager {
      * @date 2019/12/23 21:47
      */
     @RequestMapping(value = "/toUpdate")
-    public String updateBtu(Question question,Model model,Tag tag){
+    public String updateBtu(Question question,Model model){
         /**获取当前问题及标签信息*/
         Question questions = questionManagerService.findById(question.getQuestionId());
-        List<Tag> tagList = questionTagService.listByTag(tag);
+        List<Tag> tagList = questionAddTagService.listTag();
         model.addAttribute("tagList", tagList);
         model.addAttribute("questions",questions);
         return "admin/questionManagerEdit";

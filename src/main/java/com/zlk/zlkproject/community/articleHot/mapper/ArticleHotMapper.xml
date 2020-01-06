@@ -26,12 +26,12 @@
 
     <!--根据当月创建时间和浏览量降序查询最新文章标题-->
     <select id="selectTitleByArticle" resultType="com.zlk.zlkproject.entity.Article" resultMap="articleEntityMap">
-        select article_id,title,browse_count,comment_count,approval from article where date_format(create_time,'%Y-%m') = date_format(now(),'%Y-%m') and approval = 1 order by article_set_top asc,browse_count desc LIMIT 0,6
+        select article_id,title,browse_count,comment_count,approval from article where date_format(create_time,'%Y-%m') = date_format(now(),'%Y-%m') and approval = 1 order by browse_count desc LIMIT 0,6
     </select>
 
     <!--根据浏览量降序查询文章标题-->
     <select id="findTitleByBrowseCount" resultType="com.zlk.zlkproject.entity.Article" resultMap="articleEntityMap">
-        select article_id,title,browse_count,comment_count,approval from article where approval = 1 order by article_set_top asc,browse_count desc LIMIT 0,6
+        select article_id,title,browse_count,comment_count,approval from article where approval = 1 order by browse_count desc LIMIT 0,6
     </select>
 
     <!--查询所有文章-->

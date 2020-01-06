@@ -20,6 +20,32 @@ public class Pagination {
 
     private String userId;
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String qusetionId) {
+        this.questionId = qusetionId;
+    }
+
+    public Pagination(List<?> list, Question question, String qusetionId) {
+        this.list = list;
+        this.question = question;
+        this.questionId = qusetionId;
+    }
+
+    private Question question;
+
+    private String questionId;
+
     public String getUserId() {
         return userId;
     }

@@ -80,7 +80,8 @@ layui.use('element', function(){
         ,element = layui.element;
     element.progress('demo', baifansu+"%");
 });
-$(".xinxi").mouseenter(function () {
+//鼠标移入移出时间
+/*$(".xinxi").mouseenter(function () {
     $(this).css("background-color","#fff");
     $(this).css("height","7vw");
     $(this).css("width","7vw");
@@ -99,7 +100,7 @@ $(".xinxi").mouseleave(function () {
     $("#kechengshipin").css("z-index","1");
     $(this).css("box-shadow","none");
     $(this).children().children().first().css("margin-top","0vw");
-});
+});*/
 $("#jiaru").click(function () {
     var kechengId = $("#kechengId").val();
     $.ajax({

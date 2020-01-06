@@ -7,7 +7,8 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/editormd/css/editormd.css" />
@@ -22,9 +23,10 @@ To change this template use File | Settings | File Templates.
         <div class="ui container">
             <form action="<%=request.getContextPath() %>/article/update" method="post" class="ui form">
                 <input type="text" name="articleId" hidden="hidden" value="${articles.articleId}">
+                <input type="text" name="updateTime" id="updateTime" hidden="hidden" value="${articles.updateTime}">
                 <div class="required field">
                     <div class="ui left labeled input">
-                        <div class="ui selection compact basic dropdown violet label">
+                        <div class="ui selection compact basic dropdown teal label">
                             <input type="hidden" value="${articles.createArticleType}" name="createArticleType">
                             <i class="dropdown icon"></i>
                             <div class="text">原创</div>
@@ -39,13 +41,6 @@ To change this template use File | Settings | File Templates.
                 </div>
 
                 <div class="required field">
-                    <div class="ui left labeled input">
-                        <label class="ui basic violet label">摘要</label>
-                        <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
-                    </div>
-                </div>
-
-                <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
                         <textarea class="editormd-markdown-textarea" name="articleContent" style="display: none">${articles.articleContent}</textarea>
                         <!--第二个隐藏文本域,用来构造生成的HTML代码,方便表单POST提交,这里的name可以任意取,后台接受时以这个name键为准-->
@@ -56,14 +51,14 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">浏览数</label>
+                            <label class="ui basic teal label">浏览数</label>
                             <input type="text" name="browseCount" placeholder="请输入浏览数" value="${articles.browseCount}">
                         </div>
                     </div>
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">发布时间</label>
-                            <input type="text" name="createTime" value="${articles.createTime}" id="createTime" autocomplete="off" class="layui-input">
+                            <label class="ui basic teal label">发布时间</label>
+                            <input type="text" readonly name="createTime" value="<fmt:formatDate value="${articles.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>">
                         </div>
                     </div>
                 </div>
@@ -71,14 +66,20 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">评论数</label>
+                            <label class="ui basic teal label">评论数</label>
                             <input type="text" name="commentCount" placeholder="请输入评论数" value="${articles.commentCount}">
                         </div>
                     </div>
+                    <%--<div class="required field">
+                        <div class="ui left labeled input">
+                            <label class="ui basic teal label">更新时间</label>
+                            <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>--%>
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">更新时间</label>
-                            <input type="text" name="updateTime" value="${articles.updateTime}" id="updateTime" autocomplete="off" class="layui-input">
+                            <label class="ui basic teal label">摘要</label>
+                            <input type="text" name="articleDigest" placeholder="请输入一些文章摘要,这样能方便其他同学快捷的了解你的文章,注意字数不要过多" value="${articles.articleDigest}">
                         </div>
                     </div>
                 </div>
@@ -86,22 +87,22 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">赞数</label>
+                            <label class="ui basic teal label">赞数</label>
                             <input type="text" name="zanCount" placeholder="请输入赞数" value="${articles.zanCount}">
                         </div>
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">文章方向</label>
+                            <label class="ui compact basic teal label">文章方向</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="typeName" value="${articles.typeName}">
                                 <i class="dropdown icon"></i>
                                 <div class="default text">请选择文章方向</div>
                                 <div class="menu">
-                                    <div class="item" data-value="java">JAVA</div>
-                                    <div class="item" data-value="linux">Linux</div>
-                                    <div class="item" data-value="html">HTML</div>
-                                    <div class="item" data-value="mysql">MYSQL</div>
+                                    <div class="item" data-value="JAVA">JAVA</div>
+                                    <div class="item" data-value="Linux">Linux</div>
+                                    <div class="item" data-value="HTML">HTML</div>
+                                    <div class="item" data-value="MYSQL">MYSQL</div>
                                 </div>
                             </div>
                         </div>
@@ -111,13 +112,13 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">踩数</label>
+                            <label class="ui basic teal label">踩数</label>
                             <input type="text" name="caiCount" placeholder="请输入踩数" value="${articles.caiCount}">
                         </div>
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">文章置顶</label>
+                            <label class="ui compact basic teal label">文章置顶</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="articleSetTop" value="${articles.articleSetTop}">
                                 <i class="dropdown icon"></i>
@@ -134,7 +135,7 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">举报</label>
+                            <label class="ui compact basic teal label">举报</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="inform" value="${articles.inform}">
                                 <i class="dropdown icon"></i>
@@ -148,7 +149,7 @@ To change this template use File | Settings | File Templates.
                     </div>
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">审核状态</label>
+                            <label class="ui compact basic teal label">审核状态</label>
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="approval" value="${articles.approval}">
                                 <i class="dropdown icon"></i>
@@ -166,7 +167,7 @@ To change this template use File | Settings | File Templates.
                 <%--<div class="required field">
                     <div class="required field">
                         <div class="ui left labeled action input">
-                            <label class="ui compact basic violet label">标签</label>
+                            <label class="ui compact basic teal label">标签</label>
                             <div class="ui fluid selection multiple search dropdown">
                                 <input type="hidden" name="tagIds">
                                 <i class="dropdown icon"></i>
@@ -184,8 +185,8 @@ To change this template use File | Settings | File Templates.
                 <div class="two fields">
                     <div class="field">
                         <div class="ui left labeled input">
-                            <label class="ui basic violet label">首图</label>
-                            <div class="ui animated fade violet button" id="figuresBtn" style="width: 100%;z-index: auto;">
+                            <label class="ui basic teal label">首图</label>
+                            <div class="ui animated fade teal button" id="figuresBtn" style="width: 100%;z-index: auto;">
                                 <div class="visible content">上传图片</div>
                                 <div class="hidden content">
                                     可以是相关的代码截图或是引人注目的封面
@@ -196,14 +197,15 @@ To change this template use File | Settings | File Templates.
                     </div>
                     <div class="field">
                         <div class="ui left labeled input" style="width: 100%;height: 215px;">
-                            <label class="ui basic violet label" style="height: 3vw;">示例</label>
+                            <label class="ui basic teal label" style="height: 3vw;">示例</label>
                             <img class="ui medium rounded image" name="figures" src="${articles.figures}" id="figuresURL" style="width: 90%;">
                         </div>
                     </div>
                 </div>
 
                 <div class="ui right aligned container">
-                    <button type="submit" onclick="publish()" class="ui button violet">提交</button>
+                    <button type="submit" onclick="publish()" class="ui button teal">提交</button>
+                    <button type="button" onclick="window.history.go(-1)" class="ui button teal">返回</button>
                 </div>
 
             </form>
@@ -217,8 +219,17 @@ To change this template use File | Settings | File Templates.
 <script src="<%=request.getContextPath() %>/editormd/editormd.js"></script>
 <script src="<%=request.getContextPath() %>/layui/layui.js"></script>
 <script type="text/javascript">
-    //日期js
     layui.use('laydate',function(){
+        var laydate=layui.laydate;
+        laydate.render({
+            elem: '#updateTime'
+            //类型
+            ,type:'datetime'
+            ,value: new Date()
+        });
+    });
+    //日期js
+    /*layui.use('laydate',function(){
         var laydate=layui.laydate;
         laydate.render({
             elem: '#createTime'
@@ -229,17 +240,7 @@ To change this template use File | Settings | File Templates.
             ,value: new Date()
         });
     });
-    layui.use('laydate',function(){
-        var laydate=layui.laydate;
-        laydate.render({
-            elem: '#updateTime'
-            //类型
-            ,type:'datetime'
-            //  设置选择日期不能超过当前日期
-            ,max : getNowFormatDate()
-            ,value: new Date()
-        });
-    });
+
 
     //  设置选择日期不能超过当前日期
     function getNowFormatDate() {
@@ -258,11 +259,11 @@ To change this template use File | Settings | File Templates.
             + seperator1 + strDate + " " + date.getHours() + seperator2
             + date.getMinutes() + seperator2 + date.getSeconds();
         return currentdate;
-    }
+    }*/
 
 
     //转换日期格式
-    var date = $("#createTime").val();
+    /*var date = $("#createTime").val();
     function formatDate(date){
         date = new Date(date);
         //获取年月日,时分秒的值
@@ -301,7 +302,7 @@ To change this template use File | Settings | File Templates.
         return y+"-"+m+"-"+d+"  "+H+":"+m1+":"+s;
     }
     date = formatDate(date);
-    $("#updateTime").val(date);
+    $("#updateTime").val(date);*/
 
     /*$('#example1').calendar({
         ampm: false,
@@ -414,8 +415,8 @@ To change this template use File | Settings | File Templates.
                         type: 'empty',
                         prompt: '请注意文章标题不能为空'
                     }, {
-                        type: 'maxLength[30]',
-                        prompt: '请注意文章标题最大字数不能超过30'
+                        type: 'maxLength[20]',
+                        prompt: '请注意文章标题最大字数不能超过20'
                     }]
                 },
                 articleContent: {
@@ -460,7 +461,7 @@ To change this template use File | Settings | File Templates.
                         prompt: '请注意文章摘要最大字数不能超过150'
                     }]
                 }
-            },
+            }
             /*onSuccess: function () {
                 alert("编辑成功");
             },

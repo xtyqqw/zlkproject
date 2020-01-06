@@ -2,6 +2,10 @@ server:
   port: 8080
 
 
+  #请求头长度
+  max-http-header-size: 102400
+
+
 spring:
   messages:
     basename: message/msg
@@ -47,6 +51,7 @@ spring:
         login-username: admin
         # 登录密码
         login-password: admin
+
 
     username: root
     password:

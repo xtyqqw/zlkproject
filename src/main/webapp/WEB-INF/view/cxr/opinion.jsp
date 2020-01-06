@@ -5,19 +5,17 @@
   Time: 17:14
   To change this template use File | Settings | File Templates.
 --%>
+<%--jstl约束--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
     <title>意见反馈</title>
-    <script src="<%=request.getContextPath()%>/layui/layui.js"></script>
+    <script src="<%=request.getContextPath()%>/layui/layui.all.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" type="text/css">
-    <script type="text/javascript">
-        $("#tijiao").click(function () {
-            layer.msg("提交成功");
-        });
-    </script>
+
 
 
     <style type="text/css">
@@ -91,7 +89,7 @@
             border-radius: 0.3VW;
             width: 6vw;
             margin-right: 2vw;
-            height: 2.5vw;
+            height: 3.8vw;
             font-size: 1.3vw;
             border: none;
             color: #ffffff;
@@ -102,7 +100,7 @@
             border-radius: 0.3VW;
 
             width: 6vw;
-            height: 2.5vw;
+            height: 3.8vw;
             font-size: 1.3vw;
             border: none;
             color: #ffffff;
@@ -122,33 +120,38 @@
             line-height: 3.5vw;
             text-align: center;
         }
-        #yijianzhuti #chongxin{
+        #yijianzhuti #quxiao1{
             position: fixed;
-            top: 45%;
-            left: 42%;
-            font-size: 1vw;
+            top: 25%;
+            left:40%;
+            font-size: 1.3vw;
+            color: white;
             border-radius: 0.4vw;
-            background-color: #fff;
-            width: 18vw;
-            height: 3.5vw;
+            background-color:  #713ED7;
+            width: 12vw;
+            height: 3.8vw;
             line-height: 3.5vw;
             text-align: center;
         }
-        #yijianzhuti #shibai{
-            position: fixed;
-            top: 45%;
-            left: 42%;
-            font-size: 1vw;
-            border-radius: 0.4vw;
-            background-color: #fff;
-            width: 18vw;
-            height: 3.5vw;
-            line-height: 3.5vw;
-            text-align: center;
-        }
+
+
 
 
     </style>
+
+    <%--提交按钮js--%>
+    <%--<script src="<%=request.getContextPath()%>/layui/lay/dest/layui.all.js/layui.js"></script>--%>
+    <script src="<%=request.getContextPath()%>/layui/layui.all.js"></script>
+    <script>
+
+
+        //    取消按钮事件
+        //重置按钮点击事件,当点击重置按钮时，显示信息
+        $("#quxiao").click(function () {
+            layer.msg("信息已重置",{ icon:6});
+        });
+    </script>
+
 </head>
 <body style="width:90%;">
 
@@ -161,39 +164,98 @@
         <div id="jianje">
             <p><span id="dian"><b>.</b></span><span>请在下方输入框中输入你对平台的宝贵意见</span></p>
         </div>
-        <form action="<%=request.getContextPath()%>/opinion/addOpinion" method="post">
+        <form action="<%=request.getContextPath()%>/opinion/addOpinion" id="form" method="post">
             <div id="shuru">
-                <textarea id="shurukuang" name="opinionContext" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
+                <textarea id="shurukuang" name="opinionContext" required="required" placeholder="请输入20-100字的反馈内容"  minlength="20" maxlength="100"></textarea>
             </div>
 
             <div id="zhuti_wei">
-                <button id="tijiao" class="layui-btn" style="background-color: #713ED7"><p style="margin-top:-0.5vw;">提交</p></button>
-                <button id="quxiao">取消</button>
+                <input id="tijiao" type="submit" class="layui-btn" lay-event="add" style="background-color: #713ED7"><p style="margin-top:-0.5vw;"></p></input>
+                <button type="reset" id="quxiao" onclick="quxiao()">取消</button>
             </div>
-
-         </form>
+        </form>
     </div>
     <%--提交成功提示框--%>
-    <div id="chenggong"><i class="layui-icon layui-icon-auz"></i>提交成功</div>
+    <%--<div id="msg">${msg}</div>--%>
+   <input type="hidden" value="${msg}" id="msg">
+    <%--取消提示框--%>
+    <div id="quxiao1"><i class="layui-icon layui-icon-auz"></i>信息已重置</div>
 </div>
 
-
-<%--提交按钮js--%>
 <script>
-    $("#chenggong").hide();
+    $("#msg").hide();
     $('#tijiao').click(function () {
         //获取输入框的值
+        // alert("1111");
         var shuru = $('#shurukuang').val();
         //对输入框的值得长度进行判断，
         // 如果20<长度<100时。该提示信息显示
         if(shuru.length>20&&shuru.length<100){
-            $("#chenggong").show();
+            $("#msg").show();
             setTimeout(function () {
-                $("#chenggong").hide();
+                $("#msg").hide();
             },5500)
         }
     });
 </script>
+<script>
+    // 取消按钮事件
+    $("#quxiao1").hide();
+    $('#quxiao').click(function () {
+        // alert("2222");
+        var shuru = $('#shurukuang').val();
+        if(shuru.length>0){
+            $("#quxiao1").show();
+            setTimeout(function () {
+                $("#quxiao1").hide();
+            },2000)
+        }
+
+    });
+</script>
+<script>
+    //js表格
+    layui.use(['table', 'laydate', 'form', 'util', 'layer'], function () {
+        var table = layui.table;
+        var laydate = layui.laydate;
+        var layer = layui.layer;
+        var util = layui.util;
+        var form = layui.form;
+        <c:if test="${flag}">
+        <%--获取msg信息--%>
+        $(function () {
+            layer.alert($("#msg").val());
+        })
+        </c:if>
+
+        form.render();
+        //第一个实例
+
+
+
+
+        //头工具栏事件,添加方法
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+
+                        yes: function (index, layero) {
+                            //添加安扭ID
+                            layero.find("form").find("#tijiao").click();
+                        }
+                    });
+                    break;
+            };
+        });
+
+
+    });
+
+</script>
+
+
 
 </body>
 </html>

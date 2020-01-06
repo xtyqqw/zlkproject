@@ -63,6 +63,13 @@
             text-align: center;
             padding-top: 10px;
         }
+        #res_allBox{
+            margin-top: 60px;
+            margin-bottom: 15px;
+            border: 0px solid white !important;
+            width: 90%;
+            margin-left: 42px;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +89,9 @@
                     </div>
                     <div class="item">
                         <i class="eye icon"></i> <span>${article.browseCount}</span>
+                    </div>
+                    <div class="item">
+                        <i class="comments outline icon"></i> <span>${article.commentCount}</span>
                     </div>
                 </div>
             </div>
@@ -127,16 +137,16 @@
                     <div id="stuCmt_titleBox">
                         <h3 id="stuCmt_title" class="ui dividing header" style="box-shadow: none;height: 3vw;">评论</h3>
                     </div>
-                    <div id="SCS_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid white !important;">
+                    <div id="res_allBox" style="margin-top: 15px;margin-bottom: 15px;border: 0px solid white !important;">
                         <div id="ART_contentBox">
                             <ul id="art_cmt_stream"></ul>
                         </div>
                     </div>
                     <div id="art-cmt-textBox" class="field violet" style="border: 1px solid #777777; height: 12vw;border-radius: 4px;margin-top: 1vw;">
                         <div id="div_artCmt_toolBar" class="toolbar" style="border-bottom: 1px solid #777777;"></div>
-                        <div id="div_artCmt_text" class="text" style="height: 10vw;"></div>
+                        <div id="div_artCmt_text" class="text" style="height: 8vw;"></div>
                     </div>
-                    <div id="art-cmt-btnBox" class="fields">
+                    <div id="art-cmt-btnBox" class="fields" style="margin-top: 4px;margin-bottom: 4px;">
                         <div class="field m-margin-bottom-small m-mobile-wide" style="margin-top: 3px;">
                             <div class="ui left">
                                 <button id="artCmt_btn" type="button" class="ui button m-mobile-wide violet"><i class="edit icon"></i>发布</button>

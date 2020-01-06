@@ -1,36 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>提问页面</title>
+    <title>全部问题</title>
     <link rel="stylesheet" href="../layui/css/layui.css" type="text/css">
     <script src="../js/jquery-1.12.4.js"></script>
     <script src="../layui/layui.js"></script>
     <script src="../js/jquery.timeago.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .context-div {
+            width: 100%;
+            height: auto;
+            padding-bottom: 1px;
             overflow-x: hidden;
             overflow-y: hidden;
-            position: absolute;
-            margin: auto 0;
-            width: 100%;
-            height: 78%;
         }
 
         .all {
-            width: 100%;
-            height: 178px;
+            width: 90%;
+            height: 185px;
             background-color: #FFFFFF;
             border-bottom: 1px solid #F0F0F0;
-            position: relative;
-            margin-top: 30px;
-            float: left;
-            margin-left: 0;
+            margin-top: 2vw;
+            margin-left: 1.5vw;
         }
 
         .title {
-            position: relative;
-            left: 15px;
-            top: -5px;
+            margin-top: 7px;
             float: left;
         }
 
@@ -43,13 +38,13 @@
         }
 
         .solve {
-            position: relative;
-            left: 25px;
+            margin-left: 22px;
+            margin-top: 11px;
             float: left;
             width: 55px;
             height: 20px;
-            background-color: #1E9FFF;
-            border-radius: 6%;
+            background-color: #1296db;
+            border-radius: 8%;
             font-size: 15px;
             font-family: Arial;
             color: #FFFFFF;
@@ -58,13 +53,13 @@
         }
 
         .questionSetTop {
-            position: relative;
-            left: 35px;
+            margin-left: 13px;
+            margin-top: 11px;
             float: left;
             width: 35px;
             height: 20px;
             background-color: #FF0000;
-            border-radius: 6%;
+            border-radius: 8%;
             text-align: center;
         }
 
@@ -80,32 +75,29 @@
             text-align: left;
         }
 
-        .questionContent {
-            width: 90%;
+        .questionSynopsis {
+            width: 100%;
+            float: left;
+            margin-top: 25px;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            font-size: 16px;
+            font-size: 17px;
             font-family: Arial;
             color: #707070;
             text-decoration: none;
-            margin-top: 40px;
-            height: 65px;
-            margin-left: 1em;
         }
 
         .icon {
-            position: absolute;
-            left: 875px;
-            bottom: 17px;
+            float: right;
+            margin-right: 2vw;
         }
 
         .browseCount {
-            position: absolute;
-            left: 905px;
-            bottom: 17px;
+            float: right;
+
         }
 
         .browseCount a {
@@ -115,24 +107,26 @@
             text-decoration: none;
         }
 
+        .icon1 {
+            float: right;
+            margin-right: 2vw;
+            margin-left: 3vw;
+            margin-top: 1px;
+        }
 
-        .commentCount a {
+        .responseCount {
+            float: right;
+
+        }
+
+        .responseCount a {
             font-size: 16px;
             font-family: "Arial";
             color: #989898;
             text-decoration: none;
         }
 
-        .user1 {
-            height: 30px;
-            width: 300px;
-            float: left;
-            margin-left: 15px;
-            margin-top: 32px;
-        }
-
         .userRealname {
-            position: relative;
             float: left;
             display: inline;
         }
@@ -144,6 +138,13 @@
             text-decoration: none;
         }
 
+        .user1 {
+            height: 25px;
+            width: 300px;
+            float: left;
+            margin-top: 6vw;
+        }
+
         .little {
             width: 3px;
             height: 3px;
@@ -152,44 +153,41 @@
             position: relative;
             float: left;
             display: inline;
-            margin-left: 10px;
+            margin-left: 20px;
             margin-top: 8px;
         }
 
-        .createTime {
+        .updateTime {
             font-size: 16px;
             color: #989898;
             font-family: Arial;
-            position: relative;
+            margin-left: 20px;
             float: left;
             display: inline;
-            left: 10px;
         }
 
-        a:hover {
-            color: #1296db;
+        .all a:hover {
+            color: #914ff1;
             text-decoration: none;
         }
 
-        .demo1 {
+        .ques_browse {
             float: right;
-            margin: 850px 120px auto;
-            clear: both;
+            margin-top: 6vw;
         }
 
     </style>
 </head>
 <body>
 <div class="context-div"></div>
-<div id="demo1" class="demo1"></div>
+<div id="demo1" style="float: right;clear: both;margin-right: 9vw" ></div>
 <script>
     $(function () {
         loadData();
         getPage();
-        $(".timeago").timeago();
     });
     var page = 1; //设置首页页码
-    var limit = 4;  //设置一页显示的条数
+    var limit = 5;  //设置一页显示的条数
     var total;    //总条数
     function loadData() {
         $.ajax({
@@ -220,17 +218,22 @@
                     if (question[i].questionSetTop === "1") {
                         html += '<div class="questionSetTop" id="questionSetTop" style="display:none;"><p id="p">' + question[i].questionSetTop + '</p></div>';
                     }
-                    html += '<div class="questionContent"><span>' + question[i].questionSynopsis + '</span></div>';
+                    html += '<div class="questionSynopsis">' + question[i].questionSynopsis + '</div>';
                     html += '<div class="user1">';
                     html += '<div class="userRealname"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].user.userRealname + '</a></div>';
                     html += '<div class="little"></div>';
-                    html += '<div class="createTime"><span class="timeago" title="' + question[i].updateTime + '"></span></div>';
+                    html += '<div class="updateTime"><span class="timeago" title="' + question[i].updateTime + '"></span></div>';
                     html += '</div>';
-                    html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
+                    html += '<div class="ques_browse">';
+                    html += '<div class="responseCount"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].responseCount + '回答' + '</a></div>';
+                    html += '<svg t="1574820647675" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="832" width="22" height="20"><path d="M896 128H128a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h288v-64H160V192h704v512h-256c-8.832 0-16.832 3.584-22.656 9.376l-159.968 160 45.248 45.248L621.248 768H896a32 32 0 0 0 32-32V160a32 32 0 0 0-32-32" fill="#989898" p-id="833"></path><path d="M560 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 560 448M240 448a48 48 0 1 0 95.968 0.032A48 48 0 0 0 240 448M784 448a48 48 0 1 0-95.968-0.032A48 48 0 0 0 784 448" fill="#989898" p-id="834"></path></svg>';
                     html += '<div class="browseCount"><a href="/question/findQuestion?questionId=' + question[i].questionId + '" target="_blank">' + question[i].browseCount + '浏览' + '</a></div>';
+                    html += '<svg t="1574820328378" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="713" width="22" height="20"><path d="M512 608a96 96 0 1 1 0-192 96 96 0 0 1 0 192m0-256c-88.224 0-160 71.776-160 160s71.776 160 160 160 160-71.776 160-160-71.776-160-160-160" fill="#989898" p-id="714"></path><path d="M512 800c-212.064 0-384-256-384-288s171.936-288 384-288 384 256 384 288-171.936 288-384 288m0-640C265.248 160 64 443.008 64 512c0 68.992 201.248 352 448 352s448-283.008 448-352c0-68.992-201.248-352-448-352" fill="#989898" p-id="715"></path></svg>';
+                    html += '</div>';
                     html += '</div>';
                 }
                 $(".context-div").empty().append(html);
+                $(".timeago").timeago();
             }
         });
     }
@@ -246,7 +249,6 @@
                 jump: function (obj, first) {
                     page = obj.curr;
                     limit = obj.limit;
-                    console.log(obj);
                     if (!first) {
                         loadData()
                     }
